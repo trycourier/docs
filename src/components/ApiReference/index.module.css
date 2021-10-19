@@ -1,0 +1,45 @@
+.method {
+  margin-right: 0.5rem;
+}
+
+.params {
+  margin-top: 1rem;
+  border: var(--ifm-global-border-width) solid var(--ifm-toc-border-color);
+  border-radius: var(--ifm-global-radius);
+  background: #fdfbfe;
+}
+
+.param {
+  margin: 1.5rem 0;
+  padding: 0 2rem;
+}
+
+.param:not(:last-child) {
+  padding-bottom: 1.5rem;
+  border-bottom: var(--ifm-global-border-width) solid
+    var(--ifm-toc-border-color);
+}
+
+.paramTitle {
+  margin-bottom: 0.25rem;
+}
+
+.paramName {
+  margin-right: 0.25rem;
+  font-weight: var(--ifm-font-weight-semibold);
+}
+
+.paramType {
+  margin-right: 0.25rem;
+  font-size: 75%;
+  color: var(--ifm-font-color-secondary);
+}
+
+.paramRequired {
+  font-size: 75%;
+  color: var(--ifm-color-danger);
+}
+
+.paramDescription {
+  font-size: 80%;
+}

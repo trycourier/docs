@@ -1,0 +1,162 @@
+.input {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #cbd5e0;
+  border-radius: var(--ifm-global-radius);
+  background-color: #fff;
+  color: #344563;
+  outline: none;
+  resize: none;
+  font-family: var(--ifm-font-family-monospace);
+  appearance: none;
+}
+
+.input::placeholder {
+  color: #73819b;
+}
+
+.input:not(.invalid):hover {
+  border-color: #ad9dd1;
+}
+
+.input:not(.invalid):focus {
+  border-color: #73819b;
+}
+
+.input:disabled {
+  background-color: #e5eaef;
+}
+
+.invalid {
+  border-color: var(--ifm-color-danger);
+}
+
+.button {
+  padding: 6px 12px;
+  border: 0;
+  border-radius: var(--ifm-global-radius);
+  background-color: #ede4ed;
+  color: #9d3789;
+}
+
+.button:not(:disabled) {
+  cursor: pointer;
+}
+
+.button:not(:disabled):hover {
+  background-color: #9d3789;
+  color: #fff;
+}
+
+.button:disabled {
+  background-color: #e5eaef;
+  color: #73819b;
+}
+
+.inputContainer {
+  display: flex;
+  position: relative;
+}
+
+.inputOverlay {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 2;
+  width: 100%;
+  max-width: 400px;
+  margin-top: 4px;
+  font-size: 13px;
+  border: 1px solid #cbd5e0;
+  border-radius: var(--ifm-global-radius);
+  background-color: #fff;
+  box-shadow: var(--ifm-global-shadow-lw);
+  overflow: hidden;
+}
+
+.inputOverlayError {
+  padding: 0.5rem 1rem;
+  color: var(--ifm-color-danger);
+}
+
+.inputOverlayError:not(:last-child) {
+  border-bottom: 1px solid #cbd5e0;
+}
+
+.inputOverlayButton {
+  text-align: left;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background: #fff;
+  border: 0;
+  color: var(--ifm-font-color-base);
+  cursor: pointer;
+  outline: none;
+}
+
+.inputOverlayButton:hover,
+.inputOverlayButton:focus {
+  background: #f8f8f8;
+}
+
+.inputOverlayButton small {
+  display: block;
+  margin-top: 0.1rem;
+  opacity: 0.6;
+}
+
+.field {
+  margin: 0 0.5rem 0.5rem;
+  border: var(--ifm-global-border-width) solid var(--ifm-toc-border-color);
+  border-radius: var(--ifm-global-radius);
+  background-color: #fff;
+}
+
+.fieldContainer:not(:last-child) {
+  border-bottom: var(--ifm-global-border-width) solid
+    var(--ifm-toc-border-color);
+}
+
+.fieldsHeader {
+  position: relative;
+  padding: 0.5rem 2rem;
+  margin: 0.5rem 0.5rem 0;
+  font-size: 13px;
+  font-weight: 500;
+  border: var(--ifm-global-border-width) solid var(--ifm-toc-border-color);
+  border-radius: var(--ifm-global-radius) var(--ifm-global-radius) 0 0;
+  background-color: #fff;
+}
+
+.fieldsHeader + .field {
+  border-top-color: transparent;
+  border-radius: 0 0 var(--ifm-global-radius) var(--ifm-global-radius);
+  background-color: #fff;
+}
+
+.fieldsHeaderCollapsible:hover {
+  cursor: pointer;
+  background-color: #fdfbfe;
+}
+
+.fieldsHeaderCollapsible:before {
+  content: "-";
+  position: absolute;
+  left: 1rem;
+  font-weight: 400;
+  opacity: 0.5;
+}
+
+.fieldsHeaderCollapsed:before {
+  content: "+";
+}
+
+.fieldsHeaderRemovable:before {
+  content: "+";
+  transform: rotate(45deg);
+}
+
+.fieldsHeaderCollapsed {
+  margin-bottom: 0.5rem;
+  border-radius: var(--ifm-global-radius);
+}

@@ -1,0 +1,172 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+@font-face {
+  font-family: "Gellix";
+  src: url("/fonts/Gellix/Gellix-ExtraBold.ttf");
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gellix";
+  src: url("/fonts/Gellix/Gellix-Bold.ttf");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gellix";
+  src: url("/fonts/Gellix/Gellix-SemiBold.ttf");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #25c2a0;
+  --ifm-color-primary-dark: rgb(33, 175, 144);
+  --ifm-color-primary-darker: rgb(31, 165, 136);
+  --ifm-color-primary-darkest: rgb(26, 136, 112);
+  --ifm-color-primary-light: rgb(70, 203, 174);
+  --ifm-color-primary-lighter: rgb(102, 212, 189);
+  --ifm-color-primary-lightest: rgb(146, 224, 208);
+  --ifm-code-font-size: 95%;
+  /* custom */
+  --ifm-color-primary: #9121c2;
+  --ifm-navbar-height: 4.5rem;
+  --ifm-navbar-link-color: var(--ifm-font-color-base-inverse);
+  --ifm-menu-color: #2c1338;
+  --ifm-menu-color-active: var(--ifm-menu-color);
+  --ifm-font-family-base: "Poppins", system-ui, -apple-system, Segoe UI, Roboto,
+    Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, "Segoe UI",
+    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  --ifm-heading-font-family: "Gellix", system-ui, -apple-system, Segoe UI,
+    Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont,
+    "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol";
+  --ifm-menu-color-background-active: transparent;
+  --ifm-menu-color-background-hover: transparent;
+  --ifm-navbar-padding-horizontal: 3rem;
+  --ifm-spacing-horizontal: 2.25rem;
+  --ifm-spacing-vertical: 2.25rem;
+  --ifm-navbar-shadow: none;
+  --ifm-toc-border-color: rgba(0, 0, 0, 0.05);
+  --ifm-heading-color: #2c1338;
+  --ifm-font-color-base: rgb(44, 19, 56, 0.8);
+  --ifm-color-danger: #de5063;
+  --ifm-badge-padding-vertical: 0.4rem;
+  --ifm-badge-padding-horizontal: 0.8rem;
+}
+
+.docusaurus-highlight-code-line {
+  background-color: rgba(0, 0, 0, 0.1);
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+}
+
+html[data-theme="dark"] .docusaurus-highlight-code-line {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.prism-code code {
+  position: relative;
+}
+
+.prism-code code:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 2.5rem;
+  background: #1e0c26;
+}
+
+.prism-code {
+  counter-reset: line-number;
+}
+
+.prism-code .token-line::marker {
+  color: var(--ifm-color-gray-700);
+  content: counter(line-number);
+}
+
+.prism-code .token-line {
+  position: relative;
+  counter-increment: line-number;
+  display: list-item;
+  padding-left: var(--ifm-pre-padding);
+  margin-left: var(--ifm-global-spacing);
+}
+
+.navbar {
+  background: linear-gradient(259.94deg, #9121c2 3.35%, #ff5e5e 96.71%);
+}
+
+.navbar__brand {
+  margin-right: 8rem;
+}
+
+.navbar__link {
+  margin: 0 var(--ifm-navbar-item-padding-horizontal);
+  font-size: 14px;
+}
+
+.navbar__link--active,
+.navbar__link--active:hover {
+  border-radius: var(--ifm-global-radius);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.navbar__link:hover:not(.navbar__link--active) {
+  opacity: 0.8;
+}
+
+.navbar__logo {
+  width: 6.5rem;
+}
+
+aside {
+  background: rgba(145, 33, 194, 0.05);
+  border-width: 0 !important;
+}
+
+.menu {
+  padding: 2rem !important;
+}
+
+.menu__link {
+  display: inline-flex;
+  font-size: 13px;
+  font-weight: var(--ifm-font-weight-normal);
+}
+
+.menu__link:after {
+  opacity: 0.6;
+  margin-left: 0.5rem;
+  height: 1rem;
+  min-width: 1rem;
+  background-size: 1.3rem 1.3rem;
+}
+
+.menu__link--active:not(.menu__link--sublist):before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100px;
+  right: 10px;
+  bottom: 0;
+  background: rgba(145, 33, 194, 0.2);
+  border-radius: var(--ifm-global-radius);
+}
