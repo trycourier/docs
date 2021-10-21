@@ -36,25 +36,26 @@ const ApiParamOneOfField = ({ param, field }: FieldComponentProps<"oneOf">) => {
   useEffect(() => selectOption(0), []);
 
   return (
-    <div className={styles.fieldContainer}>
+    <div className={styles.group}>
       {param.options?.map((fieldParam, index) => (
-        <div key={index}>
-          <div
-            onClick={() => selectOption(index)}
-            className={clsx(styles.fieldsHeader, {
-              [styles.fieldsHeaderCollapsible]: activeIndex !== index,
-              [styles.fieldsHeaderCollapsed]: activeIndex !== index,
-            })}
-          >
-            {fieldParam.displayName || fieldParam.name}
-          </div>
+        <React.Fragment key={index}>
+          {activeIndex === index ? (
+            <div className={styles.groupHeader}>
+              {fieldParam.displayName || fieldParam.name}
+            </div>
+          ) : (
+            <button
+              onClick={() => selectOption(index)}
+              className={styles.groupHeader}
+            >
+              {fieldParam.displayName || fieldParam.name}
+            </button>
+          )}
 
           {activeIndex === index && (
-            <div className={styles.field}>
-              <ApiParamField param={fieldParam} prefix={field.name} />
-            </div>
+            <ApiParamField param={fieldParam} prefix={field.name} />
           )}
-        </div>
+        </React.Fragment>
       ))}
     </div>
   );

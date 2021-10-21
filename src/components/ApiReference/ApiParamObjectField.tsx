@@ -1,5 +1,4 @@
 import React from "react";
-import clsx from "clsx";
 
 import { FieldComponentProps } from "../ApiReference/ApiParamField";
 import ApiParamInfo from "../ApiReference/ApiParamInfo";
@@ -12,17 +11,16 @@ const ApiParamObjectField = ({
   field,
 }: FieldComponentProps<"object">) => {
   return (
-    <div className={styles.fieldContainer}>
+    <div className={styles.group}>
       {param.name && (
-        <div className={styles.fieldsHeader}>
+        <div className={styles.groupHeader}>
           <ApiParamInfo param={param} />
         </div>
       )}
-      <div className={clsx({ [styles.field]: param.name })}>
-        {param.fields?.map((fieldParam, index) => (
-          <ApiParamField key={index} param={fieldParam} prefix={field.name} />
-        ))}
-      </div>
+
+      {param.fields?.map((fieldParam, index) => (
+        <ApiParamField key={index} param={fieldParam} prefix={field.name} />
+      ))}
     </div>
   );
 };

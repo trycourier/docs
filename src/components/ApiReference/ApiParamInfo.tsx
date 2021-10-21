@@ -3,14 +3,14 @@ import Markdown from "markdown-to-jsx";
 
 import { ApiParam } from "./ApiParamField";
 
-import styles from "./index.module.css";
+import styles from "./styles.module.css";
 
 interface ApiParamInfoProps {
   param: ApiParam;
 }
 
 const ApiParamInfo = ({ param }: ApiParamInfoProps) => (
-  <>
+  <div className={styles.fieldInfo}>
     <div className={styles.paramTitle}>
       <span className={styles.paramName}>{param.name}</span>
       <span className={styles.paramType}>{param.type}</span>
@@ -22,7 +22,7 @@ const ApiParamInfo = ({ param }: ApiParamInfoProps) => (
         <Markdown>{param.description}</Markdown>
       </div>
     )}
-  </>
+  </div>
 );
 
 export default ApiParamInfo;

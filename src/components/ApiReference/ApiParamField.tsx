@@ -3,14 +3,14 @@ import clsx from "clsx";
 import { Field, FieldProps } from "formik";
 
 import ApiParamInfo from "./ApiParamInfo";
-import ApiParamTextField from "../form/ApiParamTextField";
-import ApiParamBooleanField from "../form/ApiParamBooleanField";
-import ApiParamJSONField from "../form/ApiParamJSONField";
-import ApiParamArrayField from "../form/ApiParamArrayField";
-import ApiParamObjectField from "../form/ApiParamObjectField";
-import ApiParamOneOfField from "../form/ApiParamOneOfField";
+import ApiParamTextField from "./ApiParamTextField";
+import ApiParamBooleanField from "./ApiParamBooleanField";
+import ApiParamJSONField from "./ApiParamJSONField";
+import ApiParamArrayField from "./ApiParamArrayField";
+import ApiParamObjectField from "./ApiParamObjectField";
+import ApiParamOneOfField from "./ApiParamOneOfField";
 
-import styles from "./index.module.css";
+import styles from "./styles.module.css";
 
 interface ApiBaseParam<Type extends string, Value = never> {
   name?: string;
@@ -108,16 +108,17 @@ const ApiParamField = ({ prefix, param }: ApiParamFieldProps) => {
     </Field>
   );
 
-  if (!PRIMITIVE_TYPES.includes(param.type)) {
-    return field;
-  }
-
   return (
-    <div className={clsx(styles.param, "row row--no-gutters")}>
-      <div className="col">
-        <ApiParamInfo param={param} />
-      </div>
-      <div className="col col--3 col--offset-1">{field}</div>
+    <div className={styles.field}>
+      {PRIMITIVE_TYPES.includes(param.type) ? (
+        <>
+          <ApiParamInfo param={param} />
+
+          <div className={styles.fieldInput}>{field}</div>
+        </>
+      ) : (
+        field
+      )}
     </div>
   );
 };

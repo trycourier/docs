@@ -3,31 +3,14 @@ import clsx from "clsx";
 import { Formik, Form } from "formik";
 import CodeBlock from "@theme/CodeBlock";
 
-import styles from "./index.module.css";
+import styles from "./styles.module.css";
 
-import ApiResponseField, { responseToString } from "./ApiResponseField";
+import ApiResponseField, {
+  ApiResponse,
+  responseToString,
+} from "./ApiResponseField";
 import ApiParamField, { ApiParam, apiParamInitialValue } from "./ApiParamField";
-import ApiParamButton from "../form/ApiParamButton";
-
-interface ApiPrimitiveField {
-  type: "string";
-  name?: string;
-  description?: string;
-  example?: string;
-}
-
-interface ApiComplexField extends Omit<ApiPrimitiveField, "type"> {
-  type: "object" | "array";
-  fields: ApiField[];
-}
-
-export type ApiField = ApiComplexField | ApiPrimitiveField;
-
-interface ApiResponse {
-  status: number;
-  description: string;
-  body: ApiField;
-}
+import ApiParamButton from "./ApiParamButton";
 
 export interface ApiReferenceProps {
   auth: "BEARER";
@@ -121,23 +104,11 @@ const ApiReference = ({
             </CodeBlock>
           )}
 
-          {pathParam && (
-            <div className={styles.params}>
-              <ApiParamField param={pathParam} prefix="path" />
-            </div>
-          )}
+          {pathParam && <ApiParamField param={pathParam} prefix="path" />}
 
-          {queryParam && (
-            <div className={styles.params}>
-              <ApiParamField param={queryParam} prefix="query" />
-            </div>
-          )}
+          {queryParam && <ApiParamField param={queryParam} prefix="query" />}
 
-          {bodyParam && (
-            <div className={styles.params}>
-              <ApiParamField param={bodyParam} prefix="body" />
-            </div>
-          )}
+          {bodyParam && <ApiParamField param={bodyParam} prefix="body" />}
 
           <ul className="tabs">
             {responses.map((response, index) => (
@@ -153,7 +124,11 @@ const ApiReference = ({
             ))}
           </ul>
 
+          {/* <div className={styles.group}>
+            <div className={styles.field}> */}
           <ApiResponseField field={responses[responseIndex].body} />
+          {/* </div>
+          </div> */}
 
           {/* <CodeBlock
             code={responseToString(responses[responseIndex].body)}

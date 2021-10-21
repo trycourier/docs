@@ -1,16 +1,27 @@
 import React from "react";
 
-import { ApiField } from ".";
+import { ApiParam } from "./ApiParamField";
+import ApiParamInfo from "./ApiParamInfo";
 
-export const responseToString = (field: ApiField): string => {
-  if (field.type === "string") {
-    return field.example;
+import styles from "./styles.module.css";
+
+export interface ApiResponse {
+  status: number;
+  description: string;
+  body: ApiParam;
+}
+
+export const responseToString = (field: ApiParam): string => {
+  if (
+    field.type === "string" ||
+    field.type === "boolean" ||
+    field.type === "json"
+  ) {
+    return String(field.example);
   }
 
   if (field.type === "array") {
-    return JSON.stringify(
-      field.fields.map((arrayField) => responseToString(arrayField))
-    );
+    return JSON.stringify([responseToString(field.field)]);
   }
 
   if (field.type === "object") {
@@ -27,29 +38,59 @@ export const responseToString = (field: ApiField): string => {
     );
   }
 
+  if (field.type === "oneOf") {
+    return responseToString(field.options[0]);
+  }
+
   return "";
 };
 
-const ApiResponseField = ({ field }: { field: ApiField }) => {
-  if (field.type === "string") {
+const ApiResponseField = ({ field }: { field: ApiParam }) => {
+  if (
+    field.type === "string" ||
+    field.type === "boolean" ||
+    field.type === "json"
+  ) {
     return (
-      <div>
-        {field.type} ||| {field.name} -- {field.description} - {field.example}
+      <div className={styles.field}>
+        <ApiParamInfo param={field} />
       </div>
     );
   }
 
-  if (field.type === "array" || field.type === "object") {
+  if (field.type === "object") {
     return (
-      <div>
-        <div>
-          {field.type} ||| {field.name} -- {field.description} - {field.example}
+      <div className={styles.group}>
+        <div className={styles.groupHeader}>
+          <ApiParamInfo param={field} />
         </div>
 
         {field.fields.map((arrayField, index) => (
           <ApiResponseField key={index} field={arrayField} />
         ))}
       </div>
+    );
+  }
+
+  if (field.type === "array") {
+    return (
+      <>
+        <ApiParamInfo param={field} />
+
+        <ApiResponseField field={field.field} />
+      </>
+    );
+  }
+
+  if (field.type === "oneOf") {
+    return (
+      <>
+        <ApiParamInfo param={field} />
+
+        {field.options.map((optionField, index) => (
+          <ApiResponseField key={index} field={optionField} />
+        ))}
+      </>
     );
   }
 
