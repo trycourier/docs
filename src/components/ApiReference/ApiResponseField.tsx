@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 
 import { ApiParam } from "./ApiParamField";
 import ApiParamInfo from "./ApiParamInfo";
@@ -46,6 +46,13 @@ export const responseToString = (field: ApiParam): string => {
 };
 
 const ApiResponseField = ({ field }: { field: ApiParam }) => {
+  const [collapsed, setCollapsed] = useState(true);
+
+  const toggleCollapsed = useCallback(
+    () => setCollapsed((collapsed) => !collapsed),
+    []
+  );
+
   if (
     field.type === "string" ||
     field.type === "boolean" ||
@@ -61,13 +68,15 @@ const ApiResponseField = ({ field }: { field: ApiParam }) => {
   if (field.type === "object") {
     return (
       <div className={styles.group}>
-        <div className={styles.groupHeader}>
+        <button className={styles.groupHeader} onClick={toggleCollapsed}>
           <ApiParamInfo param={field} />
-        </div>
+        </button>
 
-        {field.fields.map((arrayField, index) => (
-          <ApiResponseField key={index} field={arrayField} />
-        ))}
+        {collapsed
+          ? null
+          : field.fields.map((arrayField, index) => (
+              <ApiResponseField key={index} field={arrayField} />
+            ))}
       </div>
     );
   }

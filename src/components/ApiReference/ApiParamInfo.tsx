@@ -11,8 +11,8 @@ interface ApiParamInfoProps {
 
 const ApiParamInfo = ({ param }: ApiParamInfoProps) => (
   <div className={styles.fieldInfo}>
-    <div className={styles.paramTitle}>
-      <span className={styles.paramName}>{param.name}</span>
+    <div>
+      {param.name && <span className={styles.paramName}>{param.name}</span>}
       <span className={styles.paramType}>{param.type}</span>
       {param.required && <span className={styles.paramRequired}>required</span>}
     </div>

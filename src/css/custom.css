@@ -79,35 +79,35 @@ html[data-theme="dark"] .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-.prism-code code {
-  position: relative;
-}
-
-.prism-code code:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 2.5rem;
-  background: #1e0c26;
-}
-
 .prism-code {
   counter-reset: line-number;
-}
-
-.prism-code .token-line::marker {
-  color: var(--ifm-color-gray-700);
-  content: counter(line-number);
+  font-size: 14px;
+  background: linear-gradient(to right, #1e0c26 2.5rem, #2d1339 2.5rem);
 }
 
 .prism-code .token-line {
   position: relative;
   counter-increment: line-number;
-  display: list-item;
-  padding-left: var(--ifm-pre-padding);
-  margin-left: var(--ifm-global-spacing);
+}
+
+.prism-code .token-line:before {
+  content: counter(line-number);
+  position: sticky;
+  left: 0;
+  display: inline-block;
+  width: 1.9rem;
+  margin: calc(-1 * var(--ifm-pre-padding));
+  margin-right: 0.8rem;
+  padding-right: 0.6rem;
+  text-align: right;
+  background: #1e0c26;
+  color: var(--ifm-color-gray-700);
+}
+
+.prism-code + button {
+  font-size: 10px;
+  font-family: var(--ifm-font-family-monospace);
+  text-transform: lowercase;
 }
 
 .navbar {

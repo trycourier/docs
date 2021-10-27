@@ -1,7 +1,6 @@
 import { ApiReferenceProps } from "@site/src/components/ApiReference";
 
 const invoke: ApiReferenceProps = {
-  auth: "BEARER",
   method: "POST",
   path: "/send",
   bodyParam: {

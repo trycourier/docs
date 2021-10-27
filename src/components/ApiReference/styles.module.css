@@ -1,13 +1,62 @@
-.method {
-  margin-right: 0.5rem;
+.form {
+  position: relative;
+  z-index: 1;
+  margin-right: calc(-1 / 3 * (100% + 2 * var(--ifm-spacing-horizontal)));
+  background: #fff;
 }
 
-.paramTitle {
-  margin-bottom: 0.25rem;
+.form:before,
+.form:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2rem;
+  pointer-events: none;
+}
+
+.form:before {
+  bottom: 100%;
+  background: linear-gradient(to top, white, rgba(255, 255, 255, 0));
+}
+
+.form:after {
+  top: 100%;
+  background: linear-gradient(to bottom, white, rgba(255, 255, 255, 0));
+}
+
+.section {
+  margin-top: 1rem;
+}
+
+.sectionTitle {
+  padding-bottom: 0.5rem;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--ifm-font-color-secondary);
+}
+
+.sectionTitle + .section {
+  margin: 0;
+}
+
+.url {
+  font-size: 13px;
+}
+
+.method {
+  padding: 0.2rem 0.5rem;
+  font-size: 12px;
+  font-weight: 600;
+  margin-right: 0.5rem;
+  border-radius: var(--ifm-global-radius);
+  background: rgba(145, 33, 194, 0.2);
 }
 
 .paramName {
   margin-right: 0.25rem;
+  font-size: 14px;
   font-weight: var(--ifm-font-weight-semibold);
 }
 
@@ -23,14 +72,12 @@
 }
 
 .paramDescription {
+  margin-top: 0.25rem;
   font-size: 80%;
 }
 
-/*  */
-
 .group {
   flex: 1;
-  margin: 0.25rem 0;
   border: var(--ifm-global-border-width) solid var(--ifm-toc-border-color);
   border-radius: var(--ifm-global-radius);
   background: #fdfbfe;
@@ -108,8 +155,6 @@ button.groupHeader:focus {
   flex: 1;
 }
 
-/*  */
-
 .input {
   width: 100%;
   padding: 0.6rem 0.8rem;
@@ -144,11 +189,13 @@ button.groupHeader:focus {
 }
 
 .button {
-  padding: 6px 12px;
+  padding: 0.6rem 1rem;
   border: 0;
+  font-size: 13px;
+  font-weight: 600;
   border-radius: var(--ifm-global-radius);
-  background-color: #ede4ed;
-  color: #9d3789;
+  background-color: rgba(145, 33, 194, 0.2);
+  color: var(--ifm-font-color-base);
 }
 
 .button:not(:disabled) {
@@ -156,8 +203,7 @@ button.groupHeader:focus {
 }
 
 .button:not(:disabled):hover {
-  background-color: #9d3789;
-  color: #fff;
+  background-color: rgba(145, 33, 194, 0.3);
 }
 
 .button:disabled {
@@ -215,4 +261,65 @@ button.groupHeader:focus {
   display: block;
   margin-top: 0.1rem;
   opacity: 0.6;
+}
+
+.auth {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 1rem;
+  white-space: nowrap;
+}
+
+.auth input {
+  margin: 0 0.5rem;
+}
+
+.runner {
+  position: sticky;
+  top: var(--ifm-navbar-height);
+  padding: 1rem 0 1rem var(--ifm-spacing-horizontal);
+}
+
+.tabbedCodeBlock {
+  position: relative;
+  border-radius: var(--ifm-code-border-radius);
+  background: #2d1339;
+}
+
+.tabbedCodeBlockTabs {
+  display: flex;
+}
+
+.tabbedCodeBlockTabs:before {
+  content: "";
+  display: block;
+  width: 2.5rem;
+  margin-right: 0.8rem;
+  margin-bottom: calc(var(--ifm-code-border-radius) * -1);
+  border-radius: var(--ifm-code-border-radius) 0 0 0;
+  background: #1e0c26;
+}
+
+.tabbedCodeBlockTabs button {
+  margin-top: 0.5rem;
+  margin-right: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: var(--ifm-code-border-radius);
+  border: 0;
+  background: #392144;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  color: rgba(255, 255, 255, 0.72);
+  cursor: pointer;
+}
+
+.tabbedCodeBlockTabs button:hover,
+.tabbedCodeBlockTabs button:focus {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+button.tabbedCodeBlockActiveTab {
+  background: linear-gradient(270deg, #9121c2 0%, #ff5e5e 100%);
+  color: #fff;
 }

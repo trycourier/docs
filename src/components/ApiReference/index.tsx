@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import clsx from "clsx";
-import { Formik, Form } from "formik";
+import { Formik, Form, Field } from "formik";
 import CodeBlock from "@theme/CodeBlock";
 
 import styles from "./styles.module.css";
@@ -11,31 +11,29 @@ import ApiResponseField, {
 } from "./ApiResponseField";
 import ApiParamField, { ApiParam, apiParamInitialValue } from "./ApiParamField";
 import ApiParamButton from "./ApiParamButton";
+import ApiParamBaseInput from "./ApiParamBaseInput";
 
 export interface ApiReferenceProps {
-  auth: "BEARER";
   method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
   path: string;
   description?: string;
-  pathParam?: ApiParam;
-  queryParam?: ApiParam;
+  pathParams?: ApiParam[];
+  queryParams?: ApiParam[];
   bodyParam?: ApiParam;
   responses: ApiResponse[];
 }
 
 const ApiReference = ({
-  auth,
   method,
   path,
-  pathParam,
-  queryParam,
+  pathParams,
+  queryParams,
   bodyParam,
   responses,
 }: ApiReferenceProps) => {
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [responseIndex, setResponseIndex] = useState(0);
 
   const execCallback = useCallback(
     async (values) => {
@@ -49,8 +47,10 @@ const ApiReference = ({
           body: JSON.stringify({
             method,
             path,
-            auth: auth ? "dk_prod_D1APZA34G64MJGPEHVV2WRFQZQKR" : null,
-            body: values,
+            auth: values.auth,
+            bodyParam: values.body,
+            queryParams: values.query,
+            pathParams: values.path,
           }),
         });
 
@@ -65,12 +65,22 @@ const ApiReference = ({
         setLoading(false);
       }
     },
-    [auth, path, method]
+    [path, method]
   );
+
+  const pathParam: ApiParam = pathParams && {
+    type: "object",
+    fields: pathParams,
+  };
+  const queryParam: ApiParam = queryParams && {
+    type: "object",
+    fields: queryParams,
+  };
 
   return (
     <Formik
       initialValues={{
+        auth: "dk_prod_D1APZA34G64MJGPEHVV2WRFQZQKR",
         path: pathParam && apiParamInitialValue(pathParam),
         query: queryParam && apiParamInitialValue(queryParam),
         body: bodyParam && apiParamInitialValue(bodyParam),
@@ -78,23 +88,121 @@ const ApiReference = ({
       onSubmit={execCallback}
     >
       {({ values }) => (
-        <Form autoComplete="off">
-          <div className="row">
+        <Form autoComplete="off" className={styles.form}>
+          <div className="row row--no-gutters">
             <div className="col">
-              <small>
-                <span className={clsx("badge badge--primary", styles.method)}>
-                  {method}
-                </span>
+              <div className={styles.url}>
+                <span className={styles.method}>{method}</span>
                 {process.env.API_HOST}
                 {path}
-              </small>
+              </div>
+
+              {pathParams && (
+                <div className={styles.section}>
+                  <div className={styles.sectionTitle}>PATH PARAMS</div>
+
+                  <ApiParamField
+                    param={{ type: "object", fields: pathParams }}
+                    prefix="path"
+                  />
+                </div>
+              )}
+
+              {queryParams && (
+                <div className={styles.section}>
+                  <div className={styles.sectionTitle}>QUERY PARAMS</div>
+
+                  <ApiParamField
+                    param={{ type: "object", fields: pathParams }}
+                    prefix="query"
+                  />
+                </div>
+              )}
+
+              {bodyParam && (
+                <div className={styles.section}>
+                  <div className={styles.sectionTitle}>BODY PARAM</div>
+
+                  <ApiParamField param={bodyParam} prefix="body" />
+                </div>
+              )}
+
+              <div className={styles.section}>
+                <div className={styles.sectionTitle}>Responses</div>
+
+                {responses.map((response, index) => (
+                  <div key={index} className={styles.section}>
+                    <ApiResponseField
+                      field={{
+                        name: `${response.status} ${response.description}`,
+                        ...response.body,
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="col col--2">
-              <ApiParamButton type="submit">Execute</ApiParamButton>
+
+            <div className="col col--5">
+              <div className={styles.runner}>
+                <div className={styles.auth}>
+                  <div className={styles.sectionTitle}>AUTH TOKEN</div>
+
+                  <Field name="auth" className={styles.input} />
+
+                  <ApiParamButton type="submit">Try It</ApiParamButton>
+                </div>
+
+                <div className={styles.tabbedCodeBlock}>
+                  <div className={styles.tabbedCodeBlockTabs}>
+                    <button className={styles.tabbedCodeBlockActiveTab}>
+                      Node.js
+                    </button>
+                    <button>Python</button>
+                    <button>Ruby</button>
+                    <button>Go</button>
+                    <button>PHP</button>
+                    <button>Java</button>
+                  </div>
+
+                  <CodeBlock className="language-bash">
+                    {`
+curl --request ${method} \\
+     --url ${process.env.API_HOST}${path} \\
+     --header 'Accept: application/json' \\
+     --header 'Authorization: Bearer ${values.auth}' \\
+     --header 'Content-Type: application/json' \\
+     --data '
+${JSON.stringify(values.body, null, 2)}
+'
+                  `.trim()}
+                  </CodeBlock>
+                </div>
+
+                <div className={styles.section}>
+                  <div className={styles.sectionTitle}>
+                    Response
+                    <select className={styles.input}>
+                      {responses.map((response, index) => (
+                        <option key={index}>
+                          {response.status} {response.description}
+                        </option>
+                      ))}
+
+                      <option disabled>Custom</option>
+                    </select>
+                  </div>
+                  {/* {responses.map((response, index) => (
+                    <CodeBlock key={index} className="language-json">
+                      {responseToString(response.body)}
+                    </CodeBlock>
+                  ))} */}
+                </div>
+              </div>
             </div>
           </div>
 
-          <CodeBlock className="language-json">
+          {/* <CodeBlock className="language-json">
             {JSON.stringify(values, null, 2)}
           </CodeBlock>
 
@@ -102,42 +210,7 @@ const ApiReference = ({
             <CodeBlock className="language-json">
               {JSON.stringify(response, null, 2)}
             </CodeBlock>
-          )}
-
-          {pathParam && <ApiParamField param={pathParam} prefix="path" />}
-
-          {queryParam && <ApiParamField param={queryParam} prefix="query" />}
-
-          {bodyParam && <ApiParamField param={bodyParam} prefix="body" />}
-
-          <ul className="tabs">
-            {responses.map((response, index) => (
-              <li
-                key={index}
-                className={clsx("tabs__item", {
-                  "tabs__item--active": responseIndex === index,
-                })}
-                onClick={() => setResponseIndex(index)}
-              >
-                {response.status} - {response.description}
-              </li>
-            ))}
-          </ul>
-
-          {/* <div className={styles.group}>
-            <div className={styles.field}> */}
-          <ApiResponseField field={responses[responseIndex].body} />
-          {/* </div>
-          </div> */}
-
-          {/* <CodeBlock
-            code={responseToString(responses[responseIndex].body)}
-            language="json"
-          /> */}
-
-          <CodeBlock className="language-json">
-            {responseToString(responses[responseIndex].body)}
-          </CodeBlock>
+          )} */}
         </Form>
       )}
     </Formik>
