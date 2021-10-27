@@ -147,6 +147,7 @@ aside {
 }
 
 .menu__link {
+  position: relative;
   display: inline-flex;
   font-size: 13px;
   font-weight: var(--ifm-font-weight-normal);

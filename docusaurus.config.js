@@ -28,6 +28,8 @@ const codeTheme = require("./src/theme/codeTheme");
             editUrl:
               "https://github.com/facebook/docusaurus/edit/main/website/",
           },
+          blog: false,
+          pages: false,
           // blog: {
           //   showReadingTime: true,
           //   // Please change this to your repo.
