@@ -34,7 +34,7 @@ module.exports = {
       items: [
         // highlight-start
         {
-          type: 'docsVersionDropdown',
+          type: "docsVersionDropdown",
         },
         // highlight-end
       ],
@@ -45,7 +45,7 @@ module.exports = {
 
 The docs version dropdown appears in your navbar:
 
-![Docs Version Dropdown](/img/tutorial/docsVersionDropdown.png)
+<!-- ![Docs Version Dropdown](/img/tutorial/docsVersionDropdown.png) -->
 
 ## Update an existing version
 

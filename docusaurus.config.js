@@ -8,8 +8,8 @@ const codeTheme = require("./src/theme/codeTheme");
   module.exports = {
     title: "My Site",
     tagline: "Dinosaurs are cool",
-    url: "https://your-docusaurus-test-site.com",
-    baseUrl: "/",
+    url: `https://${process.env.VERCEL_URL}`,
+    baseUrl: "/docs/",
     onBrokenLinks: "throw",
     onBrokenMarkdownLinks: "warn",
     favicon: "img/favicon.ico",
@@ -22,6 +22,7 @@ const codeTheme = require("./src/theme/codeTheme");
         /** @type {import('@docusaurus/preset-classic').Options} */
         ({
           docs: {
+            routeBasePath: "/",
             sidebarPath: require.resolve("./sidebars.js"),
             // Please change this to your repo.
             editUrl:
@@ -54,12 +55,12 @@ const codeTheme = require("./src/theme/codeTheme");
             src: "img/logo.svg",
           },
           items: [
-            {
-              type: "doc",
-              docId: "intro",
-              position: "left",
-              label: "Tutorial",
-            },
+            // {
+            //   type: "doc",
+            //   docId: "intro",
+            //   position: "left",
+            //   label: "Tutorial",
+            // },
             // { to: "/blog", label: "Blog", position: "left" },
             // {
             //   href: "https://github.com/facebook/docusaurus",
@@ -71,15 +72,15 @@ const codeTheme = require("./src/theme/codeTheme");
         footer: {
           style: "dark",
           links: [
-            {
-              title: "Docs",
-              items: [
-                {
-                  label: "Tutorial",
-                  to: "/docs/intro",
-                },
-              ],
-            },
+            // {
+            //   title: "Docs",
+            //   items: [
+            //     {
+            //       label: "Tutorial",
+            //       to: "/docs/intro",
+            //     },
+            //   ],
+            // },
             {
               title: "Community",
               items: [
