@@ -9,6 +9,8 @@ import styles from "./styles.module.css";
 interface ApiParamBaseInputProps extends FieldComponentProps {
   multiline?: boolean;
   enum?: Array<string | boolean>;
+  valueToString?: (value: string | FieldComponentProps["param"]["default"]) => string;
+  stringToValue?: (value: string) => string | FieldComponentProps["param"]["default"];
 }
 
 const ApiParamBaseInput = ({
@@ -18,6 +20,8 @@ const ApiParamBaseInput = ({
   meta,
   form,
   param,
+  valueToString,
+  stringToValue,
 }: ApiParamBaseInputProps) => {
   const [focused, setFocused] = useState(false);
   const inputClassName = clsx(styles.input, {
@@ -42,25 +46,21 @@ const ApiParamBaseInput = ({
         event.currentTarget.name,
         options
           ? options.find((option) => String(option) === value)
-          : value || undefined
+          : (stringToValue ? stringToValue(value) : value) || undefined
       );
     },
-    [form, options]
+    [form, options, stringToValue]
   );
 
   const fieldProps = {
     ...field,
-    value: field.value == null ? "" : String(field.value),
+    value:
+      field.value == null ? "" : valueToString ? valueToString(field.value) : String(field.value),
     onChange: handleChange,
   };
 
   return (
-    <div
-      tabIndex={-1}
-      className={styles.inputContainer}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
-    >
+    <div tabIndex={-1} className={styles.inputContainer} onFocus={handleFocus} onBlur={handleBlur}>
       {options ? (
         <select {...fieldProps} className={inputClassName}>
           <option />
@@ -73,14 +73,7 @@ const ApiParamBaseInput = ({
       ) : (
         <input {...fieldProps} className={inputClassName} />
       )}
-      {focused && (
-        <ApiParamInputOverlay
-          field={field}
-          form={form}
-          meta={meta}
-          param={param}
-        />
-      )}
+      {focused && <ApiParamInputOverlay field={field} form={form} meta={meta} param={param} />}
     </div>
   );
 };

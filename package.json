@@ -66,5 +66,7 @@
       "last 1 safari version"
     ]
   },
-  "prettier": {}
+  "prettier": {
+    "printWidth": 100
+  }
 }

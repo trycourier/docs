@@ -1,5 +1,4 @@
 import React from "react";
-import clsx from "clsx";
 
 import {
   FieldComponentProps,
@@ -28,6 +27,7 @@ const ApiParamArrayField = ({
           <div className={styles.group}>
             <div className={styles.groupHeader}>
               <button
+                type="button"
                 onClick={() =>
                   form.setFieldValue(field.name, [
                     ...field.value.slice(0, index),

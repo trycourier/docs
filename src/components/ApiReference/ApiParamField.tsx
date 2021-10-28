@@ -25,7 +25,7 @@ interface ApiBaseParam<Type extends string, Value = never> {
 export type ApiParam =
   | (ApiBaseParam<"string", string> & { enum?: string[] })
   | ApiBaseParam<"boolean", boolean>
-  | ApiBaseParam<"json", string>
+  | ApiBaseParam<"json", string | object>
   | (ApiBaseParam<"array"> & { field: ApiParam })
   | (ApiBaseParam<"object"> & { fields: ApiParam[]; name?: string })
   | (ApiBaseParam<"oneOf"> & { options: ApiParam[] });
@@ -53,9 +53,8 @@ const apiParamComponents: Record<
 const PRIMITIVE_TYPES: ApiParam["type"][] = ["string", "boolean", "json"];
 
 export const buildParamPath = (param: ApiParam | string, prefix?: string) =>
-  [prefix, typeof param === "string" ? param : param.name]
-    .filter((x) => x != null)
-    .join(".") || null;
+  [prefix, typeof param === "string" ? param : param.name].filter((x) => x != null).join(".") ||
+  null;
 
 interface ApiParamFieldProps {
   prefix: string;
@@ -71,10 +70,7 @@ export const apiParamInitialValue = (param: ApiParam) => {
   const value = PRIMITIVE_TYPES.includes(param.type)
     ? param.example
     : param.type === "object"
-    ? param.fields.reduce(
-        (obj, field) => ({ ...obj, ...apiParamInitialValue(field) }),
-        {}
-      )
+    ? param.fields.reduce((obj, field) => ({ ...obj, ...apiParamInitialValue(field) }), {})
     : param.type === "array"
     ? []
     : undefined;
@@ -93,7 +89,7 @@ const validateField = (param: ApiParam) => (value: string) => {
 
   if (param.type === "json" && value != null) {
     try {
-      JSON.parse(value);
+      if (typeof value === "string") JSON.parse(value);
     } catch {
       return "Invalid JSON";
     }

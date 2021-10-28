@@ -1,8 +1,23 @@
 .form {
   position: relative;
   z-index: 1;
-  margin-right: calc(-1 / 3 * (100% + 2 * var(--ifm-spacing-horizontal)));
   background: #fff;
+}
+
+.runner {
+  padding-top: 2rem;
+}
+
+@media (min-width: 997px) {
+  .form {
+    margin-right: calc(-1 / 3 * (100% + 2 * var(--ifm-spacing-horizontal)));
+  }
+
+  .runner {
+    position: sticky;
+    top: var(--ifm-navbar-height);
+    padding: 1rem 0 0 var(--ifm-spacing-horizontal);
+  }
 }
 
 .form:before,
@@ -90,7 +105,6 @@
 
 .group .field {
   flex: 1;
-  display: flex;
   padding: 0.75rem 1rem;
 }
 
@@ -147,12 +161,22 @@ button.groupHeader:focus {
 }
 
 .fieldInput {
-  width: 30%;
-  margin-left: 2rem;
+  margin-top: 0.5rem;
 }
 
 .fieldInfo {
   flex: 1;
+}
+
+@media (min-width: 425px) {
+  .group .field {
+    display: flex;
+  }
+
+  .fieldInput {
+    width: 30%;
+    margin: 0 0 0 2rem;
+  }
 }
 
 .input {
@@ -263,21 +287,16 @@ button.groupHeader:focus {
   opacity: 0.6;
 }
 
-.auth {
+.inlineForm {
   display: flex;
   align-items: baseline;
   margin-bottom: 1rem;
   white-space: nowrap;
 }
 
-.auth input {
-  margin: 0 0.5rem;
-}
-
-.runner {
-  position: sticky;
-  top: var(--ifm-navbar-height);
-  padding: 1rem 0 1rem var(--ifm-spacing-horizontal);
+.inlineForm .input,
+.inlineForm .button {
+  margin-left: 0.5rem;
 }
 
 .tabbedCodeBlock {
@@ -288,16 +307,10 @@ button.groupHeader:focus {
 
 .tabbedCodeBlockTabs {
   display: flex;
-}
-
-.tabbedCodeBlockTabs:before {
-  content: "";
-  display: block;
-  width: 2.5rem;
-  margin-right: 0.8rem;
-  margin-bottom: calc(var(--ifm-code-border-radius) * -1);
-  border-radius: var(--ifm-code-border-radius) 0 0 0;
-  background: #1e0c26;
+  flex-wrap: wrap;
+  padding-left: 3.3rem;
+  background: linear-gradient(to right, #1e0c26 2.5rem, #2d1339 2.5rem);
+  border-radius: var(--ifm-code-border-radius);
 }
 
 .tabbedCodeBlockTabs button {

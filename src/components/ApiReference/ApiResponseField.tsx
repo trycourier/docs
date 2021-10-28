@@ -68,7 +68,11 @@ const ApiResponseField = ({ field }: { field: ApiParam }) => {
   if (field.type === "object") {
     return (
       <div className={styles.group}>
-        <button className={styles.groupHeader} onClick={toggleCollapsed}>
+        <button
+          type="button"
+          className={styles.groupHeader}
+          onClick={toggleCollapsed}
+        >
           <ApiParamInfo param={field} />
         </button>
 

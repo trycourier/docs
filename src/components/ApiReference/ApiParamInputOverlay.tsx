@@ -40,7 +40,11 @@ const ApiParamInputOverlay = ({
     <div className={styles.inputOverlay}>
       {error && <div className={styles.inputOverlayError}>{error}</div>}
       {defaultValue && (
-        <button className={styles.inputOverlayButton} onClick={setDefaultValue}>
+        <button
+          type="button"
+          className={styles.inputOverlayButton}
+          onClick={setDefaultValue}
+        >
           Set Default Value
           <small>
             {typeof defaultValue === "object"
@@ -50,7 +54,11 @@ const ApiParamInputOverlay = ({
         </button>
       )}
       {exampleValue && (
-        <button className={styles.inputOverlayButton} onClick={setExampleValue}>
+        <button
+          type="button"
+          className={styles.inputOverlayButton}
+          onClick={setExampleValue}
+        >
           Set Example Value
           <small>
             {typeof exampleValue === "object"

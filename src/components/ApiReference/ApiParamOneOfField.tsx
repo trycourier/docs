@@ -1,5 +1,4 @@
 import React, { useState, useCallback, useEffect } from "react";
-import clsx from "clsx";
 import { useFormikContext } from "formik";
 
 import {
@@ -45,6 +44,7 @@ const ApiParamOneOfField = ({ param, field }: FieldComponentProps<"oneOf">) => {
             </div>
           ) : (
             <button
+              type="button"
               onClick={() => selectOption(index)}
               className={styles.groupHeader}
             >

@@ -119,6 +119,7 @@ const codeTheme = require("./src/theme/codeTheme");
         prism: {
           theme: codeTheme,
           // darkTheme: darkCodeTheme,
+          additionalLanguages: ["ruby", "php"],
         },
       }),
 
