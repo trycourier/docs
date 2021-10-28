@@ -38,7 +38,6 @@ const ApiReference = ({
 }: ApiReferenceProps) => {
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
   const [responseIndex, setResponseIndex] = useState(0);
 
   const handleResponseSelect = useCallback((event) => {
@@ -47,7 +46,6 @@ const ApiReference = ({
 
   const execCallback = useCallback(
     async (values) => {
-      setError(false);
       setLoading(true);
 
       localStorage.setItem(STORAGE_AUTH_KEY, values.auth);
@@ -72,8 +70,8 @@ const ApiReference = ({
 
         setResponse(body);
         setResponseIndex(-1);
-      } catch {
-        setError(true);
+      } catch (error) {
+        setResponse(null);
         setResponseIndex(-1);
       } finally {
         setLoading(false);
@@ -189,10 +187,10 @@ const ApiReference = ({
                 </div>
 
                 <CodeBlock className="language-json">
-                  {error
-                    ? "Error with Test Request"
-                    : responseIndex === -1
-                    ? JSON.stringify(response?.body, null, 2)
+                  {responseIndex === -1
+                    ? response
+                      ? JSON.stringify(response.body, null, 2)
+                      : "Error with Test Request"
                     : responseToString(responses[responseIndex].body)}
                 </CodeBlock>
               </div>
