@@ -120,7 +120,7 @@ const ApiReference = ({
               <div className={styles.section}>
                 <div className={styles.sectionTitle}>QUERY PARAMS</div>
 
-                <ApiParamField param={{ type: "object", fields: pathParams }} prefix="query" />
+                <ApiParamField param={{ type: "object", fields: queryParams }} prefix="query" />
               </div>
             )}
 

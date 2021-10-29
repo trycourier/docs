@@ -2,7 +2,20 @@ import { ApiReferenceProps } from "@site/src/components/ApiReference";
 
 const invoke: ApiReferenceProps = {
   method: "POST",
-  path: "/send",
+  path: "/send/:param",
+  pathParams: [
+    {
+      type: "string",
+      name: "param",
+      example: "param",
+    },
+  ],
+  queryParams: [
+    {
+      type: "string",
+      name: "query",
+    },
+  ],
   bodyParam: {
     type: "object",
     fields: [
@@ -56,8 +69,7 @@ const invoke: ApiReferenceProps = {
                     {
                       type: "string",
                       name: "until",
-                      description:
-                        "The ISO 8601 timestamp that describes the length of the delay.",
+                      description: "The ISO 8601 timestamp that describes the length of the delay.",
                     },
                   ],
                 },
@@ -79,8 +91,7 @@ const invoke: ApiReferenceProps = {
                     {
                       type: "string",
                       name: "template",
-                      description:
-                        "The ISO 8601 timestamp that describes the length of the delay.",
+                      description: "The ISO 8601 timestamp that describes the length of the delay.",
                     },
                   ],
                 },
@@ -91,8 +102,7 @@ const invoke: ApiReferenceProps = {
             type: "string",
             name: "cancelation_token",
             example: "<CANCELATION_TOKEN>",
-            description:
-              "The string that is associated with the cancelable automation run.",
+            description: "The string that is associated with the cancelable automation run.",
           },
         ],
       },
@@ -131,8 +141,7 @@ const invoke: ApiReferenceProps = {
           {
             type: "string",
             name: "messageId",
-            description:
-              "A unique identifier associated with the message sent.",
+            description: "A unique identifier associated with the message sent.",
             example: "1-5e2b2615-05efbb3acab9172f88dd3f6f",
           },
         ],

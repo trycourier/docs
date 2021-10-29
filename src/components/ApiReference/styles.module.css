@@ -69,6 +69,10 @@
   background: rgba(145, 33, 194, 0.2);
 }
 
+.paramTitle:last-child {
+  padding: 0.3rem 0;
+}
+
 .paramName {
   margin-right: 0.25rem;
   font-size: 14px;

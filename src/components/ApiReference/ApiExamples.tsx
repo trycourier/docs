@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useFormikContext } from "formik";
 import capitalize from "lodash/capitalize";
+import mapValues from "lodash/mapValues";
 import qs from "qs";
-import { pathParams as populatePathParams } from "path-params";
+import { Path } from "path-parser";
 import CodeBlock from "@theme/CodeBlock";
 
 import styles from "./styles.module.css";
@@ -59,9 +60,12 @@ const tabs = [
         body ? line(`'Content-Type': 'application/json'${auth ? "," : ""}`, 2) : null,
         auth ? line(`Authorization: 'Bearer ${auth}'`, 2) : null,
         line("},", 1),
-        body ? line("body: JSON.stringify(", 1) : null,
-        body ? line(stringifyJSON(body, true), 2) : null,
-        body ? line(")", 1) : null,
+        body
+          ? line(`body: JSON.stringify(${stringifyJSON(body, true)})`, 1).replace(
+              /\n/g,
+              `\n${" ".repeat(INDENT_LENGTH)}`
+            )
+          : null,
         line("};"),
         line(""),
         line(`fetch('${url}', options)`),
@@ -201,6 +205,12 @@ const ApiExamples = ({ method, path }: Pick<ApiReferenceProps, "method" | "path"
     setActiveTabIndex(storedTabIndex);
   }, []);
 
+  const defaultPathParams = useMemo(
+    () => mapValues(values.path, (value, key) => `:${key}`),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+
   return (
     <div className={styles.tabbedCodeBlock}>
       <div className={styles.tabbedCodeBlockTabs}>
@@ -223,12 +233,11 @@ const ApiExamples = ({ method, path }: Pick<ApiReferenceProps, "method" | "path"
       <CodeBlock className={`language-${activeTab.lang}`}>
         {activeTab.template({
           method,
-          url: `${process.env.API_HOST}${path}${populatePathParams(
-            path,
-            values.path || {}
-          )}${qs.stringify(values.query || {}, {
-            addQueryPrefix: true,
-          })}`,
+          url: [
+            process.env.API_HOST,
+            new Path(path).build({ ...defaultPathParams, ...values.path }),
+            qs.stringify(values.query || {}, { addQueryPrefix: true }),
+          ].join(""),
           auth: values.auth,
           body: values.body,
         })}
