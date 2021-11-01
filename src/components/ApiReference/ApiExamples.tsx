@@ -14,7 +14,7 @@ const INDENT_LENGTH = 2;
 const STORAGE_EXAMPLE_TAB_KEY = "API_REFERENCE_EXAMPLE_TAB";
 
 const escapeChar = (str: string, char: string) =>
-  str.replace(new RegExp(`(?<!\\\\)(${char})`, "g"), "\\$1");
+  str.replace(new RegExp(`(?:\\\\)?(${char})`, "g"), "\\$1");
 
 const buildTemplate = (lines: Array<string | null>) =>
   lines.filter((line) => line != null).join("\n");
