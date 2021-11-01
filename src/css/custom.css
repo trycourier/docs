@@ -39,8 +39,8 @@
   --ifm-color-primary-light: rgb(70, 203, 174);
   --ifm-color-primary-lighter: rgb(102, 212, 189);
   --ifm-color-primary-lightest: rgb(146, 224, 208);
-  --ifm-code-font-size: 95%;
   /* custom */
+  --ifm-code-font-size: 12px;
   --ifm-color-primary: #9121c2;
   --ifm-navbar-height: 4.5rem;
   --ifm-navbar-link-color: var(--ifm-font-color-base-inverse);
@@ -61,14 +61,22 @@
   --ifm-color-danger: #de5063;
   --ifm-badge-padding-vertical: 0.4rem;
   --ifm-badge-padding-horizontal: 0.8rem;
+  --ifm-heading-font-weight: 600;
+  --ifm-navbar-item-padding-horizontal: 0.75rem;
+  --code-block-bg: linear-gradient(to right, #1e0c26 2.5rem, #2d1339 2.5rem);
 }
 
 @media (min-width: 997px) {
   :root {
     --ifm-spacing-horizontal: 2.25rem;
     --ifm-spacing-vertical: 2.25rem;
-    --ifm-navbar-padding-horizontal: 3rem;
+    --ifm-navbar-padding-horizontal: 2rem;
   }
+}
+
+h1,
+h2 {
+  font-weight: 700;
 }
 
 strong {
@@ -86,10 +94,17 @@ html[data-theme="dark"] .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
+[class^="codeBlockTitle"] {
+  color: white !important;
+  border: 0 !important;
+  background: var(--code-block-bg);
+  padding-left: 3.3rem !important;
+}
+
 .prism-code {
   counter-reset: line-number;
   font-size: 13px;
-  background: linear-gradient(to right, #1e0c26 2.5rem, #2d1339 2.5rem);
+  background: var(--code-block-bg);
 }
 
 .prism-code .token-line {
@@ -123,7 +138,7 @@ html[data-theme="dark"] .docusaurus-highlight-code-line {
 }
 
 .navbar__brand {
-  margin-right: 8rem;
+  margin-right: 6rem;
 }
 
 .navbar__link {
@@ -145,13 +160,57 @@ html[data-theme="dark"] .docusaurus-highlight-code-line {
   width: 6.5rem;
 }
 
-aside {
-  background: rgba(145, 33, 194, 0.05);
-  border-width: 0 !important;
+.navbar__link svg {
+  display: none;
 }
 
-.menu {
-  padding: 2rem !important;
+.navbar__items--right .navbar__item {
+  padding: 6px 16px;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.16);
+}
+
+aside,
+.navbar-sidebar {
+  background: #f9f4fc;
+  border-width: 0 !important;
+  color: #2c1338;
+  --ifm-menu-color: #2c1338;
+  --ifm-menu-color-active: var(--ifm-menu-color);
+}
+
+aside > div > a,
+.navbar-sidebar__brand .navbar__brand {
+  width: 6.5rem;
+  background: url(/img/logo-violet.svg) center no-repeat;
+}
+
+aside > div > a > img,
+.navbar-sidebar__brand .navbar__brand .navbar__logo img {
+  display: none !important;
+}
+
+.navbar-sidebar__back {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 13px;
+  color: #9121c2;
+}
+
+.navbar-sidebar__item {
+  padding: 0;
+}
+
+.navbar-sidebar__item:first-child .menu__list-item {
+  margin-bottom: 0;
+}
+
+@media (min-width: 997px) {
+  .menu {
+    padding: 2rem 1rem 0 !important;
+  }
 }
 
 .menu__link {
@@ -178,4 +237,104 @@ aside {
   bottom: 0;
   background: rgba(145, 33, 194, 0.2);
   border-radius: var(--ifm-global-radius);
+}
+
+.menu__link svg {
+  opacity: 0.4;
+  transform: scale(0.75);
+}
+
+.menu__list-item {
+  margin-bottom: 2rem;
+}
+
+.menu__list-item .menu__list-item {
+  margin: 0;
+}
+
+.menu__link:not([href]) {
+  margin-bottom: 1rem;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.menu__link:not([href]) + .menu__list {
+  margin-left: 0;
+}
+
+.footer {
+  display: none;
+}
+
+.tabs-container {
+  border-radius: var(--ifm-code-border-radius);
+  background: var(--code-block-bg);
+}
+
+.tabs {
+  padding-top: 0.5rem;
+  padding-left: 3.3rem;
+}
+
+.tabs__item {
+  margin-right: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: var(--ifm-code-border-radius);
+  border: 0;
+  background: #392144;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  color: rgba(255, 255, 255, 0.72);
+  cursor: pointer;
+}
+
+.tabs__item[aria-selected="false"]:hover,
+.tabs__item[aria-selected="false"]:focus {
+  background: #392144;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.tabs__item[aria-selected="true"] {
+  background: linear-gradient(270deg, #9121c2 0%, #ff5e5e 100%);
+  color: #fff;
+}
+
+.tabs-container .margin-vert--md {
+  margin: 0 !important;
+}
+
+[class^="tocCollapsible"] li {
+  margin-left: 0 !important;
+}
+
+[class^="tocCollapsible"] button {
+  padding-left: 0;
+}
+
+[class^="tocCollapsible"] button:after {
+  opacity: 0.5;
+  width: 1rem;
+  height: 1rem;
+  background-size: 1.5rem;
+}
+
+.pagination-nav__sublabel {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(44, 19, 56, 0.8);
+}
+
+.pagination-nav__label {
+  font-weight: 500;
+  color: rgba(44, 19, 56, 0.8);
+}
+
+.pagination-nav__link {
+  border-color: rgba(44, 19, 56, 0.06);
+}
+
+.pagination-nav__link:hover {
+  background: rgba(44, 19, 56, 0.02);
+  border-color: rgba(44, 19, 56, 0.24);
 }

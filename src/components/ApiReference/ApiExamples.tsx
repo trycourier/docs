@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import { useFormikContext } from "formik";
 import capitalize from "lodash/capitalize";
 import mapValues from "lodash/mapValues";
 import qs from "qs";
 import { Path } from "path-parser";
 import CodeBlock from "@theme/CodeBlock";
-
-import styles from "./styles.module.css";
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 import { ApiReferenceProps, FormValues } from ".";
 
@@ -193,17 +193,7 @@ const tabs = [
 ];
 
 const ApiExamples = ({ method, path }: Pick<ApiReferenceProps, "method" | "path">) => {
-  const [activeTabIndex, setActiveTabIndex] = useState(0);
   const { values } = useFormikContext<FormValues>();
-  const activeTab = tabs[activeTabIndex];
-
-  useEffect(() => {
-    const storedTabIndex = +localStorage.getItem(STORAGE_EXAMPLE_TAB_KEY);
-
-    if (!tabs[storedTabIndex]) return;
-
-    setActiveTabIndex(storedTabIndex);
-  }, []);
 
   const defaultPathParams = useMemo(
     () => mapValues(values.path, (value, key) => `:${key}`),
@@ -212,37 +202,24 @@ const ApiExamples = ({ method, path }: Pick<ApiReferenceProps, "method" | "path"
   );
 
   return (
-    <div className={styles.tabbedCodeBlock}>
-      <div className={styles.tabbedCodeBlockTabs}>
-        {tabs.map((template, index) => (
-          <button
-            key={index}
-            type="button"
-            className={activeTabIndex === index ? styles.tabbedCodeBlockActiveTab : undefined}
-            onClick={() => {
-              setActiveTabIndex(index);
-
-              localStorage.setItem(STORAGE_EXAMPLE_TAB_KEY, String(index));
-            }}
-          >
-            {template.title}
-          </button>
-        ))}
-      </div>
-
-      <CodeBlock className={`language-${activeTab.lang}`}>
-        {activeTab.template({
-          method,
-          url: [
-            process.env.API_HOST,
-            new Path(path).build({ ...defaultPathParams, ...values.path }),
-            qs.stringify(values.query || {}, { addQueryPrefix: true }),
-          ].join(""),
-          auth: values.auth,
-          body: values.body,
-        })}
-      </CodeBlock>
-    </div>
+    <Tabs groupId={STORAGE_EXAMPLE_TAB_KEY}>
+      {tabs.map((tab, index) => (
+        <TabItem key={index} value={tab.lang} label={tab.title}>
+          <CodeBlock className={`language-${tab.lang}`}>
+            {tab.template({
+              method,
+              url: [
+                process.env.API_HOST,
+                new Path(path).build({ ...defaultPathParams, ...values.path }),
+                qs.stringify(values.query || {}, { addQueryPrefix: true }),
+              ].join(""),
+              auth: values.auth,
+              body: values.body,
+            })}
+          </CodeBlock>
+        </TabItem>
+      ))}
+    </Tabs>
   );
 };
 

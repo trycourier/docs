@@ -44,8 +44,11 @@
   margin-top: 1rem;
 }
 
-.sectionTitle {
+.section > .sectionTitle {
   padding-bottom: 0.5rem;
+}
+
+.sectionTitle {
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
@@ -293,7 +296,7 @@ button.groupHeader:focus {
 
 .inlineForm {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   margin-bottom: 1rem;
   white-space: nowrap;
 }
@@ -301,42 +304,4 @@ button.groupHeader:focus {
 .inlineForm .input,
 .inlineForm .button {
   margin-left: 0.5rem;
-}
-
-.tabbedCodeBlock {
-  position: relative;
-  border-radius: var(--ifm-code-border-radius);
-  background: #2d1339;
-}
-
-.tabbedCodeBlockTabs {
-  display: flex;
-  flex-wrap: wrap;
-  padding-left: 3.3rem;
-  background: linear-gradient(to right, #1e0c26 2.5rem, #2d1339 2.5rem);
-  border-radius: var(--ifm-code-border-radius);
-}
-
-.tabbedCodeBlockTabs button {
-  margin-top: 0.5rem;
-  margin-right: 0.5rem;
-  padding: 0.4rem 0.6rem;
-  border-radius: var(--ifm-code-border-radius);
-  border: 0;
-  background: #392144;
-  font-size: 12px;
-  font-weight: 600;
-  font-family: inherit;
-  color: rgba(255, 255, 255, 0.72);
-  cursor: pointer;
-}
-
-.tabbedCodeBlockTabs button:hover,
-.tabbedCodeBlockTabs button:focus {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-button.tabbedCodeBlockActiveTab {
-  background: linear-gradient(270deg, #9121c2 0%, #ff5e5e 100%);
-  color: #fff;
 }
