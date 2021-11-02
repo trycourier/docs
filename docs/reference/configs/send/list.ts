@@ -1,6 +1,7 @@
 import { ApiReferenceProps } from "@site/src/components/ApiReference";
 
-const api: ApiReferenceProps = {
+const config: ApiReferenceProps = {
+  description: "Send a notification to list(s) subscribers",
   method: "POST",
   path: "/send/list",
   bodyParam: {
@@ -14,9 +15,8 @@ const api: ApiReferenceProps = {
             name: "list",
             displayName: "by list",
             required: true,
-            description:
-              "The list id intended to send (optional: list or pattern required)",
-            example: "example.list.id",
+            description: "The list id intended to send (optional: list or pattern required)",
+            example: "ExampleListId",
           },
           {
             type: "string",
@@ -33,19 +33,21 @@ const api: ApiReferenceProps = {
         type: "string",
         name: "event",
         required: true,
-        example: "04de5ab9-8314-2e39d6b",
+        example: "EXAMPLE_NOTIFICATION",
         description:
           'A unique identifier that can be mapped to an individual Notification. This could be the "Notification ID” on Notification detail pages (see the [Notifications page](https://app.courier.com/designer/notifications) in the Courier app) or a custom string mapped to the event in [settings](https://app.courier.com/settings/events).',
       },
       {
         type: "string",
         name: "brand",
+        example: "W50NC77P524K14M5300PGPEK4JMJ",
         description:
           "A unique identifier that represents the brand that should be used for rendering the notification.",
       },
       {
         type: "json",
         name: "data",
+        example: { name: "Jane Doe", age: 27 },
         description:
           "An object that includes any data you want to pass to a message template. The data will populate the corresponding template variables.",
       },
@@ -98,4 +100,4 @@ const api: ApiReferenceProps = {
   ],
 };
 
-export default api;
+export default config;

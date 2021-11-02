@@ -6,6 +6,7 @@ import {
   apiParamInitialValue,
   buildParamPath,
 } from "../ApiReference/ApiParamField";
+import ApiParamInfo from "../ApiReference/ApiParamInfo";
 import ApiParamField from "../ApiReference/ApiParamField";
 
 import styles from "./styles.module.css";
@@ -20,13 +21,22 @@ const ApiParamOneOfField = ({ param, field }: FieldComponentProps<"oneOf">) => {
       const oldValues = apiParamInitialValue(param.options[activeIndex]);
       const newValues = apiParamInitialValue(param.options[index]);
 
-      Object.keys(oldValues).forEach((key) => {
-        setFieldValue(buildParamPath(key, field.name), undefined);
-      });
+      const setFieldValues = (values) => {
+        if (typeof values === "object" && values !== null) {
+          if (Object.keys(newValues).length === 0) {
+            setFieldValue(buildParamPath(field.name), undefined);
+          } else {
+            Object.entries(values).forEach(([key, value]) => {
+              setFieldValue(buildParamPath(key, field.name), value);
+            });
+          }
+        } else {
+          setFieldValue(buildParamPath(field.name), values);
+        }
+      };
 
-      Object.entries(newValues).forEach(([key, value]) => {
-        setFieldValue(buildParamPath(key, field.name), value);
-      });
+      setFieldValues(oldValues);
+      setFieldValues(newValues);
     },
     [field.name, activeIndex, setFieldValue, param.options]
   );
@@ -36,11 +46,17 @@ const ApiParamOneOfField = ({ param, field }: FieldComponentProps<"oneOf">) => {
 
   return (
     <div className={styles.group}>
+      {param.name && (
+        <div className={styles.groupHeader}>
+          <ApiParamInfo param={param} />
+        </div>
+      )}
+
       {param.options?.map((fieldParam, index) => (
         <React.Fragment key={index}>
           {activeIndex === index ? (
             <div className={styles.groupHeader}>
-              {fieldParam.displayName || fieldParam.name}
+              {fieldParam.displayName || fieldParam.name || `Option ${index + 1}`}
             </div>
           ) : (
             <button
@@ -48,13 +64,11 @@ const ApiParamOneOfField = ({ param, field }: FieldComponentProps<"oneOf">) => {
               onClick={() => selectOption(index)}
               className={styles.groupHeader}
             >
-              {fieldParam.displayName || fieldParam.name}
+              {fieldParam.displayName || fieldParam.name || `Option ${index + 1}`}
             </button>
           )}
 
-          {activeIndex === index && (
-            <ApiParamField param={fieldParam} prefix={field.name} />
-          )}
+          {activeIndex === index && <ApiParamField param={fieldParam} prefix={field.name} />}
         </React.Fragment>
       ))}
     </div>

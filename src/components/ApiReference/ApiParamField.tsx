@@ -18,7 +18,6 @@ interface ApiBaseParam<Type extends string, Value = never> {
   description?: string;
   required?: boolean;
   type: Type;
-  default?: Value;
   example?: Value;
 }
 
@@ -33,7 +32,7 @@ export type ApiParam =
 export interface FieldComponentProps<
   Type extends ApiParam["type"] = ApiParam["type"],
   Param extends ApiParam = Extract<ApiParam, { type: Type }>,
-  Value extends ApiParam["default"] = Param["default"]
+  Value extends ApiParam["example"] = Param["example"]
 > extends FieldProps<Type extends "array" ? unknown[] : Value> {
   param: Param;
 }
@@ -50,7 +49,7 @@ const apiParamComponents: Record<
   oneOf: ApiParamOneOfField,
 };
 
-const PRIMITIVE_TYPES: ApiParam["type"][] = ["string", "boolean", "json"];
+export const PRIMITIVE_TYPES: ApiParam["type"][] = ["string", "boolean", "json"];
 
 export const buildParamPath = (param: ApiParam | string, prefix?: string) =>
   [prefix, typeof param === "string" ? param : param.name].filter((x) => x != null).join(".") ||
@@ -79,7 +78,7 @@ export const apiParamInitialValue = (param: ApiParam) => {
     return { [path]: value };
   }
 
-  return { ...value };
+  return PRIMITIVE_TYPES.includes(param.type) ? value : { ...value };
 };
 
 const validateField = (param: ApiParam) => (value: string) => {

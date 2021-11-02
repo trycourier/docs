@@ -9,8 +9,8 @@ import styles from "./styles.module.css";
 interface ApiParamBaseInputProps extends FieldComponentProps {
   multiline?: boolean;
   enum?: Array<string | boolean>;
-  valueToString?: (value: string | FieldComponentProps["param"]["default"]) => string;
-  stringToValue?: (value: string) => string | FieldComponentProps["param"]["default"];
+  valueToString?: (value: string | FieldComponentProps["param"]["example"]) => string;
+  stringToValue?: (value: string) => string | FieldComponentProps["param"]["example"];
 }
 
 const ApiParamBaseInput = ({

@@ -1,0 +1,11 @@
+.image {
+  margin: 0;
+}
+
+.image figcaption {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-style: italic;
+  font-size: 0.8em;
+  color: rgba(44, 19, 56, 0.6);
+}

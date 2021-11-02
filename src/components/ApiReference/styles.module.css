@@ -1,6 +1,7 @@
 .form {
   position: relative;
   z-index: 1;
+  margin: 2rem 0;
   background: #fff;
 }
 
@@ -60,6 +61,7 @@
 }
 
 .url {
+  padding-top: 0.1rem;
   font-size: 13px;
 }
 
@@ -157,6 +159,10 @@
 
 .groupHeader:last-child {
   border-radius: 0 0 var(--ifm-global-radius) var(--ifm-global-radius);
+}
+
+.groupHeader:first-child:last-child {
+  border-radius: var(--ifm-global-radius);
 }
 
 .groupHeader button:hover,

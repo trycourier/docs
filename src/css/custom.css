@@ -72,6 +72,14 @@
     --ifm-spacing-vertical: 2.25rem;
     --ifm-navbar-padding-horizontal: 2rem;
   }
+
+  main {
+    padding-top: 1rem;
+  }
+}
+
+.markdown h1:first-child {
+  --ifm-h1-font-size: 2.5rem;
 }
 
 h1,
@@ -134,7 +142,8 @@ html[data-theme="dark"] .docusaurus-highlight-code-line {
 }
 
 .navbar {
-  background: linear-gradient(259.94deg, #9121c2 3.35%, #ff5e5e 96.71%);
+  /* background: linear-gradient(259.94deg, #9121c2 3.35%, #ff5e5e 96.71%); */
+  background: linear-gradient(90deg, #c13c97 0%, #9121c2 100%);
 }
 
 .navbar__brand {
@@ -249,7 +258,15 @@ aside > div > a > img,
 }
 
 .menu__list-item .menu__list-item {
+  margin: 0 0 0.25rem 0;
+}
+
+.menu__link--sublist {
   margin: 0;
+}
+
+.menu__list {
+  transition: 0.01s !important;
 }
 
 .menu__link:not([href]) {
@@ -337,4 +354,8 @@ aside > div > a > img,
 .pagination-nav__link:hover {
   background: rgba(44, 19, 56, 0.02);
   border-color: rgba(44, 19, 56, 0.24);
+}
+
+code {
+  font-size: inherit;
 }

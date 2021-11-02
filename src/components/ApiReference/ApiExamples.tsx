@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import { useFormikContext } from "formik";
 import capitalize from "lodash/capitalize";
 import mapValues from "lodash/mapValues";
+import omitBy from "lodash/omitBy";
 import qs from "qs";
 import { Path } from "path-parser";
 import CodeBlock from "@theme/CodeBlock";
@@ -21,7 +22,7 @@ const buildTemplate = (lines: Array<string | null>) =>
 
 const line = (str: string, indent: number = 0) => `${" ".repeat(indent * INDENT_LENGTH)}${str}`;
 
-const stringifyJSON = (obj: object, pretty: boolean = false) =>
+export const stringifyJSON = (obj: object, pretty: boolean = false) =>
   JSON.stringify(obj, null, pretty ? INDENT_LENGTH : undefined);
 
 const tabs = [
@@ -210,7 +211,10 @@ const ApiExamples = ({ method, path }: Pick<ApiReferenceProps, "method" | "path"
               method,
               url: [
                 process.env.API_HOST,
-                new Path(path).build({ ...defaultPathParams, ...values.path }),
+                new Path(path).build({
+                  ...defaultPathParams,
+                  ...omitBy(values.path, (value) => value == null),
+                }),
                 qs.stringify(values.query || {}, { addQueryPrefix: true }),
               ].join(""),
               auth: values.auth,

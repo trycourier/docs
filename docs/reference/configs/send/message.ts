@@ -1,6 +1,7 @@
 import { ApiReferenceProps } from "@site/src/components/ApiReference";
 
-const api: ApiReferenceProps = {
+const config: ApiReferenceProps = {
+  description: "Send a notification to a specified recipient.",
   method: "POST",
   path: "/send",
   bodyParam: {
@@ -12,27 +13,28 @@ const api: ApiReferenceProps = {
         required: true,
         description:
           'A unique identifier that can be mapped to an individual Notification. This could be the "Notification ID” on Notification detail pages (see the [Notifications page](https://app.courier.com/designer/notifications) in the Courier app) or a custom string mapped to the event in [settings](https://app.courier.com/settings/events).',
-        example: "04de5ab9-8314-2e39d6b",
+        example: "EXAMPLE_NOTIFICATION",
       },
       {
         type: "string",
         name: "recipient",
         required: true,
         description: "A unique identifier associated with the recipient of the delivered message.",
-        example: "0460766e-8463-4905-ae98-b72c7aef41d6",
+        example: "8ec8c99a-c5f7-455b-9f60-8222b8a27056",
       },
       {
         type: "string",
         name: "brand",
         description:
           "A unique identifier that represents the brand that should be used for rendering the notification.",
+        example: "W50NC77P524K14M5300PGPEK4JMJ",
       },
       {
         type: "json",
         name: "data",
         description:
           "An object that includes any data you want to pass to a message template. The data will populate the corresponding template variables.",
-        example: {},
+        example: { name: "Jane Doe", age: 27 },
       },
       {
         type: "json",
@@ -44,25 +46,13 @@ const api: ApiReferenceProps = {
         type: "json",
         name: "preferences",
         description: "An object that includes any preferences for the recipient.",
-        example: {
-          notifications: {
-            H4CHKV5GCYMYHNHM3VJF9BX1M5HR: {
-              status: "OPTED_IN",
-              channel_preferences: [{ channel: "direct_message" }],
-              rule: [{ type: "snooze", until: "2021-12-31T00:00:00.000Z" }],
-            },
-          },
-        },
       },
       {
         type: "json",
         name: "profile",
         description:
           "An object that includes any key-value pairs required by your chosen Integrations (see our [Provider Documentation](https://docs.courier.com/docs) for the requirements for each Integration.) If profile information is included in the request and that information already exists in the profile for the recipientId, that information will be merged.",
-        example: {
-          phone_number: "2025550125",
-          email: "hello@example.com",
-        },
+        example: { phone_number: "2025550125", email: "hello@example.com" },
       },
     ],
   },
@@ -106,4 +96,4 @@ const api: ApiReferenceProps = {
   ],
 };
 
-export default api;
+export default config;

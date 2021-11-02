@@ -4,10 +4,10 @@ import CodeBlock from "@theme/CodeBlock";
 
 import styles from "./styles.module.css";
 
-import ApiResponseField, { ApiResponse, responseToString } from "./ApiResponseField";
+import ApiResponseField, { ApiResponse, buildResponse } from "./ApiResponseField";
 import ApiParamField, { ApiParam, apiParamInitialValue } from "./ApiParamField";
 import ApiParamButton from "./ApiParamButton";
-import ApiExamples from "./ApiExamples";
+import ApiExamples, { stringifyJSON } from "./ApiExamples";
 
 export interface ApiReferenceProps {
   method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
@@ -29,6 +29,7 @@ export interface FormValues {
 const STORAGE_AUTH_KEY = "API_REFERENCE_AUTH_KEY";
 
 const ApiReference = ({
+  description,
   method,
   path,
   pathParams,
@@ -107,6 +108,8 @@ const ApiReference = ({
               {process.env.API_HOST}
               {path}
             </div>
+
+            {description && <div className={styles.section}>{description}</div>}
 
             {pathParams && (
               <div className={styles.section}>
@@ -191,7 +194,7 @@ const ApiReference = ({
                     ? response
                       ? JSON.stringify(response.body, null, 2)
                       : "Error with Test Request"
-                    : responseToString(responses[responseIndex].body)}
+                    : stringifyJSON(buildResponse(responses[responseIndex].body), true)}
                 </CodeBlock>
               </div>
             </div>
