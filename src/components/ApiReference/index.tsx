@@ -142,6 +142,7 @@ const ApiReference = ({
                 <div key={index} className={styles.section}>
                   <ApiResponseField
                     field={{
+                      type: "object",
                       name: `${response.status} ${response.description}`,
                       ...response.body,
                     }}
@@ -194,7 +195,9 @@ const ApiReference = ({
                     ? response
                       ? JSON.stringify(response.body, null, 2)
                       : "Error with Test Request"
-                    : stringifyJSON(buildResponse(responses[responseIndex].body), true)}
+                    : responses[responseIndex].body
+                    ? stringifyJSON(buildResponse(responses[responseIndex].body), true)
+                    : "Empty"}
                 </CodeBlock>
               </div>
             </div>

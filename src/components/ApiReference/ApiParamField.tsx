@@ -1,9 +1,9 @@
 import React from "react";
-import clsx from "clsx";
 import { Field, FieldProps } from "formik";
 
 import ApiParamInfo from "./ApiParamInfo";
 import ApiParamTextField from "./ApiParamTextField";
+import ApiParamNumberField from "./ApiParamNumberField";
 import ApiParamBooleanField from "./ApiParamBooleanField";
 import ApiParamJSONField from "./ApiParamJSONField";
 import ApiParamArrayField from "./ApiParamArrayField";
@@ -23,6 +23,7 @@ interface ApiBaseParam<Type extends string, Value = never> {
 
 export type ApiParam =
   | (ApiBaseParam<"string", string> & { enum?: string[] })
+  | ApiBaseParam<"number", number>
   | ApiBaseParam<"boolean", boolean>
   | ApiBaseParam<"json", string | object>
   | (ApiBaseParam<"array"> & { field: ApiParam })
@@ -42,6 +43,7 @@ const apiParamComponents: Record<
   React.ComponentType<FieldComponentProps<ApiParam["type"]>>
 > = {
   string: ApiParamTextField,
+  number: ApiParamNumberField,
   boolean: ApiParamBooleanField,
   json: ApiParamJSONField,
   array: ApiParamArrayField,
@@ -49,7 +51,7 @@ const apiParamComponents: Record<
   oneOf: ApiParamOneOfField,
 };
 
-export const PRIMITIVE_TYPES: ApiParam["type"][] = ["string", "boolean", "json"];
+export const PRIMITIVE_TYPES: ApiParam["type"][] = ["string", "number", "boolean", "json"];
 
 export const buildParamPath = (param: ApiParam | string, prefix?: string) =>
   [prefix, typeof param === "string" ? param : param.name].filter((x) => x != null).join(".") ||

@@ -92,6 +92,7 @@ const config: ApiReferenceProps = {
             type: "string",
             name: "type",
             description: "The type of error that occurred.",
+            enum: ["invalid_request_error"],
             example: "invalid_request_error",
           },
         ],

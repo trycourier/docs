@@ -8,7 +8,7 @@ import styles from "./styles.module.css";
 export interface ApiResponse {
   status: number;
   description: string;
-  body: ApiParam;
+  body?: ApiParam;
 }
 
 export const buildResponse = (field: ApiParam) => {
@@ -47,13 +47,16 @@ const ApiResponseField = ({ field }: { field: ApiParam }) => {
 
   const toggleCollapsed = useCallback(() => setCollapsed((collapsed) => !collapsed), []);
 
-  if (field.type === "string" || field.type === "boolean" || field.type === "json") {
-    const enums = field.type === "string" && field.enum ? `[${field.enum.join(" | ")}]` : "";
+  if (PRIMITIVE_TYPES.includes(field.type)) {
+    const enums = field.type === "string" && field.enum ? `*[${field.enum.join(" | ")}]*` : "";
 
     return (
       <div className={styles.field}>
         <ApiParamInfo
-          param={{ ...field, description: [enums, field.description].filter(Boolean).join("\n") }}
+          param={{
+            ...field,
+            description: [enums, field.description].filter(Boolean).join(" "),
+          }}
         />
       </div>
     );
@@ -63,15 +66,20 @@ const ApiResponseField = ({ field }: { field: ApiParam }) => {
     return (
       <div className={styles.field}>
         <div className={styles.group}>
-          {field.name && (
-            <button type="button" className={styles.groupHeader} onClick={toggleCollapsed}>
-              <ApiParamInfo param={field} />
-            </button>
-          )}
+          {field.name &&
+            (field.fields ? (
+              <button type="button" className={styles.groupHeader} onClick={toggleCollapsed}>
+                <ApiParamInfo param={field} />
+              </button>
+            ) : (
+              <div className={styles.groupHeader}>
+                <ApiParamInfo param={field} />
+              </div>
+            ))}
 
           {collapsed
             ? null
-            : field.fields.map((arrayField, index) => (
+            : field.fields?.map((arrayField, index) => (
                 <ApiResponseField key={index} field={arrayField} />
               ))}
         </div>

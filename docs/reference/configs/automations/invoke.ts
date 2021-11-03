@@ -223,6 +223,10 @@ const config: ApiReferenceProps = {
                           description:
                             "A unix epoch timestamp (seconds) or an ISO_8601 date string that describes how long the idempotency_key is valid.",
                         },
+                        {
+                          type: "number",
+                          displayName: "number",
+                        },
                         accessorType,
                       ],
                     },
@@ -337,6 +341,10 @@ const config: ApiReferenceProps = {
                           displayName: "string",
                           description:
                             "A unix epoch timestamp (seconds) or an ISO_8601 date string that describes how long the idempotency_key is valid.",
+                        },
+                        {
+                          type: "number",
+                          displayName: "number",
                         },
                         accessorType,
                       ],
@@ -577,6 +585,10 @@ const config: ApiReferenceProps = {
                           displayName: "string",
                           description:
                             "A unix epoch timestamp (seconds) or an ISO_8601 date string that describes how long the idempotency_key is valid.",
+                        },
+                        {
+                          type: "number",
+                          displayName: "number",
                         },
                         accessorType,
                       ],
