@@ -13,12 +13,14 @@ const Event: ApiParam = {
       type: "string",
       name: "id",
       description: "The ID of the notification this event maps to",
+      example: "notification-id-1",
     },
     {
       type: "string",
       name: "type",
       description: "The type of event",
       enum: ["notification"],
+      example: "notification",
     },
   ],
 };
