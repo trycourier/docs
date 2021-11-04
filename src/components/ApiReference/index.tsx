@@ -26,6 +26,8 @@ export interface FormValues {
   body: object;
 }
 
+export { ApiParam };
+
 const STORAGE_AUTH_KEY = "API_REFERENCE_AUTH_KEY";
 
 const ApiReference = ({

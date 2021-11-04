@@ -27,6 +27,7 @@ export type ApiParam =
   | ApiBaseParam<"boolean", boolean>
   | ApiBaseParam<"json", string | object>
   | (ApiBaseParam<"array"> & { field: ApiParam })
+  | (ApiBaseParam<"record"> & { field: ApiParam })
   | (ApiBaseParam<"object"> & { fields: ApiParam[]; name?: string })
   | (ApiBaseParam<"oneOf"> & { options: ApiParam[] });
 
@@ -47,6 +48,7 @@ const apiParamComponents: Record<
   boolean: ApiParamBooleanField,
   json: ApiParamJSONField,
   array: ApiParamArrayField,
+  record: ApiParamArrayField,
   object: ApiParamObjectField,
   oneOf: ApiParamOneOfField,
 };
