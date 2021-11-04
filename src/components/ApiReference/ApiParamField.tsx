@@ -7,6 +7,7 @@ import ApiParamNumberField from "./ApiParamNumberField";
 import ApiParamBooleanField from "./ApiParamBooleanField";
 import ApiParamJSONField from "./ApiParamJSONField";
 import ApiParamArrayField from "./ApiParamArrayField";
+import ApiParamRecordField from "./ApiParamRecordField";
 import ApiParamObjectField from "./ApiParamObjectField";
 import ApiParamOneOfField from "./ApiParamOneOfField";
 
@@ -48,7 +49,7 @@ const apiParamComponents: Record<
   boolean: ApiParamBooleanField,
   json: ApiParamJSONField,
   array: ApiParamArrayField,
-  record: ApiParamArrayField,
+  record: ApiParamRecordField,
   object: ApiParamObjectField,
   oneOf: ApiParamOneOfField,
 };
@@ -76,6 +77,8 @@ export const apiParamInitialValue = (param: ApiParam) => {
     ? param.fields.reduce((obj, field) => ({ ...obj, ...apiParamInitialValue(field) }), {})
     : param.type === "array"
     ? []
+    : param.type === "record"
+    ? {}
     : undefined;
 
   if (path) {

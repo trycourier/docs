@@ -311,3 +311,7 @@ button.groupHeader:focus {
 .inlineForm .button {
   margin-left: 0.5rem;
 }
+
+.groupHeader .inlineForm {
+  margin: 0.25rem 0;
+}

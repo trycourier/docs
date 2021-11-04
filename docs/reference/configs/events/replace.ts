@@ -27,7 +27,7 @@ const config: ApiReferenceProps = {
           {
             type: "string",
             name: "status",
-            description: "A unique event identifier",
+            example: "SUCCESS",
           },
         ],
       },

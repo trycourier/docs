@@ -41,6 +41,7 @@ const ProfileOIDC: ApiParam = {
     {
       type: "string",
       name: "email",
+      example: "user@example.com",
     },
     {
       type: "boolean",
@@ -77,6 +78,7 @@ const ProfileOIDC: ApiParam = {
     {
       type: "string",
       name: "phone_number",
+      example: "555-555-5555",
     },
     {
       type: "boolean",

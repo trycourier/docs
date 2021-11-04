@@ -30,6 +30,26 @@ export { ApiParam };
 
 const STORAGE_AUTH_KEY = "API_REFERENCE_AUTH_KEY";
 
+const deepCompact = (value: unknown) => {
+  if (Array.isArray(value)) {
+    const array = value.map(deepCompact).filter((x) => x != null);
+
+    return array.length === 0 ? undefined : array;
+  }
+
+  if (typeof value === "object" && value !== null) {
+    const object = Object.fromEntries(
+      Object.entries(value)
+        .map(([key, value]) => [key, deepCompact(value)])
+        .filter(([key, value]) => value != null)
+    );
+
+    return Object.keys(object).length === 0 ? undefined : object;
+  }
+
+  return value;
+};
+
 const ApiReference = ({
   description,
   method,
@@ -198,7 +218,7 @@ const ApiReference = ({
                       ? JSON.stringify(response.body, null, 2)
                       : "Error with Test Request"
                     : responses[responseIndex].body
-                    ? stringifyJSON(buildResponse(responses[responseIndex].body), true)
+                    ? stringifyJSON(deepCompact(buildResponse(responses[responseIndex].body)), true)
                     : "Empty"}
                 </CodeBlock>
               </div>

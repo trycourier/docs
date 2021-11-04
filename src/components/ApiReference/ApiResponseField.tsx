@@ -24,6 +24,10 @@ export const buildResponse = (field: ApiParam) => {
     return [buildResponse(field.field)];
   }
 
+  if (field.type === "record") {
+    return { "{KEY}": buildResponse(field.field) };
+  }
+
   if (field.type === "object") {
     return field.fields.reduce(
       (obj, objField) => ({
@@ -73,7 +77,7 @@ const ApiResponseField = ({ field }: { field: ApiParam }) => {
               </button>
             ) : (
               <div className={styles.groupHeader}>
-                <ApiParamInfo param={field} />
+                <ApiParamInfo param={{ ...field, type: "" as any }} />
               </div>
             ))}
 
@@ -88,6 +92,20 @@ const ApiResponseField = ({ field }: { field: ApiParam }) => {
   }
 
   if (field.type === "array") {
+    return (
+      <div className={styles.field}>
+        <div className={styles.group}>
+          <div className={styles.groupHeader}>
+            <ApiParamInfo param={field} />
+          </div>
+
+          <ApiResponseField field={field.field} />
+        </div>
+      </div>
+    );
+  }
+
+  if (field.type === "record") {
     return (
       <div className={styles.field}>
         <div className={styles.group}>

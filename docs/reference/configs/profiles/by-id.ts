@@ -24,7 +24,7 @@ const config: ApiReferenceProps = {
       body: {
         type: "object",
         fields: [
-          Profile,
+          ...(Profile.type === "object" ? Profile.fields : []),
           {
             ...Preferences,
             name: "preferences",
