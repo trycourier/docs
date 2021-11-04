@@ -1,4 +1,4 @@
-import { ApiParam } from "@site/src/components/ApiReference";
+import { ApiParam } from "@site/src/components/ApiReference/ApiParamField";
 
 import MessageStatus from "./MessageStatus";
 

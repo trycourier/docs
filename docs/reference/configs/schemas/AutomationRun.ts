@@ -1,4 +1,4 @@
-import { ApiParam } from "@site/src/components/ApiReference";
+import { ApiParam } from "@site/src/components/ApiReference/ApiParamField";
 
 import AccessorType from "./AccessorType";
 import CancelStep from "./CancelStep";
