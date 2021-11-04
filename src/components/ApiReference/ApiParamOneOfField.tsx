@@ -23,7 +23,7 @@ const ApiParamOneOfField = ({ param, field }: FieldComponentProps<"oneOf">) => {
 
       const setFieldValues = (values) => {
         if (typeof values === "object" && values !== null) {
-          if (Object.keys(newValues).length === 0) {
+          if (Object.keys(values).length === 0) {
             setFieldValue(buildParamPath(field.name), undefined);
           } else {
             Object.entries(values).forEach(([key, value]) => {

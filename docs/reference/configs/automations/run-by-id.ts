@@ -1,6 +1,6 @@
 import { ApiReferenceProps } from "@site/src/components/ApiReference";
 
-import invokeConfig from "./invoke";
+import AutomationRun from "../schemas/AutomationRun";
 
 const config: ApiReferenceProps = {
   description: "Retrieve information and status of a given automation run.",
@@ -19,7 +19,7 @@ const config: ApiReferenceProps = {
     {
       status: 200,
       description: "OK",
-      body: invokeConfig.bodyParam,
+      body: AutomationRun,
     },
   ],
 };

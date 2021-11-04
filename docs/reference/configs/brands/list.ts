@@ -1,6 +1,7 @@
 import { ApiReferenceProps } from "@site/src/components/ApiReference";
 
-import createConfig from "./create";
+import Paging from "../schemas/Paging";
+import Brand from "../schemas/Brand";
 
 const config: ApiReferenceProps = {
   description: "Get the list of brands",
@@ -22,29 +23,14 @@ const config: ApiReferenceProps = {
         type: "object",
         fields: [
           {
-            type: "object",
+            ...Paging,
             name: "paging",
-            fields: [
-              {
-                type: "string",
-                name: "cursor",
-                example: "MTU4OTQ5NTI1ODY4NywxLTVlYmRjNWRhLTEwODZlYWFjMWRmMjEwMTNjM2I0ZjVhMA==",
-                description:
-                  "A unique identifier that allows for fetching the next set of objects.",
-              },
-              {
-                type: "boolean",
-                name: "more",
-                example: true,
-                description: "Whether or not there are more message statuses that can be fetched.",
-              },
-            ],
           },
           {
             type: "array",
             name: "results",
             description: "An array of brands",
-            field: createConfig.responses[0].body,
+            field: Brand,
           },
         ],
       },

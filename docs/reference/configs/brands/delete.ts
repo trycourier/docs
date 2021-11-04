@@ -1,7 +1,5 @@
 import { ApiReferenceProps } from "@site/src/components/ApiReference";
 
-import createConfig from "./create";
-
 const config: ApiReferenceProps = {
   description: "Delete a brand by brand ID.",
   method: "DELETE",
@@ -14,13 +12,6 @@ const config: ApiReferenceProps = {
       description: "A unique identifier associated with the brand you wish to retrieve.",
     },
   ],
-  bodyParam:
-    createConfig.bodyParam.type === "object"
-      ? {
-          ...createConfig.bodyParam,
-          fields: createConfig.bodyParam.fields.filter((field) => field.name !== "id"),
-        }
-      : undefined,
   responses: [
     {
       status: 204,

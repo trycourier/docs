@@ -1,6 +1,8 @@
 import { ApiReferenceProps } from "@site/src/components/ApiReference";
 
-import createConfig from "./create";
+import Brand from "../schemas/Brand";
+import BrandSettings from "../schemas/BrandSettings";
+import BrandSnippets from "../schemas/BrandSnippets";
 
 const config: ApiReferenceProps = {
   description: "Replace an existing brand with the supplied values.",
@@ -15,18 +17,32 @@ const config: ApiReferenceProps = {
       description: "A unique identifier associated with the brand you wish to update.",
     },
   ],
-  bodyParam:
-    createConfig.bodyParam.type === "object"
-      ? {
-          ...createConfig.bodyParam,
-          fields: createConfig.bodyParam.fields.filter((field) => field.name !== "id"),
-        }
-      : undefined,
+  bodyParam: {
+    type: "object",
+    fields: [
+      {
+        type: "string",
+        name: "name",
+        required: true,
+        example: "Example Brand Name",
+        description: "Brand name",
+      },
+      {
+        ...BrandSettings,
+        name: "settings",
+        required: true,
+      },
+      {
+        ...BrandSnippets,
+        name: "snippets",
+      },
+    ],
+  },
   responses: [
     {
       status: 200,
       description: "Successfully replaced",
-      body: createConfig.responses[0].body,
+      body: Brand,
     },
     {
       status: 400,
