@@ -63,6 +63,8 @@
   --ifm-badge-padding-horizontal: 0.8rem;
   --ifm-heading-font-weight: 600;
   --ifm-navbar-item-padding-horizontal: 0.75rem;
+  --ifm-alert-padding-vertical: 1.25rem;
+  --ifm-alert-padding-horizontal: 1.5rem;
   --code-block-bg: linear-gradient(to right, #1e0c26 2.5rem, #2d1339 2.5rem);
 }
 
@@ -107,6 +109,7 @@ html[data-theme="dark"] .docusaurus-highlight-code-line {
   border: 0 !important;
   background: var(--code-block-bg);
   padding-left: 3.3rem !important;
+  padding-bottom: 0 !important;
 }
 
 .prism-code {
