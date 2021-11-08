@@ -31,14 +31,14 @@ Courier allows you to prioritize which Integrations are used to send your Notifi
 For example, a Notification could utilize Slack and email, in that order. If the recipient has a Slack account in their Courier recipient profile, the Notification will send via Slack only. If they have no Slack account listed, but do have an email address listed, it will send via email.
 
 <Image
-  img={require("../assets/notification-channel-rules.png")}
+  img={require("../assets/reference/notification-channel-rules.png")}
   alt="A Notification with multiple Integrations"
 />
 
 There is also the option to “Always send to” a certain Integration. For example, a Notification might be configured for Slack, Twilio, and email, in that order. The sender can choose to “Always send to” email, overriding the hierarchy, so that every recipient receives an email (provided their profile contains an email address). Then, in addition to email, recipients with a Slack configuration in their profile will receive a Slack message as well. Recipients who do not have a Slack configuration in their profile, but do have a phone number, will receive the message via Twilio, as well as email.
 
 <Image
-  img={require("../assets/notification-channel-rules-w-always-send-to.png")}
+  img={require("../assets/reference/notification-channel-rules-w-always-send-to.png")}
   alt="Courier Event"
 />
 

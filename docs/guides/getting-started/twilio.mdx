@@ -42,7 +42,7 @@ Once logged in to Courier, navigate to the ["Integrations" page](https://app.cou
 Courier Integrations each require different pieces of information based on the needs of the Integration provider (see the requirements for each in the "Provider Documentation" section of the sidebar to the left). In the case of Twilio, we need an "Account SID," "Auth Token," and "Messaging Service SID." We will retrieve these from Twilio shortly.
 
 <Image
-  img={require("../../assets/twilio-integration.png")}
+  img={require("../../assets/guides/twilio/integration.png")}
   alt="Courier's Twilio Configuration Page"
 />
 
@@ -53,7 +53,7 @@ Once logged in to Twilio, navigate to the ["Dashboard"](https://www.twilio.com/c
 This page will display a section labeled "Project Info" with your "Account SID" and "Auth Token." Paste these into the corresponding fields on [Courier's Twilio Integration page](https://app.courier.com/integrations/twilio).
 
 <Image
-  img={require("../../assets/twilio-auth-credentials.png")}
+  img={require("../../assets/guides/twilio/auth-credentials.png")}
   alt="Twilio Authorization Credentials"
 />
 
@@ -65,12 +65,15 @@ To send messages, we need a Twilio phone number with SMS capabilities and a Twil
 
 First, purchase a Twilio phone number. Navigate to the ["Phone Numbers"](https://www.twilio.com/console/phone-numbers/incoming) page of the [Twilio console](https://www.twilio.com/console) by clicking the circle icon in the sidebar, then "# Phone Numbers". Then, click on ["Buy a Number"](https://www.twilio.com/console/phone-numbers/search).
 
-<Image img={require("../../assets/twilio-phone-number-menu.gif")} alt="Twilio Phone Number Menu" />
+<Image
+  img={require("../../assets/guides/twilio/phone-number-menu.gif")}
+  alt="Twilio Phone Number Menu"
+/>
 
 You can search either for a specific number or by location. Select a number capable of sending SMS messages. Check the "SMS" box to filter for numbers with this functionality. Then click "Search." Twilio will load a list of available numbers with the capabilities and the price of each number listed in a table.
 
 <Image
-  img={require("../../assets/twilio-search-phone-number.gif")}
+  img={require("../../assets/guides/twilio/search-phone-number.gif")}
   alt="Search for Phone Numbers"
 />
 
@@ -80,31 +83,34 @@ Select whichever available number appeals to you. You may be asked to comply wit
 
 Click the "Buy This Number" button, and then select, "Setup number." This will load a phone number configuration page. We don't need to change anything for this tutorial.
 
-<Image img={require("../../assets/twilio-buy-phone-number.gif")} alt="Buy a Phone Number" />
+<Image img={require("../../assets/guides/twilio/buy-phone-number.gif")} alt="Buy a Phone Number" />
 
 ### Twilio Messaging Service
 
 Now that we have a phone number, we need to create a Twilio Messaging Service that uses this number. Navigate to the ["Programmable SMS"](https://www.twilio.com/console/sms/dashboard) section of the Twilio console. This will display a Messaging Services dashboard. Navigate to the ["SMS"](https://www.twilio.com/console/sms/services) subsection in the sidebar.
 
-<Image img={require("../../assets/twilio-messaging-service.png")} alt="Twilio Messaging Services" />
+<Image
+  img={require("../../assets/guides/twilio/messaging-service.png")}
+  alt="Twilio Messaging Services"
+/>
 
 This page displays a "Create new Messaging Service" link. Click this link to load a modal with two fields: "Friendly Name," and "Use Case."
 
 Let's use "Courier SMS Service" for our "Friendly Name." There are several "Use Case" options. For this tutorial, we can select "Notifications, Outbound Only." For more about Twilio Messaging Services, see their ["Sending Messages" guide](https://www.twilio.com/docs/sms/send-messages#messaging-services). Next, click "Create."
 
 <Image
-  img={require("../../assets/twilio-configure-messaging-service.gif")}
+  img={require("../../assets/guides/twilio/configure-messaging-service.gif")}
   alt="Configure the Messaging Service"
 />
 
 Twilio will load a configuration page for your service. Thankfully, you shouldn't have to change anything here. You need only the "Service SID" at the top of the page. Copy this SID, and enter it into the "Messaging Service SID" field on [Courier's Twilio Integration page](https://app.courier.com/integrations/twilio). Click the "Add Integration" button. Then, click "Save."
 
-<Image img={require("../../assets/twilio-service-sid.png")} alt="Twilio Service SID" />
+<Image img={require("../../assets/guides/twilio/service-sid.png")} alt="Twilio Service SID" />
 
 We have one thing left to configure. We must add our phone number to our Messaging Service. Go back to Twilio. Then navigate to your Twilio Messaging Service's configuration page. You will see two links in the sidebar beneath your "Courier SMS Service." Navigate to the "Numbers" subsection. This will load a page with an "Add an Existing Number" link. Click this link, and check the box to the right of the number you purchased earlier. Click "Add Selected."
 
 <Image
-  img={require("../../assets/twilio-add-number.gif")}
+  img={require("../../assets/guides/twilio/add-number.gif")}
   alt="Add a Number to a Messaging Service"
 />
 
@@ -115,7 +121,7 @@ Navigate to the Courier [Notifications page](https://app.courier.com/designer/no
 You can add message blocks to the template by clicking one of the three icons on the mock-up smartphone. The paper icon adds a text block. The hand icon adds a link. The list icon adds a repeatable list.
 
 <Image
-  img={require("../../assets/twilio-courier-notification-template.png")}
+  img={require("../../assets/guides/twilio/courier-notification-template.png")}
   alt="Courier Notification Template"
 />
 
@@ -136,7 +142,7 @@ Courier
 ```
 
 <Image
-  img={require("../../assets/twilio-courier-notification-template-sample.png")}
+  img={require("../../assets/guides/twilio/courier-notification-template-sample.png")}
   alt="Courier Notification with Sample Message"
 />
 
@@ -153,7 +159,7 @@ Courier supports both basic and token authorization. For this tutorial, we will 
 We must send an `Authorization` header with each request. The Courier Send API also requires an `event`. The authorization token and event values are the "Auth Token" and "Notification ID" we see in the detail view of our “Test Appointment Reminder” event. Click the gear icon next to the Notification's name to reveal them.
 
 <Image
-  img={require("../../assets/twilio-auth-credentials.png")}
+  img={require("../../assets/guides/twilio/auth-credentials.png")}
   alt="Courier Authorization Credentials"
 />
 
@@ -301,8 +307,14 @@ Before sending this request, be sure to replace the `555-616-1962` value with a 
 
 Paste your complete cURL request in either format in your terminal and hit "Return." You should receive a response like `{"messageId":"<message id string>"}`. You will also receive an SMS at the phone number you specified in the request body. If you do not receive a message, be sure the phone number provided in the `profile` is an approved number with Twilio. Twilio trial accounts may limit your ability to send messages to _unknown_ numbers.
 
-<Image img={require("../../assets/twilio-send-curl-request.png")} alt="Send the cURL Request" />
+<Image
+  img={require("../../assets/guides/twilio/send-curl-request.png")}
+  alt="Send the cURL Request"
+/>
 
-<Image img={require("../../assets/twilio-delivered-message.png")} alt="Delivered SMS Message" />
+<Image
+  img={require("../../assets/guides/twilio/delivered-message.png")}
+  alt="Delivered SMS Message"
+/>
 
 Congratulations, you’re on your way to crafting a better notification strategy that your audience is sure to appreciate.

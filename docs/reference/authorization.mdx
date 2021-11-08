@@ -14,7 +14,10 @@ The Courier REST API supports both token and basic authorization.
 
 Courier assigns you an "Auth Token" when you [Register your account](https://www.trycourier.app/register). You can retrieve this token from any of your [Notification](https://www.trycourier.app/notifications) detail pages.
 
-<Image img={require("../assets/notification-in-detail-view.png")} alt="Courier Auth Token" />
+<Image
+  img={require("../assets/reference/notification-in-detail-view.png")}
+  alt="Courier Auth Token"
+/>
 
 This token should be passed as a `Bearer Token` in an `Authorization` header with each request. Remember, it is best not to store an authorization token in your source control but instead reference values stored in environment variables or some other configuration. However you handle your tokens, be sure to keep them private and secure.
 
