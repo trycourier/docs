@@ -1,0 +1,45 @@
+---
+sidebar_position: 8
+---
+
+# Checks System
+
+Checks System enables Courier customers to enable one or more checks that can be associated with multiple Courier features. As of now, we have checks configurable for the templates/notifications which is set to "custom".
+[Internationalization Specification](internationalization-specification) has an example on how custom check can be leveraged for template translations workflow.
+
+## Fetching Checks
+
+Checks API GET endpoint
+
+`GET /notifications/:notification_id/:submission_id/checks`
+
+Example - `GET /notifications/SFTYJKSF0241SVH2TWY97TTFFTQG/1630424150210/checks`
+
+```json
+{
+  "checks": [
+    {
+      "id": "custom",
+      "status": "PENDING",
+      "type": "custom",
+      "updated": 1630424150210
+    }
+  ]
+}
+```
+
+## Updating Checks
+
+Once all content has been updated, Courier can be notified that the process is completed and release the template to be published.
+
+`PUT /notifications/:notification_id/:submission_id/checks`
+
+```json
+{
+  "checks": [
+    {
+      "status": "RESOLVED"
+    }
+  ]
+}
+```
