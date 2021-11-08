@@ -9,7 +9,7 @@ module.exports = {
         {
           type: "link",
           label: "API Reference",
-          href: "/reference/introduction",
+          href: "/reference",
         },
         {
           type: "link",

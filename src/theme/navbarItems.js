@@ -6,9 +6,9 @@ const navbarItems = [
     activeBaseRegex: "^((?!reference).)*$",
   },
   {
-    to: "reference/introduction",
+    to: "reference",
     label: "API Reference",
-    activeBaseRegex: "^reference$",
+    activeBasePath: "reference",
   },
   {
     href: "https://help.courier.com",
