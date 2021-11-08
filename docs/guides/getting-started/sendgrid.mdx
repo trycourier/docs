@@ -75,7 +75,7 @@ Navigate to the Courier [Notifications page](https://app.courier.com/designer/no
 You can add message blocks to the template by clicking one of the three icons on the mock-up email. The paper icon adds a text block. The hand icon adds a link. The list icon adds a repeatable list.
 
 <Image
-  img={require("../../assets/courier-notification-template.png")}
+  img={require("../../assets/sendgrid-courier-notification-template.png")}
   alt="Courier Notification Template"
 />
 
@@ -98,7 +98,7 @@ Courier
 ```
 
 <Image
-  img={require("../../assets/courier-notification-template-sample.png")}
+  img={require("../../assets/sendgrid-courier-notification-template-sample.png")}
   alt="Courier Notification Template with Sample Message"
 />
 
@@ -115,7 +115,7 @@ Courier supports both basic and token authorization. For this tutorial, we will 
 We must send an `Authorization` header with each request. The Courier Send API also requires an `event`. The authorization token and event values are the "Auth Token" and "Notification ID" we see in the detail view of our “Test Appointment Reminder” event. Click the gear icon next to the Notification's name to reveal them.
 
 <Image
-  img={require("../../assets/courier-auth-credentials.png")}
+  img={require("../../assets/sendgrid-courier-auth-credentials.png")}
   alt="Courier Authorization Credentials"
 />
 
@@ -263,9 +263,9 @@ Before sending this request, be sure to replace the `kpryde@xavierinstitute.edu`
 
 Paste your complete cURL request in either format in your terminal and hit "Return." You should receive a response like `{"messageId":"<message id string>"}`. You will also receive an email at the address you specified in the request body. Be sure to check your spam folder if the message doesn’t arrive in your inbox.
 
-<Image img={require("../../assets/send-curl-request.png")} alt="Send the cURL Request" />
+<Image img={require("../../assets/sendgrid-send-curl-request.png")} alt="Send the cURL Request" />
 
-<Image img={require("../../assets/delivered-email.png")} alt="Delivered Email" />
+<Image img={require("../../assets/sendgrid-delivered-email.png")} alt="Delivered Email" />
 
 Congratulations, you’re on your way to crafting a better notification strategy that your audience is sure to appreciate.
 
