@@ -1,14 +1,14 @@
 import React from "react";
-import OriginalIdealImage from "@theme-original/IdealImage";
+// import OriginalIdealImage from "@theme-original/IdealImage";
 
 import styles from "./styles.module.css";
 
-function IdealImage(props) {
+function IdealImage({ img, alt, ...props }) {
   return (
     <figure className={styles.image}>
-      <OriginalIdealImage {...props} />
+      <img src={img?.default ?? img} alt={alt} {...props} />
 
-      {props.alt && <figcaption>{props.alt}</figcaption>}
+      {alt && <figcaption>{alt}</figcaption>}
     </figure>
   );
 }
