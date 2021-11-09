@@ -7,7 +7,7 @@ const ProfileFirebase: ApiParam = {
     {
       type: "string",
       name: "firebaseToken",
-      description: "[Learn more](https://docs.courier.com/docs/firebase-fcm)",
+      description: "[Learn more](/docs/guides/providers/push/firebase-fcm)",
     },
   ],
 };

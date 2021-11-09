@@ -7,7 +7,7 @@ const ProfileDiscord: ApiParam = {
     {
       type: "oneOf",
       name: "discord",
-      description: "[Learn more](https://docs.courier.com/docs/discord)",
+      description: "[Learn more](/docs/guides/providers/direct-message/discord)",
       options: [
         {
           type: "object",

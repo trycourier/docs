@@ -7,7 +7,7 @@ const ProfileAWSSNSPush: ApiParam = {
     {
       type: "string",
       name: "target_arn",
-      description: "[Learn more](https://docs.courier.com/docs/aws-sns-push)",
+      description: "[Learn more](/docs/guides/providers/push/aws-sns)",
     },
   ],
 };

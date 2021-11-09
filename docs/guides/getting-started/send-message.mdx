@@ -3,6 +3,8 @@ sidebar_position: 5
 ---
 
 import Image from "@theme/IdealImage";
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Create and Send a Notification
 
@@ -17,8 +19,8 @@ You will need both Courier and a channel provider account integrated with Courie
 
 :::info Related Resources
 
-- [Courier API Reference](/reference)
-- [Courier Integration Docs](https://docs.courier.com/docs/integrations-introduction)
+- [Courier API Reference](../../reference)
+- [Courier Integration Docs](../providers)
 - [Courier Integrations Settings page](https://app.courier.com/integrations)
 - [Bash Environment Variables](https://www.gnu.org/software/bash/manual/html_node/Environment.html)
 - [cURL](https://curl.haxx.se/)
@@ -149,7 +151,7 @@ Our `--data` option should look like this:
     "apt_date": "July 31, 2019",
     "apt_time": "11:00 AM",
     "support_phone": "555-555-5555",
-    "support_url": "https://docs.courier.com"
+    "support_url": "https://courier.com/docs"
   }
 }
 ```
@@ -193,7 +195,7 @@ curl --request POST \
     "apt_date": "July 31",
     "apt_time": "11:00 AM",
     "support_phone": "555-555-5555",
-    "support_url": "https://docs.courier.com"
+    "support_url": "https://courier.com/docs"
   }
 }' \
 https://api.courier.com/send
@@ -240,7 +242,7 @@ Congratulations, you’re on your way to crafting a better notification strategy
 
 Overrides can be used to change the request body that Courier uses to send an email. Overrides are useful when a field is not yet supported by Courier or you would like to override the value that Courier generates.
 
-For a list of fields you can override for any Courier integration provider, see the "Overrides" section of that provider's [integration doc](https://docs.courier.com/docs/integrations-introduction).
+For a list of fields you can override for any Courier integration provider, see the "Overrides" section of that provider's [integration doc](../providers).
 
 Below is an example of overriding the subject and adding an attachment to a SendGrid email.
 

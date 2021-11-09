@@ -4,6 +4,8 @@ sidebar_position: 3
 
 import TOCInline from "@theme/TOCInline";
 import Image from "@theme/IdealImage";
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Set up Chat using Slack
 
@@ -23,7 +25,7 @@ You will need both Courier and Slack accounts to complete this tutorial. If you 
 
 :::info Related Resources
 
-- [Courier API Reference](/reference)
+- [Courier API Reference](../../reference)
 - ["An Introduction to Slack Apps"](https://api.slack.com/start/overview)
 - ["Managing Slack Apps"](https://api.slack.com/slack-apps)
 - [Slack API Documentation](https://api.slack.com/)
@@ -109,11 +111,11 @@ When you are finished, click Publish in the upper right corner and give it a Pub
 
 ## Send a Message
 
-Courier passes messages to Integrations via the [Send endpoint](https://docs.courier.com/reference/send-api). For this tutorial, we will send our messages with cURL, but you can use your preferred language and HTTP library. You can also use an API testing tool such as [Postman](https://www.getpostman.com/) or [Insomnia](https://insomnia.rest/). For additional code samples, see the ["Courier API Reference"](https://docs.courier.com/reference).
+Courier passes messages to Integrations via the [Send endpoint](../../reference/send/message). For this tutorial, we will send our messages with cURL, but you can use your preferred language and HTTP library. You can also use an API testing tool such as [Postman](https://www.getpostman.com/) or [Insomnia](https://insomnia.rest/). For additional code samples, see the ["Courier API Reference"](../../reference).
 
 ### Authorization
 
-Courier supports both basic and token authorization. For this tutorial, we will use token authorization. You can read more about authorization in Courier's ["Authorization Overview"](https://docs.courier.com/reference/authorization).
+Courier supports both basic and token authorization. For this tutorial, we will use token authorization. You can read more about authorization in Courier's ["Authorization Overview"](../../reference/authorization).
 
 We must send an `Authorization` header with each request. The Courier Send API also requires an `event`. The authorization token and event values are the "Auth Token" and "Notification ID" we see in the detail view of our “Test Appointment Reminder” event. Click the gear icon next to the Notification's name to reveal them.
 
@@ -195,7 +197,7 @@ Our `--data` object should look like this:
     "apt_date": "June 26",
     "apt_time": "8:44 PM",
     "support_phone": "555-555-5555",
-    "support_url": "https://docs.courier.com"
+    "support_url": "https://courier.com/docs"
   }
 }
 ```
@@ -243,7 +245,7 @@ curl --request POST \
     "apt_date": "June 26",
     "apt_time": "8:44 PM",
     "support_phone": "555-555-5555",
-    "support_url": "https://docs.courier.com"
+    "support_url": "https://courier.com/docs"
    }
  }' \
 https://api.courier.com/send

@@ -7,7 +7,7 @@ const ProfileWebhook: ApiParam = {
     {
       type: "object",
       name: "webhook",
-      description: "[Learn more](https://docs.courier.com/docs/webhook-integration)",
+      description: "[Learn more](/docs/guides/providers/webhook-integration)",
       fields: [
         {
           type: "string",

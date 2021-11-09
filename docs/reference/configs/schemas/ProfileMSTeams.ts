@@ -7,7 +7,7 @@ const ProfileMSTeams: ApiParam = {
     {
       type: "oneOf",
       name: "ms_teams",
-      description: "[Learn more](https://docs.courier.com/docs/microsoft-teams)",
+      description: "[Learn more](/docs/guides/providers/direct-message/microsoft-teams)",
       options: [
         {
           type: "object",

@@ -4,6 +4,8 @@ sidebar_position: 2
 
 import TOCInline from "@theme/TOCInline";
 import Image from "@theme/IdealImage";
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Set up SMS using Twilio
 
@@ -26,7 +28,7 @@ When creating a Twilio account, Twilio will ask several questions to help custom
 
 :::info Related Resources
 
-- [Courier API Reference](/reference)
+- [Courier API Reference](../../reference)
 - [Twilio Phone Numbers Product Page](https://www.twilio.com/phone-numbers)
 - [Twilio Phone Numbers API Docs](https://www.twilio.com/docs/phone-numbers)
 - [Twilio Programmable SMS Docs](https://www.twilio.com/docs/sms)
@@ -232,7 +234,7 @@ Our `--data` option should look like this:
     "apt_date": "August 27, 2020",
     "apt_time": "11:00 AM",
     "support_phone": "555-555-5555",
-    "support_url": "https://docs.courier.com"
+    "support_url": "https://courier.com/docs"
   }
 }
 ```
@@ -276,7 +278,7 @@ curl --request POST \
     "apt_date": "August 27",
     "apt_time": "11:00 AM",
     "support_phone": "555-555-5555",
-    "support_url": "https://docs.courier.com"
+    "support_url": "https://courier.com/docs"
   }
 }' \
 https://api.courier.com/send

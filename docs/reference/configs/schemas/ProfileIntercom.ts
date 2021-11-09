@@ -7,7 +7,7 @@ const ProfileIntercom: ApiParam = {
     {
       type: "object",
       name: "intercom",
-      description: "[Learn more](https://docs.courier.com/docs/intercom)",
+      description: "[Learn more](/docs/guides/providers/direct-message/intercom)",
       fields: [
         {
           type: "string",
