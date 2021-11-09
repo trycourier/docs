@@ -1,0 +1,65 @@
+---
+sidebar_position: 0
+---
+
+# Airship
+
+## Profile Requirements
+
+To deliver a push notification to a recipient over Airship, Courier must be provided the recipient's Airship user id and devices. These values should be included in the recipient profile as `airship`.
+
+```json title=JSON
+{
+  "event": "{{event.id}}",
+  "recipient": "{{recipient.id}}",
+  "profile": {
+    "airship": {
+      "audience": {
+        "named_user": "{{recipient.user_id}}"
+      },
+      "device_types": ["ios"]
+    }
+  },
+  "data": {
+    "username": "Steph Courier"
+  }
+}
+```
+
+## Override
+
+You can use a provider override to replace what we send to Airship's API. For example, you can use basic auth with your send request:
+
+```json title=JSON
+{
+  "event": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  "recipient": "abc123",
+  "profile": {
+    "airship": {
+      "audience": {
+        "named_user": "{{recipient.user_id}}"
+      },
+      "device_types": ["ios"]
+    }
+  },
+  "data": {
+    "dataForPushMessage": true
+  },
+  "override": {
+    "airship": {
+      "body": {},
+      "headers": {
+        "Authorization": "Basic {{EncodedAppKey:AppSecret}}"
+      }
+    }
+  }
+}
+```
+
+Everything inside of `override.airship` will replace what we send to Airship's API. You can see all the available options by visiting [Airship's website](https://docs.airship.com/api/ua/).
+
+## Tracking Events
+
+Courier will include tracking URL information in the `global_attributes` [data bag](https://www.notion.so/trycourier/Tracking-Push-events-d6fdb9015da44ae5a6acdc5fe6832571#04de2c636307494fad517a24d9a9dd40).
+
+See Courier [push notification tracking](../push#tracking)
