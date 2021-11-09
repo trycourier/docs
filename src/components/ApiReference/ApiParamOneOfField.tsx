@@ -21,21 +21,21 @@ const ApiParamOneOfField = ({ param, field }: FieldComponentProps<"oneOf">) => {
       const oldValues = apiParamInitialValue(param.options[activeIndex]);
       const newValues = apiParamInitialValue(param.options[index]);
 
-      const setFieldValues = (values) => {
+      const setFieldValues = (values: any, clear = false) => {
         if (typeof values === "object" && values !== null) {
           if (Object.keys(values).length === 0) {
             setFieldValue(buildParamPath(field.name), undefined);
           } else {
             Object.entries(values).forEach(([key, value]) => {
-              setFieldValue(buildParamPath(key, field.name), value);
+              setFieldValue(buildParamPath(key, field.name), clear ? undefined : value);
             });
           }
         } else {
-          setFieldValue(buildParamPath(field.name), values);
+          setFieldValue(buildParamPath(field.name), clear ? undefined : values);
         }
       };
 
-      setFieldValues(oldValues);
+      setFieldValues(oldValues, true);
       setFieldValues(newValues);
     },
     [field.name, activeIndex, setFieldValue, param.options]
