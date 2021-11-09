@@ -1,0 +1,25 @@
+---
+sidebar_position: -1
+sidebar_label: Introduction
+pagination_label: Events API
+slug: /reference/events
+---
+
+import Image from "@theme/IdealImage";
+
+# Events API
+
+The Events API allows you to manage your [events](https://www.trycourier.app/settings/event-maps). Events allow you to associate an `event` string passed into the [send command](ref:sendmessage) with an existing notification.
+
+## Event
+
+The `event` (or sometimes referred to as `event_id`) is a string describing an event. This can be defined by you, i.e. `new-user` or by an incoming integration, i.e. [Segment](https://segment.com/).
+
+## Notification ID
+
+The Notification ID (or `id` in this API) is a unique identifier for a notification created in the [Courier Notification Designer](https://www.trycourier.app/designer/notifications). You can find this id in the notification settings modal by clicking on the gear on next to the notification name.
+
+<Image
+  img={require("../../assets/reference/notification-settings.png")}
+  alt="Courier Notification Settings"
+/>

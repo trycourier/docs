@@ -65,6 +65,8 @@
   --ifm-navbar-item-padding-horizontal: 0.75rem;
   --ifm-alert-padding-vertical: 1.25rem;
   --ifm-alert-padding-horizontal: 1.5rem;
+  --ifm-blockquote-padding-horizontal: 1rem;
+  --ifm-blockquote-border-left-width: 3px;
   --code-block-bg: linear-gradient(to right, #1e0c26 2.5rem, #2d1339 2.5rem);
 }
 
