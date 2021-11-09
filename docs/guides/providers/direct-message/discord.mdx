@@ -1,0 +1,69 @@
+---
+sidebar_position: 0
+---
+
+# Discord
+
+## Discord Bot Requirements
+
+To send notifications via Discord, a Discord Bot is required. You may use an existing or [create a new basic bot](https://discord.com/developers/docs/intro).
+
+### Scopes
+
+When you create the install link for your bot, make sure it has the `bot` scope with at least `View Channels` and `Send Messages` permissions. If you would like to send a message as a reply to another message, your bot will also need the `Read Message History` permission.
+
+## Profiles Requirements
+
+The information required in the recipient profile is different based on the type of message you are sending.
+
+### Sending a Direct Message
+
+To send a message to a user, you'll need to supply the discord profile object with a `user_id`. This is not the user tag. You can retrieve this value using the Discord API or copying it from a Discord Client in [Developer mode](https://discordia.me/en/developer-mode). The user you are trying to message must be a member of a server the bot is installed in.
+
+```json title=JSON
+// Recipient Profile
+{
+  "discord": {
+    "user_id": "617099137532932107"
+  }
+}
+```
+
+### Sending a Message to a Channel
+
+To send a message to a channel, you'll need to supply the discord profile object with a `channel_id`. You can retrieve this value using the Discord API or copying it from a Discord Client in [Developer mode](https://discordia.me/en/developer-mode). The bot must be installed in the server to send to the channel.
+
+```json title=JSON
+// Recipient Profile
+{
+  "discord": {
+    "channel_id": "768866348853383208"
+  }
+}
+```
+
+## Override
+
+You can use a provider override to replace what we send to Discord's [Create Message](https://discord.com/developers/docs/resources/channel#create-message) endpoint. For example, you can choose to an an embed.
+
+```json title=JSON
+{
+  "event": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  "recipient": "CHANNEL_GENERAL",
+  "profile": {
+    "discord": {
+      "channel_id": "768866348853383208"
+    }
+  },
+  "override": {
+    "discord": {
+      "body": {
+        "embed": {
+          "title": "Hello, Embed!",
+          "description": "This is an embedded message."
+        }
+      }
+    }
+  }
+}
+```

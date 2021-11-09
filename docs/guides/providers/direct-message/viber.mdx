@@ -1,0 +1,37 @@
+---
+sidebar_position: 6
+---
+
+# Viber
+
+## Viber Requirements
+
+1. An active viber account logged into either the iOS or Android app.
+2. A Viber bot. A bot can be created [here](https://partners.viber.com/account/create-bot-account). Make a note of the auth token, referred throughout this document as `VIBER_AUTH_TOKEN`.
+3. An active webhooks server that can receive POST requests from Viber. Viber provides a nodejs utility for handling these requests [here](https://www.npmjs.com/package/viber-bot).
+
+## Webhooks Server.
+
+Before sending notifications Viber requires a webhooks server to be registered. This can be done using the following cURL command:
+
+```bash
+ curl -X POST 'https://chatapi.viber.com/pa/set_webhook'\
+      -H 'Content-Type: application/json'\
+      -H 'X-Viber-Auth-Token: <VIBER_AUTH_TOKEN>'\
+      -d '{ "url": "<YOUR_WEBHOOK_SERVER_URL>", "event_types": ["delivered"] }'
+```
+
+This webhooks server will receive events including UserID's of users who wish to subscribe and notification delivery status events. These events are documented [here](https://www.npmjs.com/package/viber-bot).
+
+## Sending a Direct Message
+
+To send a direct message to a user, supply the `UserID` to the `"reciever"` field of the Viber profile object. This `UserID` is sent to the webhooks server after they send a message to the Viber bot.
+
+```js
+// Recipient Profile
+{
+  "viber": {
+    "receiver": "12943673=="
+  }
+}
+```
