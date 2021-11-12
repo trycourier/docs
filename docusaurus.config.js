@@ -63,6 +63,7 @@ const metadatas = require("./src/theme/metadatas");
       ["docusaurus2-dotenv", { systemvars: true, safe: true }],
       ["docusaurus-plugin-segment", { apiKey: process.env.SEGMENT_KEY || "key" }],
       // ["@docusaurus/plugin-ideal-image", {}],
+      ["@easyops-cn/docusaurus-search-local", { docsRouteBasePath: "/", indexBlog: false }],
     ],
   }
 );

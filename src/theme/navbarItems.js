@@ -22,10 +22,6 @@ const navbarItems = [
     href: "https://status.courier.com",
     label: "Service Status",
   },
-  // {
-  //   type: "search",
-  //   position: "right",
-  // },
   {
     href: "https://app.courier.com/",
     label: "Log In",
