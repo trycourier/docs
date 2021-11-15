@@ -1,5 +1,3 @@
-// const lightCodeTheme = require("prism-react-renderer/themes/github");
-// const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 const codeTheme = require("./src/theme/codeTheme");
 const navbarItems = require("./src/theme/navbarItems");
 const metadatas = require("./src/theme/metadatas");
@@ -25,6 +23,7 @@ const metadatas = require("./src/theme/metadatas");
           docs: {
             routeBasePath: "/",
             sidebarPath: require.resolve("./src/theme/sidebars"),
+            remarkPlugins: [require("./src/theme/plugins/rehypeExternalLinks")],
           },
           blog: false,
           pages: false,

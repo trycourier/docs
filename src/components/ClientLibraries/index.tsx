@@ -62,7 +62,11 @@ const ClientLibraries = () => {
     <ul className={styles.list}>
       {libraries.map((library) => (
         <li key={library.name}>
-          <a href={`https://github.com/trycourier/${library.name}`}>
+          <a
+            href={`https://github.com/trycourier/${library.name}`}
+            target="_blank"
+            rel="noreferrer"
+          >
             {library.icon}
             {library.name}
           </a>
