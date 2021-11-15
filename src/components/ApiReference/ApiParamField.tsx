@@ -29,7 +29,7 @@ export type ApiParam =
   | ApiBaseParam<"json", string | object>
   | (ApiBaseParam<"array"> & { field: ApiParam })
   | (ApiBaseParam<"record"> & { field: ApiParam })
-  | (ApiBaseParam<"object"> & { fields: ApiParam[]; name?: string })
+  | (ApiBaseParam<"object"> & { fields: ApiParam[] })
   | (ApiBaseParam<"oneOf"> & { options: ApiParam[] });
 
 export interface FieldComponentProps<
