@@ -1,0 +1,221 @@
+---
+sidebar_position: 4
+---
+
+import Image from "@theme/IdealImage";
+
+# Set up Chat using Microsoft Teams
+
+## Introduction
+
+This step-by-step guide will walk you through sending a notification to a channel or user on Microsoft Teams using Courier.
+You will:
+
+### Prerequisites
+
+You will need both Courier and Microsoft Teams accounts to complete this tutorial. If you don't have accounts already, sign up before proceeding. You will also need permission to install apps to Teams. Either an administrator can grant you this permission or you can sign up for a free Microsoft 365 developer program tenant.
+
+- [Sign up for Courier](https://app.courier.com/register)
+- [Sign up for a Microsoft 365 Developer Account](https://developer.microsoft.com/en-us/microsoft-365/dev-program/)
+
+## Create a Microsoft Teams Bot
+
+When building an app for Teams, you'll need to create an app package to be installed. We will be using App Studio to create this package directly from the Teams Client. Install the App Studio App in your Teams client, if you haven't already.
+
+### Create a new app
+
+Open App Studio and click _Create a new app_ on the Manifest Editor tab. Fill out all the required fields including the Bot names, descriptions, etc. At the App URLs section, fill out your privacy and Terms of Use web page URLs. In this example, we are just using the placeholder URL, `https://example.com`. Before you publish your app, you must update these urls to point to real web pages with the required statements. Next, generate an App ID.
+
+<Image
+  img={require("../../assets/guides/microsoft-teams/app-studio-create-app.png")}
+  alt="App Studio Create App"
+/>
+
+### Configure the bot
+
+From the left menu, select Capabilities > Bots. Then, click _Set up_ to configure a new bot. Fill out the bot name and select the Personal and Team scopes and click _Create bot_. Now click _Generate new password_. At the modal popup, copy the password. You'll also need to copy the ID next to your bot name. You will need both these values for the next steps.
+
+<Image
+  img={require("../../assets/guides/microsoft-teams/app-studio-bot-config.png")}
+  alt="App Studio Bot Configuration"
+/>
+
+### Deploy the bot app
+
+Before we can continue configuring and installing your bot, we must first deploy the code so we can create the messaging endpoint. In a browser, open the [Microsoft Teams Bot Starter Repo](https://github.com/trycourier/courier-netlify-msteams) and click the _Deploy to Netlify_ button. You will be prompted for the App ID (Bot ID) and App Password from above along with your [Courier Auth Token](https://app.courier.com/settings/api-keys) and a name for the repo. This will clone and deploy a starter Teams bot. Once the site is deployed, copy your site url. We'll need this to finish installing the bot. It should look like the following: `https://{site-name}.netlify.app`.
+
+<Image
+  img={require("../../assets/guides/microsoft-teams/netlify-deploy.png")}
+  alt="Netlify Deploy Input Dialog"
+/>
+
+### Install the bot
+
+We can now return to the bot configuration page and set the Bot endpoint address. Enter your site url with `/api/messages` at the end. It should look like the following: `https://{site-name}.netlify.app/api/messages`.
+
+<Image
+  img={require("../../assets/guides/microsoft-teams/app-studio-bot-endpoint.png")}
+  alt="App Studio Bot Configuration"
+/>
+
+From the left menu, select Finish > Test and distribute. If you get any errors, go fix them, otherwise, click _Install_. Click the arrow next to _Add_ to add to a team and add to a chat. You will now have access to message your bot in a channel and a direct message.
+
+<Image
+  img={require("../../assets/guides/microsoft-teams/app-studio-add-dropdown.png")}
+  alt="App Studio Add Dropdown"
+/>
+
+You can test the installation of your bot using the following commands:
+
+In channel (you must mention your bot):
+
+```text
+@YOUR_BOT test
+```
+
+In a direct message:
+
+```text
+test
+```
+
+In both cases, the bot should respond with, "Your bot has been successfully added."
+
+## Add the Microsoft Teams Integration
+
+Now that we have a working Microsoft Teams bot, we can use the App ID and Password from above to configure the Microsoft Teams Integration in Courier.
+
+Navigate to the [Integrations page](https://app.courier.com/integrations) and click on Microsoft Teams to configure it.
+
+Courier Integrations each require different pieces of information based on the needs of the Integration provider. Using the App ID and Password from above, fill them in and click _Install_.
+
+<Image
+  img={require("../../assets/guides/microsoft-teams/integration.png")}
+  alt="Configured Microsoft Teams Integration"
+/>
+
+Congratulations, you've configured your Integration with Microsoft Teams. Now, let's create a notification.
+
+## Create a notification
+
+Navigate to the Courier ["Notifications" page](https://app.courier.com/notifications) and click _Create Notification_. Click on “Untitled Notification” to rename your notification — for this tutorial, call it “Test Appointment Reminder.” From your list of configured Integrations, click on the _Microsoft Teams_ button.
+
+<Image
+  img={require("../../assets/guides/microsoft-teams/notification-channels.png")}
+  alt="Notification Channel Selector with Microsoft Teams"
+/>
+
+Then, click the _Microsoft Teams_ box that has been added to the sidebar in order to bring up a Microsoft Teams template.
+
+Courier provides a visual template editor, so you can send notifications that are formatted professionally. You can add content blocks to the template by clicking appropriate icons. If you remove a content block, it is moved to your Library in the sidebar and can be dragged back to the template if necessary.
+
+These content blocks can include variables using a mustache-like template syntax. Surround text with a single set of curly braces and that text will be interpreted as a variable (it will also be highlighted in green). For example, you may want to include a {name} variable (we'll cover the source of this variable data [later in this tutorial](#variables)).
+
+For now, add a text block and fill it with whatever text you want to send. You can also copy the example below, which contains a few variables for demonstration.
+
+```text title="Text"
+Hello {name},
+
+This is an appointment reminder from Courier. We look forward to seeing you on {apt_date} at {apt_time}.
+
+If you need to change your appointment for any reason, please contact us at least 24 hours in advance at {support_url} or {support_phone}.
+
+Best regards,
+
+Courier
+```
+
+<Image
+  img={require("../../assets/guides/microsoft-teams/notification-design.png")}
+  alt="Notification Design View with Block"
+/>
+
+When you are finished, click _Publish Changes_ in the upper right corner.
+
+### Preview the notification using a Test Event
+
+Courier allows you to preview your notifications using different Test Events so you can see how different data will affect the notification. Let's create a Test Event and preview the notification. We'll also use this Test Event when sending the message.
+
+In the Notification Designer, click on the _Preview_ tab at the top of the screen. Click the _Create Test Event_ button. Give the event the name "Tutorial Example" and replace the provided JSON with the following:
+
+```json title="JSON"
+{
+  "data": {
+    "name": "Spike Spiegel",
+    "apt_date": "June 26",
+    "apt_time": "8:44 PM",
+    "support_phone": "202-555-0143",
+    "support_url": "https://courier.com/docs"
+  },
+  "profile": {},
+  "override": {}
+}
+```
+
+<Image
+  img={require("../../assets/guides/microsoft-teams/notification-test-dialog.png")}
+  alt="Notification Test Event Dialog"
+/>
+
+Click _Create Test Event_ and you'll see a preview of the notification using the provided data for any variables used. Next, we'll use this test event to send the notification using the Send tab.
+
+## Send a Message
+
+Courier passes messages to Integrations via the [Send endpoint](ref:send-api). For this tutorial, we will send our messages using the Send tab in the Notification Designer. It will also provide you with sample code for your preferred language using one of our SDKs.
+
+Click the _Send_ tab at the top of the page.
+
+<Image
+  img={require("../../assets/guides/microsoft-teams/notification-send-tab.png")}
+  alt="Notification Send Tab"
+/>
+
+### Send a Direct Message
+
+To send a direct message to a Microsoft Teams user, we'll need a Courier recipient with a [Microsoft Teams profile](../providers/direct-message/microsoft-teams#send-a-message-to-a-microsoft-teams-user) that includes a `user_id`, `tenant_id`, and `service_url`. We can retrieve these values and save them to a profile using our bot's `add-user` command.
+
+From the direct chat, type the following message:
+
+```text
+add-user QUICKSTART_USER
+```
+
+<Image
+  img={require("../../assets/guides/microsoft-teams/executed-add-user-command.png")}
+  alt="Executed add-user command"
+/>
+
+The bot will reply with "Your profile has been updated." You can now update the Recipient ID with `QUICKSTART_USER` and click _Send Notification_. You should see the notification appear as a direct message from your bot.
+
+<Image
+  img={require("../../assets/guides/microsoft-teams/send-direct-message.png")}
+  alt="Sent Direct Message"
+/>
+
+### Send to a Channel
+
+To send a message to a Microsoft Teams channel, we'll need a Courier recipient with a [Microsoft Teams profile](../providers/direct-message/microsoft-teams#send-a-message-to-an-microsoft-teams-channel) that includes a `channel_id`, `tenant_id`, and `service_url`. We can retrieve these values and save them to a profile using our bot's `add-channel` command.
+
+From the channel your bot has been installed in, type the following message replacing `YOUR_BOT` with the name of your bot:
+
+```text
+@YOUR_BOT add-channel QUICKSTART_CHANNEL
+```
+
+<Image
+  img={require("../../assets/guides/microsoft-teams/executed-add-channel-command.png")}
+  alt="Executed add-channel command"
+/>
+
+The bot will reply with "Your profile has been updated." You can now update the Recipient ID with `QUICKSTART_CHANNEL` and click _Send Notification_. You should see the notification appear as a message from your bot in that channel.
+
+<Image
+  img={require("../../assets/guides/microsoft-teams/send-channel-message.png")}
+  alt="Sent Channel Message"
+/>
+
+Congratulations, you have successfully sent notifications to a Microsoft Teams user and channel. You are welcome to further develop this starter bot to fit your needs and [distribute it](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/overview) to other Microsoft Teams tenants.
+
+:::info Production Bots
+The bot we are using works great for this guide, but likely won't fit a production use case. You'll want to update the Activity Handler to cover other events like when the bot is installed within an organizational unit. Check out [Event-driven conversations using an activity handler](https://docs.microsoft.com/en-us/azure/bot-service/bot-activity-handler-concept?view=azure-bot-service-4.0&tabs=javascript).
+:::

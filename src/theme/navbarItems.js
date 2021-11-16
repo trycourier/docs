@@ -1,12 +1,13 @@
 const navbarItems = [
   {
-    // to: "guides",
-    to: "/",
+    type: "doc",
+    docId: "intro",
     label: "Integration Guides",
     activeBaseRegex: "^((?!reference).)*$",
   },
   {
-    to: "reference",
+    type: "doc",
+    docId: "reference/intro",
     label: "API Reference",
     activeBasePath: "reference",
   },
@@ -25,6 +26,10 @@ const navbarItems = [
   {
     href: "https://app.courier.com/",
     label: "Log In",
+    position: "right",
+  },
+  {
+    type: "docsVersionDropdown",
     position: "right",
   },
 ];

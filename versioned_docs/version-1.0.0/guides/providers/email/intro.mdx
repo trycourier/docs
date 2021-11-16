@@ -1,0 +1,94 @@
+---
+sidebar_position: -1
+sidebar_label: Introduction
+pagination_label: Email Providers
+slug: ./
+---
+
+# Email Providers
+
+Courier supports a number of Email Providers. In order to send a notification using an Email Channel, the recipient profile must include an email address in the `email` property.
+
+```json
+// Recipient Profile
+{
+  "email": "support@trycourier.com"
+}
+```
+
+Learn more about specific Email Integrations by selecting them on the left.
+
+Can't find a provider? Shoot us a message using Intercom at the bottom of this page.
+
+## Email channel-level overrides
+
+The email channel override allows you to set the subject, reply to, from, cc, and bcc email addresses, as well as the HTML and text via an override that will apply to all your email channels\* within a template.
+
+**\*Note:** attachment overrides done at the channel level will only work with Mailgun and AWS SES currently. To add attachments to other providers, see the `override` section of the integration-specific doc.
+
+**Here is the override data structure for the email channel override:
+**
+
+```json
+{
+  //rest of request
+  "override": {
+    "channel": {
+      "email": {
+        "attachments": [],
+        "bcc": "",
+        "cc": "",
+        "from": "",
+        "html": "",
+        "replyTo": "",
+        "subject": "",
+        "text": "",
+        "tracking": {
+          "open": false
+        }
+      }
+    }
+  }
+}
+```
+
+## Brand override via API
+
+`overrides.brand` uses same schema as [POST /brands](../../../reference/brands/create)
+
+Brand elements that can be overridden:
+
+- logo
+- topbar color
+- brand colors
+
+Here is the override data structure for the email channel override. In this example, the override is setting the logo image URL.
+
+```json
+{
+  "event": "CTJNNFP7NHMKMBPJFZX4P39ABSXR",
+  "recipient": "{{ recipient.id  }}",
+  "profile": {
+    "email": "example@someemaildomain.com"
+  },
+  "data": {
+    "name": "Tony",
+    "inviteLink": "https://courier.com/register?code=blah"
+  },
+  "override": {
+    "brand": {
+      "settings": {
+        "email": {
+          "header": {
+            "logo": {
+              "image": "https://www.courier.com/logo.png",
+              "href": "https://www.courier.com"
+            },
+            "barColor": "ff5d5e"
+          }
+        }
+      }
+    }
+  }
+}
+```

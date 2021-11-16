@@ -62,11 +62,12 @@
   --ifm-badge-padding-vertical: 0.4rem;
   --ifm-badge-padding-horizontal: 0.8rem;
   --ifm-heading-font-weight: 600;
-  --ifm-navbar-item-padding-horizontal: 0.75rem;
+  --ifm-navbar-item-padding-horizontal: 0.5rem;
   --ifm-alert-padding-vertical: 1.25rem;
   --ifm-alert-padding-horizontal: 1.5rem;
   --ifm-blockquote-padding-horizontal: 1rem;
   --ifm-blockquote-border-left-width: 3px;
+  --ifm-badge-padding-horizontal: 0.5rem;
   --code-block-bg: linear-gradient(to right, #1e0c26 2.5rem, #2d1339 2.5rem);
 }
 
@@ -176,12 +177,16 @@ html[data-theme="dark"] .docusaurus-highlight-code-line {
 }
 
 .navbar__brand {
-  margin-right: 6rem;
+  margin-right: 4rem;
 }
 
 .navbar__link {
   margin: 0 var(--ifm-navbar-item-padding-horizontal);
   font-size: 14px;
+}
+
+.navbar__item {
+  white-space: nowrap;
 }
 
 .navbar__link--active,
@@ -202,12 +207,16 @@ html[data-theme="dark"] .docusaurus-highlight-code-line {
   display: none;
 }
 
-.navbar__items--right .navbar__item {
+.navbar__items--right a.navbar__item {
   padding: 6px 16px;
   border: 2px solid #fff;
   border-radius: 8px;
   backdrop-filter: blur(8px);
   background: rgba(255, 255, 255, 0.16);
+}
+
+.navbar__item.dropdown {
+  padding: 0;
 }
 
 aside,
@@ -394,4 +403,10 @@ aside > div > a > img,
 
 code {
   font-size: inherit;
+}
+
+.theme-doc-version-badge {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
 }

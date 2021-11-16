@@ -1,0 +1,193 @@
+---
+sidebar_position: 4
+---
+
+import Image from "@theme/IdealImage";
+import YoutubeEmbed from "@site/src/components/YoutubeEmbed";
+
+# How to create and send to a list or list pattern
+
+> How to structure the List IDs you create via the Lists API according to the pattern guidelines that enable wildcard sending.
+
+\*\*The Courier Lists API lets you create Lists and associate one or more recipients with them in the Courier database. Then send to a list or a list pattern. Following the list pattern guidelines outlined in this document enables wildcarding.
+
+<YoutubeEmbed videoId="0k70TmgSK8o" />
+
+## Why use Lists?
+
+Many times there are groups of users you want to message with the same notification triggered by the same event. In the past, this meant tens or sometimes thousands of API calls, triggering the same notification over and over. With Courier’s Lists API, you’re able to create lists, subscribe recipient profiles to them and send to every user on the list with a single Send API call.
+
+When you send to a list, Courier handles the message fanout–following user preferences and your channel priorities–to deliver across Push, Email, SMS, Messaging Apps, and more.
+
+:::info **With the Lists API, you can easily do things like:**
+
+- Reach every user in a shared workspace.
+- Notify all users who follow a specific project.
+- Alert users subscribed to a blog category
+- Message users who opt into specific notifications.
+
+:::
+
+## What are Lists and Lists Patterns?
+
+A list usually represents some kind object in your system. Once you've created a List, you can send a message to all the recipients you subscribed to that List with a single Send API call (Courier handles the fan-out).
+
+When naming your Courier Lists, we recommend you follow our List Pattern guidelines. Using this pattern will allow you to use wildcarding to send to multiple Lists with a single Send API call.
+
+## Understanding and defining List ID Patterns
+
+Courier supports List IDs with up to four parts to enable wildcard sending.
+
+Thinking about how to structure your List IDs according to Courier's List pattern support (up to four parts in a List) will allow you to send to multiple List parts within a related pattern using a single API call.
+
+\*\*Follow this basic pattern when defining List IDs.
+
+- `part1`
+- `part1.part2`
+- `part1.part2.spart3`
+- `part1.part2.part3.part4`
+
+:::warn You must specifically subscribe users to every List or List part that apply to them.
+
+Each ID string is its own List. If you provide `part1.part2` as the List id when creating a List, that's a single List with the id of `part1.part2`
+
+Example: subscribing a user to `part1.part2` *does not *automatically subscribe users to `part1`
+:::
+
+## List Pattern Examples
+
+**As an example, let's apply this relational pattern to Pokémon:**
+
+- `pokemon`
+- `pokemon.type`
+- `pokemon.type.generation`
+- `pokemon.type.generation.evolution`
+
+**So a list of List IDs following this pattern could be:**
+
+- `pokemon`
+- `pokemon.grass`
+- `pokemon.fire`
+- `pokemon.grass.gen1`
+- `pokemon.grass.gen2`
+- `pokemon.fire.gen1`
+- `pokemon.fire.gen2`
+- `pokemon.grass.gen1.evolution1`
+- `pokemon.fire.gen1.evolution1`
+
+## Using Patterns and wildcards to send to multiple Lists at a time
+
+Following this four-part List pattern allows you to send to more than one List at the same time by using wildcards. You can wildcard up to 3 of the 4 parts within a List pattern.
+Using a single asterisk `*` will wild card every List within that part.
+
+Using a double asterisk `**` will wild card every List in every part that follows the first part. IE it's like saying "all List that start with".
+
+**Here are a few wildcard examples using our Pokemon Lists:**
+
+**pokemon.\*.gen1**
+
+`pokemon.*.gen1` would **_only_** send to the **_unique_** users subscribed to **_these exact lists:_**
+
+- `pokemon.grass.gen1`
+- `pokemon.fire.gen1`
+
+**pokemon.grass.\* **
+
+`pokemon.grass.*` would **_only_** send to the **_unique_** users subscribed to **_these exact lists:_**
+
+- `pokemon.grass.gen1`
+- `pokemon.grass.gen2`
+
+**pokemon.fire.\***
+
+`pokemon.grass.**` would **_only_** send to the **_unique_** users subscribed to **_these exact lists:_**
+
+- `pokemon.fire.gen1`
+- `pokemon.fire.gen2`
+- `pokemon.fire.gen1.evolution1`
+
+**pokemon.\*\***
+While `pokemon.**` would send to every **_unique_** user subscribed to any list below `pokemon`.
+
+- `pokemon.grass`
+- `pokemon.fire`
+- `pokemon.grass.gen1`
+- `pokemon.grass.gen2`
+- `pokemon.fire.gen1`
+- `pokemon.fire.gen2`
+- `pokemon.grass.gen1.evolution1`
+- `pokemon.fire.gen1.evolution1`
+
+## Invalid Lists, List Patterns and Wildcards
+
+:::danger Examples of invalid list IDs, patterns and wildcarding
+The following are examples of invalid List IDs, Patterns and wildcarding that Courier List and Patterns do not support.
+
+**Invalid List IDs:**
+
+- Empty strings.
+- List IDs may not include \* or # in the in the name.
+- List IDs my not start or end with a period . or include consecutive periods ..
+- List IDs may not include spaces ex: list name would be invalid while, list_name would be valid.
+- List IDs may not include more than four parts. ie root_part.part.part.part.part etc. would be invalid.
+
+**Examples of Invalid List Patterns and wildcards**
+
+`**` : List Patterns cannot match all Lists. It is not possible to send to all Lists using wildcards, so sending a request with only (\*\*) will fail.
+
+`**.part` : List Pattern cannot include a starts with (\*\*) anywhere but at the end.
+
+`*.**` : List Pattern cannot include an asterisk (\*) followed by asterisks (\*\*)
+
+`part.*.` : List Pattern cannot end with a period (.).
+
+`.part.part` : List Pattern cannot start with a period (.).
+
+`..part.*` :List Pattern cannot include consecutive periods (..).
+
+`part .part.part` List Pattern cannot include spaces.
+
+`part.***` : List Pattern cannot include more than two consecutive asterisks.
+
+`poke**`, `pokemon.fire.g*` : The wildcard (\*) or (\*\*) must replace the entire part name within the List pattern.
+:::
+
+## Sending to a list or list pattern
+
+To send to a list or list pattern use the `POST /send/list` endpoint
+
+:::info Send API
+[POST /send/list](../../reference/send/list)
+:::
+
+**Sending to a list**
+
+```bash title=cURL
+curl --request POST \
+     --url https://api.courier.com/send/list \
+     --header 'Accept: application/json' \
+     --header 'Authorization: Bearer TOKEN GOES HERE' \
+     --header 'Content-Type: application/json' \
+     --data '
+{
+     "list": "pokemon.grass",
+     "event": "04de5ab9-8314-2e39d6b"
+}
+'
+```
+
+**Sending to a list pattern**
+
+```bash title=cURL
+curl --request POST \
+     --url https://api.courier.com/send/list \
+     --header 'Accept: application/json' \
+     --header 'Authorization: Bearer TOKEN GOES HERE' \
+     --header 'Content-Type: application/json' \
+     --data '
+{
+     "pattern": "pokemon.fire.**",
+     "event": "04de5ab9-8314-2e39d6b"
+}
+'
+```
