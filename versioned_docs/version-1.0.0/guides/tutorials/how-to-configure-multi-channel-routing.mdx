@@ -3,6 +3,7 @@ sidebar_position: 2
 ---
 
 import Image from "@theme/IdealImage";
+import GifWrapper from "@site/src/components/GifWrapper";
 
 # How to configure multi-channel routing
 
@@ -10,7 +11,11 @@ import Image from "@theme/IdealImage";
 
 Courier makes it easy to set custom routing rules and ensure your user's get exactly the product notification experience you intend. The priority of the channels you select for your notification are arranged in a top-to-bottom hierarchy. To change priority, simply drag and drop your notification channels.
 
-<Image img={require("../../assets/guides/tutorials/reorder-channel-priority.gif")} alt="" />
+<GifWrapper width={714} height={378}>
+
+![](../../assets/guides/tutorials/reorder-channel-priority.gif)
+
+</GifWrapper>
 
 Courier will attempt to send the notification to the best channel possible, starting from the top and going to the bottom, based on the provided user contact information. You must provide Courier with user's contact information within their [Courier recipient profile](../../reference/profiles) or via the [Send API](../../reference/send/message) call itself.
 

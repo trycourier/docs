@@ -3,6 +3,7 @@ sidebar_position: 4
 ---
 
 import Image from "@theme/IdealImage";
+import GifWrapper from "@site/src/components/GifWrapper";
 
 # Courier Push
 
@@ -18,7 +19,11 @@ Integrating third-party applications for notifications can be tough. Courier Pus
 
 We offer two components - **Toast and Inbox** - that are easy to integrate, work seamlessly with Courier's APIs, and can be styled to match any existing website.
 
-<Image img={require("../../../assets/guides/providers/courier-inbox.gif")} alt="" />
+<GifWrapper width={480} height={360}>
+
+![](../../../assets/guides/providers/courier-inbox.gif)
+
+</GifWrapper>
 
 ## Courier Components
 
@@ -121,7 +126,11 @@ const MyComponent = (props) => {
 
 ### Integrate Toast
 
-<Image img={require("../../../assets/guides/providers/courier-toast.gif")} alt="" />
+<GifWrapper width={2880} height={2158}>
+
+![](../../../assets/guides/providers/courier-toast.gif)
+
+</GifWrapper>
 
 [Check out the repo for all of our React Components >](https://github.com/trycourier/courier-react)
 
@@ -165,7 +174,11 @@ const MyApp = ({ children }) => {
 
 ### Integrate Inbox
 
-<Image img={require("../../../assets/guides/providers/courier-inbox.gif")} alt="" />
+<GifWrapper width={480} height={360}>
+
+![](../../../assets/guides/providers/courier-inbox.gif)
+
+</GifWrapper>
 
 **Inbox** should be added in the application as a child of **CourierProvider**, but where you want the Bell icon to display. For this example, we will just put it right next to **Toast**. `yarn add @trycourier/react-inbox` or `npm i @trycourier/react-inbox`
 

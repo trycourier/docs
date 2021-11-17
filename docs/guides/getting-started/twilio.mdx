@@ -6,6 +6,7 @@ import TOCInline from "@theme/TOCInline";
 import Image from "@theme/IdealImage";
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import GifWrapper from "@site/src/components/GifWrapper";
 
 # Set up SMS using Twilio
 
@@ -67,17 +68,19 @@ To send messages, we need a Twilio phone number with SMS capabilities and a Twil
 
 First, purchase a Twilio phone number. Navigate to the ["Phone Numbers"](https://www.twilio.com/console/phone-numbers/incoming) page of the [Twilio console](https://www.twilio.com/console) by clicking the circle icon in the sidebar, then "# Phone Numbers". Then, click on ["Buy a Number"](https://www.twilio.com/console/phone-numbers/search).
 
-<Image
-  img={require("../../assets/guides/twilio/phone-number-menu.gif")}
-  alt="Twilio Phone Number Menu"
-/>
+<GifWrapper width={845} height={475} caption="Twilio Phone Number Menu">
+
+![Twilio Phone Number Menu](../../assets/guides/twilio/phone-number-menu.gif)
+
+</GifWrapper>
 
 You can search either for a specific number or by location. Select a number capable of sending SMS messages. Check the "SMS" box to filter for numbers with this functionality. Then click "Search." Twilio will load a list of available numbers with the capabilities and the price of each number listed in a table.
 
-<Image
-  img={require("../../assets/guides/twilio/search-phone-number.gif")}
-  alt="Search for Phone Numbers"
-/>
+<GifWrapper width={845} height={475} caption="Search for Phone Numbers">
+
+![Search for Phone Numbers](../../assets/guides/twilio/search-phone-number.gif)
+
+</GifWrapper>
 
 If you are new to Twilio, your trial account is initially funded with enough money to purchase a phone number and send many messages, so you won't have any expenses while completing this guide.
 
@@ -85,7 +88,11 @@ Select whichever available number appeals to you. You may be asked to comply wit
 
 Click the "Buy This Number" button, and then select, "Setup number." This will load a phone number configuration page. We don't need to change anything for this tutorial.
 
-<Image img={require("../../assets/guides/twilio/buy-phone-number.gif")} alt="Buy a Phone Number" />
+<GifWrapper width={845} height={475} caption="Buy a Phone Number">
+
+![Buy a Phone Number](../../assets/guides/twilio/buy-phone-number.gif)
+
+</GifWrapper>
 
 ### Twilio Messaging Service
 
@@ -100,10 +107,11 @@ This page displays a "Create new Messaging Service" link. Click this link to loa
 
 Let's use "Courier SMS Service" for our "Friendly Name." There are several "Use Case" options. For this tutorial, we can select "Notifications, Outbound Only." For more about Twilio Messaging Services, see their ["Sending Messages" guide](https://www.twilio.com/docs/sms/send-messages#messaging-services). Next, click "Create."
 
-<Image
-  img={require("../../assets/guides/twilio/configure-messaging-service.gif")}
-  alt="Configure the Messaging Service"
-/>
+<GifWrapper width={845} height={475} caption="Configure the Messaging Service">
+
+![Configure the Messaging Service](../../assets/guides/twilio/configure-messaging-service.gif)
+
+</GifWrapper>
 
 Twilio will load a configuration page for your service. Thankfully, you shouldn't have to change anything here. You need only the "Service SID" at the top of the page. Copy this SID, and enter it into the "Messaging Service SID" field on [Courier's Twilio Integration page](https://app.courier.com/integrations/twilio). Click the "Add Integration" button. Then, click "Save."
 
@@ -111,10 +119,11 @@ Twilio will load a configuration page for your service. Thankfully, you shouldn'
 
 We have one thing left to configure. We must add our phone number to our Messaging Service. Go back to Twilio. Then navigate to your Twilio Messaging Service's configuration page. You will see two links in the sidebar beneath your "Courier SMS Service." Navigate to the "Numbers" subsection. This will load a page with an "Add an Existing Number" link. Click this link, and check the box to the right of the number you purchased earlier. Click "Add Selected."
 
-<Image
-  img={require("../../assets/guides/twilio/add-number.gif")}
-  alt="Add a Number to a Messaging Service"
-/>
+<GifWrapper width={845} height={475} caption="Add a Number to a Messaging Service">
+
+![Add a Number to a Messaging Service](../../assets/guides/twilio/add-number.gif)
+
+</GifWrapper>
 
 ## Create a Notification
 

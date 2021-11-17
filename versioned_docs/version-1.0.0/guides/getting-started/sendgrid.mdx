@@ -6,6 +6,7 @@ import TOCInline from "@theme/TOCInline";
 import Image from "@theme/IdealImage";
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import GifWrapper from "@site/src/components/GifWrapper";
 
 # Set up Email using SendGrid
 
@@ -47,10 +48,11 @@ API permissions can be complicated, but very little is needed for this guide (yo
 
 To send a message, your API key needs only "Mail Send" permissions. You can select “Restricted Access” and toggle on only this “Mail Send” setting for now.
 
-<Image
-  img={require("../../assets/guides/sendgrid/creating-api-key.gif")}
-  alt="Creating a SendGrid API Key"
-/>
+<GifWrapper width={845} height={475} caption="Creating a SendGrid API Key">
+
+![Creating a SendGrid API Key](../../assets/guides/sendgrid/creating-api-key.gif)
+
+</GifWrapper>
 
 Copy your API key from SendGrid, and paste it into the "API Key" field on the Courier Integration page.
 
