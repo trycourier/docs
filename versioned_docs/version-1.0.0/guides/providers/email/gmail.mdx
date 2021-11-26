@@ -1,0 +1,60 @@
+---
+sidebar_position: 1
+---
+
+# Gmail
+
+> This is the documentation for the Courier Gmail email provider.
+
+## Authorizing Courier for Gmail
+
+When you set up Gmail as a provider and connect your gmail account, Courier will request permission to send emails on your behalf. Courier will not send any emails unless you explicitly make a send request using the provider.
+
+### OAuth Authorization
+
+Google APIs use the OAuth protocol for authentication and authorization. Once given permission, Courier will request an access token from the Google Authorization Server, and send the token to the Google Gmail API on your behalf.
+
+To give Courier access to your Gmail credentials, you will need to consent to Courier's requested Gmail scopes by signing into your desired Gmail inbox and allowing Courier permission.
+
+### Updating Authorized Account
+
+On the [Gmail Integration](https://app.courier.com/integrations/gmail) page, you can click on "Authorize a different Gmail inbox" to send messages from a different account. This will require you to give permissions for the new email account every time you change the account.
+
+## Profile Requirements
+
+To deliver a message to a recipient over Gmail, Courier must be provided the recipient's email address. This value should be included in the recipient profile as `email`.
+
+```json
+// Recipient Profile
+{
+  "email": "example@example.com"
+}
+```
+
+## Override
+
+You can use a provider override to replace what we send to Gmail's Send API. For example, you can add an attachment to your request:
+
+```json
+{
+  "event": "<COURIER_NOTIFICATION_ID>",
+  "recipient": "recipient_name",
+  "profile": {
+    "email": "example@example.com"
+  },
+  "override": {
+    "gmail": {
+      "attachments": [
+        {
+          "filename": "file_name.pdf",
+          "contentType": "application/pdf",
+          "data": "Q29uZ3JhdHVsYXRpb25zLCB5b3UgY2FuIGJhc2U2NCBkZWNvZGUh"
+        }
+      ]
+    }
+  }
+}
+```
+
+- The `event` should match the event name in the Courier notification settings.
+- The contentType for the attachment can be replaced with anything that is compatible with Gmail sending requirements.

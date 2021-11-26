@@ -1,0 +1,23 @@
+---
+sidebar_position: 3
+---
+
+import Image from "@theme/IdealImage";
+
+# How To Send A Notification
+
+> This how to guide walks through triggering a product notification send using the Courier Send API or the Segment integration.
+
+There are two primary ways in which you can send a notification. You can trigger a send via the [Courier Send API](../../reference/send/message), or you via a [Segment event](https://segment.com/docs/connections/destinations/catalog/courier/).
+
+The easiest way to access the code snippet to send your notification via the Courier Send API is to select the 'Send' tab from within the notification designer, and select the runtime that you want to use to make the send call from.
+
+<Image img={require("../../assets/guides/tutorials/notification-send-tab.png")} alt="" />
+
+In order to trigger a notification from a Segment event, you will first need to install the [Courier destination](https://segment.com/docs/connections/destinations/catalog/courier/) in your Segment account, and then [create a Courier Automation Template](https://app.courier.com/designer/automations).
+
+<Image img={require("../../assets/guides/tutorials/automation-templates.png")} alt="" />
+
+Once you have created an Automation, you need to configure the Segment event as the Automation trigger. You can select from identify, group, and track events.
+
+<Image img={require("../../assets/guides/tutorials/automation-design.png")} alt="" />

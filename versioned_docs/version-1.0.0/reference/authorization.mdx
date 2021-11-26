@@ -1,0 +1,152 @@
+---
+sidebar_position: 2
+---
+
+import Image from "@theme/IdealImage";
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+# Authorization
+
+The Courier REST API supports both token and basic authorization.
+
+## Token Auth
+
+Courier assigns you an "Auth Token" when you [Register your account](https://www.trycourier.app/register). You can retrieve this token from any of your [Notification](https://www.trycourier.app/notifications) detail pages.
+
+<Image
+  img={require("../assets/reference/notification-in-detail-view.png")}
+  alt="Courier Auth Token"
+/>
+
+This token should be passed as a `Bearer Token` in an `Authorization` header with each request. Remember, it is best not to store an authorization token in your source control but instead reference values stored in environment variables or some other configuration. However you handle your tokens, be sure to keep them private and secure.
+
+<Tabs groupId="code">
+<TabItem value="bash" label="cURL">
+
+```bash
+curl --request POST \
+     --url https://api.courier.com/send \
+     --header 'Authorization: Bearer <token>'
+```
+
+</TabItem>
+<TabItem value="ruby" label="Ruby">
+
+```ruby
+require 'uri'
+require 'net/http'
+require 'openssl'
+
+url = URI("https://api.trycourier.app/send")
+
+http = Net::HTTP.new(url.host, url.port)
+http.use_ssl = true
+http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+request = Net::HTTP::Post.new(url)
+request["Authorization"] = 'Bearer <token>'
+```
+
+</TabItem>
+<TabItem value="python" label="Python">
+
+```python
+import requests
+
+url = "https://api.trycourier.app/send"
+
+headers = {
+  'Authorization': "Bearer <token>"
+}
+```
+
+</TabItem>
+<TabItem value="js" label="JavaScript">
+
+```js
+const xhr = new XMLHttpRequest();
+
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === this.DONE) {
+    console.log(this.responseText);
+  }
+});
+
+xhr.open("POST", "https://api.trycourier.app/send");
+xhr.setRequestHeader("Authorization", "Bearer <token>");
+
+xhr.send(data);
+```
+
+</TabItem>
+</Tabs>
+
+## Basic Auth
+
+Basic Auth works by passing a username and password in an `Authorization` header. These credentials should be Base64 encoded, which can typically be accomplished using a function or method available in your language of choice. For example, JavaScript provides the `btoa()` and `atob()` functions to Base64 encode and decode respectively.
+
+A username of `normanosborn@oscorp.com` and password of `goblin616` are concatenated to `normanosborn@oscorp.com:goblin616`. This concatenated string becomes "bm9ybWFub3Nib3JuQG9zY29ycC5jb206Z29ibGluNjE2" once it is Base64 encoded.
+
+<Tabs groupId="code">
+<TabItem value="bash" label="cURL">
+
+```bash
+curl --request POST \
+     --url https://api.courier.com/send \
+     --header 'Authorization: Basic <Base64 encoded string>'
+```
+
+</TabItem>
+<TabItem value="ruby" label="Ruby">
+
+```ruby
+require 'uri'
+require 'net/http'
+require 'openssl'
+
+url = URI("https://api.trycourier.app/send")
+
+http = Net::HTTP.new(url.host, url.port)
+http.use_ssl = true
+http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+request = Net::HTTP::Post.new(url)
+request["Authorization"] = 'Basic <Base64 encoded string>'
+```
+
+</TabItem>
+<TabItem value="python" label="Python">
+
+```python
+import requests
+
+url = "https://api.trycourier.app/send"
+
+headers = {
+  'Authorization': "Basic <Base64 encoded string>"
+}
+```
+
+</TabItem>
+<TabItem value="js" label="JavaScript">
+
+```js
+const xhr = new XMLHttpRequest();
+
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === this.DONE) {
+    console.log(this.responseText);
+  }
+});
+
+xhr.open("POST", "https://api.trycourier.app/send");
+xhr.setRequestHeader("Authorization", "Basic <Base64 encoded string>");
+
+xhr.send(data);
+```
+
+</TabItem>
+</Tabs>
+
+To authenticate with the Courier REST API, use the email associated with your account as the username and the Auth Token as your password.

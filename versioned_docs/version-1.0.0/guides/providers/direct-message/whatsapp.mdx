@@ -1,0 +1,18 @@
+---
+sidebar_position: 8
+---
+
+# WhatsApp
+
+Courier uses the [Twilio API for WhatsApp](https://twilio.com/whatsapp) as our delivery partner. This is the fastest path for getting your WhatsApp Business account approved. After signing up for this service, know the process can take multiple weeks on the WhatsApp side. You can follow along with any of the [Twilio WhatsApp QuickStarts](https://www.twilio.com/docs/whatsapp/quickstart) to walk through signing up.
+
+## Profile Requirements
+
+To deliver a message to a recipient over Twilio Whatsapp, Courier must be provided the recipient's SMS-compatible telephone number. This value should be included in the recipient profile as `phone_number`.
+
+```json title=JSON
+// Recipient Profile
+{
+  "phone_number": "555-555-5555"
+}
+```

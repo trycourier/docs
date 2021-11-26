@@ -1,0 +1,68 @@
+---
+sidebar_position: 6
+---
+
+# Stream Chat API
+
+> https://getstream.io/chat/
+
+## Profile Requirements
+
+To deliver a message to a recipient over Stream Chat API, Courier must be provided a channelType and channelId OR a messageId
+This value should be included in the recipient profile as `streamChat`.
+
+```json title=JSON
+//RecipientProfile using channelType and channelId
+{
+  "streamChat": {
+    "channelType": "messaging",
+    "channelId": "my-channel-id"
+  }
+}
+```
+
+```json title=JSON
+//RecipientProfile using messageId (required for updating an existing message)
+{
+  "streamChat": {
+    "messageId": "my-message-id"
+  }
+}
+```
+
+## Override
+
+Overrides can be used to change the request body that Courier uses to send the message. Overrides are useful when a field is not yet supported by Courier or you would like to override the value that Courier generates.
+
+- You can override any of the fields supported by Stream Chat API `POST /channels/{type}/{id}/message` endpoint ([see all send request body fields here](https://getstream.io/chat/docs/other-rest/message_format/)) via override body object
+- You can also override apiKey, apiSecret and senderId fields via the override config object
+- You can also override baseUrl (defaulted to "https://chat-us-east-1.stream-io-api.com")
+
+```json title=JSON
+{
+  "event": "<COURIER_NOTIFICATION_ID>",
+  "recipient": "foo_bar",
+  "profile": {
+    "streamChat": {
+      "channelType": "messaging",
+      "channelId": "my-channel-id"
+    }
+  },
+  "data": {
+    "name": "Foo Bar"
+  },
+  "override": {
+    "streamChat": {
+      "body": {
+        "skip_push": true
+      }
+    },
+    "config": {
+      "baseUrl": "<overriden-base-url>",
+      "apiKey": "<overriden-api-key>",
+      "apiSecret": "<overriden-api-secret>",
+      "senderId": "<overriden-sender-id>"
+    }
+  }
+}
+```

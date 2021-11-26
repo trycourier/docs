@@ -1,0 +1,46 @@
+---
+sidebar_position: 6
+---
+
+# Telnyx
+
+## Profile Requirements
+
+To deliver a message to a recipient over Telnyx, Courier must be provided the recipient's SMS-compatible telephone number. This value should be included in the recipient profile as `phone_number`.
+
+```json title=JSON
+// Recipient Profile
+{
+  "phone_number": "+15551734686"
+}
+```
+
+## Overrides
+
+Overrides can be used to change the request body that Courier uses to send a message. Overrides are useful you would like to override the value that Courier generates. You can override any of the fields supported on the outgoing call to Telnyx.:
+
+```json title=JSON
+{
+  "event": "<COURIER_NOTIFICATION_ID>",
+  "recipient": "katherine_pryde",
+  "profile": {
+    "phone_number": "+15551734686"
+  },
+  "data": {
+    "name": "Katherine Pryde"
+  },
+  "override": {
+    "telnyx": {
+      "body": {
+        "text": "text override"
+        "to": "+17777777777"
+      },
+      "config": {
+        "apiKey": "<your API Key>",
+        "from": "+15555555555",
+        "url": "<alternate url>"
+      },
+    },
+  }
+}
+```

@@ -28,6 +28,10 @@ const navbarItems = [
     label: "Log In",
     position: "right",
   },
+  {
+    type: "docsVersionDropdown",
+    position: "right",
+  },
 ];
 
 module.exports = navbarItems;

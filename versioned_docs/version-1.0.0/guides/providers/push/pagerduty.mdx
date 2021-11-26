@@ -1,0 +1,37 @@
+---
+sidebar_position: 11
+---
+
+# PagerDuty
+
+## Profile Requirements
+
+To deliver an [Event to PagerDuty](https://v2.developer.pagerduty.com/docs/events-api-v2), there are no requirements for the profile.
+
+```json title=JSON
+// Recipient Profile
+{}
+```
+
+## Override
+
+You can use the provider override to replace what we send to PagerDuty's Events API. Supported overrides include the Severity and Source. Here's an example where we override both:
+
+```json title=JSON
+{
+  "event": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  "profile": {},
+  "override": {
+    "pagerduty": {
+      "body": {
+        "payload": {
+          "severity": "error",
+          "source": "a different source"
+        }
+      }
+    }
+  }
+}
+```
+
+Other supported payload overrides are [here](https://v2.developer.pagerduty.com/docs/send-an-event-events-api-v2).

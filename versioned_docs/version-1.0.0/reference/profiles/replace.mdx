@@ -1,0 +1,39 @@
+---
+sidebar_position: 3
+---
+
+import ApiReference from "@site/src/components/ApiReference";
+import config from "../configs/profiles/replace";
+
+# PUT /profiles/:recipient_id
+
+When using `PUT`, be sure to include all the key-value pairs required by the recipient's profile. Any key-value pairs that exist in the profile but fail to be included in the `PUT` request will be removed from the profile. Remember, a `PUT` update is a full replacement of the data. For partial updates, use the [PATCH /profiles/{recipient_id}](ref:patchprofilebyrecipientid) request.
+
+### More Examples
+
+The following types of requests will clear out the properties of the Profile:
+
+```json title=JSON
+// Empty Profile Object
+{
+  "profile": {}
+}
+```
+
+The above will result with:
+
+```json title=200
+{
+  "status": "SUCCESS"
+}
+```
+
+The Profile will now be:
+
+```json title=JSON
+{
+  "profile: {}
+}
+```
+
+<ApiReference {...config} />

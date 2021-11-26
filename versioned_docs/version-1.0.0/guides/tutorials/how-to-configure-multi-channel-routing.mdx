@@ -1,0 +1,36 @@
+---
+sidebar_position: 2
+---
+
+import Image from "@theme/IdealImage";
+import GifWrapper from "@site/src/components/GifWrapper";
+
+# How To Configure Multi-Channel Routing
+
+> This how to guide walks you through configuring multi-channel routing for your product notifications with Courier.
+
+Courier makes it easy to set custom routing rules and ensure your user's get exactly the product notification experience you intend. The priority of the channels you select for your notification are arranged in a top-to-bottom hierarchy. To change priority, simply drag and drop your notification channels.
+
+<GifWrapper width={714} height={378}>
+
+![](../../assets/guides/tutorials/reorder-channel-priority.gif)
+
+</GifWrapper>
+
+Courier will attempt to send the notification to the best channel possible, starting from the top and going to the bottom, based on the provided user contact information. You must provide Courier with user's contact information within their [Courier recipient profile](../../reference/profiles) or via the [Send API](../../reference/send/message) call itself.
+
+Take, for example, a notification that is designed to send via SMS, Slack or email, in that order of priority:
+
+<Image img={require("../../assets/guides/tutorials/channel-priority-sample.png")} alt="" />
+
+Courier will first attempt to send the notification via SMS. If the recipient has a phone number in their profile, the notification will send via SMS only. If they don't have a phone number, Courier will look for a Slack account. Finally, if they don't have a phone number or slack account, Courier will look for an email address.
+
+You can also choose to 'always send' to a specific channel. In order to do this, select the channel settings and turn on 'Always send to'.
+
+<Image img={require("../../assets/guides/tutorials/channel-settings-always-send-to.png")} alt="" />
+
+Now Courier will always send this notification via email as well as to the best of the other channels.
+
+<Image img={require("../../assets/guides/tutorials/notification-always-send-to.png")} alt="" />
+
+The routing settings created in the designer can always be overridden using the [preferences API](../../reference/preferences). This will override the hierarchy of the channel rules and send the message only via the Integration specified in the recipient’s [profile](../../reference/profiles).
