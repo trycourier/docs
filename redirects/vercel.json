@@ -212,17 +212,17 @@
     },
     {
       "source": "/docs/chat-api",
-      "destination": "https://www.courier.com/docs/guides/providers/direct-message/discord",
+      "destination": "https://www.courier.com/docs/guides/providers/direct-message/chat",
       "permanent": true
     },
     {
       "source": "/docs/discord",
-      "destination": "https://www.courier.com/docs/guides/providers/direct-message/facebook-messenger",
+      "destination": "https://www.courier.com/docs/guides/providers/direct-message/discord",
       "permanent": true
     },
     {
       "source": "/docs/facebook-messenger",
-      "destination": "!!!",
+      "destination": "https://www.courier.com/docs/guides/providers/direct-message/facebook-messenger",
       "permanent": true
     },
     {
@@ -242,7 +242,7 @@
     },
     {
       "source": "/docs/stream-chat-api",
-      "destination": "!!!",
+      "destination": "https://www.courier.com/docs/guides/providers/direct-message/stream-chat",
       "permanent": true
     },
     {
@@ -337,7 +337,7 @@
     },
     {
       "source": "/docs/how-to-automate-message-sequences",
-      "destination": "!!!",
+      "destination": "https://www.courier.com/docs/guides/tutorials/how-to-automate-message-sequences",
       "permanent": true
     },
     {
