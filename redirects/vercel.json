@@ -574,6 +574,16 @@
       "source": "/reference/replaceeventbyid",
       "destination": "https://www.courier.com/docs/reference/events/replace",
       "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "destination": "https://www.courier.com/docs/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "destination": "https://www.courier.com/docs/",
+      "permanent": true
     }
   ]
 }
