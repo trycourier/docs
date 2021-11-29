@@ -11,16 +11,6 @@ module.exports = {
           label: "API Reference",
           id: "reference/intro",
         },
-        {
-          type: "link",
-          label: "Product Updates",
-          href: "https://updates.courier.com",
-        },
-        {
-          type: "link",
-          label: "Service Status",
-          href: "https://status.courier.com",
-        },
       ],
     },
     {
