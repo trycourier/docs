@@ -14,7 +14,6 @@ const metadatas = require("./src/theme/metadatas");
     favicon: "img/favicon.ico",
     organizationName: "trycourier",
     projectName: "docs",
-    noIndex: true,
     presets: [
       [
         "@docusaurus/preset-classic",
