@@ -47,6 +47,8 @@ const metadatas = require("./src/theme/metadatas");
           logo: {
             alt: "Courier Logo",
             src: "img/logo.svg",
+            href: "https://www.courier.com",
+            target: "_self",
           },
           items: navbarItems,
         },
