@@ -1,0 +1,80 @@
+---
+sidebar_position: 10
+---
+
+import TOCInline from "@theme/TOCInline";
+import Image from "@theme/IdealImage";
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+# Quickstart: Node.js
+
+## Prerequisites
+
+### Installation (via [npm](https://www.npmjs.com/package/@trycourier/courier))
+
+```bash
+npm install @trycourier/courier
+```
+
+### Requirements
+
+You will need to get a Courier API key to get started. You can sign up and create one for free at courier.com.
+
+## Set Up A Notification
+
+1. Choose channel(s) and integrate providers
+2. Design a notification
+
+## Send API
+
+```javascript
+import { CourierClient } from "@trycourier/courier";
+
+const courier = CourierClient({ authorizationToken: "<AUTH_TOKEN>" }); // get from the Courier UI
+
+// Example: send a message supporting email & SMS
+const { messageId } = await courier.send({
+  eventId: "<EVENT_ID>", // get from the Courier UI
+  recipientId: "<RECIPIENT_ID>", // usually your system's User ID
+  profile: {
+    email: "example@example.com",
+    phone_number: "555-228-3890",
+  },
+  data: {}, // optional variables for merging into templates
+});
+
+// Example: send a message to a list
+const { messageId } = await courier.lists.send({
+  event: "<EVENT_ID>", // get from the Courier UI
+  list: "<LIST_ID>", // e.g. example.list.id
+  data: {}, // optional variables for merging into templates
+});
+
+// Example: send a message to a pattern
+const { messageId } = await courier.lists.send({
+  event: "<EVENT_ID>", // get from the Courier UI
+  pattern: "<PATTERN>", // e.g. example.list.*
+  data: {}, // optional variables for merging into templates
+});
+```
+
+### Breakdown
+
+After installing the npm package, import the Courier Client package into your application.
+
+```javascript
+import { CourierClient } from "@trycourier/courier";
+```
+
+```
+const courier = CourierClient({ authorizationToken: "<AUTH_TOKEN>" }); // get from the Courier UI
+````
+
+
+
+## Environment Variables
+
+`courier-node` supports credential storage in environment variables. If no `authorizationToken` is provided when instantiating the Courier client (e.g., `const courier = CourierClient();`), the value in the `COURIER_AUTH_TOKEN` env var will be used.
+
+If you need to use a base url other than the default https://api.courier.com, you can set it using the `COURIER_BASE_URL` env var.
