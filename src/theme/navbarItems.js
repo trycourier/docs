@@ -2,7 +2,7 @@ const navbarItems = [
   {
     type: "doc",
     docId: "intro",
-    label: "Integration Guides",
+    label: "Home",
     activeBaseRegex: "^((?!reference).)*$",
   },
   {
@@ -10,10 +10,6 @@ const navbarItems = [
     docId: "reference/intro",
     label: "API Reference",
     activeBasePath: "reference",
-  },
-  {
-    href: "https://help.courier.com",
-    label: "Help Center",
   },
   {
     href: "https://updates.courier.com",
