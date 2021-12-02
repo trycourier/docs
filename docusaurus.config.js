@@ -14,7 +14,6 @@ const metadatas = require("./src/theme/metadatas");
     favicon: "img/favicon.ico",
     organizationName: "trycourier",
     projectName: "docs",
-    noIndex: true,
     presets: [
       [
         "@docusaurus/preset-classic",
@@ -48,6 +47,8 @@ const metadatas = require("./src/theme/metadatas");
           logo: {
             alt: "Courier Logo",
             src: "img/logo.svg",
+            href: "https://www.courier.com",
+            target: "_self",
           },
           items: navbarItems,
         },
