@@ -52,6 +52,7 @@ const { messageId } = await courier.lists.send({
 });
 
 // Example: send a message to a pattern
+
 const { messageId } = await courier.lists.send({
   event: "<EVENT_ID>", // get from the Courier UI
   pattern: "<PATTERN>", // e.g. example.list.*
