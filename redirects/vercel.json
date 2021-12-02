@@ -297,17 +297,17 @@
     },
     {
       "source": "/docs/internationalization-specification",
-      "destination": "https://www.courier.com/docs/guides/getting-started/internationalization-specification",
+      "destination": "https://www.courier.com/docs/guides/enterprise/internationalization-specification",
       "permanent": true
     },
     {
       "source": "/docs/checks-system",
-      "destination": "https://www.courier.com/docs/guides/getting-started/checks-system",
+      "destination": "https://www.courier.com/docs/guides/enterprise/checks-system",
       "permanent": true
     },
     {
       "source": "/docs/set-up-sign-in-with-okta",
-      "destination": "https://www.courier.com/docs/guides/getting-started/okta-integration",
+      "destination": "https://www.courier.com/docs/guides/enterprise/okta-integration",
       "permanent": true
     },
     {
