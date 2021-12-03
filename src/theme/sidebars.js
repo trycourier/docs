@@ -85,6 +85,18 @@ module.exports = {
     },
     {
       type: "category",
+      label: "Design Studio",
+      collapsible: false,
+      items: [
+        // {
+        //   type: "link",
+        //   label: "Go",
+        //   href: "https://github.com/trycourier/courier-go",
+        // },
+      ],
+    },
+    {
+      type: "category",
       label: "Courier Enterprise",
       collapsible: false,
       items: [
