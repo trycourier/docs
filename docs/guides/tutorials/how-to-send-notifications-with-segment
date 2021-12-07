@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 6
 ---
 
 import Image from "@theme/IdealImage";
@@ -11,7 +11,7 @@ Courier’s Destination for Segment provides a no-code way to send data from Web
 
 Courier's Segment Integration is available to customers on [Courier's Starter, Business and Enterprise plans](https://www.courier.com/pricing/).
 
-# Configure Segment
+## Configure Segment
 
 By connecting Segment to Courier, you can use the `analytics.identify` and `analytics.track` API calls to direct information about users and their actions (Segment events) from Segment to Courier.
 
@@ -101,7 +101,7 @@ The following is how the above JSON object is mapped into the Courier data objec
 }
 ```
 
-# Automations
+## Automations
 
 The Segment track API calls trigger Courier Automations. The following is an example workflow, where a user's action triggers a Segment API call that triggers a Courier Automation.
 
