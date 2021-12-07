@@ -29,7 +29,7 @@ Once your Segment API is configured, navigate to the destination's "Event Tester
 
 If you continue to see the "No Segment events received yet." message in Courier, double check that your API Key was copied accurately into Segment.
 
-![segment flow](https://user-images.githubusercontent.com/28051494/145014502-8a4e0a95-d21a-4abc-b550-898d4b6aa125.png)
+<Image img={require("../assets/guides/tutorials/segment-test-event.png")} alt="Segment Workflow" />
 
 ### Identify Calls
 
@@ -110,6 +110,6 @@ Data:
 - Segment `properties` JSON data is passed into the Courier Send API as elements of the `data` JSON object
 - Segment's userId is used to locate the recipient in Courier with the same ID or create a new one when none are found
 
-![segment flow](https://user-images.githubusercontent.com/28051494/145014462-ffebb514-288d-4473-9d3d-e4d81f0dee70.png)
+<Image img={require("../assets/guides/tutorials/segment-flow.png")} alt="Segment Workflow" />
 
 [Learn more about Courier Automations >](https://www.courier.com/docs/guides/tutorials/how-to-automate-message-sequences)
