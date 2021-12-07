@@ -37,7 +37,7 @@ Segment Identify calls allow you to connect a user to their actions (Segment eve
 
 [Learn more about Segment Identify >](https://segment.com/docs/connections/spec/identify/)
 
-[Learn more about Courier Profiles >](https://www.courier.com/docs/reference/profiles/?utm_source=segmentio&utm_medium=docs&utm_campaign=partners)
+[Learn more about Courier Profiles >](../../reference/profiles)
 
 ### Recipients
 
@@ -110,6 +110,6 @@ Data:
 - Segment `properties` JSON data is passed into the Courier Send API as elements of the `data` JSON object
 - Segment's userId is used to locate the recipient in Courier with the same ID or create a new one when none are found
 
-<Image img={require("../assets/guides/tutorials/segment-flow.png")} alt="Segment Workflow" />
+<Image img={require("docs/assets/guides/tutorials/segment-test-event.png")} alt="Segment Workflow" />
 
-[Learn more about Courier Automations >](https://www.courier.com/docs/guides/tutorials/how-to-automate-message-sequences)
+[Learn more about Courier Automations >](docs/guides/tutorials/how-to-automate-message-sequences.mdx) 
