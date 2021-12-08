@@ -8,7 +8,7 @@ const metadatas = require("./src/theme/metadatas");
   module.exports = {
     title: "Courier Docs",
     url: "https://courier.com",
-    baseUrl: "/docs/",
+    baseUrl: process.env.VERCEL_ENV === "preview" ? "/" : "/docs/",
     onBrokenLinks: "throw",
     onBrokenMarkdownLinks: "warn",
     favicon: "img/favicon.ico",
