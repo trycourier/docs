@@ -7,9 +7,9 @@ import GifWrapper from "@site/src/components/GifWrapper";
 
 # How To Send Notifications With Segment
 
-Courier’s Destination for Segment provides a no-code way to send data from Web or Mobile applications into Courier. Data and events flow from your application through Segment’s integration to Courier. In order to use Courier's Segment destination, you must already have Segment installed in your application.
+Segment users can now take advantage of the complete Courier platform, including omni-channel routing, dynamic templates, preference management, automations and more by simply adding Courier as a Segment destination. The only requirement is that you are currently sending any events you would want to use to trigger a Courier notification to Segment.
 
-Courier's Segment Integration is available to customers on [Courier's Starter, Business and Enterprise plans](https://www.courier.com/pricing/).
+Courier’s Destination for Segment provides an easy way to send data from Web or Mobile applications into Courier to improve notification delivery and management. Data and events flow from your application through Segment’s integration to Courier. In order to use Courier's Segment destination, you must already have Segment installed in your application.
 
 ## Configure Segment
 
