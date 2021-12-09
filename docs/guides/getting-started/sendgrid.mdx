@@ -25,7 +25,7 @@ You will need both Courier and SendGrid accounts to complete this tutorial. If y
 
 :::info Related Resources
 
-- [Courier API Reference](../../reference)
+- [Courier API Reference](../../reference/intro.mdx)
 - [SendGrid API Keys](https://sendgrid.com/docs/ui/account-and-settings/api-keys/)
 - [Bash Environment Variables](https://www.gnu.org/software/bash/manual/html_node/Environment.html)
 - [cURL](https://curl.haxx.se/)
@@ -81,7 +81,7 @@ You can add message blocks to the template by clicking one of the three icons on
   alt="Courier Notification Template"
 />
 
-These text blocks can include variables using a mustache-like template syntax. Surround text with a single set of curly braces and that text will be interpreted as a variable (it will also be highlighted in green). For example, you may want to include a `{name}` variable (we'll cover the source of this variable data [later in this tutorial](#variables)).
+These text blocks can include variables using a mustache-like template syntax. Surround text with a single set of curly braces and that text will be interpreted as a variable (it will also be highlighted in green). For example, you may want to include a `{name}` variable (we'll cover the source of this variable data later in this tutorial).
 
 Be sure to set the subject line for your email as well (click “New Subject” to edit it). You can also choose a different From Address — this will override the From Address in your SendGrid Integration settings.
 
@@ -108,11 +108,11 @@ When you are finished, click Publish in the upper right corner and give it a Pub
 
 ## Send a Message
 
-Courier passes messages to Integrations via the [Send endpoint](../../reference/send/message) . For this tutorial, we will send our messages with cURL, but you can use your preferred language and HTTP library. You can also use an API testing tool such as [Postman](https://www.getpostman.com/) or [Insomnia](https://insomnia.rest/). For additional code samples, see the ["Courier API Reference."](../../reference)
+Courier passes messages to Integrations via the [Send endpoint](../../reference/send/message.mdx) . For this tutorial, we will send our messages with cURL, but you can use your preferred language and HTTP library. You can also use an API testing tool such as [Postman](https://www.getpostman.com/) or [Insomnia](https://insomnia.rest/). For additional code samples, see the ["Courier API Reference."](../../reference/intro.mdx)
 
 ### Authorization
 
-Courier supports both basic and token authorization. For this tutorial, we will use token authorization. You can read more about authorization in Courier's ["Authorization Overview"](../../reference/authorization).
+Courier supports both basic and token authorization. For this tutorial, we will use token authorization. You can read more about authorization in Courier's ["Authorization Overview"](../../reference/authorization.mdx).
 
 We must send an `Authorization` header with each request. The Courier Send API also requires an `event`. The authorization token and event values are the "Auth Token" and "Notification ID" we see in the detail view of our “Test Appointment Reminder” event. Click the gear icon next to the Notification's name to reveal them.
 
@@ -166,7 +166,7 @@ The `event` value, for this example, is the "Notification ID" that we assigned t
 
 A `recipient` should be a unique identifier that does not change. This prevents duplicate entries in the event that a recipient changes their email or some other identifying value. We do not have any recipients in this tutorial, so we can enter any string value. Something like “katherine_pryde” will work.
 
-The `profile` information is an object that includes any key-value pairs required by our Integrations. In the case of SendGrid, we need an `email` key and value. This is the address where our message will be delivered. You can find the required keys for any Integration by selecting an Integration on the ["Integrations" page](https://app.courier.com/integrations). See the ["Integration Provider Requirements"](../providers) for details.
+The `profile` information is an object that includes any key-value pairs required by our Integrations. In the case of SendGrid, we need an `email` key and value. This is the address where our message will be delivered. You can find the required keys for any Integration by selecting an Integration on the ["Integrations" page](https://app.courier.com/integrations). See the ["Integration Provider Requirements"](../providers/intro.mdx) for details.
 
 Lastly, we define message variables inside the `data` object. Remember the variables we set in the
 visual template editor? This is where we provide the values. Our example message had `name`,

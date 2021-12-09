@@ -109,7 +109,7 @@ Then, click the _Microsoft Teams_ box that has been added to the sidebar in orde
 
 Courier provides a visual template editor, so you can send notifications that are formatted professionally. You can add content blocks to the template by clicking appropriate icons. If you remove a content block, it is moved to your Library in the sidebar and can be dragged back to the template if necessary.
 
-These content blocks can include variables using a mustache-like template syntax. Surround text with a single set of curly braces and that text will be interpreted as a variable (it will also be highlighted in green). For example, you may want to include a {name} variable (we'll cover the source of this variable data [later in this tutorial](#variables)).
+These content blocks can include variables using a mustache-like template syntax. Surround text with a single set of curly braces and that text will be interpreted as a variable (it will also be highlighted in green). For example, you may want to include a {name} variable (we'll cover the source of this variable data later in this tutorial).
 
 For now, add a text block and fill it with whatever text you want to send. You can also copy the example below, which contains a few variables for demonstration.
 
@@ -161,7 +161,7 @@ Click _Create Test Event_ and you'll see a preview of the notification using the
 
 ## Send a Message
 
-Courier passes messages to Integrations via the [Send endpoint](../../reference/send/message). For this tutorial, we will send our messages using the Send tab in the Notification Designer. It will also provide you with sample code for your preferred language using one of our SDKs.
+Courier passes messages to Integrations via the [Send endpoint](../../reference/send/message.mdx). For this tutorial, we will send our messages using the Send tab in the Notification Designer. It will also provide you with sample code for your preferred language using one of our SDKs.
 
 Click the _Send_ tab at the top of the page.
 
@@ -172,7 +172,7 @@ Click the _Send_ tab at the top of the page.
 
 ### Send a Direct Message
 
-To send a direct message to a Microsoft Teams user, we'll need a Courier recipient with a [Microsoft Teams profile](../providers/direct-message/microsoft-teams#send-a-message-to-a-microsoft-teams-user) that includes a `user_id`, `tenant_id`, and `service_url`. We can retrieve these values and save them to a profile using our bot's `add-user` command.
+To send a direct message to a Microsoft Teams user, we'll need a Courier recipient with a [Microsoft Teams profile](../providers/direct-message/microsoft-teams.mdx#send-a-message-to-a-microsoft-teams-user) that includes a `user_id`, `tenant_id`, and `service_url`. We can retrieve these values and save them to a profile using our bot's `add-user` command.
 
 From the direct chat, type the following message:
 
@@ -194,7 +194,7 @@ The bot will reply with "Your profile has been updated." You can now update the 
 
 ### Send to a Channel
 
-To send a message to a Microsoft Teams channel, we'll need a Courier recipient with a [Microsoft Teams profile](../providers/direct-message/microsoft-teams#send-a-message-to-an-microsoft-teams-channel) that includes a `channel_id`, `tenant_id`, and `service_url`. We can retrieve these values and save them to a profile using our bot's `add-channel` command.
+To send a message to a Microsoft Teams channel, we'll need a Courier recipient with a [Microsoft Teams profile](../providers/direct-message/microsoft-teams.mdx#send-a-message-to-an-microsoft-teams-channel) that includes a `channel_id`, `tenant_id`, and `service_url`. We can retrieve these values and save them to a profile using our bot's `add-channel` command.
 
 From the channel your bot has been installed in, type the following message replacing `YOUR_BOT` with the name of your bot:
 

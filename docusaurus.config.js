@@ -12,6 +12,7 @@ const metadatas = require("./src/theme/metadatas");
     onBrokenLinks: "throw",
     onBrokenMarkdownLinks: "warn",
     favicon: "img/favicon.ico",
+    trailingSlash: true,
     organizationName: "trycourier",
     projectName: "docs",
     presets: [
