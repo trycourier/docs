@@ -265,6 +265,7 @@ aside > div > a > img,
   display: inline-flex;
   font-size: 13px;
   font-weight: var(--ifm-font-weight-normal);
+  justify-content: flex-start;
 }
 
 .menu__link:after {
@@ -275,7 +276,7 @@ aside > div > a > img,
   background-size: 1.3rem 1.3rem;
 }
 
-.menu__link--active:not(.menu__link--sublist):before {
+.menu__link--active[href]:not(.menu__link--sublist):before {
   content: "";
   position: absolute;
   top: 0;
@@ -299,8 +300,9 @@ aside > div > a > img,
   margin: 0 0 0.25rem 0;
 }
 
-.menu__link--sublist {
+.theme-doc-sidebar-item-category-level-1 > .menu__list {
   margin: 0;
+  padding: 0;
 }
 
 .menu__list {

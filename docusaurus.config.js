@@ -1,6 +1,6 @@
 const codeTheme = require("./src/theme/codeTheme");
 const navbarItems = require("./src/theme/navbarItems");
-const metadatas = require("./src/theme/metadatas");
+const metadata = require("./src/theme/metadata");
 
 // With JSDoc @type annotations, IDEs can provide config autocompletion
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
@@ -38,7 +38,7 @@ const metadatas = require("./src/theme/metadatas");
       /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
       ({
         image: "img/og-image.png",
-        metadatas,
+        metadata,
         colorMode: {
           disableSwitch: true,
         },

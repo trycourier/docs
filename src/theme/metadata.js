@@ -1,4 +1,4 @@
-const metadatas = [
+const metadata = [
   {
     name: "description",
     content:
@@ -23,4 +23,4 @@ const metadatas = [
   },
 ];
 
-module.exports = metadatas;
+module.exports = metadata;
