@@ -1,4 +1,3 @@
 {
-  "rewrites": [{ "source": "/docs/api/:match*", "destination": "/api/:match*" }],
-  "trailingSlash": true
+  "rewrites": [{ "source": "/docs/api/:match*", "destination": "/api/:match*" }]
 }
