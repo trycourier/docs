@@ -72,7 +72,7 @@ const ApiReference = ({
       localStorage.setItem(STORAGE_AUTH_KEY, values.auth);
 
       try {
-        const response = await fetch("/docs/api/exec", {
+        const response = await fetch("/docs/api/exec/", {
           method: "POST",
           headers: { "content-type": "application/json" },
           body: JSON.stringify({
