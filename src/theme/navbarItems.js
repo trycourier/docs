@@ -19,11 +19,6 @@ const navbarItems = [
     href: "https://status.courier.com",
     label: "Service Status",
   },
-  {
-    href: "https://app.courier.com/",
-    label: "Log In",
-    position: "right",
-  },
 ];
 
 module.exports = navbarItems;
