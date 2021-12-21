@@ -576,7 +576,22 @@
       "permanent": true
     },
     {
+      "source": "/docs/:path*",
+      "destination": "https://www.courier.com/docs/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/docs/:path*/",
+      "destination": "https://www.courier.com/docs/:path*",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
+      "destination": "https://www.courier.com/docs/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*/",
       "destination": "https://www.courier.com/docs/:path*",
       "permanent": true
     },
