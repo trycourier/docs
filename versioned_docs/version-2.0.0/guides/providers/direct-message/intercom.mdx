@@ -1,0 +1,48 @@
+---
+sidebar_position: 3
+---
+
+# Intercom
+
+## Profile Requirements
+
+To deliver an in-app push message to a recipient over Intercom, Courier must be provided the recipient's Intercom's User ID. Courier assumes the User is of type `user`.
+
+```json title=JSON
+// Recipient Profile
+{
+  "intercom": {
+    "from": "012345",
+    "to": {
+      "id": "<Intercom User ID>"
+    }
+  }
+}
+```
+
+## Override
+
+You can use the provider override to replace what we send as an Intercom Message. Supported overrides include the message body and the From User ID. Here's an example where we override both:
+
+```json title=JSON
+{
+  "event": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  "profile": {
+    "intercom": {
+      "id": "<Intercom User ID>"
+    }
+  },
+  "override": {
+    "intercom": {
+      "body": {
+        "body": "I overrode this message",
+        "from": {
+          "id": "012345"
+        }
+      }
+    }
+  }
+}
+```
+
+Other supported overrides are [here](https://developers.intercom.com/intercom-api-reference/reference#admin-initiated-conversation).

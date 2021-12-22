@@ -1,0 +1,117 @@
+---
+sidebar_position: 6
+---
+
+import Image from "@theme/IdealImage";
+
+# How To Send Notifications With Segment
+
+Segment users can now take advantage of the complete Courier platform, including omni-channel routing, dynamic templates, preference management, automations and more by simply adding Courier as a Segment destination. The only requirement is that you are currently sending any events you would want to use to trigger a Courier notification to Segment.
+
+Courier’s Destination for Segment provides an easy way to send data from Web or Mobile applications into Courier to improve notification delivery and management. Data and events flow from your application through Segment’s integration to Courier. In order to use Courier's Segment destination, you must already have Segment installed in your application.
+
+## Configure Segment
+
+By connecting Segment to Courier, you can use the `analytics.identify` and `analytics.track` API calls to direct information about users and their actions (Segment events) from Segment to Courier.
+
+### Connecting Segment
+
+1. Once logged into the Segment app, navigate to the [Destinations](https://app.segment.com/courier-shreya/destinations) catalog page and click **Add Destination**.
+2. Search for Courier in the Destinations Catalog, and select the Courier destination.
+3. Choose which Source should send data to the Courier destination.
+4. In the [Courier Integrations Page](https://app.courier.com/integrations), search for Segment and click on it to access the Courier API Key. (If you do not see a key here, go to the [Courier Settings Page](https://app.courier.com/settings) and copy the Auth Token from the API Keys section.)
+5. Enter the Courier API Key or Auth Token in the Courier destination settings field API Key in Segment.
+
+### Check for Segment Events
+
+Once your Segment API is configured, navigate to the destination's "Event Tester" and click "Send Event" at the bottom of the page. In the Courier API, refresh the page or click "Check for Events" and you will see the Segment event pop up on a list.
+
+If you continue to see the "No Segment events received yet." message in Courier, double check that your API Key was copied accurately into Segment.
+
+<Image
+  img={require("../../assets/guides/tutorials/segment-test-event.png")}
+  alt="Segment Workflow"
+/>
+
+### Identify Calls
+
+Segment Identify calls allow you to connect a user to their actions (Segment events) and record traits to them - the user can be identified by their User ID and can hold additional traits such as their name, email, etc.
+
+[Learn more about Segment Identify >](https://segment.com/docs/connections/spec/identify/)
+
+[Learn more about Courier Profiles >](../../reference/profiles/intro.mdx)
+
+### Recipients
+
+Courier recipients can be updated using Segment user profiles over time.
+
+### Track Calls
+
+Segment Track calls allow you to record actions performed by your users, including any properties associated with their actions - the actions can be associated with any properties that help you analyze these actions.
+
+[Learn more about Segment Track >](https://segment.com/docs/connections/spec/track/)
+
+Track events appear with a prefix of `track/` in Courier. Courier gathers data from the track's `properties` object - to send notifications based on a Segment event, these track events must be mapped to Courier Automations.
+
+The following is an example Segment API call:
+
+```jsx
+analytics.track('Login Button Clicked', {
+  messageId: "segment-test-message-a8rmf",
+  timestamp: "2021-12-07T08:41:59.410Z",
+  type: "track",
+  email: "test@example.org",
+  projectId: "4GgKeBoVJkT9EZL4vAmduv",
+  properties: {
+    property1: 1,
+    property2: "test",
+    property3: true
+  },
+  userId": "test-user-cqw3gr",
+  event": "Segment Test Event Name"
+})
+```
+
+The following is the associated JSON object from the Segment API call:
+
+```json
+{
+  "messageId": "segment-test-message-a8rmf",
+  "timestamp": "2021-12-07T08:41:59.410Z",
+  "type": "track",
+  "email": "test@example.org",
+  "projectId": "4GgKeBoVJkT9EZL4vAmduv",
+  "properties": {
+    "property1": 1,
+    "property2": "test",
+    "property3": true
+  },
+  "userId": "test-user-cqw3gr",
+  "event": "Segment Test Event Name"
+}
+```
+
+The following is how the above JSON object is mapped into the Courier data object:
+
+```json
+{
+  "data": {
+    "property1": 1,
+    "property2": "test",
+    "property3": true
+  }
+}
+```
+
+## Automations
+
+The Segment track API calls trigger Courier Automations. The following is an example workflow, where a user's action triggers a Segment API call that triggers a Courier Automation.
+
+Data:
+
+- Segment `properties` JSON data is passed into the Courier Send API as elements of the `data` JSON object
+- Segment's userId is used to locate the recipient in Courier with the same ID or create a new one when none are found
+
+<Image img={require("../../assets/guides/tutorials/segment-flow.png")} alt="Segment Workflow" />
+
+[Learn more about Courier Automations >](./how-to-automate-message-sequences.mdx)

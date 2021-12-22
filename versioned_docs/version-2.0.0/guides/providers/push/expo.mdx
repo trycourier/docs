@@ -1,0 +1,72 @@
+---
+sidebar_position: 6
+---
+
+# Expo
+
+## Profile Requirements
+
+To deliver a push notification to a recipient over Expo, Courier must be provided the recipient's Exponent push token. It should be included in the recipient profile as `expo`.
+
+### Single Token
+
+To push a notification to a single device, you can pass the recipient's push token as a string to `expo.token`.
+
+```json title=JSON
+// Recipient Profile
+{
+  "expo": {
+    "token": "ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]"
+  }
+}
+```
+
+### Multiple Tokens
+
+If the recipient has multiple devices and you'd like to push to all of them, you can pass the push tokens as an array of strings to `expo.tokens`.
+
+```json title=JSON
+// Recipient Profile
+{
+  "expo": {
+    "tokens": ["ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]", ...]
+  }
+}
+```
+
+:::info Providing both `token` and `tokens` to `expo`
+If you pass values to both `token` and `tokens`, Courier will merge the value of `token` into the `tokens` array and dedupe it.
+:::
+
+## Override
+
+You can use a provider override to replace what we send to Expo's API. For example, you can add a ttl value and turn off the sound with your send request:
+
+```json title=JSON
+{
+  "event": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  "recipient": "abc123",
+  "profile": {
+    "expo": {
+      "token": "ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]"
+    }
+  },
+  "data": {
+    "dataForPushMessage": true
+  },
+  "override": {
+    "expo": {
+      "ttl": 10,
+      "sound": null
+    }
+  }
+}
+```
+
+Everything inside of `override.expo` will replace what we send to Expo's API. Values that are not replaced will still be sent (the title, subtitle, body and data will still be generated and sent in the example above). You can see all the available options by visiting [Expo's website](https://docs.expo.io/versions/v35.0.0/guides/push-notifications/#message-format).
+
+## Tracking Events
+
+Courier will include tracking URL information in the `data` attribute on the incoming message payload.
+
+See [Courier push notification tracking](../push/intro.mdx#tracking)

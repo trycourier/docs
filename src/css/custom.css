@@ -209,7 +209,7 @@ html[data-theme="dark"] .docusaurus-highlight-code-line {
 
 .navbar__items--right a.navbar__item {
   padding: 6px 16px;
-  margin: -2px 0;
+  margin: -2px 0 -2px 12px;
   border: 2px solid #fff;
   border-radius: 8px;
   backdrop-filter: blur(8px);
