@@ -1,13 +1,11 @@
 const navbarItems = [
   {
-    type: "doc",
-    docId: "intro",
+    to: "/",
     label: "Home",
     activeBaseRegex: "^((?!reference).)*$",
   },
   {
-    type: "doc",
-    docId: "reference/intro",
+    to: "/reference/",
     label: "API Reference",
     activeBasePath: "reference",
   },
