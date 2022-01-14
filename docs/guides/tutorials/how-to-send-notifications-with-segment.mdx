@@ -1,9 +1,9 @@
 ---
 sidebar_position: 6
+description: Learn how-to send browser and mobile push notifications using Segment and Courier.
 ---
 
 import Image from "@theme/IdealImage";
-import GifWrapper from "@site/src/components/GifWrapper";
 
 # How To Send Notifications With Segment
 
@@ -37,7 +37,10 @@ Within Courier you can access the Segment integration to:
 
 Initially, you will need to connect Courier as a destination within Segment. At this stage, you will receive a “No events received” message within Courier.
 
-<Image img={require("../assets/guides/tutorials/segment-no-events.png")} alt="Segment No Events (Install)" />
+<Image
+  img={require("../../assets/guides/tutorials/segment-no-events.png")}
+  alt="Courier - Install Segment (No Events Received)"
+/>
 
 ## Configure Segment
 
@@ -55,11 +58,17 @@ By connecting Segment to Courier, you can use the `analytics.identify` and `anal
 
 In order to receive your first event from Segment, navigate to the destination's "Event Tester" and click "Send Event" at the bottom of the page.
 
-<Image img={require("../assets/guides/tutorials/segment-test-event.png")} alt="Segment Workflow" />
+<Image
+  img={require("../../assets/guides/tutorials/segment-test-event.png")}
+  alt="Segment - Test Event"
+/>
 
 In the Courier API, refresh the page or click "Check for Events" and you will see the event appear in a list if the destination setup and test event send were successful. Below is an example of a test track event sent through Segment.
 
-<Image img={require("../assets/guides/tutorials/segment-event-received.png")} alt="Segment Event Received" />
+<Image
+  img={require("../../assets/guides/tutorials/segment-event-received.png")}
+  alt="Courier - Event Received"
+/>
 
 **Troubleshooting:**
 
@@ -77,11 +86,17 @@ The easiest way to successfully link an automation to a segment event is to clic
 
 Additionally, `ref.data.userid` references data from Segment directly and auto populates the recipient ID in the automation send step (see image below).
 
-[Learn more about Courier Automations >](docs/guides/tutorials/how-to-automate-message-sequences.mdx)
+[Learn more about Courier Automations >](./how-to-automate-message-sequences.mdx)
 
-<Image img={require("../assets/guides/tutorials/segment-auto1.png")} alt="Segment Event Received" />
+<Image
+  img={require("../../assets/guides/tutorials/segment-auto1.png")}
+  alt="Courier - Map Segment Event to Automation"
+/>
 
-<Image img={require("../assets/guides/tutorials/segment-auto2.png")} alt="Segment Event Received" />
+<Image
+  img={require("../../assets/guides/tutorials/segment-auto2.png")}
+  alt="Courier - Automation Send Step"
+/>
 
 ### Segment API: Identify Calls
 
@@ -89,7 +104,7 @@ Segment Identify calls allow you to connect a user to their actions (Segment eve
 
 [Learn more about Segment Identify >](https://segment.com/docs/connections/spec/identify/)
 
-[Learn more about Courier Profiles >](../../reference/profiles)
+[Learn more about Courier Profiles >](../../reference/profiles/intro.mdx)
 
 ### Recipients
 
@@ -152,3 +167,7 @@ The following is how the above JSON object is mapped into the Courier data objec
 	}
 }
 ```
+
+**Troubleshooting:**
+
+If the email property isn’t being read into Courier, try to place `email` within the `properties` object.
