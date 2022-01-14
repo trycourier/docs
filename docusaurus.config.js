@@ -1,17 +1,18 @@
 const codeTheme = require("./src/theme/codeTheme");
 const navbarItems = require("./src/theme/navbarItems");
-const metadatas = require("./src/theme/metadatas");
+const metadata = require("./src/theme/metadata");
 
 // With JSDoc @type annotations, IDEs can provide config autocompletion
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 (
   module.exports = {
     title: "Courier Docs",
-    url: "https://courier.com",
-    baseUrl: "/docs/",
+    url: "https://www.courier.com",
+    baseUrl: process.env.VERCEL_ENV === "preview" ? "/" : "/docs/",
     onBrokenLinks: "throw",
     onBrokenMarkdownLinks: "warn",
     favicon: "img/favicon.ico",
+    trailingSlash: true,
     organizationName: "trycourier",
     projectName: "docs",
     presets: [
@@ -37,7 +38,7 @@ const metadatas = require("./src/theme/metadatas");
       /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
       ({
         image: "img/og-image.png",
-        metadatas,
+        metadata,
         colorMode: {
           disableSwitch: true,
         },

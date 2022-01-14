@@ -1,5 +1,8 @@
 ---
 sidebar_position: 4
+sidebar_label: Mailjet 
+title: Set Up Email Using Mailjet
+description: Looking for a way to send email notifications via Mailjet? This step-by-step tutorial will show you how to integrate Mailjet's API the easy way.
 ---
 
 # Mailjet
@@ -33,7 +36,7 @@ You can use a provider override to replace what we send to Mailjet's Send API. F
           {
             "ContentType": "text/plain",
             "Filename": "test.txt",
-            "Base64Content": "VGhpcyBpcyB5b3VyIGF0dGFjaGVkIGZpbGUhISEK"
+            "content": "VGhpcyBpcyB5b3VyIGF0dGFjaGVkIGZpbGUhISEK"
           }
         ]
       }
@@ -42,4 +45,4 @@ You can use a provider override to replace what we send to Mailjet's Send API. F
 }
 ```
 
-Everything inside of `override.mailjet` will replace what we send to Mailjet's Send API. You can see all the available options by visiting [Mailjet API docs](https://dev.mailjet.com/email/guides/send-api-v31/).
+Everything inside of `override.mailjet` will replace what we send to Mailjet's Send API. You can see all the available options by visiting [Mailjet API docs](https://dev.mailjet.com/email/guides/send-api-V3/).
