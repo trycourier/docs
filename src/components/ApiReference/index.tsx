@@ -1,5 +1,5 @@
-import React, { useState, useCallback, useMemo } from "react";
-import { Formik, Form, Field } from "formik";
+import React, { useState, useCallback, useMemo, useContext } from "react";
+import { Formik, Form } from "formik";
 import CodeBlock from "@theme/CodeBlock";
 
 import styles from "./styles.module.css";
@@ -8,6 +8,7 @@ import ApiResponseField, { ApiResponse, buildResponse } from "./ApiResponseField
 import ApiParamField, { ApiParam, apiParamInitialValue } from "./ApiParamField";
 import ApiParamButton from "./ApiParamButton";
 import ApiExamples, { stringifyJSON } from "./ApiExamples";
+import { ApiReferenceTokenContext } from "./ApiReferenceToken";
 
 export interface ApiReferenceProps {
   method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
@@ -20,13 +21,10 @@ export interface ApiReferenceProps {
 }
 
 export interface FormValues {
-  auth: string;
   path: object;
   query: object;
   body: object;
 }
-
-const STORAGE_AUTH_KEY = "API_REFERENCE_AUTH_KEY";
 
 const deepCompact = (value: unknown) => {
   if (Array.isArray(value)) {
@@ -60,6 +58,7 @@ const ApiReference = ({
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
   const [responseIndex, setResponseIndex] = useState(0);
+  const { token, setToken } = useContext(ApiReferenceTokenContext);
 
   const handleResponseSelect = useCallback((event) => {
     setResponseIndex(+event.currentTarget.value);
@@ -69,8 +68,6 @@ const ApiReference = ({
     async (values) => {
       setLoading(true);
 
-      localStorage.setItem(STORAGE_AUTH_KEY, values.auth);
-
       try {
         const response = await fetch("/docs/api/exec", {
           method: "POST",
@@ -78,7 +75,7 @@ const ApiReference = ({
           body: JSON.stringify({
             method,
             path,
-            auth: values.auth,
+            auth: token,
             bodyParam: values.body,
             queryParams: values.query,
             pathParams: values.path,
@@ -98,7 +95,7 @@ const ApiReference = ({
         setLoading(false);
       }
     },
-    [path, method]
+    [path, method, token]
   );
 
   const initialValues = useMemo(() => {
@@ -111,12 +108,13 @@ const ApiReference = ({
       fields: queryParams,
     };
     return {
-      auth: typeof localStorage === "undefined" ? "" : localStorage.getItem(STORAGE_AUTH_KEY) || "",
       path: pathParam && apiParamInitialValue(pathParam),
       query: queryParam && apiParamInitialValue(queryParam),
       body: bodyParam && apiParamInitialValue(bodyParam),
     };
   }, [bodyParam, pathParams, queryParams]);
+
+  const onChangeToken = useCallback((event) => setToken(event.currentTarget.value), [setToken]);
 
   return (
     <Formik<FormValues> initialValues={initialValues} onSubmit={execCallback}>
@@ -177,7 +175,7 @@ const ApiReference = ({
               <div className={styles.inlineForm}>
                 <div className={styles.sectionTitle}>AUTH TOKEN</div>
 
-                <Field name="auth" className={styles.input} />
+                <input value={token} onChange={onChangeToken} className={styles.input} />
 
                 <ApiParamButton type="submit" disabled={loading}>
                   Try It

@@ -1,5 +1,8 @@
 ---
 sidebar_position: 6
+sidebar_label: Outbound Webhooks
+title: Webhooks for Email, SMS & Push Notifications
+description: Learn how to use Courier's outbound webhook for browser, email, mobile push, and other product notifications.
 ---
 
 # Outbound Webhooks
@@ -118,7 +121,7 @@ To protect against timing attacks, use constant-time string comparison to compar
 
 ### message:updated
 
-The `data` property in the webhook response payload for the `message:updated` event is identical to the information that is returned from the [GET /message/{message_id}](../../reference/messages/by-id) endpoint
+The `data` property in the webhook response payload for the `message:updated` event is identical to the information that is returned from the [GET /message/{message_id}](../../reference/messages/by-id.mdx) endpoint
 
 For instance, when we send an email - it goes from ENQUEUED → SENT → DELIVERED → OPENED.
 
