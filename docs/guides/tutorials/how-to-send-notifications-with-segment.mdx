@@ -11,7 +11,7 @@ Courier’s Destination for Segment provides an easy way to send data from Web o
 
 ## Overview
 
-How do Segment API calls send notification?
+How do Segment API calls send notifications?
 
 1. Segment identifies some user action and creates a track API call
 2. The track API call sends the event to Courier
@@ -172,3 +172,8 @@ The following is how the above JSON object is mapped into the Courier data objec
 
 If the email property isn’t being read into Courier, try to place `email` within the `properties` object.
 
+## FAQs
+
+1. What is the difference between Courier's live and test environments in relation to Segment?
+
+Segment API keys will follow the environment you're in. If you'd like to configure Segment with your production API keys, configure in it the product environment. If you'd like to configure Segment with your test API keys, configure it in the test environment.
