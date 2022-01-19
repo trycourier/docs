@@ -82,9 +82,15 @@ Linking an automation to a Segment event allows you to create a flow of actions 
 
 Locate the event you want to link, click the + sign on the second column, and select the automation(s) of your choice. 
 
-The easiest way to successfully link an automation to a segment event is to click “create new” automation” This will create a new automation that uses this Segment event as a trigger, and autopopulates the recipient ID in the send step. All you’ll need to do is select the notification template that should be sent.
+The easiest way to successfully link an automation to a segment event is to click “create new automation”. This new automation will use the linked Segment event as a trigger, and have an autopopulated recipient ID in the send step. All you’ll need to do is select the notification template that should be sent.
 
-Additionally, `refs.data.userid` references data from Segment directly and auto populates the recipient ID in the automation send step (see Automation Send Step figure below).
+Additionally, `refs.data` points to the data object from Segment. `refs.data.userid` references this data from Segment directly and auto populates the recipient ID in the automation send step (see Automation Send Step figure below). Below the recipient ID, add the "Profile" optional field with the following JSON to get the user's email from the Segment data object:
+
+```json
+{
+  "$ref": "data.email"
+}
+```
 
 [Learn more about Courier Automations >](./how-to-automate-message-sequences.mdx)
 
@@ -177,3 +183,9 @@ If the email property isn’t being read into Courier, try to place `email` with
 1. **What is the difference between Courier's live and test environments in relation to Segment?**
   
   Segment API keys will follow the environment you're in. If you'd like to configure Segment with your production API keys, configure in it the product environment. If you'd like to configure Segment with your test API keys, configure it in the test environment.
+
+2. **What should I do if the recipient ID in the Automation template does not autopopulate?**
+
+  The reicipient ID will only autopopulate if and when the template is linked to a Segment event. To ensure this, head over to the Segment integration page and make sure that your automation is linked to the correct event. You can also do this by checking the first step of the Automation template itself, labelled "Start".
+
+  Once linked to an event, try to refresh the template and check if the reicipient ID appears. If it does not, you can manually write `refs.data.userid` into the recipient ID field.
