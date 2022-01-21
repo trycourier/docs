@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useContext } from "react";
 import { useFormikContext } from "formik";
 import capitalize from "lodash/capitalize";
 import mapValues from "lodash/mapValues";
@@ -10,6 +10,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 import { ApiReferenceProps, FormValues } from ".";
+import { ApiReferenceTokenContext } from "./ApiReferenceToken";
 
 const INDENT_LENGTH = 2;
 const STORAGE_EXAMPLE_TAB_KEY = "API_REFERENCE_EXAMPLE_TAB";
@@ -195,6 +196,7 @@ const tabs = [
 
 const ApiExamples = ({ method, path }: Pick<ApiReferenceProps, "method" | "path">) => {
   const { values } = useFormikContext<FormValues>();
+  const { token } = useContext(ApiReferenceTokenContext);
 
   const defaultPathParams = useMemo(
     () => mapValues(values.path, (value, key) => `:${key}`),
@@ -217,7 +219,7 @@ const ApiExamples = ({ method, path }: Pick<ApiReferenceProps, "method" | "path"
                 }),
                 qs.stringify(values.query || {}, { addQueryPrefix: true }),
               ].join(""),
-              auth: values.auth,
+              auth: token,
               body: values.body,
             })}
           </CodeBlock>
