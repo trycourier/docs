@@ -1,0 +1,199 @@
+---
+sidebar_position: 3
+description: Learn how to send bulk messages using Courier.
+---
+
+# Bulk Processing
+
+Bulk processing allows executing multiple job definitions across arbitrarily large set of input.
+Currently, we have added a feature that enables sending message definitions to large numbers of users in a single API invocation.
+
+## Create a Bulk Job
+
+Bulk jobs must first be defined. The structure of a job mimics the set of available configuration values for sending an individual message.
+
+Request:
+
+`POST https://api.courier.com/bulk`
+
+```json
+{
+  "headers": {
+    "idempotency-key": "rbJ9QDcWn84A-rO94HrbP"
+  },
+  "body": {
+    "message": {
+      "event": "my-notification-or-event", // required
+      "brand": "my-brand", // optional brand id
+      "data": {}, // optional data bag
+      "locale": "en_US", // optional
+      "override": {} // optional Courier overrides
+    }
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "status": 201,
+  "body": {
+    "jobId": "1-61e9dd53-b5bb6c863b7ffbe83ad4b28d"
+  }
+}
+```
+
+## Ingest users to the bulk job
+
+Using the job ID, multiple users can be ingested into the job.
+Note, the ingestion does not have to happen in a single call, you could have multiple ingestion invocations as long as job is not triggered.
+
+Request:
+
+`POST https://api.courier.com/bulk/{jobId}`
+
+```json
+{
+  "headers": {
+    "idempotency-key": "rbJ9QDcWn84A-rO94HrbP"
+  },
+  "body": {
+    "users": [
+      {
+        "recipient": "john-001", // optional, auto-generated if not present
+        "profile": {}, // optional, similar to /send profile object
+        "data": {
+          // optional, takes precendence over message data bag
+          "recipientName": "John Doe" // optional
+          // additional [key-values] similar to /send data object
+        },
+        "preferences": {} // optional, similar to preferences API
+      }
+    ]
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "status": 200,
+  "body": {
+    // gives errors for each user if found any
+    "errors": [
+      {
+        "error": "Duplicate user",
+        "user": {
+          "profile": {
+            "email": "foo@bar.com"
+          },
+          "data": {
+            "recipientName": "Foo Bar"
+          },
+          "recipient": "foo-bar"
+        }
+      }
+    ],
+    // gives total count of users that were successfully ingested
+    "total": 1
+  }
+}
+```
+
+## Executing the job
+
+Once you have added the users to your job, it can be triggered.
+Note: a job ID can only be triggered once. If you wish to send messages to more users after the job was triggered,
+you'll have to create a new job definition and add the remaiing users to the new job.
+
+`POST https://api.courier.com/bulk/{jobId}/run`
+
+```json
+{
+  "headers": {
+    "idempotency-key": "rbJ9QDcWn84A-rO94HrbP"
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "status": 202
+}
+```
+
+## Fetching Bulk Job information
+
+### Job status
+
+- `CREATED` a job has been created, but has not yet been invoked/run. This should be the initial status of a bulk job when it is created.
+- `ENQUEUING` the bulk job is currently being processed.
+- `ENQUEUED` (aka done) all items in the job have been placed in to the processing pipeline (started)
+
+`GET https://api.courier.com/bulk/{jobId}`
+
+```json
+{
+  "job": {
+    "definition": {
+      "event": "V7E6M48EFQMB78H746QCCD1KSRAA"
+    },
+    "enqueued": 2, // placed on the pipeline
+    "failures": 0, // errors during bulk job processing
+    "received": 2, // count of users in a bulk job
+    "status": "ENQUEUED" // status of the job
+  }
+}
+```
+
+### Job Items/Users
+
+- `PENDING` a job has been populated with the user, but has not yet been invoked/run. This should be the initial status when a user is added to a job
+- `ERROR` an error occurred enqueuing the user/configuration combination in the processing pipeline
+- `ENQUEUED` the user/configuration combination have been enqueued in the processing pipeline
+
+`GET https://api.courier.com/bulk/{jobId}/users?cursor={cursor}`
+
+```json
+{
+  "items": [
+    {
+      "profile": {
+        "email": "foo@courier.com"
+      },
+      "data": {
+        "recipientName": "Foo"
+      },
+      "recipient": "foo",
+      "messageId": "1-61e9dd7d-13c08339357603322c433d55", // Courier Message ID
+      "status": "ENQUEUED"
+    },
+    {
+      "profile": {
+        "email": "bar@courier.com"
+      },
+      "data": {
+        "recipientName": "Bar"
+      },
+      "recipient": "bar",
+      "status": "PENDING"
+    }
+  ],
+  "paging": {
+    "cursor": "cursor",
+    "more": true
+  }
+}
+```
+
+## Message information
+
+This would be just like how a regular /send call works.
+
+Messages are visible on the Courier UI or can be fetched via Messages API.
+
+If you have webhooks configured, Courier will invoke it with the message data throughout the lifecycle of the message.
