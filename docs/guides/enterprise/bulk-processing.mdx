@@ -62,19 +62,13 @@ Request:
     "users": [
       {
         "recipient": "john-001", // optional, auto-generated if not present
-        "email": "john@email.com", // optional
+        "profile": {}, // optional, similar to /send profile object
         "data": {
           // optional, takes precendence over message data bag
           "recipientName": "John Doe" // optional
           // additional [key-values] similar to /send data object
-        }
-      },
-      {
-        "recipient": "jane-001",
-        "email": "jane@email.com",
-        "locale": "en_US", // optional, precedence over message locale
+        },
         "preferences": {} // optional, similar to preferences API
-        // additional [key-values] similar to /send profile object
       }
     ]
   }
@@ -92,11 +86,13 @@ Response:
       {
         "error": "Duplicate user",
         "user": {
-          "email": "u1@courier.com",
-          "user_id": "u1",
+          "profile": {
+            "email": "foo@bar.com"
+          },
           "data": {
-            "recipientName": "Foo"
-          }
+            "recipientName": "Foo Bar"
+          },
+          "recipient": "foo-bar"
         }
       }
     ],
@@ -166,22 +162,25 @@ Response:
 {
   "items": [
     {
-      "email": "tejas@courier.com",
-      "data": {
-        "recipientName": "TK 1"
+      "profile": {
+        "email": "foo@courier.com"
       },
-      "user_id": "kIulr315_od6RBQ0Mp2ED", // recipient
+      "data": {
+        "recipientName": "Foo"
+      },
+      "recipient": "foo",
       "messageId": "1-61e9dd7d-13c08339357603322c433d55", // Courier Message ID
       "status": "ENQUEUED"
     },
     {
-      "email": "tejas@courier.com",
-      "data": {
-        "recipientName": "TK 2"
+      "profile": {
+        "email": "bar@courier.com"
       },
-      "user_id": "TCIyZSctsG9Q1zVsZGTGg",
-      "messageId": "1-61e9dd7d-87813f6fd7d8f334bbbacbb5",
-      "status": "ENQUEUED"
+      "data": {
+        "recipientName": "Bar"
+      },
+      "recipient": "bar",
+      "status": "PENDING"
     }
   ],
   "paging": {
