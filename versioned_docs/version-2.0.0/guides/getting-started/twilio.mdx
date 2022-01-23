@@ -233,9 +233,8 @@ Our `--data` option should look like this:
 
 ```json
 {
-  "event": "'"$COURIER_NOTIFICATION_ID"'",
-  "recipient": "peter_parker",
-  "profile": {
+  "template": "'"$COURIER_NOTIFICATION_ID"'",
+  "to": {
     "phone_number": "555-616-1962"
   },
   "data": {
@@ -252,9 +251,8 @@ Our `--data` option should look like this:
 <TabItem value="bash" label="cURL">
 
 ```bash
---data "event=$COURIER_NOTIFICATION_ID" \
---data "recipient=peter_parker" \
---data "profile[phone_number]=555-616-1962" \
+--data "template=$COURIER_NOTIFICATION_ID" \
+--data "to[phone_number]=555-616-1962" \
 --data "data[name]=Peter Parker" \
 --data "data[apt_date]=August 27" \
 --data "data[apt_time]=11:00 AM" \
@@ -277,9 +275,8 @@ curl --request POST \
 --header "Authorization: Bearer $COURIER_AUTH_TOKEN" \
 --header "Content-Type: application/json" \
 --data '{
-  "event": "'"$COURIER_NOTIFICATION_ID"'",
-  "recipient": "peter_parker",
-  "profile": {
+  "template": "'"$COURIER_NOTIFICATION_ID"'",
+  "to": {
     "phone_number": "555-616-1962"
   },
   "data": {
@@ -300,9 +297,8 @@ https://api.courier.com/send
 curl --request POST \
 --header "Authorization: Bearer $COURIER_AUTH_TOKEN" \
 --header "Content-Type: application/json" \
---data "event=$COURIER_NOTIFICATION_ID" \
---data "recipient=peter_parker" \
---data "profile[phone_number]=555-616-1962" \
+--data "template=$COURIER_NOTIFICATION_ID" \
+--data "to[phone_number]=555-616-1962" \
 --data "data[name]=Peter Parker" \
 --data "data[apt_date]=August 27" \
 --data "data[apt_time]=11:00 AM" \
