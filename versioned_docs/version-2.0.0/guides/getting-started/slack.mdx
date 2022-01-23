@@ -182,11 +182,20 @@ Our `--data` object should look like this:
 <Tabs groupId="code">
 <TabItem value="json" label="JSON">
 
+NOTE THIS IS NOT SUPPORTED YET.
+NOTE THIS IS NOT SUPPORTED YET.
+NOTE THIS IS NOT SUPPORTED YET.
+NOTE THIS IS NOT SUPPORTED YET.
+NOTE THIS IS NOT SUPPORTED YET.
+NOTE THIS IS NOT SUPPORTED YET.
+NOTE THIS IS NOT SUPPORTED YET.
+NOTE THIS IS NOT SUPPORTED YET.
+NOTE THIS IS NOT SUPPORTED YET.
+
 ```json
 {
-  "event": "'"$COURIER_NOTIFICATION_ID"'",
-  "recipient": "spike_spiegel",
-  "profile": {
+  "template": "'"$COURIER_NOTIFICATION_ID"'",
+  "to": {
     "slack": {
       "access_token": "xoxb-487947363398-212718859602-bXYRRbrQHAijFnfnuKLM7JV1",
       "email": "spiegel@bebop.com"
@@ -207,9 +216,8 @@ Our `--data` object should look like this:
 
 ```bash
 --data "event=$COURIER_NOTIFICATION_ID" \
---data "recipient=spike_spiegel" \
---data "profile[slack][access_token]=xoxb-487947363398-212718859602-bXYRRbrQHAijFnfnuKLM7JV1" \
---data "profile[slack][email]=spiegel@bebop.com" \
+--data "to[slack][access_token]=xoxb-487947363398-212718859602-bXYRRbrQHAijFnfnuKLM7JV1" \
+--data "to[slack][email]=spiegel@bebop.com" \
 --data "data[name]=Spike Spiegel" \
 --data "data[apt_date]=June 26" \
 --data "data[apt_time]=8:44 PM" \
@@ -232,9 +240,8 @@ curl --request POST \
 --header "Authorization: Bearer $COURIER_AUTH_TOKEN" \
 --header "Content-Type: application/json" \
 --data '{
-  "event": "'"$COURIER_NOTIFICATION_ID"'",
-  "recipient": "spike_spiegel",
-  "profile": {
+  "template": "'"$COURIER_NOTIFICATION_ID"'",
+  "to": {
     "slack": {
       "access_token": "xoxb-487947363398-212718859602-bXYRRbrQHAijFnfnuKLM7JV1",
       "email": "spiegel@bebop.com"
@@ -258,10 +265,9 @@ https://api.courier.com/send
 curl --request POST \
 --header "Authorization: Bearer $COURIER_AUTH_TOKEN" \
 --header "Content-Type: application/json" \
---data "event=$COURIER_NOTIFICATION_ID" \
---data "recipient=spike_spiegel" \
---data "profile[slack][access_token]=xoxb-487947363398-212718859602-bXYRRbrQHAijFnfnuKLM7JV1" \
---data "profile[slack][email]=spiegel@bebop.com" \
+--data "template=$COURIER_NOTIFICATION_ID" \
+--data "to[slack][access_token]=xoxb-487947363398-212718859602-bXYRRbrQHAijFnfnuKLM7JV1" \
+--data "to[slack][email]=spiegel@bebop.com" \
 --data "data[name]=Spike Spiegel" \
 --data "data[apt_date]=June 26" \
 --data "data[apt_time]=8:44 PM" \
@@ -276,11 +282,6 @@ https://api.trycourier.app/send
 Before sending this request, be sure to replace the `access_token` and `email` values with the Bot User OAuth Access Token and recipient's Slack Email. Also, note the `"'"$COURIER_NOTIFICATION_ID"'"` formatting in the JSON formatted `--data` option. The quotes are necessary to escape the JSON quotes and access the `COURIER_NOTIFICATION_ID` variable.
 
 Paste your complete cURL request in either format in your terminal and hit "Return." You should receive a response like `{"messageId":"<message id string>"}`. You will also receive a Slack message from your Slack app.
-
-<Image
-  img={require("../../assets/guides/slack/send-curl-request.png")}
-  alt="Send the cURL Request"
-/>
 
 <Image
   img={require("../../assets/guides/slack/delivered-message.png")}
