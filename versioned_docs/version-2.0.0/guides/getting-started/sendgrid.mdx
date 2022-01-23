@@ -180,9 +180,8 @@ Our `--data` option should look like this:
 
 ```json
 {
-  "event": "'"$COURIER_NOTIFICATION_ID"'",
-  "recipient": "katherine_pryde",
-  "profile": {
+  "template": "'"$COURIER_NOTIFICATION_ID"'",
+  "to": {
     "email": "kpryde@xavierinstitute.edu"
   },
   "data": {
@@ -199,9 +198,8 @@ Our `--data` option should look like this:
 <TabItem value="bash" label="cURL urlencoded">
 
 ```bash
---data "event=$COURIER_NOTIFICATION_ID" \
---data "recipient=katherine_pryde" \
---data "profile[email]=kpryde@xavierinstitute.edu" \
+--data "template=$COURIER_NOTIFICATION_ID" \
+--data "to[email]=kpryde@xavierinstitute.edu" \
 --data "data[name]=Katherine Pryde" \
 --data "data[apt_date]=July 31" \
 --data "data[apt_time]=11:00 AM" \
@@ -224,9 +222,8 @@ curl --request POST \
 --header "Authorization: Bearer $COURIER_AUTH_TOKEN" \
 --header "Content-Type: application/json" \
 --data '{
-  "event": "'"$COURIER_NOTIFICATION_ID"'",
-  "recipient": "katherine_pryde",
-  "profile": {
+  "template": "'"$COURIER_NOTIFICATION_ID"'",
+  "to": {
     "email": "kpryde@xavierinstitute.edu"
   },
   "data": {
@@ -247,9 +244,8 @@ https://api.courier.com/send
 curl --request POST \
 --header "Authorization: Bearer $COURIER_AUTH_TOKEN" \
 --header "Content-Type: application/json" \
---data "event=$COURIER_NOTIFICATION_ID" \
---data "recipient=katherine_pryde" \
---data "profile[email]=kpryde@xavierinstitute.edu" \
+--data "template=$COURIER_NOTIFICATION_ID" \
+--data "to[email]=kpryde@xavierinstitute.edu" \
 --data "data[name]=Katherine Pryde" \
 --data "data[apt_date]=July 31" \
 --data "data[apt_time]=11:00 AM" \
@@ -280,25 +276,25 @@ Overrides can be used to change the request body that Courier uses to send an em
 
 ```json title=JSON
 {
-  "event": "<COURIER_NOTIFICATION_ID>",
-  "recipient": "katherine_pryde",
-  "profile": {
+  "template": "<COURIER_NOTIFICATION_ID>",
+  "to": {
     "email": "kpryde@xavierinstitute.edu"
   },
   "data": {
     "name": "Katherine Pryde"
   },
-  "override": {
+  "providers": {
     "sendgrid": {
-      "body": {
-        "subject": "Requested file - lockheed.json",
-        "attachments": [
-          {
-            "content": "eyJmb28iOiJiYXIifQ==",
-            "type": "application/json",
-            "filename": "lockheed.json"
-          }
-        ]
+      "override": {
+        "body": {
+          "attachments": [
+            {
+              "content": "eyJmb28iOiJiYXIifQ==",
+              "type": "application/json",
+              "filename": "SENDGRID_ATTACH.json"
+            }
+          ]
+        }
       }
     }
   }
