@@ -15,7 +15,7 @@ const BulkJobGet: ApiParam = {
         enqueued: 2,
         failures: 0,
         received: 2,
-        status: "ENQUEUED",
+        status: "COMPLETED",
       },
     },
   ],
