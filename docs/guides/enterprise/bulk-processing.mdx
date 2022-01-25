@@ -131,8 +131,8 @@ Response:
 ### Job status
 
 - `CREATED` a job has been created, but has not yet been invoked/run. This should be the initial status of a bulk job when it is created.
-- `ENQUEUING` the bulk job is currently being processed.
-- `ENQUEUED` (aka done) all items in the job have been placed in to the processing pipeline (started)
+- `PROCESSING` the bulk job is currently being processed.
+- `COMPLETED` all items in the job have been placed in to the Courier send pipeline
 
 `GET https://api.courier.com/bulk/{jobId}`
 
@@ -145,7 +145,7 @@ Response:
     "enqueued": 2, // placed on the pipeline
     "failures": 0, // errors during bulk job processing
     "received": 2, // count of users in a bulk job
-    "status": "ENQUEUED" // status of the job
+    "status": "COMPLETED" // status of the job
   }
 }
 ```
