@@ -1,7 +1,7 @@
 import { ApiReferenceProps } from "@site/src/components/ApiReference";
 
 const config: ApiReferenceProps = {
-  description: "Create a Bulk Job",
+  description: "Run a Bulk Job",
   method: "POST",
   path: "/bulk/:job_id/run",
   pathParams: [
