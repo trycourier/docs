@@ -4,7 +4,12 @@ sidebar_position: 1
 
 import ApiReference from "@site/src/components/ApiReference";
 import config from "../configs/automations/invoke-template";
+import makeMetaDescription from "../configs/makeMetaDescription";
 
 # POST /automations/:templateId/invoke
+
+<head>
+  <meta name="description" content={makeMetaDescription({description: config.description, path: config.path})} />
+</head>
 
 <ApiReference {...config} />

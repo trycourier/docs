@@ -4,8 +4,13 @@ sidebar_position: 2
 
 import ApiReference from "@site/src/components/ApiReference";
 import config from "../configs/profiles/patch";
+import makeMetaDescription from "../configs/makeMetaDescription";
 
 # PATCH /profiles/:recipient_id
+
+<head>
+  <meta name="description" content={makeMetaDescription({description: config.description, path: config.path})} />
+</head>
 
 Unlike a `PUT` request, a `PATCH` request will update only a portion of a recipient's profile. `PATCH` syntax is a little more complicated. Courier uses the [JSON Patch](http://jsonpatch.com/) syntax described below.
 

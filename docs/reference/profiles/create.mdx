@@ -4,8 +4,13 @@ sidebar_position: 1
 
 import ApiReference from "@site/src/components/ApiReference";
 import config from "../configs/profiles/create";
+import makeMetaDescription from "../configs/makeMetaDescription";
 
 # POST /profiles/:recipient_id
+
+<head>
+  <meta name="description" content={makeMetaDescription({description: config.description, path: config.path})} />
+</head>
 
 A `recipient` should be uniquely identifiable using a string ID that will not change. For this reason, you should not use data such as an email address or phone number when assigning a recipient ID. This type of data may change over time.
 
