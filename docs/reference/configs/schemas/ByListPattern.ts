@@ -39,6 +39,12 @@ const ByListPattern: ApiParam = {
       description:
         "An object that is merged into the request sent by Courier to the provider to override properties or to gain access to features in the provider API that are not natively supported by Courier.",
     },
+    {
+      type: "json",
+      name: "preferences",
+      description:
+        "An object that includes runtime preferences. These take precedence over those set at the user level",
+    },
   ],
 };
 
