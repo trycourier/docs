@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useMemo, useContext } from "react";
 import { Formik, Form } from "formik";
 import CodeBlock from "@theme/CodeBlock";
+import Head from "@docusaurus/Head";
 
 import styles from "./styles.module.css";
 
@@ -9,6 +10,7 @@ import ApiParamField, { ApiParam, apiParamInitialValue } from "./ApiParamField";
 import ApiParamButton from "./ApiParamButton";
 import ApiExamples, { stringifyJSON } from "./ApiExamples";
 import { ApiReferenceTokenContext } from "./ApiReferenceToken";
+import makeMetaDescription from "@site/src/utils/makeMetaDescription";
 
 export interface ApiReferenceProps {
   method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
@@ -117,6 +119,10 @@ const ApiReference = ({
   const onChangeToken = useCallback((event) => setToken(event.currentTarget.value), [setToken]);
 
   return (
+    <>
+    <Head>
+      <meta name="description" content={makeMetaDescription({description: description, path: path})} />
+    </Head>
     <Formik<FormValues> initialValues={initialValues} onSubmit={execCallback}>
       <Form autoComplete="off" className={styles.form}>
         <div className="row row--no-gutters">
@@ -223,6 +229,7 @@ const ApiReference = ({
         </div>
       </Form>
     </Formik>
+    </>
   );
 };
 
