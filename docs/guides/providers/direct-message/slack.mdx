@@ -230,6 +230,15 @@ The Slack profile should only contain an OAuth Response, Incoming Webhook, or th
 
 The notification will be sent using the `channel`.
 
+:::tip Helpful Tips
+
+We look for `channel`, `user_id`, or `email` in the incoming request to decide what channel to send the notifications to, and our logic is as follow:
+- if `channel` is provided in the request, we just use `channel`.
+- if `channel` is missing but `user_id` is provided in the request, we use `user_id`.
+- if `channel` and `user_id` are missing but `email` is provided in the request, we use `email` to derive the `channel`
+
+:::
+
 ## Override
 
 You can use a provider override to replace what we send to Slack’s [chat.postMessage](https://api.slack.com/methods/chat.postMessage) method. For example, you can choose to have links unfurl.
