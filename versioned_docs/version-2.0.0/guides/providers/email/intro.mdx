@@ -31,20 +31,23 @@ The email channel override allows you to set the subject, reply to, from, cc, an
 
 ```json
 {
-  //rest of request
-  "override": {
-    "channel": {
+  "message": {
+    // ...rest of request
+    "channels": {
       "email": {
-        "attachments": [],
-        "bcc": "",
-        "cc": "",
-        "from": "",
-        "html": "",
-        "replyTo": "",
-        "subject": "",
-        "text": "",
-        "tracking": {
-          "open": false
+        "override": {
+          "attachments": [],
+          "bcc": "",
+          "brand": {},
+          "cc": "",
+          "from": "",
+          "html": "",
+          "reply_to": "",
+          "subject": "",
+          "text": "",
+          "tracking": {
+            "open": false
+          }
         }
       }
     }
@@ -66,25 +69,30 @@ Here is the override data structure for the email channel override. In this exam
 
 ```json
 {
-  "event": "CTJNNFP7NHMKMBPJFZX4P39ABSXR",
-  "recipient": "{{ recipient.id  }}",
-  "profile": {
-    "email": "example@someemaildomain.com"
-  },
-  "data": {
-    "name": "Tony",
-    "inviteLink": "https://courier.com/register?code=blah"
-  },
-  "override": {
-    "brand": {
-      "settings": {
-        "email": {
-          "header": {
-            "logo": {
-              "image": "https://www.courier.com/logo.png",
-              "href": "https://www.courier.com"
-            },
-            "barColor": "ff5d5e"
+  "message": {
+    "template": "CTJNNFP7NHMKMBPJFZX4P39ABSXR",
+    "to": {
+      "email": "example@someemaildomain.com"
+    },
+    "data": {
+      "name": "Tony",
+      "inviteLink": "https://courier.com/register?code=blah"
+    },
+    "channels": {
+      "email": {
+        "override": {
+          "brand": {
+            "settings": {
+              "email": {
+                "header": {
+                  "logo": {
+                    "image": "https://www.courier.com/logo.png",
+                    "href": "https://www.courier.com"
+                  },
+                  "barColor": "#674ea7"
+                }
+              }
+            }
           }
         }
       }
