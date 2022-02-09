@@ -25,9 +25,15 @@ On the [Gmail Integration](https://app.courier.com/integrations/gmail) page, you
 To deliver a message to a recipient over Gmail, Courier must be provided the recipient's email address. This value should be included in the recipient profile as `email`.
 
 ```json
-// Recipient Profile
 {
-  "email": "example@example.com"
+  "message": {
+    // Recipient Profile
+    "to": {
+      "email": "example@example.com"
+    }
+
+    // ... rest of message definition
+  }
 }
 ```
 
@@ -37,24 +43,27 @@ You can use a provider override to replace what we send to Gmail's Send API. For
 
 ```json
 {
-  "event": "<COURIER_NOTIFICATION_ID>",
-  "recipient": "recipient_name",
-  "profile": {
-    "email": "example@example.com"
-  },
-  "override": {
-    "gmail": {
-      "attachments": [
-        {
-          "filename": "file_name.pdf",
-          "contentType": "application/pdf",
-          "data": "Q29uZ3JhdHVsYXRpb25zLCB5b3UgY2FuIGJhc2U2NCBkZWNvZGUh"
+  "message": {
+    "template": "<COURIER_NOTIFICATION_ID>",
+    "to": {
+      "email": "example@example.com"
+    },
+    "providers": {
+      "gmail": {
+        "override": {
+          "attachments": [
+            {
+              "filename": "file_name.pdf",
+              "contentType": "application/pdf",
+              "data": "Q29uZ3JhdHVsYXRpb25zLCB5b3UgY2FuIGJhc2U2NCBkZWNvZGUh"
+            }
+          ]
         }
-      ]
+      }
     }
   }
 }
 ```
 
-- The `event` should match the event name in the Courier notification settings.
+- The `template` should match the event name in the Courier notification settings.
 - The contentType for the attachment can be replaced with anything that is compatible with Gmail sending requirements.
