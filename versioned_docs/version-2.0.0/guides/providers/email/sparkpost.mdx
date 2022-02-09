@@ -9,9 +9,15 @@ sidebar_position: 10
 To deliver a message to a recipient over SparkPost, Courier must be provided the recipient's email address. This value should be included in the recipient profile as `email`.
 
 ```json title=JSON
-// Recipient Profile
 {
-  "email": "example@example.com"
+  "message": {
+    // Recipient Profile
+    "to": {
+      "email": "example@example.com"
+    }
+
+    // ... rest of message definition
+  }
 }
 ```
 
@@ -21,22 +27,25 @@ You can use a provider override to replace what we send to SparkPost's Transmiss
 
 ```json title=JSON
 {
-  "event": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-  "recipient": "abc123",
-  "profile": {
-    "email": "example@example.com"
-  },
-  "override": {
-    "sparkpost": {
-      "body": {
-        "content": {
-          "attachments": [
-            {
-              "name": "billing.pdf",
-              "type": "application/pdf",
-              "data": "Q29uZ3JhdHVsYXRpb25zLCB5b3UgY2FuIGJhc2U2NCBkZWNvZGUh"
+  "message": {
+    "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "to": {
+      "email": "example@example.com"
+    },
+    "providers": {
+      "sparkpost": {
+        "override": {
+          "body": {
+            "content": {
+              "attachments": [
+                {
+                  "name": "billing.pdf",
+                  "type": "application/pdf",
+                  "data": "Q29uZ3JhdHVsYXRpb25zLCB5b3UgY2FuIGJhc2U2NCBkZWNvZGUh"
+                }
+              ]
             }
-          ]
+          }
         }
       }
     }
@@ -44,4 +53,4 @@ You can use a provider override to replace what we send to SparkPost's Transmiss
 }
 ```
 
-Everything inside of `override.sparkpost` will replace what we send to SparkPost's Transmissions API. You can see all the available options by visiting [SparkPost API docs](https://developers.sparkpost.com/api/transmissions/#header-request-body).
+Everything inside of `message.providers.sparkpost.override` will replace what we send to SparkPost's Transmissions API. You can see all the available options by visiting [SparkPost API docs](https://developers.sparkpost.com/api/transmissions/#header-request-body).
