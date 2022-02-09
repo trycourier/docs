@@ -42,142 +42,6 @@ const brand_id: ApiParam = {
   description: "A unique identifier that represents the brand that should be used for rendering the notification. Note that a brand_id will only be applied to a Template message."
 }
 
-const channelsEmail: ApiParam = {
-  type: "object",
-  name: "email",
-  fields: [
-    {
-      type: "string",
-      name: "brand_id",
-    },
-    {
-      type: "array",
-      name: "providers",
-      field: {
-        type: "string",
-      },
-    },
-    {
-      type: "string",
-      name: "routing_method",
-      enum: ["all", "single"]
-    },
-    {
-      type: "string",
-      name: "if"
-    },
-    {
-      type:"object",
-      name: "override",
-      fields: []
-    }
-  ]
-}
-
-const channelsPush: ApiParam = {
-  type: "object",
-  name: "push",
-  fields: [
-    {
-      type: "string",
-      name: "brand_id",
-    },
-    {
-      type: "array",
-      name: "providers",
-      field: {
-        type: "string",
-      },
-    },
-    {
-      type: "string",
-      name: "routing_method",
-      enum: ["all", "single"]
-    },
-    {
-      type: "string",
-      name: "if"
-    },
-    {
-      type:"object",
-      name: "override",
-      fields: []
-    }
-  ]
-}
-
-const channels: ApiParam = {
-  type: "object",
-  name: "channels",
-  description: "A map of valid channel identifiers (e.g. email, sms, etc.) to channel configuration objects whose properties are below. If you don't specify 'channels', Courier will use the default configuration for each channel as specified in the Courier Studio UI.",
-  fields: [
-    channelsPush,
-    channelsEmail
-  ]
-}
-
-const routingStrategyProvider: ApiParam = {
-  type: "object",
-  fields: [
-    {
-      type: "string",
-      name: "name"
-    },
-    {
-      type: "object",
-      name: "config",
-      fields: []
-    },
-    {
-      type: "string",
-      name: "if"
-    }
-  ]
-}
-
-const routingStrategyChannel: ApiParam = {
-  type: "object",
-  fields: [
-    {
-      type: "string",
-      name: "channel"
-    },
-    {
-      type: "object",
-      name: "config",
-      fields: []
-    },
-    {
-      type: "array",
-      name: "providers",
-      field: {
-        type: "oneOf",
-        options: [
-          routingStrategyProvider,
-          {
-            type: "string"
-          }
-        ]
-      }
-    },
-    {
-      type: "string",
-      name: "if"
-    }
-  ]
-}
-
-const routingChannel: ApiParam = {
-  type: "oneOf",
-  options: [
-    routingStrategyChannel,
-    routingStrategyProvider,
-    {
-      type: "string"
-    }
-  ]
-}
-
 const routing: ApiParam = {
   type:"object",
   name: "routing",
@@ -187,11 +51,14 @@ const routing: ApiParam = {
       type: "string",
       name: "method",
       required: true,
-      enum: ["all", "single"]
+      enum: ["all", "single"],
+      example: "single",
+      description: "The method for selecting channels to send the message with. If no method is specified, then 'single' will be used as default."
     },
     {
       type: "array",
       name: "channels",
+      description: "An array of valid channel identifiers (like email, push, sms, etc.) and additional routing nodes.",
       field: {
         type: "object",
         fields: [
@@ -199,7 +66,8 @@ const routing: ApiParam = {
             type: "string",
             name: "method",
             required: true,
-            enum: ["all", "single"]
+            enum: ["all", "single"],
+            example: "single"
           },
           {
             type: "array",
@@ -215,51 +83,123 @@ const routing: ApiParam = {
   ]
 }
 
+const channels: ApiParam = {
+  type: "record",
+  name: "channels",
+  description: "A map of valid channel identifiers (e.g. email, sms, etc.) to channel configuration objects whose properties are below. If you don't specify 'channels', Courier will use the default configuration for each channel as specified in the Courier Studio UI.",
+  field: {
+    type: "object",
+    displayName: "Channel Configuration Object",
+    fields: [
+      {
+        type: "string",
+        name: "brand_id",
+        description: "Supply a specific brand id, which will apply to all messages sent through the channel.",
+      },
+      {
+        type: "array",
+        name: "providers",
+        field: {
+          type: "string",
+        },
+        description: "The providers to send the message through the channel. The channel must be available to the messages Routing for this field to take effect."
+      },
+      {
+        type: "string",
+        name: "routing_method",
+        enum: ["all", "single"],
+        description: "The method for selecting the providers to send the message with. If no routing_method is specified, then 'single' will be used as default."
+      },
+      {
+        type: "string",
+        name: "if",
+        description: "A conditional expression to determine if the message should be sent through the channel. You can reference any property from the data or profile fields in your expression.",
+        example: "data.locale === 'usa' && profile.name === 'Spongebob'"
+      },
+      {
+        type:"object",
+        name: "override",
+        fields: []
+      }
+    ],
+  },
+}
+
+
 const providers: ApiParam = {
-  type: "object",
+  type: "record",
   name: "providers",
-  description: "The providers object is a map of valid provider identifiers (e.g. twilio, slack, etc.) to channel configuration objects. If you don't specify providers, Courier will use the default configuration for each provider as specified in the Courier Studio UI.",
+  description: "The providers object is a map of valid provider identifiers (e.g. twilio, slack, etc.) to provider configuration objects. If you don't specify providers, Courier will use the default configuration for each provider as specified in the Courier Studio UI.",
+  field: {
+    type: "object",
+    displayName: "Provider Configuration Object",
+    fields: [
+      {
+        type: "object",
+        name: "override",
+        fields: [],
+        description: "Contains twilio specific overrides for settings like API keys and other configurations."
+      },
+      {
+        type: "string",
+        name: "if",
+        description: "A conditional expression to determine if the message should be sent through twilio. You can reference any property from the data or profile fields in your expression.",
+        example: "data.locale === 'usa' && profile.name === 'Spongebob'"
+      }
+    ]
+  }
+}
+
+const template: ApiParam = {
+  type: "string",
+  name: "template",
+  required: true,
+  example: "NOTIFICATION_TEMPLATE",
+  description: "A notification template id or event mapping from Courier Studio."
+}
+
+const content: ApiParam = {
+  type: "object",
+  name: "content",
+  required: true,
+  description: " A simple content object or a complete Courier Elemental document.",
+  fields: []
+};
+
+const contentOrTemplate: ApiParam = {
+  type: "oneOf",
+  displayName: "content or template",
+  required: true,
+  options: [
+    template,
+    content,
+  ],
+};
+
+const metadata: ApiParam = {
+  type: "object",
+  name: "metadata",
   fields: [
     {
-      type: "object",
-      fields: [
-        {
-          type: "object",
-          name: "override",
-          fields: []
-        },
-        {
-          type: "string",
-          name: "if"
-        }
-      ]
+      type: "string",
+      name: "event",
+      description: "An arbitrary string to tracks the event that generated this request (e.g. 'signup')."
     }
   ]
-}
+};
 
 const Send: ApiParam = {
   type: "object",
-  displayName: "Send",
+  name: "message",
+  displayName: "message",
   fields: [
     to,
+    contentOrTemplate,
     brand_id,
     routing,
     channels,
     providers,
-    {
-      type: "string",
-      name: "template"
-    },
-    {
-      type: "object",
-      name: "content",
-      fields: []
-    },
-    {
-      type: "object",
-      name: "metadata",
-      fields: []
-    }
+    metadata
   ]
 };
 

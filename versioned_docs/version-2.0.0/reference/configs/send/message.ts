@@ -16,7 +16,7 @@ const config: ApiReferenceProps = {
         fields: [
           {
             type: "string",
-            name: "messageId",
+            name: "requestId",
             description: "A unique identifier associated with the message sent.",
             example: "1-5e2b2615-05efbb3acab9172f88dd3f6f",
           },
