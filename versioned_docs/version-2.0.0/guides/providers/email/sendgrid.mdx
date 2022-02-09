@@ -11,9 +11,15 @@ import Image from "@theme/IdealImage";
 To deliver a message to a recipient over SendGrid, Courier must be provided the recipient's email address. This value should be included in the recipient profile as `email`.
 
 ```json title=JSON
-// Recipient Profile
 {
-  "email": "example@example.com"
+  "message": {
+    // Recipient Profile
+    "to": {
+      "email": "example@example.com"
+    }
+
+    // ... rest of message definition
+  }
 }
 ```
 
@@ -37,28 +43,29 @@ Overrides can be used to change the request body that Courier uses to send an em
 
 ```json title=JSON
 {
-  "event": "<COURIER_NOTIFICATION_ID>",
-  "recipient": "katherine_pryde",
-  "profile": {
-    "email": "kpryde@xavierinstitute.edu"
-  },
-  "data": {
-    "name": "Katherine Pryde"
-  },
-  "override": {
-    "sendgrid": {
-      "body": {
-        "subject": "Requested file - lockheed.json",
-        "attachments": [
-          {
-            "content": "eyJmb28iOiJiYXIifQ==",
-            "type": "application/json",
-            "filename": "lockheed.json"
-          }
-        ]
-      },
-      "config": {
-        "apiKey": "<your API Key>"
+  "message": {
+    "template": "<COURIER_NOTIFICATION_ID>",
+    "to": {
+      "email": "kpryde@xavierinstitute.edu"
+    },
+    "data": {
+      "name": "Katherine Pryde"
+    },
+    "providers": {
+      "sendgrid": {
+        "override": {
+          "body": {
+            "subject": "Requested file - lockheed.json",
+            "attachments": [
+              {
+                "content": "eyJmb28iOiJiYXIifQ==",
+                "type": "application/json",
+                "filename": "lockheed.json"
+              }
+            ]
+          },
+          "apiKey": "<your API Key>"
+        }
       }
     }
   }
