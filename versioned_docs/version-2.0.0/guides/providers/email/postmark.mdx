@@ -9,11 +9,17 @@ sidebar_position: 7
 To deliver a message to a recipient over Postmark, Courier must be provided the recipient's email address. This value should be included in the recipient profile as `email`.
 
 ```json title=JSON
-// Recipient Profile
 {
-  "email": "example@example.com"
+  "message": {
+    // Recipient Profile
+    "to": {
+      "email": "example@example.com"
+    }
+
+    // ... rest of message definition
+  }
 }
-```
+
 
 ## Override
 
@@ -21,25 +27,28 @@ You can use a provider override to replace what we send to Postmark's Email API.
 
 ```json title=JSON
 {
-  "event": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-  "recipient": "abc123",
-  "profile": {
-    "email": "example@example.com"
-  },
-  "override": {
-    "postmark": {
-      "body": {
-        "Attachments": [
-          {
-            "Name": "readme.txt",
-            "Content": "dGVzdCBjb250ZW50",
-            "ContentType": "text/plain"
+  "message": {
+    "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "to": {
+      "email": "example@example.com"
+    },
+    "providers": {
+      "postmark": {
+        "override": {
+          "body": {
+            "Attachments": [
+              {
+                "Name": "readme.txt",
+                "Content": "dGVzdCBjb250ZW50",
+                "ContentType": "text/plain"
+              }
+            ]
           }
-        ]
+        }
       }
     }
   }
 }
 ```
 
-The `override.postmark` can be used to replace what we send to Postmark's Email API. Note: the override does not replace the entire object, only the elements that you define in the body of the override. You can see all the available options by visiting the [Postmark API docs](https://postmarkapp.com/developer/api/email-api).
+The `message.porviders.postmark.override` property can be used to replace what we send to Postmark's Email API. Note: the override does not replace the entire object, only the elements that you define in the body of the override. You can see all the available options by visiting the [Postmark API docs](https://postmarkapp.com/developer/api/email-api).
