@@ -9,11 +9,16 @@ sidebar_position: 5
 To deliver a message to a recipient over Mandrill, Courier must be provided the recipient's email address. This value should be included in the recipient profile as `email`.
 
 ```json title=JSON
-// Recipient Profile
 {
-  "email": "example@example.com"
+  "message": {
+    // Recipient Profile
+    "to": {
+      "email": "example@example.com"
+    }
+
+    // ... rest of message definition
+  }
 }
-```
 
 ## Override
 
@@ -21,22 +26,25 @@ You can use a provider override to replace what we send to Mandrill's Messages A
 
 ```json title=JSON
 {
-  "event": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-  "recipient": "abc123",
-  "profile": {
-    "email": "example@example.com"
-  },
-  "override": {
-    "mandrill": {
-      "body": {
-        "message": {
-          "attachments": [
-            {
-              "type": "text/plain",
-              "name": "myfile.txt",
-              "content": "ZXhhbXBsZSBmaWxl"
+  "message": {
+    "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "to": {
+      "email": "example@example.com"
+    },
+    "providers": {
+      "mandrill": {
+        "override": {
+          "body": {
+            "message": {
+              "attachments": [
+                {
+                  "type": "text/plain",
+                  "name": "myfile.txt",
+                  "content": "ZXhhbXBsZSBmaWxl"
+                }
+              ]
             }
-          ]
+          }
         }
       }
     }
@@ -44,4 +52,4 @@ You can use a provider override to replace what we send to Mandrill's Messages A
 }
 ```
 
-Everything inside of `override.mandrill` will replace what we send to Mandrill's Messages API. You can see all the available options by visiting [Mandrill API docs](https://mandrillapp.com/api/docs/messages.JSON.html).
+Everything inside of `providers.mandrill.override` will replace what we send to Mandrill's Messages API. You can see all the available options by visiting [Mandrill API docs](https://mandrillapp.com/api/docs/messages.JSON.html).
