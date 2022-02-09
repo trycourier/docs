@@ -47,25 +47,26 @@ Overrides can be used to change the RawMessage & Source and that Courier uses to
 
 ```json
 {
-  "event": "<COURIER_NOTIFICATION_ID>",
-  "recipient": "katherine_pryde",
-  "profile": {
-    "email": "kpryde@xavierinstitute.edu"
-  },
-  "data": {
-    "name": "Katherine Pryde"
-  },
-  "override": {
-    "aws-ses": {
-      "body": {
-        "RawMessage": {
-          "Data": "<Mime 1.0 compatible message>"
+  "message": {
+    "template": "<COURIER_NOTIFICATION_ID>",
+    "to": {
+      "email": "kpryde@xavierinstitute.edu"
+    },
+    "data": {
+      "name": "Katherine Pryde"
+    },
+    "provider": {
+      "aws-ses": {
+        "override": {
+          "body": {
+            "RawMessage": {
+              "Data": "<Mime 1.0 compatible message>"
+            },
+            "accessKeyId": "<Access Key ID>",
+            "secretAccessKey": "<Secret Access Key>"
+          }
         }
       }
-    },
-    "config": {
-      "accessKeyId": "<Access Key ID>",
-      "secretAccessKey": "<Secret Access Key>"
     }
   }
 }
@@ -77,23 +78,26 @@ To include an attachment in the email, you can use the following override:
 
 ```json
 {
-  "event": "<COURIER_NOTIFICATION_ID>",
-  "recipient": "katherine_pryde",
-  "profile": {
-    "email": "kpryde@xavierinstitute.edu"
-  },
-  "data": {
-    "name": "Katherine Pryde"
-  },
-  "override": {
-    "aws-ses": {
-      "attachments": [
-        {
-          "filename": "hello.txt",
-          "contentType": "text/plain",
-          "data": "SGk="
+  "message": {
+    "to": {
+      "email": "kpryde@xavierinstitute.edu"
+    },
+    "template": "<COURIER_NOTIFICATION_ID>",
+    "data": {
+      "name": "Katherine Pryde"
+    },
+    "providers": {
+      "aws-ses": {
+        "override": {
+          "attachments": [
+            {
+              "filename": "hello.txt",
+              "contentType": "text/plain",
+              "data": "SGk="
+            }
+          ]
         }
-      ]
+      }
     }
   }
 }
