@@ -9,9 +9,15 @@ sidebar_position: 4
 To deliver a message to a recipient over Mailjet, Courier must be provided the recipient's email address. This value should be included in the recipient profile as `email`.
 
 ```json title=JSON
-// Recipient Profile
 {
-  "email": "example@example.com"
+  "message": {
+    // Recipient Profile
+    "to": {
+      "email": "example@example.com"
+    }
+
+    // ... rest of message definition
+  }
 }
 ```
 
@@ -21,21 +27,24 @@ You can use a provider override to replace what we send to Mailjet's Send API. F
 
 ```json title=JSON
 {
-  "event": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-  "recipient": "abc123",
-  "profile": {
-    "email": "example@example.com"
-  },
-  "override": {
-    "mailjet": {
-      "body": {
-        "Attachments": [
-          {
-            "ContentType": "text/plain",
-            "Filename": "test.txt",
-            "content": "VGhpcyBpcyB5b3VyIGF0dGFjaGVkIGZpbGUhISEK"
+  "message": {
+    "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "to": {
+      "email": "example@example.com"
+    },
+    "providers": {
+      "mailjet": {
+        "override": {
+          "body": {
+            "Attachments": [
+              {
+                "ContentType": "text/plain",
+                "Filename": "test.txt",
+                "content": "VGhpcyBpcyB5b3VyIGF0dGFjaGVkIGZpbGUhISEK"
+              }
+            ]
           }
-        ]
+        }
       }
     }
   }

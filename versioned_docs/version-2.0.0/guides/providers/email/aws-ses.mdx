@@ -8,7 +8,7 @@ sidebar_position: 0
 
 To deliver a message to a recipient over AWS SES, Courier must be provided the recipient's email address. This value should be included in the recipient profile as `email`.
 
-```json
+```json title=JSON
 {
   "message": {
     // Recipient Profile
@@ -33,7 +33,7 @@ When creating a new IAM user, you can attach the **AmazonSESFullAccess** built-i
 
 Here is an example of an IAM user with the policy required where they can perform send email against all SES identities:
 
-```json
+```json title=JSON
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -61,7 +61,7 @@ Overrides can be used to change the RawMessage & Source and that Courier uses to
     "data": {
       "name": "Katherine Pryde"
     },
-    "provider": {
+    "providers": {
       "aws-ses": {
         "override": {
           "body": {

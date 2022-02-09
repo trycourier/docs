@@ -10,7 +10,7 @@ import Image from "@theme/IdealImage";
 
 To deliver a message to a recipient over MailerSend, Courier must be provided the recipient's email address. This value should be included in the recipient profile as `email`.
 
-```json
+```json title=JSON
 {
   "message": {
     // Recipient Profile
@@ -47,7 +47,7 @@ Overrides can be used to change the request body that Courier uses to send an em
     "data": {
       "name": "Abdul Ahmady"
     },
-    "channels": {
+    "providers": {
       "mailersend": {
         "override": {
           "apiKey": "<YOUR_OVERRIDDEN_API_KEY>",
