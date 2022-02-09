@@ -9,9 +9,15 @@ sidebar_position: 0
 To deliver a message to a recipient over AWS SES, Courier must be provided the recipient's email address. This value should be included in the recipient profile as `email`.
 
 ```json
-// Recipient Profile
 {
-  "email": "example@example.com"
+  "message": {
+    // Recipient Profile
+    "to": {
+      "email": "example@example.com"
+    }
+
+    // ... rest of request
+  }
 }
 ```
 
