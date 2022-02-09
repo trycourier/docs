@@ -9,9 +9,15 @@ sidebar_position: 9
 To deliver a message to a recipient over SMTP, Courier must be provided the recipient's email address. This value should be included in the recipient profile as `email`.
 
 ```json title=JSON
-// Recipient Profile
 {
-  "email": "example@example.com"
+  "message": {
+    // Recipient Profile
+    "to": {
+      "email": "example@example.com"
+    }
+
+    // ... rest of message definition
+  }
 }
 ```
 
@@ -23,50 +29,52 @@ You can use a provider override to replace what we send to SMTP using NodeMailer
 
 ```json title=JSON
 {
-  "event": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-  "recipient": "abc123",
-  "profile": {
-    "email": "example@example.com"
-  },
-  "override": {
-    "smtp": {
-      "body": {
-        "attachments": [
-          {
-            "filename": "text1.txt",
-            "content": "aGVsbG8gd29ybGQh",
-            "encoding": "base64"
+  "message": {
+    "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "to": {
+      "email": "example@example.com"
+    },
+    "providers": {
+      "smtp": {
+        "override": {
+          "body": {
+            "attachments": [
+              {
+                "filename": "text1.txt",
+                "content": "aGVsbG8gd29ybGQh",
+                "encoding": "base64"
+              }
+            ]
           }
-        ]
+        }
       }
     }
   }
 }
 ```
 
-Everything inside of `override.smtp.body` will replace what we send using NodeMailer. You can see all the available options by visiting the [NodeMailer docs](https://nodemailer.com/message/).
+Everything inside of `message.providers.smtp.override.body` will replace what we send using NodeMailer. You can see all the available options by visiting the [NodeMailer docs](https://nodemailer.com/message/).
 
 ### Transport Override
 
-You may also override the [SMTP transport configuration](https://nodemailer.com/smtp/) using values passed to `override.smtp.config`, like so:
+You may also override the [SMTP transport configuration](https://nodemailer.com/smtp/) using values passed to `message.providers.smtp.override`, like so:
 
 ```json title=JSON
 {
-  "event": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-  "recipient": "abc123",
-  "profile": {
-    "email": "example@example.com"
-  },
-  "override": {
-    "smtp": {
-      "config": {
-        "auth": {
+  "message": {
+    "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "to": {
+      "email": "example@example.com"
+    },
+    "providers": {
+      "smtp": {
+        "override": {
           "user": "username",
-          "pass": "hunter2"
-        },
-        "host": "smtp.example.com",
-        "secure": true,
-        "port": 465
+          "pass": "hunter2",
+          "host": "smtp.example.com",
+          "secure": true,
+          "port": 465
+        }
       }
     }
   }
