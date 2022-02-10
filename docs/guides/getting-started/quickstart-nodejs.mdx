@@ -5,13 +5,14 @@ description: Send your first notification with Nodejs.
 
 import Image from "@theme/IdealImage";
 
-# Nodejs Quickstart
+# NodeJS Quickstart
 
-Welcome to the Node.js Quickstart! Here we will walk through the process of finding our API keys, installing the SDK, and making your first API call with Node.js. If you have any questions, join our Discourse community: [https://forum.courier.com/](https://forum.courier.com/)
+Welcome to the Node.js Quickstart! Here we will walk through the process of getting your  API keys, installing the SDK, and making your first API call with Node.js. If you have any questions, join our Discourse community: [https://forum.courier.com/](https://forum.courier.com/)
 
 ## Prerequisites
 
 - Sign up for Courier
+- [Integrate the provider for the type of notification you want to](https://youtu.be/nAbRLOMv96w)
 - Install the latest version of nodejs: [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
 
 ## Getting Your API Keys
@@ -20,9 +21,19 @@ Navigate to the Courier app [https://app.courier.com/](https://app.courier.com/)
 
 After signing up, click on the setting icon ⚙️ at the bottom left of the Courier app and click "API Keys" in the left menu. For this you can use either the Published Test or the Published Production keys. You can switch between the Production and Test environments at the top right corner of the app.
 
+<Image
+img={require("../../assets/guides/courier-app/settings.png")}
+alt="Courier Settings"
+/>
+
+<Image
+img={require("../../assets/guides/courier-app/api-keys.png")}
+alt="Courier Settings: API Keys"
+/>
+
 ## Installing the SDK
 
-Install dependensies:
+Install dependencies:
 
 ```
 npm install node-fetch --save
@@ -34,7 +45,9 @@ Run the following command in your project directory to install the SDK via npm:
 npm install @trycourier/courier
 ```
 
-## Send Your Notification
+## Sending a notification with Courier Elemental
+
+Courier Elemental is a new JSON syntax built to describe your notification, including recipient data, notification content, variables, and routing. Here is an example of a simple notification sent with Elemental:
 
 ```jsx
 const fetch = require('node-fetch');
@@ -46,20 +59,23 @@ const options = {
     'Content-Type': 'application/json'
   },
   body: JSON.stringify({
-    "message": {
-      "to": {
-        "data": {},
-        "preferences": {}
-      },
-      "routing": {
-        "method": "single",
-        "channels": []
-      },
-      "channels": {},
-      "providers": {},
-      "metadata": {},
-      "template": "NOTIFICATION_TEMPLATE"
-    }
+		"message": {
+			"to": {
+				"email": "email@example.com",
+				"user_id": "user-12345"
+			},
+			"content": {
+				"title": "Welcome!",
+				"body": "Thanks for signing up, {{name}}"
+			},
+			"data": {
+				"name": "Peter Parker"
+			},
+			"routing": {
+				"method": "single",
+				"channels": ["email"]
+		}
+}
   })
 };
 
@@ -71,37 +87,18 @@ fetch('https://api.courier.com/send', options)
 
 Replace the JSON within the body to match the type and content of notification you want to send.
 
-### Create a Notification: API V2
+There are 4 main properties within this example notification:
 
-Courier Elemental is a new JSON syntax built to describe your notification, including recipient data, notification content, variables, and routing. Here is an example of a simple notification sent with Elemental:
+- `to`: provide information used by Courier to identify the recipient of the notification. Here you can include details such as the recipient’s email address for email, phone number for SMS.
+- `content`: add your notification’s title and body.
+- `data`: include any data you want to pass to a message template. The data will populate the corresponding template variables.
+- `routing`: customize which channel(s) Courier will potentially deliver the message. If no routing key is specified, Courier will use the default routing configured in the Courier Studio UI.
 
-```json
-{
-	"message": {
-		"to": {
-			"email": "email@example.com",
-			"user_id": "user-12345"
-		},
-		"content": {
-			"title": "Welcome!",
-			"body": "Thanks for signing up, {{name}}"
-		},
-		"data": {
-			"name": "Peter Parker"
-		},
-		"routing": {
-			"method": "single",
-			"channels": ["email"]
-		}
-	}
-}
-```
+[Explore how to customize your notification with more properties >](../../../reference/send/message/)
 
 ### Create a Notification: In the Designer
 
-For this step, you will first need to create a notification template in your Courier app. [Learn how to design your first notification >](https://youtu.be/lvhRdNJMLbY) Get your Notification ID by going to the notification settings, under the General category.
-
-Send a message using a notification template from your Courier app:
+This is **optional**, and only recommended when you want to use the Courier app to design a notification. Once you have designed the notification template in the Courier Designer, you can replace the JSON body with the following:
 
 ```json
 {
@@ -110,10 +107,13 @@ Send a message using a notification template from your Courier app:
 			"email": "email@example.com",
 			"user_id": "user-12345"
 		},
+		//Notification ID can be found in the template settings in the Courier Designer
 		"notification-template": "a-courier-notification-id-or-event-mapping"
 	}
 }
 ```
+
+[Learn how to design your first notification >](https://youtu.be/lvhRdNJMLbY) 
 
 ### Send & Test the Notification
 
