@@ -9,8 +9,12 @@ sidebar_position: 3
 To deliver a message to a recipient via MessageMedia, Courier must be provided the recipient's SMS-compatible telephone number. This value should be included in the recipient profile as `phone_number`.
 
 ```json title=JSON
-// Recipient Profile
 {
-  "phone_number": "+491575556511"
+  "message": {
+    // Recipient Profile
+    "to": {
+      "phone_number": "+491575556511"
+    }
+  }
 }
 ```

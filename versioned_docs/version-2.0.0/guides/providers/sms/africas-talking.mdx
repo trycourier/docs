@@ -11,7 +11,11 @@ To deliver a message to a recipient over Africa's Talking SMS, Courier must be p
 ```json title=JSON
 // Recipient Profile
 {
-  "phone_number": "+27765559758"
+  "message": {
+    "to": {
+      "phone_number": "+27765559758"
+    }
+  }
 }
 ```
 
@@ -21,19 +25,22 @@ You can use a provider override to replace what we send to Africa's Talking SMS 
 
 ```json title=JSON
 {
-  "event": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-  "recipient": "abc123",
-  "profile": {
-    "phone_number": "+27765559758"
-  },
-  "override": {
-    "africastalking-sms": {
-      "body": {
-        "from": "12345"
+  "message": {
+    "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "to": {
+      "phone_number": "+27765559758"
+    },
+    "providers": {
+      "africastalking-sms": {
+        "override": {
+          "body": {
+            "from": "12345"
+          }
+        }
       }
     }
   }
 }
 ```
 
-Everything inside of `override.africastalking-sms` will replace what we send to Africa's Talking SMS API. You can see all the available options by visiting [Africa's Talking SMS docs](https://build.at-labs.io/docs/sms%2Fsending).
+Everything inside of `providers.africastalking-sms.override` will replace what we send to Africa's Talking SMS API. You can see all the available options by visiting [Africa's Talking SMS docs](https://build.at-labs.io/docs/sms%2Fsending).
