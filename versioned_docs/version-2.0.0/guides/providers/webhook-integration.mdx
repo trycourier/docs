@@ -15,20 +15,24 @@ To deliver an HTTP request, Courier must be provided with a destination. For a s
 If you need to specify the webhook destination on a per recipient basis, you can choose "Dynamic Destination" and pass the information in the recipient profile. These values should be included in the recipient profile as `webhook`.
 
 ```json title=JSON
-// Recipient Profile
 {
-  "webhook": {
-    "url": "https://www.example.com",
-    "method": "POST", // default to "POST",
-    "headers": {
-      "Content-Type": "application/json"
-    },
-    "authentication": {
-      "mode": "basic", //default to "none"
-      "username": "AzureDiamond",
-      "password": "hunter2"
-    },
-    "profile": "expanded" // default to "limited"
+  "message": {
+    // Recipient Profile
+    "to": {
+      "webhook": {
+        "url": "https://www.example.com",
+        "method": "POST", // default to "POST",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "authentication": {
+          "mode": "basic", //default to "none"
+          "username": "AzureDiamond",
+          "password": "hunter2"
+        },
+        "profile": "expanded" // default to "limited"
+      }
+    }
   }
 }
 ```
@@ -88,7 +92,7 @@ You can use a provider override to replace what we send to the destination.
     "data": {
       "hello": "world"
     },
-    "channels": {
+    "providers": {
       "webhook": {
         "override": {
           "url": "https://www.example.com",
