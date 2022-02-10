@@ -63,15 +63,16 @@ Based on how the profile is configured, the webhook provider will send the follo
 ```json title=JSON
 // Example Payload
 {
-  "event": "MY_EVENT",
-  "recipient": "1234ABCD",
-  "profile": {
-    "email": "stan.pines@mysteryshack.com",
-    "phone_number": "+12025550165"
-  },
-  "data": {
-    "name": "Stan Pines",
-    "location": "Gravity Falls, OR"
+  "message": {
+    "template": "MY_EVENT",
+    "to": {
+      "email": "stan.pines@mysteryshack.com",
+      "phone_number": "+12025550165"
+    },
+    "data": {
+      "name": "Stan Pines",
+      "location": "Gravity Falls, OR"
+    }
   }
 }
 ```
@@ -82,20 +83,23 @@ You can use a provider override to replace what we send to the destination.
 
 ```json title=JSON
 {
-  "event": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-  "recipient": "abc123",
-  "data": {
-    "hello": "world"
-  },
-  "override": {
-    "webhook": {
-      "url": "https://www.example.com",
-      "method": "PUT",
-      "headers": {
-        "X-Custom-Header": "Hello from Courier"
-      },
-      "body": {
-        "key": "value"
+  "message": {
+    "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "data": {
+      "hello": "world"
+    },
+    "channels": {
+      "webhook": {
+        "override": {
+          "url": "https://www.example.com",
+          "method": "PUT",
+          "headers": {
+            "X-Custom-Header": "Hello from Courier"
+          },
+          "body": {
+            "key": "value"
+          }
+        }
       }
     }
   }
