@@ -19,14 +19,18 @@ You can use the provider override to replace what we send to PagerDuty's Events 
 
 ```json title=JSON
 {
-  "event": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-  "profile": {},
-  "override": {
-    "pagerduty": {
-      "body": {
-        "payload": {
-          "severity": "error",
-          "source": "a different source"
+  "message": {
+    "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "to": {},
+    "providers": {
+      "pagerduty": {
+        "override": {
+          "body": {
+            "payload": {
+              "severity": "error",
+              "source": "a different source"
+            }
+          }
         }
       }
     }

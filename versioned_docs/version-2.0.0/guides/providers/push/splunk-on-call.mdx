@@ -11,10 +11,14 @@ To deliver a message to a recipient over Splunk On-Call, Courier must be provide
 ```json title=JSON
 //RecipientProfile
 {
-  "splunk_on_call": {
-    "target": {
-      "type": "User",
-      "slug": "userSlug"
+  "message": {
+    "to": {
+      "splunk-on-call": {
+        "target": {
+          "type": "User",
+          "slug": "userSlug"
+        }
+      }
     }
   }
 }
@@ -30,23 +34,26 @@ Overrides can be used to change the request body that Courier uses to send a pus
 
 ```json title=JSON
 {
-  "event": "<COURIER_NOTIFICATION_ID>",
-  "recipient": "katherine_pryde",
-  "profile": {
-    "splunk_on_call": {
-      "target": {
-        "type": "User",
-        "slug": "kpryde"
+  "message": {
+    "template": "<COURIER_NOTIFICATION_ID>",
+    "to": {
+      "splunk-on-call": {
+        "target": {
+          "type": "User",
+          "slug": "kpryde"
+        }
       }
-    }
-  },
-  "data": {
-    "name": "Katherine Pryde"
-  },
-  "override": {
-    "config": {
-      "apiKey": "<your API Key>",
-      "userName": "<youruserName>"
+    },
+    "data": {
+      "name": "Katherine Pryde"
+    },
+    "providers": {
+      "splunk-on-call": {
+        "config": {
+          "apiKey": "<your API Key>",
+          "userName": "<youruserName>"
+        }
+      }
     }
   }
 }

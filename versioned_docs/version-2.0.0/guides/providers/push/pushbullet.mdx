@@ -16,14 +16,17 @@ Below is an example using the override to send a `url` by overriding the `type` 
 
 ```json title=JSON
 {
-  "event": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-  "recipient": "abc123",
-  "profile": {},
-  "override": {
-    "pushbullet": {
-      "body": {
-        "type": "link",
-        "url": "https://www.courier.com"
+  "message": {
+    "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "to": {},
+    "providers": {
+      "pushbullet": {
+        "override": {
+          "body": {
+            "type": "link",
+            "url": "https://www.courier.com"
+          }
+        }
       }
     }
   }

@@ -21,15 +21,17 @@ Overrides can be used to change the request body that Courier uses to send a pus
 
 ```json title=JSON
 {
-  "override": {
+  "providers": {
     "opsgenie": {
-      "config": {
-        "accessToken": "YOUR TOKEN",
-        "url": "URL"
-      },
-      "headers": {},
-      "body": {
-        "message": "YOUR MESSAGE"
+      "override": {
+        "config": {
+          "accessToken": "YOUR TOKEN",
+          "url": "URL"
+        },
+        "headers": {},
+        "body": {
+          "message": "YOUR MESSAGE"
+        }
       }
     }
   }

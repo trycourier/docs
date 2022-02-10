@@ -19,17 +19,19 @@ Push channel overrides allow you to set the body, clickAction, data, icon, and t
 
 ```json
 {
-  //rest of request
-  "override": {
-    "channel": {
+  "message": {
+    "channels": {
       "push": {
-        "body": "",
-        "clickAction": "",
-        "data": "",
-        "icon": "",
-        "title": ""
+        "override": {
+          "body": "",
+          "clickAction": "",
+          "data": "",
+          "icon": "",
+          "title": ""
+        }
       }
     }
+    //... rest of message
   }
 }
 ```
@@ -42,14 +44,12 @@ Courier will attach a trackingUrl for all push requests that allow the state of 
 
 ```json
 {
-  "data": {
-    "message": {
-      "data": {
-        "trackingUrl": "https://api.courier.com/e/123_channelTrackingId"
-        // other data attributes
-      }
-      // other messages attributes
+  "message": {
+    "data": {
+      "trackingUrl": "https://api.courier.com/e/123_channelTrackingId"
+      // other data attributes
     }
+    // other messages attributes
   }
 }
 ```

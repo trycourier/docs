@@ -15,7 +15,11 @@ provided the recipient's [Firebase registration token](https://firebase.google.c
 
 ```json title=JSON
 {
-  "firebaseToken": "MTI2MjAwMzQ3OTMzQHByb2plY3RzLmdjbS5hbmFTeUIzcmNaTmtmbnFLZEZiOW1oekNCaVlwT1JEQTJKV1d0dw=="
+  "message": {
+    "to": {
+      "firebaseToken": "MTI2MjAwMzQ3OTMzQHByb2plY3RzLmdjbS5hbmFTeUIzcmNaTmtmbnFLZEZiOW1oekNCaVlwT1JEQTJKV1d0dw=="
+    }
+  }
 }
 ```
 
@@ -25,21 +29,24 @@ You can use a provider override to replace what we send to the Firebase FCM API.
 
 ```json title=JSON
 {
-  "event": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-  "recipient": "abc123",
-  "profile": {
-    "firebaseToken": "MTI2MjAwMzQ3OTMzQHByb2plY3RzLmdjbS5hbmFTeUIzcmNaTmtmbnFLZEZiOW1oekNCaVlwT1JEQTJKV1d0dw=="
-  },
-  "override": {
-    "firebase-fcm": {
-      "body": {
-        "notification": {
-          "title": "Portugal vs. Denmark",
-          "body": "great match!"
-        },
-        "data": {
-          "Nick": "Mario",
-          "Room": "PortugalVSDenmark"
+  "message": {
+    "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "to": {
+      "firebaseToken": "MTI2MjAwMzQ3OTMzQHByb2plY3RzLmdjbS5hbmFTeUIzcmNaTmtmbnFLZEZiOW1oekNCaVlwT1JEQTJKV1d0dw=="
+    },
+    "data": {
+      "Nick": "Mario",
+      "Room": "PortugalVSDenmark"
+    },
+    "providers": {
+      "firebase-fcm": {
+        "override": {
+          "body": {
+            "notification": {
+              "title": "Portugal vs. Denmark",
+              "body": "great match!"
+            }
+          }
         }
       }
     }
@@ -47,7 +54,7 @@ You can use a provider override to replace what we send to the Firebase FCM API.
 }
 ```
 
-Everything inside of `override.firebase-fcm.body` will be merged into the [Message object](https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages#Message) we send to the Firebase FCM API.
+Everything inside of `providers.firebase-fcm.override.body` will be merged into the [Message object](https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages#Message) we send to the Firebase FCM API.
 
 ## Tracking Events
 

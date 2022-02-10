@@ -26,12 +26,14 @@ Below is an example of using the override to deliver a post to a specific known 
 
 ```json title=JSON
 {
-  "override": {
+  "providers": {
     "beamer": {
-      "body": {
-        "filterUserId": "YOUR USER ID",
-        "sendPushNotification": "false",
-        "publish": "true"
+      "override": {
+        "body": {
+          "filterUserId": "YOUR USER ID",
+          "sendPushNotification": "false",
+          "publish": "true"
+        }
       }
     }
   }

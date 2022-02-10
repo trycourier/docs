@@ -9,9 +9,13 @@ sidebar_position: 5
 To start a conversation with a recipient over Drift, Courier must be provided the recipient's email. This value should be included in the recipient profile as `email`.
 
 ```json title=JSON
-//RecipientProfile
 {
-  "email": "example@example.com"
+  "message": {
+    //RecipientProfile
+    "to": {
+      "email": "example@example.com"
+    }
+  }
 }
 ```
 
@@ -21,22 +25,25 @@ Overrides can be used to change the request body that Courier uses to send an em
 
 ```json title=JSON
 {
-  "event": "<COURIER_NOTIFICATION_ID>",
-  "recipient": "katherine_pryde",
-  "profile": {
-    "phone_number": "+12345678901"
-  },
-  "data": {
-    "name": "Katherine Pryde"
-  },
-  "override": {
-    "drift": {
-      "body": {
-        "from": "+109876543210"
-      }
+  "message": {
+    "template": "<COURIER_NOTIFICATION_ID>",
+    "to": {
+      "phone_number": "+12345678901"
     },
-    "config": {
-      "accessToken": "<youraccesstoken>"
+    "data": {
+      "name": "Katherine Pryde"
+    },
+    "provider": {
+      "drift": {
+        "override": {
+          "body": {
+            "from": "+109876543210"
+          },
+          "config": {
+            "accessToken": "<youraccesstoken>"
+          }
+        }
+      }
     }
   }
 }

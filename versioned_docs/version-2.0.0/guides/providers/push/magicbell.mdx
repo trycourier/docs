@@ -11,19 +11,27 @@ To deliver a message to in-app using MagicBell, Courier must be provided with ei
 ### Email example:
 
 ```json title=JSON
-// Recipient Profile
 {
-  "email": "user@example.com"
+  "message": {
+    // Recipient Profile
+    "to": {
+      "email": "user@example.com"
+    }
+  }
 }
 ```
 
 ### External ID:
 
 ```json title=JSON
-// Recipient Profile
 {
-  "magicbell": {
-    "external_id": "user123"
+  "message": {
+    // Recipient Profile
+    "to": {
+      "magicbell": {
+        "external_id": "user123"
+      }
+    }
   }
 }
 ```
@@ -36,17 +44,20 @@ Below is an example of overriding the Category & Action URL parameters in MagicB
 
 ```json title=JSON
 {
-  "event": "example_template",
-  "recipient": "example_user",
-  "profile": {
-    "email": "user@example.com"
-  },
-  "data": {},
-  "override": {
-    "magicbell": {
-      "body": {
-        "category": "new_message",
-        "action_url": "https://example.com/example_link"
+  "message": {
+    "template": "example_template",
+    "to": {
+      "email": "user@example.com"
+    },
+    "data": {},
+    "providers": {
+      "magicbell": {
+        "override": {
+          "body": {
+            "category": "new_message",
+            "action_url": "https://example.com/example_link"
+          }
+        }
       }
     }
   }

@@ -9,10 +9,14 @@ sidebar_position: 13
 To deliver a message to a recipient via Pusher, Courier must be provided a target object that contains the recipient's pusher channel. This value should be included in the recipient profile as 'pusher'.
 
 ```json title=JSON
-// Recipient Profile
 {
-  "pusher": {
-    "channel": "<PUSHER_CHANNEL>"
+  "message": {
+    // Recipient Profile
+    "to": {
+      "pusher": {
+        "channel": "<PUSHER_CHANNEL>"
+      }
+    }
   }
 }
 ```
@@ -25,15 +29,16 @@ Pusher can be used in Courier in two ways. One is via the "Push" channel the oth
 
 ```json title=JSON
 {
-  "event": "<COURIER_NOTIFICATION_ID>",
-  "recipient": "katherine_pryde",
-  "profile": {
-    "pusher": {
-      "channel": "<PUSHER_CHANNEL>"
+  "message": {
+    "template": "<COURIER_NOTIFICATION_ID>",
+    "to": {
+      "pusher": {
+        "channel": "<PUSHER_CHANNEL>"
+      }
+    },
+    "data": {
+      "name": "Katherine Pryde"
     }
-  },
-  "data": {
-    "name": "Katherine Pryde"
   }
 }
 ```
