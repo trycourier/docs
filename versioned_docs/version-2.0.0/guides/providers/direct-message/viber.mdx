@@ -28,10 +28,14 @@ This webhooks server will receive events including UserID's of users who wish to
 To send a direct message to a user, supply the `UserID` to the `"reciever"` field of the Viber profile object. This `UserID` is sent to the webhooks server after they send a message to the Viber bot.
 
 ```js
-// Recipient Profile
 {
-  "viber": {
-    "receiver": "12943673=="
+  "message": {
+    // Recipient Profile
+    "to": {
+      "viber": {
+        "receiver": "12943673=="
+      }
+    }
   }
 }
 ```

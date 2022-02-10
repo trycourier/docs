@@ -21,10 +21,14 @@ The information required in the recipient profile is different based on the type
 To send a message to a user, you'll need to supply the discord profile object with a `user_id`. This is not the user tag. You can retrieve this value using the Discord API or copying it from a Discord Client in [Developer mode](https://discordia.me/en/developer-mode). The user you are trying to message must be a member of a server the bot is installed in.
 
 ```json title=JSON
-// Recipient Profile
 {
-  "discord": {
-    "user_id": "617099137532932107"
+  "message": {
+    // Recipient Profile
+    "to": {
+      "discord": {
+        "user_id": "617099137532932107"
+      }
+    }
   }
 }
 ```
@@ -34,10 +38,14 @@ To send a message to a user, you'll need to supply the discord profile object wi
 To send a message to a channel, you'll need to supply the discord profile object with a `channel_id`. You can retrieve this value using the Discord API or copying it from a Discord Client in [Developer mode](https://discordia.me/en/developer-mode). The bot must be installed in the server to send to the channel.
 
 ```json title=JSON
-// Recipient Profile
 {
-  "discord": {
-    "channel_id": "768866348853383208"
+  "message": {
+    // Recipient Profile
+    "to": {
+      "discord": {
+        "channel_id": "768866348853383208"
+      }
+    }
   }
 }
 ```
@@ -48,19 +56,22 @@ You can use a provider override to replace what we send to Discord's [Create Mes
 
 ```json title=JSON
 {
-  "event": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-  "recipient": "CHANNEL_GENERAL",
-  "profile": {
-    "discord": {
-      "channel_id": "768866348853383208"
-    }
-  },
-  "override": {
-    "discord": {
-      "body": {
-        "embed": {
-          "title": "Hello, Embed!",
-          "description": "This is an embedded message."
+  "message": {
+    "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "to": {
+      "discord": {
+        "channel_id": "768866348853383208"
+      }
+    },
+    "providers": {
+      "discord": {
+        "override": {
+          "body": {
+            "embed": {
+              "title": "Hello, Embed!",
+              "description": "This is an embedded message."
+            }
+          }
         }
       }
     }

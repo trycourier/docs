@@ -44,10 +44,14 @@ Sending Direct Messages requires an additional scope. Be sure to grant the `im:w
 Slack’s [Slack Button](https://api.slack.com/docs/slack-button) lets you easily connect your Slack App with your customer’s account. As part of the OAuth process that the Slack Button initiates, Slack will fire a webhook to your servers. Simply store what they send you for that user and send it along to Courier, we’ll take care of the rest.
 
 ```json title=JSON
-// Recipient Profile
 {
-  "slack": {
-    // Contents of the JSON object provided by Slack's OAuth access method
+  "message": {
+    // Recipient Profile
+    "to": {
+      "slack": {
+        // Contents of the JSON object provided by Slack's OAuth access method
+      }
+    }
   }
 }
 ```
@@ -57,11 +61,15 @@ Slack’s [Slack Button](https://api.slack.com/docs/slack-button) lets you easil
 To simplify setting up the recipient profile, we allow you to specify the `email` used to log into the Slack Workspace and Courier will do the `user_id` lookup for you.
 
 ```json title=JSON
-// Recipient Profile
 {
-  "slack": {
-    "access_token": "xoxb-xxxxx",
-    "email": "user@example.com"
+  "message": {
+    // Recipient Profile
+    "to": {
+      "slack": {
+        "access_token": "xoxb-xxxxx",
+        "email": "user@example.com"
+      }
+    }
   }
 }
 ```
@@ -75,11 +83,15 @@ Using this method requires additional scopes. Be sure to grant the `users:read` 
 For testing, the `user_id` is found by finding the user in the Workspace Directory, clicking the … button, and selecting “Copy member ID”. For production use cases you would likely retrieve these IDs via the Slack API.
 
 ```json title=JSON
-// Recipient Profile
 {
-  "slack": {
-    "access_token": "xoxb-xxxxx",
-    "user_id": "UEFNTF6QL"
+  "message": {
+    // Recipient Profile
+    "to": {
+      "slack": {
+        "access_token": "xoxb-xxxxx",
+        "user_id": "UEFNTF6QL"
+      }
+    }
   }
 }
 ```
@@ -102,11 +114,15 @@ To send a message to a public or private channel, you’ll need to pass its `cha
 />
 
 ```json title=JSON
-// Recipient Profile
 {
-  "slack": {
-    "access_token": "xoxb-xxxxx",
-    "channel": "CL2MR6HEX"
+  "message": {
+    // Recipient Profile
+    "to": {
+      "slack": {
+        "access_token": "xoxb-xxxxx",
+        "channel": "CL2MR6HEX"
+      }
+    }
   }
 }
 ```
@@ -155,14 +171,18 @@ const main = async () => {
 main();
 ```
 
-This will allow you to send to a channel using a recipient id of `CHANNEL_` + the channel name in all upper case .If you wanted to send a message to the general channel, it would look like the following:
+This will allow you to send to a channel using a user id of `CHANNEL_` + the channel name in all upper case .If you wanted to send a message to the general channel, it would look like the following:
 
 ```json title=JSON
 {
-  "event": "HELLO_SLACK",
-  "recipient": "CHANNEL_GENERAL",
-  "data": {
-    "hello": "world"
+  "message": {
+    "to": {
+      "user_id": "CHANNEL_GENERAL"
+    },
+    "template": "HELLO_SLACK",
+    "data": {
+      "hello": "world"
+    }
   }
 }
 ```
@@ -179,11 +199,15 @@ This will allow you to send to a channel using a recipient id of `CHANNEL_` + th
 If you are working with a [Slash Command](https://api.slack.com/interactivity/slash-commands) and would like to respond to it, you can use the `response_url` from the [POST payload](https://api.slack.com/interactivity/slash-commands#app_command_handling). This URL can be passed to Courier as a Slack Incoming Webhook.
 
 ```json title=JSON
-// Recipient Profile
 {
-  "slack": {
-    "incoming_webhook": {
-      "url": "https://hooks.slack.com/commands/1234/5678"
+  "message": {
+    // Recipient Profile
+    "to": {
+      "slack": {
+        "incoming_webhook": {
+          "url": "https://hooks.slack.com/commands/1234/5678"
+        }
+      }
     }
   }
 }
@@ -200,11 +224,15 @@ Since the POST payload also contains the `channel_id` and `user_id`, you may als
 Incoming Webhooks are a simple way to post messages from your app to a specific public channel. Unless you have a specific use case, we recommend sending using one of the methods outlined above. Follow the [Incoming Webhooks Setup Guide](https://api.slack.com/messaging/webhooks) and pass the Webhook URL via `slack.incoming_webhook.url` to the recipient profile.
 
 ```json title=JSON
-// Recipient Profile
 {
-  "slack": {
-    "incoming_webhook": {
-      "url": "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
+  "message": {
+    // Recipient Profile
+    "to": {
+      "slack": {
+        "incoming_webhook": {
+          "url": "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
+        }
+      }
     }
   }
 }
@@ -216,10 +244,14 @@ The Slack profile should only contain an OAuth Response, Incoming Webhook, or th
 
 ```json title=JSON
 {
-  "slack": {
-    "access_token": "xoxb-xxxxx",
-    "channel": "CL2MR6HEX",
-    "user_id": "UEFNTF6QL"
+  "message": {
+    "to": {
+      "slack": {
+        "access_token": "xoxb-xxxxx",
+        "channel": "CL2MR6HEX",
+        "user_id": "UEFNTF6QL"
+      }
+    }
   }
 }
 ```
@@ -232,18 +264,21 @@ You can use a provider override to replace what we send to Slack’s [chat.postM
 
 ```json title=JSON
 {
-  "event": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-  "recipient": "abc123",
-  "profile": {
-    "slack": {
-      "access_token": "xoxb-xxxxx",
-      "user_id": "UEFNTF6QL"
-    }
-  },
-  "override": {
-    "slack": {
-      "body": {
-        "unfurl_links": true
+  "message": {
+    "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "to": {
+      "slack": {
+        "access_token": "xoxb-xxxxx",
+        "user_id": "UEFNTF6QL"
+      }
+    },
+    "providers": {
+      "slack": {
+        "override": {
+          "body": {
+            "unfurl_links": true
+          }
+        }
       }
     }
   }
@@ -270,9 +305,13 @@ Learn more about [Advanced formatting with special parsing](https://api.slack.co
 When the Courier Slack Integration first launched, the profile data was accepted in a different format. While it is recommended that you use the format outlined above, the following profile format may still work for some Slack Apps.
 
 ```json title=JSON
-// Recipient Profile
 {
-  "slackToken": "xoxb-xxxxx",
-  "slackChannel": "CL2MR6HEX"
+  "message": {
+    // Recipient Profile
+    "to": {
+      "slackToken": "xoxb-xxxxx",
+      "slackChannel": "CL2MR6HEX"
+    }
+  }
 }
 ```

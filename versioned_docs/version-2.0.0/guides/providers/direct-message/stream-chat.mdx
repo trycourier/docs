@@ -12,20 +12,28 @@ To deliver a message to a recipient over Stream Chat API, Courier must be provid
 This value should be included in the recipient profile as `streamChat`.
 
 ```json title=JSON
-//RecipientProfile using channelType and channelId
 {
-  "streamChat": {
-    "channelType": "messaging",
-    "channelId": "my-channel-id"
+  "message": {
+    //RecipientProfile using channelType and channelId
+    "to": {
+      "streamChat": {
+        "channelType": "messaging",
+        "channelId": "my-channel-id"
+      }
+    }
   }
 }
 ```
 
 ```json title=JSON
-//RecipientProfile using messageId (required for updating an existing message)
 {
-  "streamChat": {
-    "messageId": "my-message-id"
+  "message": {
+    //RecipientProfile using messageId (required for updating an existing message)
+    "to": {
+      "streamChat": {
+        "messageId": "my-message-id"
+      }
+    }
   }
 }
 ```
@@ -40,28 +48,31 @@ Overrides can be used to change the request body that Courier uses to send the m
 
 ```json title=JSON
 {
-  "event": "<COURIER_NOTIFICATION_ID>",
-  "recipient": "foo_bar",
-  "profile": {
-    "streamChat": {
-      "channelType": "messaging",
-      "channelId": "my-channel-id"
-    }
-  },
-  "data": {
-    "name": "Foo Bar"
-  },
-  "override": {
-    "stream-chat": {
-      "body": {
-        "skip_push": true
+  "message": {
+    "template": "<COURIER_NOTIFICATION_ID>",
+    "to": {
+      "streamChat": {
+        "channelType": "messaging",
+        "channelId": "my-channel-id"
       }
     },
-    "config": {
-      "baseUrl": "<overriden-base-url>",
-      "apiKey": "<overriden-api-key>",
-      "apiSecret": "<overriden-api-secret>",
-      "senderId": "<overriden-sender-id>"
+    "data": {
+      "name": "Foo Bar"
+    },
+    "providers": {
+      "stream-chat": {
+        "override": {
+          "body": {
+            "skip_push": true
+          },
+          "config": {
+            "baseUrl": "<overriden-base-url>",
+            "apiKey": "<overriden-api-key>",
+            "apiSecret": "<overriden-api-secret>",
+            "senderId": "<overriden-sender-id>"
+          }
+        }
+      }
     }
   }
 }

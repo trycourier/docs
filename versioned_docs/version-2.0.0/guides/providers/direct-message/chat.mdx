@@ -10,22 +10,27 @@ To deliver a message to a recipient over Chat API, Courier must be provided a ph
 This value should be included in the recipient profile as `chat_api`.
 
 ```json title=JSON
-//RecipientProfile using phone number
 {
-  "chat_api": {
-    "phone_number": "12345678"
+  "message": {
+    //RecipientProfile using phone number
+    "to": {
+      "chat_api": {
+        "phone_number": "12345678"
+      }
+    }
   }
 }
 ```
 
 ```json title=JSON
-//RecipientProfile using chat id
 {
-  "chat_api": {
-    "chat_id": "chat id"
+  "message": {
+    //RecipientProfile using phone number
+    "to": {
+      "chat_id": "<chat_id>"
+    }
   }
 }
-```
 
 ## Template
 
@@ -37,20 +42,23 @@ Overrides can be used to change the request body that Courier uses to send a pus
 
 ```json title=JSON
 {
-  "event": "<COURIER_NOTIFICATION_ID>",
-  "recipient": "katherine_pryde",
-  "profile": {
-    "chat_api": {
-      "phone_number": "12345678"
-    }
-  },
-  "data": {
-    "name": "Katherine Pryde"
-  },
-  "override": {
-    "config": {
-      "instanceId": "<yourInstanceId>",
-      "token": "<yourToken>"
+  "message": {
+    "template": "<COURIER_NOTIFICATION_ID>",
+    "to": {
+      "chat_api": {
+        "phone_number": "12345678"
+      }
+    },
+    "data": {
+      "name": "Katherine Pryde"
+    },
+    "providers": {
+      "override": {
+        "config": {
+          "instanceId": "<yourInstanceId>",
+          "token": "<yourToken>"
+        }
+      }
     }
   }
 }

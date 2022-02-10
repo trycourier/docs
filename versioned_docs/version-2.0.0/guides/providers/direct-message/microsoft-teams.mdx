@@ -21,13 +21,17 @@ To deliver a message to a recipient over Microsoft Teams, Courier must be provid
 You can use the [Microsoft Graph Explorer](https://developer.microsoft.com/en-us/graph/graph-explorer) to query for the `user_id`. You can learn more by checking out [Build Microsoft Teams apps with Microsoft Graph](https://docs.microsoft.com/en-us/graph/tutorials/teams).
 
 ```json title=JSON
-// Recipient Profile
 {
-  "ms_teams": {
-    "user_id": "",
-    "tenant_id": "",
-    "service_url": "https://smba.trafficmanager.net/amer"
-  };
+  "message": {
+    // Recipient Profile
+    "to": {
+      "ms_teams": {
+        "user_id": "",
+        "tenant_id": "",
+        "service_url": "https://smba.trafficmanager.net/amer"
+      }
+    }
+  }
 }
 ```
 
@@ -40,11 +44,15 @@ To locate the `conversation_id` open Microsoft Teams in the browser and use the 
 ```json title=JSON
 // Recipient Profile
 {
-  "ms_teams": {
-    "conversation_id": "",
-    "tenant_id": "",
-    "service_url": "https://smba.trafficmanager.net/amer"
-  };
+  "message": {
+    "to": {
+      "ms_teams": {
+        "conversation_id": "",
+        "tenant_id": "",
+        "service_url": "https://smba.trafficmanager.net/amer"
+      }
+    }
+  }
 }
 ```
 
@@ -58,23 +66,26 @@ Overrides can be used to change the App ID and App Password of an Azure Bot. Bel
 
 ```json title=JSON
 {
-  "event": "<COURIER_NOTIFICATION_ID>",
-  "recipient": "katherine_pryde",
-  "profile": {
-    "ms_teams": {
-      "user_id": "a-user-id",
-      "tenant_id": "a-tenant-id-or-group-id",
-      "service_url": "https://smba.trafficmanager.net/amer"
-    }
-  },
-  "data": {
-    "name": "Katherine Pryde"
-  },
-  "override": {
-    "msteams": {
-      "config": {
-        "appId": "<App ID>",
-        "appPassword": "<App Password>"
+  "message": {
+    "template": "<COURIER_NOTIFICATION_ID>",
+    "to": {
+      "ms_teams": {
+        "user_id": "a-user-id",
+        "tenant_id": "a-tenant-id-or-group-id",
+        "service_url": "https://smba.trafficmanager.net/amer"
+      }
+    },
+    "data": {
+      "name": "Katherine Pryde"
+    },
+    "providers": {
+      "msteams": {
+        "override": {
+          "config": {
+            "appId": "<App ID>",
+            "appPassword": "<App Password>"
+          }
+        }
       }
     }
   }
