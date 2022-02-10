@@ -10,18 +10,19 @@ To deliver a push notification to a recipient over Airship, Courier must be prov
 
 ```json title=JSON
 {
-  "event": "{{event.id}}",
-  "recipient": "{{recipient.id}}",
-  "profile": {
-    "airship": {
-      "audience": {
-        "named_user": "{{recipient.user_id}}"
-      },
-      "device_types": ["ios"]
+  "message": {
+    "template": "{{event.id}}",
+    "to": {
+      "airship": {
+        "audience": {
+          "named_user": "{{recipient.user_id}}"
+        },
+        "device_types": ["ios"]
+      }
+    },
+    "data": {
+      "username": "Steph Courier"
     }
-  },
-  "data": {
-    "username": "Steph Courier"
   }
 }
 ```
@@ -32,31 +33,34 @@ You can use a provider override to replace what we send to Airship's API. For ex
 
 ```json title=JSON
 {
-  "event": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-  "recipient": "abc123",
-  "profile": {
-    "airship": {
-      "audience": {
-        "named_user": "{{recipient.user_id}}"
-      },
-      "device_types": ["ios"]
-    }
-  },
-  "data": {
-    "dataForPushMessage": true
-  },
-  "override": {
-    "airship": {
-      "body": {},
-      "headers": {
-        "Authorization": "Basic {{EncodedAppKey:AppSecret}}"
+  "message": {
+    "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "to": {
+      "airship": {
+        "audience": {
+          "named_user": "{{recipient.user_id}}"
+        },
+        "device_types": ["ios"]
+      }
+    },
+    "data": {
+      "dataForPushMessage": true
+    },
+    "providers": {
+      "airship": {
+        "override": {
+          "body": {},
+          "headers": {
+            "Authorization": "Basic {{EncodedAppKey:AppSecret}}"
+          }
+        }
       }
     }
   }
 }
 ```
 
-Everything inside of `override.airship` will replace what we send to Airship's API. You can see all the available options by visiting [Airship's website](https://docs.airship.com/api/ua/).
+Everything inside of `providers.airship.override` will replace what we send to Airship's API. You can see all the available options by visiting [Airship's website](https://docs.airship.com/api/ua/).
 
 ## Tracking Events
 

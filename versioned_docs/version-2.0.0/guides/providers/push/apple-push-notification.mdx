@@ -46,10 +46,14 @@ Courier support sending Apple Push Notifications using single and multiple token
 
 ```json title=JSON
 {
-  "profile": {
-    "apn": {
-      "token": "YOUR TOKEN"
-    }
+  "message": {
+    "to": {
+      "apn": {
+        "token": "YOUR TOKEN"
+      }
+    },
+
+    // ... rest of message definition
   }
 }
 ```
@@ -58,9 +62,11 @@ Courier support sending Apple Push Notifications using single and multiple token
 
 ```json title=JSON
 {
-  "profile": {
-    "apn": {
-      "tokens": ["YOUR TOKEN 1", "YOUR TOKEN 2"]
+  "message": {
+    "to": {
+      "apn": {
+        "tokens": ["YOUR TOKEN 1", "YOUR TOKEN 2"]
+      }
     }
   }
 }
@@ -74,29 +80,31 @@ You can optionally specify if you want to route APN to the development/sandbox a
 
 ```json title=JSON
 {
-  "overrides": {
+  "providers": {
     "apn": {
-      "body": {
-      	"apns-priority": "number",
-        "badge": "Number",
-        "content-available": "number",
-        "expiry": "number", // e.g Math.floor(Date.now() / 1000) + 3600 Expires 1 hour from now.
-        "sound": "String",
-        "alert": "String or Dictionary", // https://developer.apple.com/library/archive/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/PayloadKeyReference.html#//apple_ref/doc/uid/TP40008194-CH17-SW5
-        "payload": "'{\"messageFrom\":\"Courier\"}'",
-        "topic": "your-app-bundle-id"
-      },
-      "config": {
-        "isProduction": false | true, // defaults to true
-        "key": "*******",
-        "topic": "your_app_topic"
+      "override": {
+        "body": {
+          "apns-priority": "number",
+          "badge": "Number",
+          "content-available": "number",
+          "expiry": "number", // e.g Math.floor(Date.now() / 1000) + 3600 Expires 1 hour from now.
+          "sound": "String",
+          "alert": "String or Dictionary", // https://developer.apple.com/library/archive/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/PayloadKeyReference.html#//apple_ref/doc/uid/TP40008194-CH17-SW5
+          "payload": "'{\"messageFrom\":\"Courier\"}'",
+          "topic": "your-app-bundle-id"
+        },
+        "config": {
+          "isProduction": false | true, // defaults to true
+          "key": "*******",
+          "topic": "your_app_topic"
+        }
       }
     }
   }
 }
 ```
 
-Everything inside of `override.apn.body` will replace what we send to the APN API. Values that are not replaced will still be sent.
+Everything inside of `providers.apn.override.body` will replace what we send to the APN API. Values that are not replaced will still be sent.
 
 ## Tracking Events
 

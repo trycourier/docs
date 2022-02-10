@@ -27,9 +27,12 @@ The AWS SNS provider is currently listed as a Push integration, although it can 
 To deliver a message to a mobile device over SNS, Courier must be provided either the Topic ARN, that the device is subscribed to, or the Target ARN that the device is subscribed to. If using a Target ARN, then this value should be included in the recipient profile as `target_arn`.
 
 ```json title=JSON
-// Recipient Profile
 {
-  "target_arn": "your:target:arn"
+  "message": {
+    "to": {
+      "target_arn": "your:target:arn"
+    }  
+  }
 }
 ```
 
@@ -42,9 +45,12 @@ Either the Target ARN or the Topic ARN should be provided, not both.
 To deliver a message to a recipient over AWS SNS, Courier must be provided the recipient's phone number. This value should be included in the recipient profile as `phone_number`.
 
 ```json title=JSON
-// Recipient Profile
 {
-  "phone_number": "+12345678901"
+  "message": {
+    "to": {
+      "phone_number": "+12345678901"
+    }
+  }
 }
 ```
 
@@ -56,14 +62,19 @@ You can override both the Access Key Id and the Secret Access Key supported by A
 
 ```json title=JSON
 {
-  "event": "<COURIER_NOTIFICATION_ID>",
-  "recipient": "",
-  "profile": {},
-  "data": {},
-  "override": {
-    “config”: {
-     	"accessKeyId": “<your Access Key Id>”,
-	"secretAccessKey": "<your Secret Access Key>",
+  "message": {
+    "template": "<COURIER_NOTIFICATION_ID>",
+    "to": {},
+    "data": {},
+    "providers": {
+      "aws-sns": {
+        "override": {
+          "config": {
+            "accessKeyId": “<your Access Key Id>”,
+            "secretAccessKey": "<your Secret Access Key>",
+          }
+        }
+      }
     }
   }
 }

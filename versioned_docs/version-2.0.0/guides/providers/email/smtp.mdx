@@ -69,11 +69,15 @@ You may also override the [SMTP transport configuration](https://nodemailer.com/
     "providers": {
       "smtp": {
         "override": {
-          "user": "username",
-          "pass": "hunter2",
-          "host": "smtp.example.com",
-          "secure": true,
-          "port": 465
+          "config": {
+            "auth": {
+              "user": "username",
+              "pass": "hunter2"
+            },
+            "host": "smtp.example.com",
+            "secure": true,
+            "port": 465
+          }
         }
       }
     }

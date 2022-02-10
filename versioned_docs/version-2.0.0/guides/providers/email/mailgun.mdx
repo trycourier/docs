@@ -38,9 +38,11 @@ You can use a provider override to replace what we send to Mailgun's Messages AP
           "body": {
             "o:tag": "notifications"
           },
-          "apiKey": "<your API Key>",
-          "domain": "<domain>",
-          "host": "<host>"
+          "config": {
+            "apiKey": "<your API Key>",
+            "domain": "<domain>",
+            "host": "<host>"
+          }
         }
       }
     }
