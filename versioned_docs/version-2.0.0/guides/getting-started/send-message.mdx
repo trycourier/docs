@@ -141,16 +141,18 @@ Our `--data` option should look like this:
 
 ```json
 {
-  "template": "'"$COURIER_NOTIFICATION_ID"'",
-  "to": {
-    "email": "kpryde@xavierinstitute.edu"
-  },
-  "data": {
-    "name": "Katherine Pryde",
-    "apt_date": "July 31, 2019",
-    "apt_time": "11:00 AM",
-    "support_phone": "555-555-5555",
-    "support_url": "https://courier.com/docs"
+  "message": {
+    "template": "'"$COURIER_NOTIFICATION_ID"'",
+    "to": {
+      "email": "kpryde@xavierinstitute.edu"
+    },
+    "data": {
+      "name": "Katherine Pryde",
+      "apt_date": "July 31, 2019",
+      "apt_time": "11:00 AM",
+      "support_phone": "555-555-5555",
+      "support_url": "https://courier.com/docs"
+    }
   }
 }
 ```
@@ -159,13 +161,13 @@ Our `--data` option should look like this:
 <TabItem value="bash" label="cURL urlencoded">
 
 ```bash
---data "template=$COURIER_NOTIFICATION_ID" \
---data "to[email]=kpryde@xavierinstitute.edu" \
---data "data[name]=Katherine Pryde" \
---data "data[apt_date]=July 31" \
---data "data[apt_time]=11:00 AM" \
---data "data[support_phone]=555-555-5555" \
---data "data[support_url]=https://docs.trycourier.com" \
+--data "message[template]=$COURIER_NOTIFICATION_ID" \
+--data "message[to][email]=kpryde@xavierinstitute.edu" \
+--data "message[data][name]=Katherine Pryde" \
+--data "message[data][apt_date]=July 31" \
+--data "message[data][apt_time]=11:00 AM" \
+--data "message[data][support_phone]=555-555-5555" \
+--data "message[data][support_url]=https://docs.trycourier.com" \
 ```
 
 </TabItem>
@@ -183,16 +185,18 @@ curl --request POST \
 --header "Authorization: Bearer $COURIER_AUTH_TOKEN" \
 --header "Content-Type: application/json" \
 --data '{
-  "template": "'"$COURIER_NOTIFICATION_ID"'",
-  "to": {
-    "email": "kpryde@xavierinstitute.edu"
-  },
-  "data": {
-    "name": "Katherine Pryde",
-    "apt_date": "July 31",
-    "apt_time": "11:00 AM",
-    "support_phone": "555-555-5555",
-    "support_url": "https://courier.com/docs"
+  "message": {
+    "template": "'"$COURIER_NOTIFICATION_ID"'",
+    "to": {
+      "email": "kpryde@xavierinstitute.edu"
+    },
+    "data": {
+      "name": "Katherine Pryde",
+      "apt_date": "July 31",
+      "apt_time": "11:00 AM",
+      "support_phone": "555-555-5555",
+      "support_url": "https://courier.com/docs"
+    }
   }
 }' \
 https://api.courier.com/send
@@ -205,13 +209,13 @@ https://api.courier.com/send
 curl --request POST \
 --header "Authorization: Bearer $COURIER_AUTH_TOKEN" \
 --header "Content-Type: application/json" \
---data "template=$COURIER_NOTIFICATION_ID" \
---data "to[email]=kpryde@xavierinstitute.edu" \
---data "data[name]=Katherine Pryde" \
---data "data[apt_date]=July 31" \
---data "data[apt_time]=11:00 AM" \
---data "data[support_phone]=555-555-5555" \
---data "data[support_url]=https://docs.trycourier.com" \
+--data "message[template]=$COURIER_NOTIFICATION_ID" \
+--data "message[to][email]=kpryde@xavierinstitute.edu" \
+--data "message[data][name]=Katherine Pryde" \
+--data "message[data][apt_date]=July 31" \
+--data "message[data][apt_time]=11:00 AM" \
+--data "message[data][support_phone]=555-555-5555" \
+--data "message[data][support_url]=https://docs.trycourier.com" \
 https://api.trycourier.app/send
 ````
 
@@ -244,24 +248,26 @@ Below is an example of overriding the subject and adding an attachment to a Send
 
 ```json title=JSON
 {
-  "template": "<COURIER_NOTIFICATION_ID>",
-  "to": {
-    "email": "kpryde@xavierinstitute.edu"
-  },
-  "data": {
-    "name": "Katherine Pryde"
-  },
-  "providers": {
-    "sendgrid": {
-      "override": {
-        "body": {
-          "attachments": [
-            {
-              "content": "eyJmb28iOiJiYXIifQ==",
-              "type": "application/json",
-              "filename": "SENDGRID_ATTACH.json"
-            }
-          ]
+  "message": {
+    "template": "<COURIER_NOTIFICATION_ID>",
+    "to": {
+      "email": "kpryde@xavierinstitute.edu"
+    },
+    "data": {
+      "name": "Katherine Pryde"
+    },
+    "providers": {
+      "sendgrid": {
+        "override": {
+          "body": {
+            "attachments": [
+              {
+                "content": "eyJmb28iOiJiYXIifQ==",
+                "type": "application/json",
+                "filename": "SENDGRID_ATTACH.json"
+              }
+            ]
+          }
         }
       }
     }

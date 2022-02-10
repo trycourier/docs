@@ -233,16 +233,18 @@ Our `--data` option should look like this:
 
 ```json
 {
-  "template": "'"$COURIER_NOTIFICATION_ID"'",
-  "to": {
-    "phone_number": "555-616-1962"
-  },
-  "data": {
-    "name": "Peter Parker",
-    "apt_date": "August 27, 2020",
-    "apt_time": "11:00 AM",
-    "support_phone": "555-555-5555",
-    "support_url": "https://courier.com/docs"
+  "message": {
+    "template": "'"$COURIER_NOTIFICATION_ID"'",
+    "to": {
+      "phone_number": "555-616-1962"
+    },
+    "data": {
+      "name": "Peter Parker",
+      "apt_date": "August 27, 2020",
+      "apt_time": "11:00 AM",
+      "support_phone": "555-555-5555",
+      "support_url": "https://courier.com/docs"
+    }
   }
 }
 ```
@@ -275,16 +277,18 @@ curl --request POST \
 --header "Authorization: Bearer $COURIER_AUTH_TOKEN" \
 --header "Content-Type: application/json" \
 --data '{
-  "template": "'"$COURIER_NOTIFICATION_ID"'",
-  "to": {
-    "phone_number": "555-616-1962"
-  },
-  "data": {
-    "name": "Peter Parker",
-    "apt_date": "August 27",
-    "apt_time": "11:00 AM",
-    "support_phone": "555-555-5555",
-    "support_url": "https://courier.com/docs"
+  "message": {
+    "template": "'"$COURIER_NOTIFICATION_ID"'",
+    "to": {
+      "phone_number": "555-616-1962"
+    },
+    "data": {
+      "name": "Peter Parker",
+      "apt_date": "August 27",
+      "apt_time": "11:00 AM",
+      "support_phone": "555-555-5555",
+      "support_url": "https://courier.com/docs"
+    }
   }
 }' \
 https://api.courier.com/send
@@ -297,13 +301,13 @@ https://api.courier.com/send
 curl --request POST \
 --header "Authorization: Bearer $COURIER_AUTH_TOKEN" \
 --header "Content-Type: application/json" \
---data "template=$COURIER_NOTIFICATION_ID" \
---data "to[phone_number]=555-616-1962" \
---data "data[name]=Peter Parker" \
---data "data[apt_date]=August 27" \
---data "data[apt_time]=11:00 AM" \
---data "data[support_phone]=555-555-5555" \
---data "data[support_url]=https://docs.trycourier.com" \
+--data "message[template]=$COURIER_NOTIFICATION_ID" \
+--data "message[to][phone_number]=555-616-1962" \
+--data "message[data][name]=Peter Parker" \
+--data "message[data][apt_date]=August 27" \
+--data "message[data][apt_time]=11:00 AM" \
+--data "message[data][support_phone]=555-555-5555" \
+--data "message[data][support_url]=https://docs.trycourier.com" \
 https://api.trycourier.app/send
 ```
 
