@@ -7,6 +7,7 @@ import MessageHistoryRenderedItem from "./MessageHistoryRenderedItem";
 import MessageHistoryRoutedItem from "./MessageHistoryRoutedItem";
 import MessageHistoryDeliveredItem from "./MessageHistoryDeliveredItem";
 import MessageHistoryUndeliverableItem from "./MessageHistoryUndeliverableItem";
+import MessageHistoryUnroutableItem from "./MessageHistoryUnroutableItem";
 
 const MessageHistory: ApiParam = {
   type: "oneOf",
@@ -19,6 +20,7 @@ const MessageHistory: ApiParam = {
     MessageHistoryRoutedItem,
     MessageHistoryDeliveredItem,
     MessageHistoryUndeliverableItem,
+    MessageHistoryUnroutableItem,
   ],
 };
 

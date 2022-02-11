@@ -139,6 +139,7 @@ Here's a rundown for how the payloads would look like -
     "notification": "SFTYJKSF0241SVH2TWY97TTFFTQG",
     "providers": [],
     "recipient": "b19fb0e0-8cd6-4337-b41c-92c780c80d1a",
+    "recipientId": "b19fb0e0-8cd6-4337-b41c-92c780c80d1a",
     "status": "ENQUEUED"
   },
   "type": "message:updated"
@@ -158,6 +159,7 @@ Here's a rundown for how the payloads would look like -
       // provider specific info
     ],
     "recipient": "b19fb0e0-8cd6-4337-b41c-92c780c80d1a",
+    "recipientId": "b19fb0e0-8cd6-4337-b41c-92c780c80d1a",
     "sent": 1630512468691,
     "status": "SENT"
   },
@@ -179,6 +181,7 @@ Here's a rundown for how the payloads would look like -
       // provider specific info
     ],
     "recipient": "b19fb0e0-8cd6-4337-b41c-92c780c80d1a",
+    "recipientId": "b19fb0e0-8cd6-4337-b41c-92c780c80d1a",
     "sent": 1630512468691,
     "status": "DELIVERED"
   },
@@ -201,8 +204,29 @@ Here's a rundown for how the payloads would look like -
       // provider specific info
     ],
     "recipient": "b19fb0e0-8cd6-4337-b41c-92c780c80d1a",
+    "recipientId": "b19fb0e0-8cd6-4337-b41c-92c780c80d1a",
     "sent": 1630512468691,
     "status": "OPENED"
+  },
+  "type": "message:updated"
+}
+```
+
+** Example payload for UNROUTABLE event **
+
+```json title=JSON
+{
+  "data": {
+    "enqueued": 1644594639213,
+    "error": "No providers added",
+    "event": "5QDEPHNXMC49GVP83X69J1SXV7CE",
+    "id": "1-620685cf-bf64c91e464de93a283cb791",
+    "notification": "5QDEPHNXMC49GVP83X69J1SXV7CE",
+    "providers": [],
+    "reason": "NO_PROVIDERS",
+    "recipient": "ab666576-ac30-4d5f-9559-29b85e94a8a4",
+    "recipientId": "ab666576-ac30-4d5f-9559-29b85e94a8a4",
+    "status": "UNROUTABLE"
   },
   "type": "message:updated"
 }
@@ -213,19 +237,20 @@ Here's a rundown for how the payloads would look like -
 ```json title=JSON
 {
   "data": {
-    "enqueued": 1633531064316,
-    "error": "No Valid Delivery Channel",
-    "event": "7R2EAGJYN6M09EJ53G98JYPEXF6R",
-    "id": "1-615db4b8-6f28ea5d7440b1cf7c2c6762",
-    "notification": "7R2EAGJYN6M09EJ53G98JYPEXF6R",
+    "enqueued": 1644595488228,
+    "error": "Notification opted out by user",
+    "event": "AVV5FVHYX5MJX3NT634DM3EMAYE0",
+    "id": "1-62068920-79afc13b939d3b7a4ad1e376",
+    "notification": "AVV5FVHYX5MJX3NT634DM3EMAYE0",
     "providers": [
       {
-        "error": "No Valid Delivery Channel",
+        "error": "Notification opted out by user",
         "status": "UNDELIVERABLE"
       }
     ],
-    "reason": "NO_CHANNELS",
-    "recipient": "aeede3f0-785e-4dbd-8695-b45edd1d4666",
+    "reason": "UNSUBSCRIBED",
+    "recipient": "suhas@courier.com",
+    "recipientId": "suhas_stable_issue_2",
     "status": "UNDELIVERABLE"
   },
   "type": "message:updated"

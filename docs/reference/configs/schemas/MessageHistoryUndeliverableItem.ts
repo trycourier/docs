@@ -46,7 +46,7 @@ const MessageHistoryUndeliverableItem: ApiParam = {
       name: "ts",
       example: 1562611083411,
       description:
-        "A UTC timestamp at which the recipient opened a message for the first time. This is stored as a millisecond representation of the Unix epoch (the time passed since January 1, 1970).",
+        "A UTC timestamp at which the message was determined to be undeliverable. This is stored as a millisecond representation of the Unix epoch (the time passed since January 1, 1970).",
     },
     {
       type: "string",

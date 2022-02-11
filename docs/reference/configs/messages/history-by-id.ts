@@ -34,6 +34,7 @@ const config: ApiReferenceProps = {
         "MAPPED",
         "PROFILE_LOADED",
         "RENDERED",
+        "UNROUTABLE",
       ],
     },
   ],
