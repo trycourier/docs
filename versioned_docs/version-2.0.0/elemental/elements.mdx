@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
 slug: ./elements
 toc_max_heading_level: 2
 ---
@@ -7,8 +7,6 @@ toc_max_heading_level: 2
 import TOCInline from "@theme/TOCInline";
 
 # Elements
-
-Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin hamburger doner. Cupim bacon jowl meatloaf pork chop picanha, spare ribs pork flank leberkas. Pork belly picanha capicola rump, andouille filet mignon turkey chicken beef ribs fatback biltong buffalo tri-tip ham.
 
 <TOCInline maxHeadingLevel={2} toc={toc} />
 
@@ -18,11 +16,28 @@ Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin ham
 
 ### Fields
 
+| Field            | Type   | Required | Description                                                                |
+| ---------------- | ------ | -------- | -------------------------------------------------------------------------- |
+| type             | string | required | The type of element. For action elements, this value should be `"action"`. |
+| content          | string | required |                                                                            |
+| href             | string | required |                                                                            |
+| action_id        | string |          |                                                                            |
+| align            | string |          |                                                                            |
+| background_color | string |          |                                                                            |
+| locales          |        |          |                                                                            |
+
 ## Channel Element
 
 Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin hamburger doner. Cupim bacon jowl meatloaf pork chop picanha, spare ribs pork flank leberkas. Pork belly picanha capicola rump, andouille filet mignon turkey chicken beef ribs fatback biltong buffalo tri-tip ham.
 
 ### Fields
+
+| Field    | Type   | Required | Description                                                                  |
+| -------- | ------ | -------- | ---------------------------------------------------------------------------- |
+| type     | string | required | The type of element. For channel elements, this value should be `"channel"`. |
+| channel  |        | required |                                                                              |
+| elements |        |          | If `raw` has not been specified, `elements` is `required`.                   |
+| raw      |        |          | If `elements` has not been specified, `raw` is `required`.                   |
 
 ## Divider Element
 
@@ -30,17 +45,36 @@ Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin ham
 
 ### Fields
 
+| Field | Type   | Required | Description                                                                  |
+| ----- | ------ | -------- | ---------------------------------------------------------------------------- |
+| type  | string | required | The type of element. For divider elements, this value should be `"divider"`. |
+| color | string |          |                                                                              |
+
 ## Group Element
 
 Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin hamburger doner. Cupim bacon jowl meatloaf pork chop picanha, spare ribs pork flank leberkas. Pork belly picanha capicola rump, andouille filet mignon turkey chicken beef ribs fatback biltong buffalo tri-tip ham.
 
 ### Fields
 
+| Field    | Type   | Required | Description                                                              |
+| -------- | ------ | -------- | ------------------------------------------------------------------------ |
+| type     | string | required | The type of element. For group elements, this value should be `"group"`. |
+| elements |        | required |                                                                          |
+
 ## Image Element
 
 Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin hamburger doner. Cupim bacon jowl meatloaf pork chop picanha, spare ribs pork flank leberkas. Pork belly picanha capicola rump, andouille filet mignon turkey chicken beef ribs fatback biltong buffalo tri-tip ham.
 
 ### Fields
+
+| Field    | Type   | Required | Description                                                              |
+| -------- | ------ | -------- | ------------------------------------------------------------------------ |
+| type     | string | required | The type of element. For image elements, this value should be `"image"`. |
+| src      | string | required |                                                                          |
+| align    | string |          |                                                                          |
+| alt_text | string |          |                                                                          |
+| href     | string |          |                                                                          |
+| width    | string |          |                                                                          |
 
 ## Meta Element
 
@@ -54,8 +88,23 @@ Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin ham
 
 ### Fields
 
+| Field        | Type   | Required | Description                                                              |
+| ------------ | ------ | -------- | ------------------------------------------------------------------------ |
+| type         | string | required | The type of element. For quote elements, this value should be `"quote"`. |
+| content      | string | required |                                                                          |
+| align        | string |          |                                                                          |
+| border_color | string |          |                                                                          |
+| text_style   | string |          |                                                                          |
+| locales      |        |          |                                                                          |
+
 ## Text Element
 
 Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin hamburger doner. Cupim bacon jowl meatloaf pork chop picanha, spare ribs pork flank leberkas. Pork belly picanha capicola rump, andouille filet mignon turkey chicken beef ribs fatback biltong buffalo tri-tip ham.
 
 ### Fields
+
+| Field   | Type   | Required | Description                                                              |
+| ------- | ------ | -------- | ------------------------------------------------------------------------ |
+| type    | string | required | The type of element. For action elements, this value should be `"text"`. |
+| content | string | required |                                                                          |
+| locales |        |          |                                                                          |
