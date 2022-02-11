@@ -5,7 +5,7 @@ description: Send your first notification with Nodejs.
 
 import Image from "@theme/IdealImage";
 
-# NodeJS Quickstart
+# Node.JS Quickstart
 
 Welcome to the Node.js Quickstart! Here we will walk through the process of getting your API keys, installing the SDK, and making your first API call with Node.js. If you have any questions, join our Discourse community: [https://forum.courier.com/](https://forum.courier.com/)
 
@@ -29,13 +29,9 @@ img={require("../../assets/guides/courier-app/api-keys.png")}
 alt="Courier Settings: API Keys"
 />
 
-## Installing the SDK
+## Using the SDK
 
-Install dependencies:
-
-```
-npm install node-fetch --save
-```
+### Installing the SDK
 
 Run the following command in your project directory to install the SDK via npm:
 
@@ -43,44 +39,33 @@ Run the following command in your project directory to install the SDK via npm:
 npm install @trycourier/courier
 ```
 
-## Sending a notification with Courier Elemental
+### Sending a notification with Courier Elemental
 
 Courier Elemental is a new JSON syntax built to describe your notification, including recipient data, notification content, variables, and routing. Here is an example of a simple notification sent with Elemental:
 
 ```jsx
-const fetch = require('node-fetch');
+import { CourierClient } from "@trycourier/courier";
 
-const options = {
-  method: 'POST',
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json'
+const courier = CourierClient({ authorizationToken: "YOUR_AUTH_TOKEN_HERE" });
+
+const { requestId } = await courier.send({
+  message: {
+    to: {
+      email: "email@example.com",
+    },
+	content: {
+		title: "Welcome!",
+		body: "Thanks for signing up, {{name}}",
+	},
+    data: {
+      name: "Peter Parker",
+    },
+	routing: {
+      method: "single",
+	  channels: ["email"],
+    },
   },
-  body: JSON.stringify({
-		"message": {
-			"to": {
-				"email": "email@example.com",
-				"user_id": "user-12345"
-			},
-			"content": {
-				"title": "Welcome!",
-				"body": "Thanks for signing up, {{name}}"
-			},
-			"data": {
-				"name": "Peter Parker"
-			},
-			"routing": {
-				"method": "single",
-				"channels": ["email"]
-		}
-}
-  })
-};
-
-fetch('https://api.courier.com/send', options)
-  .then(response => response.json())
-  .then(response => console.log(response))
-  .catch(err => console.error(err));
+});
 ```
 
 Replace the JSON within the body to match the type and content of notification you want to send.
@@ -122,3 +107,4 @@ Sending a message is an async process. So upon submission of a message, only a r
 ```
 
 Monitor the status of your notification once sent in the Courier app's [Data Dashboard](https://app.courier.com/data/messages).
+
