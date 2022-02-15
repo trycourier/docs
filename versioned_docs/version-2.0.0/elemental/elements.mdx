@@ -21,7 +21,7 @@ Allows the user to execute an action. Can be a button or a link.
 | type             | string | required | The type of element. For action elements, this value should be `"action"`.               |
 | content          | string | required | The text content of the action shown to the user.                                        |
 | href             | string | required | The target URL of the action.                                                            |
-| action_id        | string |          |                                                                                          |
+| action_id        | string |          | A unique id used to identify the action when it is executed.                             |
 | align            | string |          | The alignment of the action button. One of `"center"`, `"left"`, `"right"`, or `"full"`. |
 | background_color | string |          | The background color of the action button.                                               |
 | style            | string |          | Can be `"button"` or `"link"`. Defaults to link.                                         |
@@ -49,12 +49,12 @@ Note: As an alternative, most elements support a `channel` property. Which allow
 
 ### Fields
 
-| Field    | Type   | Required | Description                                                                                                                                  |
-| -------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| type     | string | required | The type of element. For channel elements, this value should be `"channel"`.                                                                 |
-| channels |        | required | The channel the contents of this element should be applied to. Can be `email`, `push`, `direct_message`, `sms` or a provider such as `slack` |
-| elements |        |          | An array of elements to apply to the channel. If `raw` has not been specified, `elements` is `required`.                                     |
-| raw      |        |          | Raw data to apply to the channel. See example. If `elements` has not been specified, `raw` is `required`.                                    |
+| Field    | Type             | Required | Description                                                                                                                                  |
+| -------- | ---------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| type     | string           | required | The type of element. For channel elements, this value should be `"channel"`.                                                                 |
+| channel  | string           | required | The channel the contents of this element should be applied to. Can be `email`, `push`, `direct_message`, `sms` or a provider such as `slack` |
+| elements | CourierElement[] |          | An array of elements to apply to the channel. If `raw` has not been specified, `elements` is `required`.                                     |
+| raw      | object           |          | Raw data to apply to the channel. See example. If `elements` has not been specified, `raw` is `required`.                                    |
 
 ### Examples
 
@@ -137,7 +137,7 @@ Renders a dividing line between elements.
 | Field | Type   | Required | Description                                                                  |
 | ----- | ------ | -------- | ---------------------------------------------------------------------------- |
 | type  | string | required | The type of element. For divider elements, this value should be `"divider"`. |
-| color | string |          |                                                                              |
+| color | string |          | The CSS color to render the line with. I.E. `#fff`.                          |
 
 ### Examples
 
@@ -155,10 +155,10 @@ Allows you to group elements together. This can be useful when used in combinati
 
 ### Fields
 
-| Field    | Type   | Required | Description                                                              |
-| -------- | ------ | -------- | ------------------------------------------------------------------------ |
-| type     | string | required | The type of element. For group elements, this value should be `"group"`. |
-| elements |        | required |                                                                          |
+| Field    | Type             | Required | Description                                                              |
+| -------- | ---------------- | -------- | ------------------------------------------------------------------------ |
+| type     | string           | required | The type of element. For group elements, this value should be `"group"`. |
+| elements | CourierElement[] | required | Sub elements to render.                                                  |
 
 ### Examples
 
