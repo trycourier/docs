@@ -12,40 +12,125 @@ import TOCInline from "@theme/TOCInline";
 
 ## Action Element
 
-Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin hamburger doner.
+Allows the user to execute an action. Can be a button or a link.
 
 ### Fields
 
-| Field            | Type   | Required | Description                                                                |
-| ---------------- | ------ | -------- | -------------------------------------------------------------------------- |
-| type             | string | required | The type of element. For action elements, this value should be `"action"`. |
-| content          | string | required |                                                                            |
-| href             | string | required | The target URL of the action.                                              |
-| action_id        | string |          |                                                                            |
-| align            | string |          | The alignment of the action button.                                        |
-| background_color | string |          | The background color of the action button.                                 |
-| locales          |        |          |                                                                            |
+| Field            | Type   | Required | Description                                                                              |
+| ---------------- | ------ | -------- | ---------------------------------------------------------------------------------------- |
+| type             | string | required | The type of element. For action elements, this value should be `"action"`.               |
+| content          | string | required | The text content of the action shown to the user.                                        |
+| href             | string | required | The target URL of the action.                                                            |
+| action_id        | string |          |                                                                                          |
+| align            | string |          | The alignment of the action button. One of `"center"`, `"left"`, `"right"`, or `"full"`. |
+| background_color | string |          | The background color of the action button.                                               |
+| style            | string |          | Can be `"button"` or `"link"`. Defaults to link.                                         |
+| locales          | object |          | Region specific content. See [locales docs](../locales) for more details.                |
 
 ### Examples
+
+Basic usage:
+
+```json
+{
+  "type": "action",
+  "content": "Click me",
+  "href": "https://example.com"
+}
+```
 
 ## Channel Element
 
-Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin hamburger doner.
+The channel element allows you to customize notification based on which channel the notification is being sent to.
+
+Channel elements are only valid as top-level elements; you cannot nest channel elements. If there is a channel element specified at the top-level of the document, all sibling elements must be channel elements.
+
+Note: As an alternative, most elements support a `channel` property. Which allows you to selectively display an individual element on a per channel basis. See the [control flow docs](../control-flow) for more details.
 
 ### Fields
 
-| Field    | Type   | Required | Description                                                                  |
-| -------- | ------ | -------- | ---------------------------------------------------------------------------- |
-| type     | string | required | The type of element. For channel elements, this value should be `"channel"`. |
-| channels |        | required |                                                                              |
-| elements |        |          | If `raw` has not been specified, `elements` is `required`.                   |
-| raw      |        |          | If `elements` has not been specified, `raw` is `required`.                   |
+| Field    | Type   | Required | Description                                                                                                                                  |
+| -------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| type     | string | required | The type of element. For channel elements, this value should be `"channel"`.                                                                 |
+| channels |        | required | The channel the contents of this element should be applied to. Can be `email`, `push`, `direct_message`, `sms` or a provider such as `slack` |
+| elements |        |          | An array of elements to apply to the channel. If `raw` has not been specified, `elements` is `required`.                                     |
+| raw      |        |          | Raw data to apply to the channel. See example. If `elements` has not been specified, `raw` is `required`.                                    |
 
 ### Examples
 
+Basic Usage:
+
+```json
+{
+  "type": "channel",
+  "channel": "email",
+  "elements": [
+    {
+      "type": "meta",
+      "title": "My Subject"
+    },
+    {
+      "type": "text",
+      "content": "My email body"
+    }
+  ]
+},
+{
+  "type": "channel",
+  "channel": "default", // all other channels
+  "elements": [
+    {
+      "type": "meta",
+      "title": "My Title"
+    },
+    {
+      "type": "text",
+      "content": "Hello **world**"
+    }
+  ]
+}
+```
+
+With raw:
+
+```json
+{
+  "type": "channel",
+  "channel": "email",
+  "raw": {
+    "subject": "My Subject",
+    "html": "<mjml>...</mjml>",
+    "text": "Lorem ipsum dolor, sit amet",
+    "transformers": ["handlebars", "mjml"]
+  }
+},
+
+{
+  "type": "channel",
+  "channel": "slack",
+  "raw": {
+    "slackBlocks": { ... } // Block Kit
+  }
+},
+
+{
+  "type": "channel", // all other channels
+  "elements": [
+    {
+      "type": "meta",
+      "title": "My Title"
+    },
+    {
+      "type": "text",
+      "content": "Hello **world**"
+    }
+  ]
+}
+```
+
 ## Divider Element
 
-Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin hamburger doner.
+Renders a dividing line between elements.
 
 ### Fields
 
@@ -58,13 +143,15 @@ Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin ham
 
 ```json
 {
-  "type": "divider"
+  "type": "divider",
+  "color": "#800080"
 }
 ```
 
 ## Group Element
 
-Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin hamburger doner.
+Allows you to group elements together. This can be useful when used in combination with `"if"` or
+`"loop"`. See [control flow docs](../control-flow) for more details.
 
 ### Fields
 
@@ -75,20 +162,37 @@ Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin ham
 
 ### Examples
 
+```json
+{
+  "type": "group",
+  "loop": "data.products.bread",
+  "elements": [
+    {
+      "type": "text",
+      "content": "# {{$.item.name}}"
+    },
+    {
+      "type": "text",
+      "content": "- Price: {{$.item.price}}"
+    }
+  ]
+}
+```
+
 ## Image Element
 
-Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin hamburger doner.
+Used to embed an image into the notification.
 
 ### Fields
 
-| Field    | Type   | Required | Description                                                              |
-| -------- | ------ | -------- | ------------------------------------------------------------------------ |
-| type     | string | required | The type of element. For image elements, this value should be `"image"`. |
-| src      | string | required |                                                                          |
-| align    | string |          |                                                                          |
-| alt_text | string |          |                                                                          |
-| href     | string |          |                                                                          |
-| width    | string |          |                                                                          |
+| Field    | Type   | Required | Description                                                                      |
+| -------- | ------ | -------- | -------------------------------------------------------------------------------- |
+| type     | string | required | The type of element. For image elements, this value should be `"image"`.         |
+| src      | string | required | The source of the image.                                                         |
+| align    | string |          | The alignment of the image. One of `"center"`, `"left"`, `"right"`, or `"full"`. |
+| alt_text | string |          | Alternate text for the image.                                                    |
+| href     | string |          | A URL to link to when the image is clicked.                                      |
+| width    | string |          | CSS width properties to apply to the image. (I.E. 50px)                          |
 
 ### Examples
 
@@ -101,7 +205,7 @@ Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin ham
 
 ## Meta Element
 
-Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin hamburger doner.
+The meta element contains information describing the notification that may be used by a particular channel or provider. One important field is the title field which will be used as the title for channels that support it.
 
 ### Fields
 
@@ -121,20 +225,44 @@ Set the title
 }
 ```
 
+With handlebars:
+
+```javascript
+{
+  "type": "meta",
+  "title": "Hello, {{first_name}} {{last_name}}" // comes from data (data.first_name etc)
+}
+```
+
+Channel filtered (see [control flow docs](../control-flow) for more details):
+
+```json
+{
+  "type": "meta",
+  "title": "This is an email!",
+  "channels": ["email"]
+},
+{
+  "type": "meta",
+  "title": "This is a push notification!",
+  "channels": ["push"]
+}
+```
+
 ## Quote Element
 
-Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin hamburger doner.
+Renders a quote block.
 
 ### Fields
 
-| Field        | Type   | Required | Description                                                              |
-| ------------ | ------ | -------- | ------------------------------------------------------------------------ |
-| type         | string | required | The type of element. For quote elements, this value should be `"quote"`. |
-| content      | string | required |                                                                          |
-| align        | string |          |                                                                          |
-| border_color | string |          |                                                                          |
-| text_style   | string |          |                                                                          |
-| locales      |        |          |                                                                          |
+| Field        | Type   | Required | Description                                                                  |
+| ------------ | ------ | -------- | ---------------------------------------------------------------------------- |
+| type         | string | required | The type of element. For quote elements, this value should be `"quote"`.     |
+| content      | string | required | The text value of the quote.                                                 |
+| align        | string |          | Alignment of the quote. One of `"center"`, `"left"`, `"right"`, or `"full"`. |
+| border_color | string |          | CSS border color property (i.e. `#fff`).                                     |
+| text_style   | string |          | One of `"text"`, `"h1"`, `"h2"`, or `"subtext"`                              |
+| locales      | object |          | Region specific content. See [locales docs](../locales) for more details.    |
 
 ### Examples
 
@@ -147,23 +275,46 @@ Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin ham
 
 ## Text Element
 
-Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin hamburger doner.
+Represents a body of text to be rendered inside of the notification.
 
 ### Fields
 
-| Field   | Type   | Required | Description                                                              |
-| ------- | ------ | -------- | ------------------------------------------------------------------------ |
-| type    | string | required | The type of element. For action elements, this value should be `"text"`. |
-| content | string | required |                                                                          |
-| locales |        |          |                                                                          |
+| Field   | Type   | Required | Description                                                               |
+| ------- | ------ | -------- | ------------------------------------------------------------------------- |
+| type    | string | required | The type of element. For action elements, this value should be `"text"`.  |
+| content | string | required | The text content displayed in the notification.                           |
+| locales | object |          | Region specific content. See [locales docs](../locales) for more details. |
 
 ### Examples
 
-A basic text element
+Basic usage:
 
 ```json
 {
   "type": "text",
   "content": "Thanks for signing up, {{name}}!"
+}
+```
+
+With handlebars:
+
+```json
+{
+  "type": "text",
+  "content": "This is a notification I sent to {{first_name}}" // comes from the message.data property (i.e. data.first_name)
+}
+```
+
+With locales:
+
+```json
+{
+  "type": "text",
+  "content": "This is a notification I sent to {{first_name}}",
+  "locales": {
+    "eu-fr": {
+      "content": "Ceci est une notification que j'ai envoyée à {{first_name}}"
+    }
+  }
 }
 ```
