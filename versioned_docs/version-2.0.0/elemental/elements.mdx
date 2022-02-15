@@ -12,7 +12,7 @@ import TOCInline from "@theme/TOCInline";
 
 ## Action Element
 
-Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin hamburger doner. Cupim bacon jowl meatloaf pork chop picanha, spare ribs pork flank leberkas. Pork belly picanha capicola rump, andouille filet mignon turkey chicken beef ribs fatback biltong buffalo tri-tip ham.
+Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin hamburger doner.
 
 ### Fields
 
@@ -20,28 +20,32 @@ Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin ham
 | ---------------- | ------ | -------- | -------------------------------------------------------------------------- |
 | type             | string | required | The type of element. For action elements, this value should be `"action"`. |
 | content          | string | required |                                                                            |
-| href             | string | required |                                                                            |
+| href             | string | required | The target URL of the action.                                              |
 | action_id        | string |          |                                                                            |
-| align            | string |          |                                                                            |
-| background_color | string |          |                                                                            |
+| align            | string |          | The alignment of the action button.                                        |
+| background_color | string |          | The background color of the action button.                                 |
 | locales          |        |          |                                                                            |
+
+### Examples
 
 ## Channel Element
 
-Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin hamburger doner. Cupim bacon jowl meatloaf pork chop picanha, spare ribs pork flank leberkas. Pork belly picanha capicola rump, andouille filet mignon turkey chicken beef ribs fatback biltong buffalo tri-tip ham.
+Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin hamburger doner.
 
 ### Fields
 
 | Field    | Type   | Required | Description                                                                  |
 | -------- | ------ | -------- | ---------------------------------------------------------------------------- |
 | type     | string | required | The type of element. For channel elements, this value should be `"channel"`. |
-| channel  |        | required |                                                                              |
+| channels |        | required |                                                                              |
 | elements |        |          | If `raw` has not been specified, `elements` is `required`.                   |
 | raw      |        |          | If `elements` has not been specified, `raw` is `required`.                   |
 
+### Examples
+
 ## Divider Element
 
-Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin hamburger doner. Cupim bacon jowl meatloaf pork chop picanha, spare ribs pork flank leberkas. Pork belly picanha capicola rump, andouille filet mignon turkey chicken beef ribs fatback biltong buffalo tri-tip ham.
+Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin hamburger doner.
 
 ### Fields
 
@@ -50,9 +54,17 @@ Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin ham
 | type  | string | required | The type of element. For divider elements, this value should be `"divider"`. |
 | color | string |          |                                                                              |
 
+### Examples
+
+```json
+{
+  "type": "divider"
+}
+```
+
 ## Group Element
 
-Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin hamburger doner. Cupim bacon jowl meatloaf pork chop picanha, spare ribs pork flank leberkas. Pork belly picanha capicola rump, andouille filet mignon turkey chicken beef ribs fatback biltong buffalo tri-tip ham.
+Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin hamburger doner.
 
 ### Fields
 
@@ -61,9 +73,11 @@ Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin ham
 | type     | string | required | The type of element. For group elements, this value should be `"group"`. |
 | elements |        | required |                                                                          |
 
+### Examples
+
 ## Image Element
 
-Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin hamburger doner. Cupim bacon jowl meatloaf pork chop picanha, spare ribs pork flank leberkas. Pork belly picanha capicola rump, andouille filet mignon turkey chicken beef ribs fatback biltong buffalo tri-tip ham.
+Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin hamburger doner.
 
 ### Fields
 
@@ -76,15 +90,40 @@ Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin ham
 | href     | string |          |                                                                          |
 | width    | string |          |                                                                          |
 
+### Examples
+
+```json
+{
+  "type": "image",
+  "src": "https://www.courier.com/logo.png"
+}
+```
+
 ## Meta Element
 
-Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin hamburger doner. Cupim bacon jowl meatloaf pork chop picanha, spare ribs pork flank leberkas. Pork belly picanha capicola rump, andouille filet mignon turkey chicken beef ribs fatback biltong buffalo tri-tip ham.
+Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin hamburger doner.
 
 ### Fields
 
+| Field | Type   | Required | Description                                                                   |
+| ----- | ------ | -------- | ----------------------------------------------------------------------------- |
+| type  | string | required | The type of element. For image elements, this value should be `"meta"`.       |
+| title | string |          | The title to be displayed by supported channels i.e. push, email (as subject) |
+
+### Examples
+
+Set the title
+
+```json
+{
+  "type": "meta",
+  "title": "Thank you for signing up!"
+}
+```
+
 ## Quote Element
 
-Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin hamburger doner. Cupim bacon jowl meatloaf pork chop picanha, spare ribs pork flank leberkas. Pork belly picanha capicola rump, andouille filet mignon turkey chicken beef ribs fatback biltong buffalo tri-tip ham.
+Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin hamburger doner.
 
 ### Fields
 
@@ -97,9 +136,18 @@ Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin ham
 | text_style   | string |          |                                                                          |
 | locales      |        |          |                                                                          |
 
+### Examples
+
+```json
+{
+  "type": "quote",
+  "content": "The future belongs to those who believe in the beauty of their dreams"
+}
+```
+
 ## Text Element
 
-Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin hamburger doner. Cupim bacon jowl meatloaf pork chop picanha, spare ribs pork flank leberkas. Pork belly picanha capicola rump, andouille filet mignon turkey chicken beef ribs fatback biltong buffalo tri-tip ham.
+Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin hamburger doner.
 
 ### Fields
 
@@ -108,3 +156,14 @@ Spicy jalapeno pork belly turkey jowl jerky, cow pig sausage shankle sirloin ham
 | type    | string | required | The type of element. For action elements, this value should be `"text"`. |
 | content | string | required |                                                                          |
 | locales |        |          |                                                                          |
+
+### Examples
+
+A basic text element
+
+```json
+{
+  "type": "text",
+  "content": "Thanks for signing up, {{name}}!"
+}
+```
