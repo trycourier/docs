@@ -166,12 +166,17 @@ Allows you to group elements together. This can be useful when used in combinati
 ```json
 {
   "type": "group",
-  "loop": "data.products.bread",
+  "loop": "data.products",
   "elements": [
     {
       "type": "text",
       "content": "# {{$.item.name}}"
     },
+    { "type": "divider" },
+    {
+      "type": "text",
+      "content": "- Description: {{$.item.description}}"
+    }
     {
       "type": "text",
       "content": "- Price: {{$.item.price}}"
