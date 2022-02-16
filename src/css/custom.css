@@ -438,6 +438,10 @@ aside > div > a > img,
   background-size: 1.5rem;
 }
 
+.theme-doc-version-badge {
+  margin: 1rem 0 !important;
+}
+
 .pagination-nav__sublabel {
   font-size: 13px;
   font-weight: 400;
