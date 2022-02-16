@@ -535,3 +535,11 @@ code {
 .sidebar-enterprise .menu__link--active:before {
   background-image: url(/img/sidebar-icons/enterprise-active.svg);
 }
+
+.sidebar-elemental .menu__link:before {
+  background-image: url(/img/sidebar-icons/elemental.svg);
+}
+
+.sidebar-elemental .menu__link--active:before {
+  background-image: url(/img/sidebar-icons/elemental-active.svg);
+}
