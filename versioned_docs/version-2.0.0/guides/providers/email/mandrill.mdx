@@ -1,5 +1,8 @@
 ---
 sidebar_position: 5
+sidebar_label: Mandrill
+title: Set Up Email Using Mandrill
+description: Looking for a way to send email notifications via Mandrill? This step-by-step tutorial will show you how to integrate Mandrill's API the easy way.
 ---
 
 # Mandrill
@@ -8,7 +11,7 @@ sidebar_position: 5
 
 To deliver a message to a recipient over Mandrill, Courier must be provided the recipient's email address. This value should be included in the recipient profile as `email`.
 
-```json title=JSON
+````json title=JSON
 {
   "message": {
     // Recipient Profile
@@ -50,6 +53,6 @@ You can use a provider override to replace what we send to Mandrill's Messages A
     }
   }
 }
-```
+````
 
 Everything inside of `messageproviders.mandrill.override` will replace what we send to Mandrill's Messages API. You can see all the available options by visiting [Mandrill API docs](https://mandrillapp.com/api/docs/messages.JSON.html).

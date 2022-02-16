@@ -6,6 +6,10 @@ import Image from "@theme/IdealImage";
 
 # Slack
 
+<head>
+  <link rel="canonical" href="https://www.courier.com/docs/guides/getting-started/slack/" />
+</head>
+
 ## Slack App Requirements
 
 To send notifications via Slack, a Slack App is required. You may use an existing or [create a new basic app](https://api.slack.com/authentication/basics).
@@ -257,6 +261,16 @@ The Slack profile should only contain an OAuth Response, Incoming Webhook, or th
 ```
 
 The notification will be sent using the `channel`.
+
+:::tip Helpful Tips
+
+We look for `channel`, `user_id`, or `email` in the incoming request to decide what channel to send the notifications to, and our logic is as follow:
+
+- if `channel` is provided in the request, we just use `channel`.
+- if `channel` is missing but `user_id` is provided in the request, we use `user_id`.
+- if `channel` and `user_id` are missing but `email` is provided in the request, we use `email` to derive the `channel`
+
+:::
 
 ## Override
 
