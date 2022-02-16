@@ -4,7 +4,16 @@ const MessageStatus: ApiParam = {
   type: "string",
   displayName: "MessageStatus",
   example: "DELIVERED",
-  enum: ["CLICKED", "DELIVERED", "OPENED", "SENT", "UNDELIVERABLE", "ENQUEUED", "UNMAPPED"],
+  enum: [
+    "CLICKED",
+    "DELIVERED",
+    "OPENED",
+    "SENT",
+    "UNDELIVERABLE",
+    "ENQUEUED",
+    "UNMAPPED",
+    "UNROUTABLE",
+  ],
   description: `
 Message Status:
 
@@ -15,6 +24,7 @@ Message Status:
 * \`SENT\` - The message has been accepted by the provider.
 * \`UNDELIVERABLE\` - The message could not be delivered to at least one provider, or the provider could not deliver the message to the recipient. This can happen for multiple reasons: an error, insufficient profile data, invalid notification setup, invalid integration configuration, etc.
 * \`UNMAPPED\` - Could not find a corresponding notification or event for the messages.
+* \`UNROUTABLE\` - The message could not be routed to any channel or provider. This can happen for multiple reasons: insufficient profile data, invalid notification setup, invalid integration configuration, etc.
   `.trim(),
 };
 

@@ -120,115 +120,121 @@ const ApiReference = ({
 
   return (
     <>
-    <Head>
-      <meta name="description" content={makeMetaDescription({description: description, path: path})} />
-    </Head>
-    <Formik<FormValues> initialValues={initialValues} onSubmit={execCallback}>
-      <Form autoComplete="off" className={styles.form}>
-        <div className="row row--no-gutters">
-          <div className="col">
-            <div className={styles.url}>
-              <span className={styles.method}>{method}</span>
-              {process.env.API_HOST}
-              {path}
-            </div>
-
-            {description && <div className={styles.section}>{description}</div>}
-
-            {pathParams && (
-              <div className={styles.section}>
-                <div className={styles.sectionTitle}>PATH PARAMS</div>
-
-                <ApiParamField param={{ type: "object", fields: pathParams }} prefix="path" />
+      <Head>
+        <meta
+          name="description"
+          content={makeMetaDescription({ description: description, path: path })}
+        />
+      </Head>
+      <Formik<FormValues> initialValues={initialValues} onSubmit={execCallback}>
+        <Form autoComplete="off" className={styles.form}>
+          <div className="row row--no-gutters">
+            <div className="col">
+              <div className={styles.url}>
+                <span className={styles.method}>{method}</span>
+                {process.env.API_HOST}
+                {path}
               </div>
-            )}
 
-            {queryParams && (
-              <div className={styles.section}>
-                <div className={styles.sectionTitle}>QUERY PARAMS</div>
+              {description && <div className={styles.section}>{description}</div>}
 
-                <ApiParamField param={{ type: "object", fields: queryParams }} prefix="query" />
-              </div>
-            )}
+              {pathParams && (
+                <div className={styles.section}>
+                  <div className={styles.sectionTitle}>PATH PARAMS</div>
 
-            {bodyParam && (
-              <div className={styles.section}>
-                <div className={styles.sectionTitle}>BODY PARAM</div>
-
-                <ApiParamField param={bodyParam} prefix="body" />
-              </div>
-            )}
-
-            <div className={styles.section}>
-              <div className={styles.sectionTitle}>Responses</div>
-
-              {responses.map((response, index) => (
-                <div key={index} className={styles.section}>
-                  <ApiResponseField
-                    field={{
-                      type: "object",
-                      name: `${response.status} ${response.description}`,
-                      ...response.body,
-                    }}
-                  />
+                  <ApiParamField param={{ type: "object", fields: pathParams }} prefix="path" />
                 </div>
-              ))}
-            </div>
-          </div>
+              )}
 
-          <div className="col col--5">
-            <div className={styles.runner}>
-              <div className={styles.inlineForm}>
-                <div className={styles.sectionTitle}>AUTH TOKEN</div>
+              {queryParams && (
+                <div className={styles.section}>
+                  <div className={styles.sectionTitle}>QUERY PARAMS</div>
 
-                <input value={token} onChange={onChangeToken} className={styles.input} />
+                  <ApiParamField param={{ type: "object", fields: queryParams }} prefix="query" />
+                </div>
+              )}
 
-                <ApiParamButton type="submit" disabled={loading}>
-                  Try It
-                </ApiParamButton>
-              </div>
+              {bodyParam && (
+                <div className={styles.section}>
+                  <div className={styles.sectionTitle}>BODY PARAM</div>
 
-              <ApiExamples method={method} path={path} />
+                  <ApiParamField param={bodyParam} prefix="body" />
+                </div>
+              )}
 
               <div className={styles.section}>
-                <div className={styles.inlineForm}>
-                  <div className={styles.sectionTitle}>
-                    Response {responseIndex !== -1 && "Example"}
+                <div className={styles.sectionTitle}>Responses</div>
+
+                {responses.map((response, index) => (
+                  <div key={index} className={styles.section}>
+                    <ApiResponseField
+                      field={{
+                        type: "object",
+                        name: `${response.status} ${response.description}`,
+                        ...response.body,
+                      }}
+                    />
                   </div>
-                  <select
-                    value={responseIndex}
-                    className={styles.input}
-                    onChange={handleResponseSelect}
-                  >
-                    {responseIndex === -1 && (
-                      <option disabled value={-1}>
-                        {response?.status} Test Request
-                      </option>
-                    )}
+                ))}
+              </div>
+            </div>
 
-                    {responses.map((response, index) => (
-                      <option key={index} value={index}>
-                        {response.status} {response.description}
-                      </option>
-                    ))}
-                  </select>
+            <div className="col col--5">
+              <div className={styles.runner}>
+                <div className={styles.inlineForm}>
+                  <div className={styles.sectionTitle}>AUTH TOKEN</div>
+
+                  <input value={token} onChange={onChangeToken} className={styles.input} />
+
+                  <ApiParamButton type="submit" disabled={loading}>
+                    Try It
+                  </ApiParamButton>
                 </div>
 
-                <CodeBlock className="language-json">
-                  {responseIndex === -1
-                    ? response
-                      ? JSON.stringify(response.body, null, 2)
-                      : "Error with Test Request"
-                    : responses[responseIndex].body
-                    ? stringifyJSON(deepCompact(buildResponse(responses[responseIndex].body)), true)
-                    : "Empty"}
-                </CodeBlock>
+                <ApiExamples method={method} path={path} />
+
+                <div className={styles.section}>
+                  <div className={styles.inlineForm}>
+                    <div className={styles.sectionTitle}>
+                      Response {responseIndex !== -1 && "Example"}
+                    </div>
+                    <select
+                      value={responseIndex}
+                      className={styles.input}
+                      onChange={handleResponseSelect}
+                    >
+                      {responseIndex === -1 && (
+                        <option disabled value={-1}>
+                          {response?.status} Test Request
+                        </option>
+                      )}
+
+                      {responses.map((response, index) => (
+                        <option key={index} value={index}>
+                          {response.status} {response.description}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <CodeBlock className="language-json">
+                    {responseIndex === -1
+                      ? response
+                        ? JSON.stringify(response.body, null, 2)
+                        : "Error with Test Request"
+                      : responses[responseIndex].body
+                      ? stringifyJSON(
+                          deepCompact(buildResponse(responses[responseIndex].body)),
+                          true
+                        )
+                      : "Empty"}
+                  </CodeBlock>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </Form>
-    </Formik>
+        </Form>
+      </Formik>
     </>
   );
 };

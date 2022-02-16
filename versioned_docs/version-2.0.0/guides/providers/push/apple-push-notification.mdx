@@ -1,5 +1,8 @@
 ---
 sidebar_position: 1
+sidebar_label: Apple Push Notification
+title: Setup Notifications Using Apple Push Notification
+description: Looking for a way to send push notifications via Apple Push Notification? This step-by-step tutorial will show you how to integrate Apple Push Notification's API the easy way.
 ---
 
 import Image from "@theme/IdealImage";
@@ -51,7 +54,7 @@ Courier support sending Apple Push Notifications using single and multiple token
       "apn": {
         "token": "YOUR TOKEN"
       }
-    },
+    }
 
     // ... rest of message definition
   }
@@ -91,7 +94,8 @@ You can optionally specify if you want to route APN to the development/sandbox a
           "sound": "String",
           "alert": "String or Dictionary", // https://developer.apple.com/library/archive/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/PayloadKeyReference.html#//apple_ref/doc/uid/TP40008194-CH17-SW5
           "payload": "'{\"messageFrom\":\"Courier\"}'",
-          "topic": "your-app-bundle-id"
+          "topic": "your-app-bundle-id",
+          "mutable-content": "number" // 1 will set the flag (default is unset)
         },
         "config": {
           "isProduction": false | true, // defaults to true
