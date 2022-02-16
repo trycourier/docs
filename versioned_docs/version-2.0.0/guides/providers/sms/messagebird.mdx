@@ -1,0 +1,20 @@
+---
+sidebar_position: 2
+---
+
+# MessageBird
+
+## Profile Requirements
+
+To deliver a message to a recipient over MessageBird, Courier must be provided the recipient's SMS-compatible telephone number. This value should be included in the recipient profile as `phone_number`.
+
+```json title=JSON
+{
+  "message": {
+    // Recipient Profile
+    "to": {
+      "phone_number": "+491575556511"
+    }
+  }
+}
+```

@@ -1,0 +1,75 @@
+---
+sidebar_position: 8
+---
+
+import Image from "@theme/IdealImage";
+
+# SendGrid
+
+## Profile Requirements
+
+To deliver a message to a recipient over SendGrid, Courier must be provided the recipient's email address. This value should be included in the recipient profile as `email`.
+
+```json title=JSON
+{
+  "message": {
+    // Recipient Profile
+    "to": {
+      "email": "example@example.com"
+    }
+
+    // ... rest of message definition
+  }
+}
+```
+
+## Email Activity Tracking
+
+For the SendGrid configuration, the toggle, _Enable Email Activity Tracking via Polling_, will allow Courier to use SendGrid’s Email Activity API to periodically check on the delivery status of sent emails. The API Key must have Read Access to the Email Activity, and the SendGrid account must have the additional email history add-on enabled. See the documentation for [API Keys](https://app.sendgrid.com/settings/api_keys) and [Email Activity](https://app.sendgrid.com/settings/billing/addons/email_activity) to ensure the SendGrid account is set up correctly.
+
+<Image
+  img={require("../../../assets/guides/providers/sendgrid-api-key-permissions.png")}
+  alt="Enable read access to Email Activity on the API Key."
+/>
+
+<Image
+  img={require("../../../assets/guides/providers/sendgrid-addons.png")}
+  alt="Upgrade the plan to include extended email activity history."
+/>
+
+## Override
+
+Overrides can be used to change the request body that Courier uses to send an email. Overrides are useful when a field is not yet supported by Courier or you would like to override the value that Courier generates. You can override any of the fields supported by SendGrid's `/mail/send` endpoint ([see all v3 mail send request body fields here](https://sendgrid.api-docs.io/v3.0/mail-send/v3-mail-send)). Below is an example of overriding the subject and adding an attachment:
+
+```json title=JSON
+{
+  "message": {
+    "template": "<COURIER_NOTIFICATION_ID>",
+    "to": {
+      "email": "kpryde@xavierinstitute.edu"
+    },
+    "data": {
+      "name": "Katherine Pryde"
+    },
+    "providers": {
+      "sendgrid": {
+        "override": {
+          "body": {
+            "subject": "Requested file - lockheed.json",
+            "attachments": [
+              {
+                "content": "eyJmb28iOiJiYXIifQ==",
+                "type": "application/json",
+                "filename": "lockheed.json"
+              }
+            ]
+          },
+          "config": {
+            "apiKey": "<your API Key>"
+          }
+        }
+      }
+    }
+  }
+}
+```

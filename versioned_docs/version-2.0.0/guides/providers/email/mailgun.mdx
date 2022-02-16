@@ -1,0 +1,84 @@
+---
+sidebar_position: 3
+---
+
+# Mailgun
+
+## Profile Requirements
+
+To deliver a message to a recipient over Mailgun, Courier must be provided the recipient's email address. This value should be included in the recipient profile as `email`.
+
+```json title=JSON
+{ 
+  "message": {
+    // Recipient Profile
+    "to": {
+      "email": "example@example.com"
+    }
+
+    // ... rest of message definition
+  }
+}
+```
+
+## Override
+
+You can use a provider override to replace what we send to Mailgun's Messages API. For example, you can use [Mailgun's Tagging](https://documentation.mailgun.com/en/latest/user_manual.html#tagging) with your request:
+
+```json title=JSON
+{
+  "message": {
+    "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "to": {
+      "email": "example@example.com"
+    },
+    "providers": {
+      "mailgun": {
+        "override": {
+          "body": {
+            "o:tag": "notifications"
+          },
+          "config": {
+            "apiKey": "<your API Key>",
+            "domain": "<domain>",
+            "host": "<host>"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+Everything inside of `message.providers.mailgun.override` will replace what we send to Mailgun's Messages API. You can see all the available options by visiting [Mailgun API docs](https://documentation.mailgun.com/en/latest/api-sending.html).
+
+## Sending Attachments
+
+To include an attachment in the email, you can use the following override:
+
+```json
+{
+  "message": {
+    "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "to": {
+      "email": "example@example.com"
+    },
+    "data": {
+      "hello": "world"
+    },
+    "providers": {
+      "mailgun": {
+        "override": {
+          "attachments": [
+            {
+              "filename": "billing.pdf",
+              "contentType": "application/pdf",
+              "data": "Q29uZ3JhdHVsYXRpb25zLCB5b3UgY2FuIGJhc2U2NCBkZWNvZGUh"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+```

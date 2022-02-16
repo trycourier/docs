@@ -1,0 +1,111 @@
+---
+sidebar_position: 4
+---
+
+# Webhook Integration
+
+Courier supports sending HTTP requests to a specified destination using the Webhook provider.
+
+## Profile Requirements
+
+To deliver an HTTP request, Courier must be provided with a destination. For a static destination, you can specify the Webhook URL and Authorization type in the [webhook integration setup page](https://www.trycourier.app/integrations/webhook).
+
+### Dynamic Destination
+
+If you need to specify the webhook destination on a per recipient basis, you can choose "Dynamic Destination" and pass the information in the recipient profile. These values should be included in the recipient profile as `webhook`.
+
+```json title=JSON
+{
+  "message": {
+    // Recipient Profile
+    "to": {
+      "webhook": {
+        "url": "https://www.example.com",
+        "method": "POST", // default to "POST",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "authentication": {
+          "mode": "basic", //default to "none"
+          "username": "AzureDiamond",
+          "password": "hunter2"
+        },
+        "profile": "expanded" // default to "limited"
+      }
+    }
+  }
+}
+```
+
+#### Authentication
+
+The webhooks provider supports basic and bearer authentication. You can select either type by setting `authentication.method` to `basic` or `bearer` and providing the credentials. Authentication defaults to `None` if not provided.
+
+```json title="Basic Auth"
+{
+  "mode": "basic", //default to "none"
+  "username": "AzureDiamond",
+  "password": "hunter2"
+}
+```
+
+```json title="Bearer Auth"
+{
+  "mode": "bearer",
+  "token": "ABCDEFG123456"
+}
+```
+
+#### Expanded Profile
+
+What profile information is included in the request payload can be specified by setting `profile` to either `limited` or `expanded` . The default setting is `limited` and will only included the profile data provided when the send API was called. Selecting `expanded` will include profile data merged from the profile database.
+
+## Request Payload
+
+Based on how the profile is configured, the webhook provider will send the following payload using what was passed into the send method.
+
+```json title=JSON
+// Example Payload
+{
+  "message": {
+    "template": "MY_EVENT",
+    "to": {
+      "email": "stan.pines@mysteryshack.com",
+      "phone_number": "+12025550165"
+    },
+    "data": {
+      "name": "Stan Pines",
+      "location": "Gravity Falls, OR"
+    }
+  }
+}
+```
+
+## Override
+
+You can use a provider override to replace what we send to the destination.
+
+```json title=JSON
+{
+  "message": {
+    "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "data": {
+      "hello": "world"
+    },
+    "providers": {
+      "webhook": {
+        "override": {
+          "url": "https://www.example.com",
+          "method": "PUT",
+          "headers": {
+            "X-Custom-Header": "Hello from Courier"
+          },
+          "body": {
+            "key": "value"
+          }
+        }
+      }
+    }
+  }
+}
+```

@@ -24,6 +24,14 @@ const metadata = require("./src/theme/metadata");
             routeBasePath: "/",
             sidebarPath: require.resolve("./src/theme/sidebars"),
             remarkPlugins: [require("./src/theme/plugins/rehypeExternalLinks")],
+            lastVersion: "2.0.0",
+            versions: {
+              current: {
+                label: "1.0.0",
+                path: "1.0.0",
+                banner: "unmaintained",
+              },
+            },
           },
           blog: false,
           pages: false,

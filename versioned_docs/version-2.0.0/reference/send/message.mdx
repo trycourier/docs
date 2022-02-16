@@ -1,0 +1,28 @@
+---
+sidebar_position: 0
+---
+
+import ApiReference from "@site/src/components/ApiReference";
+import config from "../configs/send/message";
+
+# POST /send
+
+### Custom Formatting
+
+To improve working with cURL, Courier also supports a custom urlencoded format that can be used in the place of JSON.
+This format allows nested data values using square bracket syntax. This is useful when passing `profile` and `data` parameters.
+For example, a cURL `--data` option with the `profile` parameter and a nested `email` would look like this:
+```bash
+--data "profile[email]=test@example.com"
+```
+
+## Send Response Data
+
+Sending a message is an async process. So upon submission of a message,
+only a requestId will be returned.
+
+```json
+{ "requestId": "87e7c05b-4f46-fda24e356e23" }
+```
+
+<ApiReference {...config} />

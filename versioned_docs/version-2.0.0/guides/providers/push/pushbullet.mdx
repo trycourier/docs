@@ -1,0 +1,34 @@
+---
+sidebar_position: 12
+---
+
+# Pushbullet
+
+## Profile Requirements
+
+No profile data is required for Pushbullet.
+
+## Override
+
+Overrides can be used to change the request body that Courier uses to send a push message. Overrides are useful when a field is not yet supported by Courier or you would like to override the value that Courier generates. You can override any of the fields supported by Pushbullet’s `/pushes` endpoint ([see all send request body fields here](https://docs.pushbullet.com/#create-push)).
+
+Below is an example using the override to send a `url` by overriding the `type` of the push:
+
+```json title=JSON
+{
+  "message": {
+    "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "to": {},
+    "providers": {
+      "pushbullet": {
+        "override": {
+          "body": {
+            "type": "link",
+            "url": "https://www.courier.com"
+          }
+        }
+      }
+    }
+  }
+}
+```

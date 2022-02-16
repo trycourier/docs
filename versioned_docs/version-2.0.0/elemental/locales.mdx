@@ -1,0 +1,52 @@
+---
+sidebar_position: 4
+slug: ./locales
+toc_max_heading_level: 2
+---
+
+# Locales
+
+Locales allow you to customize elements based on the the locale of the target recipient.
+
+At the moment locales is restricted to elements that have a `content` property. This includes `action`, `quote`, and `text` elements.
+
+Locales take the following interface:
+
+```typescript
+interface Locales {
+  [locale: string]: {
+    content: string;
+  };
+}
+```
+
+When a `"locale"` is specified in the `message.to` field, each element that has content
+for that `"locale"` will have their top level content property replaced by the locale specific
+content.
+
+```json
+{
+  "message": {
+    "to": {
+      "email": "person@example.com",
+      "locale": "eu-fr"
+    },
+    "content": {
+      "version": "2022-01-01",
+      "elements": [
+        {
+          "type": "text",
+          "content": "Hello",
+          "locales": {
+            "eu-fr": {
+              "content": "Bonjour"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+In the above example, `Hello` would be replaced with `Bonjour`.

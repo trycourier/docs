@@ -1,0 +1,65 @@
+---
+sidebar_position: 0
+---
+
+# Chat API
+
+## Profile Requirements
+
+To deliver a message to a recipient over Chat API, Courier must be provided a phone number or chat id.
+This value should be included in the recipient profile as `chat_api`.
+
+```json title=JSON
+{
+  "message": {
+    //RecipientProfile using phone number
+    "to": {
+      "chat_api": {
+        "phone_number": "12345678"
+      }
+    }
+  }
+}
+```
+
+```json title=JSON
+{
+  "message": {
+    //RecipientProfile using phone number
+    "to": {
+      "chat_id": "<chat_id>"
+    }
+  }
+}
+
+## Template
+
+In the notification’s integration settings, a quoted message id and mentioned phone numbers can be provided
+
+## Override
+
+Overrides can be used to change the request body that Courier uses to send a push message. Overrides are useful when a field is not yet supported by Courier or you would like to override the value that Courier generates. You can override any of the fields supported by Chat APIs `/sendMessage` endpoint ([see all send request body fields here](https://chat-api.com/en/swagger.html?_ga=2.118122049.934738336.1637606157-1510064799.1637365770#/messages/sendMessage)). Below is an example of overriding the token and the chat API instance for the configuration:
+
+```json title=JSON
+{
+  "message": {
+    "template": "<COURIER_NOTIFICATION_ID>",
+    "to": {
+      "chat_api": {
+        "phone_number": "12345678"
+      }
+    },
+    "data": {
+      "name": "Katherine Pryde"
+    },
+    "providers": {
+      "override": {
+        "config": {
+          "instanceId": "<yourInstanceId>",
+          "token": "<yourToken>"
+        }
+      }
+    }
+  }
+}
+```

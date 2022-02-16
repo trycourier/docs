@@ -17,6 +17,10 @@ const navbarItems = [
     href: "https://status.courier.com",
     label: "Service Status",
   },
+  {
+    type: "docsVersionDropdown",
+    position: "right",
+  },
 ];
 
 module.exports = navbarItems;

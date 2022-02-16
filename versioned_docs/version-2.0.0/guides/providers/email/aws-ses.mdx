@@ -1,0 +1,112 @@
+---
+sidebar_position: 0
+---
+
+# AWS SES
+
+## Profile Requirements
+
+To deliver a message to a recipient over AWS SES, Courier must be provided the recipient's email address. This value should be included in the recipient profile as `email`.
+
+```json title=JSON
+{
+  "message": {
+    // Recipient Profile
+    "to": {
+      "email": "example@example.com"
+    }
+
+    // ... rest of message definition
+  }
+}
+```
+
+## Configuring AWS SES
+
+To deliver a message, Courier requires an Access Key ID and Secret Access Key of an IAM user. That user needs to be able to perform SES SendEmail Action on the identity or identities ARNs of the recipient(s). See [creating a new IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) and [Programmatic access Documentation](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to get started.
+
+### Attach the Built-in Policy
+
+When creating a new IAM user, you can attach the **AmazonSESFullAccess** built-in policy to grant the IAM user full access to sending emails to any identity on the AWS account.
+
+### Create and Attach a Custom Policy
+
+Here is an example of an IAM user with the policy required where they can perform send email against all SES identities:
+
+```json title=JSON
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "VisualEditor0",
+      "Effect": "Allow",
+      "Action": ["ses:SendRawEmail", "ses:GetSendStatistics"],
+      "Resource": "*"
+    }
+  ]
+}
+```
+
+## Override
+
+Overrides can be used to change the RawMessage & Source and that Courier uses to send an email and to add attachments. Overrides in SES are useful if you have a MIME 1.0 string to pass instead of the template created in Courier. You can override any of the fields supported by AWS SES's `SendRawEmail` method ([see all request body fields here](https://docs.aws.amazon.com/ses/latest/APIReference/API_SendRawEmail.html)). Below is an example of overriding the Data off of RawMessage:
+
+```json
+{
+  "message": {
+    "template": "<COURIER_NOTIFICATION_ID>",
+    "to": {
+      "email": "kpryde@xavierinstitute.edu"
+    },
+    "data": {
+      "name": "Katherine Pryde"
+    },
+    "providers": {
+      "aws-ses": {
+        "override": {
+          "body": {
+            "RawMessage": {
+              "Data": "<Mime 1.0 compatible message>"
+            },
+          },
+          "config": {
+            "accessKeyId": "<Access Key ID>",
+            "secretAccessKey": "<Secret Access Key>"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+### Sending Attachments
+
+To include an attachment in the email, you can use the following override:
+
+```json
+{
+  "message": {
+    "to": {
+      "email": "kpryde@xavierinstitute.edu"
+    },
+    "template": "<COURIER_NOTIFICATION_ID>",
+    "data": {
+      "name": "Katherine Pryde"
+    },
+    "providers": {
+      "aws-ses": {
+        "override": {
+          "attachments": [
+            {
+              "filename": "hello.txt",
+              "contentType": "text/plain",
+              "data": "SGk="
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+```

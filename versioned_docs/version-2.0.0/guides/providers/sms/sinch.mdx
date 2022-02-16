@@ -1,0 +1,20 @@
+---
+sidebar_position: 5
+---
+
+# Sinch
+
+## Profile Requirements
+
+To deliver an SMS message through Sinch, Courier must be provided the recipient's SMS-compatible phone number. This value should be included in the recipient profile as `phone_number`.
+
+```json title=JSON
+{
+  "message": {
+    // Recipient Profile
+    "to": {
+      "phone_number": "+491575556511"
+    }
+  }
+}
+```

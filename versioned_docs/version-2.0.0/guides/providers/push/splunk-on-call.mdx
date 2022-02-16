@@ -1,0 +1,60 @@
+---
+sidebar_position: 14
+---
+
+# Splunk On Call
+
+## Profile Requirements
+
+To deliver a message to a recipient over Splunk On-Call, Courier must be provided a target object that contains the recipient's type and slug. This value should be included in the recipient profile as `splunk_on_call`.
+
+```json title=JSON
+//RecipientProfile
+{
+  "message": {
+    "to": {
+      "splunk-on-call": {
+        "target": {
+          "type": "User",
+          "slug": "userSlug"
+        }
+      }
+    }
+  }
+}
+```
+
+## Template Requirements
+
+To deliver a message to a recipient over Splunk On-Call, Courier must be provided a summary in the notification’s integration settings
+
+## Override
+
+Overrides can be used to change the request body that Courier uses to send a push message. Overrides are useful when a field is not yet supported by Courier or you would like to override the value that Courier generates. You can override any of the fields supported by Splunk On-Call's `/api-public/v1/incidents` endpoint ([see all send request body fields here](https://portal.victorops.com/public/api-docs.html#/Incidents)). Below is an example of overriding the from username and the api key for the configuration:
+
+```json title=JSON
+{
+  "message": {
+    "template": "<COURIER_NOTIFICATION_ID>",
+    "to": {
+      "splunk-on-call": {
+        "target": {
+          "type": "User",
+          "slug": "kpryde"
+        }
+      }
+    },
+    "data": {
+      "name": "Katherine Pryde"
+    },
+    "providers": {
+      "splunk-on-call": {
+        "config": {
+          "apiKey": "<your API Key>",
+          "userName": "<youruserName>"
+        }
+      }
+    }
+  }
+}
+```

@@ -1,0 +1,518 @@
+---
+sidebar_position: 0
+---
+
+import Image from "@theme/IdealImage";
+
+# Internationalization Specification
+
+## Flow
+
+A notification template is changed and submitted for translation. Upon submission, an outbound webhook call will be made that will notify of a pending change submission. Upon receipt of the webhook event, the content for the notification template can be fetched and the translation process begun.
+
+**Diagram**
+
+<Image img={require("../../assets/guides/internationalization-specification/diagram.png")} alt="" />
+
+```json
+{
+  type: "notification:submitted",
+  data: {
+		id: "NOTIFICATION_ID_HERE",
+    // ...
+  }
+```
+
+## Fetching Content
+
+When the "notification:submitted" is received
+
+`GET /notifications/:notification_id/draft/content`
+
+### Sample Template
+
+<Image
+  img={require("../../assets/guides/internationalization-specification/sample-template.png")}
+  alt=""
+/>
+
+### Sample Template Response
+
+```json
+{
+  "blocks": [
+    {
+      "alias": "Greetings",
+      "context": "This is where we greet a new user",
+      "id": "block_43c114d9-9cfd-4340-808f-17e2fc7a4c87",
+      "type": "text",
+      "checksum": "fb60f2098fa407a4ff8d48e3e908d889",
+      "content": "Hello <variable id=\"3\">{name}</variable>, Welcome to <highlight id=\"6\">Courier</highlight>!",
+      "locales": {
+        "fr_FR": "Bonjour <variable id=\"3\">{name}</variable>, bienvenu a <highlight id=\"6\">Courier</highlight>!"
+      }
+    },
+    {
+      "id": "block_f19dd58f-d32c-41b8-911c-239053d34803",
+      "type": "markdown",
+      "content": "Ready, <variable id=\"3\">{name}</variable>? Get started [here](http://daringfireball.net/projects/markdown/).",
+      "checksum": "d06665ec3f663789db81474bc1a82fc5",
+      "locales": {
+        "fr_FR": "prêt, <variable id=\"3\">{name}</variable>? Commencer [ici](http://daringfireball.net/projects/markdown/)."
+      }
+    },
+    {
+      "id": "block_78863d66-54f2-4032-a897-cbed3abb2538",
+      "type": "quote",
+      "content": "<highlight id=\"3\">Marvel</highlight> is better than DC, do you agree <variable id=\"6\">{name}</variable>?",
+      "checksum": "d6e5df4e00b54703e7048cbc5276863e",
+      "locales": {
+        "fr_FR": "<highlight id=\"3\">Marvel</highlight> mieux que DC, êtes-vous d'accord <variable id=\"3\">{name}</variable>?"
+      }
+    },
+    {
+      "id": "block_106b5136-1bf9-4842-bff7-cbae140fd3a3",
+      "type": "action",
+      "content": "Share",
+      "checksum": "67561c1170434dcbfd9becb827672495",
+      "locales": {
+        "fr_FR": "Partagez"
+      }
+    },
+    {
+      "id": "block_9ec5eba6-8ab1-4938-96b0-0f6b63439619",
+      "type": "list",
+      "content": {
+        "children": "<variable id=\"3\">{userName}</variable>",
+        "parent": "<variable id=\"3\">{blogTitle}</variable> liked by"
+      },
+      "checksum": "a4f817cd1a363e95ce1400095937cad8",
+      "locales": {
+        "fr_FR": {
+          "children": "<variable id=\"3\">{userName}</variable>",
+          "parent": "<variable id=\"3\">{blogTitle}</variable> aimé par"
+        }
+      }
+    },
+    {
+      "id": "block_31500deb-de21-436f-9ae6-98f08d569148",
+      "type": "template",
+      "content": "\n\n<div class=\"notes\">Thanks!</div>",
+      "checksum": "c1a6639e8a83a4aba68004ad1a06f124",
+      "locales": {
+        "fr_FR": "\n\n<div class=\"notes\">Merci!</div>"
+      }
+    }
+  ],
+  "channels": [
+    {
+      "id": "channel_f2e7b2e9-187f-40d9-9725-636d6c59833a",
+      "type": "email",
+      "content": {
+        "subject": "New Subject"
+      },
+      "checksum": "96bcf212afa5cae1c7918280743aec71",
+      "locales": {
+        "fr_FR": {
+          "subject": "French New Subject"
+        }
+      }
+    }
+  ],
+  "checksum": "22d224a20345f1e3d3cf4c231243a747"
+}
+```
+
+## Block Alias and Context
+
+Every block can optionally have an alias and a context. This can be used to have supplementary block information for organizing blocks better.
+
+Retrieval: GET content endpoints can be used to retrieve alias and context per block
+
+Updates: Can only be changed from the Courier UI by clicking on the block info(i) icon
+
+<Image
+  img={require("../../assets/guides/internationalization-specification/template-block-info.png")}
+  alt=""
+/>
+
+<Image
+  img={require("../../assets/guides/internationalization-specification/block-info-dialog.png")}
+  alt=""
+/>
+
+## Block types supported
+
+### Text Block
+
+Example: Text block with a variable {name} and a highlight
+
+<Image
+  img={require("../../assets/guides/internationalization-specification/text-block.png")}
+  alt=""
+/>
+
+Here's how the block JSON would look like
+
+```json
+{
+  "alias": "Greetings",
+  "context": "This is where we greet a new user",
+  "id": "block_43c114d9-9cfd-4340-808f-17e2fc7a4c87",
+  "type": "text",
+  "content": "Hello <variable id=\"3\">{name}</variable>, Welcome to <highlight id=\"6\">Courier</highlight>!",
+  "locales": {
+    "fr_FR": "Bonjour <variable id=\"3\">{name}</variable>, bienvenu a <highlight id=\"6\">Courier</highlight>!"
+  }
+}
+```
+
+### Let's talk IDs
+
+**Block ID:** This is the top level ID which every block gets and is prefixed with `block`.
+
+**Variable ID:** Unique IDs that a variable inside a block content gets
+
+**Highlight ID:** Unique IDs that a highlight inside a block content gets
+
+_Note - All the IDs are auto-generated by Courier and are used in resolving the contents for the block. The locale variations PUT should also have exactly same IDs for accurate consolidation and resolution._
+
+### Quote Block
+
+Example: Quote block with a variable {name} and a highlight
+
+<Image
+  img={require("../../assets/guides/internationalization-specification/quote-block.png")}
+  alt=""
+/>
+
+```json
+{
+  "id": "block_78863d66-54f2-4032-a897-cbed3abb2538",
+  "type": "quote",
+  "content": "<highlight id=\"3\">Marvel</highlight> is better than DC, do you agree <variable id=\"6\">{name}</variable>?",
+  "locales": {
+    "fr_FR": "<highlight id=\"3\">Marvel</highlight> mieux que DC, êtes-vous d'accord <variable id=\"3\">{name}</variable>?"
+  }
+}
+```
+
+## Markdown Block
+
+Example: Markdown block with a variable {name}
+
+<Image
+  img={require("../../assets/guides/internationalization-specification/markdown-block.png")}
+  alt=""
+/>
+
+```json
+{
+  "id": "block_f19dd58f-d32c-41b8-911c-239053d34803",
+  "type": "markdown",
+  "content": "Ready, <variable id=\"3\">{name}</variable>? Get started [here](http://daringfireball.net/projects/markdown/).",
+  "locales": {
+    "fr_FR": "prêt, <variable id=\"3\">{name}</variable>? Commencer [ici](http://daringfireball.net/projects/markdown/)."
+  }
+}
+```
+
+## Action Block
+
+<Image
+  img={require("../../assets/guides/internationalization-specification/action-block.png")}
+  alt=""
+/>
+
+```json
+{
+  "id": "block_106b5136-1bf9-4842-bff7-cbae140fd3a3",
+  "type": "action",
+  "content": "Share it",
+  "locales": {
+    "fr_FR": "Partagez-le"
+  }
+}
+```
+
+## List Block
+
+List blocks can get a bit confusing - [https://help.courier.com/en/articles/4209135-working-with-list-blocks](https://help.courier.com/en/articles/4209135-working-with-list-blocks) an article that can help 🙂
+
+<Image
+  img={require("../../assets/guides/internationalization-specification/list-block.png")}
+  alt=""
+/>
+
+```json
+{
+  "id": "block_9ec5eba6-8ab1-4938-96b0-0f6b63439619",
+  "type": "list",
+  "content": {
+    "children": "<variable id=\"3\">{userName}</variable>",
+    "parent": "<variable id=\"3\">{blogTitle}</variable> liked by"
+  },
+  "locales": {
+    "fr_FR": {
+      "children": "<variable id=\"3\">{userName}</variable>",
+      "parent": "<variable id=\"3\">{blogTitle}</variable> aimé par"
+    }
+  }
+}
+```
+
+## Template Block
+
+<Image
+  img={require("../../assets/guides/internationalization-specification/template-block.png")}
+  alt=""
+/>
+
+```json
+{
+  "id": "block_31500deb-de21-436f-9ae6-98f08d569148",
+  "type": "template",
+  "content": "\n\n<div class=\"notes\">Thanks!</div>"
+  },
+  "locales": {
+     "fr_FR": "\n\n<div class=\"notes\">Merci!</div>"
+  }
+}
+```
+
+_Note: We intentionally omit styles and comments in the API response to optimize the translation payload_
+
+## Checksum
+
+We md5 hash the contents for each block, channel and notification so you could track if contents have ever changed in order to manage translations workflow as needed.
+
+## Channels
+
+We expose the email (subject) and push (title) to be localized (assuming you have those channels configured with your notification)
+
+## Updating Content
+
+When translated content is received, template content should be fetched and the new content should be overlaid. This can be repeated each time a piece of translated content is received.
+
+`PUT /notifications/:notification_id/draft/locales`
+
+```json
+{
+  "blocks": [
+    {
+      "id": "block_43c114d9-9cfd-4340-808f-17e2fc7a4c87",
+      "type": "text",
+      "locales": {
+        "fr_FR": "Bonjour <variable id=\"3\">{name}</variable>, bienvenu a <highlight id=\"6\">Courier</highlight>!"
+      }
+    },
+    {
+      "id": "block_78863d66-54f2-4032-a897-cbed3abb2538",
+      "type": "quote",
+      "locales": {
+        "fr_FR": "<highlight id=\"3\">Marvel</highlight> mieux que DC, êtes-vous d'accord <variable id=\"3\">{name}</variable>?"
+      }
+    },
+    {
+      "id": "block_f19dd58f-d32c-41b8-911c-239053d34803",
+      "type": "markdown",
+      "locales": {
+        "fr_FR": "prêt, <variable id=\"3\">{name}</variable>? Commencer [ici](http://daringfireball.net/projects/markdown/)."
+      }
+    },
+    {
+      "id": "block_106b5136-1bf9-4842-bff7-cbae140fd3a3",
+      "type": "action",
+      "locales": {
+        "fr_FR": "Partagez-le"
+      }
+    },
+    {
+      "id": "block_9ec5eba6-8ab1-4938-96b0-0f6b63439619",
+      "type": "list",
+      "locales": {
+        "fr_FR": {
+          "children": "<variable id=\"3\">{userName}</variable>",
+          "parent": "<variable id=\"3\">{blogTitle}</variable> aimé par"
+        }
+      }
+    },
+    {
+      "id": "block_31500deb-de21-436f-9ae6-98f08d569148",
+      "type": "template",
+      "locales": {
+        "fr_FR": "\n\n<div class=\"notes\">Merci!</div>"
+      }
+    }
+  ]
+}
+```
+
+## Updating partial contents (Shipping soon)
+
+In case you'd like to update a specific block or a channel's locales, or all blocks and channels for a specific locale (for ex: Chinese translations for a notification), we've got you covered. You can use the following endpoints -
+
+### Update locales for a specific block
+
+`PUT /notifications/:notification_id/blocks/:block_id/locales`
+
+or `PUT /notifications/:id/draft/blocks/:blockId/locales`
+
+```json
+{
+  "fr_FR": "French Lorem Ipsum",
+  "it_IT": "Italian Lorem Ipsum"
+}
+```
+
+### Update locales for a specific channel
+
+`PUT /notifications/:id/channels/:channelId/locales`
+
+or `PUT /notifications/:id/draft/channels/:channelId/locales`
+
+```json
+{
+  "fr_FR": "French Subject",
+  "it_IT": "Italian Subject"
+}
+```
+
+### Update block and channel contents for a specific locale
+
+`PUT /notifications/:id/locales/:localeid`
+
+or `PUT /notifications/:id/draft/locales/:localeid`
+
+```json
+{
+  "blocks": [
+    {
+      "id": "block_f4c81f75-8edb-4c8f-a50b-37193a580b7f",
+      "content": "Italian text block content"
+    },
+    {
+      "id": "block_fcb968bf-b0d1-48e0-b1b2-e23963de8479",
+      "content": {
+          "children": "Italian List block children",
+          "parent": "Italian List block parent"
+      }
+    }
+  ],
+  "channels": [
+    {
+      "id": "channel_9f24f9a9-c597-4330-b357-7929a6dc8f33",
+      "content": "Italian Subject"
+    },
+    {
+      "id": "channel_20dda4a6-5439-4a71-953a-bc70a90e39f5",
+      "content": "Italian Push Title"
+    }
+  ]
+```
+
+## Completing The Process
+
+Once all content has been updated, Courier can be notified that the process is completed and release the template to be published.
+
+`PUT /notifications/:notification_id/:submission_id/checks`
+
+```json
+{
+  "checks": [
+    {
+      "id": "B5BYH93H4D4XRPJBMZJGB43TJEZ3", // check ID
+      "status": "RESOLVED",
+      "type": "custom"
+    }
+  ]
+}
+```
+
+## Fetching Checks
+
+Checks API GET endpoint
+
+`GET /notifications/:notification_id/:submission_id/checks`
+
+Example - `GET /notifications/SFTYJKSF0241SVH2TWY97TTFFTQG/1630424150210/checks`
+
+```jsx
+{
+	"checks":[
+		{
+			"id":"B5BYH93H4D4XRPJBMZJGB43TJEZ3", // check ID
+			"status":"PENDING",
+			"type":"custom",
+			"updated":1630424150210
+		}
+	]
+}
+```
+
+## Locale based preview
+
+Notification Preview section reflects localized content if there's a locale associated with the profile in your test-event. Here's an example -
+
+I have `"locale": "fr_FR"` in the profile object of a test event
+
+Localized Preview
+
+<Image
+  img={require("../../assets/guides/internationalization-specification/localized-preview.png")}
+  alt=""
+/>
+
+Default Preview (no locale in the profile object of the test event)
+
+<Image
+  img={require("../../assets/guides/internationalization-specification/default-preview.png")}
+  alt=""
+/>
+
+## Using locales while sending messages
+
+You can use locale as a profile attribute while invoking Courier's /send endpoint. Here's an example -
+
+```jsx
+{
+	"event": "<your-notification-or-event>",
+	"recipient": "<your-recipient>",
+	"profile": {
+            "locale": "en_US"
+         }
+}
+```
+
+## Webhooks
+
+As mentioned earlier in the doc, you could configure the webhooks in Settings → Webhooks and we'd call those when a notification was submitted for a review, when it was canceled and also when it got published. Please note: At this point we do not have a granular way to allocate webhooks so you could get other events (like message sent events) for the webhooks you add to the Settings, feel free to ignore/not handle those. Here's a couple of screenshots -
+
+<Image
+  img={require("../../assets/guides/internationalization-specification/webhook-settings.png")}
+  alt=""
+/>
+
+<Image
+  img={require("../../assets/guides/internationalization-specification/edit-webhook-dialog.png")}
+  alt=""
+/>
+
+## Submitted Keys
+
+Submitted keys are used when you have to send a notification that was submitted for a review but maybe not ready to be published. Basically, submitted is an interim state between Draft and Published. Here's how it works -
+
+→ If notification was published, a submitted key send operation uses published notification contents
+
+→ If notification was submitted for review, a submitted key send operation uses latest draft notification content
+
+Submitted keys can be retrieved, updated or deleted from the Settings → API Keys UI.
+
+<Image
+  img={require("../../assets/guides/internationalization-specification/submitted-keys.png")}
+  alt=""
+/>
+
+## Block overrides
+
+We also expose `blocks` via `overrides` object in case you need to override the contents on the fly during the send operations.
