@@ -30,6 +30,10 @@ const metadata = require("./src/theme/metadata");
                 label: "1.0.0",
                 path: "1.0.0",
                 banner: "unmaintained",
+                badge: false,
+              },
+              "2.0.0": {
+                badge: false,
               },
             },
           },
