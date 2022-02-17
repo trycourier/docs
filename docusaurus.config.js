@@ -29,7 +29,7 @@ const metadata = require("./src/theme/metadata");
               current: {
                 label: "1.0.0",
                 path: "1.0.0",
-                banner: "unmaintained",
+                banner: "none",
                 badge: false,
               },
               "2.0.0": {
