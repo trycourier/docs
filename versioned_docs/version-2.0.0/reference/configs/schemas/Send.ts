@@ -24,6 +24,11 @@ const to: ApiParam = {
     },
     {
       type: "string",
+      name: "list_id",
+      description: "A unique identifier associated with a Courier list of subscribers. A message will be sent to each subscriber in the list."
+    },
+    {
+      type: "string",
       name: "phone_number",
       description: "A unique phone number associated to the recipient of message."
     },
