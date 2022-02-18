@@ -1,7 +1,11 @@
 import React from "react";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Link from "@docusaurus/Link";
-import { useActivePlugin, useActiveDocContext, useVersions } from "@theme/hooks/useDocs";
+import {
+  useActivePlugin,
+  useActiveDocContext,
+  useVersions,
+  useDocVersionSuggestions,
+} from "@theme/hooks/useDocs";
 import { ThemeClassNames, useDocsPreferredVersion, useDocsVersion } from "@docusaurus/theme-common";
 import DocVersionBanner from "@theme-original/DocVersionBanner";
 
@@ -9,15 +13,52 @@ import type { Props } from "@theme/DocVersionBanner";
 import clsx from "clsx";
 import type { PropVersionMetadata } from "@docusaurus/plugin-content-docs";
 
+function DocVersionV1Banner({
+  className,
+  versionMetadata,
+}: Props & {
+  versionMetadata: PropVersionMetadata;
+}): JSX.Element {
+  const { pluginId } = useActivePlugin({ failfast: true })!;
+  const { savePreferredVersionName } = useDocsPreferredVersion(pluginId);
+  const { latestVersionSuggestion, latestDocSuggestion } = useDocVersionSuggestions(pluginId);
+
+  const latestVersionSuggestedDoc =
+    latestDocSuggestion ??
+    latestVersionSuggestion.docs.find((doc) => doc.id === latestVersionSuggestion.mainDocId);
+
+  return (
+    <div
+      className={clsx(
+        className,
+        ThemeClassNames.docs.docVersionBanner,
+        "alert alert--warning margin-bottom--md"
+      )}
+      role="alert"
+    >
+      <div>
+        This is documentation for Courier’s <b>{versionMetadata.label}</b> API.
+      </div>
+      <div className="margin-top--md">
+        For the most up-to-date documentation, see the{" "}
+        <Link
+          href={latestVersionSuggestedDoc.path}
+          onClick={() => savePreferredVersionName(latestVersionSuggestion.name)}
+        >
+          <b>latest version</b>
+        </Link>{" "}
+        (API {latestVersionSuggestion.label}).
+      </div>
+    </div>
+  );
+}
+
 function DocVersionV2Banner({
   className,
   versionMetadata,
 }: Props & {
   versionMetadata: PropVersionMetadata;
 }): JSX.Element {
-  const {
-    siteConfig: { title: siteTitle },
-  } = useDocusaurusContext();
   const { activeDoc } = useActiveDocContext();
   const { pluginId } = useActivePlugin({ failfast: true })!;
   const versions = useVersions(pluginId);
@@ -34,16 +75,17 @@ function DocVersionV2Banner({
       className={clsx(
         className,
         ThemeClassNames.docs.docVersionBanner,
-        "alert alert--warning margin-bottom--md"
+        "alert alert--info margin-bottom--md"
       )}
       role="alert"
     >
       <div>
-        This is documentation for {siteTitle} <b>{versionMetadata.label}</b>, which is shipped on
+        This is documentation for Courier’s <b>{versionMetadata.label}</b> API, which we released on
         2/15/22.
       </div>
       <div className="margin-top--md">
-        If you implemented the Courier API prior to 2/15/22 you can find {siteTitle} <b>1.0.0</b>{" "}
+        If you implemented the Courier API prior to 2/15/22 you can find Courier’s{" "}
+        <b>{previousVersion.label}</b> docs{" "}
         <Link
           href={previousVersionSuggestedDoc.path}
           onClick={() => savePreferredVersionName(previousVersion.name)}
@@ -64,5 +106,5 @@ export default function CustomDocVersionBanner({ className }: Props): JSX.Elemen
   if (versionMetadata.isLast) {
     return <DocVersionV2Banner className={className} versionMetadata={versionMetadata} />;
   }
-  return null;
+  return <DocVersionV1Banner className={className} versionMetadata={versionMetadata} />;
 }
