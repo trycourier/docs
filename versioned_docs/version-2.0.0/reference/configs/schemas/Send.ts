@@ -1,10 +1,56 @@
 import { ApiParam } from "@site/src/components/ApiReference/ApiParamField";
 
+const recipientList: ApiParam = {
+  type: "array",
+  // name: "to",
+  // required: true,
+  displayName: "Recipient List",
+  description: 'The recipient of the message. Can also be a list of Recipient objects.',
+  field: {
+    type: "object",
+    fields: [
+      {
+        type: "object",
+        name: "data",
+        fields: [],
+        description: "An object that includes any data you want to pass to the message. The data will populate the corresponding template or elemental variables."
+      },
+      {
+        type: "string",
+        name: "email",
+        description: "A unique email address associated to the recipient of message."
+      },
+      {
+        type: "string",
+        name: "user_id",
+        description: "A unique identifier associated with the recipient of the delivered message."
+      },
+      {
+        type: "string",
+        name: "list_id",
+        description: "A unique identifier associated with a Courier list of subscribers. A message will be sent to each subscriber in the list."
+      },
+      {
+        type: "string",
+        name: "phone_number",
+        description: "A unique phone number associated to the recipient of message."
+      },
+      {
+        type: "object",
+        name: "preferences",
+        description: "An object that includes any preferences for the recipient.",
+        fields: []
+      },
+    ]
+  }
+}
+
 const to: ApiParam = {
   type: "object",
   name: "to",
   required: true,
-  description: 'The recipient of the message.',
+  displayName: "Recipient",
+  description: 'The recipient of the message. Can also be a list of Recipient objects.',
   fields: [
     {
       type: "object",
@@ -39,7 +85,18 @@ const to: ApiParam = {
       fields: []
     },
   ]
-};
+}
+
+// const to: ApiParam = {
+//   type: "oneOf",
+//   name: "to",
+//   displayName: "to",
+//   required: true,
+//   options: [
+//     recipient,
+//     recipientList
+//   ]
+// }
 
 const brand_id: ApiParam = {
   type: "string",
