@@ -85,7 +85,7 @@ export const apiParamInitialValue = (param: ApiParam) => {
     return { [path]: value };
   }
 
-  return PRIMITIVE_TYPES.includes(param.type) ? value : { ...value };
+  return value;
 };
 
 const validateField = (param: ApiParam) => (value: string) => {
