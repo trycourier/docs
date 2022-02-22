@@ -225,7 +225,15 @@ const content: ApiParam = {
   name: "content",
   required: true,
   description: " A simple content object or a complete Courier Elemental document.",
-  fields: []
+  fields: [{
+    type: "string",
+    name: "title",
+    description: "The title of a notification.  (i.e. Email Subject / Push Title)"
+  }, {
+    type: "string",
+    name: "body",
+    description: "The body of a notification."
+  }]
 };
 
 const contentOrTemplate: ApiParam = {
