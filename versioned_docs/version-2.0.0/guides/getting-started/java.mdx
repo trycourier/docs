@@ -1,0 +1,140 @@
+---
+sidebar_position: 0
+description: Send your first notification with Java.
+---
+
+import Image from "@theme/IdealImage";
+
+# Get Started with Java
+
+Welcome to the Java Quickstart! Here we will walk through the process of getting your API keys, installing the SDK, and making your first API call with Java. If you have any questions, join our Discourse community: [https://forum.courier.com/](https://forum.courier.com/)
+
+## Prerequisites
+
+- Sign up for Courier
+- [Integrate the provider for the type of notification you want to](https://youtu.be/nAbRLOMv96w)
+- Install the latest version of Java: [https://java.com/en/download/help/download_options.html](https://java.com/en/download/help/download_options.html)
+
+## Getting Your API Keys
+
+Navigate to the Courier API Keys page in Settings (https://app.courier.com/settings/api-keys) to get access to all API keys, including production and test keys. [Learn more about the difference between production and test keys >](https://forum.courier.com/t/the-difference-between-production-and-test-environments/115)
+
+<Image img={require("../../assets/guides/courier-app/settings.png")} alt="Courier Settings" />
+
+<Image
+  img={require("../../assets/guides/courier-app/api-keys.png")}
+  alt="Courier Settings: API Keys"
+/>
+
+## Using the SDK
+
+### Installing the SDK
+
+Copy the following Courier SDK dependency snippet and add to Maven pom.xml file
+
+```java
+<dependency>
+  <groupId>com.courier</groupId>
+  <artifactId>courier-java</artifactId>
+  <version>X.X.X</version>
+  <scope>compile</scope>
+</dependency>
+```
+
+Ask Maven to download the dependencies by running:
+```
+mvn compile
+```
+
+### Sending a notification with Courier Elemental
+
+Courier Elemental is a new JSON syntax built to describe your notification, including recipient data, notification content, variables, and routing. Here is an example of a simple notification sent with Elemental:
+
+```java
+import services.Courier;
+import services.SendService;
+import models.SendEnhancedRequestBody;
+import models.SendEnhancedResponseBody;
+import models.SendRequestMessage;
+import com.google.gson.Gson;
+import java.io.IOException;
+import java.util.HashMap;
+
+public class App {
+  public static void main(String[] args) {
+    Courier.init("YOUR_AUTH_TOKEN_HERE");
+
+    SendEnhancedRequestBody request = new SendEnhancedRequestBody();
+    SendRequestMessage message = new SendRequestMessage();
+
+    HashMap<String, String> to = new HashMap<String, String>();
+    to.put("email", "email@example.com");
+    message.setTo(to);
+
+    HashMap<String, Object> content = new HashMap<String, Object>();
+    content.put("title", "Welcome!");
+    content.put("community", "Thanks for signing up, {{name}}");
+    message.setContent(content);
+
+    HashMap<String, Object> data = new HashMap<String, Object>();
+    data.put("name", "Peter Parker");
+    message.setData(data);
+
+    HashMap<String, Object> routing = new HashMap<String, Object>();
+    routing.put("method", "single");
+    routing.put("channels", ["email"]);
+    message.setRouting(routing);
+
+    request.setMessage(message);
+    try {
+        SendEnhancedResponseBody response = new SendService().sendEnhancedMessage(request);
+        System.out.println(response);
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+  }
+}
+```
+
+Replace the JSON within the body to match the type and content of notification you want to send.
+
+There are 4 main properties within this example notification:
+
+- `to`: provide information used by Courier to identify the recipient of the notification. Here you can include details such as the recipient’s email address for email, phone number for SMS.
+- `content`: add your notification’s title and body.
+- `data`: include any data you want to pass to a message template. The data will populate the corresponding template variables.
+- `routing`: customize which channel(s) Courier will potentially deliver the message. If no routing key is specified, Courier will use the default routing configured in the Courier Studio UI.
+
+[Explore how to customize your notification with more properties >](../../../reference/send/message/)
+
+### Create a Notification: In the Designer
+
+This is **optional**, and only recommended when you want to use the Courier app to design a notification. Once you have designed the notification template in the Courier Designer, you can replace the JSON body with the following:
+
+```json
+{
+  "message": {
+    "to": {
+      "email": "email@example.com"
+    },
+    //Notification ID can be found in the template settings in the Courier Designer
+    "template": "a-courier-notification-id-or-event-mapping"
+  }
+}
+```
+
+[Learn how to design your first notification >](https://youtu.be/lvhRdNJMLbY)
+
+### Send & Test the Notification
+
+Sending a message is an async process. So upon submission of a message, only a requestId will be returned.
+
+```json
+{ "requestId": "87e7c05b-4f46-fda24e356e23" }
+```
+
+Monitor the status of your notification once sent in the Courier app's [Data Dashboard](https://app.courier.com/data/messages).
+
+## Questions?
+
+Join our developer community on [forum.courier.com](https://forum.courier.com/).
