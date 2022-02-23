@@ -1,19 +1,19 @@
 ---
-sidebar_position: 0
-description: Send your first notification with Nodejs.
+sidebar_position: 4
+description: Send your first notification with PHP.
 ---
 
 import Image from "@theme/IdealImage";
 
-# Get Started with Node.js
+# Get Started with PHP
 
-Welcome to the Node.js Quickstart! Here we will walk through the process of getting your API keys, installing the SDK, and making your first API call with Node.js. If you have any questions, join our Discourse community: [https://forum.courier.com/](https://forum.courier.com/)
+Welcome to the PHP Quickstart! Here we will walk through the process of getting your API keys, installing the SDK, and making your first API call with PHP. If you have any questions, join our Discourse community: [https://forum.courier.com/](https://forum.courier.com/)
 
 ## Prerequisites
 
 - Sign up for Courier
 - [Integrate the provider for the type of notification you want to](https://youtu.be/nAbRLOMv96w)
-- Install the latest version of Node.js: [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
+- Install the latest version of PHP: [https://www.php.net/manual/en/install.php](https://www.php.net/manual/en/install.php)
 
 ## Getting Your API Keys
 
@@ -30,39 +30,46 @@ Navigate to the Courier API Keys page in Settings (https://app.courier.com/setti
 
 ### Installing the SDK
 
-Run the following command in your project directory to install the SDK via npm:
+Run the following command in your project directory to install the SDK:
 
 ```
-npm install @trycourier/courier
+composer require trycourier/courier
 ```
+
+Create a PHP file in your project's base folder for the following steps.
 
 ### Sending a notification with Courier Elemental
 
 Courier Elemental is a new JSON syntax built to describe your notification, including recipient data, notification content, variables, and routing. Here is an example of a simple notification sent with Elemental:
 
-```jsx
-import { CourierClient } from "@trycourier/courier";
+```php
+<?php
+  require "./vendor/autoload.php";
+  use Courier\CourierClient;
 
-const courier = CourierClient({ authorizationToken: "YOUR_AUTH_TOKEN_HERE" });
+    $courier = new CourierClient(https://api.courier.com/send, "YOUR_AUTH_TOKEN_HERE");
 
-const { requestId } = await courier.send({
-  message: {
-    to: {
-      email: "email@example.com",
-    },
-    content: {
-      title: "Welcome!",
-      body: "Thanks for signing up, {{name}}",
-    },
-    data: {
-      name: "Peter Parker",
-    },
-    routing: {
-      method: "single",
-      channels: ["email"],
-    },
-  },
-});
+    $result = $courier->sendEnhancedNotification(
+      (object) [
+        'to' => [
+          'email' => "email@example.com",
+        ],
+        'content' => [
+          'title' => "Welcome!",
+          'community' => "Thanks for signing up, {{name}}",
+        ],
+        'data' => [
+          'name' => "Peter Parker",
+        ],
+        'routing' => [
+          'method' => "single",
+          'channels' => ["email"],
+        ],
+      ],
+    );
+
+    echo( $result->requestId );
+?>
 ```
 
 Replace the JSON within the body to match the type and content of notification you want to send.
