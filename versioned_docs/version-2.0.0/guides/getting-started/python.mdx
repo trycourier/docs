@@ -1,19 +1,19 @@
 ---
-sidebar_position: 0
-description: Send your first notification with Nodejs.
+sidebar_position: 1
+description: Send your first notification with Python.
 ---
 
 import Image from "@theme/IdealImage";
 
-# Get Started with Node.js
+# Get Started with Python
 
-Welcome to the Node.js Quickstart! Here we will walk through the process of getting your API keys, installing the SDK, and making your first API call with Node.js. If you have any questions, join our Discourse community: [https://forum.courier.com/](https://forum.courier.com/)
+Welcome to the Python Quickstart! Here we will walk through the process of getting your API keys, installing the SDK, and making your first API call with Python. If you have any questions, join our Discourse community: [https://forum.courier.com/](https://forum.courier.com/)
 
 ## Prerequisites
 
 - Sign up for Courier
 - [Integrate the provider for the type of notification you want to](https://youtu.be/nAbRLOMv96w)
-- Install the latest version of Node.js: [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
+- Download the latest version of Python: [https://www.python.org/downloads/](https://www.python.org/downloads/)
 
 ## Getting Your API Keys
 
@@ -30,39 +30,41 @@ Navigate to the Courier API Keys page in Settings (https://app.courier.com/setti
 
 ### Installing the SDK
 
-Run the following command in your project directory to install the SDK via npm:
+Run the following command in your project directory to install the Courier SDK via pip:
 
 ```
-npm install @trycourier/courier
+pip install trycourier
 ```
 
 ### Sending a notification with Courier Elemental
 
 Courier Elemental is a new JSON syntax built to describe your notification, including recipient data, notification content, variables, and routing. Here is an example of a simple notification sent with Elemental:
 
-```jsx
-import { CourierClient } from "@trycourier/courier";
+```python
+from trycourier import Courier
 
-const courier = CourierClient({ authorizationToken: "YOUR_AUTH_TOKEN_HERE" });
+client = Courier(auth_token="YOUR_AUTH_TOKEN_HERE")
 
-const { requestId } = await courier.send({
-  message: {
-    to: {
-      email: "email@example.com",
+resp = client.send_message(
+  message={
+    "to": {
+      "email": "email@example.com",
     },
-    content: {
-      title: "Welcome!",
-      body: "Thanks for signing up, {{name}}",
+    "content": {
+      "title": "Welcome!",
+      "body": "Thanks for signing up, {{name}}",
     },
-    data: {
-      name: "Peter Parker",
+    "data": {
+      "name": "Peter Parker",
     },
-    routing: {
-      method: "single",
-      channels: ["email"],
+    "routing": {
+      "method": "single",
+      "channels": ["email"],
     },
-  },
-});
+  }
+)
+
+print(resp['messageId'])
 ```
 
 Replace the JSON within the body to match the type and content of notification you want to send.
