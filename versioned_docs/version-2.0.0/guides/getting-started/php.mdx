@@ -1,0 +1,116 @@
+---
+sidebar_position: 4
+description: Send your first notification with PHP.
+---
+
+import Image from "@theme/IdealImage";
+
+# Get Started with PHP
+
+Welcome to the PHP Quickstart! Here we will walk through the process of getting your API keys, installing the SDK, and making your first API call with PHP. If you have any questions, join our Discourse community: [https://forum.courier.com/](https://forum.courier.com/)
+
+## Prerequisites
+
+- Sign up for Courier
+- [Integrate the provider for the type of notification you want to](https://youtu.be/nAbRLOMv96w)
+- Install the latest version of PHP: [https://www.php.net/manual/en/install.php](https://www.php.net/manual/en/install.php)
+
+## Getting Your API Keys
+
+Navigate to the Courier API Keys page in Settings (https://app.courier.com/settings/api-keys) to get access to all API keys, including production and test keys. [Learn more about the difference between production and test keys >](https://forum.courier.com/t/the-difference-between-production-and-test-environments/115)
+
+<Image img={require("../../assets/guides/courier-app/settings.png")} alt="Courier Settings" />
+
+<Image
+  img={require("../../assets/guides/courier-app/api-keys.png")}
+  alt="Courier Settings: API Keys"
+/>
+
+## Using the SDK
+
+### Installing the SDK
+
+Run the following command in your project directory to install the SDK:
+
+```
+composer require trycourier/courier
+```
+
+Create a PHP file in your project's base folder for the following steps.
+
+### Sending a notification with Courier Elemental
+
+Courier Elemental is a new JSON syntax built to describe your notification, including recipient data, notification content, variables, and routing. Here is an example of a simple notification sent with Elemental:
+
+```php
+<?php
+  require "./vendor/autoload.php";
+  use Courier\CourierClient;
+
+    $courier = new CourierClient(https://api.courier.com/send, "YOUR_AUTH_TOKEN_HERE");
+
+    $result = $courier->sendEnhancedNotification(
+      (object) [
+        'to' => [
+          'email' => "email@example.com",
+        ],
+        'content' => [
+          'title' => "Welcome!",
+          'community' => "Thanks for signing up, {{name}}",
+        ],
+        'data' => [
+          'name' => "Peter Parker",
+        ],
+        'routing' => [
+          'method' => "single",
+          'channels' => ["email"],
+        ],
+      ],
+    );
+
+    echo( $result->requestId );
+?>
+```
+
+Replace the JSON within the body to match the type and content of notification you want to send.
+
+There are 4 main properties within this example notification:
+
+- `to`: provide information used by Courier to identify the recipient of the notification. Here you can include details such as the recipient’s email address for email, phone number for SMS.
+- `content`: add your notification’s title and body.
+- `data`: include any data you want to pass to a message template. The data will populate the corresponding template variables.
+- `routing`: customize which channel(s) Courier will potentially deliver the message. If no routing key is specified, Courier will use the default routing configured in the Courier Studio UI.
+
+[Explore how to customize your notification with more properties >](../../../reference/send/message/)
+
+### Create a Notification: In the Designer
+
+This is **optional**, and only recommended when you want to use the Courier app to design a notification. Once you have designed the notification template in the Courier Designer, you can replace the JSON body with the following:
+
+```json
+{
+  "message": {
+    "to": {
+      "email": "email@example.com"
+    },
+    //Notification ID can be found in the template settings in the Courier Designer
+    "template": "a-courier-notification-id-or-event-mapping"
+  }
+}
+```
+
+[Learn how to design your first notification >](https://youtu.be/lvhRdNJMLbY)
+
+### Send & Test the Notification
+
+Sending a message is an async process. So upon submission of a message, only a requestId will be returned.
+
+```json
+{ "requestId": "87e7c05b-4f46-fda24e356e23" }
+```
+
+Monitor the status of your notification once sent in the Courier app's [Data Dashboard](https://app.courier.com/data/messages).
+
+## Questions?
+
+Join our developer community on [forum.courier.com](https://forum.courier.com/).

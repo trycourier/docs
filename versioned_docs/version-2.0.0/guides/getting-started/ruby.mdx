@@ -1,0 +1,125 @@
+---
+sidebar_position: 2
+description: Send your first notification with Ruby.
+---
+
+import Image from "@theme/IdealImage";
+
+# Get Started with Ruby
+
+Welcome to the Ruby Quickstart! Here we will walk through the process of getting your API keys, installing the SDK, and making your first API call with Ruby. If you have any questions, join our Discourse community: [https://forum.courier.com/](https://forum.courier.com/)
+
+## Prerequisites
+
+- Sign up for Courier
+- [Integrate the provider for the type of notification you want to](https://youtu.be/nAbRLOMv96w)
+- Install the latest version of Ruby: [https://www.ruby-lang.org/en/documentation/installation/)
+
+## Getting Your API Keys
+
+Navigate to the Courier API Keys page in Settings (https://app.courier.com/settings/api-keys) to get access to all API keys, including production and test keys. [Learn more about the difference between production and test keys >](https://forum.courier.com/t/the-difference-between-production-and-test-environments/115)
+
+<Image img={require("../../assets/guides/courier-app/settings.png")} alt="Courier Settings" />
+
+<Image
+  img={require("../../assets/guides/courier-app/api-keys.png")}
+  alt="Courier Settings: API Keys"
+/>
+
+## Using the SDK
+
+### Installing the SDK using Bundle
+
+Add this line to the top of  your 
+```
+gem 'trycourier'
+```
+
+And then execute:
+
+```
+$ bundle install
+```
+
+### Installing the SDK using Gem:
+
+```
+$ gem install trycourier
+```
+
+### Sending a notification with Courier Elemental
+
+Courier Elemental is a new JSON syntax built to describe your notification, including recipient data, notification content, variables, and routing. Here is an example of a simple notification sent with Elemental:
+
+```ruby
+require "trycourier"
+
+client = Courier::Client.new "YOUR_AUTH_TOKEN_HERE"
+
+res = client.send({
+    message => {
+        to => {
+          "email" => "email@example.com",
+        },
+        content: => {
+          "title" => "Welcome!",
+          "body" => "Thanks for signing up, {{name}}",
+        },
+        data: => { #any data you want to pass to the content or message template
+          "name" => "Nuxt.js Enthusiasts",
+        },
+        routing: => { #any data you want to pass to the content or message template
+          "method" => "single",
+          "channels" => ["email"],
+        },
+    },
+  })
+  puts res.code # the HTTP response code
+  puts res.message_id # if the code is 200, this will be the Courier message ID for this notification
+rescue Courier::CourierAPIError => re #error sent from from the API
+  puts re.message
+end
+```
+
+Replace the JSON within the body to match the type and content of notification you want to send.
+
+There are 4 main properties within this example notification:
+
+- `to`: provide information used by Courier to identify the recipient of the notification. Here you can include details such as the recipient’s email address for email, phone number for SMS.
+- `content`: add your notification’s title and body.
+- `data`: include any data you want to pass to a message template. The data will populate the corresponding template variables.
+- `routing`: customize which channel(s) Courier will potentially deliver the message. If no routing key is specified, Courier will use the default routing configured in the Courier Studio UI.
+
+[Explore how to customize your notification with more properties >](../../../reference/send/message/)
+
+### Create a Notification: In the Designer
+
+This is **optional**, and only recommended when you want to use the Courier app to design a notification. Once you have designed the notification template in the Courier Designer, you can replace the JSON body with the following:
+
+```json
+{
+  "message": {
+    "to": {
+      "email": "email@example.com"
+    },
+    //Notification ID can be found in the template settings in the Courier Designer
+    "template": "a-courier-notification-id-or-event-mapping"
+  }
+}
+```
+
+[Learn how to design your first notification >](https://youtu.be/lvhRdNJMLbY)
+
+### Send & Test the Notification
+
+Sending a message is an async process. So upon submission of a message, only a requestId will be returned.
+
+```json
+{ "requestId": "87e7c05b-4f46-fda24e356e23" }
+```
+
+Monitor the status of your notification once sent in the Courier app's [Data Dashboard](https://app.courier.com/data/messages).
+
+## Questions?
+
+Join our developer community on [forum.courier.com](https://forum.courier.com/).
