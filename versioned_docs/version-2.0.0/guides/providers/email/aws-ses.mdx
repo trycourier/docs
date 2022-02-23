@@ -2,15 +2,13 @@
 sidebar_position: 0
 ---
 
+import Image from "@theme/IdealImage";
+
 # AWS SES
 
-<head>
-  <link rel="canonical" href="https://www.courier.com/docs/guides/getting-started/aws-ses/" />
-</head>
+## Set Up Email Using AWS SES
 
-# Set Up Email Using AWS SES
-
-## Introduction
+### Introduction
 
 This step-by-step guide will walk you through sending an email notification using Courier and AWS SES. You will:
 
@@ -18,7 +16,7 @@ This step-by-step guide will walk you through sending an email notification usin
 2. [Create a Courier Notification ](../../../getting-started/send-message/#create-a-notification)
 3. [Send a message with cURL](../../../getting-started/send-message/#send-a-message)
 
-### Prerequisites
+#### Prerequisites
 
 You will need both Courier and AWS SES accounts to complete this tutorial. If you don't have accounts already, please sign up before proceeding.
 
@@ -34,21 +32,24 @@ You will need both Courier and AWS SES accounts to complete this tutorial. If yo
 
 :::
 
-## Add the AWS SES Integration
+### Add the AWS SES Integration
 
 Once logged in to Courier, navigate to the ["Integrations" page](https://app.courier.com/integrations). Click on [the AWS SES Integration](https://app.courier.com/integrations/aws-ses) to configure it.
 
 Each Courier integration requires different pieces of information based on the needs of the Integration provider (see the requirements for each in the "Integrations" section of the sidebar to the left).
 
-### Create an AWS SES API Key
+#### Create an AWS SES API Key
 
 To deliver a message via AWS SES, Courier requires an **Access Key ID** and **Secret Access Key** of an **Identity and Access Management (IAM) User.** This user needs to be able to perform the SES SendEmail Action on the identity or identities ARNs of the recipient(s). See [creating a new IAM user ](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html)and [Programmatic access documentation](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) for more details.
 
-#### Creating an Identity and Access Management (IAM) User with AmazonSESFullAccess Permissions via the AWS SES User Interface
+##### Creating an Identity and Access Management (IAM) User with AmazonSESFullAccess Permissions via the AWS SES User Interface
 
 Once logged in to AWS SES, navigate to ["Settings" → "My Security Credentials.” ](https://console.aws.amazon.com/iam/home#/security_credentials)
 
-<Image img={require("../../../assets/guides/aws-ses/settings.png")} alt="AWS SES Settings Dropdown" />
+<Image
+  img={require("../../../assets/guides/aws-ses/settings.png")}
+  alt="AWS SES Settings Dropdown"
+/>
 
 Then [”Access management” → “Users”](https://console.aws.amazon.com/iam/home#/users).
 
@@ -70,7 +71,7 @@ Be sure to copy and download your IAM user keys on the success page. You won't h
   alt="Add user success - copy and download keys"
 />
 
-#### Create and Attach a Custom Policy
+##### Create and Attach a Custom Policy
 
 Here is an example of an IAM user with the policy required where they can perform send email against all SES identities:
 
@@ -88,7 +89,7 @@ Here is an example of an IAM user with the policy required where they can perfor
 }
 ```
 
-## Integrate the AWS SES API Key in Courier
+### Integrate the AWS SES API Key in Courier
 
 Once you have created your IAM user and downloaded the API Access keys, open the [Courier AWS SES integration page](https://app.courier.com/integrations/aws-ses) and add the Access Key ID and Secret Access Key.
 
@@ -97,7 +98,7 @@ Once you have created your IAM user and downloaded the API Access keys, open the
   alt="Courier AWS SES integration page"
 />
 
-## Add an AWS SES Verified "From" Address to Courier
+### Add an AWS SES Verified "From" Address to Courier
 
 Next, add an email address to the "From Address" field. This will usually be an address such as support@mydomain.com, news@mydomain.com, or mail@mydomain.com, but any address you control is fine.
 
@@ -109,7 +110,7 @@ The "From" address must belong to a verified identity in your AWS-SES account (e
 See [“Verifying an Identity for Amazon SES Sending Authorization”](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-identity-owner-tasks-verification.html) for more information.
 :::
 
-### Create a verified identity
+#### Create a verified identity
 
 To verify an identify click [Create identity](https://console.aws.amazon.com/sesv2/home?region=us-east-1#/verified-identities/create) on the Verified identities page.
 
@@ -125,7 +126,7 @@ To verify an identify click [Create identity](https://console.aws.amazon.com/ses
 If you have a new AWS SES account, before you or the delegate sender can send email to non-verified email addresses, you have to submit a request to have your account removed from the Amazon SES sandbox. For more information, see ["Moving out of the Amazon SES sandbox."](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/request-production-access.html).
 :::
 
-### Add Your Verified "From" Address to the AWS SES Integration
+#### Add Your Verified "From" Address to the AWS SES Integration
 
 Add your AWS SES verified From email address or any email address with a verified AWS SES domain to the "From Address" field. This will be your default from email for all emails using the AWS SES integration. You can [override this default "From" address](https://help.courier.com/en/articles/4745504-setting-the-from-reply-to-cc-and-bcc-names-and-address-fields) on a per channel basis within your templates.
 
@@ -134,13 +135,13 @@ Add your AWS SES verified From email address or any email address with a verifie
   alt="Courier AWS SES Integration page"
 />
 
-## Select AWS SES Region
+### Select AWS SES Region
 
 Select your preferred AWS SES region from the dropdown in the Courier AWS SES integration. For more information, see [“Regions and Amazon SES.”](https://docs.aws.amazon.com/ses/latest/dg/regions.html).
 
 <Image img={require("../../../assets/guides/aws-ses/region.png")} alt="Region dropdown menu" />
 
-## Create and Send a Courier Notification with AWS SES
+### Create and Send a Courier Notification with AWS SES
 
 See ["Create and Send a Message"](../../../getting-started/send-message) for details on how to:
 

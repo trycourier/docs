@@ -19,14 +19,11 @@ Welcome to the Node.js Quickstart! Here we will walk through the process of gett
 
 Navigate to the Courier API Keys page in Settings (https://app.courier.com/settings/api-keys) to get access to all API keys, including production and test keys. [Learn more about the difference between production and test keys >](https://forum.courier.com/t/the-difference-between-production-and-test-environments/115)
 
-<Image
-img={require("../../assets/guides/courier-app/settings.png")}
-alt="Courier Settings"
-/>
+<Image img={require("../../assets/guides/courier-app/settings.png")} alt="Courier Settings" />
 
 <Image
-img={require("../../assets/guides/courier-app/api-keys.png")}
-alt="Courier Settings: API Keys"
+  img={require("../../assets/guides/courier-app/api-keys.png")}
+  alt="Courier Settings: API Keys"
 />
 
 ## Using the SDK
@@ -53,16 +50,16 @@ const { requestId } = await courier.send({
     to: {
       email: "email@example.com",
     },
-	content: {
-		title: "Welcome!",
-		body: "Thanks for signing up, {{name}}",
-	},
+    content: {
+      title: "Welcome!",
+      body: "Thanks for signing up, {{name}}",
+    },
     data: {
       name: "Peter Parker",
     },
-	routing: {
+    routing: {
       method: "single",
-	  channels: ["email"],
+      channels: ["email"],
     },
   },
 });
@@ -85,17 +82,17 @@ This is **optional**, and only recommended when you want to use the Courier app 
 
 ```json
 {
-	message: {
-		to: {
-			email: "email@example.com",
-		},
-		//Notification ID can be found in the template settings in the Courier Designer
-		template: "a-courier-notification-id-or-event-mapping"
-	}
+  "message": {
+    "to": {
+      "email": "email@example.com"
+    },
+    //Notification ID can be found in the template settings in the Courier Designer
+    "template": "a-courier-notification-id-or-event-mapping"
+  }
 }
 ```
 
-[Learn how to design your first notification >](https://youtu.be/lvhRdNJMLbY) 
+[Learn how to design your first notification >](https://youtu.be/lvhRdNJMLbY)
 
 ### Send & Test the Notification
 
@@ -106,4 +103,3 @@ Sending a message is an async process. So upon submission of a message, only a r
 ```
 
 Monitor the status of your notification once sent in the Courier app's [Data Dashboard](https://app.courier.com/data/messages).
-
