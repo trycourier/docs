@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useFormikContext } from "formik";
+import { isPlainObject } from "lodash";
 
 import {
   FieldComponentProps,
@@ -22,7 +23,7 @@ const ApiParamOneOfField = ({ param, field }: FieldComponentProps<"oneOf">) => {
       const newValues = apiParamInitialValue(param.options[index]);
 
       const setFieldValues = (values: any, clear = false) => {
-        if (typeof values === "object" && values !== null) {
+        if (isPlainObject(values)) {
           if (Object.keys(values).length === 0) {
             setFieldValue(buildParamPath(field.name), undefined);
           } else {
