@@ -13,7 +13,7 @@ Welcome to the Go Quickstart! Here we will walk through the process of getting y
 
 - Sign up for Courier
 - [Integrate the provider for the type of notification you want to](https://youtu.be/nAbRLOMv96w)
-- Install the latest version of Node.js: [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
+- Install the latest version of Go: [https://go.dev/doc/install](https://go.dev/doc/install)
 
 ## Getting Your API Keys
 
@@ -30,13 +30,11 @@ Navigate to the Courier API Keys page in Settings (https://app.courier.com/setti
 
 ### Installing the SDK
 
-Run the following command in your project directory to install the SDK:
+Add this line to your go package:
 
 ```
-
+import "github.com/trycourier/courier-go"
 ```
-
-
 
 ### Sending a notification with Courier Elemental
 
@@ -52,7 +50,7 @@ import (
 
 func send() {
 
-    client := courier.CreateClient("pk_prod_5494W51ADYMP2BM0Q3G13N1DVNHY", nil)
+    client := courier.CreateClient("YOUR_AUTH_TOKEN_HERE", nil)
 
     requestID, err := client.SendMessage(
       context.Background(),
@@ -61,11 +59,16 @@ func send() {
           "to": map[string]string{
             "email": "email@example.com",
           },
-          "template": "R3PC795W684WWSQYN2YJJGAWDNVJ",
-          "data": map[string]string{
-            "name": "Peter Parker",
+          "content": map[string]string{
             "title": "Welcome!",
             "community": "Thanks for signing up, {{name}}",
+          },
+          "data": map[string]string{
+            "name": "Peter Parker",
+          },
+          "routing": map[string]string{
+            "method": "single",
+            "channels": ["email"],
           },
         },
       },
@@ -76,31 +79,6 @@ func send() {
     }
     log.Println(requestID)
   }
-```
-
-```jsx
-import { CourierClient } from "@trycourier/courier";
-
-const courier = CourierClient({ authorizationToken: "YOUR_AUTH_TOKEN_HERE" });
-
-const { requestId } = await courier.send({
-  message: {
-    to: {
-      email: "email@example.com",
-    },
-    content: {
-      title: "Welcome!",
-      body: "Thanks for signing up, {{name}}",
-    },
-    data: {
-      name: "Peter Parker",
-    },
-    routing: {
-      method: "single",
-      channels: ["email"],
-    },
-  },
-});
 ```
 
 Replace the JSON within the body to match the type and content of notification you want to send.
