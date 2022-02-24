@@ -10,6 +10,35 @@ import TOCInline from "@theme/TOCInline";
 
 <TOCInline maxHeadingLevel={2} toc={toc} />
 
+## Elemental Sugar
+
+Syntatic Sugar to provide a fast shorthand for Courier Elemental Blocks.
+
+### Fields
+
+| Field | Type   | Required | Description                                                                |
+| ----- | ------ | -------- | -------------------------------------------------------------------------- |
+| title | string |          | The type of element. For action elements, this value should be `"action"`. |
+| body  | string |          | The text content of the action shown to the user.                          |
+
+### Examples
+
+Elemental Sugar does not require the use of `message.content.version` nor does it require nesting block objects in `message.content.elements`.
+Instead, simply pass Elemental Sugar properties directly under `message.content`:
+
+```json
+{
+  "message": {
+    // ... rest of message,
+
+    "content": {
+      "title": "Hello",
+      "body": "World"
+    }
+  }
+}
+```
+
 ## Action Element
 
 Allows the user to execute an action. Can be a button or a link.
