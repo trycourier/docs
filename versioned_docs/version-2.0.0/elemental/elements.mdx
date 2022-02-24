@@ -39,6 +39,25 @@ Instead, simply pass Elemental Sugar properties directly under `message.content`
 }
 ```
 
+Feel free to use Elemental Sugar alongside Elemental blocks:
+
+```json
+{
+  "message": {
+    // ... rest of message,
+
+    "content": {
+      "title": "Hello",
+      "body": "World",
+      "version": "2020-01-01",
+      "elements": [
+        // Courier Elemental Blocks
+      ]
+    }
+  }
+}
+```
+
 ## Action Element
 
 Allows the user to execute an action. Can be a button or a link.
