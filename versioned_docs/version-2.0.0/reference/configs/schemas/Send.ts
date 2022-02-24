@@ -32,6 +32,12 @@ const recipientList: ApiParam = {
       },
       {
         type: "string",
+        name: "list_pattern",
+        description:
+          "A unique identifier associated with a Courier pattern used to identify specific list(s) intended to send. A message will be sent to each subscriber in the specific list(s).",
+      },
+      {
+        type: "string",
         name: "phone_number",
         description: "A unique phone number associated to the recipient of message.",
       },
@@ -72,6 +78,12 @@ const recipient: ApiParam = {
       name: "list_id",
       description:
         "A unique identifier associated with a Courier list of subscribers. A message will be sent to each subscriber in the list.",
+    },
+    {
+      type: "string",
+      name: "list_pattern",
+      description:
+        "A unique identifier associated with a Courier pattern used to identify specific list(s) intended to send. A message will be sent to each subscriber in the specific list(s).",
     },
     {
       type: "string",
