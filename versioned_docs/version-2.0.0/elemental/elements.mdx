@@ -10,6 +10,54 @@ import TOCInline from "@theme/TOCInline";
 
 <TOCInline maxHeadingLevel={2} toc={toc} />
 
+## Elemental Sugar
+
+Syntatic Sugar to provide a fast shorthand for Courier Elemental Blocks.
+
+### Fields
+
+| Field | Type   | Required | Description                                                                   |
+| ----- | ------ | -------- | ----------------------------------------------------------------------------- |
+| title | string |          | The title to be displayed by supported channels i.e. push, email (as subject) |
+| body  | string |          | The text content displayed in the notification.                               |
+
+### Examples
+
+Elemental Sugar does not require the use of `message.content.version` nor does it require nesting block objects in `message.content.elements`.
+Instead, simply pass Elemental Sugar properties directly under `message.content`:
+
+```json
+{
+  "message": {
+    // ... rest of message,
+
+    "content": {
+      "title": "Hello",
+      "body": "World"
+    }
+  }
+}
+```
+
+Feel free to use Elemental Sugar alongside Elemental blocks:
+
+```json
+{
+  "message": {
+    // ... rest of message,
+
+    "content": {
+      "title": "Hello",
+      "body": "World",
+      "version": "2020-01-01",
+      "elements": [
+        // Courier Elemental Blocks
+      ]
+    }
+  }
+}
+```
+
 ## Action Element
 
 Allows the user to execute an action. Can be a button or a link.
