@@ -121,6 +121,11 @@
       "permanent": true
     },
     {
+      "source": "/docs/nowpush",
+      "destination": "https://www.courier.com/docs/guides/providers/push/nowpush/",
+      "permanent": true
+    },
+    {
       "source": "/docs/onesignal-push",
       "destination": "https://www.courier.com/docs/guides/providers/push/onesignal-push/",
       "permanent": true
