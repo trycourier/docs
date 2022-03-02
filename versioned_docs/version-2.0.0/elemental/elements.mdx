@@ -64,16 +64,16 @@ Allows the user to execute an action. Can be a button or a link.
 
 ### Fields
 
-| Field            | Type   | Required | Description                                                                              |
-| ---------------- | ------ | -------- | ---------------------------------------------------------------------------------------- |
-| type             | string | required | The type of element. For action elements, this value should be `"action"`.               |
-| content          | string | required | The text content of the action shown to the user.                                        |
-| href             | string | required | The target URL of the action.                                                            |
-| action_id        | string |          | A unique id used to identify the action when it is executed.                             |
-| align            | string |          | The alignment of the action button. One of `"center"`, `"left"`, `"right"`, or `"full"`. |
-| background_color | string |          | The background color of the action button.                                               |
-| style            | string |          | Can be `"button"` or `"link"`. Defaults to link.                                         |
-| locales          | object |          | Region specific content. See [locales docs](../locales) for more details.                |
+| Field            | Type   | Required | Description                                                                                                      |
+| ---------------- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------- |
+| type             | string | required | The type of element. For action elements, this value should be `"action"`.                                       |
+| content          | string | required | The text content of the action shown to the user.                                                                |
+| href             | string | required | The target URL of the action.                                                                                    |
+| action_id        | string |          | A unique id used to identify the action when it is executed.                                                     |
+| align            | string |          | The alignment of the action button. One of `"center"`, `"left"`, `"right"`, or `"full"`. Defaults to `"center"`. |
+| background_color | string |          | The background color of the action button.                                                                       |
+| style            | string |          | Can be `"button"` or `"link"`. Defaults to `"button"`.                                                           |
+| locales          | object |          | Region specific content. See [locales docs](../locales) for more details.                                        |
 
 ### Examples
 
