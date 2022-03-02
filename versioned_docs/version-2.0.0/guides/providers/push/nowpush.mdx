@@ -13,10 +13,16 @@ No profile data is required for NowPush. If `device_type`, `message_type`, `url`
 
 ```json title=JSON
 {
-    "device_type": "browser",
-    "message_type": "link",
-    "url": "www.nowpush.com",
-    "apiKey": ""
+    "message": {
+        "to": {
+            "nowpush": {
+                "device_type": "browser",
+                "message_type": "link",
+                "url": "www.nowpush.com",
+                "apiKey": ""
+            }
+        }
+    }
 }
 ```
 
