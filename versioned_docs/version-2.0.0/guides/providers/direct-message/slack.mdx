@@ -8,13 +8,13 @@ import TabItem from "@theme/TabItem";
 
 # Slack
 
-# Set Up Chat Using Slack
+## Set Up Chat Using Slack
 
-## Introduction
+### Introduction
 
 This step-by-step guide will walk you through sending a Slack Direct Message using Courier. You will:
 
-### Prerequisites
+#### Prerequisites
 
 You will need both Courier and Slack accounts to complete this tutorial. If you don't have accounts already, sign up before proceeding. You will also need permission to create a Slack app, configure that app, and add it to a Slack workspace. If you do not have access already, you can create your own free Slack workspace.
 
@@ -33,7 +33,7 @@ You will need both Courier and Slack accounts to complete this tutorial. If you 
 
 :::
 
-## Add the Slack Integration
+### Add the Slack Integration
 
 Once logged in to Courier, navigate to the ["Integrations" page](https://app.courier.com/integrations). Click on the Slack Integration to configure it.
 
@@ -41,11 +41,11 @@ Once logged in to Courier, navigate to the ["Integrations" page](https://app.cou
 
 Courier Integrations each require different pieces of information based on the needs of the Integration provider. We will send our configuration details as part of our request body when sending a message. For now, click "Install."
 
-### Slack App
+#### Slack App
 
 Our Slack app will be relatively simple. Slack allows for complex interactivity and menu interactions. For a full overview of what's possible, visit ["An Introduction to Slack Apps"](https://api.slack.com/start/overview). We will create an app that delivers direct messages only. If you would like to use an existing Slack App, you can skip to [OAuth Permissions](#oauth-permissions).
 
-#### Create a Slack App
+**Create a Slack App**
 
 Once logged in to Slack, navigate to the ["Apps"](https://api.slack.com/apps) page, and click the "Create an App" button. This will open a modal with two form fields: "App Name," and "Slack Development Workspace."
 
@@ -55,7 +55,7 @@ For the "App Name," use something like "Courier Test App." The "Development Slac
 
 <Image img={require("../../../assets/guides/slack/app-console.png")} alt="Slack App Console" />
 
-#### OAuth Permissions
+**OAuth Permissions**
 
 For this tutorial, we'll be sending a direct message using the email address associated with the recipient's Slack account. To do this, your app will need the following scopes: `chat:write`, `im:write`, `users:read`, and `users:read.email`. Navigate to the "OAuth & Permissions" page in the sidebar menu. In the Scopes section of the page, add these scopes as Bot Token Scopes.
 
@@ -74,7 +74,7 @@ You should see a "Bot User OAuth Access Token." Make note of this value.
 
 Congratulations, you've configured your Integration with Slack. Now, let's create a Notification.
 
-## Create a Courier Notification
+### Create a Courier Notification
 
 Navigate to the Courier ["Notifications" page](https://app.courier.com/notifications) and click "Create Notification." Click on “Untitled Notification” to rename your notification — for this tutorial, call it “Test Appointment Reminder.” From your list of configured Integrations, click on the Slack button. Then, click the “Slack” box that has been added to the sidebar in order to bring up a Slack template.
 
@@ -108,11 +108,11 @@ Courier
 
 When you are finished, click Publish in the upper right corner and give it a Publish Message of "Initial notification."
 
-## Send a Message
+### Send a Message
 
 Courier passes messages to Integrations via the [Send endpoint](../../../../reference). For this tutorial, we will send our messages with cURL, but you can use your preferred language and HTTP library. You can also use an API testing tool such as [Postman](https://www.getpostman.com/) or [Insomnia](https://insomnia.rest/). For additional code samples, see the ["Courier API Reference"](../../../../reference).
 
-### Authorization
+#### Authorization
 
 Courier supports both basic and token authorization. For this tutorial, we will use token authorization. You can read more about authorization in Courier's ["Authorization Overview"](../../../../reference).
 
@@ -141,7 +141,7 @@ These variables will persist for as long as your Bash session remains alive. If 
 
 To verify that you created the variables correctly, you can see them by typing `echo $VARIABLE_NAME`. For example, typing `echo $COURIER_AUTH_TOKEN` will print the Courier Auth Token value to the terminal.
 
-### Building the cURL Request
+#### Building the cURL Request
 
 We want to send a POST request to `https://api.courier.com/send`. Let's build our cURL request line-by-line. First, we'll tell cURL this is a POST request.
 
@@ -221,7 +221,7 @@ Our `--data` object should look like this:
 
 Now add the Send URL, `https://api.courier.com/send`, to complete the cURL request.
 
-#### Complete cURL Request in both Formats
+**Complete cURL Request in both Formats**
 
 <Tabs>
 <TabItem value="bash" label="cURL in JSON">
@@ -285,7 +285,6 @@ Paste your complete cURL request in either format in your terminal and hit "Retu
   img={require("../../../assets/guides/slack/delivered-message.png")}
   alt="Delivered Slack Message"
 />
-
 
 ## Slack App Requirements
 
