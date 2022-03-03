@@ -9,7 +9,7 @@ const ChannelPreferences: ApiParam = {
     {
       type: "string",
       name: "channel",
-      enum: ["direct_message", "email", "push"],
+      enum: ["direct_message", "email", "push", "sms"],
       example: "direct_message",
     },
   ],
