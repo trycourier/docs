@@ -12,7 +12,7 @@ The Courier REST API supports both token and basic authorization.
 
 ## Token Auth
 
-Courier assigns you an "Auth Token" when you [Register your account](https://www.trycourier.app/register). You can retrieve this token from any of your [Notification](https://www.trycourier.app/notifications) detail pages.
+Courier assigns you an "Auth Token" when you [Register your account](https://app.courier.com/signup). You can retrieve this token from any of your [Notification](https://app.courier.com/designer/notifications) detail pages.
 
 <Image
   img={require("../assets/reference/notification-in-detail-view.png")}
@@ -38,7 +38,7 @@ require 'uri'
 require 'net/http'
 require 'openssl'
 
-url = URI("https://api.trycourier.app/send")
+url = URI("https://api.courier.com/send")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
@@ -54,7 +54,7 @@ request["Authorization"] = 'Bearer <token>'
 ```python
 import requests
 
-url = "https://api.trycourier.app/send"
+url = "https://api.courier.com/send"
 
 headers = {
   'Authorization': "Bearer <token>"
@@ -73,7 +73,7 @@ xhr.addEventListener("readystatechange", function () {
   }
 });
 
-xhr.open("POST", "https://api.trycourier.app/send");
+xhr.open("POST", "https://api.courier.com/send");
 xhr.setRequestHeader("Authorization", "Bearer <token>");
 
 xhr.send(data);
@@ -105,7 +105,7 @@ require 'uri'
 require 'net/http'
 require 'openssl'
 
-url = URI("https://api.trycourier.app/send")
+url = URI("https://api.courier.com/send")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
@@ -121,7 +121,7 @@ request["Authorization"] = 'Basic <Base64 encoded string>'
 ```python
 import requests
 
-url = "https://api.trycourier.app/send"
+url = "https://api.courier.com/send"
 
 headers = {
   'Authorization': "Basic <Base64 encoded string>"
@@ -140,7 +140,7 @@ xhr.addEventListener("readystatechange", function () {
   }
 });
 
-xhr.open("POST", "https://api.trycourier.app/send");
+xhr.open("POST", "https://api.courier.com/send");
 xhr.setRequestHeader("Authorization", "Basic <Base64 encoded string>");
 
 xhr.send(data);

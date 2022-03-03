@@ -76,7 +76,7 @@ Congratulations, you've configured your Integration with Slack. Now, let's creat
 
 ### Create a Courier Notification
 
-Navigate to the Courier ["Notifications" page](https://app.courier.com/notifications) and click "Create Notification." Click on “Untitled Notification” to rename your notification — for this tutorial, call it “Test Appointment Reminder.” From your list of configured Integrations, click on the Slack button. Then, click the “Slack” box that has been added to the sidebar in order to bring up a Slack template.
+Navigate to the Courier ["Notifications" page](https://app.courier.com/designer/notifications) and click "Create Notification." Click on “Untitled Notification” to rename your notification — for this tutorial, call it “Test Appointment Reminder.” From your list of configured Integrations, click on the Slack button. Then, click the “Slack” box that has been added to the sidebar in order to bring up a Slack template.
 
 <Image
   img={require("../../../assets/guides/slack/courier-notification-template.png")}
@@ -213,7 +213,7 @@ Our `--data` object should look like this:
 --data "data[apt_date]=June 26" \
 --data "data[apt_time]=8:44 PM" \
 --data "data[support_phone]=555-555-5555" \
---data "data[support_url]=https://docs.trycourier.com" \
+--data "data[support_url]=https://www.courier.com/docs/" \
 ```
 
 </TabItem>
@@ -265,8 +265,8 @@ curl --request POST \
 --data "data[apt_date]=June 26" \
 --data "data[apt_time]=8:44 PM" \
 --data "data[support_phone]=555-555-5555" \
---data "data[support_url]=https://docs.trycourier.com" \
-https://api.trycourier.app/send
+--data "data[support_url]=https://www.courier.com/docs/" \
+https://api.courier.com/send
 ```
 
 </TabItem>
