@@ -136,6 +136,11 @@
       "permanent": true
     },
     {
+      "source": "/docs/opsgenie",
+      "destination": "https://www.courier.com/docs/guides/providers/push/ops-genie/",
+      "permanent": true
+    },
+    {
       "source": "/docs/pagerduty",
       "destination": "https://www.courier.com/docs/guides/providers/push/pagerduty/",
       "permanent": true
@@ -173,6 +178,11 @@
     {
       "source": "/docs/aws-sns-sms",
       "destination": "https://www.courier.com/docs/guides/providers/sms/aws-sns/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/aws-sns",
+      "destination": "https://www.courier.com/docs/guides/providers/push/aws-sns/",
       "permanent": true
     },
     {
@@ -247,6 +257,11 @@
     },
     {
       "source": "/docs/stream-chat-api",
+      "destination": "https://www.courier.com/docs/guides/providers/direct-message/stream-chat/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/stream-chat",
       "destination": "https://www.courier.com/docs/guides/providers/direct-message/stream-chat/",
       "permanent": true
     },
