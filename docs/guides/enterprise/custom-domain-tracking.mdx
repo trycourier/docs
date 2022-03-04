@@ -1,0 +1,33 @@
+---
+sidebar_position: 4
+---
+
+import Image from "@theme/IdealImage";
+
+# Custom Domain Tracking
+
+Learn how Courier can build tracking links with your domain in the URL.
+
+## Using Courier domain for link tracking
+
+Courier uses `ct0.app` as the default domain exclusively for link tracking. If you have enabled link tracking for your workspace, your links would have this default behavior.
+
+<Image img={require("../../assets/guides/custom-domain-tracking/default.png")} alt="" />
+
+## Using yourcompany.com for link tracking
+
+Below steps would require you working with Courier Support and someone with an access to your company's DNS records.
+
+### Modifying DNS records
+
+You'll need to add the following CNAME record entry to your DNS host. This process varies depending on your DNS host.
+
+`<workspace-id>.<your-domain>`
+
+### Courier enabling this feature for you
+
+After updating the record, work with Courier support who will enable this feature for you.
+
+Once its enabled, all links would look like below (courier-dev.com is where your company domain would appear)
+
+<Image img={require("../../assets/guides/custom-domain-tracking/custom.png")} alt="" />
