@@ -276,6 +276,34 @@ const metadata: ApiParam = {
       description:
         "An arbitrary string to tracks the event that generated this request (e.g. 'signup').",
     },
+    {
+      type: "object",
+      name: "utm",
+      displayName: "utm",
+      description: "Identify the campaign that refers traffic to a specific website, and attributes the browser's website session. Used by Google Analytics.",
+      fields: [
+        {
+          type: "string",
+          name: "campaign",
+        },
+        {
+          type: "string",
+          name: "content",
+        },
+        {
+          type: "string",
+          name: "medium",
+        },
+        {
+          type: "string",
+          name: "source",
+        },
+        {
+          type: "string",
+          name: "term",
+        }
+      ]
+    }
   ],
 };
 
