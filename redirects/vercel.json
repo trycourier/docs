@@ -326,6 +326,11 @@
       "permanent": true
     },
     {
+      "source": "/docs/custom-domain-tracking",
+      "destination": "https://www.courier.com/docs/guides/enterprise/custom-domain-tracking/",
+      "permanent": true
+    },
+    {
       "source": "/docs/set-up-sign-in-with-okta",
       "destination": "https://www.courier.com/docs/guides/enterprise/okta-integration/",
       "permanent": true
