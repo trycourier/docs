@@ -15,7 +15,7 @@ const ApiParamArrayField = ({ param, field, form }: FieldComponentProps<"array">
         </div>
       )}
 
-      {field.value.map((value, index) => (
+      {[...field.value].map((value, index) => (
         <div key={index} className={styles.field}>
           <div className={styles.group}>
             <div className={styles.groupHeader}>
