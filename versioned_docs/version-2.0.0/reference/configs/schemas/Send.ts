@@ -280,7 +280,7 @@ const metadata: ApiParam = {
       type: "object",
       name: "utm",
       displayName: "utm",
-      description: "Identify the campaign that refers traffic to a specific website, and attributes the browser's website session. Used by Google Analytics.",
+      description: "Identify the campaign that refers traffic to a specific website, and attributes the browser's website session.",
       fields: [
         {
           type: "string",
