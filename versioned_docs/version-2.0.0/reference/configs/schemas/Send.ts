@@ -277,10 +277,20 @@ const metadata: ApiParam = {
         "An arbitrary string to tracks the event that generated this request (e.g. 'signup').",
     },
     {
+      type: "array",
+      name: "tags",
+      description:
+        "An array of up to 9 tags you wish to associate with this request (and corresponding messages) for later analysis. Individual tags cannot be more than 30 characters in length.",
+      field: {
+        type: "string",
+      },
+    },
+    {
       type: "object",
       name: "utm",
       displayName: "utm",
-      description: "Identify the campaign that refers traffic to a specific website, and attributes the browser's website session.",
+      description:
+        "Identify the campaign that refers traffic to a specific website, and attributes the browser's website session.",
       fields: [
         {
           type: "string",
@@ -301,9 +311,9 @@ const metadata: ApiParam = {
         {
           type: "string",
           name: "term",
-        }
-      ]
-    }
+        },
+      ],
+    },
   ],
 };
 
