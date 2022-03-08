@@ -9,6 +9,12 @@ const config: ApiReferenceProps = {
   path: "/messages",
   queryParams: [
     {
+      type: "boolean",
+      name: "archived",
+      description: "A boolean value that indicates whether archived messages should be included in the response.",
+      example: "false",
+    },
+    {
       type: "string",
       name: "cursor",
       description: "A unique identifier that allows for fetching the next set of message statuses.",
@@ -54,6 +60,13 @@ const config: ApiReferenceProps = {
         "An indicator of the current status of the message. Multiple status values can be passed in.",
       example: "OPENED",
     },
+    {
+      type: "string",
+      name: "tags",
+      description:
+        "A comma delimited list of 'tags' associated with a message",
+      example: "tag-1,tag-2",
+    }
   ],
   responses: [
     {
