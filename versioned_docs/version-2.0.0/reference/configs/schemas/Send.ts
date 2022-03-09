@@ -8,9 +8,8 @@ const recipientList: ApiParam = {
     type: "object",
     fields: [
       {
-        type: "object",
+        type: "json",
         name: "data",
-        fields: [],
         description:
           "An object that includes any data you want to pass to the message. The data will populate the corresponding template or elemental variables.",
       },
@@ -42,10 +41,9 @@ const recipientList: ApiParam = {
         description: "A unique phone number associated to the recipient of message.",
       },
       {
-        type: "object",
+        type: "json",
         name: "preferences",
         description: "An object that includes any preferences for the recipient.",
-        fields: [],
       },
     ],
   },
@@ -57,9 +55,8 @@ const recipient: ApiParam = {
   description: "The recipient of the message. Can also be a list of Recipient objects.",
   fields: [
     {
-      type: "object",
+      type: "json",
       name: "data",
-      fields: [],
       description:
         "An object that includes any data you want to pass to the message. The data will populate the corresponding template or elemental variables.",
     },
@@ -91,10 +88,9 @@ const recipient: ApiParam = {
       description: "A unique phone number associated to the recipient of message.",
     },
     {
-      type: "object",
+      type: "json",
       name: "preferences",
       description: "An object that includes any preferences for the recipient.",
-      fields: [],
     },
   ],
 };
@@ -112,6 +108,70 @@ const brand_id: ApiParam = {
   name: "brand_id",
   description:
     "A unique identifier that represents the brand that should be used for rendering the notification. Note that a brand_id will only be applied to a Template message.",
+};
+
+const routingProvider: ApiParam = {
+  type: "object",
+  displayName: "Provider",
+  fields: [
+    {
+      type: "string",
+      name: "channel",
+      required: true,
+    },
+    {
+      type: "json",
+      name: "config",
+    },
+    {
+      type: "string",
+      name: "if",
+      description:
+        "A conditional expression to determine if the message should be sent through the channel. You can reference any property from the data or profile fields in your expression.",
+    },
+  ],
+};
+
+const routingChannel: ApiParam = {
+  type: "object",
+  displayName: "Channel",
+  fields: [
+    {
+      type: "string",
+      name: "channel",
+      required: true,
+    },
+    {
+      type: "string",
+      name: "method",
+      required: true,
+      enum: ["all", "single"],
+      example: "single",
+      description:
+        "The method for selecting channels to send the message with. If no method is specified, then 'single' will be used as default.",
+    },
+    {
+      type: "json",
+      name: "config",
+    },
+    {
+      type: "string",
+      name: "if",
+      description:
+        "A conditional expression to determine if the message should be sent through the channel. You can reference any property from the data or profile fields in your expression.",
+    },
+    {
+      type: "oneOf",
+      name: "providers",
+      options: [
+        {
+          type: "string",
+          displayName: "string",
+        },
+        routingProvider,
+      ],
+    },
+  ],
 };
 
 const routing: ApiParam = {
@@ -135,23 +195,14 @@ const routing: ApiParam = {
       description:
         "An array of valid channel identifiers (like email, push, sms, etc.) and additional routing nodes.",
       field: {
-        type: "object",
-        fields: [
+        type: "oneOf",
+        options: [
           {
             type: "string",
-            name: "method",
-            required: true,
-            enum: ["all", "single"],
-            example: "single",
+            displayName: "string",
           },
-          {
-            type: "array",
-            name: "channels",
-            field: {
-              type: "object",
-              fields: [],
-            },
-          },
+          routingChannel,
+          routingProvider,
         ],
       },
     },
@@ -197,9 +248,8 @@ const channels: ApiParam = {
         example: "data.locale === 'usa' && profile.name === 'Spongebob'",
       },
       {
-        type: "object",
+        type: "json",
         name: "override",
-        fields: [],
       },
     ],
   },
@@ -215,9 +265,8 @@ const providers: ApiParam = {
     displayName: "Provider Configuration Object",
     fields: [
       {
-        type: "object",
+        type: "json",
         name: "override",
-        fields: [],
         description:
           "Contains twilio specific overrides for settings like API keys and other configurations.",
       },
