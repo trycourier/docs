@@ -8,6 +8,8 @@ import {
 } from "@theme/hooks/useDocs";
 import { ThemeClassNames, useDocsPreferredVersion, useDocsVersion } from "@docusaurus/theme-common";
 import DocVersionBanner from "@theme-original/DocVersionBanner";
+import Head from "@docusaurus/Head";
+import { useBaseUrlUtils } from "@docusaurus/useBaseUrl";
 
 import type { Props } from "@theme/DocVersionBanner";
 import clsx from "clsx";
@@ -27,29 +29,39 @@ function DocVersionV1Banner({
     latestDocSuggestion ??
     latestVersionSuggestion.docs.find((doc) => doc.id === latestVersionSuggestion.mainDocId);
 
+  const { withBaseUrl } = useBaseUrlUtils();
+
   return (
-    <div
-      className={clsx(
-        className,
-        ThemeClassNames.docs.docVersionBanner,
-        "alert alert--warning margin-bottom--md"
+    <>
+      {latestDocSuggestion && (
+        <Head>
+          <link rel="canonical" href={withBaseUrl(latestDocSuggestion.path, { absolute: true })} />
+        </Head>
       )}
-      role="alert"
-    >
-      <div>
-        This is documentation for Courier’s <b>{versionMetadata.label}</b> API.
+
+      <div
+        className={clsx(
+          className,
+          ThemeClassNames.docs.docVersionBanner,
+          "alert alert--warning margin-bottom--md"
+        )}
+        role="alert"
+      >
+        <div>
+          This is documentation for Courier’s <b>{versionMetadata.label}</b> API.
+        </div>
+        <div className="margin-top--md">
+          For the most up-to-date documentation, see the{" "}
+          <Link
+            href={latestVersionSuggestedDoc.path}
+            onClick={() => savePreferredVersionName(latestVersionSuggestion.name)}
+          >
+            <b>latest version</b>
+          </Link>{" "}
+          (API {latestVersionSuggestion.label}).
+        </div>
       </div>
-      <div className="margin-top--md">
-        For the most up-to-date documentation, see the{" "}
-        <Link
-          href={latestVersionSuggestedDoc.path}
-          onClick={() => savePreferredVersionName(latestVersionSuggestion.name)}
-        >
-          <b>latest version</b>
-        </Link>{" "}
-        (API {latestVersionSuggestion.label}).
-      </div>
-    </div>
+    </>
   );
 }
 
