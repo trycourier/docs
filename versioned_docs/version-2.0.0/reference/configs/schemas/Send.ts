@@ -103,14 +103,14 @@ const to: ApiParam = {
   options: [recipient, recipientList],
 };
 
-const brand_id: ApiParam = {
+export const brand_id: ApiParam = {
   type: "string",
   name: "brand_id",
   description:
     "A unique identifier that represents the brand that should be used for rendering the notification. Note that a brand_id will only be applied to a Template message.",
 };
 
-const routingProvider: ApiParam = {
+export const routingProvider: ApiParam = {
   type: "object",
   displayName: "Provider",
   fields: [
@@ -132,7 +132,7 @@ const routingProvider: ApiParam = {
   ],
 };
 
-const routingChannel: ApiParam = {
+export const routingChannel: ApiParam = {
   type: "object",
   displayName: "Channel",
   fields: [
@@ -174,7 +174,7 @@ const routingChannel: ApiParam = {
   ],
 };
 
-const routing: ApiParam = {
+export const routing: ApiParam = {
   type: "object",
   name: "routing",
   description:
@@ -209,7 +209,7 @@ const routing: ApiParam = {
   ],
 };
 
-const channels: ApiParam = {
+export const channels: ApiParam = {
   type: "record",
   name: "channels",
   description:
@@ -255,7 +255,7 @@ const channels: ApiParam = {
   },
 };
 
-const providers: ApiParam = {
+export const providers: ApiParam = {
   type: "record",
   name: "providers",
   description:
@@ -281,7 +281,7 @@ const providers: ApiParam = {
   },
 };
 
-const template: ApiParam = {
+export const template: ApiParam = {
   type: "string",
   name: "template",
   required: true,
@@ -289,7 +289,7 @@ const template: ApiParam = {
   description: "A notification template id or event mapping from Courier Studio.",
 };
 
-const content: ApiParam = {
+export const content: ApiParam = {
   type: "object",
   name: "content",
   required: true,
@@ -308,14 +308,14 @@ const content: ApiParam = {
   ],
 };
 
-const contentOrTemplate: ApiParam = {
+export const contentOrTemplate: ApiParam = {
   type: "oneOf",
   displayName: "content or template",
   required: true,
   options: [template, content],
 };
 
-const metadata: ApiParam = {
+export const metadata: ApiParam = {
   type: "object",
   name: "metadata",
   fields: [
