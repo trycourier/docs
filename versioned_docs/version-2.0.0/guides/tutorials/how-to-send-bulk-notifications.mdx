@@ -25,11 +25,14 @@ Request:
   },
   "body": {
     "message": {
-      "event": "my-notification-or-event", // required
+      "event": "my-notification-or-event", // optional if using API v2
       "brand": "my-brand", // optional brand id
       "data": {}, // optional data bag
       "locale": "en_US", // optional
       "override": {} // optional Courier overrides
+      "message": {
+        // optional API v2 message that supports elemental
+      }
     }
   }
 }
@@ -70,7 +73,10 @@ Request:
           "recipientName": "John Doe" // optional
           // additional [key-values] similar to /send data object
         },
-        "preferences": {} // optional, similar to preferences API
+        "preferences": {}, // optional, similar to preferences API
+        "to": {
+          // optional json that represents a user recipient
+        }
       }
     ]
   }
