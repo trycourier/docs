@@ -1,6 +1,6 @@
 ---
-sidebar_position: 9
-sidebar_label: NowPush 
+sidebar_position: 7
+sidebar_label: NowPush
 title: Set Up Push Notifications Using NowPush
 description: The simplest way to share images, videos, text or documents between all your devices, on any operating system.
 ---
@@ -13,16 +13,15 @@ No profile data is required for NowPush. If `device_type`, `message_type`, `url`
 
 ```json title=JSON
 {
-    "message": {
-        "to": {
-            "nowpush": {
-                "device_type": "browser",
-                "message_type": "link",
-                "url": "www.nowpush.com",
-                "apiKey": ""
-            }
-        }
+  "message": {
+    "to": {
+      "nowpush": {
+        "device_type": "browser",
+        "message_type": "link",
+        "url": "www.nowpush.com",
+        "apiKey": ""
+      }
     }
+  }
 }
 ```
-

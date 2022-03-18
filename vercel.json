@@ -1,3 +1,31 @@
 {
-  "rewrites": [{ "source": "/docs/api/:match*", "destination": "/api/:match*" }]
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [{ "source": "/docs/api/:match*", "destination": "/api/:match*" }],
+  "redirects": [
+    {
+      "source": "(/docs)?/guides/providers/sms/(aws-sns)/",
+      "destination": "$1/guides/providers/other/$2/",
+      "permanent": true
+    },
+    {
+      "source": "(/docs)?/guides/providers/push/(aws-sns|beamer|custom-provider|drift|magicbell|nowpush|ops-genie|pagerduty|pushbullet|pusher|splunk-on-call)/",
+      "destination": "$1/guides/providers/other/$2/",
+      "permanent": true
+    },
+    {
+      "source": "(/docs)?/guides/providers/direct-message/(facebook-messenger|intercom)/",
+      "destination": "$1/guides/providers/other/$2/",
+      "permanent": true
+    },
+    {
+      "source": "(/docs)?/guides/providers/webhook-integration/",
+      "destination": "$1/guides/providers/other/webhook-integration/",
+      "permanent": true
+    },
+    {
+      "source": "(/docs)?/guides/providers/push/courier-push/",
+      "destination": "$1/guides/providers/in-app/courier-push/",
+      "permanent": true
+    }
+  ]
 }
