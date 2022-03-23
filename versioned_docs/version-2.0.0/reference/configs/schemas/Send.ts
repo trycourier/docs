@@ -366,11 +366,24 @@ export const metadata: ApiParam = {
   ],
 };
 
+export const timeout: ApiParam = {
+  type: "object",
+  name: "timeout",
+  fields: [
+    {
+      type: "number",
+      name: "message",
+      description:
+        "An arbitrary duration for a message to be available for delivery. Default is 72 hours or 259200000 Milliseconds",
+    },
+  ],
+};
+
 const Send: ApiParam = {
   type: "object",
   name: "message",
   displayName: "message",
-  fields: [to, contentOrTemplate, brand_id, routing, channels, providers, metadata],
+  fields: [to, contentOrTemplate, brand_id, routing, channels, providers, metadata, timeout],
 };
 
 export default Send;
