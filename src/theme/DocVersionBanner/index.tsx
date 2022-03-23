@@ -1,5 +1,7 @@
 import React from "react";
 import Link from "@docusaurus/Link";
+import { applyTrailingSlash } from "@docusaurus/utils-common";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import {
   useActivePlugin,
   useActiveDocContext,
@@ -29,13 +31,20 @@ function DocVersionV1Banner({
     latestDocSuggestion ??
     latestVersionSuggestion.docs.find((doc) => doc.id === latestVersionSuggestion.mainDocId);
 
+  const context = useDocusaurusContext();
   const { withBaseUrl } = useBaseUrlUtils();
 
   return (
     <>
       {latestDocSuggestion && (
         <Head>
-          <link rel="canonical" href={withBaseUrl(latestDocSuggestion.path, { absolute: true })} />
+          <link
+            rel="canonical"
+            href={applyTrailingSlash(
+              withBaseUrl(latestDocSuggestion.path, { absolute: true }),
+              context.siteConfig
+            )}
+          />
         </Head>
       )}
 
