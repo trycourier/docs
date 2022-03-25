@@ -42,6 +42,8 @@ const metadata = require("./src/theme/metadata");
           theme: {
             customCss: require.resolve("./src/css/custom.css"),
           },
+          // Using a custom plugin to filter out paths
+          sitemap: false,
         }),
       ],
     ],
@@ -80,6 +82,7 @@ const metadata = require("./src/theme/metadata");
         "@easyops-cn/docusaurus-search-local",
         { docsRouteBasePath: "/", indexBlog: false, ignoreFiles: /1\.0\.0/ },
       ],
+      ["./plugins/sitemap", {}],
     ],
   }
 );
