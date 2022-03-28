@@ -2,7 +2,12 @@ const fs = require("fs-extra");
 const path = require("path");
 const createSitemap = require("@docusaurus/plugin-sitemap/lib/createSitemap").default;
 
-module.exports = function pluginSitemap(context, options) {
+const options = {
+  changefreq: "weekly",
+  priority: 0.5,
+};
+
+module.exports = function pluginSitemap(context) {
   return {
     name: "docusaurus-plugin-sitemap-custom",
 
