@@ -1,0 +1,144 @@
+---
+sidebar_position: -1
+sidebar_label: Introduction
+pagination_label: Audiences API
+slug: ./
+---
+
+# Audiences API
+
+Audience is an arbitrary user collection that adheres to a set of rules. Rules can be something as simple as "users in California" but can also be easily extended to complex set of operations. e.g. When a product owner says, we need to build out a notification that sends out billing or usage alerts to all the workspace administrators who are from California. Doing this manually right now with Courier requires a lot of work upfront, which we want to unload from the developers and product teams. Audiences API is meant to solve this problem where Courier does all the heavy lifting to make it "just work" for you.
+
+## Audience structure
+
+```json
+{
+  "description": "(optional) description for this audience",
+  "name": "(optional) name for this audience",
+  "filter": {
+    "path": "title", // assumes you are using Courier profiles API and your user has title field
+    "value": "Software Engineer",
+    "operator": "EQ"
+  }
+}
+```
+
+## Audience Filter
+Audience filters are used to match a user's profile against a set of criteria. Courier supports the following operators:
+- EQ (equal to)
+- NEQ (not equal to)
+- GT (greater than)
+- GTE (greater than or equal to)
+- LT (less than)
+- LTE (less than or equal to)
+- INCLUDES
+- OMIT
+- AND
+- OR
+
+These operators are case-sensitive. Say you create a `user` using Courier's [profile](../../reference/profiles/intro.mdx) and your user's profile looks like this:
+
+```json
+{
+  "profile": {
+    "title": "Software Engineer",
+    "email": "suhas@courier.com",
+    "phone_number": "1234567890",
+    "location": {
+      "city": "San Francisco",
+      "state": "CA",
+      "country": "US"
+    },
+    "favorite_programming_languages": [
+      "Go",
+      "Typescript"
+    ]
+  }
+}
+```
+
+Now let's consider following use cases and see how we can use them:
+
+### 1. You want to notify a subset of users who are from San Francisco.
+```json
+{
+  "operator": "EQ",
+  "path": "location.city",
+  "value": "San Francisco"
+}
+```
+
+### 2. You want to notify a subset of users who are Software Engineer and they either live in San Francisco or Oakland.
+
+```json
+{
+  "operator": "AND",
+  "rules": [
+    {
+      "operator": "EQ",
+      "path": "title",
+      "value": "Software Engineer"
+    },
+    {
+      "operator": "OR",
+      "rules": [
+        {
+          "operator": "EQ",
+          "path": "location.city",
+          "value": "Oakland"
+        },
+        {
+          "operator": "EQ",
+          "path": "location.city",
+          "value": "San Francisco"
+        }
+      ]
+    }
+  ]
+}
+```
+
+
+### 3. You want to notify a set of users who with title Software Engineer and they have listed Typescript as one of their favorite programming languages.
+
+```json
+{
+  "operator": "AND",
+  "rules": [
+    {
+      "operator": "EQ",
+      "path": "title",
+      "value": "Software Engineer"
+    },
+    {
+      "operator": "INCLUDES",
+      "path": "favorite_programming_languages",
+      "value": "Typescript"
+    }
+  ]
+}
+```
+
+## Usage
+
+Once you define an audience, and you confirm the rules are giving you the right set of users, you can use [Send endpoint](../../reference/send/message.mdx) to send to the audience like this:
+
+```json
+{
+  "message": {
+    "to": {
+      "audience_id": "123456789"
+    },
+    "content": {
+      "title": "Hello World",
+      "body": "Hello there"
+    },
+    "routing": {
+      "channels": ["push", "sms"],
+      "method": "single"
+    }
+  }
+}
+
+```
+

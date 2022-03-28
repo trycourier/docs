@@ -1,0 +1,64 @@
+---
+sidebar_position: 0
+---
+
+import ApiReference from "@site/src/components/ApiReference";
+import config from "../configs/audiences/put";
+
+# PUT /audiences/:audience_id
+
+A `audience_id` should be uniquely identifiable using a string ID that will not change.
+
+### Examples
+
+```json title=JSON
+{
+  "name": "Developers from San Francisco",
+  "filter": {
+    "operator": "AND",
+    "rules": [
+      {
+        "path": "location",
+        "operator": "EQ",
+        "value": "San Francisco"
+      },
+      {
+        "path": "job_title",
+        "operator": "EQ",
+        "value": "Developer"
+      }
+    ]
+  }
+}
+```
+
+The above will result with:
+
+```json title=200
+{
+  "audience": {
+    "id": "<audience-id>",
+    "name": "My favorite people",
+    "description": "People I like",
+    "created_at": "<iso-8601-formatted-string>",
+    "updated_at": "<iso-8601-formatted-string>",
+    "filter": {
+      "operator": "AND",
+      "rules": [
+        {
+          "path": "location",
+          "operator": "EQ",
+          "value": "San Francisco"
+        },
+        {
+          "path": "job_title",
+          "operator": "EQ",
+          "value": "Developer"
+        }
+      ]
+    }
+  }
+}
+```
+
+<ApiReference {...config} />
