@@ -19,13 +19,6 @@ const Preferences: ApiParam = {
       description: "json object that contains category ids with the respective preferences",
       field: Preference,
     },
-    {
-      type: "string",
-      name: "templateId",
-      description:
-        "specify an optional preference template id to validate preferences before persisting it",
-      example: "W951R8G37V49KZMK8DEKW8Z588BZ",
-    },
   ],
 };
 
