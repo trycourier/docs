@@ -335,6 +335,15 @@ export const metadata: ApiParam = {
       },
     },
     {
+      type: "string",
+      name: "trace_id",
+      description:
+        "Is for unique IDs used to correlate this request to processing on your servers. Courier does not verify the uniqueness of this ID.",
+      field: {
+        type: "string",
+      },
+    },
+    {
       type: "object",
       name: "utm",
       displayName: "utm",
