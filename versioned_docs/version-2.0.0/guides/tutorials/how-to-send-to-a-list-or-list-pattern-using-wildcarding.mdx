@@ -154,23 +154,23 @@ The following are examples of invalid List IDs, Patterns and wildcarding that Co
 
 ## Sending to a list or list pattern
 
-To send to a list or list pattern use the `POST /send/list` endpoint
+To send to a list or list pattern use the `POST /send` endpoint
 
 :::info Send API
-[POST /send/list](../../reference/send/list.mdx)
+[POST /send](../../reference/send/message.mdx)
 :::
 
 **Sending to a list**
 
 ```bash title=cURL
 curl --request POST \
-     --url https://api.courier.com/send/list \
+     --url https://api.courier.com/send \
      --header 'Accept: application/json' \
      --header 'Authorization: Bearer TOKEN GOES HERE' \
      --header 'Content-Type: application/json' \
      --data '
 {
-     "list": "pokemon.grass",
+     "list_id": "pokemon.grass",
      "event": "04de5ab9-8314-2e39d6b"
 }
 '
@@ -180,13 +180,13 @@ curl --request POST \
 
 ```bash title=cURL
 curl --request POST \
-     --url https://api.courier.com/send/list \
+     --url https://api.courier.com/send \
      --header 'Accept: application/json' \
      --header 'Authorization: Bearer TOKEN GOES HERE' \
      --header 'Content-Type: application/json' \
      --data '
 {
-     "pattern": "pokemon.fire.**",
+     "list_pattern": "pokemon.fire.**",
      "event": "04de5ab9-8314-2e39d6b"
 }
 '
