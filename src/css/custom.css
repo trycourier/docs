@@ -528,12 +528,12 @@ code {
   background-image: url(/img/sidebar-icons/client-libraries-active.svg);
 }
 
-.sidebar-enterprise .menu__link:before {
-  background-image: url(/img/sidebar-icons/enterprise.svg);
+.sidebar-business .menu__link:before {
+  background-image: url(/img/sidebar-icons/business.svg);
 }
 
-.sidebar-enterprise .menu__link--active:before {
-  background-image: url(/img/sidebar-icons/enterprise-active.svg);
+.sidebar-business .menu__link--active:before {
+  background-image: url(/img/sidebar-icons/business-active.svg);
 }
 
 .sidebar-elemental .menu__link:before {
