@@ -99,7 +99,7 @@
     },
     {
       "type": "category",
-      "label": "Courier Enterprise",
+      "label": "Courier Business",
       "className": "sidebar-enterprise",
       "items": [
         {
