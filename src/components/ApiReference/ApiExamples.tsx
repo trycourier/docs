@@ -3,6 +3,7 @@ import { useFormikContext } from "formik";
 import capitalize from "lodash/capitalize";
 import mapValues from "lodash/mapValues";
 import omitBy from "lodash/omitBy";
+import isPlainObject from "lodash/isPlainObject";
 import qs from "qs";
 import { Path } from "path-parser";
 import CodeBlock from "@theme/CodeBlock";
@@ -194,6 +195,25 @@ const tabs = [
   },
 ];
 
+// Used to filter out the fields that are empty in the example body JSON
+const filterOutEmpty = (value: any) => {
+  if (Array.isArray(value)) {
+    const cleanArray = value.map((item) => filterOutEmpty(item)).filter((item) => item != null);
+    return cleanArray.length === 0 ? undefined : cleanArray;
+  }
+
+  if (isPlainObject(value)) {
+    const cleanObject = Object.entries(value).reduce((obj, [key, value]) => {
+      const cleanValue = filterOutEmpty(value);
+      return cleanValue == null ? obj : { ...obj, [key]: cleanValue };
+    }, {});
+
+    return Object.keys(cleanObject).length === 0 ? undefined : cleanObject;
+  }
+
+  return value;
+};
+
 const ApiExamples = ({ method, path }: Pick<ApiReferenceProps, "method" | "path">) => {
   const { values } = useFormikContext<FormValues>();
   const { token } = useContext(ApiReferenceTokenContext);
@@ -220,7 +240,7 @@ const ApiExamples = ({ method, path }: Pick<ApiReferenceProps, "method" | "path"
                 qs.stringify(values.query || {}, { addQueryPrefix: true }),
               ].join(""),
               auth: token,
-              body: values.body,
+              body: filterOutEmpty(values.body),
             })}
           </CodeBlock>
         </TabItem>
