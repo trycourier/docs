@@ -34,10 +34,7 @@ const config: ApiReferenceProps = {
             type: "array",
             name: "items",
             description: "List of audience members",
-            field: {
-              type: "object",
-              fields: [AudienceMember],
-            },
+            field: AudienceMember,
           },
           {
             type: "object",

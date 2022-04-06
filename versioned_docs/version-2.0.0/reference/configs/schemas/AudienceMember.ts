@@ -2,6 +2,7 @@ import { ApiParam } from "@site/src/components/ApiReference/ApiParamField";
 
 const AudienceMember: ApiParam = {
   type: "object",
+  name: "AudienceMember",
   displayName: "AudienceMember",
   fields: [
     {
