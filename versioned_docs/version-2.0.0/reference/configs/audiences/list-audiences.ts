@@ -9,8 +9,7 @@ const config: ApiReferenceProps = {
     {
       type: "string",
       name: "cursor",
-      description:
-        "A unique identifier that allows for fetching the next set of audiences",
+      description: "A unique identifier that allows for fetching the next set of audiences",
       example: "MTU4OTQ5NTI1ODY4NywxLTVlYmRjNWRhLTEwODZlYWFjMWRmMjEwMTNjM2I0ZjVhMA",
     },
   ],
@@ -26,10 +25,7 @@ const config: ApiReferenceProps = {
             type: "array",
             name: "items",
             description: "List of audiences",
-            field: {
-              type: "object",
-              fields: [Audience],
-            },
+            field: Audience,
           },
           {
             type: "object",
