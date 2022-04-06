@@ -31,8 +31,8 @@ const SingleFilter: ApiParam = {
 
 var GroupFilters: ApiParam = {
   type: "array",
-  name: "Group of Filter rules",
-  description: "Group of filters to combine multiple rules",
+  name: "filters",
+  description: "Group of filters to combine multiple filters in a single logical expression",
   field: {
     type: "oneOf",
     options: [SingleFilter, GroupFilters],

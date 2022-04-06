@@ -1,17 +1,16 @@
 import { ApiReferenceProps } from "@site/src/components/ApiReference";
-import AudienceMember from "../schemas/AudienceMember";
 
 const config: ApiReferenceProps = {
-  description: "Get list of members of an audience.",
+  description: "Get list of audiences user is a member of.",
   method: "GET",
-  path: "/audiences/:audience_id/members",
+  path: "/members/:member_id/audiences",
   pathParams: [
     {
       type: "string",
-      name: "audience_id",
+      name: "member_id",
       required: true,
-      description: "A unique identifier representing the audience_id",
-      example: "developer-audience",
+      description: "A unique identifier representing the user id",
+      example: "suhas_rd",
     },
   ],
   queryParams: [
@@ -28,15 +27,28 @@ const config: ApiReferenceProps = {
       description: "Audience members associated with the audience by `audience_id`",
       body: {
         type: "object",
-        displayName: "List of members in an audience",
+        displayName: "List of audiences user is a member of",
         fields: [
           {
             type: "array",
             name: "items",
-            description: "List of audience members",
+            description: "List of audiences",
             field: {
               type: "object",
-              fields: [AudienceMember],
+              fields: [
+                {
+                  type: "string",
+                  name: "audience_id",
+                  description: "A unique identifier representing the audience_id",
+                  example: "my-favorite-developers",
+                },
+                {
+                  type: "number",
+                  name: "audience_version",
+                  description: "represents the version of the audience that this member belongs to",
+                  example: 1,
+                },
+              ],
             },
           },
           {

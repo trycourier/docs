@@ -16,7 +16,7 @@ A `audience_id` should be uniquely identifiable using a string ID that will not 
   "name": "Developers from San Francisco",
   "filter": {
     "operator": "AND",
-    "rules": [
+    "filters": [
       {
         "path": "location",
         "operator": "EQ",
@@ -44,7 +44,7 @@ The above will result with:
     "updated_at": "<iso-8601-formatted-string>",
     "filter": {
       "operator": "AND",
-      "rules": [
+      "filters": [
         {
           "path": "location",
           "operator": "EQ",

@@ -7,7 +7,7 @@ slug: ./
 
 # Audiences API
 
-Audience is an arbitrary user collection that adheres to a set of rules. Rules can be something as simple as "users in California" but can also be easily extended to complex set of operations. e.g. When a product owner says, we need to build out a notification that sends out billing or usage alerts to all the workspace administrators who are from California. Doing this manually right now with Courier requires a lot of work upfront, which we want to unload from the developers and product teams. Audiences API is meant to solve this problem where Courier does all the heavy lifting to make it "just work" for you.
+Audience is an arbitrary user collection that adheres to a set of rules. These rules can be as simple as "users in California," but can also be extended to a complex set of operations. For example, a product owner may need to build out a notification to send billing or usage alerts to workspace administrators who are from California. Doing this manually with Courier requires a lot of tedious work up front, which we want to unload from developers and product teams. The Audiences API is meant to solve this problem by having Courier do all the heavy lifting to make it "just work" for you.
 
 ## Audience structure
 
@@ -24,7 +24,9 @@ Audience is an arbitrary user collection that adheres to a set of rules. Rules c
 ```
 
 ## Audience Filter
+
 Audience filters are used to match a user's profile against a set of criteria. Courier supports the following operators:
+
 - EQ (equal to)
 - NEQ (not equal to)
 - GT (greater than)
@@ -36,7 +38,7 @@ Audience filters are used to match a user's profile against a set of criteria. C
 - AND
 - OR
 
-These operators are case-sensitive. Say you create a `user` using Courier's [profile](../../reference/profiles/intro.mdx) and your user's profile looks like this:
+These operators are case-sensitive. If a user is created with Courier's [profile](../../reference/profiles/intro.mdx) the user's profile looks like this:
 
 ```json
 {
@@ -49,17 +51,15 @@ These operators are case-sensitive. Say you create a `user` using Courier's [pro
       "state": "CA",
       "country": "US"
     },
-    "favorite_programming_languages": [
-      "Go",
-      "Typescript"
-    ]
+    "favorite_programming_languages": ["Go", "Typescript"]
   }
 }
 ```
 
 Now let's consider following use cases and see how we can use them:
 
-### 1. You want to notify a subset of users who are from San Francisco.
+### 1. You want to notify a subset of users who are from San Francisco.​
+
 ```json
 {
   "operator": "EQ",
@@ -72,8 +72,8 @@ Now let's consider following use cases and see how we can use them:
 
 ```json
 {
-  "operator": "OR",
-  "rules": [
+  "operator": "AND",
+  "filters": [
     {
       "operator": "EQ",
       "path": "title",
@@ -81,7 +81,7 @@ Now let's consider following use cases and see how we can use them:
     },
     {
       "operator": "OR",
-      "rules": [
+      "filters": [
         {
           "operator": "EQ",
           "path": "location.city",
@@ -98,13 +98,12 @@ Now let's consider following use cases and see how we can use them:
 }
 ```
 
-
 ### 3. You want to notify a set of users who with title Software Engineer and they have listed Typescript as one of their favorite programming languages.
 
 ```json
 {
   "operator": "AND",
-  "rules": [
+  "filters": [
     {
       "operator": "EQ",
       "path": "title",
@@ -121,7 +120,7 @@ Now let's consider following use cases and see how we can use them:
 
 ## Usage
 
-Once you define an audience, and you confirm the rules are giving you the right set of users, you can use [Send endpoint](../../reference/send/message.mdx) to send to the audience like this:
+Once you define an audience and confirm the rules are including the correctset of users, you can use Send endpoint to send to the audience like this:
 
 ```json
 {
@@ -139,6 +138,4 @@ Once you define an audience, and you confirm the rules are giving you the right 
     }
   }
 }
-
 ```
-
