@@ -512,12 +512,12 @@ code {
   background-image: url(/img/sidebar-icons/tutorials-active.svg);
 }
 
-.sidebar-providers .menu__link:before {
-  background-image: url(/img/sidebar-icons/providers.svg);
+.sidebar-channels .menu__link:before {
+  background-image: url(/img/sidebar-icons/channels.svg);
 }
 
-.sidebar-providers .menu__link--active:before {
-  background-image: url(/img/sidebar-icons/providers-active.svg);
+.sidebar-channels .menu__link--active:before {
+  background-image: url(/img/sidebar-icons/channels-active.svg);
 }
 
 .sidebar-client-libraries .menu__link:before {
