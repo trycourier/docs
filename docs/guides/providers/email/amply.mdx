@@ -1,15 +1,15 @@
 ---
 sidebar_position: 0
-sidebar_label: Mailgun
-title: Send Email Notifications Using Mailgun
-description: Looking for a way to send email notifications via Mailgun? This step-by-step tutorial will show you how to integrate Mailgun's API the easy way.
+sidebar_label: Amply
+title: Send Email Notifications Using Amply
+description: Looking for a way to send email notifications via Amply? This step-by-step tutorial will show you how to integrate Amply's API the easy way.
 ---
 
-# Mailgun
+# Amply
 
 ## Profile Requirements
 
-To deliver a message to a recipient over Mailgun, Courier must be provided the recipient's email address. This value should be included in the recipient profile as `email`.
+To deliver a message to a recipient over Amply, Courier must be provided the recipient's email address. This value should be included in the recipient profile as `email`.
 
 ```json title=JSON
 // Recipient Profile
@@ -20,7 +20,7 @@ To deliver a message to a recipient over Mailgun, Courier must be provided the r
 
 ## Override
 
-You can use a provider override to replace what we send to Mailgun's Messages API. For example, you can use [Mailgun's Tagging](https://documentation.mailgun.com/en/latest/user_manual.html#tagging) with your request:
+You can use a provider override to replace what we send to Amply's Mail Send API. For example, you can use following payload to override `from email` with your request:
 
 ```json title=JSON
 {
@@ -30,21 +30,18 @@ You can use a provider override to replace what we send to Mailgun's Messages AP
     "email": "example@example.com"
   },
   "override": {
-    "mailgun": {
-      "body": {
-        "o:tag": "notifications"
-      },
-      "config": {
-        "apiKey": "<your API Key>",
-        "domain": "<domain>",
-        "host": "<host>"
-      }
+    "amply": {
+      "config": [
+        {
+          "fromEmail": "pigeons@courier.com"
+        }
+      ]
     }
   }
 }
 ```
 
-Everything inside of `override.mailgun` will replace what we send to Mailgun's Messages API. You can see all the available options by visiting [Mailgun API docs](https://documentation.mailgun.com/en/latest/api-sending.html).
+Everything inside of `override.amply` will replace what we send to Amply's Send Mail API. You can see all the available options by visiting [Amply API docs](https://docs.sendamply.com/docs/api/b3A6MTg2OTcyNA-send-an-email).
 
 ## Sending Attachments
 
@@ -61,7 +58,7 @@ To include an attachment in the email, you can use the following override:
     "hello": "world"
   },
   "override": {
-    "mailgun": {
+    "amply": {
       "attachments": [
         {
           "filename": "billing.pdf",
