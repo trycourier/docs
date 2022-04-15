@@ -1,0 +1,82 @@
+---
+sidebar_position: 0
+sidebar_label: Amply
+title: Send Email Notifications Using Amply
+description: Looking for a way to send email notifications via Amply? This step-by-step tutorial will show you how to integrate Amply's API the easy way.
+---
+
+# Amply
+
+## Profile Requirements
+
+To deliver a message to a recipient over Amply, Courier must be provided the recipient's email address. This value should be included in the recipient profile as `email`.
+
+```json title=JSON
+{
+  "message": {
+    // Recipient Profile
+    "to": {
+      "email": "example@example.com"
+    }
+
+    // ... rest of message definition
+  }
+}
+```
+
+## Override
+
+You can use a provider override to replace what we send to Amply's Mail Send API. For example, you can use following payload to override `from email` with your request:
+
+```json title=JSON
+{
+  "message": {
+    "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "to": {
+      "email": "example@example.com"
+    },
+    "providers": {
+      "amply": {
+        "override": {
+          "config": {
+            "fromName": "pigeons@courier.com"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+Everything inside of `message.providers.amply.override` will replace what we send to Amply's Messages API. You can see all the available options by visiting [Amply API docs](https://docs.sendamply.com/docs/api/b3A6MTg2OTcyNA-send-an-email).
+
+## Sending Attachments
+
+To include an attachment in the email, you can use the following override:
+
+```json
+{
+  "message": {
+    "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "to": {
+      "email": "example@example.com"
+    },
+    "data": {
+      "hello": "world"
+    },
+    "providers": {
+      "amply": {
+        "override": {
+          "attachments": [
+            {
+              "filename": "billing.pdf",
+              "contentType": "application/pdf",
+              "data": "Q29uZ3JhdHVsYXRpb25zLCB5b3UgY2FuIGJhc2U2NCBkZWNvZGUh"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+```
