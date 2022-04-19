@@ -70,6 +70,7 @@ const config: ApiReferenceProps = {
             type: "array",
             description: "An array of Messages",
             field: PartialMessage,
+            name: "results",
           },
         ],
       },
