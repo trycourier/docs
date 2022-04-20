@@ -1,0 +1,63 @@
+---
+sidebar_position: 4
+---
+
+# GET /users/:user_id/tokens/:token
+
+Returns values associated with the token and the token's current status.
+
+Path Parameters:
+
+- `:user_id` - The user's ID this can be any uniquely identifiable string.
+- `:token` - The full token string
+
+Success Response:
+
+- Status: 200
+- Body:
+
+```ts
+{
+  token: string,
+  provider_key: "apn" | "firebase-fcm",
+  properties: { [key: string]: any },
+  device?: {
+    app_id?: string,
+    ad_id?: string,
+    device_id?: string,
+    platform?: string,
+    manufacturer?: string,
+    model?: string,
+  },
+  tracking?: {
+    os_version?: string,
+    ip?: string,
+    lat?: string,
+    long?: string,
+  }
+}
+```
+
+## Examples:
+
+Request:
+
+- URL: `/users/user-1234/tokens/ads23fghsdfgsd32
+- Method: `GET`
+
+Response:
+
+```json
+{
+  "token": "ads23fghsdfgsd32",
+  "provider_key": "apn",
+  "properties": {
+    "is_person": true
+  },
+  "device": {
+    "app_id": "com.my.app",
+    "platform": "iOS",
+    "model": "iPhone 13"
+  }
+}
+```

@@ -1,0 +1,62 @@
+---
+sidebar_position: 3
+---
+
+# PUT /users/:user_id/tokens/:token
+
+Associate a token with the supplied `:user_id`. If token exists it's value will be
+replaced with the passed body, otherwise the token will be created.
+
+Path Parameters:
+
+- `:user_id` - The user's ID this can be any uniquely identifiable string.
+- `:token` - The full token string
+
+Request Body:
+
+```ts
+{
+  token?: string, // Optional in this context. Must match `:token` path param exactly.
+  provider_key: "apn" | "firebase-fcm", // More providers will be added in the future
+  properties: { [key: string]: any },
+  device?: {
+    app_id?: string,
+    ad_id?: string,
+    device_id?: string,
+    platform?: string,
+    manufacturer?: string,
+    model?: string,
+  },
+  tracking?: {
+    os_version?: string,
+    ip?: string,
+    lat?: string,
+    long?: string,
+  }
+}
+```
+
+Success Response:
+
+- Status: `204`
+
+## Examples
+
+- URL: `/users/user-1234/tokens/ads23fghsdfgsd32
+- Method: `PUT`
+- Body:
+
+```json
+{
+  "token": "ads23fghsdfgsd32",
+  "provider_key": "apn",
+  "properties": {
+    "is_person": true
+  },
+  "device": {
+    "app_id": "com.my.app",
+    "platform": "iOS",
+    "model": "iPhone 13"
+  }
+}
+```

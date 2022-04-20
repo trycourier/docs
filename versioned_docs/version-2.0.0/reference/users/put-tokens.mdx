@@ -1,0 +1,84 @@
+---
+sidebar_position: 2
+---
+
+# PUT /users/:user_id/tokens
+
+Associate a group of tokens with the supplied `:user_id`. Will overwrite any existing tokens
+associated with that user.
+
+Path Parameters:
+
+- `:user_id` - The user's ID this can be any uniquely identifiable string.
+
+Request Body:
+
+```ts
+{
+  tokens: {
+    token: string,
+    provider_key: "apn" | "firebase-fcm", // More providers will be added in the future
+    device?: {
+      app_id?: string,
+      ad_id?: string,
+      device_id?: string,
+      platform?: string,
+      manufacturer?: string,
+      model?: string,
+    },
+    tracking?: {
+      os_version?: string,
+      ip?: string,
+      lat?: string,
+      long?: string,
+    }
+  }[]
+}
+```
+
+Success Response:
+
+- Status: 204
+
+## Examples
+
+- URL: `/users/user-1234/tokens
+- Method: `PUT`
+- Body:
+
+```json
+{
+  "tokens": [
+    {
+      "token": "ads23fghsdfgsd32",
+      "provider_key": "apn",
+      "properties": {
+        "is_person": true
+      },
+      "device": {
+        "app_id": "com.my.app",
+        "platform": "iOS",
+        "model": "iPhone 13"
+      }
+    },
+    {
+      "token": "b2345dfgdgnwa",
+      "provider_key": "apn",
+      "tracking": {
+        "ip": "127.0.0.1",
+        "lat": "0.0",
+        "long": "123"
+      }
+    },
+    {
+      "token": "c32432fsdfdsdsfscxzcz",
+      "provider_key": "firebase-fcm",
+      "device": {
+        "device_id": "ipad",
+        "platform": "ipadOS",
+        "model": "iPad mini"
+      }
+    }
+  ]
+}
+```
