@@ -1,0 +1,77 @@
+import { ApiParam } from "@site/src/components/ApiReference/ApiParamField";
+
+export const UserTokenDevice: ApiParam = {
+  type: "object",
+  name: "device",
+  description: "Information about the device the token is associated with.",
+  fields: [
+    {
+      type: "string",
+      name: "app_id",
+      description: "Id of the application the token is used for",
+      example: "com.example.app",
+    },
+    {
+      type: "string",
+      name: "ad_id",
+      description: "Id of the advertising identifier",
+      example: "1234567890",
+    },
+    {
+      type: "string",
+      name: "device_id",
+      description: "Id of the device the token is associated with",
+      example: "1234567890",
+    },
+    {
+      type: "string",
+      name: "platform",
+      description: "The device platform i.e. android, ios, web",
+      example: "android",
+    },
+    {
+      type: "string",
+      name: "manufacturer",
+      description: "The device manufacturer",
+      example: "Samsung",
+    },
+    {
+      type: "string",
+      name: "model",
+      description: "The device model",
+      example: "SM-G930F",
+    },
+  ],
+};
+
+export const UserTokenTracking: ApiParam = {
+  type: "object",
+  name: "tracking",
+  description: "Information about the device the token is associated with.",
+  fields: [
+    {
+      type: "string",
+      name: "os_version",
+      description: "The operating system version",
+      example: "9",
+    },
+    {
+      type: "string",
+      name: "ip",
+      description: "The IP address of the device",
+      example: "1.2.3.4",
+    },
+    {
+      type: "string",
+      name: "lat",
+      description: "The latitude of the device",
+      example: "1.2",
+    },
+    {
+      type: "string",
+      name: "long",
+      description: "The longitude of the device",
+      example: "3.4",
+    },
+  ],
+};

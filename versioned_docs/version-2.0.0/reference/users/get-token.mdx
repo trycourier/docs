@@ -1,0 +1,36 @@
+---
+sidebar_position: 4
+---
+
+import ApiReference from "@site/src/components/ApiReference";
+import config from "../configs/users/get-token";
+
+# GET /users/:user_id/tokens/:token
+
+Returns values associated with the token and the token's current status.
+
+<ApiReference {...config} />
+
+## Examples:
+
+Request:
+
+- URL: `/users/user-1234/tokens/ads23fghsdfgsd32
+- Method: `GET`
+
+Response:
+
+```json
+{
+  "token": "ads23fghsdfgsd32",
+  "provider_key": "apn",
+  "properties": {
+    "is_person": true
+  },
+  "device": {
+    "app_id": "com.my.app",
+    "platform": "iOS",
+    "model": "iPhone 13"
+  }
+}
+```

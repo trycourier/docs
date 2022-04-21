@@ -1,0 +1,30 @@
+---
+sidebar_position: 3
+---
+
+import ApiReference from "@site/src/components/ApiReference";
+import config from "../configs/users/put-token";
+
+# PUT /users/:user_id/tokens/:token
+
+<ApiReference {...config} />
+
+## Examples
+
+- URL: `/users/user-1234/tokens/ads23fghsdfgsd32
+- Method: `PUT`
+- Body:
+
+```json
+{
+  "provider_key": "apn",
+  "properties": {
+    "is_person": true
+  },
+  "device": {
+    "app_id": "com.my.app",
+    "platform": "iOS",
+    "model": "iPhone 13"
+  }
+}
+```
