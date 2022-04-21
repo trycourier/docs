@@ -3,7 +3,7 @@ import { UserTokenDevice, UserTokenTracking } from "../schemas/UserToken";
 
 const config: ApiReferenceProps = {
   description:
-    "Associate a token with the supplied `:user_id`. If token exists it's value will be replaced with the passed body, otherwise the token will be created.",
+    "Associate a token with the supplied :user_id. If token exists it's value will be replaced with the passed body, otherwise the token will be created.",
   method: "PUT",
   path: "/users/:user_id/tokens/:token",
   pathParams: [
@@ -29,7 +29,7 @@ const config: ApiReferenceProps = {
         type: "string",
         name: "provider_key",
         required: true,
-        description: "The provider token is to be associated with.",
+        description: "The provider the token is to be associated with.",
         example: "apn",
         enum: ["apn", "firebase-fcm"],
       },

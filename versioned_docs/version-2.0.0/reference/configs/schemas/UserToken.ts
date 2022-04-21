@@ -46,7 +46,7 @@ export const UserTokenDevice: ApiParam = {
 
 export const UserTokenTracking: ApiParam = {
   type: "object",
-  name: "device",
+  name: "tracking",
   description: "Information about the device the token is associated with.",
   fields: [
     {

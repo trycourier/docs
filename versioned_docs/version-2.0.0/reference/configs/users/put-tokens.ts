@@ -3,7 +3,7 @@ import { UserTokenDevice, UserTokenTracking } from "../schemas/UserToken";
 
 const config: ApiReferenceProps = {
   description:
-    "Associate a group of tokens with the supplied `:user_id`. Will overwrite any existing tokens associated with that user.",
+    "Associate a group of tokens with the supplied :user_id. Will overwrite any existing tokens associated with that user.",
   method: "PUT",
   path: "/users/:user_id/tokens",
   pathParams: [
@@ -31,7 +31,7 @@ const config: ApiReferenceProps = {
           type: "string",
           name: "provider_key",
           required: true,
-          description: "The provider token is to be associated with.",
+          description: "The provider the token is to be associated with.",
           example: "apn",
           enum: ["apn", "firebase-fcm"],
         },
