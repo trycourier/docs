@@ -2,43 +2,15 @@
 sidebar_position: 2
 ---
 
+import ApiReference from "@site/src/components/ApiReference";
+import config from "../configs/users/put-token";
+
 # PUT /users/:user_id/tokens
+
+<ApiReference {...config} />
 
 Associate a group of tokens with the supplied `:user_id`. Will overwrite any existing tokens
 associated with that user.
-
-Path Parameters:
-
-- `:user_id` - The user's ID this can be any uniquely identifiable string.
-
-Request Body:
-
-```ts
-{
-  tokens: {
-    token: string,
-    provider_key: "apn" | "firebase-fcm", // More providers will be added in the future
-    device?: {
-      app_id?: string,
-      ad_id?: string,
-      device_id?: string,
-      platform?: string,
-      manufacturer?: string,
-      model?: string,
-    },
-    tracking?: {
-      os_version?: string,
-      ip?: string,
-      lat?: string,
-      long?: string,
-    }
-  }[]
-}
-```
-
-Success Response:
-
-- Status: 204
 
 ## Examples
 

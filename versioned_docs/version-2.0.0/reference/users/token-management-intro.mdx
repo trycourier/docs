@@ -8,7 +8,7 @@ The Token Management API is used to store and track the status of user tokens. W
 apps can register a tokens associated with a provider and user_id. Whenever a notification
 is sent to that user via the provider, the token will automatically be loaded and used.
 
-With the Token Management API multiple tokens for a user can be registered to the same provider,
+With the Token Management API, multiple tokens for a user can be registered to the same provider,
 allowing apps to send to multiple devices with a single `/send` call.
 
 Token statuses are also automatically tracked. The API will not send to stale or invalid tokens.
