@@ -1,0 +1,42 @@
+---
+sidebar_position: 13
+sidebar_label: Pusher Beams
+title: Set Up Push Notifications Using Pusher Beams
+description: Looking for a way to send push notifications via Pusher Beams? This step-by-step tutorial will show you how to integrate Pusher Beams the easy way.
+---
+
+# Pusher Beams
+
+## Introduction
+
+Pusher Beams can be used to send to either the users or to the interests. At least one `mode` out of web, apns or fcm is required.
+
+## Send to interests
+
+```json title=JSON
+{
+  "event": "<COURIER_NOTIFICATION_ID>",
+  "recipient": "my-recipient",
+  "profile": {
+    "pusherBeams": {
+      "interests": ["interest-1", "interest-2"],
+      "mode": ["apns", "fcm"]
+    }
+  }
+}
+```
+
+## Send to users
+
+```json title=JSON
+{
+  "event": "<COURIER_NOTIFICATION_ID>",
+  "recipient": "my-recipient",
+  "profile": {
+    "pusherBeams": {
+      "userIds": ["interest-1", "interest-2"],
+      "mode": ["apns", "fcm"]
+    }
+  }
+}
+```
