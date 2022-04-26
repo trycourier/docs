@@ -30,7 +30,7 @@ const config: ApiReferenceProps = {
         name: "provider_key",
         required: true,
         description: "The provider the token is to be associated with.",
-        example: "apn",
+        example: "firebase-fcm",
         enum: ["apn", "firebase-fcm"],
       },
       {
