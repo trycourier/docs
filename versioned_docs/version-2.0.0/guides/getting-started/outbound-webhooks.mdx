@@ -343,6 +343,24 @@ Example
 }
 ```
 
+### audiences:user:unmatched
+
+This event is fired when a user is unmatched to an audience. This usually happens when a user is [removed](https://www.courier.com/docs/reference/profiles/delete/) or updated in such a way that it no longer matches any of the audience's filters.
+
+Example
+
+```json title=JSON
+{
+  "data": {
+    "audience_id": "favorite-fooss-players",
+    "audience_version": 4,
+    "reason": "EQ('favorite_game', 'fosss') => true, EQ('gender', 'pigeon') => true, EQ('style', 'defend') => true",
+    "user_id": "suhas_with_foss"
+  },
+  "type": "audiences:user:unmatched"
+}
+```
+
 ### audiences:calculated
 
 This event is fired when Courier is done calculating audiences. This is a background process that runs every time you create or update an audience. It can take varaible time depending on total number of users you have created in your Courier workspace.
