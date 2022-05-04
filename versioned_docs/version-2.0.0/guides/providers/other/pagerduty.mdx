@@ -5,16 +5,36 @@ title: Set Up Push Notifications Using PagerDuty
 description: Looking for a way to send push notifications via PagerDuty? This step-by-step tutorial will show you how to integrate PagerDuty's API the easy way.
 ---
 
+import Image from "@theme/IdealImage";
+
 # PagerDuty
 
-## Profile Requirements
+## How to configure PagerDuty:
 
-To deliver an [Event to PagerDuty](https://developer.pagerduty.com/api-reference/YXBpOjI3NDgyNjU-pager-duty-v2-events-api), there are no requirements for the profile.
+### Prerequisites
 
-```json title=JSON
-// Recipient Profile
-{}
-```
+- Pagerduty [account](https://www.pagerduty.com/sign-up/) with elevated privileges
+- Pagerduty Service created and configured with Events-v2 integration
+
+#### Add Event-v2 integration to your Pagerduty Service
+
+<Image img={require("../../../assets/guides/providers/pd-event-v2-integration.png")} alt="" />
+
+#### Once the integration is configured, you will see something like this:
+
+<Image img={require("../../../assets/guides/providers/pd-after-installation.png")} alt="" />
+
+#### Click on the setting toggle on the top right corner, and copy Integration Key:
+
+<Image img={require("../../../assets/guides/providers/pd-routing-key.png")} alt="" />
+
+#### Navigate to PagerDuty channel installation page in your [Courier account](https://app.courier.com/channels/pagerduty) and fill up the form fields, Paste your Integration key in the Routing Key field:
+
+<Image img={require("../../../assets/guides/providers/pd-provider-page.png")} alt="" />
+
+#### Create notification Template in Courier like following, hit publish and start using this template to send push notifications to your PagerDuty service:
+
+<Image img={require("../../../assets/guides/providers/pd-notification-template.png")} alt="" />
 
 ## Override
 
@@ -24,7 +44,9 @@ You can use the provider override to replace what we send to PagerDuty's Events 
 {
   "message": {
     "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-    "to": {},
+    "to": {
+      "user_id": "1234567890"
+    },
     "providers": {
       "pagerduty": {
         "override": {
