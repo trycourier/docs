@@ -9,7 +9,20 @@ import config from "../configs/auth/issue-token";
 
 <ApiReference {...config} />
 
-## Available Scopes
+# Usage
+
+This token can be used as a bearer token in place of a normal API Key for the following endpoints:
+
+- `PUT | PATCH /users/:user_id/tokens/:token` (must have `write:user-tokens` scope).
+- `GET /users/:user_id/tokens/:token` (must have `read:user-tokens` scope).
+- `GraphQL (POST) /client/q` Required permissions depend on query / mutation.
+  - `messages` Requires `read:messages` scope.
+
+Notes:
+
+- Endpoints that are tied to a user_id require the user_id to be listed in the scope field (i.e `user_id:123`)
+
+# Available Scopes
 
 - `user_id:<user-id>` - Gives the token access to a given user. Multiple can be listed. Ex `user_id:pigeon user_id:bluebird`. User ID scopes must be used in conjunction with other scopes to specify which resources of the user the token can access.
 - `read:messages` - Gives the token access to read messages. Must be used in conjunction with one or more user_ids.
