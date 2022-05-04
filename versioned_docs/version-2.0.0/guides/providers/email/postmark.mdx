@@ -11,7 +11,7 @@ description: Looking for a way to send email notifications via Postmark? This st
 
 To deliver a message to a recipient over Postmark, Courier must be provided the recipient's email address. This value should be included in the recipient profile as `email`.
 
-````json title=JSON
+```json title=JSON
 {
   "message": {
     // Recipient Profile
@@ -55,6 +55,6 @@ You can use a provider override to replace what we send to Postmark's Email API.
     }
   }
 }
-````
+```
 
 The `message.porviders.postmark.override` property can be used to replace what we send to Postmark's Email API. Note: the override does not replace the entire object, only the elements that you define in the body of the override. You can see all the available options by visiting the [Postmark API docs](https://postmarkapp.com/developer/api/email-api).
