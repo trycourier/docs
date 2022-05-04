@@ -1,0 +1,17 @@
+---
+sidebar_position: 1
+---
+
+import ApiReference from "@site/src/components/ApiReference";
+import config from "../configs/auth/issue-token";
+
+# POST /auth/issue-token
+
+<ApiReference {...config} />
+
+## Available Scopes
+
+- `user_id:<user-id>` - Gives the token access to a given user. Multiple can be listed. Ex `user_id:pigeon user_id:bluebird`. User ID scopes must be used in conjunction with other scopes to specify which resources of the user the token can access.
+- `read:messages` - Gives the token access to read messages. Must be used in conjunction with one or more user_ids.
+- `read:user-tokens` - Gives the token access to read user tokens. Must be used in conjunction with one or more `user_id` scopes.
+- `write:user-tokens` - Gives the token access to write user tokens. Must be used in conjunction with one or more `user_id` scopes.
