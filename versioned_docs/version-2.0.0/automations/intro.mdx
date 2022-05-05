@@ -85,8 +85,8 @@ axios({
 ```
 
 For such simple use cases it is often convenient to define the Automation workflow directly in the API request body. However if your use case requires more
-logical steps, trigger scheduling functionality or if you would just like Courier to save the Automation definition for future use, then
-consider using the The Template Designer.
+logical steps, scheduling functionality or if you would just like Courier to save the Automation definition for future use, then
+consider using the [The Template Designer](#the-template-designer).
 
 For more information on additional properties see the [Passing Dynamic Data](#passing-dynamic-data) section below or visit the [Automation Steps](steps) documentation section.
 
@@ -95,12 +95,12 @@ For more information on additional properties see the [Passing Dynamic Data](#pa
 The Automation Template Designer is an ideal tool to define a series of [Automation Steps](steps) once and invoke them
 with either an [Automation Trigger](triggers) or an API call.
 
-Using the above example, imagine we no longer want to manage the Automation code, but instead we want Courier store that logic. This allows us
-to easily edit the Automation Run in the future, reduce our Courier code footprint.
+Using the above example, imagine we no longer want to manage the Automation code, but instead we want Courier to store that logic. This allows us
+to easily edit the Automation Run in the future while reducing our Courier code footprint.
 
 We can turn the above call into a Automation Template, using the following procedure:
 
-1. Navigate to `https://app.courier.com/designer/automations` and click `Create Template.
+1. Navigate to `https://app.courier.com/designer/automations` and click `Create Template`.
 
 <Image img={require("../assets/automations/create-template.png")} alt="" />
 
