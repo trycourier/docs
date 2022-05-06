@@ -15,7 +15,7 @@ There are currently three possible trigger sources that can be configured to inv
 
 ## The Cron Schedule Trigger
 
-To invoke an Automation Run on a reoccurring schedule you can attach a Cron trigger to your Automation Run.
+To invoke an Automation Run on a reoccurring schedule you can attach a Cron trigger to the Automation Run.
 
 1. Select the Start block in the Automation Template Designer and select "Scheduled Trigger"
 
@@ -27,9 +27,9 @@ To invoke an Automation Run on a reoccurring schedule you can attach a Cron trig
 
 ## The Segment Event Trigger
 
-To invoke an Automation Run on a reoccurring schedule you can attach a Cron trigger you Automation Run.
+To invoke an Automation Run given a Segment Track event on group or identity you can attach a Segment Event trigger to the Automation Run.
 
-1. Select the Start block in the Automation Template Designer and select either the type of Segment Event you want to trigger this Automation Run.
+1. Select the Start block in the Automation Template Designer, select Track under the _Add a Segment Event to Trigger this Automation_ section, and enter the event name. Optionally specify Identity or Group.
 
 <Image img={require("../assets/automations/visual-mode-track-event.png")} alt="" />
 
@@ -39,12 +39,8 @@ To invoke an Automation Run on a reoccurring schedule you can attach a Cron trig
 
 ## The Audience Match Trigger
 
-<!-- To invoke an Automation Run on a reoccurring schedule you can attach a Cron trigger you Automation Run.
+To invoke an Automation Run given a Courier Audience match or unmatched event you can attach an Audience Event trigger to the Run.
 
-1. Select the Start block in the Automation Template Designer and select "Scheduled Trigger"
+1. Select the Start block in the Automation Template Designer, select either "Match" or "Unmatched" under the _Audience Events to Trigger this Automation_ section.
 
-<Image img={require("../assets/automations/visual-mode-start-block.png")} alt="" />
-
-2. Enter a cron schedule expression to invoke the Automation Run. You can use https://crontab.guru/ to dial in your cron expression. In this example I will invoke the Automation Run every hour.
-
-<Image img={require("../assets/automations/visual-mode-cron-expression.png")} alt="" /> -->
+<Image img={require("../assets/automations/visual-mode-audience-match-event.png")} alt="" />
