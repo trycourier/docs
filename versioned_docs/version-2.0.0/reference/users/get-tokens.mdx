@@ -1,0 +1,50 @@
+---
+sidebar_position: 6
+---
+
+import ApiReference from "@site/src/components/ApiReference";
+import config from "../configs/users/get-tokens";
+
+# GET /users/:user_id/tokens
+
+<ApiReference {...config} />
+
+## Examples:
+
+Request:
+
+- URL: `/users/user-1234/tokens
+- Method: `GET`
+
+Response:
+
+```json
+{
+  "tokens": [
+    {
+      "token": "ads23fghsdfgsd32",
+      "provider_key": "apn",
+      "properties": {
+        "is_person": true
+      },
+      "device": {
+        "app_id": "com.my.app",
+        "platform": "iOS",
+        "model": "iPhone 13"
+      }
+    },
+    {
+      "token": "jkfs23dvsjdfh23G",
+      "provider_key": "apn",
+      "properties": {
+        "is_person": false
+      },
+      "device": {
+        "app_id": "com.my.app",
+        "platform": "iOS",
+        "model": "iPad Mini"
+      }
+    }
+  ]
+}
+```
