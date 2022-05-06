@@ -211,9 +211,10 @@ There are a few ways to access dynamic data in an Automation Run.
 
 ## The Automation Run Cache
 
-The Automation Run Cache is essentially a JSON object that the Automation Run
-writes values to. This allows Automation Steps to share data across each other.
-In other words, one Automation Step can update the cache, while another Automation Step can read from it.
+The Automation Run Cache is essentially a JSON object that an Automation Step from the Automation Run
+writes values to. This allows Automation Steps to share data across the entire Automation Run.
+In other words, one Automation Step can update the cache, while another Automation Step, that gets executed later, can read from it.
+The cache is only valid for the length of the run, so only steps that belong to the Automation Run can access the Automation Cache.
 
 ## Initializing the Automation Run Cache
 
