@@ -149,9 +149,11 @@ axios({
   });
 ```
 
-As you can see this application code is now a lot less to read and maintain. We also get the added benefit to update the
+As you can see this application code is now a lot less to read and maintain. We also get the added benefit of be able to update the
 Automation Template, without updating our application code. Lets extend this example to wait an additional day and then
-send our new user our latest blog post. This quickly implemented leveraging the Automation Template designer.
+fetch user usage data and send it to our new user. This is quickly implemented leveraging the Automation Template designer.
+
+<!-- TODO: (Refer to the [Notification Guide]() for information on how to create a new Notification.) -->
 
 1. Toggle the editor back to "Visual Mode".
 
@@ -166,18 +168,56 @@ send our new user our latest blog post. This quickly implemented leveraging the 
 
 <Image img={require("../assets/automations/visual-mode-delay-form.png")} alt="" />
 
-4. Select "New Step" again, and then select "Send", and update the Send form.
+4. Select "New Step" again, and then select "Fetch Data". Then update the Webhook textarea in Fetch Data form to the following:
+
+```json
+{
+  "url": "https://myapp.com/users/usage",
+  "method": "GET",
+  "params": {
+    "userId": {
+      "$ref": "data.user_id"
+    }
+  }
+}
+```
+
+<Image img={require("../assets/automations/visual-mode-fetch-data-form.png")} alt="" />
+
+We will discuss the syntax `"$ref": "data.user_id"` in the [Accessing Dynamic Data](#accessing-dynamic-data) section.
+
+5. Select "New Step" again, and then select "Send", and update the Send form.
 
 <Image img={require("../assets/automations/visual-mode-send-form.png")} alt="" />
 
 5. Publish the template.
 
-For more information on how to schedule or invoke an Automation Template from an Event see the [Triggers](triggers) section.
+If you want to invoke the Automation on a schedule or in response to an event see the [Triggers](triggers) section.
 
-## Passing Dynamic Data
+That's it! Now whenever a new user signs up to our application, we will execute the following workflow:
 
-In addition to providing your automation a `step` array of Automation Steps, you can include the following properties to your Automation Run by making a call to
-`/automations/invoke` or by invoking an Automation Template by making a call to `/automations/:templateId/invoke`
+1. Wait 1 Day
+2. Send a TIPS_AND_TRICKS message to incentive user activity.
+3. Wait 1 Day
+4. Fetch the latest usage report for our new user.
+5. Send a USER_USAGE_REPORT message to incentive user engagement.
+
+## Accessing Dynamic Data
+
+As we have seen it is a common use case to [send dynamic data](#passing-dynamic-data) to your Automation Run.
+After all using the latest data to send a notification is often the most engaging.
+
+There are a few ways to access dynamic data in an Automation Run.
+
+## The Automation Run Cache
+
+The Automation Run Cache is essentially a JSON object that the Automation Run
+writes values to. This allows Automation Steps to share data across each other.
+In other words, one Automation Step can update the cache, while another Automation Step can read from it.
+
+## Initializing the Automation Run Cache
+
+To initialize the Automation Cache, you can invoke the Automation Run with any of the following properties:
 
 - `brand`
   - type: string
@@ -193,53 +233,15 @@ In addition to providing your automation a `step` array of Automation Steps, you
   - description: A unique identifier that can be mapped to an individual Notification. This could be the "Notification ID” on Notification detail pages (see the Notifications page in the Courier app) or a custom string mapped to the event in settings.
 - `recipient`
   - type: string
-  - description: A unique identifier associated with the recipient of the delivered message, which can optionally map to a Courier managed profile.
+  - description: A unique identifier associated with the recipient of the delivered message, which can optionally map to a Courier managed profile. -->
 
-## Accessing Dynamic Data
-
-It is a common use case to [send dynamic data](#passing-dynamic-data) to your Automation Run.
-There are two ways to access the dynamic data that is made available to the Automation Run at request time.
-
-### Using Accessor Types in Code Mode
-
-If you are defining your Automation Run directly in the Request body, then you can use "accessor types" to reference
-the data from the API call.
-
-For example if we wanted to pass the `userId` as the recipient of the Send step from our earlier use case, then we can reference this dynamic data
-using an "accessor type".
-
-1. Navigate back to the Automation Template designer and select the `DELAYED_DELIVERY` template.
-
-<Image img={require("../assets/automations/code-mode-hard-coded-recipient.png")} alt="" />
-
-2. Replace the Send step to the following
-
-```json
-{
-  "action": "send",
-  "recipient": {
-    "$ref": "data.user_id"
-  },
-  "template": "TIPS_AND_TRICKS"
-}
-```
-
-<Image img={require("../assets/automations/code-mode-accessor-type.png")} alt="" />
-
-3. Finally we can update the API call and pass the data.
+Continuing with our example, lets initialize the Automation Cache with the `user_id` of our new user.
+We will add the `user_id` to the `data` property of the Automation Run Cache, and include it in our https request body:
 
 ```javascript
 const axios = require("axios");
 
-// get the userId
-const userId = db.getUserId();
-
-// pass the data with the http call
-const data = JSON.stringify({
-  data: {
-    userId,
-  },
-});
+const user = db.createUser();
 
 axios({
   method: "post",
@@ -248,7 +250,11 @@ axios({
     Authorization: "Bearer token",
     "Content-Type": "application/json",
   },
-  data,
+  data: {
+    data: {
+      user_id: user.id,
+    },
+  },
 })
   .then(function (response) {
     console.log(JSON.stringify(response.data));
@@ -257,3 +263,102 @@ axios({
     console.log(error);
   });
 ```
+
+## Reading from the Automation Run Cache
+
+To read values from the Automation Cache you can use an "accessor type":
+
+```json
+{
+  "action": "send",
+  "recipient": {
+    "$ref": "data.user_id"
+  }
+}
+```
+
+An "accessor type" is simply an object with the key `$ref` and a string value that represents
+a property path to the Automation Cache object.
+
+Lets update the Send step to read from Automation Cache.
+
+1. First switch the designer to "code mode", and update the `recipient` property value to:
+
+```json
+"recipient": {
+  "$ref": "data.user_id"
+}
+```
+
+and click Publish
+
+<Image img={require("../assets/automations/code-mode-accessor-type.png")} alt="" />
+
+Now if you switch the designer back to "Visual Mode", you will see the Send Form has also updated.
+
+<Image img={require("../assets/automations/visual-mode-form-accessor-type.png")} alt="" />
+
+The `Recipient ID` field of the Send Form has changed to `refs.data.user_id`. This is a "form accessor type", and is
+analogous to the "accessor type" syntax described above, but is only valid in the Automation Step form editor.
+
+## Writing to the Automation Run Cache
+
+There are two Automation Steps used to write data to the Automation Cache, Fetch Data and Send List.
+
+We have already seen the Fetch Data Step earlier in this document. As a refresher, we simply provide a webhook url to the
+Automation Step.
+
+```json
+{
+  "action": "fetch-data",
+  "webhook": {
+    "url": "https://myapp.com/users/usage",
+    "method": "GET",
+    "params": {
+      "userId": {
+        "$ref": "data.user_id"
+      }
+    }
+  },
+  "merge_strategy": "replace"
+}
+```
+
+When this step is executed, it will make an http request `"https://myapp.com/users/usage"` and replace the Automation Cache's `data`
+property with the response.
+
+If you would like instead to merge the http response with the existing data in the Automation Cache you can provide a different
+`merge_strategy`:
+
+- `replace`
+  - overwrite all properties in the Automation Cache with the http response. Remove's all in properties in the Automation Cache that do not exist in http response.
+- `soft-merge`
+  - only overwrite properties in the Automation Cache with the http response properties that do not yet exist in the Automation Cache.
+- `overwrite`
+  - overwrite all properties in the Automation Cache with the properties from the http response.
+- `none`
+  - do not make any changes to the Automation Cache if the Automation Cache already exists and has data. Otherwise initialize the Automation Cache.
+
+The second step used to write data to the Automation Cache is the Send List step. For every recipient in the courier list, a the `webhook` property to the optional `data_source` object.
+if called via `http`, and the run context is updated with the response.
+
+```json
+{
+  "action": "send-list",
+  "template": "USER_USAGE_REPORT",
+  "list": "MY_COURIER_LIST",
+  "data_source": {
+    "webhook": {
+      "url": "https://myapp.com/users/usage",
+      "method": "GET",
+      "headers": {}
+    },
+    "merge_strategy": "replace"
+  }
+}
+```
+
+When a Send List Automation Step is configured with the optional `data_source` property, the webhook url will be called with the `recipient_id`
+as a query param for each user in the list. It will then update the Automation Cache with the response and passed to the Notification Template and sent as a notification message.
+
+For more information see the in the [Steps](steps) section.
