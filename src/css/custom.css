@@ -543,3 +543,11 @@ code {
 .sidebar-elemental .menu__link--active:before {
   background-image: url(/img/sidebar-icons/elemental-active.svg);
 }
+
+.sidebar-automations .menu__link:before {
+  background-image: url(/img/sidebar-icons/automations.svg);
+}
+
+.sidebar-automations .menu__link--active:before {
+  background-image: url(/img/sidebar-icons/automations-active.svg);
+}
