@@ -75,3 +75,40 @@ export const UserTokenTracking: ApiParam = {
     },
   ],
 };
+
+export const UserToken: ApiParam = {
+  type: "object",
+  fields: [
+    {
+      type: "string",
+      name: "token",
+      description: "The full token string.",
+    },
+    {
+      type: "string",
+      name: "provider_key",
+      description: "The provider token is to be associated with.",
+      example: "firebase-fcm",
+      enum: ["apn", "firebase-fcm"],
+    },
+    {
+      type: "json",
+      name: "properties",
+      description: "Properties sent to the provider along with the token",
+    },
+    UserTokenDevice,
+    UserTokenTracking,
+    {
+      type: "string",
+      name: "status",
+      description: "The status of the token.",
+      example: "active",
+      enum: ["active", "unknown", "failed", "revoked"],
+    },
+    {
+      type: "string",
+      name: "status_reason",
+      description: "The reason for the token status.",
+    },
+  ],
+};

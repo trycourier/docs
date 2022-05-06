@@ -2,9 +2,9 @@ import { ApiReferenceProps } from "@site/src/components/ApiReference";
 import { UserToken } from "../schemas/UserToken";
 
 const config: ApiReferenceProps = {
-  description: "Returns data associated with a token including token status.",
+  description: "Returns all tokens associated with the supplied user_id.",
   method: "GET",
-  path: "/users/:user_id/tokens/:token",
+  path: "/users/:user_id/tokens",
   pathParams: [
     {
       type: "string",
@@ -13,19 +13,22 @@ const config: ApiReferenceProps = {
       description: "The user's ID. This can be any uniquely identifiable string.",
       example: "user-1234",
     },
-    {
-      type: "string",
-      name: "token",
-      required: true,
-      description: "The full token string.",
-      example: "ABW7HO9Y7XAQXZ7Y",
-    },
   ],
   responses: [
     {
       status: 200,
       description: "OK",
-      body: UserToken,
+      body: {
+        type: "object",
+        fields: [
+          {
+            type: "array",
+            name: "tokens",
+            description: "A list of tokens registered with the user.",
+            field: UserToken,
+          },
+        ],
+      },
     },
     {
       status: 400,
