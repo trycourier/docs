@@ -325,7 +325,7 @@ Automation Step.
 }
 ```
 
-When this step is executed, it will make an http request `"https://myapp.com/users/usage"` and replace the Automation Cache's `data`
+When this step is executed, it will make an http request to `"https://myapp.com/users/usage"` and replace the Automation Cache's `data`
 property with the response.
 
 If you would like instead to merge the http response with the existing data in the Automation Cache you can provide a different
@@ -363,3 +363,50 @@ When a Send List Automation Step is configured with the optional `data_source` p
 as a query param for each user in the list. It will then update the Automation Cache with the response and passed to the Notification Template and sent as a notification message.
 
 For more information see Send List in the [Steps](steps) section.
+
+## Canceling the Automation Run
+
+Finally we cover how to cancel an Automation Run that is in progress. Lets extend our example again and imagine we want to cancel the DELAYED_DELIVERY Automation Run
+if our new user deletes their account in our application. If this event occurs at any point during the Automation Run's execution,
+then we want to cancel the Automation Run and not send any more messages.
+
+1. First we need to make our Automation Run "cancelable" by providing a Cancelation Token value for our Automation Run. Lets name our token the same
+   value as our users `user_id` by using the "accessor form type" `refs.data.user_id`
+
+<Image img={require("../assets/automations/visual-mode-cancel-token.png")} alt="" />
+
+2. Next, create Automation by selecting All Automations, then clicking Create Template. Give the Automation Template a name and alias of `CANCEL_NEW_USER_WORKFLOW`. Click Publish.
+
+<Image img={require("../assets/automations/visual-mode-cancel-automation.png")} alt="" />
+
+3. Click New Step and select a Cancel Automation from the menu. Set the value using the same "accessor form type" `refs.data.user_id`.
+
+<Image img={require("../assets/automations/visual-mode-cancel-step-form.png")} alt="" />
+
+4. Now lets update our application code to invoke the `CANCEL_NEW_USER_WORKFLOW` Automation when the user removes their account.
+
+```javascript
+const axios = require("axios");
+
+const user = db.deleteUser(id);
+
+axios({
+  method: "post",
+  url: "https://api.courier.com/automations/CANCEL_NEW_USER_WORKFLOW/invoke",
+  headers: {
+    Authorization: "Bearer token",
+    "Content-Type": "application/json",
+  },
+  data: {
+    data: {
+      user_id: user.id,
+    },
+  },
+})
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+```
