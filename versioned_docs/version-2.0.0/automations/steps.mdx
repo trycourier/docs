@@ -53,9 +53,15 @@ Wait a duration of time, before proceeding to the next Automation Step.
 
 ### Fields
 
-| Field  | Type   | Required | Description                                                                         |
-| ------ | ------ | -------- | ----------------------------------------------------------------------------------- |
-| action | string | required | The type of element. For the Delay Automation Step, this value should be `"delay"`. |
+| Field    | Type   | Required | Description                                                                                                                  |
+| -------- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| action   | string | required | The type of element. For the Delay Automation Step, this value should be `"delay"`.                                          |
+| duration | string |          | The human readable time duration. A duration value and unit is required, e.g. 5 minutes, 1 hour, 3 days                      |
+| if       | string |          | A boolean expression whose value is used to determine the execution of the step. Can optionally consume step reference data. |
+| ref      | string |          | A pointer to step and its data.                                                                                              |
+| until    | string |          | The ISO 8601 timestamp that describes the length of the delay.                                                               |
+
+Either `until` or `duration` is required.
 
 ### Schema
 
@@ -64,7 +70,8 @@ Wait a duration of time, before proceeding to the next Automation Step.
   "action": "delay",
   "if": "",
   "ref": "",
-  "until": ""
+  "until": "",
+  "duration": ""
 }
 ```
 
@@ -74,9 +81,12 @@ Cancel an Automation Run that is In Progress.
 
 ### Fields
 
-| Field  | Type   | Required | Description                                                                           |
-| ------ | ------ | -------- | ------------------------------------------------------------------------------------- |
-| action | string | required | The type of element. For the Cancel Automation Step, this value should be `"cancel"`. |
+| Field             | Type   | Required | Description                                                                                                                                                |
+| ----------------- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| action            | string | required | The type of element. For the Cancel Automation Step, this value should be `"cancel"`.                                                                      |
+| cancelation_token | string |          | The string that is associated with the cancelable automation run. An Automation Run is cancelable if it has a `cancelation_token` value at execution time. |
+| if                | string |          | A boolean expression whose value is used to determine the execution of the step. Can optionally consume step reference data.                               |
+| ref               | string |          | A pointer to step and its data.                                                                                                                            |
 
 ### Schema
 
@@ -95,9 +105,40 @@ Fetch data via https and write the response to the `data` property of the Automa
 
 ### Fields
 
-| Field  | Type   | Required | Description                                                                                   |
-| ------ | ------ | -------- | --------------------------------------------------------------------------------------------- |
-| action | string | required | The type of element. For the Fetch Data Automation Step, this value should be `"fetch-data"`. |
+| Field              | Type   | Required | Description                                                                                                                                                                                                                                              |
+| ------------------ | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| action             | string | required | The type of element. For the Fetch Data Automation Step, this value should be `"fetch-data"`.                                                                                                                                                            |
+| idempotency_expiry | string |          | A unix epoch timestamp (seconds) or an ISO_8601 date string that describes how long the idempotency_key is valid.                                                                                                                                        |
+| idempotency_key    | string |          | A unique value generated by the client which the server uses to recognize subsequent retries of the same request.                                                                                                                                        |
+| if                 | string |          | A boolean expression whose value is used to determine the execution of the step. Can optionally consume step reference data.                                                                                                                             |
+| merge_strategy     | enum   |          | `replace`, `soft-merge`, `overwrite`, or `none`. If nothing is specified then the default strategy is `replace`. The strategy to merge the webhook response into the [Automation Run Cache](../../automations/#the-automation-run-cache). Details below. |
+| ref                | string |          | A pointer to step and its data.                                                                                                                                                                                                                          |
+| webhook            | object |          | The webhook configuration of the resource that is accessible via http. See the `webhook` schema bellow.                                                                                                                                                  |
+
+The `merge_strategy` property can be any of the following values:
+
+- `replace`
+  - overwrite all properties in the Automation Cache with the http response. Remove's all in properties in the Automation Cache that do not exist in http response.
+- `soft-merge`
+  - only overwrite properties in the Automation Cache with the http response properties that do not yet exist in the Automation Cache.
+- `overwrite`
+  - overwrite all properties in the Automation Cache with the properties from the http response.
+- `none`
+  - do not make any changes to the Automation Cache if the Automation Cache already exists and has data. Otherwise initialize the Automation Cache.
+
+The `webhook` can be configured with any of the following properties:
+
+```json
+{
+  "webhook": {
+    "body": {}, // optional
+    "headers": {}, // optional
+    "params": {}, // optional
+    "method": "GET" | "POST", // optional, default GET
+    "url": "<API_RESOURCE>"
+  }
+}
+```
 
 ### Schema
 
@@ -110,24 +151,59 @@ Fetch data via https and write the response to the `data` property of the Automa
   "merge_strategy": "replace" | "none" | "overwrite" | "soft-merge",
   "ref": "",
   "webhook": {
-    "url": "WEBHOOK_URL",
-    "method": "GET",
-    "body": {},
-    "headers": {},
-    "params": {}
-  },
+    "body": {}, // optional
+    "headers": {}, // optional
+    "params": {}, // optional
+    "method": "GET" | "POST", // optional, default GET
+    "url": "<API_RESOURCE>"
+  }
 }
 ```
 
 ## Send List
 
-Send a message to each recipient in the list. Optionally fetch data for each recipient via https and write the response to the `data` property of the Automation Run Cache.
+Send a message to each recipient in the list. Optionally fetch data for each recipient via http and merge the response into the `data` property of the [Automation Run Cache](../../automations/#the-automation-run-cache).
 
 ### Fields
 
-| Field  | Type   | Required | Description                                                                                 |
-| ------ | ------ | -------- | ------------------------------------------------------------------------------------------- |
-| action | string | required | The type of element. For the Send List Automation Step, this value should be `"send-list"`. |
+| Field              | Type   | Required | Description                                                                                                                                                                                                                                |
+| ------------------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| action             | string | required | The type of element. For the Send List Automation Step, this value should be `"send-list"`.                                                                                                                                                |
+| brand              | string |          | The brand id to be used in the notification.                                                                                                                                                                                               |
+| data               | string |          | An object that includes any data you want to pass to a message template. The data will populate the corresponding template variables.                                                                                                      |
+| data_source        | object |          | The webhook configuration of the resource that is accessible via http. See the `data_source` schema bellow.                                                                                                                                |
+| idempotency_expiry | string |          | A unix epoch timestamp (seconds) or an ISO_8601 date string that describes how long the idempotency_key is valid.                                                                                                                          |
+| idempotency_key    | string |          | A unique value generated by the client which the server uses to recognize subsequent retries of the same request.                                                                                                                          |
+| if                 | string |          | A boolean expression whose value is used to determine the execution of the step. Can optionally consume step reference data.                                                                                                               |
+| list               | string | required | The Courier List Id.                                                                                                                                                                                                                       |
+| override           | string |          | An object sent by Courier to the provider to leverage features of the provider API or to simply override properties of the provider api call.                                                                                              |
+| template           | string | required | A unique identifier that can be mapped to an individual Notification. This could be the "Notification ID” on Notification detail pages (see the Notifications page in the Courier app) or a custom string mapped to the event in settings. |
+| ref                | string |          | A pointer to step and its data.                                                                                                                                                                                                            |
+
+The `merge_strategy` property of the steps `data_source` object, can be any of the following values:
+
+- `replace`
+  - overwrite all properties in the Automation Cache with the http response. Remove's all in properties in the Automation Cache that do not exist in http response.
+- `soft-merge`
+  - only overwrite properties in the Automation Cache with the http response properties that do not yet exist in the Automation Cache.
+- `overwrite`
+  - overwrite all properties in the Automation Cache with the properties from the http response.
+- `none`
+  - do not make any changes to the Automation Cache if the Automation Cache already exists and has data. Otherwise initialize the Automation Cache.
+
+The `webhook` property of the steps `data_source` object, can be configured with any of the following properties:
+
+```json
+{
+  "webhook": {
+    "body": {}, // optional
+    "headers": {}, // optional
+    "params": {}, // optional
+    "method": "GET" | "POST", // optional, default GET
+    "url": "<API_RESOURCE>"
+  }
+}
+```
 
 ### Schema
 
@@ -160,9 +236,25 @@ Update the Courier Profile given a recipientId.
 
 ### Fields
 
-| Field  | Type   | Required | Description                                                                                           |
-| ------ | ------ | -------- | ----------------------------------------------------------------------------------------------------- |
-| action | string | required | The type of element. For the Update Profile Automation Step, this value should be `"update-profile"`. |
+| Field        | Type   | Required | Description                                                                                                                                                                                |
+| ------------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| action       | string | required | The type of element. For the Update Profile Automation Step, this value should be `"update-profile"`.                                                                                      |
+| if           | string |          | A boolean expression whose value is used to determine the execution of the step. Can optionally consume step reference data.                                                               |
+| merge        | enum   |          | `replace`, `soft-merge`, `overwrite`, or `none`. If nothing is specified then the default strategy is `replace`. The strategy to merge new data into the recipient profile. Details below. |
+| profile      | string |          | An object that includes any key-value pairs associated with the recipient profile                                                                                                          |
+| recipient_id | string |          | A unique identifier associated with the recipient profile you intend to update.                                                                                                            |
+| ref          | string |          | A pointer to step and its data.                                                                                                                                                            |
+
+The `merge` property can be any of the following values:
+
+- `replace`
+  - overwrite all properties in the recipient profile with the http response. Remove's all in properties in the recipient profile that do not exist in http response.
+- `soft-merge`
+  - only overwrite properties in the recipient profile with the http response properties that do not yet exist in the recipient profile.
+- `overwrite`
+  - overwrite all properties in the recipient profile with the properties from the http response.
+- `none`
+  - do not make any changes to the recipient profile if the recipient profile already exists and has data. Otherwise initialize the recipient profile
 
 ### Schema
 
@@ -177,43 +269,19 @@ Update the Courier Profile given a recipientId.
 }
 ```
 
-## Subscribe
-
-Add the recipient as a subscribe to the Courier List. Optionally update the recipient preferences.
-
-### Fields
-
-| Field  | Type   | Required | Description                                                                                 |
-| ------ | ------ | -------- | ------------------------------------------------------------------------------------------- |
-| action | string | required | The type of element. For the Subscribe Automation Step, this value should be `"subscribe"`. |
-
-### Schema
-
-```json
-{
-  "action": "subscribe",
-  "recipient_id": "",
-  "list_id": "",
-  "subscription": {
-    "preferences": {
-      "notification": {},
-      "categories": {}
-    }
-  },
-  "if": "",
-  "ref": ""
-}
-```
-
 ## Invoke
 
 Invoke another Automation Template
 
 ### Fields
 
-| Field  | Type   | Required | Description                                                                           |
-| ------ | ------ | -------- | ------------------------------------------------------------------------------------- |
-| action | string | required | The type of element. For the Invoke Automation Step, this value should be `"invoke"`. |
+| Field    | Type   | Required | Description                                                                                                                                                                                     |
+| -------- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| action   | string | required | The type of element. For the Invoke Automation Step, this value should be `"invoke"`.                                                                                                           |
+| context  | string |          | The initial values of the [Automation Run Cache](../../automations/#the-automation-run-cache) to invoke the Automation Template with.                                                           |
+| if       | string |          | A boolean expression whose value is used to determine the execution of the step. Can optionally consume step reference data.                                                                    |
+| ref      | string |          | A pointer to step and its data.                                                                                                                                                                 |
+| template | string | required | A unique identifier that can be mapped to an Automation Template. This could be the Template ID or the Alias from the [Automation Template Designer](../../automations/#the-template-designer). |
 
 ### Schema
 
