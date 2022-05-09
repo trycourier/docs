@@ -76,6 +76,30 @@ export const UserTokenTracking: ApiParam = {
   ],
 };
 
+export const BaseUserTokenFields: ApiParam[] = [
+  {
+    type: "string",
+    name: "provider_key",
+    description: "The provider token is to be associated with.",
+    example: "firebase-fcm",
+    enum: ["apn", "firebase-fcm", "expo", "onesignal"],
+  },
+  {
+    type: "json",
+    name: "properties",
+    description: "Properties sent to the provider along with the token",
+  },
+  UserTokenDevice,
+  UserTokenTracking,
+  {
+    type: "string",
+    name: "expiry_date",
+    description:
+      "ISO 8601 formatted date the token expires. Defaults to 2 months. Set to false to disable expiration.",
+  },
+];
+
+/** Full UserToken. Used for GET requests. Has info attached by backend. */
 export const UserToken: ApiParam = {
   type: "object",
   fields: [
@@ -84,20 +108,7 @@ export const UserToken: ApiParam = {
       name: "token",
       description: "The full token string.",
     },
-    {
-      type: "string",
-      name: "provider_key",
-      description: "The provider token is to be associated with.",
-      example: "firebase-fcm",
-      enum: ["apn", "firebase-fcm"],
-    },
-    {
-      type: "json",
-      name: "properties",
-      description: "Properties sent to the provider along with the token",
-    },
-    UserTokenDevice,
-    UserTokenTracking,
+    ...BaseUserTokenFields,
     {
       type: "string",
       name: "status",
