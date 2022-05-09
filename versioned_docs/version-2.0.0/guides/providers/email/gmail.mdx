@@ -13,6 +13,13 @@ description: Looking for a way to send emails and notifications via Gmail? This 
 
 When you set up Gmail as a provider and connect your gmail account, Courier will request permission to send emails on your behalf. Courier will not send any emails unless you explicitly make a send request using the provider.
 
+:::info Gmail Quota Rate Limits
+
+Gmail's API has [limitations](https://developers.google.com/gmail/api/reference/quota) based on per-method quota usage (250 per second) thus Gmail is really intended for getting started fast, testing, or small-scale sending. 
+Courier has a variety of [email provider integrations](../) that won't rate limit you. 
+
+:::
+
 ### OAuth Authorization
 
 Google APIs use the OAuth protocol for authentication and authorization. Once given permission, Courier will request an access token from the Google Authorization Server, and send the token to the Google Gmail API on your behalf.
