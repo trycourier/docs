@@ -96,6 +96,7 @@ export const BaseUserTokenFields: ApiParam[] = [
     name: "expiry_date",
     description:
       "ISO 8601 formatted date the token expires. Defaults to 2 months. Set to false to disable expiration.",
+    example: "2030-01-01T00:00:00.000Z",
   },
 ];
 
