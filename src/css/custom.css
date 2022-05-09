@@ -551,3 +551,11 @@ code {
 .sidebar-automations .menu__link--active:before {
   background-image: url(/img/sidebar-icons/automations-active.svg);
 }
+
+.sidebar-sequences .menu__link:before {
+  background-image: url(/img/sidebar-icons/sequences.svg);
+}
+
+.sidebar-sequences .menu__link--active:before {
+  background-image: url(/img/sidebar-icons/sequences-active.svg);
+}
