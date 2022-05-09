@@ -388,11 +388,24 @@ export const timeout: ApiParam = {
   ],
 };
 
+export const delay: ApiParam = {
+  type: "object",
+  name: "delay",
+  fields: [
+    {
+      type: "number",
+      name: "duration",
+      description: "The millisecond duration to delay the delivery of the message.",
+      example: 30000,
+    },
+  ],
+};
+
 const Send: ApiParam = {
   type: "object",
   name: "message",
   displayName: "message",
-  fields: [to, contentOrTemplate, brand_id, routing, channels, providers, metadata, timeout],
+  fields: [to, contentOrTemplate, brand_id, routing, channels, providers, metadata, timeout, delay],
 };
 
 export default Send;
