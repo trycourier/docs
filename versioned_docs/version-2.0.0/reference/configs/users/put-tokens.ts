@@ -1,5 +1,5 @@
 import { ApiReferenceProps } from "@site/src/components/ApiReference";
-import { UserTokenDevice, UserTokenTracking } from "../schemas/UserToken";
+import { BaseUserTokenFields } from "../schemas/UserToken";
 
 const config: ApiReferenceProps = {
   description:
@@ -27,22 +27,7 @@ const config: ApiReferenceProps = {
           description: "Full body of the token. Must match token in URL.",
           example: "ABW7HO9Y7XAQXZ7Y",
         },
-        {
-          type: "string",
-          name: "provider_key",
-          required: true,
-          description: "The provider the token is to be associated with.",
-          example: "firebase-fcm",
-          enum: ["apn", "firebase-fcm"],
-        },
-        {
-          type: "json",
-          name: "properties",
-          required: false,
-          description: "Properties to be sent to the provider along with the token",
-        },
-        UserTokenDevice,
-        UserTokenTracking,
+        ...BaseUserTokenFields,
       ],
     },
   },
