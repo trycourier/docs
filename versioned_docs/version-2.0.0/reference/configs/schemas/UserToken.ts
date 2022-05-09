@@ -83,6 +83,7 @@ export const BaseUserTokenFields: ApiParam[] = [
     description: "The provider token is to be associated with.",
     example: "firebase-fcm",
     enum: ["apn", "firebase-fcm", "expo", "onesignal"],
+    required: true,
   },
   {
     type: "json",
