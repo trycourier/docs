@@ -251,6 +251,41 @@ export const channels: ApiParam = {
         type: "json",
         name: "override",
       },
+      {
+        type: "object",
+        name: "metadata",
+        fields: [
+          {
+            type: "object",
+            name: "utm",
+            displayName: "utm",
+            description:
+              "Identify the campaign that refers traffic to a specific website, through this specific channel. These properties will override the properties set in the message metadata.",
+            fields: [
+              {
+                type: "string",
+                name: "campaign",
+              },
+              {
+                type: "string",
+                name: "content",
+              },
+              {
+                type: "string",
+                name: "medium",
+              },
+              {
+                type: "string",
+                name: "source",
+              },
+              {
+                type: "string",
+                name: "term",
+              },
+            ],
+          },
+        ],
+      },
     ],
   },
 };
@@ -276,6 +311,41 @@ export const providers: ApiParam = {
         description:
           "A conditional expression to determine if the message should be sent through twilio. You can reference any property from the data or profile fields in your expression.",
         example: "data.locale === 'usa' && profile.name === 'Spongebob'",
+      },
+      {
+        type: "object",
+        name: "metadata",
+        fields: [
+          {
+            type: "object",
+            name: "utm",
+            displayName: "utm",
+            description:
+              "Identify the campaign that refers traffic to a specific website, through this specific provider. These properties will override the properties set in the message metadata and the channel metadata.",
+            fields: [
+              {
+                type: "string",
+                name: "campaign",
+              },
+              {
+                type: "string",
+                name: "content",
+              },
+              {
+                type: "string",
+                name: "medium",
+              },
+              {
+                type: "string",
+                name: "source",
+              },
+              {
+                type: "string",
+                name: "term",
+              },
+            ],
+          },
+        ],
       },
     ],
   },
