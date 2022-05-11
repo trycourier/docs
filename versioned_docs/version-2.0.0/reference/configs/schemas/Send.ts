@@ -260,7 +260,7 @@ export const channels: ApiParam = {
             name: "utm",
             displayName: "utm",
             description:
-              "Identify the campaign that refers traffic to a specific website, through this specific channel. These properties will override the properties set in the message metadata.",
+              "Identify the campaign that refers traffic to a specific website through this specific channel. These properties will override the properties set in the message metadata.",
             fields: [
               {
                 type: "string",
@@ -321,7 +321,7 @@ export const providers: ApiParam = {
             name: "utm",
             displayName: "utm",
             description:
-              "Identify the campaign that refers traffic to a specific website, through this specific provider. These properties will override the properties set in the message metadata and the channel metadata.",
+              "Identify the campaign that refers traffic to a specific website through this specific provider. These properties will override the properties set in the message metadata and the channel metadata.",
             fields: [
               {
                 type: "string",
