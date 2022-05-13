@@ -51,6 +51,12 @@ To deliver a message to a recipient over Gmail, Courier must be provided the rec
 
 You can use a provider override to replace what we send to Gmail's Send API. For example, you can add an attachment to your request:
 
+:::caution Overriding the 'From', 'Reply to', 'CC', and 'BCC' Fields
+
+Gmail's API has limitations based on what fields you can override - these include the 'From', 'Reply to', 'CC', and 'BCC' fields. Our [list of email providers](../) have less limitations on what you can override.
+
+:::
+
 ```json title=JSON
 {
   "message": {
