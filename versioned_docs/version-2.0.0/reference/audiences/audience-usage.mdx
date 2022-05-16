@@ -1,0 +1,28 @@
+---
+sidebar_position: 2
+sidebar_label: Example Usage
+pagination_label: Audiences API
+slug: ./example-usage
+---
+
+# Usage
+
+Once you define an audience and confirm the rules are including the correctset of users, you can use Send endpoint to send to the audience like this:
+
+```json
+{
+  "message": {
+    "to": {
+      "audience_id": "<audience_id>"
+    },
+    "content": {
+      "title": "Hello World",
+      "body": "Hello there"
+    },
+    "routing": {
+      "channels": ["push", "sms"],
+      "method": "single"
+    }
+  }
+}
+```

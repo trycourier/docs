@@ -1,0 +1,205 @@
+---
+sidebar_position: 0
+sidebar_label: Operators
+pagination_label: Audiences API
+slug: ./operators
+toc_max_heading_level: 2
+---
+
+import TOCInline from "@theme/TOCInline";
+
+# Operators
+
+<TOCInline maxHeadingLevel={2} toc={toc} />
+
+Audience operators are used to match a user's profile against a set of criteria. Courier supports the following operators:
+
+- `ENDS_WITH` (ends with)
+
+```ts
+{
+  "operator": "ENDS_WITH",
+  "value": "sonicpigeons.com",
+  "path": "email"
+}
+```
+
+- `EQ` (equal to)
+
+```ts
+{
+  "operator": "EQ",
+  "value": "Oakland",
+  "path": "location.city"
+}
+```
+
+- `EXISTS` (check any specific attributes (e.g. email, phone number, etc.) exists in the user's profile)
+
+```ts
+{
+  "operator": "EXISTS",
+  "value": true, // false if you want to check for the absence of the attribute
+  "path": "email"
+}
+```
+
+- `GT` (checks any specific numeric attribute in user's profile is greater than specified value)
+
+```ts
+{
+  "operator": "GT",
+  "value": "100",
+  "path": "foss_ball_victories"
+}
+```
+
+- `GTE` (checks any specific numeric attribute in user's profile is greater than or equal to specified value)
+
+```ts
+{
+  "operator": "GTE",
+  "value": "99",
+  "path": "foss_ball_victories"
+}
+```
+
+- `INCLUDES` (checks if user's profile specific attribute includes any of the specified values, e.g. favorite_notification channel includes push)
+
+```ts
+{
+  "operator": "INCLUDES",
+  "value": ["push", "email"],
+  "path": "favorite_notification_channel"
+}
+```
+
+- `LT` (checks any specific numeric attribute in user's profile is less than specified value)
+
+```ts
+{
+  "operator": "LT",
+  "value": "100",
+  "path": "foss_ball_victories"
+}
+```
+
+- `LTE` (checks any specific numeric attribute in user's profile is less than equal to than specified value)
+
+```ts
+{
+  "operator": "LTE",
+  "value": "99",
+  "path": "foss_ball_victories"
+}
+```
+
+- `NEQ` (checks if specified attribute is not equal to given value. e.g. company is not equal to "sonicpigeons.com")
+
+```ts
+{
+  "operator": "NEQ",
+  "value": "sonicpigeons.com",
+  "path": "company"
+}
+```
+
+- `OMIT` (checks if specified attribute is not included in user's profile, e.g. if user's favorite_notification_channel does not include email)
+
+```ts
+{
+  "operator": "OMIT",
+  "value": "email",
+  "path": "favorite_notification_channel"
+}
+```
+
+- `STARTS_WITH` (checks if specified attribute starts with given value, e.g. email starts with "pigeons")
+
+```ts
+{
+  "operator": "STARTS_WITH",
+  "value": "pigeons",
+  "path": "email"
+}
+```
+
+These operators are case-sensitive. If a user is created with Courier's [profile](../../reference/profiles/intro.mdx) the user's profile looks like this:
+
+```json
+{
+  "profile": {
+    "title": "Software Engineer",
+    "email": "suhas@courier.com",
+    "phone_number": "1234567890",
+    "location": {
+      "city": "San Francisco",
+      "state": "CA",
+      "country": "US"
+    },
+    "favorite_programming_languages": ["Go", "Typescript"]
+  }
+}
+```
+
+Now let's consider following use cases and see how we can use them:
+
+### 1. You want to notify a subset of users who are from San Francisco.​
+
+```json
+{
+  "operator": "EQ",
+  "path": "location.city",
+  "value": "San Francisco"
+}
+```
+
+### 2. You want to notify a subset of users who are Software Engineer and they either live in San Francisco or Oakland.
+
+```json
+{
+  "operator": "AND",
+  "filters": [
+    {
+      "operator": "EQ",
+      "path": "title",
+      "value": "Software Engineer"
+    },
+    {
+      "operator": "OR",
+      "filters": [
+        {
+          "operator": "EQ",
+          "path": "location.city",
+          "value": "Oakland"
+        },
+        {
+          "operator": "EQ",
+          "path": "location.city",
+          "value": "San Francisco"
+        }
+      ]
+    }
+  ]
+}
+```
+
+### 3. You want to notify a set of users who with title Software Engineer and they have listed Typescript as one of their favorite programming languages.
+
+```json
+{
+  "operator": "AND",
+  "filters": [
+    {
+      "operator": "EQ",
+      "path": "title",
+      "value": "Software Engineer"
+    },
+    {
+      "operator": "INCLUDES",
+      "path": "favorite_programming_languages",
+      "value": "Typescript"
+    }
+  ]
+}
+```
