@@ -4,13 +4,13 @@ sidebar_position: 0
 
 # Intro
 
-The Token Management API is used to store and track the status of user tokens. With this API
-apps can register a tokens associated with a provider and user_id. Whenever a notification
-is sent to that user via the provider, the token will automatically be loaded and used.
+The Token Management API is used to store and track the status of user device tokens. When a
+`/send` call is made with a `user_id`, Courier will automatically load and use the appropriate
+tokens. No need to include them in the call.
 
-With the Token Management API, multiple tokens for a user can be registered to the same provider,
+With Token Management, multiple tokens for a user can be registered to the same provider,
 allowing apps to send to multiple devices with a single `/send` call.
 
 Token statuses are also automatically tracked. The API will not send to stale or invalid tokens.
 
-The token management API is all endpoints prefixed with `/users/:user_id/tokens`
+Token Management is all endpoints prefixed with `/users/:user_id/tokens`
