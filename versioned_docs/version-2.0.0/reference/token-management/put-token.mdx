@@ -1,26 +1,22 @@
 ---
-sidebar_position: 5
+sidebar_position: 2
 ---
 
 import ApiReference from "@site/src/components/ApiReference";
-import config from "../configs/users/get-token";
+import config from "../configs/token-management/put-token";
 
-# GET /users/:user_id/tokens/:token
+# PUT /users/:user_id/tokens/:token
 
 <ApiReference {...config} />
 
-## Examples:
-
-Request:
+## Examples
 
 - URL: `/users/user-1234/tokens/ads23fghsdfgsd32
-- Method: `GET`
-
-Response:
+- Method: `PUT`
+- Body:
 
 ```json
 {
-  "token": "ads23fghsdfgsd32",
   "provider_key": "apn",
   "properties": {
     "is_person": true

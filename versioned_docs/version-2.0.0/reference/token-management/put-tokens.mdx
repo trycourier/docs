@@ -1,22 +1,19 @@
 ---
-sidebar_position: 6
+sidebar_position: 1
 ---
 
 import ApiReference from "@site/src/components/ApiReference";
-import config from "../configs/users/get-tokens";
+import config from "../configs/token-management/put-token";
 
-# GET /users/:user_id/tokens
+# PUT /users/:user_id/tokens
 
 <ApiReference {...config} />
 
-## Examples:
-
-Request:
+## Examples
 
 - URL: `/users/user-1234/tokens
-- Method: `GET`
-
-Response:
+- Method: `PUT`
+- Body:
 
 ```json
 {
@@ -34,15 +31,21 @@ Response:
       }
     },
     {
-      "token": "jkfs23dvsjdfh23G",
+      "token": "b2345dfgdgnwa",
       "provider_key": "apn",
-      "properties": {
-        "is_person": false
-      },
+      "tracking": {
+        "ip": "127.0.0.1",
+        "lat": "0.0",
+        "long": "123"
+      }
+    },
+    {
+      "token": "c32432fsdfdsdsfscxzcz",
+      "provider_key": "firebase-fcm",
       "device": {
-        "app_id": "com.my.app",
-        "platform": "iOS",
-        "model": "iPad Mini"
+        "device_id": "ipad",
+        "platform": "ipadOS",
+        "model": "iPad mini"
       }
     }
   ]
