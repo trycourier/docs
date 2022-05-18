@@ -7,7 +7,9 @@ slug: ./
 
 # Profiles API
 
-The Profiles API allows you to manage the profile information associated with an individual recipient.
+The Profiles API allows you to manage profile information associated with an individual recipient.
+
+Conforms with OIDC standard claims (https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims)
 
 ## Recipient ID
 
@@ -20,6 +22,6 @@ A `profile` is a JSON object that includes any key-value pairs required by our I
 ```json
 "profile": {
   "phone_number": "555-555-5555",
-  "email”: “normanosborn@oscorp.com"
+  "email": "normanosborn@oscorp.com"
 }
 ```
