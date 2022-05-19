@@ -4,13 +4,27 @@ const Operator: ApiParam = {
   type: "string",
   name: "operator",
   description: "The operator to use for filtering",
-  enum: ["AND", "EQ", "GT", "GTE", "INCLUDES", "LT", "LTE", "NEQ", "OMIT", "OR"],
+  enum: [
+    "ENDS_WITH",
+    "EQ",
+    "EXISTS",
+    "GT",
+    "GTE",
+    "INCLUDES",
+    "IS_AFTER",
+    "IS_BEFORE",
+    "LT",
+    "LTE",
+    "NEQ",
+    "OMIT",
+    "STARTS_WITH",
+  ],
   example: "EQ",
 };
 
 const SingleFilter: ApiParam = {
   type: "object",
-  name: "Single Filter",
+  displayName: "Single Filter",
   description: "A single filter to use for filtering",
   fields: [
     Operator,
@@ -18,25 +32,35 @@ const SingleFilter: ApiParam = {
       type: "string",
       name: "value",
       description: "The value to use for filtering",
-      example: "developer-audience",
+      example: "engineer",
     },
     {
       type: "string",
       name: "path",
       description:
         "The attribe name from profile whose value will be operated against the filter value",
+      example: "title",
     },
   ],
 };
 
-var GroupFilters: ApiParam = {
-  type: "array",
-  name: "filters",
-  description: "Group of filters to combine multiple filters in a single logical expression",
-  field: {
-    type: "oneOf",
-    options: [SingleFilter, GroupFilters],
-  },
+var GroupFilter: ApiParam = {
+  type: "object",
+  name: "Multiple Filters",
+  fields: [
+    {
+      type: "string",
+      name: "operator",
+      description: "The operator to use for filtering",
+      enum: ["AND", "OR"],
+      example: "OR",
+    },
+    {
+      type: "array",
+      name: "filters",
+      field: SingleFilter,
+    },
+  ],
 };
 
 const Audience: ApiParam = {
@@ -66,7 +90,7 @@ const Audience: ApiParam = {
       name: "filter",
       description: "Either a single filter or a group of filters",
       required: true,
-      options: [SingleFilter, GroupFilters],
+      options: [SingleFilter, GroupFilter],
     },
   ],
 };
