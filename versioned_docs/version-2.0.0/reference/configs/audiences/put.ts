@@ -5,13 +5,13 @@ const config: ApiReferenceProps = {
   description: "Creates or updates audience.",
   method: "PUT",
   path: "/audiences/:audience_id",
+  bodyParam: Audience,
   pathParams: [
     {
       type: "string",
       name: "audience_id",
       required: true,
-      description:
-        "A unique identifier representing the audience id",
+      description: "A unique identifier representing the audience id",
       example: "my-favorite-developer-audience",
     },
   ],
@@ -25,9 +25,7 @@ const config: ApiReferenceProps = {
         fields: [
           {
             type: "object",
-            fields: [
-              Audience,
-            ]
+            fields: [Audience],
           },
         ],
       },
