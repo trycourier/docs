@@ -155,7 +155,7 @@ Invoke another Automation Template
 }
 ```
 
-## Send
+## Send (Legacy)
 
 Send a Notification Template
 
@@ -189,6 +189,33 @@ Send a Notification Template
   "profile": {},
   "recipient": "",
   "ref": ""
+}
+```
+
+## Send
+
+Send a Notification Template
+
+### Fields
+
+| Field   | Type   | Required | Description                                                                                                                   |
+| ------- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| action  | string | required | The type of element. For the Send Automation Step, this value should be `"send"`.                                             |
+| message | object | required | The Courier Message. For more information see [The Courier Message](../../reference/send/message) in the /send api reference. |
+
+### Schema
+
+```json
+{
+  "action": "send",
+  "message": {
+    "to": {
+      // profile
+    },
+    // either template or content is required but not both
+    "template": "",
+    "content": {}
+  }
 }
 ```
 
