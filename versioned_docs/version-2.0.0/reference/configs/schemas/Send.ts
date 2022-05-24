@@ -186,8 +186,7 @@ export const routing: ApiParam = {
       required: true,
       enum: ["all", "single"],
       example: "single",
-      description:
-        "The method for selecting channels to send the message with. If no method is specified, then 'single' will be used as default.",
+      description: "The method for selecting channels to send the message with.",
     },
     {
       type: "array",
