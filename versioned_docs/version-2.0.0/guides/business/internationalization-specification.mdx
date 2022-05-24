@@ -355,9 +355,9 @@ In case you'd like to update a specific block or a channel's locales, or all blo
 
 ### Update locales for a specific block
 
-`PUT /notifications/:notification_id/blocks/:block_id/locales`
+`POST /notifications/:notification_id/blocks/:block_id/locales`
 
-or `PUT /notifications/:id/draft/blocks/:blockId/locales`
+or `POST /notifications/:id/draft/blocks/:blockId/locales`
 
 ```json
 {
@@ -368,9 +368,9 @@ or `PUT /notifications/:id/draft/blocks/:blockId/locales`
 
 ### Update locales for a specific channel
 
-`PUT /notifications/:id/channels/:channelId/locales`
+`POST /notifications/:id/channels/:channelId/locales`
 
-or `PUT /notifications/:id/draft/channels/:channelId/locales`
+or `POST /notifications/:id/draft/channels/:channelId/locales`
 
 ```json
 {
