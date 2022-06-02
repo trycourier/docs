@@ -85,3 +85,9 @@ To include an attachment in the email, you can use the following override:
   }
 }
 ```
+
+## IP Address Range
+
+Mailgun offers an [additional security](https://help.mailgun.com/hc/en-us/articles/360012244474-IP-Allowlist) feature that can whitelist certain IP addresses from accessing their API. Courier is hosted on AWS and does not provide an IP range in the form of an allow list.
+
+AWS provides [a workaround](https://docs.aws.amazon.com/general/latest/gr/aws-ip-ranges.html#subscribe-notifications) by allowing users to subscribe and update the changes themselves. Whenever there is a change to the AWS IP address ranges, AWS will send notifications to subscribers of the `AmazonIpSpaceChanged` topic.
