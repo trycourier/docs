@@ -64,3 +64,11 @@ Overrides can be used to change the request body that Courier uses to send an em
   }
 }
 ```
+
+## MailerSend 422 Response Code
+
+When submitting an API request to MailerSend, you will get a numbered response code. One of the most common response error codes is a 422 error. This could be due to a couple of reasons:
+
+<table><tbody><tr><td colspan="1" rowspan="1"><p>From email must be verified</p></td><td colspan="1" rowspan="1"><p>The domain of the from email address must match the domain that the API token or SMTP credentials are from.</p></td></tr><tr><td colspan="1" rowspan="1"><p>You must provide HTML and/or text versions of the email or template ID.</p></td><td colspan="1" rowspan="1"><p>The API request is missing one of the 3 parameters needed to send the content, either the text or HTML version or the template ID. </p></td></tr><tr><td colspan="1" rowspan="1"><p>This file type is not supported.</p></td><td colspan="1" rowspan="1"><p>The attachment file encoded in Base 64 is not part of our supported filetypes. Please refer to our <a target="_blank" title="supported file types" href="https://developers.mailersend.com/api/v1/email.html#supported-file-types">supported filetypes here</a>.</p></td></tr><tr><td colspan="1" rowspan="1"><p>The reply to email must be a valid email address.</p></td><td colspan="1" rowspan="1"><p>The reply_to email parameter is not a valid email address, it may be missing an "@", make sure it's a valid email address without typos.</p></td></tr><tr><td colspan="1" rowspan="1"><p>Email quota reached</p></td><td colspan="1" rowspan="1"><p>The account's quota has been reached. Make sure your account has been approved so you can send more than 100 emails per month.</p></td></tr></tbody></table>
+
+Among these errors, the most common one our users encounter is the email domain verification. Please make sure your email domain is [verified with MailerSend](https://www.mailersend.com/help/how-to-verify-and-authenticate-a-sending-domain) before you start using it in your Courier integration.
