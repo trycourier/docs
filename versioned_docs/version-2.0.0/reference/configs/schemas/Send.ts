@@ -451,6 +451,22 @@ export const timeout: ApiParam = {
       description:
         "An arbitrary duration for a message to be available for delivery. Default is 72 hours or 259200000 Milliseconds",
     },
+    {
+      type: "record",
+      name: "channel",
+      description: "An arbitrary duration for a channel to be available for delivery.",
+      field: {
+        type: "number",
+      },
+    },
+    {
+      type: "record",
+      name: "provider",
+      description: "An arbitrary duration for a provider to be available for delivery.",
+      field: {
+        type: "number",
+      },
+    },
   ],
 };
 
