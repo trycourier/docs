@@ -47,15 +47,24 @@ import { CourierClient } from "@trycourier/courier";
 
 const courier = CourierClient({ authorizationToken: "<AUTH_TOKEN>" }); // get from the Courier UI
 
-// Example: send a message supporting email & SMS
-const { messageId } = await courier.send({
-  eventId: "<EVENT_ID>", // get from the Courier UI
-  recipientId: "<RECIPIENT_ID>", // usually your system's User ID
-  profile: {
-    email: "example@example.com",
-    phone_number: "555-228-3890",
+// Example: send a basic message to an email recipient
+const { requestId } = await courier.send({
+  message: {
+    to: {
+      data: {
+        name: "Marty",
+      },
+      email: "marty_mcfly@email.com",
+    },
+    content: {
+      title: "Back to the Future",
+      body: "Oh my {{name}}, we need 1.21 Gigawatts!",
+    },
+    routing: {
+      method: "single",
+      channels: ["email"],
+    },
   },
-  data: {}, // optional variables for merging into templates
 });
 ```
 
@@ -68,18 +77,23 @@ from trycourier import Courier
 
 client = Courier(auth_token="your-auth-token") #or set via COURIER_AUTH_TOKEN env var
 
-resp = client.send(
-    event="your-event-id",
-    recipient="your-recipient-id",
-    profile={
-        "email": "example@example.com",
-        "phone_number": "555-867-5309"
+resp = client.send_message(
+  message={
+    'to': {
+      'email': 'marty_mcfly@email.com',
+      'data': {'name': 'Marty'}
     },
-    data={
-      "world": "Python!"
+    'content': {
+      'title': 'Back to the Future',
+      'body': 'Oh my {{name}}, we need 1.21 Gigawatts!',
+    },
+    'routing': {
+      'method': 'single',
+      'channels': ['email'],
     }
+  }
 )
-print(resp['messageId'])
+print(resp['requestId'])
 ```
 
 </TabItem>
@@ -91,26 +105,27 @@ require "trycourier"
 
 begin
   client = Courier::Client.new "your-auth-token" # or set via COURIER_AUTH_TOKEN env var
-  res = client.send({
-    "event" => "your-event-id",
-    "recipient" => "your-recipient-id",
-
-    "profile" => {
-      "email": "example@example.com",
-      "phone_number": "555-867-5309"
-    },
-
-    "data" => {
-      "world" => "Ruby!"
+  res = client.send_message({
+    "message" => {
+      "to" => {
+        "email" => "marty_mcfly@email.com",
+        "data" => {
+          "name" => "Marty McFly"
+        }
+      }
+      "content" => {
+        "title" => "hello {{name}}",
+        "body" => "Welcome to Courier!"
+      },
+      "data" => {
+        "name" => "Ruby"
+      }
     }
   })
-
   puts res.code # the HTTP response code
-  puts res.message_id # if 200, this will be the Courier message ID for this notification
-rescue Courier::ResponseError => re
+  puts res.request_id # if the code is 202, this will be the Courier request ID for this message
+rescue Courier::CourierAPIError => re #error sent from from the API
   puts re.message
-rescue Courier::InputError => ie
-  puts ie.message
 end
 ```
 
@@ -122,31 +137,29 @@ end
 package main
 
 import (
-  "log"
-  "github.com/trycourier/courier-go"
+	"context"
+	"fmt"
+	"github.com/trycourier/courier-go/v2"
 )
 
-func send() {
-  client := courier.CourierClient("<AUTH_TOKEN>")
-  var message = []byte(`{
-    eventId: "<EVENT_ID>", // get from the Courier UI
-    recipientId: "<RECIPIENT_ID>"
-    profile: {
-      email: "example@example.com",
-      phone_number: "555-228-3890"
-    },
-    data: {} // optional variables for merging into templates
-    overrides: {} // optional http provider overrides
-  }`)
-  response, err := client.Send(message)
-  if err != nil {
-    log.Fatalln(err)
-  }
-  log.Println(response.MessageId)
-}
-
 func main() {
-  send()
+	client := courier.CourierClient("<YOUR_AUTH_TOKEN>", nil)
+	message := courier.SendMessageRequestBody{
+		  "template": "<COURIER_TEMPLATE>",
+			"to": map[string]string{
+				"email": "marty_mcfly@email.com",
+        "data": map[string]string{
+          "name": "Marty McFly"
+        }
+		}
+	}
+
+	reqID, err := client.SendMessage(context.Background(), message)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println(reqID)
 }
 ```
 
@@ -155,14 +168,25 @@ func main() {
 <TabItem value="php" label="courier-php">
 
 ```php
-<?
-  use Courier\CourierClient;
+<?php
+    require "./vendor/autoload.php";
+    use Courier\CourierClient;
 
-  $client = new Courier("https://api.courier.com/", "TOKEN");
-  $response = $client->sendNotification(
-    "<EVENT-ID>",
-    "<RECIPIENT_ID>");
-  print_r($response);
+    $courier = new CourierClient("https://api.courier.com/", "redacted");
+
+    $result = $courier->sendEnhancedNotification(
+      (object) [
+        'to' => [
+          'email' => "marty_mcfly@email.com,
+        ],
+        'template' => "COURIER_TEMPLATE",
+        'data' => [
+          'name' => "Marty McFly",
+        ],
+      ],
+    );
+
+    echo( $result->requestId );
 ?>
 ```
 
@@ -171,18 +195,21 @@ func main() {
 <TabItem value="java" label="courier-java">
 
 ```java
+import com.google.gson.Gson;
 Courier.init("<AUTH_TOKEN>");
 
-SendRequestBody sendRequestBody = new SendRequestBody();
-sendRequestBody.setEvent("<EVENT-ID>");
-sendRequestBody.setRecipient("<RECIPIENT_ID>");
-HashMap<String, String> profile = new HashMap<>();
-profile.put("email", "example@example.com");
-profile.put("phone_number", "555-228-3890");
-sendRequestBody.setProfile(new Gson().toJson(profile));
+Gson gson = new Gson();
+SendEnhancedRequestBody sendEnhancedRequestBody = new SendEnhancedRequestBody();
+SendRequestMessage sendRequestMessage = new SendRequestMessage();
+HashMap<String, Object> toMap = gson.fromJson("{'email':'marty_mcfly@email.com'}", HashMap.class);
 
-SendResponseBody sendResponseBody = new SendService().send(sendRequestBody);
-System.out.println(sendResponseBody);
+sendRequestMessage.setTo(toMap);
+sendRequestMessage.setTemplate("my-template");
+sendRequestMessage.setBrand_id("my-brand");
+sendEnhancedRequestBody.setMessage(sendRequestMessage);
+
+SendEnhancedResponseBody sendEnhancedResponseBody2 = new SendService().sendEnhancedMessage(sendEnhancedRequestBody);
+System.out.println(sendEnhancedResponseBody2);
 ```
 
 </TabItem>
