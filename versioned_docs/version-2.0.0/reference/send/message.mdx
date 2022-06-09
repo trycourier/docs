@@ -26,3 +26,31 @@ only a requestId will be returned.
 ```
 
 <ApiReference {...config} />
+
+## Example
+
+Method: `POST`
+
+URL: `https://api.courier.com/send`
+
+Body:
+​
+```json
+{
+	"message": {
+		"to": {
+			"email": "hello@example.com"
+		},
+		"template": "abcdef12345678",
+        "data": {
+            "name": "John Doe"
+        },
+		"routing": {
+			"method": "single",
+			"channels": [
+				"email"
+			]
+		}
+	}
+}
+```
