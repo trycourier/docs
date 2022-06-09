@@ -7,28 +7,30 @@ import config from "../configs/send/routing-by-id";
 
 # POST /send/:event/routing
 
-## Example Request Body
+<ApiReference {...config} />
+
+## Example
 
 Method: `POST`
+
 URL: `/send/:event/routing`
+
 Body:
 ​
 ```json
 {
 	"recipients": [
 		{
-			"recipient": "<recipient-id>",
+			"recipient": "abcdefgh12345678",
 			"data": {
-				"name": "<name-variable-value>",
-				"age": "<age-variable-value>"
+				"name": "Jane Smith",
+				"age": 27
 			},
 			"profile": {
-				"phone_number": "<recipient-phone-number>",
-				"email": "<recipient-email>"
+				"phone_number": "2025550125",
+				"email": "jane.smith@example.com"
 			}
 		}
 	]
 }
 ```
-
-<ApiReference {...config} />
