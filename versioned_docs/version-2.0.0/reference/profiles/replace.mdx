@@ -37,3 +37,21 @@ The Profile will now be:
 ```
 
 <ApiReference {...config} />
+
+## Example
+
+Method: `PUT`
+
+URL: `/profiles/:recipient_id`
+
+Body:
+​
+```json
+{
+  "profile": {
+    "email": "user@example.com",
+    "phone_number": "555-555-5555",
+    "name": "John Smith"
+  }
+}
+```

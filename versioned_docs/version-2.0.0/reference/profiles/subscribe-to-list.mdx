@@ -8,3 +8,31 @@ import config from "../configs/profiles/subscribe-to-list";
 # POST /profiles/:recipient_id/lists
 
 <ApiReference {...config} />
+
+## Example
+
+Method: `POST`
+
+URL: `/profiles/:recipient_id/lists`
+
+Body:
+​
+```json
+{
+    "notifications": {
+        "{notificationKey}": {
+            "channel_preferences": [
+                {
+                    "channel": "direct_message"
+                }
+            ],
+            "rules": [
+                {
+                    "type": "snooze"
+                }
+            ],
+            "status": "OPTED_IN"
+        }
+    }
+}
+```
