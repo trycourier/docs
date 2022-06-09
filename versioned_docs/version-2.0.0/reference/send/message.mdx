@@ -25,4 +25,32 @@ only a requestId will be returned.
 { "requestId": "87e7c05b-4f46-fda24e356e23" }
 ```
 
+## Example Request Body
+
+Method: `POST`
+URL: `/send`
+Body:
+​
+```json
+{
+	"message": {
+		"to": {
+			"email": "<recipient-email>"
+		},
+		"template": "<your-template-id>",
+        "data": {
+            "variables": "<variable-value>"
+        },
+		"routing": {
+			"method": "single",
+			"channels": [
+				{
+					"channel": "email"
+				}
+			]
+		}
+	}
+}
+```
+
 <ApiReference {...config} />
