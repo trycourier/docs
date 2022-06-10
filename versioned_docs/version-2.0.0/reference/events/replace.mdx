@@ -8,3 +8,18 @@ import config from "../configs/events/replace";
 # PUT /events/:event_id
 
 <ApiReference {...config} />
+
+## Example
+
+Method: `PUT`
+
+URL: `https://api.courier.com/events/abcdefgh12345678`
+
+Body:
+​
+```json
+{
+    "id": "12345678abcdefgh",
+    "type": "notification"
+}
+```
