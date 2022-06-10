@@ -62,3 +62,36 @@ The above will result with:
 ```
 
 <ApiReference {...config} />
+
+## Example
+
+Method: `PUT`
+
+URL: `https://api.courier.com/audiences/abcdefgh12345678`
+
+Body:
+
+```json
+{
+  "id": "abcdefgh12345678",
+  "name": "Developer Audience",
+  "description": "Audience for developers",
+  "filter": {
+    "Multiple Filters": {
+      "operator": "OR",
+      "filters": [
+        {
+          "operator": "EQ",
+          "value": "engineer",
+          "path": "title"
+        },
+        {
+          "operator": "EQ",
+          "value": "product manager",
+          "path": "title"
+        }
+      ]
+    }
+  }
+}
+```
