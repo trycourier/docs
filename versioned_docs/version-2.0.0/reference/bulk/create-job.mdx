@@ -12,3 +12,28 @@ Bulk processing allows executing multiple job definitions across arbitrarily lar
 New to bulk processing? Check this <a href="https://www.courier.com/docs/guides/tutorials/how-to-send-bulk-notifications/">tutorial</a> to start sending bulk notifications in seconds.
 
 <ApiReference {...config} />
+
+## Example
+
+Method: `POST`
+
+URL: `https://api.courier.com/bulk`
+
+Body:
+​
+```json
+{
+    "message": {
+        "event": "abcdefgh12345678",
+        "brand": "W50NC77P524K14M5300PGPEK4JMJ",
+        "data": {
+            "name": "Jane Doe",
+            "age": 27
+        },
+        "routing": {
+            "method": "single"
+        },
+        "template": "NOTIFICATION_TEMPLATE"
+    }
+}
+```
