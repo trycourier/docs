@@ -8,3 +8,46 @@ import config from "../configs/preferences/replace";
 # PUT /preferences/:recipient_id
 
 <ApiReference {...config} />
+
+## Example
+
+Method: `PUT`
+
+URL: `https://api.courier.com/preferences/0460766e-8463-4905-ae98-b72c7aef41d6`
+
+Body:
+​
+```json
+{
+  "notifications": {
+    "abcdefg12345678": {
+      "channel_preferences": [
+        {
+          "channel": "direct_message"
+        }
+      ],
+      "rules": [
+        {
+          "type": "snooze"
+        }
+      ],
+      "status": "OPTED_IN"
+    }
+  },
+  "categories": {
+    "cooking": {
+      "channel_preferences": [
+        {
+          "channel": "direct_message"
+        }
+      ],
+      "rules": [
+        {
+          "type": "snooze"
+        }
+      ],
+      "status": "OPTED_IN"
+    }
+  }
+}
+```
