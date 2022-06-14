@@ -11,38 +11,4 @@ import Image from "@theme/IdealImage";
 
 Bulk processing allows you to send message definitions to large numbers of users in a single API invocation.
 
-New to bulk processing? Check this <a href="https://www.courier.com/docs/guides/tutorials/how-to-send-bulk-notifications/">tutorial</a> to start sending bulk notifications in seconds.
-
-## Creating a Bulk Job 
-
-The structure of a job mimics the set of available configuration values for sending an individual message.
-
-## Ingest users to the bulk job
-
-Using the job ID, multiple users can be ingested into the job. Note, the ingestion does not have to happen in a single call, you could have multiple ingestion invocations as long as job is not triggered.
-
-## Executing the job
-
-Once you have added the users to your job, it can be triggered. Note: a job ID can only be triggered once. If you wish to send messages to more users after the job was triggered, you'll have to create a new job definition and add the remaining users to the new job.
-
-## Fetching Bulk Job information
-
-### Job Status
-
-  * `CREATED` a job has been created, but has not yet been invoked/run. This should be the initial status of a bulk job when it is created.
-  * `PROCESSING` the bulk job is currently being processed.
-  * `COMPLETED` all items in the job have been placed in to the Courier send pipeline
-
-### Job Items/Users 
-
-  * `PENDING` a job has been populated with the user, but has not yet been invoked/run. This should be the initial status when a user is added to a job
-  * `ERROR` an error occurred enqueuing the user/configuration combination in the processing pipeline
-  * `ENQUEUED` the user/configuration combination have been enqueued in the processing pipeline
-
-## Message Information 
-
-This would be just like how a regular /send call works.
-
-Messages are visible on the Courier UI or can be fetched via Messages API.
-
-If you have webhooks configured, Courier will invoke it with the message data throughout the lifecycle of the message.
+New to bulk processing? Check out [this guide](https://www.courier.com/docs/guides/tutorials/how-to-send-bulk-notifications/) to start sending bulk notifications in minutes.
