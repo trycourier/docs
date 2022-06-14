@@ -9,13 +9,13 @@ import Image from "@theme/IdealImage";
 
 # Bulk API
 
-Bulk processing allows executing multiple job definitions across arbitrarily large set of input. Currently, we have added a feature that enables sending message definitions to large numbers of users in a single API invocation.
+Bulk processing allows you to send message definitions to large numbers of users in a single API invocation.
 
 New to bulk processing? Check this <a href="https://www.courier.com/docs/guides/tutorials/how-to-send-bulk-notifications/">tutorial</a> to start sending bulk notifications in seconds.
 
 ## Creating a Bulk Job 
 
-Bulk jobs must first be defined. The structure of a job mimics the set of available configuration values for sending an individual message.
+The structure of a job mimics the set of available configuration values for sending an individual message.
 
 ## Ingest users to the bulk job
 
@@ -23,25 +23,21 @@ Using the job ID, multiple users can be ingested into the job. Note, the ingesti
 
 ## Executing the job
 
-Once you have added the users to your job, it can be triggered. Note: a job ID can only be triggered once. If you wish to send messages to more users after the job was triggered, you'll have to create a new job definition and add the remaiing users to the new job.
+Once you have added the users to your job, it can be triggered. Note: a job ID can only be triggered once. If you wish to send messages to more users after the job was triggered, you'll have to create a new job definition and add the remaining users to the new job.
 
 ## Fetching Bulk Job information
 
 ### Job Status
 
-<ul>
-  <li>CREATED a job has been created, but has not yet been invoked/run. This should be the initial status of a bulk job when it is created.</li>
-  <li>PROCESSING the bulk job is currently being processed.</li>
-  <li>COMPLETED all items in the job have been placed in to the Courier send pipeline</li>
-</ul>
+  * `CREATED` a job has been created, but has not yet been invoked/run. This should be the initial status of a bulk job when it is created.
+  * `PROCESSING` the bulk job is currently being processed.
+  * `COMPLETED` all items in the job have been placed in to the Courier send pipeline
 
 ### Job Items/Users 
 
-<ul>
-  <li>PENDING a job has been populated with the user, but has not yet been invoked/run. This should be the initial status when a user is added to a job</li>
-  <li>ERROR an error occurred enqueuing the user/configuration combination in the processing pipeline</li>
-  <li>ENQUEUED the user/configuration combination have been enqueued in the processing pipeline</li>
-</ul>
+  * `PENDING` a job has been populated with the user, but has not yet been invoked/run. This should be the initial status when a user is added to a job
+  * `ERROR` an error occurred enqueuing the user/configuration combination in the processing pipeline
+  * `ENQUEUED` the user/configuration combination have been enqueued in the processing pipeline
 
 ## Message Information 
 
