@@ -142,7 +142,9 @@ const ApiReference = ({
                 <div className={styles.section}>
                   <div className={styles.sectionTitle}>PATH PARAMS</div>
 
-                  <ApiParamField param={{ type: "object", fields: pathParams }} prefix="path" />
+                  <div className={styles.group}>
+                    <ApiParamField param={{ type: "object", fields: pathParams }} prefix="path" />
+                  </div>
                 </div>
               )}
 
@@ -150,7 +152,9 @@ const ApiReference = ({
                 <div className={styles.section}>
                   <div className={styles.sectionTitle}>QUERY PARAMS</div>
 
-                  <ApiParamField param={{ type: "object", fields: queryParams }} prefix="query" />
+                  <div className={styles.group}>
+                    <ApiParamField param={{ type: "object", fields: queryParams }} prefix="query" />
+                  </div>
                 </div>
               )}
 
@@ -158,7 +162,9 @@ const ApiReference = ({
                 <div className={styles.section}>
                   <div className={styles.sectionTitle}>BODY PARAM</div>
 
-                  <ApiParamField param={bodyParam} prefix="body" />
+                  <div className={styles.group}>
+                    <ApiParamField param={bodyParam} prefix="body" />
+                  </div>
                 </div>
               )}
 
@@ -167,13 +173,16 @@ const ApiReference = ({
 
                 {responses.map((response, index) => (
                   <div key={index} className={styles.section}>
-                    <ApiResponseField
-                      field={{
-                        type: "object",
-                        name: `${response.status} ${response.description}`,
-                        ...response.body,
-                      }}
-                    />
+                    <div className={styles.group}>
+                      <ApiResponseField
+                        collapsible
+                        field={{
+                          type: "object",
+                          name: `${response.status} ${response.description}`,
+                          ...response.body,
+                        }}
+                      />
+                    </div>
                   </div>
                 ))}
               </div>

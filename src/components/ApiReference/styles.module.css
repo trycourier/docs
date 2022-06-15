@@ -122,6 +122,10 @@
   border-top: var(--ifm-global-border-width) solid var(--ifm-toc-border-color);
 }
 
+.groupHeader {
+  width: 100%;
+}
+
 .groupHeader,
 .groupHeader button {
   border: 0;
@@ -133,8 +137,7 @@
   outline: none;
 }
 
-.groupHeader {
-  width: 100%;
+.group > .groupHeader {
   padding: 0.25rem 1rem;
   font-size: 13px;
   font-weight: 500;
@@ -171,6 +174,24 @@ button.groupHeader:hover,
 button.groupHeader:focus {
   cursor: pointer;
   background-color: #fdfbfe;
+}
+
+.groupContainer {
+  width: 100%;
+}
+
+.groupContainer > .group:only-child {
+  margin: -0.75rem -1rem;
+  border: 0;
+  background: #fdfbfe;
+}
+
+.groupContainer .groupContainer > .group:only-child {
+  background: #fff;
+}
+
+.groupContainer > .groupHeader:not(:only-child) {
+  margin-bottom: 0.75rem;
 }
 
 .fieldInput {

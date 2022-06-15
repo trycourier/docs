@@ -46,32 +46,34 @@ const ApiParamOneOfField = ({ param, field }: FieldComponentProps<"oneOf">) => {
   useEffect(() => selectOption(0), []);
 
   return (
-    <div className={styles.group}>
+    <div className={styles.groupContainer}>
       {param.name && (
         <div className={styles.groupHeader}>
           <ApiParamInfo param={param} />
         </div>
       )}
 
-      {param.options?.map((fieldParam, index) => (
-        <React.Fragment key={index}>
-          {activeIndex === index ? (
-            <div className={styles.groupHeader}>
-              {fieldParam.displayName || fieldParam.name || `Option ${index + 1}`}
-            </div>
-          ) : (
-            <button
-              type="button"
-              onClick={() => selectOption(index)}
-              className={styles.groupHeader}
-            >
-              {fieldParam.displayName || fieldParam.name || `Option ${index + 1}`}
-            </button>
-          )}
+      <div className={styles.group}>
+        {param.options?.map((fieldParam, index) => (
+          <React.Fragment key={index}>
+            {activeIndex === index ? (
+              <div className={styles.groupHeader}>
+                {fieldParam.displayName || fieldParam.name || `Option ${index + 1}`}
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={() => selectOption(index)}
+                className={styles.groupHeader}
+              >
+                {fieldParam.displayName || fieldParam.name || `Option ${index + 1}`}
+              </button>
+            )}
 
-          {activeIndex === index && <ApiParamField param={fieldParam} prefix={field.name} />}
-        </React.Fragment>
-      ))}
+            {activeIndex === index && <ApiParamField param={fieldParam} prefix={field.name} />}
+          </React.Fragment>
+        ))}
+      </div>
     </div>
   );
 };
