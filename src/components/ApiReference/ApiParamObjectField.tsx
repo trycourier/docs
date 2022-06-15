@@ -6,21 +6,20 @@ import ApiParamField from "../ApiReference/ApiParamField";
 
 import styles from "./styles.module.css";
 
-const ApiParamObjectField = ({
-  param,
-  field,
-}: FieldComponentProps<"object">) => {
+const ApiParamObjectField = ({ param, field }: FieldComponentProps<"object">) => {
   return (
-    <div className={styles.group}>
+    <div className={styles.groupContainer}>
       {param.name && (
         <div className={styles.groupHeader}>
           <ApiParamInfo param={param} />
         </div>
       )}
 
-      {param.fields?.map((fieldParam, index) => (
-        <ApiParamField key={index} param={fieldParam} prefix={field.name} />
-      ))}
+      <div className={styles.group}>
+        {param.fields?.map((fieldParam, index) => (
+          <ApiParamField key={index} param={fieldParam} prefix={field.name} />
+        ))}
+      </div>
     </div>
   );
 };
