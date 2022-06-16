@@ -58,3 +58,52 @@ You can use a provider override to replace what we send to Postmark's Email API.
 ```
 
 The `message.porviders.postmark.override` property can be used to replace what we send to Postmark's Email API. Note: the override does not replace the entire object, only the elements that you define in the body of the override. You can see all the available options by visiting the [Postmark API docs](https://postmarkapp.com/developer/api/email-api).
+
+## Using Postmark Templates
+
+```json title=JSON
+{
+	"message": {
+		"to": {
+			"email": "rodrigo@courier.com"
+		},
+		"content": {
+			"title": "hello",
+			"body": "world"
+		},
+		"providers": {
+			"postmark": {
+				"override": {
+					"config": {
+						"url": "https://api.postmarkapp.com/email/withTemplate"
+					},
+					"body": {
+						"TemplateId": "123456",
+						"TemplateModel": {
+							"product_url": "product_url_Value",
+							"product_name": "product_name_Value",
+							"name": "name_Value",
+							"action_url": "action_url_Value",
+							"login_url": "login_url_Value",
+							"username": "username_Value",
+							"trial_length": "trial_length_Value",
+							"trial_start_date": "trial_start_date_Value",
+							"trial_end_date": "trial_end_date_Value",
+							"support_email": "support_email_Value",
+							"live_chat_url": "live_chat_url_Value",
+							"sender_name": "sender_name_Value",
+							"help_url": "help_url_Value",
+							"company_name": "company_name_Value",
+							"company_address": "company_address_Value"
+						}
+					}
+				}
+			}
+		}
+	}
+}
+```
+
+The `message.porviders.postmark.override.config` property can be used to override Courier templates and use Postmark's Templates API. 
+
+Be sure to include the `https://api.postmarkapp.com/email/withTemplate` URL in the config object along with the `TemplateId` and `TemplateModel` in the the body.
