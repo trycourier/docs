@@ -8,3 +8,48 @@ import config from "../configs/lists/recipient-subscribe";
 # PUT /lists/:list_id/subscriptions/:recipient_id
 
 <ApiReference {...config} />
+
+## Example
+
+Method: `PUT`
+
+URL: `https://api.courier.com/lists/abcdefgh12345678/subscriptions/0460766e-8463-4905-ae98-b72c7aef41d6`
+
+Body:
+​
+```json
+{
+    "preferences": {
+        "notifications": {
+            "abcdefgh12345678": {
+                "channel_preferences": [
+                    {
+                        "channel": "direct_message"
+                    }
+                ],
+                "rules": [
+                    {
+                        "type": "snooze"
+                    }
+                ],
+                "status": "OPTED_IN"
+            }
+        },
+        "categories": {
+            "cooking": {
+                "channel_preferences": [
+                    {
+                        "channel": "direct_message"
+                    }
+                ],
+                "rules": [
+                    {
+                        "type": "snooze"
+                    }
+                ],
+                "status": "OPTED_IN"
+            }
+        }
+    }
+}
+```

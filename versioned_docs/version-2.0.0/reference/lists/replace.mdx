@@ -8,3 +8,49 @@ import config from "../configs/lists/replace";
 # PUT /lists/:list_id
 
 <ApiReference {...config} />
+
+## Example
+​
+Method: `PUT`
+
+URL: `https://api.courier.com/lists/abcdefgh12345678`
+
+Body:
+​
+```json
+{
+    "name": "Example List Name",
+    "preferences": {
+        "notifications": {
+            "abcdefgh12345678": {
+                "channel_preferences": [
+                    {
+                        "channel": "direct_message"
+                    }
+                ],
+                "rules": [
+                    {
+                        "type": "snooze"
+                    }
+                ],
+                "status": "OPTED_IN"
+            }
+        },
+        "categories": {
+            "cooking": {
+                "channel_preferences": [
+                    {
+                        "channel": "direct_message"
+                    }
+                ],
+                "rules": [
+                    {
+                        "type": "snooze"
+                    }
+                ],
+                "status": "OPTED_IN"
+            }
+        }
+    }
+}
+```
