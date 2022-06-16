@@ -69,3 +69,28 @@ For more details about JSON Patch syntax:
 :::
 
 <ApiReference {...config} />
+
+## Example
+
+Method: `PATCH`
+
+URL: `https://api.courier.com/profiles/abcdefgh12345678`
+
+Body:
+​
+```json
+{
+  [
+    {
+      "op": "replace",
+      "path": "/email",
+      "value": "test@example.com"
+    },
+    {
+      "op": "add",
+      "path": "/phone_number",
+      "value": "1234567890"
+    }
+  ]
+}
+```
