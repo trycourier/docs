@@ -55,6 +55,12 @@ You can use a provider override to replace what we send to Mailgun's Messages AP
 
 Everything inside of `message.providers.mailgun.override` will replace what we send to Mailgun's Messages API. You can see all the available options by visiting [Mailgun API docs](https://documentation.mailgun.com/en/latest/api-sending.html).
 
+:::note EU Host
+
+When sending from Mailgun's EU infrastructure, be sure to substitute the beginning of the endpoint `https://api.mailgun.net` with `https://api.eu.mailgun.net`, and include it in the `config` object of the override along with the `apiKey` and `domain`.
+
+:::
+
 ## Sending Attachments
 
 To include an attachment in the email, you can use the following override:
