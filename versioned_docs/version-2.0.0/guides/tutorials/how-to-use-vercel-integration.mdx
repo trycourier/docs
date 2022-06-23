@@ -1,0 +1,58 @@
+---
+sidebar_position: 8
+---
+
+import Image from "@theme/IdealImage";
+
+# How To Use Vercel Integration
+
+You can use [Courier Vercel Integration](https://vercel.com/integrations/courier) to quickly
+integrate Courier with your Vercel projects.
+
+### 1. Add Courier Integration to your Vercel Account
+
+To Add Courier Vercel Integration to your Vercel Account, you need to open the
+[Courier Integration](https://vercel.com/integrations/courier) in the Vercel Integrations
+Marketplace and click the "Add Integration" button.
+
+You will be prompted to select the scope of the projects you want the integration to access.
+
+### 2. Sign in to Courier
+
+You will get redirected to the project configuration page if are already signed in to Courier.
+
+Otherwise, you will need to sign in to your Courier account or sign up for a new free account.
+
+### 3. Configure the integration
+
+You will be presented with the list of projects you gave access to in the previous step.
+
+Select the projects you would like to enable Courier integration for.
+
+<Image
+  img={require("../../assets/guides/tutorials/vercel-integration-demo.png")}
+  alt="Courier Vercel Integration Demo"
+/>
+
+This integration will add the following environment variables to get started sending your
+notifications with Courier.
+
+- `COURIER_AUTH_TOKEN`
+
+  - This environment variable is used to authenticate Courier API requests, including sending
+    notifications.
+
+- `COURIER_CLIENT_KEY`
+
+  - This environment variable is used client-side for the Courier in-app provider, i.e. Courier
+    Inbox and Courier Toasts.
+
+:::note
+You can open this configuration screen anytime in the future by clicking the "Configure" button in
+the top right corner of the Courier Integration page in Vercel.
+:::
+
+### 4. Finish the configuration
+
+Click "Enable" or "Save" button to end the configuration and enable the integration for selected
+projects and [start sending notifications](./how-to-send-a-notification.mdx) with Courier.
