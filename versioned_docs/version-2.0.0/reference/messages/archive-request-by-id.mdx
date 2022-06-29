@@ -1,0 +1,21 @@
+---
+sidebar_position: 3
+---
+
+import ApiReference from "@site/src/components/ApiReference";
+import config from "../configs/messages/archive-request-by-id";
+
+# Intro
+
+This is applicable for a very peculiar use-case: Messages that are sent to a list and are shown as a banner via Courier Embedded components.
+You'll most likely would not need to use this API unless you're specifically building around this use-case. Reach out to Courier Support if you have any questions.
+
+# PUT /requests/:request_id/archive
+
+<ApiReference {...config} />
+
+## Example
+
+Method: `PUT`
+
+URL: `https://api.courier.com/requests/1-62bbd4dc-d0a17ebd6ec04e7bbab5de60/archive`
