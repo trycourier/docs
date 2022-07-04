@@ -126,6 +126,11 @@
   width: 100%;
 }
 
+.groupHeader svg {
+  font-size: 1.2em;
+  vertical-align: middle;
+}
+
 .groupHeader,
 .groupHeader button {
   border: 0;

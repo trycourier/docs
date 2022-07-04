@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useFormikContext } from "formik";
 import { isPlainObject } from "lodash";
+import { MdExpandLess, MdExpandMore } from "react-icons/md";
 
 import {
   FieldComponentProps,
@@ -56,19 +57,16 @@ const ApiParamOneOfField = ({ param, field }: FieldComponentProps<"oneOf">) => {
       <div className={styles.group}>
         {param.options?.map((fieldParam, index) => (
           <React.Fragment key={index}>
-            {activeIndex === index ? (
-              <div className={styles.groupHeader}>
-                {fieldParam.displayName || fieldParam.name || `Option ${index + 1}`}
-              </div>
-            ) : (
-              <button
-                type="button"
-                onClick={() => selectOption(index)}
-                className={styles.groupHeader}
-              >
-                {fieldParam.displayName || fieldParam.name || `Option ${index + 1}`}
-              </button>
-            )}
+            <button
+              type="button"
+              onClick={() =>
+                selectOption(activeIndex === index ? (index + 1) % param.options.length : index)
+              }
+              className={styles.groupHeader}
+            >
+              {activeIndex === index ? <MdExpandLess /> : <MdExpandMore />}{" "}
+              {fieldParam.displayName || fieldParam.name || `Option ${index + 1}`}
+            </button>
 
             {activeIndex === index && <ApiParamField param={fieldParam} prefix={field.name} />}
           </React.Fragment>
