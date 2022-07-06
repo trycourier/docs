@@ -146,7 +146,6 @@ export const routingChannel: ApiParam = {
       name: "method",
       required: true,
       enum: ["all", "single"],
-      example: "single",
       description:
         "The method for selecting channels to send the message with. If no method is specified, then 'single' will be used as default.",
     },
@@ -185,7 +184,6 @@ export const routing: ApiParam = {
       name: "method",
       required: true,
       enum: ["all", "single"],
-      example: "single",
       description: "The method for selecting channels to send the message with.",
     },
     {
@@ -478,7 +476,6 @@ export const delay: ApiParam = {
       type: "number",
       name: "duration",
       description: "The millisecond duration to delay the delivery of the message.",
-      example: 30000,
     },
   ],
 };
