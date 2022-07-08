@@ -28,7 +28,7 @@ You will need both Courier and Microsoft Teams accounts to complete this tutoria
 
 When building an app for Teams, you'll need to create an app package to be installed. We will be using App Studio to create this package directly from the Teams Client. Install the App Studio App in your Teams client, if you haven't already.
 
-#### Create a new app
+#### Create a New App
 
 Open App Studio and click _Create a new app_ on the Manifest Editor tab. Fill out all the required fields including the Bot names, descriptions, etc. At the App URLs section, fill out your privacy and Terms of Use web page URLs. In this example, we are just using the placeholder URL, `https://example.com`. Before you publish your app, you must update these urls to point to real web pages with the required statements. Next, generate an App ID.
 
@@ -37,7 +37,7 @@ Open App Studio and click _Create a new app_ on the Manifest Editor tab. Fill ou
   alt="App Studio Create App"
 />
 
-#### Configure the bot
+#### Configure the Bot
 
 From the left menu, select Capabilities > Bots. Then, click _Set up_ to configure a new bot. Fill out the bot name and select the Personal and Team scopes and click _Create bot_. Now click _Generate new password_. At the modal popup, copy the password. You'll also need to copy the ID next to your bot name. You will need both these values for the next steps.
 
@@ -232,7 +232,7 @@ With Microsoft Teams, Courier can send a message to either Users that are part o
 
 To locate your `tenant_id`, you can navigate to https://teams.microsoft.com/?tenantId and copy the value from the redirected url `tennantId` query parameter.
 
-### Send a message to a Microsoft Teams User
+### Send a Message to a Microsoft Teams User
 
 To deliver a message to a recipient over Microsoft Teams, Courier must be provided with the ID of the intended recipient, the tenant ID for the Microsoft Teams account that recipient is a user of, and the service URL associated with that Microsoft Teams tenant.
 
@@ -253,7 +253,7 @@ You can use the [Microsoft Graph Explorer](https://developer.microsoft.com/en-us
 }
 ```
 
-### Send a message to an Microsoft Teams Channel
+### Send a message to a Microsoft Teams Channel
 
 To deliver a message to a channel over Microsoft Teams, Courier must be provided with the ID of the channel and the service URL associated with that Microsoft Teams tenant.
 
@@ -309,3 +309,80 @@ Overrides can be used to change the App ID and App Password of an Azure Bot. Bel
   }
 }
 ```
+## MS Teams Adaptive Cards
+
+Courier supports Jsonnet blocks for [MS Teams Adaptive Cards](https://docs.microsoft.com/en-us/adaptive-cards/) in the Template Designer. 
+
+:::info Feature Flag Request
+Please note that Jsonnet blocks currently only work with v2 of Courier's Send API. If you'd like Jsonnet block features enabled, please contact support.
+:::
+
+### Using Jsonnet Blocks
+
+Courier Jsonnet blocks lets users design the look of their MS Teams Adaptive Cards. In the following steps, we'll make an example adaptive card and use the Send API to post to MS Teams with our bot.
+
+In the designer, create a new MS Teams channel and add a Jsonnet block:
+
+<Image
+  img={require("../../../assets/guides/microsoft-teams/designer-jsonnet-block.png")}
+  alt="Jsonnet Block"
+/>
+
+Microsoft has an [Adaptive Cards Designer](https://adaptivecards.io/designer/) with a template we can use for this example. Copy the code from the 'Card Payload Editor' into the Jsonnet block:
+
+<Image
+  img={require("../../../assets/guides/microsoft-teams/designer-jsonnet-block-sample.png")}
+  alt="Sample Jsonnet"
+/>
+
+### Send an Adaptive Card to an MS Teams Channel
+
+Be sure to include the sample data from the [Sample Data Editor](https://adaptivecards.io/designer/) in your send request:
+
+```json title=JSON
+{
+	"message": {
+		"to": {
+			"user_id": "QUICKSTART_USER"
+		},
+		"template": "TGAV18XGBAM565JHKFZY3SJYZB52",
+		"data": {
+			"title": "Publish Adaptive Card Schema",
+			"description": "Now that we have defined the main rules and features of the format, we need to produce a schema and publish it to GitHub. The schema will be the starting point of our reference documentation.",
+			"creator": {
+				"name": "Matt Hidinger",
+				"profileImage": "https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg"
+			},
+			"createdUtc": "2017-02-14T06:08:39Z",
+			"viewUrl": "https://adaptivecards.io",
+			"properties": [
+				{
+					"key": "Board",
+					"value": "Adaptive Cards"
+				},
+				{
+					"key": "List",
+					"value": "Backlog"
+				},
+				{
+					"key": "Assigned to",
+					"value": "Matt Hidinger"
+				},
+				{
+					"key": "Due date",
+					"value": "Not set"
+				}
+			]
+		}
+	}
+}
+```
+
+The `user_id` for this example has an `ms_teams` object with a `conversation_id` already configured in the user profile. Make sure you have this configured otherwise you'll receive a `400 bad request` error. Once the request is sent, the MS Teams channel will render the following adaptive card:
+
+<Image
+  img={require("../../../assets/guides/microsoft-teams/MS-teams-adaptive-card.png")}
+  alt="MS Teams Adaptive Card"
+/>
+
+Congratulations, You can now send Adaptive Cards to MS Teams!
