@@ -304,6 +304,7 @@ aside > div > a > img,
   font-family: var(--ifm-heading-font-family);
   padding-right: 6px;
   padding-left: 10px;
+  padding-bottom: 30px;
 }
 
 .theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible {
