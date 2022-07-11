@@ -257,6 +257,7 @@ aside > div > a > img,
 
 .menu {
   scrollbar-gutter: stable;
+  margin-bottom: 15px;
 }
 
 .menu__link {
@@ -294,7 +295,6 @@ aside > div > a > img,
 
 .menu__list-item.theme-doc-sidebar-item-category-level-1 {
   margin-top: 10px;
-  margin-bottom: 20px;
 }
 
 .theme-doc-sidebar-item-link-level-1 .menu__link,
