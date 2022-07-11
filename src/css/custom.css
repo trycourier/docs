@@ -257,6 +257,7 @@ aside > div > a > img,
 
 .menu {
   scrollbar-gutter: stable;
+  margin-bottom: 20px;
 }
 
 .menu__link {
