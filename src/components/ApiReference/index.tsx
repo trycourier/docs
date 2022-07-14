@@ -8,7 +8,7 @@ import styles from "./styles.module.css";
 import ApiResponseField, { ApiResponse, buildResponse } from "./ApiResponseField";
 import ApiParamField, { ApiParam, apiParamInitialValue } from "./ApiParamField";
 import ApiParamButton from "./ApiParamButton";
-import ApiExamples, { stringifyJSON } from "./ApiExamples";
+import ApiExamples, { stringifyJSON, filterOutEmpty } from "./ApiExamples";
 import { ApiReferenceTokenContext } from "./ApiReferenceToken";
 import makeMetaDescription from "@site/src/utils/makeMetaDescription";
 
@@ -78,7 +78,7 @@ const ApiReference = ({
             method,
             path,
             auth: token,
-            bodyParam: values.body,
+            bodyParam: filterOutEmpty(values.body),
             queryParams: values.query,
             pathParams: values.path,
           }),

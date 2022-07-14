@@ -242,7 +242,6 @@ export const channels: ApiParam = {
         name: "if",
         description:
           "A conditional expression to determine if the message should be sent through the channel. You can reference any property from the data or profile fields in your expression.",
-        example: "data.locale === 'usa' && profile.name === 'Spongebob'",
       },
       {
         type: "json",
@@ -307,7 +306,6 @@ export const providers: ApiParam = {
         name: "if",
         description:
           "A conditional expression to determine if the message should be sent through twilio. You can reference any property from the data or profile fields in your expression.",
-        example: "data.locale === 'usa' && profile.name === 'Spongebob'",
       },
       {
         type: "object",

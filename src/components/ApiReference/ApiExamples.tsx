@@ -196,7 +196,7 @@ const tabs = [
 ];
 
 // Used to filter out the fields that are empty in the example body JSON
-const filterOutEmpty = (value: any) => {
+export const filterOutEmpty = (value: any) => {
   if (Array.isArray(value)) {
     const cleanArray = value.map((item) => filterOutEmpty(item)).filter((item) => item != null);
     return cleanArray.length === 0 ? undefined : cleanArray;
