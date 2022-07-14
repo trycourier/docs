@@ -91,8 +91,6 @@ export const apiParamInitialValue = (param: ApiParam) => {
 const validateField = (param: ApiParam) => (value: string) => {
   if (!PRIMITIVE_TYPES.includes(param.type)) return;
 
-  if (param.required && value == null) return "Required";
-
   if (param.type === "json" && value != null) {
     try {
       if (typeof value === "string") JSON.parse(value);
