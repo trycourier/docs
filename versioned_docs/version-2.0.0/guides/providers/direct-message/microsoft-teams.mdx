@@ -178,7 +178,7 @@ Click the _Send_ tab at the top of the page.
 
 #### Send a Direct Message
 
-To send a direct message to a Microsoft Teams user, we'll need a Courier recipient with a [Microsoft Teams profile](./#send-a-message-to-a-microsoft-teams-user) that includes a `user_id`, `tenant_id`, and `service_url`. We can retrieve these values and save them to a profile using our bot's `add-user` command.
+To send a direct message to a Microsoft Teams user, we'll need a Courier recipient with a [Microsoft Teams profile](./#send-a-message-to-a-microsoft-teams-user) that includes a `user_id`, `tenant_id`, `conversation_id`, and `service_url`. We can retrieve these values and save them to a profile using our bot's `add-user` command.
 
 From the direct chat, type the following message:
 
@@ -231,6 +231,8 @@ The bot we are using works great for this guide, but likely won't fit a producti
 With Microsoft Teams, Courier can send a message to either Users that are part of a tenant or the Channel.
 
 To locate your `tenant_id`, you can navigate to https://teams.microsoft.com/?tenantId and copy the value from the redirected url `tennantId` query parameter.
+
+You can follow the steps in this [Microsoft Teams article](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/get-teams-context?tabs=json) in order to fetch the roster or user profile for your bot.
 
 ### Send a Message to a Microsoft Teams User
 
@@ -386,3 +388,28 @@ The `user_id` for this example has an `ms_teams` object with a `conversation_id`
 />
 
 Congratulations, You can now send Adaptive Cards to MS Teams!
+
+## MS Teams @ Mentions in Adaptive Cards
+
+To include a mention in an Adaptive Card you need to include the following elements:
+* A `<at>username</at>` in the JSONNET block.
+* The `mentioned` object inside of an MS Teams property in the card content that includes the MS Teams user `id` of the user being mentioned.
+
+A sample mention will follow this template inside:
+
+```json title=JSON
+{
+	"msteams": {
+		"entities": [
+			{
+				"type": "mention",
+				"text": "<at>John Doe</at>",
+				"mentioned": {
+					"id": "29:123124124124",
+					"name": "John Doe"
+				}
+			}
+		]
+	}
+}
+```
