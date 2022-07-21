@@ -56,12 +56,12 @@ const AuditEvent: ApiParam = {
         type: "string",
         name: "timestamp",
         description: "A UTC timestamp at which the audit event was triggered.",
-        example: "courier.studio"
+        example: "2022-07-05T22:30:24.662Z"
     },
     {
         type: "string",
         name: "type",
-        description: "The type of audit event that was triggered",
+        description: "The type of audit event that was triggered.",
         example: "user:role-changed"
     },
     {
