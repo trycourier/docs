@@ -53,7 +53,11 @@ You can use a provider override to replace what we send to Mailgun's Messages AP
 }
 ```
 
-Everything inside of `message.providers.mailgun.override` will replace what we send to Mailgun's Messages API. You can see all the available options by visiting [Mailgun API docs](https://documentation.mailgun.com/en/latest/api-sending.html).
+Everything inside of `message.providers.mailgun.override` will replace what we send to Mailgun's Messages API. 
+
+For example, one could override the `fromAddress` field in the request Courier sends to Mailgun by including the override param and data inside the `config` object.
+
+You can see all the available options by visiting [Mailgun API docs](https://documentation.mailgun.com/en/latest/api-sending.html).
 
 :::note EU Host
 
