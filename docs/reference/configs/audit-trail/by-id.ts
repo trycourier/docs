@@ -6,7 +6,7 @@ const config: ApiReferenceProps = {
   description: "Fetch a specific audit event from the Audit Trail by event ID.",
   method: "GET",
   path: "/audit-events/:audit-event-id",
-  queryParams: [
+  pathParams: [
     {
         type: "string",
         name: "audit-event-id",
