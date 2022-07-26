@@ -67,10 +67,7 @@ The `message.providers.postmark.override` property can be used to replace what w
 		"to": {
 			"email": "rodrigo@courier.com"
 		},
-		"content": {
-			"title": "hello",
-			"body": "world"
-		},
+		"template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
 		"providers": {
 			"postmark": {
 				"override": {
@@ -107,3 +104,9 @@ The `message.providers.postmark.override` property can be used to replace what w
 The `message.providers.postmark.override.config` property can be used to override Courier templates and use Postmark's [Templates API](https://postmarkapp.com/developer/api/templates-api). 
 
 Be sure to include the `https://api.postmarkapp.com/email/withTemplate` URL in the config object along with the `TemplateId` and `TemplateModel` in the the body.
+
+:::caution Mapping a Courier Template to your Postmark Template Override
+
+When using Postmark templates - make sure your request uses a `template` parameter instead of `content`. Otherwise the `content` object will take presedence over the Postmark override. The `template_id` must be valid or an error will occur.
+
+:::
