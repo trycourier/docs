@@ -13,7 +13,7 @@ const config: ApiReferenceProps = {
       name: "cursor",
       description: "A unique identifier that allows for fetching the next set of audit events.",
       example: "MTU4OTQ5NTI1ODY4NywxLTVlYmRjNWRhLTEwODZlYWFjMWRmMjEwMTNjM2I0ZjVhMA==",
-    }
+    },
   ],
   responses: [
     {
