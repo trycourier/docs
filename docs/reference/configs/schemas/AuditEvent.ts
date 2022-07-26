@@ -64,12 +64,6 @@ const AuditEvent: ApiParam = {
       description: "The type of audit event that was triggered.",
       example: "user:role-changed",
     },
-    {
-      type: "string",
-      name: "workspaceId",
-      description: "A unique identifier associated with the workspace.",
-      example: "876a5b62-1d7c-494f-9a32-d40a39a8e29e",
-    },
   ],
 };
 
