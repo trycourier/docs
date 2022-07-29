@@ -2,6 +2,8 @@
 sidebar_position: 4
 ---
 
+import Image from "@theme/IdealImage";
+
 # Microsoft Teams
 
 ## Microsoft Teams Bot Requirements
@@ -12,13 +14,18 @@ To send notifications via Microsoft Teams, a Microsoft Teams Bot is required. Yo
 
 With Microsoft Teams, Courier can send a message to either Users that are part of a tenant or the Channel.
 
-To locate your `tenant_id`, you can navigate to https://teams.microsoft.com/?tenantId and copy the value from the redirected url `tennantId` query parameter.
+To locate your `tenant_id`, you can navigate to https://teams.microsoft.com/?tenantId and copy the value from the redirected url `tenantId` query parameter. If the parameter doesn't show up in the url, click the three dots next to your Team and click _Get link to team_ to find a link with the `tenantId` parameter.
+
+<Image
+  img={require("../../../assets/guides/microsoft-teams/profile-requirements-locate-tenant-id.png")}
+  alt="Locate Link to Find tenantId"
+/>
 
 ### Send a message to a Microsoft Teams User
 
-To deliver a message to a recipient over Microsoft Teams, Courier must be provided with the ID of the intended recipient, the tenant ID for the Microsoft Teams account that recipient is a user of, and the service URL associated with that Microsoft Teams tenant.
+To deliver a message to a recipient over Microsoft Teams, Courier must be provided with the ID of the intended recipient `user_id`, the tenant ID for the Microsoft Teams account that recipient is a user of `tenant_id`, and the service URL associated with that Microsoft Teams tenant `service_url`.
 
-You can use the [Microsoft Graph Explorer](https://developer.microsoft.com/en-us/graph/graph-explorer) to query for the `user_id`. You can learn more by checking out [Build Microsoft Teams apps with Microsoft Graph](https://docs.microsoft.com/en-us/graph/tutorials/teams).
+You can follow the steps in this [Microsoft Teams article](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/get-teams-context?tabs=json) in order to fetch the roster or user profile for your bot. To retrieve the authentication token, make the call in step 1 of [this Microsoft Teams article](https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-authentication?view=azure-bot-service-4.0#step-1-request-an-access-token-from-the-azure-ad-v2-account-login-service).
 
 ```json title=JSON
 // Recipient Profile
