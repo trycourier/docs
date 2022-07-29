@@ -77,7 +77,7 @@ const metadata = require("./src/theme/metadata");
     plugins: [
       ["docusaurus2-dotenv", { systemvars: true, safe: true }],
       ...(process.env.SEGMENT_KEY
-        ? ["docusaurus-plugin-segment", { apiKey: process.env.SEGMENT_KEY }]
+        ? [["docusaurus-plugin-segment", { apiKey: process.env.SEGMENT_KEY }]]
         : []),
       ["@docusaurus/plugin-ideal-image", {}],
       [
