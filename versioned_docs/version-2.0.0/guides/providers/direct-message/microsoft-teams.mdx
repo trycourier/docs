@@ -230,15 +230,18 @@ The bot we are using works great for this guide, but likely won't fit a producti
 
 With Microsoft Teams, Courier can send a message to either Users that are part of a tenant or the Channel.
 
-To locate your `tenant_id`, you can navigate to https://teams.microsoft.com/?tenantId and copy the value from the redirected url `tennantId` query parameter.
+To locate your `tenant_id`, you can navigate to https://teams.microsoft.com/?tenantId and copy the value from the redirected url `tenantId` query parameter. If the parameter doesn't show up in the url, click the three dots next to your Team and click _Get link to team_ to find a link with the `tenantId` parameter.
 
-You can follow the steps in this [Microsoft Teams article](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/get-teams-context?tabs=json) in order to fetch the roster or user profile for your bot.
+<Image
+  img={require("../../../assets/guides/microsoft-teams/profile-requirements-locate-tenant-id.png")}
+  alt="Locate Link to Find tenantId"
+/>
 
 ### Send a Message to a Microsoft Teams User
 
-To deliver a message to a recipient over Microsoft Teams, Courier must be provided with the ID of the intended recipient, the tenant ID for the Microsoft Teams account that recipient is a user of, and the service URL associated with that Microsoft Teams tenant.
+To deliver a message to a recipient over Microsoft Teams, Courier must be provided with the ID of the intended recipient `user_id`, the tenant ID for the Microsoft Teams account that recipient is a user of `tenant_id`, and the service URL associated with that Microsoft Teams tenant `service_url`.
 
-You can use the [Microsoft Graph Explorer](https://developer.microsoft.com/en-us/graph/graph-explorer) to query for the `user_id`. You can learn more by checking out [Build Microsoft Teams apps with Microsoft Graph](https://docs.microsoft.com/en-us/graph/tutorials/teams).
+You can follow the steps in this [Microsoft Teams article](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/get-teams-context?tabs=json) in order to fetch the roster or user profile for your bot. To retrieve the authentication token, make the call in step 1 of [this Microsoft Teams article](https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-authentication?view=azure-bot-service-4.0#step-1-request-an-access-token-from-the-azure-ad-v2-account-login-service).
 
 ```json title=JSON
 {
@@ -311,9 +314,10 @@ Overrides can be used to change the App ID and App Password of an Azure Bot. Bel
   }
 }
 ```
+
 ## MS Teams Adaptive Cards
 
-Courier supports Jsonnet blocks for [MS Teams Adaptive Cards](https://docs.microsoft.com/en-us/adaptive-cards/) in the Template Designer. 
+Courier supports Jsonnet blocks for [MS Teams Adaptive Cards](https://docs.microsoft.com/en-us/adaptive-cards/) in the Template Designer.
 
 :::info Feature Flag Request
 Please note that Jsonnet blocks currently only work with v2 of Courier's Send API. If you'd like Jsonnet block features enabled, please contact support.
@@ -330,7 +334,7 @@ In the designer, create a new MS Teams channel and add a Jsonnet block:
   alt="Jsonnet Block"
 />
 
-Microsoft has an [Adaptive Cards Designer](https://adaptivecards.io/designer/) with a template we can use for this example. Copy the code from the 'Card Payload Editor' into the Jsonnet block:
+Microsoft has an [Adaptive Cards Designer](https://adaptivecards.io/designer/) with a template we can use for this example. Copy the code from the "Card Payload Editor" into the Jsonnet block:
 
 <Image
   img={require("../../../assets/guides/microsoft-teams/designer-jsonnet-block-sample.png")}
@@ -343,40 +347,40 @@ Be sure to include the sample data from the [Sample Data Editor](https://adaptiv
 
 ```json title=JSON
 {
-	"message": {
-		"to": {
-			"user_id": "QUICKSTART_USER"
-		},
-		"template": "TGAV18XGBAM565JHKFZY3SJYZB52",
-		"data": {
-			"title": "Publish Adaptive Card Schema",
-			"description": "Now that we have defined the main rules and features of the format, we need to produce a schema and publish it to GitHub. The schema will be the starting point of our reference documentation.",
-			"creator": {
-				"name": "Matt Hidinger",
-				"profileImage": "https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg"
-			},
-			"createdUtc": "2017-02-14T06:08:39Z",
-			"viewUrl": "https://adaptivecards.io",
-			"properties": [
-				{
-					"key": "Board",
-					"value": "Adaptive Cards"
-				},
-				{
-					"key": "List",
-					"value": "Backlog"
-				},
-				{
-					"key": "Assigned to",
-					"value": "Matt Hidinger"
-				},
-				{
-					"key": "Due date",
-					"value": "Not set"
-				}
-			]
-		}
-	}
+  "message": {
+    "to": {
+      "user_id": "QUICKSTART_USER"
+    },
+    "template": "TGAV18XGBAM565JHKFZY3SJYZB52",
+    "data": {
+      "title": "Publish Adaptive Card Schema",
+      "description": "Now that we have defined the main rules and features of the format, we need to produce a schema and publish it to GitHub. The schema will be the starting point of our reference documentation.",
+      "creator": {
+        "name": "Matt Hidinger",
+        "profileImage": "https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg"
+      },
+      "createdUtc": "2017-02-14T06:08:39Z",
+      "viewUrl": "https://adaptivecards.io",
+      "properties": [
+        {
+          "key": "Board",
+          "value": "Adaptive Cards"
+        },
+        {
+          "key": "List",
+          "value": "Backlog"
+        },
+        {
+          "key": "Assigned to",
+          "value": "Matt Hidinger"
+        },
+        {
+          "key": "Due date",
+          "value": "Not set"
+        }
+      ]
+    }
+  }
 }
 ```
 
@@ -392,24 +396,25 @@ Congratulations, You can now send Adaptive Cards to MS Teams!
 ## MS Teams @ Mentions in Adaptive Cards
 
 To include a mention in an Adaptive Card you need to include the following elements:
-* A `<at>username</at>` in the JSONNET block.
-* The `mentioned` object inside of an MS Teams property in the card content that includes the MS Teams user `id` of the user being mentioned.
+
+- A `<at>username</at>` in the JSONNET block.
+- The `mentioned` object inside of an MS Teams property in the card content that includes the MS Teams user `id` of the user being mentioned.
 
 A sample mention will follow this template inside:
 
 ```json title=JSON
 {
-	"msteams": {
-		"entities": [
-			{
-				"type": "mention",
-				"text": "<at>John Doe</at>",
-				"mentioned": {
-					"id": "29:123124124124",
-					"name": "John Doe"
-				}
-			}
-		]
-	}
+  "msteams": {
+    "entities": [
+      {
+        "type": "mention",
+        "text": "<at>John Doe</at>",
+        "mentioned": {
+          "id": "29:123124124124",
+          "name": "John Doe"
+        }
+      }
+    ]
+  }
 }
 ```
