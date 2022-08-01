@@ -28,3 +28,29 @@ All Courier Elemental templates have the following top level structure:
 | -------- | ---------------------------- | -------- | ------------------------------------- |
 | version  | string                       | required |                                       |
 | elements | [CourierElement](elements)[] | required | Array of [Courier Elements](elements) |
+
+## Usage
+
+Courier Elemental can be used in place of a standard template in a `/send` call. To do so,
+pass the elemental document as the `content` property of the message object:
+
+```js
+{
+  "message": {
+    "to": { /** etc */ },
+    "content":{
+      "elements": [
+        {
+          "type": "meta",
+          "title": "My Title"
+        },
+        {
+          "type": "text",
+          "content": "Hello **world**"
+        }
+      ],
+      "version": "2022-01-01",
+    }
+  }
+}
+```
