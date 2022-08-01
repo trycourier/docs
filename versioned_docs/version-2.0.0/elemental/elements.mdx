@@ -142,7 +142,8 @@ Basic Usage:
 
 With raw:
 
-```json
+```js
+// Email
 {
   "type": "channel",
   "channel": "email",
@@ -154,6 +155,7 @@ With raw:
   }
 },
 
+// Slack
 {
   "type": "channel",
   "channel": "slack",
@@ -162,18 +164,17 @@ With raw:
   }
 },
 
+// Webhook
 {
-  "type": "channel", // all other channels
-  "elements": [
-    {
-      "type": "meta",
-      "title": "My Title"
-    },
-    {
-      "type": "text",
-      "content": "Hello **world**"
+  "type": "channel",
+  "channel": "webhook",
+  "raw": {
+    "payload": {
+      "body": {
+        "hello": "world"
+      }
     }
-  ]
+  }
 }
 ```
 
