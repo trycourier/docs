@@ -70,6 +70,11 @@ module.exports = {
           label: "Ruby",
           href: "https://github.com/trycourier/courier-ruby",
         },
+        {
+          type: "link",
+          label: "iOS (Swift, Obj-C)",
+          href: "https://github.com/trycourier/courier-ios",
+        },
       ],
     },
     {
