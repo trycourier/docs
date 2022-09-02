@@ -21,3 +21,36 @@ To deliver an SMS message through TextUs, Courier must be provided the recipient
   }
 }
 ```
+
+## Overrides
+
+Overrides can be used to change the request that Courier makes to the provider. Overrides are useful when a field is not yet supported by Courier or you would like to override the value that Courier generates. You can override the `authToken`, `from` and `email` as well as the `body` of the SMS content.
+
+```json title=JSON
+{
+  "message": {
+    "template": "<COURIER_NOTIFICATION_ID>",
+    "to": {
+      "phone_number": "+12345678901"
+    },
+    "data": {
+      "first_name": "Jane Doe"
+    },
+    "providers": {
+      "textus": {
+        "override": {
+          "body": {
+            "to": "+109876543210",
+            "body": "I am the right content for the SMS"
+          },
+          "config": {
+            "from": "<override From number>",
+            "authToken": "<override Auth Token>",
+            "email": "<override Email>"
+          }
+        }
+      }
+    }
+  }
+}
+```
