@@ -1,0 +1,36 @@
+---
+sidebar_position: 3
+---
+
+# Send Emails Using Your Customer's Domain and Email Service Provider
+
+> How to send emails from your customer's domain by overriding the provider's integration API Key.
+
+## White-Label Your Customer's Email Domain
+
+In addition to white-labeling the branding of their emails, some Courier customers want to white-label the email sender domain for their users.
+
+Courier allows you to do this by sending emails using your customer's Email Service Provider. This is accomplished by overriding the API key of your email provider integration with your customer's provider API key.
+
+## Overriding the Email Integration API Key
+
+To send with your customer's email service provider, you'll need your customer's Email Service Provider API Key.
+
+1. Add an integration in your Courier Tenant for each Email Service Provider you'd like to support*
+2. Add those integrations to the email channel of the notification template you want to white-label
+3. Use provider-level conditions to determine which provider gets used (e.g. send over a data field named "esp" with the value "mailgun" and set a rule that only enables that provider if that value has been set). 
+4. Provide your customer's API key using the override** section of the send command.
+
+:::info Note
+
+The initial API key you put into the Courier email integrations don't need to be valid as long as you're always going to override the API Key via the Send API.
+
+:::
+
+**See the 'Override' section of your provider's Courier integration doc for details.**
+
+[Courier Email Integration Docs](/guides/providers/email)
+
+## Sending With Your Customer's 'From' Email Address
+<!-- Link follow-up doc -->
+To programmatically set the From: address on an email template, you'll use a variable in the email channel settings as detailed in this help article: [Setting the 'From', 'Reply-To', 'CC' and 'BCC' Names and Address Fields](https://help.courier.com/en/articles/4745504-setting-the-from-reply-to-cc-and-bcc-names-and-address-fields).

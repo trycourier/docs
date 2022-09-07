@@ -1,0 +1,450 @@
+---
+sidebar_position: 7
+---
+
+# Handlebars Helpers
+
+> Courier's custom Handlebars helpers for use in email template overrides and custom brand templates.
+
+The default Handlebars helpers can be found [here](https://handlebarsjs.com/guide/block-helpers.html).
+
+## Courier Handlebars Helpers
+
+Don't see a custom handlebars helper you need in the list? [Share your use case](mailto:support@courier.com).
+
+## Universal Helpers
+
+### And
+
+**Usage:**
+
+- `{{#if (and true 1 "yay")}}`
+- `{{#if (and true false)}}`
+- `{{#if (and variable1 variable2)}}`
+
+**Should:**
+
+- Return `true` if all arguments are truthy.
+- Return `false` if one argument is falsy.
+- Return `true` if no arguments.
+
+### Capitalize
+
+**Usage:**
+
+- `{{capitalize "courier")}} => "Courier"`
+- `{{capitalize "try courier")}} => "Try courier" (does not support words)`
+
+**Should:**
+
+Capitalize the first character given a string.
+
+### Concat
+
+**Usage:**
+
+- `{{concat "hello" "world"}}`
+
+**Should:**
+
+- Stringify all arguments and join them using the provided separator.
+- Should use `null` string for the separator by default.
+- Should return a null string if no arguments.
+
+### Condition
+
+**Usage:**
+
+- `{{#if (condition "a" "!=" "b")}}`
+
+**Example:**
+
+- `{{#if (condition (var "someVariable") "==" "foo")}}yay{{else}}boo{{/if}}`
+- The `someVariable` value in this case would be on the data block.
+
+**Should:**
+
+- Throw if the operator is unsupported.
+- Require two operands separated by an operator.
+- Run the appropriate operation on the operands.
+
+### Conditional
+
+**Usage:**
+
+- `{{conditional (filter "data" "customer.name" "EQUALS" "josh") (filter "profile" "email" "CONTAINS" "@trycourier.com")}}`
+
+**Should:**
+
+- Loop through all arguments and ensure all are truthy if using the "and" logical operator.
+- Loop through all arguments and ensure one is truthy if using the "or" logical operator.
+- Return true if the conditions passed, false otherwise (use #unless helper to hide content if condition passes).
+
+### Default
+
+**Usage:**
+
+- `{{default undefined "valued customer"}}`
+
+**Should:**
+
+- Return the `value` if it is not nullish.
+- Return the defaultValue if the value is nullish.
+
+### Each
+
+**Usage:**
+
+- `{{each ["a", "b", "c"] as |char|}}`
+
+**Should:**
+
+- Match the Handlebars built-in #each helper.
+- Set the `@variableHandler` scope when rendering each element.
+
+:::info Note
+
+This is a modified version of [this Handlebars helper](https://github.com/handlebars-lang/handlebars.js/blob/212f9d930b1a39599da2646ac23da64f6552b9d0/lib/handlebars/helpers/each.js).
+
+:::
+
+### Filter
+
+**Usage:**
+
+- `{{conditional (filter "data" "customer.name" "EQUALS" "josh") (filter "profile" "email" "CONTAINS" "@trycourier.com")}}`
+
+**Should:**
+
+- Require a `source`, `sourceProperty` and `operator`.
+- Value is optional as `IS_EMPTY` and `NOT_EMPTY` operators do not need it.
+- Get source operand from `source` + `sourceProperty`.
+- Use operator to compare source `operand` with value `operand`.
+
+### Format
+
+**Usage:**
+
+- `{{format "%.2f" "100"}} => "100.00"`
+
+**Should:**
+
+- Return a formatted string given a format and set of arguments.
+
+### Inc
+
+**Usage:**
+
+- `{{inc value}}`
+
+**Should:**
+
+- Increase value by 1.
+
+### JSON-Parse
+
+**Usage:**
+
+- `{{text-block (params data=(json-parse "{ \"anInlineObject\": true }"))}}`
+
+**Should:**
+
+- Parse a `JSON` string and return the result.
+- Throw if it encounters a parse error.
+
+### Not
+
+**Usage:**
+
+- `{{#if (and (not false) true)}}`
+
+**Should:**
+
+- Return a `boolean` inverse of the value.
+
+### Or
+
+**Usage:**
+
+- `{{#if (or true false)}}`
+
+**Should:**
+
+- Return `true` if one argument is truthy.
+- Return `false` if all argument are falsy.
+- Return `false` if no arguments.
+
+### Path
+
+**Usage:**
+
+- `{{#if (path "customer.email")}}`
+
+**Should:**
+
+- Use the variable handler to resolve a `JSONPath`.
+- Return the resolved value.
+- Return undefined if the value was not found.
+
+### Set
+
+**Usage:**
+
+- `{{set "name" (default first_name "valued customer")}}`
+
+**Should:**
+
+- Set a value on the root data using the name.
+- Set the value on the root of the variable handler context.
+- Restrict top level names (ex: `data`, `profile`, `brand`).
+
+### Trim-Left
+
+**Usage:**
+
+- `{{#trim-left}}  test  {{/trim-left}}`
+- `{{trim-left "  a string  "}}`
+
+**Should:**
+
+- Return the value trimmed (defaults to block value).
+
+### Trim-one-char-right
+
+**Usage:**
+
+- `{{a-block (params text=(trim-one-char-right "ends with\ "))}}`
+
+**Should:**
+
+- Return the string with the last character removed. 
+
+:::info
+
+This helper is for dealing with the following [escaping issue](https://github.com/handlebars-lang/handlebars.js/issues/1159).
+
+:::
+
+### Trim-Right
+
+**Usage:**
+
+- `{{#trim-right}} test {{/trim-right}}`
+
+- `{{trim-right " a string "}}`
+
+**Should:**
+
+- Return the value trimmed (defaults to block value).
+
+### Trim
+
+**Usage:**
+
+- `{{#trim}}  test  {{/trim}}`
+- `{{trim "  a string  "}}`
+
+**Should:**
+
+- Return the value trimmed (defaults to block value)
+
+### Truncate
+
+**Usage:**
+
+- `{{ truncate "some very long string" 9 }} => "some very"`
+- `{{ truncate "some very long string" 9 "..." }} => "some very..."`
+
+**Should:**
+
+- Truncate the string to the number of characters defined in the helper
+
+### Var
+
+**Usage:**
+
+- `"{{var customer.fullName}}" <{{var "customer.email"}}>`
+
+**Should:**
+
+- Use the variable handler to resolve a `JSONPath`.
+- Return the resolved value as a string.
+- Not be a `SafeString` so the value will be encoded.
+
+### With
+
+**Usage:**
+
+- `{{with customers}}`
+
+**Should:**
+
+- Match the Handlebars built-in #with helper.
+- Set the `@variableHandler` scope when rendering the block content.
+
+:::info Note
+
+modified version of [this Handlebars helper](https://github.com/handlebars-lang/handlebars.js/blob/212f9d930b1a39599da2646ac23da64f6552b9d0/lib/handlebars/helpers/with.js).
+
+:::
+
+## Math
+
+### Add
+
+**Usage:**
+
+- `{{abs -1)}}`
+
+**Should:**
+
+- Return the absolute value for an input value
+- Throw if it encounters a value that is not a number
+
+### Ceil
+
+**Usage:**
+
+- `{{ceil 1.35)}}`
+
+**Should:**
+
+- Return the input value rounded up to the next largest integer.
+- Throw if it encounters a value that is not a number.
+
+### Divide
+
+**Usage:**
+
+- `{{divide 8 4)}}`
+
+**Should:**
+
+- Return the result of dividing one number by another.
+- Throw if it encounters an input that is not a number.
+
+### Floor
+
+**Usage:**
+
+- `{{floor 1.35)}}`
+
+**Should:**
+
+- Return the input value rounded down to the next largest integer.
+- Throw if it encounters a value that is not a number.
+
+### Mod
+
+**Usage:**
+
+- `{{mod 8 3)}}`
+
+**Should:**
+
+- Return the remainder left over division.
+- Throw if it encounters a numerator that is not a number.
+- Throw if it encounters a operator that is not a number.
+
+### Multiply
+
+**Usage:**
+
+- `{{multiply 8 3)}}`
+
+**Should:**
+
+- Return the result of multiply two numbers together.
+- Throw if it encounters an input that is not a number.
+
+### Round
+
+**Usage:**
+
+- `{{round 1.35)}}`
+
+**Should:**
+
+- Return the input value rounded to the nearest integer.
+- Throw if it encounters a value that is not a number.
+
+### Subtract (or sub)
+
+**Usage:**
+
+- `{{subtract 8 3)}}`
+
+**Should:**
+
+- Return the result of subtracting one number from another.
+- Throw if it encounters an input that is not a number.
+
+## SendWithUs
+
+### date-time-format
+
+**Usage:**
+
+- `{{swu_datetimeformat 1593031220882 "%a, %B %d"}}`
+
+**Should:**
+
+- Parse milliseconds since epoch number and return a value based on the provided format.
+- Throw if a number is not provided.
+
+**Usage:**
+
+- `{swu_datetimeformat "2021-05-25T08:59:59.000+0900"}}`
+
+**Should:**
+
+- Accept `ISO-8601` timestamps with timezone offset and render the offset timezone.
+
+### Iso8601-to-time
+
+**Usage:**
+
+- `{{swu_iso8601_to_time "2020-06-24T19:17:47.010Z"}}`
+
+**Should:**
+
+- Parse an ISO date string and return the time value.
+- Throw if it encounters an Invalid Date.
+
+### timestamp-to-time
+
+**Usage:**
+
+- `{{swu_timestamp_to_time "2020-06-24T19:17:47.010Z"}}`
+
+**Should:**
+
+- Parse a Unix epoch timestamp and return the time value.
+- Throw if it encounters an Invalid Date
+
+## Other Useful Helpers
+
+### Display JSON as HTML
+
+- [View on stack overflow](https://stackoverflow.com/questions/883977/display-json-as-html)
+
+**Usage:**
+
+- `JSON.stringify({ foo: "sample", bar: "sample" }, null, 4)`
+
+**Should:**
+
+- Output unformatted JSON in a formatted way.
+
+**Turns:**
+
+- `{ "foo": "sample", "bar": "sample" }`
+
+**Into:**
+
+``` javascript
+{ 
+   "foo": "sample", 
+   "bar": "sample" 
+}
+```
