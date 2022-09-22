@@ -8,16 +8,46 @@ import Image from "@theme/IdealImage";
 
 > This how to guide walks through triggering a product notification send using the Courier Send API or the Segment integration.
 
+## Send a Notification
+
 There are two primary ways in which you can send a notification. You can trigger a send via the [Courier Send API](../../reference/send/message.mdx), or you via a [Segment event](https://segment.com/docs/connections/destinations/catalog/courier/).
 
 The easiest way to access the code snippet to send your notification via the Courier Send API is to select the 'Send' tab from within the notification designer, and select the runtime that you want to use to make the send call from.
 
-<Image img={require("../../assets/guides/tutorials/notification-send-tab.png")} alt="" />
+<Image img={require("../../assets/guides/tutorials/notification-send-tab.png")} alt="Your Product Notification Template" />
+
+### Generating the Code Snippet to Integrate in Your Codebase
+
+Once you have completed the required steps, you'll be able to generate a code snippet and send a test Notification.
+
+<Image
+  img={require("../../assets/guides/send-notification/send-notification-code.jpeg")}
+  alt="Code Snippet"
+/>
+
+To generate the right code snippet for your database to start sending your Notification to live users, confirm you have the right selection for these three settings:
+
+1. Select your programming stack
+2. Set the notification event
+3. Recipient id setting
+
+### Sending a Test Notification
+
+After you configure the Code Snippet, setting these values will allow you to send a test Notification from the Send Tab:
+
+4. Select a test event
+5. Select the brand (Email notifications)
+6. Send a test notification
+7. Copy the code snippet
+
+**Read more:** [How to Send a Notification](../../courier-designer/notification-designer/send-a-notification.mdx)
+
+## Trigger an Automation with Segment
 
 In order to trigger a notification from a Segment event, you will first need to install the [Courier destination](https://segment.com/docs/connections/destinations/catalog/courier/) in your Segment account, and then [create a Courier Automation Template](https://app.courier.com/designer/automations).
 
-<Image img={require("../../assets/guides/tutorials/automation-templates.png")} alt="" />
+<Image img={require("../../assets/guides/tutorials/automation-templates.png")} alt="Automations Overview" />
 
 Once you have created an Automation, you need to configure the Segment event as the Automation trigger. You can select from identify, group, and track events.
 
-<Image img={require("../../assets/guides/tutorials/automation-design.png")} alt="" />
+<Image img={require("../../assets/guides/tutorials/automation-design.png")} alt="Setting Up Your Automations Triggers" />
