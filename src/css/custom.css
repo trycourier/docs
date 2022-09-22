@@ -576,3 +576,11 @@ code {
 .sidebar-designing .menu__link--active:before {
   background-image: url(/img/sidebar-icons/designing-notification-active.svg);
 }
+
+.sidebar-getting-started .menu__link:before {
+  background-image: url(/img/sidebar-icons/gettingstarted.svg);
+}
+
+.sidebar-getting-started .menu__link--active:before {
+  background-image: url(/img/sidebar-icons/gettingstarted-active.svg);
+}
