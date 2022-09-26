@@ -13,7 +13,14 @@ To send notifications via Discord, a Discord Bot is required. You may use an exi
 
 ### Scopes
 
-When you create the install link for your bot, make sure it has the `bot` scope with at least `View Channels` and `Send Messages` permissions. If you would like to send a message as a reply to another message, your bot will also need the `Read Message History` permission.
+Update the `bot` scope with the following permissions:
+- `View Channels`
+- `Send Messages`
+- Optional: `Read Message History` to send a message as a reply to another message
+
+[Learn more about Adding Scopes and Permissions.](https://discord.com/developers/docs/getting-started#adding-scopes-and-permissions)
+
+Once the permissions are finalized, go to the generated URL below. This URL will invite the bot to the server and authorize it with the permissions chosen.
 
 ## Profiles Requirements
 
@@ -21,7 +28,12 @@ The information required in the recipient profile is different based on the type
 
 ### Sending a Direct Message
 
-To send a message to a user, you'll need to supply the discord profile object with a `user_id`. This is not the user tag. You can retrieve this value using the Discord API or copying it from a Discord Client in [Developer mode](https://discordia.me/en/developer-mode). The user you are trying to message must be a member of a server the bot is installed in.
+To send a message to a user, you'll need to supply the Discord profile object with a `user_id`:
+1. Go to User Settings on Discord (next to profile on the bottom left),
+2. Access the Advanced settings page and enable Developer Mode ✅,
+3. Right click on the user and copy the user ID.
+
+This is not the user tag. The user you are trying to message must be a member of a server the bot is installed in.
 
 ```json title=JSON
 // Recipient Profile
@@ -34,7 +46,12 @@ To send a message to a user, you'll need to supply the discord profile object wi
 
 ### Sending a Message to a Channel
 
-To send a message to a channel, you'll need to supply the discord profile object with a `channel_id`. You can retrieve this value using the Discord API or copying it from a Discord Client in [Developer mode](https://discordia.me/en/developer-mode). The bot must be installed in the server to send to the channel.
+To send a message to a channel, you'll need to supply the discord profile object with a `channel_id`:
+1. Go to User Settings on Discord (next to profile on the bottom left),
+2. Access the Advanced settings page and enable Developer Mode ✅,
+3. Right click on the channel and copy the channel ID.
+
+The bot must be installed in the server to send to the channel.
 
 ```json title=JSON
 // Recipient Profile
