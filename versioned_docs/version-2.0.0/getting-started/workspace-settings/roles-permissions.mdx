@@ -1,0 +1,46 @@
+---
+sidebar_position: 0
+---
+
+import Image from "@theme/IdealImage";
+
+# Roles and Permissions
+
+> Understanding Courier's roles and permissions and how to assign roles to members of your tenant.
+
+Role-based Access Control (RBAC) is available to Courier customers on the Business Tier only. Free and Developer tier users can [upgrade to access roles](https://app.courier.com/settings/billing).
+
+## Assigning Roles to Teammates in Your Tenant
+
+Workspace administrators can [invite teammates](https://help.courier.com/en/articles/4257168-inviting-your-team-and-managing-tenant-security-settings) and assign/change teammate roles from a pre-defined list of roles.
+
+:::info Accessing Team Settings
+
+Go to **Settings > Team** to invite, assign and manage team member roles.
+
+:::
+
+<Image img={require("../../assets/guides/courier-app/roles-permissions.png")} alt="Team Roles" />
+
+## Roles and Role-Based Feature Access
+
+Below you'll find the complete list of pre-defined roles and their feature access.
+
+:::info Note
+
+Access to the data logs has three pre-defined levels
+
+:::
+
+- **Level 1:** View a list of messages with a high-level summary.
+- **Level 2:** View list of messages with high-level summary and message status details (received, sent, delivered).
+- **Full Access:** List of messages in logs along with high-level summary, message status details (received, sent, delivered). Rendered message visible in Logs.
+
+| Role                   | Description                                                                                                    | Feature Access                                                                                                                                                    |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Admin**              | Best for company administrators and business owners. Has permissions for everything.                           | <ul><li>Full read and write access</li><li>Account management</li><li>Edit Access to API keys</li></ul>                                                                                        |
+| **Manager**            | Best for a team manager who doesn't need to update users or billing.                                           | <ul><li>Full read and write access</li><li>View Access to API keys</li></ul>                                                                                                             |
+| **Developer**          | Best for engineers and developers who will primarily work with Courier's API and template designer.            | <ul><li>Read-only access in the Live environment</li><li>Full read and write access in the Test environment</li><li>Level 2 Logs Access in Production</li><li>Full Access to Logs in Test</li></ul> |
+| **Designer**           | Has the ability to update templates and brands but can't update integrations or settings.                      | <ul><li>Full read and write access for the Designer, Brands and Metrics.</li><li>Read-only access for integrations and Lists</li><li>Level 1 Logs Access</li></ul>                            |
+| **Support Specialist** | Best for customer support specialists regularly use the platform but don't need to update templates or brands. | <ul><li>Read-only access to Designer, Brands, Integrations.</li><li>Full read and write access in Lists and Metrics</li><li> Full Logs access</li></ul>                                         |
+| **Analyst**            | Best for users who need full read-only access to the platform (except logs).                                   | <ul><li>Read-only access to the Designer, Brands, Integrations and Lists</li><li>Full access to Metrics</li><li>Level 2 Logs Access</li></ul>                                                 |
