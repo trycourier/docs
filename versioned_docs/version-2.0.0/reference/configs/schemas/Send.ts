@@ -282,6 +282,11 @@ export const channels: ApiParam = {
           },
         ],
       },
+      {
+        type: "number",
+        name: "timeout",
+        description: "(Business tier only) Time in ms to attempt the channel before failover.",
+      },
     ],
   },
 };
@@ -341,6 +346,11 @@ export const providers: ApiParam = {
             ],
           },
         ],
+      },
+      {
+        type: "number",
+        name: "timeout",
+        description: "(Business tier only) Time in ms to attempt the provider before failover.",
       },
     ],
   },
@@ -448,20 +458,14 @@ export const timeout: ApiParam = {
         "An arbitrary duration for a message to be available for delivery. Default is 72 hours or 259200000 Milliseconds",
     },
     {
-      type: "record",
+      type: "number",
       name: "channel",
-      description: "An arbitrary duration for a channel to be available for delivery.",
-      field: {
-        type: "number",
-      },
+      description: "(Business tier only) Time in ms to attempt a channel before failover.",
     },
     {
-      type: "record",
+      type: "number",
       name: "provider",
-      description: "An arbitrary duration for a provider to be available for delivery.",
-      field: {
-        type: "number",
-      },
+      description: "(Business tier only) Time in ms to attempt a provider before failover.",
     },
   ],
 };
