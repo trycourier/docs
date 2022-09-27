@@ -1,0 +1,31 @@
+---
+sidebar_position: 4
+---
+
+import Image from "@theme/IdealImage";
+
+# Jsonnet Webhook Designer
+
+> Specify the payload of your webhook integration using Jsonnet code editor in the Courier notification designer.
+
+Courier supports sending HTTP requests to a specified destination using the Webhook provider.
+
+## Setting Up Your Webhook Destination
+
+To deliver an HTTP request, Courier must be provided with a destination. For details on how to set up a dynamic destination, see the [Webhook integration developer documentation](../../guides/providers/other/webhook-integration.mdx).
+
+For a static destination, you can specify the Webhook URL and Authorization type in the [webhook integration setup page](https://app.courier.com/channels/webhook).
+
+## Configuring Your Webhook Payload
+
+The webhook notification designer lets you configure the payload of your webhook integration using a [Jsonnet](https://jsonnet.org/) code editor.
+
+<Image
+  img={require("../../assets/guides/design-notifications/design-jsonnet-webhook.png")}
+  alt="Jsonnet Webhook"
+/>
+
+<Image
+  img={require("../../assets/guides/design-notifications/design-webhook-payload.png")}
+  alt="Jsonnet Webhook Payload"
+/>

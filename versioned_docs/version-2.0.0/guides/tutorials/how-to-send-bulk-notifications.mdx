@@ -49,10 +49,15 @@ Response:
 }
 ```
 
-## Ingest users to the bulk job
+## Ingest Users to the Bulk Job
 
 Using the job ID, multiple users can be ingested into the job.
-Note, the ingestion does not have to happen in a single call, you could have multiple ingestion invocations as long as job is not triggered.
+
+:::info Note
+
+The ingestion does **not** have to happen in a single call, you could have multiple ingestion invocations as long as job is **not** triggered. The bulk job **will not expire** until it is invoked.
+
+:::
 
 Request:
 
@@ -110,11 +115,15 @@ Response:
 }
 ```
 
-## Executing the job
+## Executing the Job
 
 Once you have added the users to your job, it can be triggered.
-Note: a job ID can only be triggered once. If you wish to send messages to more users after the job was triggered,
-you'll have to create a new job definition and add the remaiing users to the new job.
+
+:::info Note
+
+A `jobId` can only be triggered once. If you wish to send messages to more users after the job was triggered, you'll have to create a new job definition and add the remaiing users to the new job.
+
+:::
 
 `POST https://api.courier.com/bulk/{jobId}/run`
 
@@ -134,9 +143,9 @@ Response:
 }
 ```
 
-## Fetching Bulk Job information
+## Fetching Bulk Job Information
 
-### Job status
+### Job Status
 
 - `CREATED` a job has been created, but has not yet been invoked/run. This should be the initial status of a bulk job when it is created.
 - `PROCESSING` the bulk job is currently being processed.
@@ -198,7 +207,7 @@ Response:
 }
 ```
 
-## Message information
+## Message Information
 
 This would be just like how a regular /send call works.
 

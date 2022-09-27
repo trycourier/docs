@@ -1,0 +1,50 @@
+---
+sidebar_position: 1
+---
+
+# Courier's Delivery Pipeline Resilience
+
+> When and how Courier will retry a notification send and how it handles delivery status check retries.
+
+## Send Retries
+
+### Retry Requirements
+
+> The following reasons will trigger a retry when trying to send a notification through an integration:
+
+- The integration did not respond (e.g. network connection lost).
+- The integration responded to our attempt with a reason to allow for a retry (e.g. server overloaded, rate limit exceeded etc.).
+- Uncaught exception in our pipeline.
+
+### Retry Attempts
+
+> If we encounter any of the reasons above, we will retry immediately for the first ten attempts. Afterwards:
+
+- We wait **one hour** before the 11th attempt
+- We wait **two hours** before the 12th attempt
+- We wait **three hours** before the 13th attempt up to the 25th attempt
+
+The 25 attempts span over 72 hours giving us a chance to resolve the send within three days.
+
+## Delivery Status Check Retries
+
+### Status Check Requirements
+
+> The following reasons will trigger a retry when trying to check the delivery status of a notification for some integrations:
+
+- The integration did not respond (e.g. network connection lost).
+- The integration responded at our attempted with a reason to allow for a retry (e.g. server overloaded).
+- The integration had a temporary failure attempting to resolve the delivery status.
+- Uncaught exception in our pipeline.
+
+> If we encounter any of the reasons above, we will retry immediately for the first ten attempts. Afterwards:
+
+- We wait **an hour** before the 11th attempt.
+- We wait **two hours** before the 12th attempt.
+- We wait **three hours** before the 13th attempt up to the 25th attempt.
+
+The 25 attempts span over 72 hours giving us a chance to resolve the delivery status within three days.
+
+## Courier Status Page
+
+You can track Courier's services status [here](https://status.courier.com/)
