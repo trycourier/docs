@@ -15,6 +15,12 @@ The Preferences API allows for notifications to be disabled per recipient. This 
 
 To add an Unsubscribe Link to a notification, add a link to the notification and set the Hyperlink URL to `{$.urls.unsubscribe}`. This will create a link that will disable the notification for the recipient and present them with a "You have been unsubscribed from this notification." message.
 
+:::caution The User ID
+
+In order for a recipient to be unsubscribed from your notification, you **must include** `to.user_id` in the Send request. This is because the `user_id` ties the recipient profile to their set preferences. So if no `user_id` is present in the request, the unsubscribe method will not work. 
+
+:::
+
 <Image img={require("../../assets/reference/unsubscribe-link.png")} alt="" />
 
 If the recipient would like to start receiving the notification again, it will need to be re-enabled using the API.
