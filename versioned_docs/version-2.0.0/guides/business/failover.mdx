@@ -1,0 +1,59 @@
+---
+sidebar_position: 7
+---
+
+# Automated Failover (Business Tier Only)
+
+Courier employs advanced automated failover to provide high resiliency against potential issues
+that could prevent a notification from being delivered.
+
+Failover may be triggered by:
+
+- A provider outage.
+- Invalid recipient destination.
+- Provider throttling / payment issues.
+
+# How To Take Advantage of Automated Failover
+
+1. Have a backup provider for your most important channels. Backup providers are used automatically
+   in the event of a provider outage or billing issue. No configuration beyond installing the provider
+   from the channels page is required. For example, if SendGrid is your preferred email channel,
+   you could install SES as a backup. If SendGrid fails, SES will be used automatically.
+2. Have multiple `best of` channels in your template configuration or `single` channels in routing.
+   Courier will attempt to use each configured until the message is successfully sent. For example,
+   if a template uses best of push, sms, and email, Courier will start with push. If push fails, sms
+   will be tried and so on.
+
+Note: Courier will retry failed sends with any provider for five minutes by default before failing
+over to the next available provider. This can be overridden using the `message.timeouts` field of
+your send call. All timeouts are specified in ms For example:
+
+```jsonc
+{
+  "message": {
+    "timeouts": {
+      /** Attempt each provider for 10 seconds before moving on to the next provider in the channel */
+      "provider": 10000,
+      /** Attempt to use a provider within the current channel for 1 minute before moving on to the next channel */
+      "channel": 60000,
+      /** Attempt the send for 2 minutes before quitting (no retry or failover will occur after this time) */
+      "message": 120000
+    },
+
+    // Timeouts can also be specified on a channel and provider level. These take precedent over
+    // The top level timeouts field when applicable
+
+    "channels": {
+      "email": {
+        "timeout": 50000
+      }
+    },
+
+    "providers": {
+      "ses": {
+        "timeout": 20000
+      }
+    }
+  }
+}
+```
