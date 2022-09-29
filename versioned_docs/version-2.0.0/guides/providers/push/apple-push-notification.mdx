@@ -83,6 +83,12 @@ You can optionally specify if you want to route APN to the development/sandbox a
 
 ```json title=JSON
 {
+  "message": {
+    "to": {
+      "apn": {
+        "token": "some_token"
+      }
+    },
   "providers": {
     "apn": {
       "override": {
@@ -104,6 +110,7 @@ You can optionally specify if you want to route APN to the development/sandbox a
         }
       }
     }
+  }
   }
 }
 ```
