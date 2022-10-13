@@ -17,7 +17,7 @@ The `routing` object allows you to select various channels and decide which ones
 
 When the `method` property is defined as `all`, Courier will attempt to send messages to all listed channels. In the example below, Courier will send the message via email and SMS. Since the Push profile requirements are not completed, it will not be able to send a Push notification.
 
-```JSON
+```javascript
 to: {
     phone_number: "123456789",
     email: "example@email.com",
@@ -30,7 +30,7 @@ routing: {
 
 When the `method` property is defined as `single`, Courier will attempt to the send messages to only one channel. In the example below, it will first attempt SMS. Since  `phone_number` is not included in the user profile, it will attempt to send via email *instead*. If the email is sent successfully, it will not attempt to send a Push notification.
 
-```JSON
+```javascript
 message: {
       to: {
         email: "example@email.com",
