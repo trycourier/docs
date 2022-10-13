@@ -1,0 +1,111 @@
+---
+sidebar_position: -1
+---
+
+import Image from "@theme/IdealImage";
+
+# Preferences Center
+
+> Courier's Preferences Center allows recipients to set more fine-grained controls on their notification preferences.
+
+:::caution Preferences Center is currently in closed beta
+
+Courier's Preferences Center is currently in closed beta, and locked behind a feature flag. Please contact support to state your use case and submit your request for beta access.
+
+:::
+
+## Preference Sections
+
+A Preference Section lets users state which topics a recipient can receive notifications through, as well as setting the ability for recipients to customize their delivery channels.
+
+<Image img={require("../../assets/guides/preferences-ui/preferences-topics.png")} alt="Preferences Center Overview" />
+
+### Channel Delivery Customization
+
+Channel Delivery Customization gives recipients the ability to select and set the preference for their preferred delivery channel.
+
+<Image img={require("../../assets/guides/preferences-ui/preferences-channel-settings.png")} alt="Subscription Topic Settings" />
+
+If a notification has multiple delivery channels, recipients will be able to set their delivery channel preferences from an external Preferences Page.
+
+<Image img={require("../../assets/guides/preferences-ui/preferences-page-settings.png")} alt="Preferences Page With Delivery Channels Customization" />
+
+## Subscription Topics
+
+Subscription Topics are sections where a user can map a notification to a specified topic. For example, welcome and onboarding notifications could be mapped to an `Invitations` topic.
+
+**Please note** that a notification **cannot** be mapped to more than one topic.
+
+<Image img={require("../../assets/guides/preferences-ui/preferences-topic-overview.png")} alt="Preferences Topics Overview" />
+
+### Subscription Topics Settings
+
+You can customize your topic settings like `Name`, `Section` the topic will live in, `Default State` for your topic, as well as `Linked Notifications` to the topic.
+
+<Image img={require("../../assets/guides/preferences-ui/preferences-topic-settings.png")} alt="Preferences Topics Settings" />
+
+### Topic Default State
+
+The Topic default state defines wheter a topic can be opted in or out, and whether it's always required.
+
+- **On:** Users who do not take any action will automatically receive notifications in this grouping.
+- **Off:** Users will not receive these notifications unless they change their preferences.
+- **Required:** Users will not be able to opt-out of these notifications.
+
+## Mapping a Notification to a Subscription Topic
+
+When [creating a new notification](../../courier-designer/notification-designer/design-a-notification.mdx), users now have the option to map it to a subscription topic in the pop-out modal. 
+
+<Image img={require("../../assets/guides/preferences-ui/preferences-new-notification.png")} alt="New Notificaion Modal" />
+
+You may choose to not map your notification to a topic upon creation of a new template, and you can always map a subscription topic from the dropdown menu later on if you prefer.
+
+<Image img={require("../../assets/guides/preferences-ui/preferences-topic-dropdown.png")} alt="Preferences Topic Dropdown" />
+
+## Preferences Page
+
+A Preferences Page is an external page that recipients are redirected to where they can customize and set their preferred notification delivery methods.
+
+<Image img={require("../../assets/guides/preferences-ui/preferences-preferences-page-free.png")} alt="Recipient Preferences Page" />
+
+A recipient can select to opt-in or out of a notification (depending on the subscription topic default state)as well as select the preferred delivery channel for a notification (business-tier feature) from this page.
+
+### Preferences Page Link
+
+When creating a template, users can attach a Courier Preferences Page hyperlink that will provide an auto-generated link. This link will open a preference center for the recipient where they will be able to establish their notification preferences.
+
+In the hyperlink modal, add `{$.urls.preferences}` inside the URL form.
+
+<Image img={require("../../assets/guides/preferences-ui/preferences-hyperlink.png")} alt="Preferences URL" />
+
+<Image img={require("../../assets/guides/preferences-ui/preferences-notification-template.png")} alt="Notification Template With Preferences Hyperlink" />
+
+:::info User Id
+
+In order for a recipient to successfully set their preferences from a notification, you must include `to.user_id` in the Send request. This is because the `user_id` ties the recipient profile to their set preferences. If no `user_id` is present in the request, the preferences method will not register.
+
+:::
+
+### Customizing Delivery Channels
+
+If a notification template has multiple delivery channels configured, a recipient will be able to customize and set their preferred delivery channel from the Preferences Page.
+
+:::info Business Tier Feature
+
+Delivery Channel customization is a Courier Business feature. Please [contact](https://www.courier.com/request-demo/) our Product Experts for more details.
+
+:::
+
+Once a recipient receives a notification with a link to a Preferences Page, they will have the option to select their preferred delivery channel method. Any further notifications sent to this recipient will adhere by the delivery rules set going forward.
+
+<Image img={require("../../assets/guides/preferences-ui/preferences-channel-select.png")} alt="Preferences Page With Delivery Channels" />
+
+### Preferences Page Branding
+
+Just like with email templates, the preferences page can be customized to fit your [branding style](../../courier-designer/brands/customize-default-brand.mdx). The Preferences Center will use the the specified default brand to style the Preferences Page.
+
+<Image img={require("../../assets/guides/preferences-ui/preferences-default-brand.png")} alt="Default Brand Selected" />
+
+<Image img={require("../../assets/guides/preferences-ui/preferences-page-branding.png")} alt="Customized Preferences Page" />
+
+[Developer and Business tier](https://www.courier.com/pricing/) customers have the option to remove Courier branding from their Preferences Page.
