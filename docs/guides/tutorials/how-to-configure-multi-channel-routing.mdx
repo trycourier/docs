@@ -9,48 +9,7 @@ import GifWrapper from "@site/src/components/GifWrapper";
 
 > This how to guide walks you through configuring multi-channel routing for your product notifications with Courier.
 
-Courier makes it easy to set custom routing rules and ensure your user's get exactly the product notification experience you intend.
-
-## Routing in the Send API
-
-The `routing` object allows you to select various channels and decide which ones you want to send messages to.
-
-When the `method` property is defined as `all`, Courier will attempt to send messages to all listed channels. In the example below, Courier will send the message via email and SMS. Since the Push profile requirements are not completed, it will not be able to send a Push notification.
-
-```javascript
-to: {
-    phone_number: "123456789",
-    email: "example@email.com",
-},
-routing: {
-    method: "all",
-    channels: ["sms", "email", "push"],
-}
-```
-
-When the `method` property is defined as `single`, Courier will attempt to the send messages to only one channel. In the example below, it will first attempt SMS. Since  `phone_number` is not included in the user profile, it will attempt to send via email *instead*. If the email is sent successfully, it will not attempt to send a Push notification.
-
-```javascript
-message: {
-      to: {
-        email: "example@email.com",
-      },
-      routing: {
-        method: "all",
-        channels: ["sms", "email", "push"],
-      },
-    },
-```
-
-Ensure that for all channels listed, the profile requirements are met. You can find information about profile requirements for the provider under [Channels >](https://www.courier.com/docs/guides/providers/).
-
-Learn more about setting up routing in the [API reference](https://www.courier.com/docs/reference/send/message/0) documentation.
-
-![references routing](https://user-images.githubusercontent.com/28051494/195457907-1c547277-a15a-4a81-ace2-c0138e2878f0.png)
-
-## Routing in the Designer
-
-The priority of the channels you select for your notification are arranged in a top-to-bottom hierarchy. To change priority, simply drag and drop your notification channels.
+Courier makes it easy to set custom routing rules and ensure your user's get exactly the product notification experience you intend. The priority of the channels you select for your notification are arranged in a top-to-bottom hierarchy. To change priority, simply drag and drop your notification channels.
 
 <GifWrapper width={714} height={378}>
 
