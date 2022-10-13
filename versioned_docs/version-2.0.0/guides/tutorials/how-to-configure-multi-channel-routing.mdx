@@ -15,19 +15,6 @@ Courier makes it easy to set custom routing rules and ensure your user's get exa
 
 The `routing` object allows you to select various channels and decide which ones you want to send messages to.
 
-When the `method` property is defined as `all`, Courier will attempt to send messages to all listed channels. In the example below, Courier will send the message via email and SMS. Since the Push profile requirements are not completed, it will not be able to send a Push notification.
-
-```javascript
-to: {
-    phone_number: "123456789",
-    email: "example@email.com",
-},
-routing: {
-    method: "all",
-    channels: ["sms", "email", "push"],
-}
-```
-
 When the `method` property is defined as `single`, Courier will attempt to the send messages to only one channel. In the example below, it will first attempt SMS. Since  `phone_number` is not included in the user profile, it will attempt to send via email *instead*. If the email is sent successfully, it will not attempt to send a Push notification.
 
 ```javascript
@@ -40,6 +27,19 @@ message: {
         channels: ["sms", "email", "push"],
       },
     },
+```
+
+When the `method` property is defined as `all`, Courier will attempt to send messages to all listed channels. In the example below, Courier will send the message via email and SMS. Since the Push profile requirements are not completed, it will not be able to send a Push notification.
+
+```javascript
+to: {
+    phone_number: "123456789",
+    email: "example@email.com",
+},
+routing: {
+    method: "all",
+    channels: ["sms", "email", "push"],
+}
 ```
 
 Ensure that for all channels listed, the profile requirements are met. You can find information about profile requirements for the provider under [Channels >](https://www.courier.com/docs/guides/providers/).
