@@ -217,7 +217,7 @@ This is a modified version of [this Handlebars helper](https://github.com/handle
 
 **Should:**
 
-- Return the string with the last character removed. 
+- Return the string with the last character removed.
 
 :::info
 
@@ -443,8 +443,18 @@ modified version of [this Handlebars helper](https://github.com/handlebars-lang/
 **Into:**
 
 ``` javascript
-{ 
-   "foo": "sample", 
-   "bar": "sample" 
+{
+   "foo": "sample",
+   "bar": "sample"
 }
+```
+
+## Common use-cases
+
+### Using if conditional with MJML
+
+```handlebars
+{{#if (condition (var "testing") "==" "yes")}}
+  <mj-text align="center">Testing</mj-text>
+{{/if}}
 ```
