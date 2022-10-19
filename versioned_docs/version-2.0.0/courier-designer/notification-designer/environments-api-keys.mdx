@@ -112,6 +112,31 @@ Courier will copy the current template. All other assets copied will be their mo
   alt="Confirm by Selecting 'Copy And Publish'"
 />
 
+### Migrating Templates to Another Workspace
+
+If you have multiple workspaces, migrating a template between workspaces is as easy as selecting from a dropdown menu.
+
+1. In the migrate assets modal, choose a `Destination Workspace` from the dropdown menu.
+
+<Image
+  img={require("../../assets/guides/environments/environments-workspace-copy.png")}
+  alt="Select Destination Workspace From Dropdown"
+/>
+
+2. Select the workspace you wish to migrate your template to.
+
+<Image
+  img={require("../../assets/guides/environments/environments-workspace-dropdown.png")}
+  alt="Choose the Destination Workspace"
+/>
+
+3. The template will be migrated to the selected workspace and environment.
+
+<Image
+  img={require("../../assets/guides/environments/environments-copied-template.png")}
+  alt="Migrated Template in New Workspace"
+/>
+
 ### Event Mapping and Template Migration
 
 If you have an [event mapped](../../sending-notifications/create-map-events.mdx) to a template that you are migrating between environments, the event and its mapping will automatically migrate as well.
