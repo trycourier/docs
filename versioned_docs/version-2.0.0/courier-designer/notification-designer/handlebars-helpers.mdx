@@ -311,6 +311,31 @@ Return the magnitude of a number. This helper will throw an errow if it encounte
 {{abs (var "profile.negative_number")}}
 ```
 
+### Add
+
+Returns the the sum of two operands. This helper will throw an errow if it encounters an input value that is not a number.
+
+**Parameters**
+
+- `term` **{Number}**
+- `term` **{Number}**
+
+**Example**
+
+```handlebars
+{{add 5 3}}
+<!-- Output: 8 -->
+
+{{add -1 -3}}
+<!-- Output: -4 -->
+
+<!-- Reference a "data" variable -->
+{{add (var "term_1") (var "term_2")}}
+
+<!-- Reference a "profile" variable -->
+{{add (var "profile.term_1") (var "profile.term_2")}}
+```
+
 ### Ceil
 
 Returns the least integer greater than or equal to the decimal number input. This helper will throw an errow if it encounters a value that is not a number.
