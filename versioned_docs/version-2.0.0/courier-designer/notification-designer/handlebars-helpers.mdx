@@ -530,82 +530,117 @@ Returns the difference of two operands. This helper will throw an errow if it en
 {{subtract (var "profile.term_1") (var "profile.term_2")}}
 ```
 
-## SendWithUs
+## SendWithUs Helpers
 
-### date-time-format
+SendWithUs helpers are available to help ease migration from your existing Jinja templates to Courier rendered messages.
 
-**Usage:**
+### swu_datetimeformat
 
-- `{{swu_datetimeformat 1593031220882 "%a, %B %d"}}`
+Returns a formatted date string. This helper will throw if an invalid date is provided.
 
-**Should:**
+**Parameters**
 
-- Parse milliseconds since epoch number and return a value based on the provided format.
-- Throw if a number is not provided.
+- `input` **{String|Number}**
 
-**Usage:**
+**Examples**
 
-- `{swu_datetimeformat "2021-05-25T08:59:59.000+0900"}}`
+```handlebars
+{{swu_datetimeformat 1554145200000 "%a, %B %d"}}
+<!-- Output: Mon, April 01 -->
 
-**Should:**
+{{swu_datetimeformat "2019-04-01T12:00:00.000Z" "%a, %B %d"}}
+<!-- Output: Mon, April 01 -->
+```
 
-- Accept `ISO-8601` timestamps with timezone offset and render the offset timezone.
+::: info
 
-### Iso8601-to-time
+[See full list of format options](https://support.sendwithus.com/jinja/jinja_time/#datetime-format)
 
-**Usage:**
+:::
 
-- `{{swu_iso8601_to_time "2020-06-24T19:17:47.010Z"}}`
+### swu_iso8601_to_time
 
-**Should:**
+Returns an ISO-8601 date string as epoch milliseconds. This helper will throw if an invalid date is provided.
 
-- Parse an ISO date string and return the time value.
-- Throw if it encounters an Invalid Date.
+**Parameters**
 
-### timestamp-to-time
+- `input` **{String}**
 
-**Usage:**
+**Examples**
 
-- `{{swu_timestamp_to_time "2020-06-24T19:17:47.010Z"}}`
+```handlebars
+{{swu_iso8601_to_time "2019-04-01T12:00:00.000Z"}}
+<!-- Output: 1554145200000 -->
 
-**Should:**
+<!-- Reference a "data" variable -->
+{{swu_iso8601_to_time (var "some_date_variable")}}
 
-- Parse a Unix epoch timestamp and return the time value.
-- Throw if it encounters an Invalid Date
+<!-- Reference a "profile" variable -->
+{{swu_iso8601_to_time (var "profile.some_date_variable")}}
+```
 
-## Other Useful Helpers
+### swu_timestamp_to_time
 
-### Display JSON as HTML
+Returns an Unix epoch timestamp (seconds) as a millisecond epoch time value. This helper will throw if an invalid unix epoch date is not provided.
 
-- [View on stack overflow](https://stackoverflow.com/questions/883977/display-json-as-html)
+**Parameters**
 
-**Usage:**
+- `input` **{Number}**
 
-- `JSON.stringify({ foo: "sample", bar: "sample" }, null, 4)`
+**Examples**
 
-**Should:**
+```handlebars
+{{swu_timestamp_to_time 1554145200}}
+<!-- Output: 1554145200000 -->
 
-- Output unformatted JSON in a formatted way.
+<!-- Reference a "data" variable -->
+{{swu_timestamp_to_time (var "some_timestamp")}}
 
-**Turns:**
-
-- `{ "foo": "sample", "bar": "sample" }`
-
-**Into:**
-
-```javascript
-{
-   "foo": "sample",
-   "bar": "sample"
-}
+<!-- Reference a "profile" variable -->
+{{swu_timestamp_to_time (var "profile.some_timestamp")}}
 ```
 
 ## Common use-cases
 
-### Using if conditional with MJML
+### Conditionally rendering content
+
+`#if` blocks can be used to control whether content is rendered.
+
+**Example**
 
 ```handlebars
-{{#if (condition (var "testing") "==" "yes")}}
-  <mj-text align="center">Testing</mj-text>
+<!-- equal -->
+{{#if (condition (var "some_variable") "==" "show")}}
+  <mj-text align="center">Hello!</mj-text>
+{{/if}}
+
+<!-- strict equal -->
+{{#if (condition (var "some_variable") "===" "show")}}
+  <mj-text align="center">Hello!</mj-text>
+{{/if}}
+
+<!-- not equal -->
+{{#if (condition (var "some_variable") "!=" "hide")}}
+  <mj-text align="center">Hello!</mj-text>
+{{/if}}
+
+<!-- greater than -->
+{{#if (condition (var "some_array.length") ">" 0)}}
+  <mj-text align="center">Hello!</mj-text>
+{{/if}}
+
+<!-- greater than or equal -->
+{{#if (condition (var "some_array.length") ">=" 0)}}
+  <mj-text align="center">Hello!</mj-text>
+{{/if}}
+
+<!-- less than -->
+{{#if (condition (var "some_array.length") "<" 0)}}
+  <mj-text align="center">Hello!</mj-text>
+{{/if}}
+
+<!-- less than or equal -->
+{{#if (condition (var "some_array.length") "<=" 0)}}
+  <mj-text align="center">Hello!</mj-text>
 {{/if}}
 ```
