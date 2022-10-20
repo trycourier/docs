@@ -329,7 +329,7 @@ Returns the least integer greater than or equal to the decimal number input. Thi
 <!-- Output: 2 -->
 
 {{ceil -1.01}}
-<!-- Output: 1 -->
+<!-- Output: -1 -->
 
 <!-- Reference a "data" variable -->
 {{ceil (var "some_number")}}
@@ -365,59 +365,145 @@ Returns the quotient of its operands where the left operand is the dividend and 
 
 ### Floor
 
-**Usage:**
+Returns the largest integer less than or equal to a given number. This helper will throw an errow if it encounters a value that is not a number.
 
-- `{{floor 1.35)}}`
+**Parameters**
 
-**Should:**
+- `input` **{Number}**
 
-- Return the input value rounded down to the next largest integer.
-- Throw if it encounters a value that is not a number.
+**Example**
+
+```handlebars
+{{floor .95}}
+<!-- Output: 0 -->
+
+{{floor 1.01}}
+<!-- Output: 1 -->
+
+{{floor -1.01}}
+<!-- Output: -2 -->
+
+<!-- Reference a "data" variable -->
+{{floor (var "some_number")}}
+
+<!-- Reference a "profile" variable -->
+{{floor (var "profile.some_number")}}
+```
 
 ### Mod
 
+Returns the remainder left over when one operand is divided by a second operand. It always takes the sign of the dividend.
+
+This helper will throw an errow if it encounters an input value that is not a number or if the divisor is `0`.
+
+**Parameters**
+
+- `dividend` **{Number}**
+- `divisor` **{Number}**
+
 **Usage:**
 
-- `{{mod 8 3)}}`
+**Example**
 
-**Should:**
+```handlebars
+{{mod 13 5}}
+<!-- Output: 3 -->
 
-- Return the remainder left over division.
-- Throw if it encounters a numerator that is not a number.
-- Throw if it encounters a operator that is not a number.
+{{mod -13 5}}
+<!-- Output: -3 -->
+
+{{mod 4 2}}
+<!-- Output: 0 -->
+
+<!-- Reference a "data" variable -->
+{{mod (var "dividend") (var "divisor)}}
+
+<!-- Reference a "profile" variable -->
+{{mod (var "profile.dividend") (var "profile.divisor)}}
+```
 
 ### Multiply
 
-**Usage:**
+Returns the product of two operands. This helper will throw an errow if it encounters an input value that is not a number.
 
-- `{{multiply 8 3)}}`
+**Parameters**
 
-**Should:**
+- `multiplier` **{Number}**
+- `multiplicand` **{Number}**
 
-- Return the result of multiply two numbers together.
-- Throw if it encounters an input that is not a number.
+**Example**
+
+```handlebars
+{{multiply 12 2}}
+<!-- Output: 24 -->
+
+{{multiply -12 2}}
+<!-- Output: -24 -->
+
+<!-- Reference a "data" variable -->
+{{multiply (var "multiplier") (var "multiplicand")}}
+
+<!-- Reference a "profile" variable -->
+{{multiply (var "profile.multiplier") (var "profile.multiplicand")}}
+```
 
 ### Round
 
-**Usage:**
+Returns the value of a number rounded to the nearest integer. This helper will throw an errow if it encounters an input value that is not a number.
 
-- `{{round 1.35)}}`
+**Parameters**
 
-**Should:**
+- `input` **{Number}**
 
-- Return the input value rounded to the nearest integer.
-- Throw if it encounters a value that is not a number.
+**Example**
+
+```handlebars
+{{round 1.5}}
+<!-- Output: 2 -->
+
+{{round 1.4}}
+<!-- Output: 1 -->
+
+{{round -1.4}}
+<!-- Output: -1 -->
+
+{{round -1.5}}
+<!-- Output: -2 -->
+
+<!-- Reference a "data" variable -->
+{{round (var "some_variable")}}
+
+<!-- Reference a "profile" variable -->
+{{round (var "profile.some_variable")}}
+```
 
 ### Subtract (or sub)
 
-**Usage:**
+Returns the difference of two operands. This helper will throw an errow if it encounters an input value that is not a number.
 
-- `{{subtract 8 3)}}`
+**Parameters**
 
-**Should:**
+- `term` **{Number}**
+- `term` **{Number}**
 
-- Return the result of subtracting one number from another.
-- Throw if it encounters an input that is not a number.
+**Example**
+
+```handlebars
+{{subtract 5 3}}
+<!-- Output: 2 -->
+
+{{sub 5 3}}
+<!-- Output: 2 -->
+
+{{subtract 3.5 5}}
+<!-- Output: -1.5 -->
+
+<!-- Reference a "data" variable -->
+{{subtract (var "term_1") (var "term_2")}}
+
+<!-- Reference a "profile" variable -->
+{{subtract (var "profile.term_1") (var "profile.term_2")}}
+```
 
 ## SendWithUs
 
