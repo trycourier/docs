@@ -202,8 +202,8 @@ This is a modified version of [this Handlebars helper](https://github.com/handle
 
 **Usage:**
 
-- `{{#trim-left}}  test  {{/trim-left}}`
-- `{{trim-left "  a string  "}}`
+- `{{#trim-left}} test {{/trim-left}}`
+- `{{trim-left " a string "}}`
 
 **Should:**
 
@@ -241,8 +241,8 @@ This helper is for dealing with the following [escaping issue](https://github.co
 
 **Usage:**
 
-- `{{#trim}}  test  {{/trim}}`
-- `{{trim "  a string  "}}`
+- `{{#trim}} test {{/trim}}`
+- `{{trim " a string "}}`
 
 **Should:**
 
@@ -292,14 +292,24 @@ modified version of [this Handlebars helper](https://github.com/handlebars-lang/
 
 ### Abs
 
-**Usage:**
+Return the magnitude of a number. This helper will throw an errow if it encounters a value that is not a number.
 
-- `{{abs -1)}}`
+**Parameters**
 
-**Should:**
+- `input` **{Number}**
 
-- Return the absolute value for an input value
-- Throw if it encounters a value that is not a number
+**Example**
+
+```handlebars
+{{abs -10}}
+<!-- Output: 10 -->
+
+<!-- Reference a "data" variable -->
+{{abs (var "negative_number")}}
+
+<!-- Reference a "profile" variable -->
+{{abs (var "profile.negative_number")}}
+```
 
 ### Ceil
 
@@ -442,7 +452,7 @@ modified version of [this Handlebars helper](https://github.com/handlebars-lang/
 
 **Into:**
 
-``` javascript
+```javascript
 {
    "foo": "sample",
    "bar": "sample"
