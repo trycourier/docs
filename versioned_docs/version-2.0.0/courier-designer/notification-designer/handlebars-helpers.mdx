@@ -575,37 +575,45 @@ Returns the difference of two operands. This helper will throw an errow if it en
 
 ## Other Useful Helpers
 
-### Display JSON as HTML
-
-- [View on stack overflow](https://stackoverflow.com/questions/883977/display-json-as-html)
-
-**Usage:**
-
-- `JSON.stringify({ foo: "sample", bar: "sample" }, null, 4)`
-
-**Should:**
-
-- Output unformatted JSON in a formatted way.
-
-**Turns:**
-
-- `{ "foo": "sample", "bar": "sample" }`
-
-**Into:**
-
-```javascript
-{
-   "foo": "sample",
-   "bar": "sample"
-}
-```
-
 ## Common use-cases
 
-### Using if conditional with MJML
+### Conditionally rendering content
+
+**Example**
 
 ```handlebars
-{{#if (condition (var "testing") "==" "yes")}}
-  <mj-text align="center">Testing</mj-text>
+<!-- equal -->
+{{#if (condition (var "some_variable") "==" "show")}}
+  <mj-text align="center">Hello!</mj-text>
+{{/if}}
+
+<!-- strict equal -->
+{{#if (condition (var "some_variable") "===" "show")}}
+  <mj-text align="center">Hello!</mj-text>
+{{/if}}
+
+<!-- not equal -->
+{{#if (condition (var "some_variable") "!=" "hide")}}
+  <mj-text align="center">Hello!</mj-text>
+{{/if}}
+
+<!-- greater than -->
+{{#if (condition (var "some_array.length") ">" 0)}}
+  <mj-text align="center">Hello!</mj-text>
+{{/if}}
+
+<!-- greater than or equal -->
+{{#if (condition (var "some_array.length") ">=" 0)}}
+  <mj-text align="center">Hello!</mj-text>
+{{/if}}
+
+<!-- less than -->
+{{#if (condition (var "some_array.length") "<" 0)}}
+  <mj-text align="center">Hello!</mj-text>
+{{/if}}
+
+<!-- less than or equal -->
+{{#if (condition (var "some_array.length") "<=" 0)}}
+  <mj-text align="center">Hello!</mj-text>
 {{/if}}
 ```
