@@ -14,7 +14,7 @@ Don't see a custom handlebars helper you need in the list? [Share your use case]
 
 ## Universal Helpers
 
-### And
+### and
 
 **Usage:**
 
@@ -28,7 +28,7 @@ Don't see a custom handlebars helper you need in the list? [Share your use case]
 - Return `false` if one argument is falsy.
 - Return `true` if no arguments.
 
-### Capitalize
+### capitalize
 
 **Usage:**
 
@@ -39,7 +39,7 @@ Don't see a custom handlebars helper you need in the list? [Share your use case]
 
 Capitalize the first character given a string.
 
-### Concat
+### concat
 
 **Usage:**
 
@@ -51,7 +51,7 @@ Capitalize the first character given a string.
 - Should use `null` string for the separator by default.
 - Should return a null string if no arguments.
 
-### Condition
+### condition
 
 **Usage:**
 
@@ -68,7 +68,7 @@ Capitalize the first character given a string.
 - Require two operands separated by an operator.
 - Run the appropriate operation on the operands.
 
-### Conditional
+### conditional
 
 **Usage:**
 
@@ -80,7 +80,7 @@ Capitalize the first character given a string.
 - Loop through all arguments and ensure one is truthy if using the "or" logical operator.
 - Return true if the conditions passed, false otherwise (use #unless helper to hide content if condition passes).
 
-### Default
+### default
 
 **Usage:**
 
@@ -91,7 +91,7 @@ Capitalize the first character given a string.
 - Return the `value` if it is not nullish.
 - Return the defaultValue if the value is nullish.
 
-### Each
+### each
 
 **Usage:**
 
@@ -108,7 +108,7 @@ This is a modified version of [this Handlebars helper](https://github.com/handle
 
 :::
 
-### Filter
+### filter
 
 **Usage:**
 
@@ -121,7 +121,7 @@ This is a modified version of [this Handlebars helper](https://github.com/handle
 - Get source operand from `source` + `sourceProperty`.
 - Use operator to compare source `operand` with value `operand`.
 
-### Format
+### format
 
 **Usage:**
 
@@ -131,7 +131,7 @@ This is a modified version of [this Handlebars helper](https://github.com/handle
 
 - Return a formatted string given a format and set of arguments.
 
-### Inc
+### inc
 
 **Usage:**
 
@@ -141,7 +141,7 @@ This is a modified version of [this Handlebars helper](https://github.com/handle
 
 - Increase value by 1.
 
-### JSON-Parse
+### json-parse
 
 **Usage:**
 
@@ -152,7 +152,7 @@ This is a modified version of [this Handlebars helper](https://github.com/handle
 - Parse a `JSON` string and return the result.
 - Throw if it encounters a parse error.
 
-### Not
+### not
 
 **Usage:**
 
@@ -162,7 +162,7 @@ This is a modified version of [this Handlebars helper](https://github.com/handle
 
 - Return a `boolean` inverse of the value.
 
-### Or
+### or
 
 **Usage:**
 
@@ -174,7 +174,7 @@ This is a modified version of [this Handlebars helper](https://github.com/handle
 - Return `false` if all argument are falsy.
 - Return `false` if no arguments.
 
-### Path
+### path
 
 **Usage:**
 
@@ -186,7 +186,7 @@ This is a modified version of [this Handlebars helper](https://github.com/handle
 - Return the resolved value.
 - Return undefined if the value was not found.
 
-### Set
+### set
 
 **Usage:**
 
@@ -198,7 +198,7 @@ This is a modified version of [this Handlebars helper](https://github.com/handle
 - Set the value on the root of the variable handler context.
 - Restrict top level names (ex: `data`, `profile`, `brand`).
 
-### Trim-Left
+### trim-left
 
 **Usage:**
 
@@ -209,7 +209,7 @@ This is a modified version of [this Handlebars helper](https://github.com/handle
 
 - Return the value trimmed (defaults to block value).
 
-### Trim-one-char-right
+### trim-one-char-right
 
 **Usage:**
 
@@ -225,7 +225,7 @@ This helper is for dealing with the following [escaping issue](https://github.co
 
 :::
 
-### Trim-Right
+### trim-right
 
 **Usage:**
 
@@ -237,7 +237,7 @@ This helper is for dealing with the following [escaping issue](https://github.co
 
 - Return the value trimmed (defaults to block value).
 
-### Trim
+### trim
 
 **Usage:**
 
@@ -248,7 +248,7 @@ This helper is for dealing with the following [escaping issue](https://github.co
 
 - Return the value trimmed (defaults to block value)
 
-### Truncate
+### truncate
 
 **Usage:**
 
@@ -259,7 +259,7 @@ This helper is for dealing with the following [escaping issue](https://github.co
 
 - Truncate the string to the number of characters defined in the helper
 
-### Var
+### var
 
 **Usage:**
 
@@ -271,7 +271,7 @@ This helper is for dealing with the following [escaping issue](https://github.co
 - Return the resolved value as a string.
 - Not be a `SafeString` so the value will be encoded.
 
-### With
+### with
 
 **Usage:**
 
@@ -290,7 +290,7 @@ modified version of [this Handlebars helper](https://github.com/handlebars-lang/
 
 ## Math
 
-### Abs
+### abs
 
 Return the magnitude of a number. This helper will throw an errow if it encounters a value that is not a number.
 
@@ -311,7 +311,7 @@ Return the magnitude of a number. This helper will throw an errow if it encounte
 {{abs (var "profile.negative_number")}}
 ```
 
-### Add
+### add
 
 Returns the the sum of two operands. This helper will throw an errow if it encounters an input value that is not a number.
 
@@ -336,7 +336,7 @@ Returns the the sum of two operands. This helper will throw an errow if it encou
 {{add (var "profile.term_1") (var "profile.term_2")}}
 ```
 
-### Ceil
+### ceil
 
 Returns the least integer greater than or equal to the decimal number input. This helper will throw an errow if it encounters a value that is not a number.
 
@@ -363,7 +363,7 @@ Returns the least integer greater than or equal to the decimal number input. Thi
 {{ceil (var "profile.some_number")}}
 ```
 
-### Divide
+### divide
 
 Returns the quotient of its operands where the left operand is the dividend and the right operand is the divisor. This helper will throw an errow if it encounters an input value that is not a number or if the divisor is `0`.
 
@@ -388,7 +388,7 @@ Returns the quotient of its operands where the left operand is the dividend and 
 {{divide (var "profile.dividend") (var "profile.divisor")}}
 ```
 
-### Floor
+### floor
 
 Returns the largest integer less than or equal to a given number. This helper will throw an errow if it encounters a value that is not a number.
 
@@ -415,7 +415,7 @@ Returns the largest integer less than or equal to a given number. This helper wi
 {{floor (var "profile.some_number")}}
 ```
 
-### Mod
+### mod
 
 Returns the remainder left over when one operand is divided by a second operand. It always takes the sign of the dividend.
 
@@ -447,7 +447,7 @@ This helper will throw an errow if it encounters an input value that is not a nu
 {{mod (var "profile.dividend") (var "profile.divisor)}}
 ```
 
-### Multiply
+### multiply
 
 Returns the product of two operands. This helper will throw an errow if it encounters an input value that is not a number.
 
@@ -472,7 +472,7 @@ Returns the product of two operands. This helper will throw an errow if it encou
 {{multiply (var "profile.multiplier") (var "profile.multiplicand")}}
 ```
 
-### Round
+### round
 
 Returns the value of a number rounded to the nearest integer. This helper will throw an errow if it encounters an input value that is not a number.
 
@@ -502,7 +502,7 @@ Returns the value of a number rounded to the nearest integer. This helper will t
 {{round (var "profile.some_variable")}}
 ```
 
-### Subtract (or sub)
+### subtract (sub)
 
 Returns the difference of two operands. This helper will throw an errow if it encounters an input value that is not a number.
 
