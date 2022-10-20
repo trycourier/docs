@@ -313,25 +313,55 @@ Return the magnitude of a number. This helper will throw an errow if it encounte
 
 ### Ceil
 
-**Usage:**
+Returns the least integer greater than or equal to the decimal number input. This helper will throw an errow if it encounters a value that is not a number.
 
-- `{{ceil 1.35)}}`
+**Parameters**
 
-**Should:**
+- `input` **{Number}**
 
-- Return the input value rounded up to the next largest integer.
-- Throw if it encounters a value that is not a number.
+**Example**
+
+```handlebars
+{{ceil .95}}
+<!-- Output: 1 -->
+
+{{ceil 1.01}}
+<!-- Output: 2 -->
+
+{{ceil -1.01}}
+<!-- Output: 1 -->
+
+<!-- Reference a "data" variable -->
+{{ceil (var "some_number")}}
+
+<!-- Reference a "profile" variable -->
+{{ceil (var "profile.some_number")}}
+```
 
 ### Divide
 
-**Usage:**
+Returns the quotient of its operands where the left operand is the dividend and the right operand is the divisor. This helper will throw an errow if it encounters an input value that is not a number or if the divisor is `0`.
 
-- `{{divide 8 4)}}`
+**Parameters**
 
-**Should:**
+- `dividend` **{Number}**
+- `divisor` **{Number}**
 
-- Return the result of dividing one number by another.
-- Throw if it encounters an input that is not a number.
+**Example**
+
+```handlebars
+{{divide 12 2}}
+<!-- Output: 6 -->
+
+{{divide 3 2}}
+<!-- Output: 1.5 -->
+
+<!-- Reference a "data" variable -->
+{{divide (var "dividend") (var "divisor")}}
+
+<!-- Reference a "profile" variable -->
+{{divide (var "profile.dividend") (var "profile.divisor")}}
+```
 
 ### Floor
 
