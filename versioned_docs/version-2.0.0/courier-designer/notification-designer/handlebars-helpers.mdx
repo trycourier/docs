@@ -30,43 +30,83 @@ Don't see a custom handlebars helper you need in the list? [Share your use case]
 
 ### capitalize
 
-**Usage:**
+Returns the capitalized first character of a given string.
 
-- `{{capitalize "courier")}} => "Courier"`
-- `{{capitalize "try courier")}} => "Try courier" (does not support words)`
+**Parameters**
 
-**Should:**
+- `input` **{string}**
 
-Capitalize the first character given a string.
+**Example**
+
+```handlebars
+{{capitalize "foo"}}
+<!-- Output: Foo -->
+
+<!-- Reference a "data" variable -->
+{{capitalize (var "name")}}
+
+<!-- Reference a "profile" variable -->
+{{capitalize (var "profile.name")}}
+```
 
 ### concat
 
-**Usage:**
+Stringifies all arguments and joins them using the provided separator. Should use `null` string for the separator by default and should return a null string if no arguments.
 
-- `{{concat "hello" "world"}}`
+**Parameters**
 
-**Should:**
+- `input` **{String|Number}**
 
-- Stringify all arguments and join them using the provided separator.
-- Should use `null` string for the separator by default.
-- Should return a null string if no arguments.
+**Example**
+
+```handlebars
+{{concat "hello" " " "world"}}
+<!-- Output: hello world -->
+
+<!-- Reference a "data" variable -->
+{{concat "hello" " " (var "name")}}
+
+<!-- Reference a "profile" variable -->
+{{concat "hello" " " (var "profile.name")}}
+```
 
 ### condition
 
-**Usage:**
+Use the if statement to specify a block of code to be executed if a condition is true. Will throw an error if the operator is unsupported.
 
-- `{{#if (condition "a" "!=" "b")}}`
+- Require two operands separated by an operator.
+- Run the appropriate operation on the operands.
+
+**Parameters**
+
+- `input` **{String|Number}** 
+
+**Note:** Data and profile can have booleans
 
 **Example:**
 
-- `{{#if (condition (var "someVariable") "==" "foo")}}yay{{else}}boo{{/if}}`
-- The `someVariable` value in this case would be on the data block.
+```handlebars
+{{#if (condition (var "eligible") "==" "yes")}}
+<strong>Hello!</strong>
+{{else}}
+<strong>Bye</strong>
+{{/if}}
+<!-- Output: dependent on variable -->
 
-**Should:**
+<!-- Reference a "profile" variable -->
+{{#if (condition (var "profile.name") "==" "rod")}}
+<strong>Hello {{var "profile.name"}}!</strong>
+{{else}}
+<strong>Hello there</strong>
+{{/if}}
 
-- Throw if the operator is unsupported.
-- Require two operands separated by an operator.
-- Run the appropriate operation on the operands.
+<!-- Reference a boolean -->
+{{#if (condition (var "profile.hungry") "==" "true")}}
+<strong>{{var "profile.name"}} is hungry!</strong>
+{{else}}
+<strong>{{var "profile.name"}} is not hungry</strong>
+{{/if}}
+```
 
 ### conditional
 
@@ -313,7 +353,7 @@ Return the magnitude of a number. This helper will throw an errow if it encounte
 
 ### add
 
-Returns the the sum of two operands. This helper will throw an errow if it encounters an input value that is not a number.
+Returns the the sum of two operands. This helper will throw an error if it encounters an input value that is not a number.
 
 **Parameters**
 
