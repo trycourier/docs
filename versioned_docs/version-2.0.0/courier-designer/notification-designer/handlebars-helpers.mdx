@@ -16,17 +16,35 @@ Don't see a custom handlebars helper you need in the list? [Share your use case]
 
 ### and
 
-**Usage:**
+Returns `true` if all arguments are truthy, `false` if one argument is falsy, and `true` if no arguments
 
-- `{{#if (and true 1 "yay")}}`
+**Parameters**
+
+- `input` **{String|Number }**
+
+**Note:** Data and profile can have booleans.
+
+**Example:**
+
+```handlebars
+{{#if (and (var "boolean") (var "another_boolean"))}}
+  <strong>True</strong>
+{{else}}
+  <strong>False</strong>
+{{/if}}
+<!-- Output: dependent on variables -->
+
+<!-- Reference a "profile" variable -->
+{{#if (and (var "profile.boolean") (var "profile.another_boolean"))}}
+  <strong>True</strong>
+{{else}}
+  <strong>False</strong>
+{{/if}}
+```
+
+<!-- - `{{#if (and true 1 "yay")}}`
 - `{{#if (and true false)}}`
-- `{{#if (and variable1 variable2)}}`
-
-**Should:**
-
-- Return `true` if all arguments are truthy.
-- Return `false` if one argument is falsy.
-- Return `true` if no arguments.
+- `{{#if (and variable1 variable2)}}` -->
 
 ### capitalize
 
@@ -81,7 +99,7 @@ Use the if statement to specify a block of code to be executed if a condition is
 
 - `input` **{String|Number}** 
 
-**Note:** Data and profile can have booleans
+**Note:** Data and profile can have booleans.
 
 **Example:**
 
@@ -133,14 +151,40 @@ Use the if statement to specify a block of code to be executed if a condition is
 
 ### each
 
-**Usage:**
+Iterates over a list. Inside the block, you can use `this` to reference the element being iterated over.
 
-- `{{each ["a", "b", "c"] as |char|}}`
+**Parameters**
 
-**Should:**
+- `input` **{String|Number}**
 
-- Match the Handlebars built-in #each helper.
-- Set the `@variableHandler` scope when rendering each element.
+**Example:**
+
+```json
+"data": {
+    "people": [
+      {
+        "name": "Rod"
+      },
+      {
+        "name": "TK"
+      },
+      {
+        "name": "Suhas"
+      }
+    ]
+  }
+```
+
+```handlebars
+<ul>
+{{#each people}}
+<li>{{this.name}}</li>
+{{/each}}
+</ul>
+<!-- Output: unordered list -->
+```
+
+<!-- - Set the `@variableHandler` scope when rendering each element. -->
 
 :::info Note
 
