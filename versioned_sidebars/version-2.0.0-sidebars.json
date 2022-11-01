@@ -135,8 +135,23 @@
         },
         {
           "type": "link",
-          "label": "iOS (Swift, Obj-C)",
+          "label": "iOS",
           "href": "https://github.com/trycourier/courier-ios"
+        },
+        {
+          "type": "link",
+          "label": "Android",
+          "href": "https://github.com/trycourier/courier-android"
+        },
+        {
+          "type": "link",
+          "label": "React Native",
+          "href": "https://github.com/trycourier/courier-react-native"
+        },
+        {
+          "type": "link",
+          "label": "Flutter",
+          "href": "https://github.com/trycourier/courier-flutter"
         }
       ]
     },
