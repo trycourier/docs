@@ -12,6 +12,7 @@ const Preference: ApiParam = {
       type: "array",
       name: "channel_preferences",
       field: ChannelPreferences,
+      description: ChannelPreferences["description"],
     },
     {
       type: "array",
