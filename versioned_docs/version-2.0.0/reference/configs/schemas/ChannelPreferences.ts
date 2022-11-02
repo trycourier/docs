@@ -4,13 +4,13 @@ const ChannelPreferences: ApiParam = {
   type: "object",
   displayName: "ChannelPreferences",
   description:
-    "This preference allows you to specify channel preferences, custom to your recipient. E.g. If recipient A, only wants to be notified using SMS, you can set the channel_preferences for the recipient to `direct_message` and Courier will use `direct_message` as first mode to send notification",
+    "`channel_preferences` lets you customize and set preferred channel the user wants to get notified on. e.g. If user A, only wants to be notified using SMS, you can set the channel_preferences for the user to `sms` and Courier will use `sms` as first mode to send notification",
   fields: [
     {
       type: "string",
       name: "channel",
-      enum: ["direct_message", "email", "push"],
-      example: "direct_message",
+      enum: ["direct_message", "email", "push", "sms"],
+      example: "push",
     },
   ],
 };
