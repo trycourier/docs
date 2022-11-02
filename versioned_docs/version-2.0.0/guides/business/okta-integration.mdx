@@ -65,6 +65,30 @@ This guide will walk you through the steps necessary to allow your team to sign 
 
 That's all thats needed to allow sign in with Okta. Be sure to assign users using the Assignments tab of Courier App Integration.
 
+## Creating a Courier Bookmark App
+
+Bookmark apps are used to direct users to a specific web page using Okta applications. Below is a step-by-step process to create a Courier bookmark app within the Okta Admin Panel.
+
+:::info
+
+Before you can create a bookmark, you will need a bookmark URL from Courier for IdP initiated SSO to work. Please [contact Support](mailto:support@courier.com) to get set up with the bookmark URL.
+
+:::
+
+### Steps
+
+1. Make sure you're logged-in to the Okta admin panel as an `Admin`.
+2. Expand the `Applications` drop-down in the left pane, then click `Applications`.
+3. Click `Browse App Catalog`.
+4. Search for `Bookmark App`, select it from the list of results, and click `Add` in the left pane.
+5. Choose an app name, in this example `Courier Login`, which will be the display name.
+6. Copy the URL supplied by Courier Support directly to into the URL box:
+
+<Image img={require("../../assets/guides/okta/okta-bookmark-app.png")} alt="Okta Bookmark App Settings" />
+
+7. Click `Save`.
+8. Assign to users to test.
+
 ## Migrating Users To Okta
 
 1. From the [Settings > Security](https://app.courier.com/settings/security) page, Ensure that "Require Google SSO" is not checked
