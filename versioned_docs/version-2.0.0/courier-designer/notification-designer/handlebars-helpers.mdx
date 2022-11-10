@@ -207,13 +207,17 @@ This is a modified version of [this Handlebars helper](https://github.com/handle
 
 ### format
 
-**Usage:**
+Returns a formatted string given a format and set of arguments.
 
-- `{{format "%.2f" "100"}} => "100.00"`
+**Parameters**
+- `input` **{String | Number}**
 
-**Should:**
+**Example:**
 
-- Return a formatted string given a format and set of arguments.
+```handlebars
+{{format "%.2f"  (var "number")}}
+<!-- If number = 1 | Output: 1.00 -->
+```
 
 ### inc
 
@@ -228,7 +232,6 @@ Increase value by 1.
 ```handlebars
 {{inc (var "value")}}
 <!-- If value = 1 | Output: 2 -->
-
 ```
 
 ### json-parse
