@@ -217,13 +217,19 @@ This is a modified version of [this Handlebars helper](https://github.com/handle
 
 ### inc
 
-**Usage:**
+Increase value by 1.
 
-- `{{inc value}}`
+**Parameters**
 
-**Should:**
+- `input` **{Number}**
 
-- Increase value by 1.
+**Example:**
+
+```handlebars
+{{inc (var "value")}}
+<!-- If value = 1 | Output: 2 -->
+
+```
 
 ### json-parse
 
