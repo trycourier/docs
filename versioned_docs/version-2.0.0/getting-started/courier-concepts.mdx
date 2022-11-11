@@ -1,0 +1,105 @@
+---
+sidebar_position: 0
+---
+
+# Courier Concepts
+
+> Terms and concepts you will commonly see when you use Courier's notification platform.
+
+## Audience
+
+An Audience is an arbitrary user collection that automatically adheres to a set of rules. These rules can be as simple as "users in California," but can also be extended to a complex set of operations. Audience rules can be defined in the [Courier Web App](https://app.courier.com/users) or via the [Audiences API](../reference/audiences/intro.mdx).
+
+## Automations
+
+An automation is a fully managed orchestration service that makes it easy to design complex notification workflows with the [Automations API](../reference/automation/intro.mdx) or via the [Automations template UI](../guides/tutorials/how-to-automate-message-sequences.mdx). Some simple examples include delaying the delivery of a notification, fetching the latest data to include with a notification, canceling the delivery of a notification, or scheduling a reoccurring notification.
+
+## Brands
+
+Brands is a Courier feature set that lets you apply a consistent look and feel to your email notifications. You can also use this feature to "white-label" email notifications you send on behalf of your customers to their end-user recipients or if you have multiple brands internally. Courier Brands are also fully API enabled. Developers can get, create, update and delete brands programmatically using our [Brands API](../reference/brands/intro.mdx).
+
+**Keep reading:** [Brands](../courier-designer/brands/how-to-use-brands-to-customize.mdx)
+
+## Channels
+
+Courier allows you to build notifications for four different notification types or Channels: email, SMS, push notification and direct message.  In order to send notifications via a channel, you must add one or more integrations. You can prioritize the send order of the channels and set conditions to disable them.  
+
+**Keep reading:** [Channels and Integrations](https://help.courier.com/en/articles/4196354-what-are-channels-and-integrations).
+
+## Channel Rules
+
+Courier's [channel rules](../sending-notifications/channel-priority.mdx) allow you to prioritize which Integrations are used to send your Notifications. Selected Integrations are arranged in a top-to-bottom hierarchy.
+
+## Content Blocks
+
+[Content blocks](https://help.courier.com/en/articles/4193090-content-block-basics) are pieces of content that you add to your notification in Couriers drag and drop [Notification Designer](../courier-designer/notification-designer/notification-designer-overview.mdx). Content blocks are responsive and reusable across channels.
+
+## Conditions
+
+The "Conditions" tab in the Notification, Channel or Block Settings lets you apply conditionals to define when to send a notification, which channel the notification is routed to (even which integration) and which blocks to include.
+
+## Device Token
+
+A device token (push token) is a unique key for the app-device combination issued by the Apple or Google push notification gateways. It allows gateways and push notification providers to route messages and ensure the notification is delivered only to the unique app-device combination for which it is intended. Courier's [Token Management API](../reference/token-management/intro.mdx) is used to store and track the status of user device tokens. 
+
+## Elemental
+
+[Courier Elemental](../elemental/intro.mdx) is a powerful JSON based syntax for describing the content of your notification in a way that will work for email, push, chat, or any channel you use to notify users. With Courier Elemental you can customize the look, language, and structure of your notification based on locale, channel, and other more advanced custom logic.
+
+## Events
+
+An event is a unique identifier that can be mapped to an individual Notification. These events can be defined by you, i.e. `new-user` or by an incoming [event through Segment](../guides/tutorials/how-to-send-notifications-with-segment.mdx).
+
+## Handlebars
+
+Handlebars is a simple email templating language that generates HTML. The Courier Notification Designer lets you insert Template Blocks that use Handlebars or switch to the [Handlebars editor](../courier-designer/notification-designer/handlebars-designer.mdx) and build your entire template in HTML.
+
+## List
+
+A `List` is a static group users defined by you via the [List API](../reference/lists/intro.mdx) or the [Users page](https://app.courier.com/users) in the Courier Web App by subscribing user profile(s) to the list.
+
+## Logs
+
+Courier's notification Logs provide a timeline along with insights into the status of sent messages and automations. You can filter the logs by status, date range, recipient, ID etc. 
+
+## Notifications 
+
+Notifications are the messages you send through channels via the delivery systems you integrate with Courier. Each notification has a unique identifier known as the Event ID which you can find in the [notification settings](../courier-designer/notification-designer/notification-designer-overview.mdx).
+
+**Keep reading:** [What is Courier?](what-is-courier.mdx)
+
+## Notification Design Studio
+
+Courier's Notification Design Studio empowers every team member to build beautiful, multi-channel notifications with and easy to use graphic user interface. Its drag & drop interface lets you build branded notification content without writing code that consistently renders across every email client and reusable in any channel.
+
+**Keep reading:** [Notification Design Studio.](../courier-designer/notification-designer/notification-designer-overview.mdx)
+
+## Override
+
+Overrides can be used to change the request body that Courier sends to a provider. Overrides are useful when a field is not yet supported by Courier, or you would like to override the value that Courier generates. Here's an [Override example using SendGrid](../guides/providers/email/sendgrid.mdx#override).
+
+## Profile
+
+A [Profile](../reference/profiles/intro.mdx) is a JSON object that includes any key-value pairs required by our Integrations. You can find the required keys for any Integration on its "Integrations" page. See the [Integration Introduction](../guides/providers/intro.mdx) for details.
+
+## Provider
+
+[Providers](https://www.courier.com/providers/) are the channel service providers (Twilio, Sendgrid, APN, etc,) you connect to Courier so that it can send your notifications. Rather than replacing your existing providers, Courier passes your Notifications to the providers you already use via these channel integrations.
+
+## Template
+
+A Courier template contains everything needed to define the channels, providers, settings, routing rules and content for your notification. The template ID is used to trigger the notification send.
+
+## Transactional Emails
+
+Many courier customers use us to build transactional email notification templates. Although Courier does not actually send emails (that's done by the [email service providers](../guides/providers/email/intro.mdx) you integrate with Courier) you can add [unsubscribe links](../reference/preferences/intro.mdx) to your Courier email templates. Understanding when an email notification is transactional or relationship is important and the [CAN-SPAM](https://www.ftc.gov/tips-advice/business-center/guidance/can-spam-act-compliance-guide-business) act's definition is a good place to start. 
+
+## Trigger
+
+A Trigger is a mechanism to invoke an Automation Run. There are currently [three possible trigger sources](../automations/triggers.mdx) that can be configured to invoke an Automation Run from the designer, a cron schedule, a Segment event and a Courier Audience event.
+
+## White-labeling
+
+White labeling is when you remove your brand and logo from notifications and instead use branding defined by your customer. In other words, white-label email notifications are sent by you on behalf of your customers to their end-users. This means end-users receiving email notifications you send see your customers' branding on the email. 
+
+**Read more:** [White-labeling](../courier-designer/brands/how-to-use-brands-to-customize.mdx)
