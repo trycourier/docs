@@ -75,6 +75,11 @@ module.exports = {
           label: "iOS (Swift, Obj-C)",
           href: "https://github.com/trycourier/courier-ios",
         },
+        {
+          type: "link",
+          label: "C#",
+          href: "https://github.com/tk26/courier-csharp",
+        },
       ],
     },
     {
