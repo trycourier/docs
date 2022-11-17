@@ -334,11 +334,19 @@ Represents a body of text to be rendered inside of the notification.
 
 ### Fields
 
-| Field   | Type   | Required | Description                                                               |
-| ------- | ------ | -------- | ------------------------------------------------------------------------- |
-| type    | string | required | The type of element. For action elements, this value should be `"text"`.  |
-| content | string | required | The text content displayed in the notification.                           |
-| locales | object |          | Region specific content. See [locales docs](../locales) for more details. |
+| Field         | Type                 | Required   | Description                                                                                                |
+| ------------- | -------------------- | ---------- | ---------------------------------------------------------------------------------------------------------- |
+| type          | string               | required   | The type of element. For action elements, this value should be `"text"`.                                   |
+| content       | string               | required\* | The text content displayed in the notification. Either this field must be specified, or the elements field |
+| elements      | TextContentElement[] | required\* | An array of Text Content Elements. Either this field must be specified, or the content element field       |
+| align         | string               |            | Text alignment. One of "left", "center", or "right"                                                        |
+| text_style    | string               |            | Allows the text to be rendered as a heading level. Can be "text", "h1", "h2", or "subtext"                 |
+| color         | string               |            | Specifies the color of text. Can be any valid css color value                                              |
+| bold          | boolean              |            | Apply bold to the text                                                                                     |
+| italic        | boolean              |            | Apply italics to the text                                                                                  |
+| strikethrough | boolean              |            | Apply a strike through the text                                                                            |
+| underline     | boolean              |            | Apply an underline to the text                                                                             |
+| locales       | object               |            | Region specific content. See [locales docs](../locales) for more details.                                  |
 
 ### Examples
 
@@ -371,5 +379,82 @@ With locales:
       "content": "Ceci est une notification que j'ai envoyée à {{first_name}}"
     }
   }
+}
+```
+
+## Text Content Elements
+
+The following elements can be applied as sub `elements` to the main text element. For now,
+they must be a child of the text element.
+
+### String Element
+
+Renders a simple string. Similar to default behavior of text without a newline applied at the end
+
+| Field         | Type     | Required | Description                                                                                |
+| ------------- | -------- | -------- | ------------------------------------------------------------------------------------------ |
+| type          | "string" | required | The type of element. For action elements, this value should be `"string"`.                 |
+| content       | string   | required | The text content displayed in the notification.                                            |
+| align         | string   |          | Text alignment. One of "left", "center", or "right"                                        |
+| text_style    | string   |          | Allows the text to be rendered as a heading level. Can be "text", "h1", "h2", or "subtext" |
+| color         | string   |          | Specifies the color of text. Can be any valid css color value                              |
+| bold          | boolean  |          | Apply bold to the text                                                                     |
+| italic        | boolean  |          | Apply italics to the text                                                                  |
+| strikethrough | boolean  |          | Apply a strike through the text                                                            |
+| underline     | boolean  |          | Apply an underline to the text                                                             |
+| locales       | object   |          | Region specific content. See [locales docs](../locales) for more details.                  |
+
+### Link Element
+
+Renders a link within a body of text.
+
+| Field            | Type    | Required | Description                                                                                |
+| ---------------- | ------- | -------- | ------------------------------------------------------------------------------------------ |
+| type             | "link"  | required | The type of element. For action elements, this value should be `"link"`.                   |
+| content          | string  | required | The text content displayed in the notification.                                            |
+| href             | string  |          | The address to link to                                                                     |
+| disable_tracking | boolean |          | Disable tracking for the link                                                              |
+| align            | string  |          | Text alignment. One of "left", "center", or "right"                                        |
+| text_style       | string  |          | Allows the text to be rendered as a heading level. Can be "text", "h1", "h2", or "subtext" |
+| color            | string  |          | Specifies the color of text. Can be any valid css color value                              |
+| bold             | boolean |          | Apply bold to the text                                                                     |
+| italic           | boolean |          | Apply italics to the text                                                                  |
+| strikethrough    | boolean |          | Apply a strike through the text                                                            |
+| underline        | boolean |          | Apply an underline to the text                                                             |
+| locales          | object  |          | Region specific content. See [locales docs](../locales) for more details.                  |
+
+### Img Element
+
+Renders an image inline within a body of text.
+
+| Field            | Type    | Required | Description                                                                                |
+| ---------------- | ------- | -------- | ------------------------------------------------------------------------------------------ |
+| type             | "link"  | required | The type of element. For action elements, this value should be `"link"`.                   |
+| src              | string  | required | The source address of the image                                                            |
+| alt_text         | string  |          | Text to used for screen readers and displayed on mouse hover                               |
+| width            | string  |          | How wide the image should render. Can be any valid css width value                         |
+| href             | string  |          | An address to link to                                                                      |
+| disable_tracking | boolean |          | Disable tracking for the link                                                              |
+| align            | string  |          | Text alignment. One of "left", "center", or "right"                                        |
+| text_style       | string  |          | Allows the text to be rendered as a heading level. Can be "text", "h1", "h2", or "subtext" |
+| color            | string  |          | Specifies the color of text. Can be any valid css color value                              |
+| bold             | boolean |          | Apply bold to the text                                                                     |
+| italic           | boolean |          | Apply italics to the text                                                                  |
+| strikethrough    | boolean |          | Apply a strike through the text                                                            |
+| underline        | boolean |          | Apply an underline to the text                                                             |
+| locales          | object  |          | Region specific content. See [locales docs](../locales) for more details.                  |
+
+### Examples
+
+Basic example:
+
+```json
+{
+  "type": "text",
+  "elements": [
+    { "type": "string", "content": "Hey! ", "bold": true },
+    { "type": "link", "content": "Check out this site.", "href": "https://www.example.com" },
+    { "type": "img", "src": "https://emoji.com/cool-emoji", "width": "5px" }
+  ]
 }
 ```
