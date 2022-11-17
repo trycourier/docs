@@ -140,14 +140,20 @@ Use the if statement to specify a block of code to be executed if a condition is
 
 ### default
 
-**Usage:**
+Returns the `value` if it is not nullish.
 
-- `{{default undefined "valued customer"}}`
+**Parameters**
 
-**Should:**
+- `input` **{String|Number}** 
 
-- Return the `value` if it is not nullish.
-- Return the defaultValue if the value is nullish.
+**Note:** Data and profile can have booleans.
+
+**Example:**
+
+```handlebars
+{{default undefined (var "customer")}}
+<!-- Output: Returns the default value -->
+```
 
 ### each
 
