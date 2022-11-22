@@ -135,6 +135,11 @@
         },
         {
           "type": "link",
+          "label": "C#",
+          "href": "https://github.com/tk26/courier-csharp"
+        },
+        {
+          "type": "link",
           "label": "iOS",
           "href": "https://github.com/trycourier/courier-ios"
         },
@@ -152,11 +157,6 @@
           "type": "link",
           "label": "Flutter",
           "href": "https://github.com/trycourier/courier-flutter"
-        },
-        {
-          "type": "link",
-          "label": "C#",
-          "href": "https://github.com/tk26/courier-csharp"
         }
       ]
     },
