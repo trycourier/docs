@@ -128,15 +128,18 @@ Use the if statement to specify a block of code to be executed if a condition is
 
 ### conditional
 
-**Usage:**
+- Loops through all arguments and ensures all are truthy if using the "and" logical operator.
+- Loops through all arguments and ensures one is truthy if using the "or" logical operator.
+- Returns true if the conditions passed, false otherwise (use #unless helper to hide content if condition passes).
 
-- `{{conditional (filter "data" "customer.name" "EQUALS" "josh") (filter "profile" "email" "CONTAINS" "@trycourier.com")}}`
+- `input` **{String|Number}** 
 
-**Should:**
+**Note:** Data and profile can have booleans.
 
-- Loop through all arguments and ensure all are truthy if using the "and" logical operator.
-- Loop through all arguments and ensure one is truthy if using the "or" logical operator.
-- Return true if the conditions passed, false otherwise (use #unless helper to hide content if condition passes).
+```handlebars
+{{conditional (filter "data" "customer.name" "EQUALS" "josh") (filter "profile" "email" "CONTAINS" "@trycourier.com")}}
+<!-- Output: dependent on variable -->
+```
 
 ### default
 
