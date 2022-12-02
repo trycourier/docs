@@ -72,12 +72,12 @@ axios({
 
 For such simple use cases it is often convenient to define the Automation workflow directly in the API request body. However if your use case requires more logical steps, scheduling functionality or if you would just like Courier to save the Automation definition for future use, then consider using the [The Template Designer](#the-template-designer).
 
-For more information on additional properties see the [Accessing Dynamic Data](#accessing-dynamic-data) section below or visit the [Automation Steps](steps) documentation section.
+For more information on additional properties see the [Accessing Dynamic Data](#accessing-dynamic-data) section below or visit the [Automation Steps](./steps.mdx) documentation section.
 
 ## The Template Designer
 
-The Automation Template Designer is an ideal tool to define a series of [Automation Steps](steps) once and invoke them
-with either an [Automation Trigger](triggers) or an API call.
+The Automation Template Designer is an ideal tool to define a series of [Automation Steps](./steps.mdx) once and invoke them
+with either an [Automation Trigger](./triggers.mdx) or an API call.
 
 Instead of managing the Automation code, we store the logic within Courier. This allows us to easily edit the Automation Run in the future while reducing our code.
 
@@ -173,7 +173,7 @@ We will discuss the syntax `"$ref": "data.user_id"` in the [Accessing Dynamic Da
 
 5. Publish the template.
 
-If you want to invoke the Automation on a schedule or in response to an event see the [Triggers](triggers) section.
+If you want to invoke the Automation on a schedule or in response to an event see the [Triggers](./triggers.mdx) section.
 
 That's it! Now whenever a new user signs up to our application, we will execute the following workflow:
 
@@ -339,7 +339,7 @@ if called via `http`, and the run context is updated with the response.
 
 When a Send List Automation Step is configured with the optional `data_source` property, the webhook url will be called with the `recipient_id` as a query param for each user in the list. It will then update the Automation Cache with the response and passed to the Notification Template and sent as a notification message.
 
-For more information see Send List in the [Steps](steps) section.
+For more information see Send List in the [Steps](./steps.mdx) section.
 
 #### Canceling the Automation Run
 
