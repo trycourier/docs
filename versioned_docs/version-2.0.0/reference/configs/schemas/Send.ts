@@ -489,13 +489,13 @@ export const expiry: ApiParam = {
   fields: [
     {
       type: "string",
-      name: "expire_at",
-      description: "An epoch timestamp or ISO8601 timestamp that describes the time in which a message expires.",
+      name: "expires_at",
+      description: "An epoch timestamp or ISO8601 timestamp with timezone (YYYY-MM-DDThh:mm:ss.sTZD) that describes the time in which a message expires.",
     },
     {
       type: "string",
-      name: "expire_in",
-      description: "A duration in the form of milliseconds or an ISO8601 Duration format (i.e. P1DT4H)",
+      name: "expires_in",
+      description: "A duration in the form of milliseconds or an ISO8601 Duration format (i.e. P1DT4H).  https://tc39.es/proposal-temporal/docs/duration.html",
     },
   ],
 };
