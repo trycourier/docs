@@ -1,15 +1,15 @@
 ---
-sidebar_position: 8
-sidebar_label: TextUs
-title: Send SMS Notifications Using TextUs
-description: Looking for a way to send text message notifications via TextUs? This step-by-step tutorial will show you how to integrate TextUs's API the easy way.
+sidebar_position: 1
+sidebar_label: Azure SMS
+title: Send SMS Notifications Using Azure Communication Service
+description: Looking for a way to send text message notifications via Azure? This step-by-step tutorial will show you how to integrate Azure Communication Service SMS API the easy way.
 ---
 
-# TextUs
+# Azure SMS
 
 ## Profile Requirements
 
-To deliver an SMS message through TextUs, Courier must be provided the recipient's SMS-compatible phone number. This value should be included in the recipient profile as `phone_number`.
+To deliver an SMS message through Azure SMS, Courier must be provided the recipient's SMS-compatible phone number. This value should be included in the recipient profile as `phone_number`.
 
 ```json title=JSON
 {
@@ -37,16 +37,16 @@ Overrides can be used to change the request that Courier makes to the provider. 
       "first_name": "Jane Doe"
     },
     "providers": {
-      "textus": {
+      "azure-sms": {
         "override": {
           "body": {
-            "to": "+109876543210",
-            "body": "I am the right content for the SMS"
+            "to": "+19876543210",
+            "message": "I am the right content for the SMS"
           },
           "config": {
-            "from": "<override From number>",
-            "authToken": "<override Auth Token>",
-            "email": "<override Email>"
+            "from": "<override from number>",
+            "accessKey": "<override access key>",
+            "endpoint": "<override endpoint>"
           }
         }
       }
