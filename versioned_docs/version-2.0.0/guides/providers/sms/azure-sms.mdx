@@ -1,0 +1,56 @@
+---
+sidebar_position: 9
+sidebar_label: Azure SMS
+title: Send SMS Notifications Using Azure Communication Service
+description: Looking for a way to send text message notifications via Azure? This step-by-step tutorial will show you how to integrate Azure Communication Service SMS API the easy way.
+---
+
+# Azure SMS
+
+## Profile Requirements
+
+To deliver an SMS message through Azure SMS, Courier must be provided the recipient's SMS-compatible phone number. This value should be included in the recipient profile as `phone_number`.
+
+```json title=JSON
+{
+  "message": {
+    // Recipient Profile
+    "to": {
+      "phone_number": "+11112223334"
+    }
+  }
+}
+```
+
+## Overrides
+
+Overrides can be used to change the request that Courier makes to the provider. Overrides are useful when a field is not yet supported by Courier or you would like to override the value that Courier generates. You can override the `authToken`, `from` and `email` as well as the `body` of the SMS content.
+
+```json title=JSON
+{
+  "message": {
+    "template": "<COURIER_NOTIFICATION_ID>",
+    "to": {
+      "phone_number": "+12345678901"
+    },
+    "data": {
+      "first_name": "Jane Doe"
+    },
+    "providers": {
+      "azure-sms": {
+        "override": {
+          "body": {
+            "to": "+19876543210",
+            "message": "I am the right content for the SMS"
+          },
+          "config": {
+            "from": "<override from number>",
+            "accessKey": "<override access key>",
+            "endpoint": "<override endpoint>"
+          }
+        }
+      }
+    }
+  }
+}
+```
