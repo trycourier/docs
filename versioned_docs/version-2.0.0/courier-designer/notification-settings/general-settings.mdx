@@ -1,0 +1,122 @@
+---
+sidebar_position: 0
+---
+
+import Image from "@theme/IdealImage";
+
+# General Settings
+
+> A quick introduction to the Notification settings: where they are, what information they provide and what you can do with them.
+
+The Notification settings contain important information required to send the notification along with settings that define how email notifications look, when your notification sends, and its publish history.
+
+There are five sections of the Notification Settings. 
+
+- General
+- Notes
+- Events
+- Conditions
+- Publish History
+
+## Opening the Notification Settings
+
+To view the Notification settings, open the notification in the designer list, then click the settings icon next to the Notification name. 
+
+<Image
+  img={require("../../assets/guides/notification-settings/notification-settings-main.png")}
+  alt="Access Notification General Settings"
+/>
+
+## General Settings
+
+<Image
+  img={require("../../assets/guides/notification-settings/notification-settings-general.png")}
+  alt="General Settings"
+/>
+
+### Notification ID
+
+- The Notification ID is a unique string assigned to the notification by Courier. 
+- When you make a successful Send API request, Courier returns the Notification ID mapped to the event used to trigger it. 
+- You can also use the Notification ID as the event object in your Send 
+
+### Auth Token
+
+- A Tenant-level token required to send Notifications. 
+- You can also find your Tenant's AuthToken in the [General Settings](https://www.courier.app/settings/general).
+
+### Brand Config
+
+- Brands are "enabled" by default so each new email notification will use your [Default Brand](../brands/customize-default-brand.mdx) template unless you disable it. 
+- Brands must be "enabled" to use [Custom Brands](../brands/how-to-use-brands-to-customize.mdx) on email notifications.
+
+### Category
+
+- Use this setting to assign a notification to a Category. Notification Categories let you group notifications and allow end-users to set preferences on more than one notification at a time.
+
+### Notification Config
+
+- Even if you've assigned a notification to a Category, you can define whether or not you want the notification to inherit settings from the category or define them at the Notification level with this setting. 
+
+<Image
+  img={require("../../assets/guides/notification-settings/notification-settings-config.png")}
+  alt="Configuration Settings"
+/>
+
+### Created
+
+- Timestamp of when the notification was created.
+
+### Duplicate
+
+- The Duplicate button allows you to duplicate all content, channels and configurations created in this notification into a new notification.
+- The duplicate will not share the same Notification ID.
+
+### Delete
+
+- The Delete button permanently deletes the notification and all its content.
+
+## Notes
+
+<Image
+  img={require("../../assets/guides/notification-settings/notification-settings-notes.png")}
+  alt="Notification Notes"
+/>
+
+Notes let you create and edit an internal note about the Notification. Once a note has been added, you'll see a new note icon in the main notifications list – clicking this opens a read-only view of the note directly within the list view.
+
+<Image
+  img={require("../../assets/guides/notification-settings/notification-settings-notes-designer.png")}
+  alt="Notification Designer Overview"
+/>
+
+## Events
+
+You can map an existing Event trigger to the notification in the Events section of the Notification settings.
+
+<Image
+  img={require("../../assets/guides/notification-settings/notification-settings-events.png")}
+  alt="Event Mapping Settings"
+/>
+
+**Read more:** [Creating Events](https://help.courier.com/en/articles/4202416-how-to-create-and-map-event-triggers-for-your-notifications)
+
+## Conditions
+
+Using the Conditions tool in the Notification settings allows you to use properties from the data or profile objects provided by the [Send API](../../reference/send/intro.mdx) call or [User Profile](../../reference/profiles/intro.mdx) to prevent the notification from sending when specific conditions are met.
+
+## Publish History
+
+- Publish History allows you to see who published versions of the Notification and when they published it.  
+- Rollback allows you to revert to any previously published version.
+
+
+:::caution Note
+
+You will lose any unpublished work if you click **Rollback**.
+:::
+
+<Image
+  img={require("../../assets/guides/notification-settings/notification-settings-history.png")}
+  alt="Notification Versioning"
+/>

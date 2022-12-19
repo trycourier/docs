@@ -1,0 +1,78 @@
+---
+sidebar_position: 1
+---
+
+import Image from "@theme/IdealImage";
+
+# Using Send Conditions
+
+> How to set conditional send rules to disable Notifications or Channels using properties from the Send API data object or User Profile.
+
+Using the `Conditions` functionality in the Notification and Channel settings allows you to use properties from the data or profile objects provided by the [Send API](../../reference/send/intro.mdx) call or [User Profile](../../reference/profiles/intro.mdx) to prevent the notification from sending when specific conditions are met.
+
+If you want to disable the *entire* notification, set your conditions in the [Notification Settings](general-settings.mdx). To disable specific Channels within the Notification, set your condition in the [Channel settings](../../sending-notifications/channel-settings.mdx).
+
+:::info Note
+
+- Channel conditions only apply to the channel where you set them.
+- You cannot disable specific integrations within the channel. If you want to be able to disable specific integrations based on Conditions, add set the integration(s) as a stand-alone channel(s) in the notification. 
+
+:::
+
+## Setting Send Conditions
+
+### For Notifications and Channels 
+
+Open the Notification / Block Settings and select the Conditions tab.
+
+<Image
+  img={require("../../assets/guides/send-conditions/send-conditions-settings.png")}
+  alt="Notification Settings"
+/>
+
+<Image
+  img={require("../../assets/guides/send-conditions/send-conditions-channel-settings.png")}
+  alt="Channel Settings"
+/>
+
+### For Content Blocks
+
+Open the conditional settings modal from the content block you wish to set conditions to.
+
+<Image
+  img={require("../../assets/guides/send-conditions/send-conditions-filter.png")}
+  alt="Content Block Conditions"
+/>
+
+## Setting Conditions
+
+1. Select the `source` of the `property` and `values` to either render or hide when certain conditions are met.
+
+:::tip
+
+You can access nested values using dot notation.
+
+:::
+
+<Image
+  img={require("../../assets/guides/send-conditions/send-conditions-condition-filter.png")}
+  alt="Conditions Source"
+/>
+
+2. Set the property name, operator and value that you want to disable/enable the notification, channel, or content block.
+
+<Image
+  img={require("../../assets/guides/send-conditions/send-conditions-operator.png")}
+  alt="Condition Operators"
+/>
+
+:::caution Important
+
+If you set multiple conditions, **all** conditions must be met to disable the message. 
+
+:::
+
+<Image
+  img={require("../../assets/guides/send-conditions/send-conditions-double.png")}
+  alt="Multiple Conditions"
+/>
