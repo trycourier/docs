@@ -584,3 +584,11 @@ code {
 .sidebar-getting-started .menu__link--active:before {
   background-image: url(/img/sidebar-icons/gettingstarted-active.svg);
 }
+
+.sidebar-preference-center .menu__link:before {
+  background-image: url(/img/sidebar-icons/sequences.svg);
+}
+
+.sidebar-preference-center .menu__link--active:before {
+  background-image: url(/img/sidebar-icons/sequences-active.svg);
+}
