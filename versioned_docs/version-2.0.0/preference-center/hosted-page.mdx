@@ -1,0 +1,71 @@
+---
+sidebar_position: 4
+---
+
+import Image from "@theme/IdealImage";
+
+# Hosted Page
+
+The hosted page is an external page that recipients are redirected to where they can customize and set their preferred notification delivery methods.
+
+<Image
+  img={require("../assets/guides/preferences-ui/preferences-preferences-page-free.png")}
+  alt="Recipient Preferences Page"
+/>
+
+A recipient can select to opt-in or out of a notification (depending on the subscription topic default state)as well as select the preferred delivery channel for a notification (business-tier feature) from this page.
+
+### Preferences Page Link
+
+When creating a template, users can attach a Courier Preferences Page hyperlink that will provide an auto-generated link. This link will open a preference center for the recipient where they will be able to establish their notification preferences.
+
+In the hyperlink modal, add `{$.urls.preferences}` inside the URL form.
+
+<Image
+  img={require("../assets/guides/preferences-ui/preferences-hyperlink.png")}
+  alt="Preferences URL"
+/>
+
+<Image
+  img={require("../assets/guides/preferences-ui/preferences-notification-template.png")}
+  alt="Notification Template With Preferences Hyperlink"
+/>
+
+:::info User Id
+
+In order for a recipient to successfully set their preferences from a notification, you must include `to.user_id` in the Send request. This is because the `user_id` ties the recipient profile to their set preferences. If no `user_id` is present in the request, the preferences method will not register.
+
+:::
+
+### Customizing Delivery Channels
+
+If a notification template has multiple delivery channels configured, a recipient will be able to customize and set their preferred delivery channel from the Preferences Page.
+
+:::info Business Tier Feature
+
+Delivery Channel customization is a Courier Business feature. Please [contact](https://www.courier.com/request-demo/) our Product Experts for more details.
+
+:::
+
+Once a recipient receives a notification with a link to a Preferences Page, they will have the option to select their preferred delivery channel method. Any further notifications sent to this recipient will adhere by the delivery rules set going forward.
+
+<Image
+  img={require("../assets/guides/preferences-ui/preferences-hosted-page.png")}
+  alt="Preferences Page With Delivery Channels"
+/>
+
+### Preferences Page Branding
+
+Just like with email templates, the preferences page can be customized to fit your [branding style](../courier-designer/brands/customize-default-brand.mdx). The Preference Center will use the the specified default brand to style the Preferences Page.
+
+<Image
+  img={require("../assets/guides/preferences-ui/preferences-default-brand.png")}
+  alt="Default Brand Selected"
+/>
+
+<Image
+  img={require("../assets/guides/preferences-ui/preferences-page-branding.png")}
+  alt="Customized Preferences Page"
+/>
+
+[Developer and Business tier](https://www.courier.com/pricing/) customers have the option to remove Courier branding from their Preferences Page.
