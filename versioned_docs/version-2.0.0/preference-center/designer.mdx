@@ -1,0 +1,98 @@
+---
+sidebar_position: 1
+---
+
+import Image from "@theme/IdealImage";
+
+# Preferences Designer
+
+<Image
+  img={require("../assets/guides/preferences-ui/preferences-designer-zoomed-in.png")}
+  alt="Preference designer view"
+/>
+
+## Section
+
+Sections group subscription topics together and they determine which topic delivery channels users can opt in/out of.
+
+<Image
+  img={require("../assets/guides/preferences-ui/preferences-section.png")}
+  alt="Section titled 'Critical' with push and email set as customizable channels"
+/>
+
+### Channel Delivery Customization
+
+Channel Delivery Customization gives recipients the ability to select and set the preference for their preferred delivery channel.
+
+<Image
+  img={require("../assets/guides/preferences-ui/preferences-channel-settings.png")}
+  alt="Subscription Topic Settings"
+/>
+
+If a notification has multiple delivery channels, recipients will be able to set their delivery channel preferences from an external Preferences Page.
+
+<Image
+  img={require("../assets/guides/preferences-ui/preferences-customize-delivery-channel.png")}
+  alt="Preferences Page With Delivery Channels Customization"
+/>
+
+## Subscription Topics
+
+Subscription Topics are sections where you can map a notification template to a specified topic. For example, welcome and onboarding notifications could be mapped to an `Invitations` topic.
+
+**Please note** that a notification **cannot** be mapped to more than one topic.
+
+<Image
+  img={require("../assets/guides/preferences-ui/preferences-topic-overview.png")}
+  alt="Preferences Topics Overview"
+/>
+
+### Configuration
+
+#### Settings
+
+You can set topic properties like **Name**, the **Section** it will be in, and its **Default State**.
+
+<Image
+  img={require("../assets/guides/preferences-ui/preferences-topic-settings.png")}
+  alt="Preferences Topics Settings"
+/>
+
+The **Default State** defines whether a topic can be opted in or out, and whether it's always required.
+
+- `On` - Users who do not take any action will automatically receive notifications in this grouping.
+- `Off` - Users will not receive these notifications unless they change their preferences.
+- `Required` - Users will not be able to opt-out of these notifications.
+
+### Ways to assign notification template to topic
+
+#### Option 1: Linked notifications
+
+<Image
+  img={require("../assets/guides/preferences-ui/preferences-linked-notifications.png")}
+  alt="Topic's linked notifications"
+/>
+
+Select which notifications templates will fall under this subscription topic. If a template is already part of a different topic,
+you will be prompted to confirm moving it to the current one.
+
+<Image
+  img={require("../assets/guides/preferences-ui/preferences-search-notifications.png")}
+  alt="Notification template search"
+/>
+
+#### Option 2: Assign topic on notification template creation
+
+When [creating a new notification](../courier-designer/notification-designer/design-a-notification.mdx), you'll see the option to map it to a subscription topic in the creation modal.
+
+<Image
+  img={require("../assets/guides/preferences-ui/preferences-new-notification.png")}
+  alt="New Notificaion Modal"
+/>
+
+#### Option 3: Template designer Subscription Topic dropdown
+
+<Image
+  img={require("../assets/guides/preferences-ui/preferences-topic-dropdown.png")}
+  alt="Preferences Topic Dropdown"
+/>
