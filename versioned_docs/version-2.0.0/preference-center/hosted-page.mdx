@@ -9,15 +9,23 @@ import Image from "@theme/IdealImage";
 The hosted page is an external page that recipients are redirected to where they can customize and set their preferred notification delivery methods.
 
 <Image
-  img={require("../assets/guides/preferences-ui/preferences-preferences-page-free.png")}
+  img={require("../assets/guides/preferences-ui/preferences-hosted-page-example.png")}
   alt="Recipient Preferences Page"
 />
 
-A recipient can select to opt-in or out of a notification (depending on the subscription topic default state)as well as select the preferred delivery channel for a notification (business-tier feature) from this page.
+A recipient can select to opt-in or out of a notification (depending on the subscription topic default state)
+as well as select the preferred delivery channel for a notification (business-tier feature) from this page.
 
 ### Preferences Page Link
 
-When creating a template, users can attach a Courier Preferences Page hyperlink that will provide an auto-generated link. This link will open a preference center for the recipient where they will be able to establish their notification preferences.
+When creating a notification template, users can attach a Courier Preferences Page hyperlink that will provide an auto-generated link. This link will open the preferences center hosted page; the recipient will be able to establish their notifications preferences at this page.
+
+Add text to the notification template, highlight it, and select the create link icon. 
+
+<Image
+  img={require("../assets/guides/preferences-ui/preferences-hyperlink-create.png")}
+  alt="Preferences URL Creation"
+/>
 
 In the hyperlink modal, add `{$.urls.preferences}` inside the URL form.
 
@@ -25,6 +33,8 @@ In the hyperlink modal, add `{$.urls.preferences}` inside the URL form.
   img={require("../assets/guides/preferences-ui/preferences-hyperlink.png")}
   alt="Preferences URL"
 />
+
+The resulting link will look like this.
 
 <Image
   img={require("../assets/guides/preferences-ui/preferences-notification-template.png")}
