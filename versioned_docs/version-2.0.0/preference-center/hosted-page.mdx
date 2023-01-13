@@ -16,10 +16,18 @@ The hosted page is an external page that recipients are redirected to where they
 A recipient can select to opt-in or out of a notification (depending on the subscription topic default state)
 as well as select the preferred delivery channel for a notification (business-tier feature) from this page.
 
-### Preferences Page Link In Notification Text
+### Preferences Page Link
 
-When creating a notification template, users can attach a Courier Preferences Page hyperlink that will provide an auto-generated link. This link will open the preferences center hosted page; the recipient will be able to establish their notifications preferences at this page.
+When using a notification template, users can attach a Courier Preferences Page hyperlink that will provide an auto-generated link. This link will open the preferences center hosted page; the recipient will be able to establish their notifications preferences at this page.
 
+:::info User Id
+
+In order for a recipient to successfully set their preferences from a notification, you must include `to.user_id` in the Send request. This is because the `user_id` ties the recipient profile to their set preferences. If no `user_id` is present in the request, the preferences method will not register.
+
+:::
+
+
+#### Adding Preferences Link To Notification Text
 Add text to the notification template, highlight it, and select the create link icon. 
 
 <Image
@@ -41,11 +49,40 @@ The resulting link will look like this.
   alt="Notification Template With Preferences Hyperlink"
 />
 
-:::info User Id
 
-In order for a recipient to successfully set their preferences from a notification, you must include `to.user_id` in the Send request. This is because the `user_id` ties the recipient profile to their set preferences. If no `user_id` is present in the request, the preferences method will not register.
+#### Adding Preferences Link To Brand Footer
+Edit footer text, highlight it, and select the create link icon. 
 
-:::
+<Image
+  img={require("../assets/guides/preferences-ui/preferences-page-brand.png")}
+  alt="Brand Editor Footer Edit"
+/>
+
+<Image
+  img={require("../assets/guides/preferences-ui/preferences-hyperlink-brand-create.png")}
+  alt="Brand Editor Footer Preferences URL Creation"
+/>
+
+In the hyperlink modal, add `{$.urls.preferences}` inside the URL form.
+
+<Image
+  img={require("../assets/guides/preferences-ui/preferences-hyperlink-brand.png")}
+  alt="Brand Editor Preferences URL"
+/>
+
+The resulting link will look like this.
+
+<Image
+  img={require("../assets/guides/preferences-ui/preferences-brand-with-link.png")}
+  alt="Brand Template With Preferences Hyperlink"
+/>
+
+When you use this brand when using a notification, the hyperlink will be shown like this.
+
+<Image
+  img={require("../assets/guides/preferences-ui/preferences-notification-brand-link.png")}
+  alt="Notification Template Using Brand With Preferences Hyperlink"
+/>
 
 ### Customizing Delivery Channels
 
