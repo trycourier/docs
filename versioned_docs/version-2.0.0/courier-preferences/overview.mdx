@@ -10,6 +10,12 @@ Fine-grained preferences management for your users.
 
 Courier Preferences allow a user to determine which notifications and channels they receive. These notifications are grouped into a preference array that you can then use to integrate a pre-built notification center into your notifications.
 
+:::info Prerequisite: User Id
+
+In order for a recipient to successfully set their preferences from a notification, you must include `to.user_id` in the [Send request](/reference/send/message). This is because the `user_id` ties the recipient profile to their set preferences. If no `user_id` is present in the request, the preferences method will not register.
+
+:::
+
 ## How Preferences Work
 
 Preferences take your existing notification templates and allow you to group them into an array of preferences your users can easily customize. This array of preferences is made up of preference topics and preference sections. Notification templates that contain similar information can be grouped into preference topics. Preference topics that contain a similar grouping of notifications and channels can be integrated into preference sections. 
