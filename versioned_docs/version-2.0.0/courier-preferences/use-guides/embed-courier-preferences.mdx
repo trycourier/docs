@@ -1,0 +1,255 @@
+---
+sidebar_position: 0
+sidebar_label: Embed Courier Preferences Into Your App
+pagination_label: Embed Courier Preferences Into Your Typescript React app
+---
+
+import Image from "@theme/IdealImage";
+
+# Introduction
+> Courier provides an npm package [@trycourier/react-preferences](https://www.npmjs.com/package/@trycourier/react-preferences) that contains Courier preference enabled react components.
+Courier Preferences components are ready to plug into your react app to immediately configure user preferences.
+
+In this Guide, we will add the PreferencesList component into a simple Typescript React App that will allow a user to configure which notifications they wish to receive.
+You can see the final code here [Newsletter Preferences](https://github.com/trycourier/courier-guides/tree/main/preferences-center)
+
+## Context
+Let's imagine we have created a newsletter for bird lovers using Courier. When a user first signs up for our newsletter, they are automatically subscribed to receive bird facts. 
+Our newsletter also allows a user to receive bird pictures and bird jokes, but they must choose to sign up for extra communications.
+We want to create a Typescript React app that will allow users to see and customize their subscribed topics.
+
+## Set up our newsletter notifications
+We want to have 3 subscription topics for our fellow bird lovers: facts, pictures, and jokes. 
+Let's create a notification to template for these subscription topics for 3 birds: Pigeons, Humminbirds, and Budgies. 
+For simplicity and demonstration, we can create 1 template per bird per topic for a total of 9 notifications. 
+
+Example Fact Notification
+<Image
+  img={require("./assets/fact-notification.png")}
+  alt="Example Fact Notification"
+/>
+
+Example Picture Notification
+<Image
+  img={require("./assets/picture-notification.png")}
+  alt="Example Picture Notification"
+/>
+
+Example Joke Notification
+<Image
+  img={require("./assets/joke-notification.png")}
+  alt="Example Joke Notification"
+/>
+
+Total Notifications
+<Image
+  img={require("./assets/notification-screenshot.png")}
+  alt="Total Notifications"
+/>
+
+In order to easily know which message we are sending, we can add a descriptive event name in notification settings
+<Image
+  img={require("./assets/notification-event.png")}
+  alt="Notification with event"
+/>
+
+## Set up the newsletter preferences
+
+Let's set up our newsletter preferences section by navigating the preferences in Courier designer.
+We can edit the section, and name it Newsletter, as well as pick the channels for delivery. 
+
+<Image
+  img={require("./assets/update-section.png")}
+  alt="Newsletter section"
+/>
+
+Next, let's create the subscription topics. 
+
+
+The first subscription topic, will be our facts topic. We want to have the default status to be opted-in so our users don't need to change anything to receive these notifications. 
+
+<Image
+  img={require("./assets/facts-subscription-topic-create.png")}
+  alt="Facts subscription topic"
+/>
+
+We will link our 3 fact notifications to this topic
+
+<Image
+  img={require("./assets/facts-subscription-link-notifications.png")}
+  alt="Facts subscription topic linked notifications"
+/>
+
+The second and third topics, pictures and jokes respectfully, should have an opted-out status, so users have to set their preferences to receive them. We will link the remaining notifications to these topics
+
+<Image
+  img={require("./assets/pictures-subscription-topic-create.png")}
+  alt="Pictures subscription topic"
+/>
+
+<Image
+  img={require("./assets/pictures-subscription-link-notifications.png")}
+  alt="Pictures subscription topic linked notifications"
+/>
+
+Our Preferences Designer should look like this.
+
+<Image
+  img={require("./assets/preferences-center-screenshot.png")}
+  alt="Preferences Center Designer"
+/>
+
+If We preview the hosted page, we get something that looks like this. 
+
+<Image
+  img={require("./assets/preferences-center-preview.png")}
+  alt="Preferences Center Designer Preview"
+/>
+
+> Publish the page to continue
+
+## Create a courier user profile
+
+In order for our user to be able to set their preferences and have them be respected, we must create a courier user profile for them. 
+<Image
+  img={require("./assets/create-user.png")}
+  alt="Create User"
+/>
+
+## Embedding the Preferences Center into a Typescript React app
+In this example, we will be adding the Courier Preferences Center to a Typescript React App that uses Webpack 5.
+You can look at the companion code [here.](https://github.com/trycourier/courier-guides/tree/main/preferences-center) 
+
+In our code we used the following: 
+
+- React 17, 
+- Typescript, 
+- Webpack 5
+- Material UI
+- Eslint
+- Yarn
+
+
+## Adding and configuring Courier Provider
+
+In Courier Studio, configure the Courier Provider under [channels.](https://app.courier.com/channels/courier) 
+Scroll all the way to the bottom and click install provider. Copy and paste your public Client Key and add it to your app as an environment variable in an .env file.
+
+We named our variable `REACT_APP_COURIER_CLIENT_KEY`
+
+Now, add the trycourier packages @trycourier/react-hooks, @trycourier/react-provider, and @trycourier/react-preferences like so
+```js
+yarn add @trycourier/react-hooks @trycourier/react-provider and @trycourier/react-preferences
+```
+
+:::caution All @trycourier packages must be the same version
+:::
+
+You also need to add styled-components as it is a peer dependency
+```js
+yarn add styled-components
+```
+
+Embed Courier Provider into your code 
+
+```js
+import {CourierProvider} from '@trycourier/react-provider';
+
+    <CourierProvider
+        clientKey={clientKey}
+        userId={userName}>
+    </CourierProvider>
+```
+
+:::info Configuration
+
+clientKey is obtained from the [Courier Provider]((https://app.courier.com/channels/courier)) in the Studio App.
+userId is the user whose preferences you wish to target. In the sample app, a dialogue has been created for input, but the user_id can be hardcoded.
+:::
+
+## Adding Courier Preferences list
+
+Now we can add PreferencesList as a child of CourierProvider. CourierProvider will provide preferences with our user context,
+this will allow PreferencesList to configure the user preferences without the need for more code configuration. 
+
+```js
+import {CourierProvider} from '@trycourier/react-provider';
+import {PreferenceList} from '@trycourier/react-preferences';
+    <CourierProvider
+        clientKey={clientKey}
+        userId={userName}>
+        <PreferenceList />
+    </CourierProvider>
+```
+
+## Using the Preferences App
+
+When we first open the sample app, we will see our userName input modal to target the specific user whose preferences we wish to change.
+<Image
+  img={require("./assets/preferences-app-empty-modal.png")}
+  alt="Username modal empty"
+/>
+ 
+Once we have submitted a username, we will see the default view of our Preferences Center.
+
+<Image
+  img={require("./assets/preferences-app-modal-filled.png")}
+  alt="Username modal filled"
+/>
+
+This list will look the same as the preview of our published preferences center.
+
+<Image
+  img={require("./assets/preferences-app-default.png")}
+  alt="Preferences App Default"
+/>
+
+## Subscribing to notifications
+
+We can switch the subscription toggles on to subscribe the user into the pictures and jokes subscription topics. 
+We can send the user a message with a picture.
+
+
+:::info User Id
+
+In order for a recipient to successfully set their preferences from a notification, you must include `to.user_id` in the Send request. This is because the `user_id` ties the recipient profile to their set preferences. If no `user_id` is present in the request, the preferences method will not register.
+
+:::
+
+<Image
+  img={require("./assets/preferences-app-subscribe.png")}
+  alt="Preferences App Subscribed To All"
+/>
+
+ Courier will see the user is opted in and the message will be sent. 
+The Courier log determining subscription will look like this
+
+<Image
+  img={require("./assets/user-opted-in.png")}
+  alt="User preferences opted in"
+/>
+
+## Unsubscribing from notifications
+We can click the toggles again to unsubscribe the user from the bird jokes topic.
+We can send the user a message with a joke. 
+
+:::info User Id
+
+In order for a recipient to successfully set their preferences from a notification, you must include `to.user_id` in the Send request. This is because the `user_id` ties the recipient profile to their set preferences. If no `user_id` is present in the request, the preferences method will not register.
+
+:::
+
+<Image
+  img={require("./assets/preferences-app-unsubscribe.png")}
+  alt="Preferences App Unsubscribed From Jokes"
+/>
+
+Courier will see the user is opted out and the message will not be sent. 
+The Courier log determining unsubscribe will look like this
+
+<Image
+  img={require("./assets/user-opted-out.png")}
+  alt="User preferences opted out"
+/>
+
+We hope this guide was useful to embed the Courier Preferences Center into a simple Typescript React app.
