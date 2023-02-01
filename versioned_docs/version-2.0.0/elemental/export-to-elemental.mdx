@@ -1,0 +1,50 @@
+---
+sidebar_position: 5
+slug: ./export-to-elemental
+toc_max_heading_level: 2
+---
+
+import Image from "@theme/IdealImage";
+import TOCInline from "@theme/TOCInline";
+
+# Export to elemental
+
+Courier Designer Studio offers DnD functionalities to build notification templates and users can invoke a notification by just referencing the template ID.
+
+Elemental on the other hand offers a powerful JSON based syntax to send notifications.
+
+We also offer interoperability between notification designer and elemental, so you get the best of the two worlds.
+
+Using Export to elemental feature, you can use designer to build notifications and then export it to elemental.
+
+## See it in action
+
+Click the dropdown on top-right of notification editor, and click "Export to elemental".
+
+<Image
+  img={require("../assets/guides/elemental/export-to-elemental.png")}
+  alt="Export to elemental"
+/>
+
+Copy and use the elemental syntax with your requests payload to send notifications.
+
+<Image
+  img={require("../assets/guides/elemental/export-to-elemental-output.png")}
+  alt="Export to elemental output"
+/>
+
+## Block types and node type mappings
+
+| Block type | Elemental node type(s)       |
+| ---------- | ---------------------------- |
+| text       | combination of text and list |
+| image      | image                        |
+| action     | action                       |
+| divider    | divider                      |
+| markdown   | text (format markdown)       |
+| quote      | quote                        |
+| template   | html                         |
+
+Note: List and jsonnet blocks, locales at the block level are not supported.
+
+Please reach out to support@courier.com if you have any questions.
