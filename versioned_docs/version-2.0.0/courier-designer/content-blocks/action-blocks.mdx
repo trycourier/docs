@@ -1,0 +1,71 @@
+---
+sidebar_position: 9
+---
+
+import Image from "@theme/IdealImage";
+import GifWrapper from "@site/src/components/GifWrapper";
+
+# Action Blocks
+
+> A detailed look at Courier Action Block functionality, use cases and best practices.
+
+## Working With Action Blocks
+
+**Availability:** All channels
+
+The action block presents the recipient with an action to perform. Depending on the channel, this could appear as a button or a link.
+
+<Image
+  img={require("../../assets/guides/action-blocks/action-block-new.png")}
+  alt="New Action Block"
+/>
+
+## Block Level Options
+
+When you select an action block, you are presented with a toolbar with the following formatting options depending on the notification channel.
+
+<GifWrapper width={920} height={614} caption="Action Block Options">
+
+![action block](../../assets/guides/action-blocks/action-block-options.gif)
+
+</GifWrapper>
+
+### Edit
+
+- Presents you with a modal to set the `Friendly Text` and `Action`. For most channels, the action is a URL. For Slack, you can opt to use a webhook.
+
+### Button
+
+- Displays the action as a button. If you drag a button from the reusable content library into a channel where the button is not an option, Courier automatically reformats it into a link.
+
+:::info Note
+
+Action buttons are not available across all channels. For SMS and Chat options, the button will render as a URL.
+
+:::
+
+### Text
+
+- Displays the action as a URL link.
+
+### Align
+
+- Allows you to align the content of the block left, center or right.
+
+### Color
+
+- Presents the users with a color picker to select the button color. You can use a color from the palette or enter the hex value for a custom color - or select from pre-defined brand template colors. This option is only available for action buttons.
+
+## Hide an Action Block Using Conditions
+
+It is possible to hide an action block - or any other type of block - using [conditional filters](../notification-settings/send-conditions.mdx/#for-content-blocks).
+
+<Image
+  img={require("../../assets/guides/action-blocks/action-block-filter.png")}
+  alt="Action Block Filter"
+/>
+
+<Image
+  img={require("../../assets/guides/action-blocks/action-block-condition.png")}
+  alt="Action Block Conditions"
+/>
