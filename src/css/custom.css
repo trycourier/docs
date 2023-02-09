@@ -592,3 +592,11 @@ code {
 .sidebar-preference-center .menu__link--active:before {
   background-image: url(/img/sidebar-icons/sequences-active.svg);
 }
+
+.sidebar-data .menu__link:before {
+  background-image: url(/img/sidebar-icons/notification-data.svg);
+}
+
+.sidebar-data .menu__link--active:before {
+  background-image: url(/img/sidebar-icons/notification-data-active.svg);
+}
