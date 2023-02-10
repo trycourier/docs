@@ -1,12 +1,14 @@
 ---
 sidebar_position: 0
 pagination_label: "Courier Preferences: Introduction"
+slug: ./
 ---
 
 # Introduction
 
 Fine-grained preferences management for your users.
-> Courier Preferences enables your users to set fine-grained preferences over the notifications they receive. 
+
+> Courier Preferences enables your users to set fine-grained preferences over the notifications they receive.
 
 Courier Preferences allow a user to determine which notifications and channels they receive. These notifications are grouped into a preference array that you can then use to integrate a pre-built notification center into your notifications.
 
@@ -18,12 +20,13 @@ In order for a recipient to successfully set their preferences from a notificati
 
 ## How Preferences Work
 
-Preferences take your existing notification templates and allow you to group them into an array of preferences your users can easily customize. This array of preferences is made up of preference topics and preference sections. Notification templates that contain similar information can be grouped into preference topics. Preference topics that contain a similar grouping of notifications and channels can be integrated into preference sections. 
+Preferences take your existing notification templates and allow you to group them into an array of preferences your users can easily customize. This array of preferences is made up of preference topics and preference sections. Notification templates that contain similar information can be grouped into preference topics. Preference topics that contain a similar grouping of notifications and channels can be integrated into preference sections.
 
 You can create and manage these sections and topics in the preference center. Once created, you can use our new notification center, preferences react component, or preferences APIs. We recommend you use our new notification center, it’s a link that can be added to your notification templates or brands in a few steps.
 
 ### What is a Preference Topic?
-Preference topics are groups of notifications your users can opt-in and out of. 
+
+Preference topics are groups of notifications your users can opt-in and out of.
 
 - If you’re a ride-sharing company, one of your topics might be promotions. In Courier you can create a preference topic for each type of notification your user wants to manage.
 - If you’re a bank, you might have required and optional account updates. In this case, having both topics would ensure users have control over the optional account updates.
@@ -32,11 +35,11 @@ Note: Topics can have many notification templates attached to them, but not vice
 
 All preference topics come with a default state of “on”, “off”, or “required”. By default, every preference topic is set to “on” so that users will receive notifications attached to this topic. Preference topics with their default state set to “off” allow their users to opt-in to notifications instead of receiving them by default. A default state set to “required” will prevent users from opting out of those notifications.
 
-Learn more about Preference Topics [here](../preference-center/designer/#preference-topics).
+Learn more about Preference Topics [here](./preference-center/designer/#preference-topics).
 
 ### What is a Preference Section?
 
-Preference sections are groups of preference topics that your users can manage their preferred communications channels with. 
+Preference sections are groups of preference topics that your users can manage their preferred communications channels with.
 
 - If you’re an internet financial infrastructure company, one of your sections might be “Payments”. In Courier, you can create a preference section and enable users to select interchangeably between Slack, Email, and Text as their preferred method of communication.
 
@@ -44,8 +47,7 @@ Note: Preference sections can have many preference topics attached to them, but 
 
 Courier Preferences supports all four of our [Courier Channels](https://help.courier.com/en/articles/4196354-what-are-channels-and-integrations) including webhooks out of the box. Enabling your users to customize their preferred method of communication is called “Channel Delivery Customization” and is currently available for our enterprise-tier customers. Contact….. (add where to talk to us)
 
-Learn more about Preference Sections [here](../preference-center/designer/#preference-sections).
-
+Learn more about Preference Sections [here](./preference-center/designer/#preference-sections).
 
 ## Using your Preferences
 
@@ -55,10 +57,10 @@ Please note that when sending a notification Courier Preferences relies on the `
 
 Also, when sending a notification that is linked to a topic, please note that user preferences set to that topic are respected first before other preferences, notification conditions, or channel conditions. If you’ve set a topic ad-hoc in the send call, the user preferences set to that topic will be respected first.
 
-Learn more about the Preferences Designer [here](../preference-center/designer).
+Learn more about the Preferences Designer [here](./preference-center/designer).
 
 ### Hosted Page
 
-The hosted page is a customizable page that displays the topics and sections so users can set their preferences. This page can be created and managed in the preference center.  For enterprise customers, the page is styled by your default brand and displays your logo and links in the header and footer respectively. Courier does not currently support customized domains on this page, support for this is coming soon.
+The hosted page is a customizable page that displays the topics and sections so users can set their preferences. This page can be created and managed in the preference center. For enterprise customers, the page is styled by your default brand and displays your logo and links in the header and footer respectively. Courier does not currently support customized domains on this page, support for this is coming soon.
 
-Learn more about the Hosted Page [here](../preference-center/hosted-page).
+Learn more about the Hosted Page [here](./preference-center/hosted-page).
