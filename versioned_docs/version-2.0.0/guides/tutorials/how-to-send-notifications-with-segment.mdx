@@ -106,10 +106,14 @@ Additionally, `refs.data` points to the data object from Segment. `refs.data.use
 
 ### Courier as a Segment Source
 
-You can also configure Courier to send events to your segment integration. This allows you to track Courier events in segment 
+You can also configure Courier to send events to your segment integration. This allows you to track Courier events in segment.
 
-To do so, insert your [Segment Write Key](https://segment.com/docs/connections/find-writekey/) in the Segment source write key input in Courier Studio.
-When you click away from the input field, the write key will be saved and the value will be masked like below.
+1. In Segment, navigate to the Sources page (under “Connections”) (https://app.segment.com/[your-workspace-name]/sources)
+2. Select your framework of choice (e.g. Node.js).
+3. Get a write key.
+  - Once you’ve added Node.js as a source, you’ll see a page with instructions on how to add Segment to your Node.js codebase. You’ll be given a write key, which you can copy.
+4. Insert your [Segment Write Key](https://segment.com/docs/connections/find-writekey/) in the Segment source write key input in Courier Studio.
+5. *Click away from the input field* to save and the value will be masked like below.
 
 <Image
   img={require("../../assets/guides/tutorials/segment-write-key.png")}
