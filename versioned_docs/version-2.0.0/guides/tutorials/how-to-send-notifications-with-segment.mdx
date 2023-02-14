@@ -35,11 +35,11 @@ Within Courier you can access the Segment integration to:
 - Check for events and view all events (sent via Segment and received by Courier)
 - Link Courier automations to received events
 
-Initially, you will need to connect Courier as a destination within Segment. At this stage, you will receive a “No events received” message within Courier.
+Initially, you will need to connect Courier as a destination within Segment. At this stage, you will see your segment event table empty and waiting for events.
 
 <Image
   img={require("../../assets/guides/tutorials/segment-no-events.png")}
-  alt="Courier - Install Segment (No Events Received)"
+  alt="Courier - Segment"
 />
 
 ## Configure Segment
@@ -48,7 +48,7 @@ By connecting Segment to Courier, you can use the `analytics.identify` and `anal
 
 ### Connecting Segment
 
-1. Once logged into the Segment app, navigate to the [Destinations](https://app.segment.com/courier-shreya/destinations) catalog page and click **Add Destination**.
+1. Once logged into the Segment app, navigate to the [Destinations](https://segment.com/docs/connections/destinations) catalog page and click **Add Destination**.
 2. Search for Courier in the Destinations Catalog, and select the Courier destination.
 3. Choose which Source should send data to the Courier destination.
 4. In the [Courier Integrations Page](https://app.courier.com/integrations), search for Segment and click on it to access the Courier API Key. (If you do not see a key here, go to the [Courier Settings Page](https://app.courier.com/settings) and copy the Auth Token from the API Keys section.)
@@ -63,7 +63,7 @@ In order to receive your first event from Segment, navigate to the destination's
   alt="Segment - Test Event"
 />
 
-In the Courier API, refresh the page or click "Check for Events" and you will see the event appear in a list if the destination setup and test event send were successful. Below is an example of a test track event sent through Segment.
+In the Courier Studio, refresh the page or wait a couple of seconds and you will see the event appear in a list if the destination setup and test event send were successful. Below is an example of a test track event sent through Segment.
 
 <Image
   img={require("../../assets/guides/tutorials/segment-event-received.png")}
@@ -102,6 +102,40 @@ Additionally, `refs.data` points to the data object from Segment. `refs.data.use
 <Image
   img={require("../../assets/guides/tutorials/segment-new-automation.png")}
   alt="Courier - Automation Send Step"
+/>
+
+### Courier as a Segment Source
+
+You can also configure Courier to send events to your segment integration. This allows you track Courier events in segment 
+
+To do so, insert your [Segment Write Key](https://segment.com/docs/connections/find-writekey/) in the Segment source write key input in Courier Studio.
+When you click away from the input field the write key will be saved and the value will be masked like below
+
+<Image
+  img={require("../../assets/guides/tutorials/segment-write-key.png")}
+  alt="Courier - Segment Write Key Saved"
+/>
+
+After adding your Segment write key, Courier will send updates to Segment. 
+Events include messages being sent, opened, clicked, delivered, unroutable, and undeliverable. 
+
+<Image
+  img={require("../../assets/guides/tutorials/segment-courier-events.png")}
+  alt="Courier - Example Courier Segment Event"
+/>
+
+These events will also be forwarded to Courier, if you've set it as a destination
+
+<Image
+  img={require("../../assets/guides/tutorials/segment-events-from-courier.png")}
+  alt="Courier - Courier Events from Segment"
+/>
+
+You can then use these events to map other automations 
+
+<Image
+  img={require("../../assets/guides/tutorials/segment-courier-events-configured.png")}
+  alt="Courier - Courier Events from Segment Configured"
 />
 
 ### Segment API: Identify Calls
