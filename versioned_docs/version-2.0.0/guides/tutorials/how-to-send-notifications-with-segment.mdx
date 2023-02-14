@@ -30,12 +30,12 @@ Prior to sending notifications with Segment you will need the following:
 
 ## Install Segment
 
-Within Courier you can access the Segment integration to:
+Within Courier, you can access the Segment integration to:
 
 - Check for events and view all events (sent via Segment and received by Courier)
 - Link Courier automations to received events
 
-Initially, you will need to connect Courier as a destination within Segment. At this stage, you will see your segment event table empty and waiting for events.
+You will need to connect Courier as a destination within Segment. At this stage, you will see your segment event table empty and waiting for events.
 
 <Image
   img={require("../../assets/guides/tutorials/segment-no-events.png")}
@@ -223,3 +223,7 @@ Segment API keys will follow the environment you're in. If you'd like to configu
 The reicipient ID will only autopopulate if and when the template is linked to a Segment event. To ensure this, head over to the Segment integration page and make sure that your automation is linked to the correct event. You can also do this by checking the first step of the Automation template itself, labelled "Start".
 
 Once linked to an event, try to refresh the template and check if the reicipient ID appears. If it does not, you can manually write `refs.data.userid` into the recipient ID field.
+
+3. **How do I disable Courier as a Segment source?**
+
+Remove the write key from the Segment Integration page in the Courier Studio and *click away*.
