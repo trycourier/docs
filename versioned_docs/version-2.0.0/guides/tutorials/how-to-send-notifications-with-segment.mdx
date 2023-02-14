@@ -218,16 +218,16 @@ If the email property isn’t being read into Courier, try to place `email` with
 
 ## FAQs
 
-1. **What is the difference between Courier's live and test environments in relation to Segment?**
+**1. What is the difference between Courier's live and test environments in relation to Segment?**
 
 Segment API keys will follow the environment you're in. If you'd like to configure Segment with your production API keys, configure in it the product environment. If you'd like to configure Segment with your test API keys, configure it in the test environment.
 
-2. **What should I do if the recipient ID in the Automation template does not autopopulate?**
+**2. What should I do if the recipient ID in the Automation template does not autopopulate?**
 
 The reicipient ID will only autopopulate if and when the template is linked to a Segment event. To ensure this, head over to the Segment integration page and make sure that your automation is linked to the correct event. You can also do this by checking the first step of the Automation template itself, labelled "Start".
 
 Once linked to an event, try to refresh the template and check if the reicipient ID appears. If it does not, you can manually write `refs.data.userid` into the recipient ID field.
 
-3. **How do I disable Courier as a Segment source?**
+**3. How do I disable Courier as a Segment source?**
 
 Remove the write key from the Segment Integration page in the Courier Studio and *click away*.
