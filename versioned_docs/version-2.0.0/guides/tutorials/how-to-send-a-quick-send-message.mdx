@@ -1,13 +1,11 @@
 ---
-sidebar_position: 11
+sidebar_position: 10
 description: Learn how-to send browser and mobile push notifications using Segment and Courier.
 ---
 
 import Image from "@theme/IdealImage";
 
-# Quick Send
-
-Courier’s Destination for Segment provides an easy way to send data from Web or Mobile applications into Courier to improve notification delivery and management. Data and events flow from your application through Segment’s integration to Courier. In order to use Courier's Segment destination, you must already have Segment installed in your application.
+# How to Send a Notification with Quick Send
 
 ## What is Quick Send?
 
@@ -18,13 +16,15 @@ Quick Send is a product feature that enables a one time send to be crafted and s
 ### Creating Content to Send
 
 First, start by creating content that you’d wish to send to your users. Enter a title and a message to send. You may also decide
-what language you want this content to be displayed as from the drop down menu shown below.
+what language you want this content to be displayed as by using the drop down menu shown below.
+
+Here, you can also choose to bold or italicize your message as well.
 
 <Image
   img={require("../../assets/guides/tutorials/image1.png")}
 />
 
-Here, you can also choose to bold or italicize your message as well.
+
 
 
 ### Branding
@@ -40,7 +40,7 @@ You can also add a button to your message and customize its title.
   img={require("../../assets/guides/tutorials/image2.png")}
 />
 
-For the Button URL, “https://” is not required. For instance, “courier.com” is acceptable as a URL for a button. 
+For the Button URL, “https://” is not required. For instance, “courier.com” is acceptable as a URL.
 
 ### Adding Tags
 
@@ -55,6 +55,8 @@ Here, we’ll add a tag named “Welcome”.
 <Image
   img={require("../../assets/guides/tutorials/image4.png")}
 />
+
+You can now see the tag has been successfully added.
 
 <Image
   img={require("../../assets/guides/tutorials/image5.png")}
@@ -93,6 +95,7 @@ Each dropdown option will display their name and ID.
   img={require("../../assets/guides/tutorials/image9.png")}
 />
 
+
 Quick Send requires that you have Users, Lists, or Audiences created prior to using Quick Send. There is no ability to create a recipient within this feature. 
 
 <Image
@@ -106,13 +109,13 @@ Quick Send requires that you have Users, Lists, or Audiences created prior to us
   img={require("../../assets/guides/tutorials/image11.png")}
 />
 
-Every Quick Send message requires routing to be properly configured. This means adding a channel to both sections, “Always sent to” and “Send to the best of”. When clicking on “Add Channel”, you will see the following
+Every Quick Send message requires routing to be properly configured. This means adding a channel to both sections, “Always sent to” and “Send to the best of”. When clicking on “Add Channel”, you will see the following.
 
 <Image
   img={require("../../assets/guides/tutorials/image12.png")}
 />
 
-Select whichever channel you want for your notification. For the sake of this example, we’ll choose the “Email” option. 
+Select whichever channel you want for your notification. For the sake of this example, we’ll choose the “Email” option. After making this selection, we see the following.
 
 <Image
   img={require("../../assets/guides/tutorials/image13.png")}
@@ -142,7 +145,7 @@ Now, click “Add Channel” under “Send to the best of”.
   img={require("../../assets/guides/tutorials/image17.png")}
 />
 
-For this example, the “Email” option is chosen once more, and an “Email channel will automatically add/configure the provider that was recently configured. For this example, we used “Gmail”. We see that an “Email” channel with “Gmail” as a provider was automatically configured under the “Send to the best of” section of our routing settings. 
+For this example, the “Email” option is chosen once more, and an “Email" channel will automatically add/configure the provider that was recently configured. For this example, we used “Gmail”. We see that an “Email” channel with “Gmail” as a provider was automatically configured under the “Send to the best of” section of our routing settings. 
 
 <Image
   img={require("../../assets/guides/tutorials/image18.png")}
@@ -158,7 +161,7 @@ In order to preview, ensure that you add a recipient.
   img={require("../../assets/guides/tutorials/image19.png")}
 />
 
-Ensure that you select a recipient and once you do this, you will have the ability to see how said recipient will receive your Quick Send message. 
+Ensure that you select a recipient. Once you do this, you will have the ability to see how said recipient will receive your Quick Send message. 
 
 <Image
   img={require("../../assets/guides/tutorials/image20.png")}
