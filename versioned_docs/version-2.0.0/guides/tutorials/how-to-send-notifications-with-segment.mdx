@@ -48,6 +48,11 @@ By connecting Segment to Courier, you can use the `analytics.identify` and `anal
 
 ### Connecting Segment
 
+<Image
+  img={require("../../assets/guides/tutorials/segment-destination-setup.gif")}
+  alt="Segment Courier Destination Setup"
+/>
+
 1. Once logged into the Segment app, navigate to the [Destinations](https://segment.com/docs/connections/destinations) catalog page and click **Add Destination**.
 2. Search for Courier in the Destinations Catalog, and select the Courier destination.
 3. Choose which Source should send data to the Courier destination.
@@ -107,6 +112,16 @@ Additionally, `refs.data` points to the data object from Segment. `refs.data.use
 ### Courier as a Segment Source
 
 You can also configure Courier to send events to your segment integration. This allows you to track Courier events in segment.
+
+<Image
+  img={require("../../assets/guides/tutorials/segment-courier-add-source.gif")}
+  alt="Add Couier as Segment Source"
+/>
+
+<Image
+  img={require("../../assets/guides/tutorials/segment-courier-source-setup.gif")}
+  alt="Add Segment Write Key"
+/>
 
 1. In Segment, navigate to the Sources page (under “Connections”).
 2. Select your framework of choice (e.g. Node.js).
