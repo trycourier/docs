@@ -1,0 +1,34 @@
+---
+sidebar_label: Migration to new Courier Preferences
+pagination_label: Migration to new Courier Preferences
+slug: ./migration
+---
+
+import Image from "@theme/IdealImage";
+
+# Migrating to new Courier Preferences
+
+:::info Get started with Courier Preferences
+If you haven't already, you can get started with Courier Preferences by following the [Getting Started Guide](../).
+:::
+
+## Changes to your unsubscribe link
+
+With the launch of Courier Preferences we're upgrading the unsubscribe link in your emails to a new UI and linking existing user preferences to Courier Preferences topics.
+For each notification template that one of your recipients has unsubscribed from, Courier has created a matching topic in Courier Preferences.
+Existing preferences for users will still be respected after this migration.
+
+## Migrating from Categories
+
+Courier is slowly depreciating the use of categories in notification templates in favor of Courier Preferences.
+Courier Preferences takes the best parts of categories but adds a lot more flexibility and control and with this migration,
+your existing categories preferences will still work as you've set them.
+For each category you've created, we've created a matching topic in Courier Preferences.
+The topic we've created matches the default state of the category so if you had a category that was enabled by default, the topic will be enabled by default.
+Recipient preferences attached to categories will still be respected.
+
+## Migrating from old Preferences
+
+For users of old Courier Preferences, we've migrated your preferences to the new Courier Preferences.
+Your preference templates still exist, but are now attached to a section. All your preference temtplate settings
+have been migrated for you.
