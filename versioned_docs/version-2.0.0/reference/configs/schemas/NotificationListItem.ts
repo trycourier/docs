@@ -1,6 +1,38 @@
 import { ApiParam } from "@site/src/components/ApiReference/ApiParamField";
 import NotificationTag from "./NotificationTag";
-import { routing } from "./Send";
+
+const NotificationRoutingMethodField: ApiParam = {
+  type: "string",
+  name: "method",
+  description:
+    "The method for selecting channels to send the message with. If no method is specified, then 'single' will be used as default.",
+  enum: ["all", "single"],
+};
+
+const NotificationRoutingChannelsField: ApiParam = {
+  type: "array",
+  name: "channels",
+  description:
+    "An array of valid channel identifiers (like email, push, sms, etc.) and additional routing nodes.",
+  field: {
+    type: "oneOf",
+    options: [
+      { type: "string" },
+      {
+        type: "object",
+        fields: [
+          NotificationRoutingMethodField,
+          {
+            type: "array",
+            field: {
+              type: "string",
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
 
 const NotificationListItem: ApiParam = {
   type: "object",
@@ -20,8 +52,10 @@ const NotificationListItem: ApiParam = {
       description: "A unique identifier associated with the notification.",
     },
     {
-      ...routing,
+      type: "object",
+      name: "routing",
       description: "Routing strategy used by this notification.",
+      fields: [NotificationRoutingMethodField, NotificationRoutingChannelsField],
     },
     {
       type: "object",
