@@ -64,6 +64,7 @@ const NotificationListItem: ApiParam = {
       fields: [
         {
           type: "array",
+          name: "data",
           field: NotificationTag,
         },
       ],
