@@ -9,6 +9,12 @@ const NotificationTag: ApiParam = {
       example: "Important",
       description: "A unique identifier of the tag.",
     },
+    {
+      type: "string",
+      name: "name",
+      example: "Important",
+      description: "Name of the tag.",
+    },
   ],
 };
 
