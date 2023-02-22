@@ -2,32 +2,27 @@
 sidebar_position: 4
 ---
 
-import Image from "@theme/IdealImage";
-
 # Custom Domain Tracking
 
-Learn how Courier can build tracking links with your domain in the URL.
+By default, Courier uses `ct0.app` for link tracking. Courier business tier customers can opt for custom tracking domain (ex: tracking.mywebsite.com) if interested!
 
-## Using Courier domain for link tracking
+## Setting up custom tracking
 
-Courier uses `ct0.app` as the default domain exclusively for link tracking. If you have enabled link tracking for your workspace, your links would have this default behavior.
+While we are planning on making this a self-served process soon, at the moment it requires you working with Courier Support.
 
-<Image img={require("../../assets/guides/custom-domain-tracking/default.png")} alt="" />
+### Provide us the tracking URL
 
-## Using yourcompany.com for link tracking
+This would typically be something like `tracking.mywebsite.com`
 
-Below steps would require you working with Courier Support and someone with an access to your company's DNS records.
+### Modifying DNS entries
 
-### Modifying DNS records
+This step requires adding 2 new DNS records on your end.
 
-You'll need to add the following CNAME record entry to your DNS host. This process varies depending on your DNS host.
+a. First one is for cert validation. Based on your tracking URL, Courier will create a certificate and ask you to confirm/validate.
+This cert is required so our infrastructure allows requests redirected from you during tracking resolution. Work with Courier support staff to get this added.
 
-`<workspace-id>.<your-domain>`
+b. Second one is adding `tracking.mywebsite.com` CNAME `tracking.ct0.app`
 
-### Courier enabling this feature for you
+### Go live
 
-After updating the record, work with Courier support who will enable this feature for you.
-
-Once its enabled, all links would look like below (courier-dev.com is where your company domain would appear)
-
-<Image img={require("../../assets/guides/custom-domain-tracking/custom.png")} alt="" />
+After updating the DNS records, work with Courier support who will enable this feature for you. Once enabled, all links would be routed through your tracking domain.

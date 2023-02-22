@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 4
 slug: ./triggers
 toc_max_heading_level: 2
 ---
@@ -21,7 +21,7 @@ To invoke an Automation Run on a reoccurring schedule you can attach a Cron trig
 
 <Image img={require("../assets/automations/visual-mode-start-block.png")} alt="" />
 
-2. Enter a cron schedule expression to invoke the Automation Run. You can use https://crontab.guru/ to dial in your cron expression. In this example I will invoke the Automation Run every hour.
+2. Enter a cron schedule expression to invoke the Automation Run. This input accepts a cron time string (https://crontab.guru/) or an ISO 8601 date time. In this example, we will invoke the Automation Run every hour.
 
 <Image img={require("../assets/automations/visual-mode-cron-expression.png")} alt="" />
 
@@ -33,7 +33,7 @@ To invoke an Automation Run given a Segment Track event on group or identity you
 
 <Image img={require("../assets/automations/visual-mode-track-event.png")} alt="" />
 
-2. In this example I will add a track Segment event to invoke the Automation Run.
+2. In this example, we will add a track Segment event to invoke the Automation Run.
 
 <Image img={require("../assets/automations/visual-mode-track-event-form.png")} alt="" />
 

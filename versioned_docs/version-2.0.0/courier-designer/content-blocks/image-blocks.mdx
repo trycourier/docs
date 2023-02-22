@@ -1,0 +1,48 @@
+---
+sidebar_position: 6
+---
+
+import Image from "@theme/IdealImage";
+
+# Image Blocks
+
+> A detailed look at Image Block functionality, use cases and best practices.
+
+## Working With Image Blocks
+
+<Image
+  img={require("../../assets/guides/image-blocks/image-block-new.png")}
+  alt="New Image Block"
+/>
+
+## Cross-Channel Behaviors
+
+### SMS, Push
+
+- When you add a new image block or pull one in from the library in SMS, push or DM, you will see the image URL. 
+- How that URL is unfurled will depend on the integrated channel provider.  
+
+### Direct Message
+
+- If you have one of these direct message integrations as a channel, you will see the image block display your image in real-time in the editor, no preview links.
+
+<Image
+  img={require("../../assets/guides/image-blocks/image-block-fb.png")}
+  alt="Image Block Rendering"
+/>
+
+## Hiding Image Blocks Using Conditions
+
+It is possible to hide an image block (or any other type of block) using [conditional filters](../notification-settings/send-conditions.mdx/#for-content-blocks).
+
+<Image
+  img={require("../../assets/guides/image-blocks/image-block-filter.png")}
+  alt="Image Block Filter"
+/>
+
+<Image
+  img={require("../../assets/guides/image-blocks/image-block-condition.png")}
+  alt="Image Block Conditional"
+/>
+
+**Read more:** [Content block basics](content-block-basics.mdx)
