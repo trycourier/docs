@@ -3,7 +3,7 @@ import topicPreferenceInput from "../schemas/topic-preference-input"
 const config: ApiReferenceProps = {
   description:
     "Update or Create user preferences for a specific subscription topic",
-  method: "PATCH",
+  method: "PUT",
   path: "/users/:user_id/preferences/:topic_id",
   pathParams: [
     {
@@ -33,8 +33,8 @@ const config: ApiReferenceProps = {
         fields: [
           {
             type: "string",
-            name: "status",
-            example: "SUCCESS",
+            name: "message",
+            example: "success",
           },
         ],
       },
