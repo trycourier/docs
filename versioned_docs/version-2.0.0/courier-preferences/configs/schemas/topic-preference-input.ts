@@ -2,6 +2,7 @@ import { ApiParam } from "@site/src/components/ApiReference/ApiParamField";
 
 const Paging: ApiParam = {
   type: "object",
+  name: "topic",
   displayName: "Subscription Topic Preferences Input",
   fields: [
     {
