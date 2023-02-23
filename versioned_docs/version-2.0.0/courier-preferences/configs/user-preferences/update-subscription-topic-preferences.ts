@@ -30,11 +30,10 @@ const config: ApiReferenceProps = {
       description: "OK",
       body: {
         type: "object",
-        name: "message",
         fields: [
           {
             type: "string",
-            name: "status",
+            name: "message",
             example: "success",
           },
         ],
