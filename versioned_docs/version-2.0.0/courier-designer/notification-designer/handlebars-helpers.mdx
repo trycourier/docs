@@ -749,12 +749,12 @@ Returns an Unix epoch timestamp (seconds) as a millisecond epoch time value. Thi
 
 ### Pluralizing Text
 
-The `formatMessage` helper can be used to pluralize text in rendered content
+The `formatMessage` helper can be used to pluralize text in rendered content. Pluralization respects the [ICU format](https://unicode-org.github.io/icu/userguide/format_parse/messages/) and entries follow [Unicode CLDR rules](https://cldr.unicode.org/index/cldr-spec/plural-rules).
 
 **Example**
 ```handlebars
 Your list contains {{formatMessage "{itemCount, plural,
-	=0 {no items}
+    =0 {no items}
     one {# item}
     other {# items}
 }" itemCount=itemCount}}.
