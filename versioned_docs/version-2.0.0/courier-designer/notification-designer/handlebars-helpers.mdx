@@ -746,3 +746,16 @@ Returns an Unix epoch timestamp (seconds) as a millisecond epoch time value. Thi
   <mj-text align="center">Hello!</mj-text>
 {{/if}}
 ```
+
+### Pluralizing Text
+
+The `formatMessage` helper can be used to pluralize text in rendered content
+
+**Example**
+```handlebars
+Your list contains {{formatMessage "{itemCount, plural,
+	=0 {no items}
+    one {# item}
+    other {# items}
+}" itemCount=itemCount}}.
+````
