@@ -1,0 +1,68 @@
+---
+sidebar_position: 1
+---
+
+import Image from "@theme/IdealImage";
+
+# Get Rendered Notification Content
+
+> The Courier [Messages API](../reference/messages/history-by-id.mdx) lets you get the rendered output of any Courier notification in your send history using the history endpoint.
+
+The Courier Messages API allows you to fetch the array of events of a message you've previously sent, including the rendered content by using the endpoint.
+
+To fetch the content for a given message there are two API calls that you need to make
+
+1. Fetch message history using GET /messages/{message_id}/history and the message ID that was returned in response to your send command.
+
+2. Fetch message content using a  root-relative URL
+
+## Fetch Message History
+
+Message history can be fetched by calling the history [endpoint](../reference/messages/history-by-id.mdx) or by calling the getMessageHistory function in our SDKs.
+
+Message history will contain a `RENDERED` event that contains links to the rendered output for the message.
+
+<Image
+  img={require("../assets/guides/message-rendered/rendered-sample.png")}
+  alt="Example of a Rendered Event"
+/>
+
+## Fetch Message Content
+
+The output section in the history response contains the root-relative URL that can be used to fetch the content that was rendered and sent to the provider. The output url must be appended to the Courier API host (https://api.courier.com).
+
+Here is an example of a rendered push event:
+
+<Image
+  img={require("../assets/guides/message-rendered/rendered-content.png")}
+  alt="Example of a Rendered Push Event"
+/>
+
+## Rendered Content for Emails
+
+`HTML` content is returned with a `content-type` of text/html  and the response is raw HTML:
+
+```json
+content-type: text/html
+content-length: 32015
+date: Tue, 26 Oct 2021 17:10:10 GMT
+x-amzn-requestid: e9d54717-3cb0-4f1e-a47a-b64317738596
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000;includeSubDomains;preload
+x-amz-apigw-id: H01x2GapIAMFgnA=
+x-content-type-options: nosniff
+x-amzn-trace-id: Root=1-61783672-23906a806f14d99d7d10ee9e
+access-control-allow-credentials: true
+x-cache: Miss from cloudfront
+via: 1.1 55429f2d64d86ac51a104a1c84030e14.cloudfront.net (CloudFront)
+x-amz-cf-pop: SFO5-C1
+x-amz-cf-id: TOmwTJ_vtG_PZ5EIxf0nSqJ9wz7YBcg0j0uRsMFqghDd0eY5-jB7jw==
+```
+
+The sample response:
+
+<Image
+  img={require("../assets/guides/message-rendered/rendered-response.png")}
+  alt="Example of an Email Response"
+/>
+
