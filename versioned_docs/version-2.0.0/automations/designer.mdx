@@ -8,6 +8,7 @@ toc_max_heading_level: 2
 import Image from "@theme/IdealImage";
 import connectingNodesURL from "./assets/connecting-nodes.mp4";
 import draggingNodesURL from "./assets/dragging-nodes.mp4";
+import ifNodeURL from "./assets/if-node.mp4";
 
 # The Automations Designer
 
@@ -54,7 +55,22 @@ target node:
   <source src={connectingNodesURL} />
 </video>
 
-# Invoking A Template
+## Conditional Flow
+
+Automations can conditionally execute a branch of the workflow. This can be useful in any
+case where you may want to change the actions of an automation based on certain data sent
+with the template.
+
+For example, you may want to send one template if one data field represents a certain value,
+or another template if it does not:
+
+<video width="783" loop autoplay controls>
+  <source src={ifNodeURL} />
+</video>
+
+## Invoking A Template
+
+**Be sure to publish the template before invoking (using the publish button in the upper right)**
 
 There are a few ways to invoke a template, either through a trigger node, or through an api call.
 
