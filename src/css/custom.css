@@ -521,6 +521,14 @@ code {
   background-image: url(/img/sidebar-icons/channels-active.svg);
 }
 
+.sidebar-external-integrations .menu__link:before {
+  background-image: url(/img/sidebar-icons/external-integrations.svg);
+}
+
+.sidebar-external-integrations .menu__link--active:before {
+  background-image: url(/img/sidebar-icons/external-integrations.svg);
+}
+
 .sidebar-client-libraries .menu__link:before {
   background-image: url(/img/sidebar-icons/client-libraries.svg);
 }
