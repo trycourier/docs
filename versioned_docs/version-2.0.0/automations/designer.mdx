@@ -43,7 +43,7 @@ The bottom one acts as a placeholder for action and control flow nodes.
 To add nodes, expand from the list on the left and then click and drag a node onto the right. The
 first trigger and action node will snap into their respective placeholders:
 
-<video width="783" loop autoplay controls>
+<video width="783" loop autoplay muted controls>
   <source src={draggingNodesURL} />
 </video>
 
@@ -51,7 +51,7 @@ Nodes are executed sequentially through their connections, from top to bottom. T
 nodes, click and drag from the white dot at the bottom of the source node to the top of the
 target node:
 
-<video width="783" loop autoplay controls>
+<video width="783" loop autoplay muted controls>
   <source src={connectingNodesURL} />
 </video>
 
@@ -64,7 +64,7 @@ with the template.
 For example, you may want to send one template if one data field represents a certain value,
 or another template if it does not:
 
-<video width="783" loop autoplay controls>
+<video width="783" loop autoplay muted controls>
   <source src={ifNodeURL} />
 </video>
 
@@ -83,3 +83,41 @@ the designer and invoke it by calling POST `api/automations/:template_id_here/in
 more details.
 
 <Image img={require("./assets/renaming.png")} alt="Template ID location, settings tab" />
+
+## Accessing Dynamic Data
+
+All fields within the designer can be pointed to dynamic data using a special `refs` object syntax.
+
+The `refs` object has access to the following properties:
+
+- `brand`
+  - type: string
+  - description: A unique identifier that represents the brand that should be used for rendering the notification.
+- `data`
+  - type: object
+  - description: An object that includes any data you want to pass to a message template or accessor type. The data will populate the corresponding template variables.
+- `profile`
+  - type: object
+  - description: an object that includes any key-value pairs required by your chosen Integrations (see our Provider Documentation for the requirements for each Integration.) If profile information is included in the request and that information already exists in the profile for the recipientId, that information will be merged.
+- `template`
+  - type: string
+  - description: A unique identifier that can be mapped to an individual Notification. This could be the "Notification ID” on Notification detail pages (see the Notifications page in the Courier app) or a custom string mapped to the event in settings.
+- `recipient`
+  - type: string
+  - description: A unique identifier associated with the recipient of the delivered message, which can optionally map to a Courier managed profile. -->
+
+These properties can all be set using the `invoke` api. Additionally, the data property can be initialized by triggers
+such as Segment, or modified by actions such as `Fetch Data`.
+
+For example, you can access the `userId` supplied by segment in a send node using `refs.data.userId`
+
+<Image img={require("./assets/refs-example.png")} alt="Template ID location, settings tab" />
+
+## Reserved Field values
+
+The following field values are reserved for current and future interpolation features. They can
+not be used literally in and input field.
+
+- `refs`
+- `data`
+- `profile`
