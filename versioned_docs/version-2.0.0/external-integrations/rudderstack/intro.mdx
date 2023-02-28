@@ -1,0 +1,37 @@
+---
+pagination_label: "Courier <-> RudderStack: Introduction"
+sidebar_position: 0
+slug: ./
+toc_max_heading_level: 2
+---
+
+# Overview
+
+## Introduction
+
+Courier RudderStack integration lets you seamlessly send your event data from a variety of event sources to Courier. All you need to do is configure Courier as a destination in RudderStack.
+
+You can also add RudderStack configure (write key, data plane URL) inside Courier workspace with which Courier events can be sent to RudderStack.
+
+## RudderStack to Courier
+
+RudderStack supports Courier as a destination. Once you configure Courier destination inside RudderStack, you should be able to connect one or more sources, and you should see events flowing into Courier.
+
+Events flowing in from RudderStack into Courier are visible on RudderStack integration page inside Courier Studio, from where you can map it to trigger notification workflows. For instance, you can trigger an automation that welcomes a new user if an `identify` event flows in from RudderStack.
+
+Supported RudderStack Events:
+
+- Identify
+- Track
+
+## Courier to RudderStack
+
+Courier generates events during execution workflow (for instance, a message sent event is generated when a message is sent to a user by Courier). These events can be sourced outbound to RudderStack, which can further unlock other powerful use-cases and potentially wire up other destinations inside RudderStack.
+
+## Example use-cases
+
+Following are some examples of use-cases you could achieve with Courier Rudderstack integration
+
+- User Sync from RudderStack to Courier
+- Welcoming new users based on sign-up tracking
+- Nudging users to upgrade to paid tier based on usage tracking
