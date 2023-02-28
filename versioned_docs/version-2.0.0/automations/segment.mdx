@@ -27,7 +27,7 @@ success condition. We'll start with the reminder condition.
    "Checkout Page Visited". Note: The track event dropdown is populated with events Courier has
    already received from Segment.
 
-<video width="783" loop autoplay muted controls>
+<video width="783" loop autoPlay muted controls>
   <source src={segmentTrackVisitedURL} />
 </video>
 
@@ -36,7 +36,7 @@ success condition. We'll start with the reminder condition.
 4. Connect the delay node to a new send node and select the desired template. We set the userId to
    `refs.data.userId`, which is the userId sent to us by segment.
 
-<video width="783" loop autoplay muted controls>
+<video width="783" loop autoPlay muted controls>
   <source src={settingUpDelayAndSendURL} />
 </video>
 
@@ -46,6 +46,12 @@ success condition. We'll start with the reminder condition.
    of this automation associated with the same user the notification would otherwise be sent to.
 6. Click publish to finalize the template
 
-<video width="783" loop autoplay muted controls>
+<video width="783" loop autoPlay muted controls>
   <source src={settingUpCancellationURL} />
 </video>
+
+The next automation will cancel the reminder automation from above, and send an invoice on
+successful checkout.
+
+1. Create a new automation.
+2. Add a Segment trigger node with a track event set to "Checkout
