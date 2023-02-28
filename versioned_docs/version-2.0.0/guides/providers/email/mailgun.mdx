@@ -102,7 +102,7 @@ AWS provides [a workaround](https://docs.aws.amazon.com/general/latest/gr/aws-ip
 ## Setup mailhooks for delivery status updates
 
 By default, after we send a message, Courier will poll Mailgun periodically to find out if the message was delivered successfully or not.
-To get faster status updates, you can setup a mailhook so Mailgun can report delivery status directly to Courier.
+To get faster status updates, you can setup a webhook so Mailgun can report delivery status directly to Courier.
 
 To start, login to Courier and visit the Mailgun provider configuration screen (from the Channels menu on the left side). There, you will find a Webhook URL.
 
@@ -118,4 +118,4 @@ On the webhooks screen, click the green "Add webhook" button on the right. For e
 
 Repeat the process to create a webhook for event type "Permanent Failure." Use the same URL for both webhooks.
 
-It takes Mailgun about a minute to start sending events to the webhooks. So, give it a minute or two, then go back to the Courier Mailgun configuration screen. Activate the toggle switch to "Disable polling for status updates." Now that webhooks are setup, you won't need polling anymore.
+It takes Mailgun about a minute to start sending events to the webhooks. So, give it a minute or two, then go back to the Courier Mailgun configuration screen. Activate the toggle switch to "Disable polling for status updates" and press the save button. Now that webhooks are setup, you won't need polling anymore.
