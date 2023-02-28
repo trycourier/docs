@@ -8,6 +8,9 @@ toc_max_heading_level: 2
 import segmentTrackVisitedURL from "./assets/segment-track-1.mp4";
 import settingUpDelayAndSendURL from "./assets/setting-up-delay-and-send.mp4";
 import settingUpCancellationURL from "./assets/setting-up-cancellation-token.mp4";
+import segmentCheckoutCompleteURL from "./assets/segment-checkout-complete.mp4";
+import segmentCancelNodeURL from "./assets/segment-cancel-node.mp4";
+import segmentSendCheckoutCompleteURL from "./assets/segment-send-checkout-complete.mp4";
 
 # Segment
 
@@ -54,4 +57,21 @@ The next automation will cancel the reminder automation from above, and send an 
 successful checkout.
 
 1. Create a new automation.
-2. Add a Segment trigger node with a track event set to "Checkout
+2. Add a Segment trigger node with a track event set to "Checkout Complete"
+
+<video width="783" loop autoPlay muted controls>
+  <source src={segmentCheckoutCompleteURL} />
+</video>
+
+3. Add a cancel automation node and set the token to the user id. This will prevent the reminder
+   to finish checking out from sending.
+
+<video width="783" loop autoPlay muted controls>
+  <source src={segmentCancelNodeURL} />
+</video>
+
+4. Send the Checkout Complete notification
+
+<video width="783" loop autoPlay muted controls>
+  <source src={segmentSendCheckoutCompleteURL} />
+</video>
