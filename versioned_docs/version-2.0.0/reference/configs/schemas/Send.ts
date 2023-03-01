@@ -78,6 +78,12 @@ const recipient: ApiParam = {
     },
     {
       type: "string",
+      name: "audience_id",
+      description:
+        "A unique identifier associated with a Courier Audiences. A message will be sent to each user in the audience.",
+    },
+    {
+      type: "string",
       name: "list_id",
       description:
         "A unique identifier associated with a Courier list of subscribers. A message will be sent to each subscriber in the list.",
