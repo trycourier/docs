@@ -1,0 +1,49 @@
+---
+sidebar_position: 3
+sidebar_label: Dynamic Data
+slug: ./dynamic
+toc_max_heading_level: 2
+---
+
+import Image from "@theme/IdealImage";
+
+# Accessing Dynamic Data
+
+All fields within the designer or an adhoc automation can be pointed to dynamic data using a special `refs` object syntax.
+
+The `refs` object has access to the following properties:
+
+- `brand`
+  - type: string
+  - description: A unique identifier that represents the brand that should be used for rendering the notification.
+- `data`
+  - type: object
+  - description: An object that includes any data you want to pass to a message template or accessor type. The data will populate the corresponding template variables.
+- `profile`
+  - type: object
+  - description: an object that includes any key-value pairs required by your chosen Integrations (see our Provider Documentation for the requirements for each Integration.) If profile information is included in the request and that information already exists in the profile for the recipientId, that information will be merged.
+- `template`
+  - type: string
+  - description: A unique identifier that can be mapped to an individual Notification. This could be the "Notification ID” on Notification detail pages (see the Notifications page in the Courier app) or a custom string mapped to the event in settings.
+- `recipient`
+  - type: string
+  - description: A unique identifier associated with the recipient of the delivered message, which can optionally map to a Courier managed profile. -->
+
+These properties can all be set using the `invoke` api. Additionally, the data property can be initialized by triggers
+such as Segment, or modified by actions such as `Fetch Data`.
+
+For example, you can access the `userId` supplied by segment in a send node using `refs.data.userId`
+
+<Image
+  img={require("./assets/refs-example.png")}
+  alt="Accessing userId dynamically using refs.data.userId within the send node"
+/>
+
+## Reserved Field values
+
+The following field values are reserved for current and future interpolation features. They can
+not be used literally in an input field.
+
+- `refs`
+- `data`
+- `profile`

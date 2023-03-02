@@ -1,0 +1,88 @@
+---
+sidebar_position: 2
+sidebar_label: Designer
+slug: ./designer
+toc_max_heading_level: 2
+---
+
+import Image from "@theme/IdealImage";
+import connectingNodesURL from "./assets/connecting-nodes.mp4";
+import draggingNodesURL from "./assets/dragging-nodes.mp4";
+import ifNodeURL from "./assets/if-node.mp4";
+
+# The Automations Designer
+
+The automations designer is a node-flow based visual programming environment designed for all
+technical skill levels.
+
+## Creating A Template
+
+Start by navigating to the [automations page within the Courier
+app](https://app.courier.com/automations). From there, a new automation template can be created by
+clicking the `New Automation` Button.
+
+<Image img={require("./assets/automations-list-page.png")} alt="Automations Home Page" />
+
+## Renaming The Template
+
+To rename a template, click the name in the upper left hand corner of the designer. By default, the
+name is "Untitled Automation". The name is automatically saved after being updated.
+
+<Image img={require("./assets/renaming.png")} alt="Renaming an automation template" />
+
+## Using Nodes
+
+A new template starts with two placeholder nodes. A trigger placeholder, and an action placeholder.
+
+The top placeholder with acts as a placeholder for an automation trigger node. A trigger node
+defines what starts an automation run. The trigger is optional, a template can always be directly
+triggered using the `api/automations/:template_id/invoke` api endpoint
+
+The bottom one acts as a placeholder for action and control flow nodes.
+
+To add nodes, expand from the list on the left and then click and drag a node onto the right. The
+first trigger and action node will snap into their respective placeholders:
+
+<video width="783" loop autoPlay muted controls>
+  <source src={draggingNodesURL} />
+</video>
+
+Nodes are executed sequentially through their connections, from top to bottom. To connect two
+nodes, click and drag from the white dot at the bottom of the source node to the top of the
+target node:
+
+<video width="783" loop autoPlay muted controls>
+  <source src={connectingNodesURL} />
+</video>
+
+## Control Flow
+
+Automations can conditionally execute a branch of the workflow. This can be useful in any
+case where you may want to change the actions of an automation based on certain data sent
+with the template.
+
+For example, you may want to send one template if one data field represents a certain value,
+or another template if it does not:
+
+<video width="783" loop autoPlay muted controls>
+  <source src={ifNodeURL} />
+</video>
+
+## Invoking A Template
+
+**Be sure to publish the template before invoking (using the publish button in the upper right)**
+
+There are a few ways to invoke a template, either through a trigger node, or through an api call.
+
+See [Scheduling automations](./scheduling.mdx) or [Triggering With Segment](./segment.mdx) for to get
+a feel of how trigger nodes work.
+
+To run an automation by api call, grab the automation template id from the settings section of
+the designer and invoke it by calling POST `api/automations/:template_id_here/invoke`. View
+[Automations API docs](https://www.courier.com/docs/reference/automation/invoke-template/) for
+more details.
+
+<Image
+  img={require("./assets/template-id-location.png")}
+  alt="Template ID location, settings tab"
+/>
