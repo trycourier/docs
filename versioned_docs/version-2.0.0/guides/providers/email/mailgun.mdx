@@ -112,10 +112,12 @@ Copy this URL, then login to Mailgun. On the left side, choose Sending, then Web
 
 <Image img={require("../../../assets/guides/mailgun/mailgun-ui.png")} alt="" />
 
-On the webhooks screen, click the green "Add webhook" button on the right. For event type, choose "Delivered Messages". Now paste the webhook URL into the URL field and press "Create webhook."
+On the webhooks screen, first make sure the Domain selected on the top-right matches the Mailgun Domain on the Courier Mailgun configuration screen.
+Then, click the green "Add webhook" button. For event type, choose "Delivered Messages". Now paste the webhook URL into the URL field and press "Create webhook."
 
 <Image img={require("../../../assets/guides/mailgun/mailgun-form.png")} alt="" />
 
 Repeat the process to create a webhook for event type "Permanent Failure." Use the same URL for both webhooks.
 
-It takes Mailgun about a minute to start sending events to the webhooks. So, give it a minute or two, then go back to the Courier Mailgun configuration screen. Activate the toggle switch to "Disable polling for status updates" and press the save button. Now that webhooks are setup, you won't need polling anymore.
+Now that the webhook is configured, you will no longer need Courier to poll for status updates. We recommend waiting about an hour before disabling polling in order to make sure there is no gap in status reporting of any messages already in-flight.
+When you are ready, return to the Courier Mailgun configuration screen. Flip the toggle switch labelled "Enable polling for status updates" into the off position. Then, press the Save button at the bottom of the screen.
