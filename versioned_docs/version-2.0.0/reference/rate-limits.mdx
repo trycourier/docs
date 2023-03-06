@@ -1,0 +1,63 @@
+---
+sidebar_position: 0
+---
+
+# Courier API Rate Limits
+
+> When and how rate-limits are applied to requests made to the Courier APIs.
+
+## API Rate Limits
+
+### Send API
+
+> Not rate limited
+
+- There are no rate limits on requests made to the [Send API](send/intro.mdx).
+- If your send requests occur at a rate that exceeds your provider's rate limit, Courier's Send pipeline will retry your message for 72 hours following these [send retry rules](../sending-notifications/delivery-pipeline-resilience.mdx). 
+
+### Profiles API
+
+> Not rate limited
+
+- There is no rate limit on requests made to the [Profiles API](profiles/intro.mdx). 
+- Some Courier customers like to hit the Profiles API before or after hitting the Send endpoint as part of their Notifications send workflow. The Profiles API is built to scale with this type of workflow.
+
+### Preferences API
+
+> Not rate limited
+
+- There is no rate limit on requests made to the [Preferences API](preferences/intro.mdx).
+
+### Messages API
+
+> Not rate limited
+
+- There is no rate limit on requests made to the [Messages API](messages/intro.mdx). 
+
+### Lists API
+
+> Some rate limits
+
+- `POST` requests to the [subscriptions endpoint](lists/post-subscribe.mdx) are rate-limited to 20 creations per minute.
+- `PUT` requests to the [Lists API](lists/replace.mdx) are rate-limited to 20 creations per minute.
+- `GET` requests to the Lists API are not rate-limited.
+
+### Events API
+
+> Some rate limits
+
+- `PUT` requests to the [Events API](audit-events/intro.mdx) are rate-limited to 20 creations per minute. 
+- `GET` requests to the Events API are not rate-limited.
+
+### Brands API
+
+> Some rate limits
+
+- PUT requests to the [Brands API](brands/intro.mdx) are rate-limited to 20 creations per minute. 
+- GET requests to the Brands API are not rate-limited.
+
+### Other Rate Limits
+
+- **Invitations:** 50 invites per 15 minutes
+- **Login attempts:** 5 attempts per 5 minutes
+- **Categories:** 20 creations per minute
