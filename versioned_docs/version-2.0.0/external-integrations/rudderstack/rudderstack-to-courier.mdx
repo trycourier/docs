@@ -59,4 +59,29 @@ Received RudderStack Events can be mapped to an existing automation, or a new au
 
 Click on the plus (+) icon under link automations and map the event to an existing automation template, or create a new automation template.
 
+Properties should be scoped by courier.automation object, so for instance if you want to map userId to refs, your request to rudderstack would look like below (note courier.automation object):
+
+```json title="Rudderstack Courier Automation Property Example"
+{
+  "event": "user-checkout",
+  "type": "track",
+  "properties": {
+    "courier": {
+      "automation": {
+        "data": {
+          "userId": "my-user"
+        }
+      }
+    }
+  }
+}
+```
+
+Mapped automation would look like below:
+
+<Image
+  img={require("../../assets/external-integrations/rudderstack/rudderstack-mapped-automation-v2.png")}
+  alt=""
+/>
+
 [Learn more about Courier Automations >](../../guides/tutorials/how-to-automate-message-sequences.mdx)
