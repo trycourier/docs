@@ -473,6 +473,10 @@ code {
   text-transform: uppercase;
 }
 
+video {
+  max-width: 100%;
+}
+
 .sidebar-home .menu__link:before {
   background-image: url(/img/sidebar-icons/home.svg);
 }
