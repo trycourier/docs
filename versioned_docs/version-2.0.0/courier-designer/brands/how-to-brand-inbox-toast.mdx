@@ -6,7 +6,7 @@ import YoutubeEmbed from "@site/src/components/YoutubeEmbed";
 import Image from "@theme/IdealImage";
 import GifWrapper from "@site/src/components/GifWrapper";
 
-# Branding Courier In-App Toast and Inbox
+# Branding Courier Toast and Inbox
 
 > Step-by-step guide to customizing the look and feel of your in-app toast and inbox using the Courier Brands Designer.
 
@@ -28,23 +28,12 @@ If you previously set your brand colors for email, those colors are applied to I
   alt="Brand Colors" width={350}
 />
 
-The **Primary** color will be used on the bell icon, unread message count and markers, inbox text highlights, action buttons, and the auto close timer bar on toast messages.
+The **Primary** color will be used on the bell icon, unread message count and unread indicator, and the auto close timer bar on toast messages.
 
-The **Secondary** color will be used as the default inbox background color.
-
-<Image
-  img={require("../../assets/guides/courier-app/inbox-primary-colors.png")}
-  alt="Primary and Secondary Colors"  width={500}
-/>
 
 ### Inbox Border Radius
 
 You can define the curve on the corners of your inbox using the Inbox Border Radius field. 
-
-<Image
-  img={require("../../assets/guides/courier-app/inbox-border-radius.png")}
-  alt="Border Radius Colors"
-/>
 
 :::info
 
@@ -55,11 +44,6 @@ Please be sure to include **px** at the end of your number.
 ### Message Auto-Close Timer
 
 The Message Auto Close Timer field sets the amount of time your toast notification will stay open before auto closing. 
-
-<Image
-  img={require("../../assets/guides/courier-app/inbox-auto-close-time.png")}
-  alt="Auto-Close Timer"
-/>
 
 You can see the auto close timer in action within your Courier workspace when you use the 'Send' tab and receive the toast notification that action triggers.
 
@@ -76,27 +60,12 @@ Courier Inbox widgets can be customizable in order to match your brand.
 
 You can set the launch location of the widget relative to the bell icon. This will allow you to embed the widget in the top, left or right hand navigation bar.
 
-<GifWrapper width={845} height={475} caption="Widget Position">
+<GifWrapper width={845} height={325} caption="Widget Position">
 
 ![Widget Position](../../assets/guides/courier-app/inbox-widget-position.gif)
 
 </GifWrapper>
 
-### Widget Background
-
-By default, the inbox background is set the the Secondary brand color. You can also set your background to a two color gradient.
-
-<Image
-  img={require("../../assets/guides/courier-app/inbox-widget-bg.png")}
-  alt="Widget Background Color"
-/>
-
-If you want to set your background to a solid color that is not the secondary brand color, set both the top and bottom colors in the gradient fields of the Widget Background editor.
-
-<Image
-  img={require("../../assets/guides/courier-app/inbox-widget-bg-solid.png")}
-  alt="Solid Widget Background Color"
-/>
 
 ## Customizing In-App Icons
 
@@ -109,11 +78,6 @@ Courier's In-App Inbox uses icons in two places: the bell icon which indicates n
 <Image
   img={require("../../assets/guides/courier-app/inbox-widget-icon.png")}
   alt="Widget Icon Upload" width={400}
-/>
-
-<Image
-  img={require("../../assets/guides/courier-app/inbox-bell-icon.png")}
-  alt="Widget Bell Icon"
 />
 
 ### Message Icon
