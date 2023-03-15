@@ -561,6 +561,10 @@ code {
   background-image: url(/img/sidebar-icons/automations-active.svg);
 }
 
+.sidebar-inbox .menu__link:before {
+  background-image: url(/img/sidebar-icons/inbox.svg);
+}
+
 .sidebar-sequences .menu__link:before {
   background-image: url(/img/sidebar-icons/sequences.svg);
 }

@@ -9,13 +9,13 @@ import Image from "@theme/IdealImage";
 
 # Authentication
 
-Before we get started with Courier's Inbox, we need to talk about _Authentication_.  The idiomatic way of building an inbox is to integrate with our [components](http://www.courier.com/docs/inbox/components/) into **your frontend** and have these components talk _directly_ to Courier's API.  These API's are different than our normal endpoints at https://api.courier.com as our Inbox APIs have CORS (Cross Origin) enabled.  When you first install the Courier provider, we do not require strict authentication beyond a public Client Keys and User ID.
+Before we get started with Courier's Inbox, we need to talk about _Authentication_.  The preferred way of building an inbox is to integrate with our [components](http://www.courier.com/docs/inbox/components/) into **your frontend** and have these components talk _directly_ to Courier's API.  These API's are different than our normal endpoints at https://api.courier.com as our Inbox APIs have CORS (Cross Origin) enabled.  When you first install the Courier provider, we do not require strict authentication beyond a public Client Keys and User ID.
 
 If you haven't installed the Courier Provider yet, you can do so [here](https://app.courier.com/channels/courier).  
 
 ## Default (No Auth)
 
-To started with the Courier Provider, we do not require authentication beyound your Client Key and User ID.  This is to help with development and help get you up and running.  You can find your Client Key [here](https://app.courier.com/channels/courier).
+To started with the Courier Provider, we do not require authentication beyond your Client Key and User ID.  This is to help with development and help get you up and running.  You can find your Client Key [here](https://app.courier.com/channels/courier).
 
 Before going to _production_, you should implement stricter authentication as described below.
 
