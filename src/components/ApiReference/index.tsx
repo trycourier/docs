@@ -136,7 +136,7 @@ const ApiReference = ({
                 {path}
               </div>
 
-              {description && <div className={styles.section}>{description}</div>}
+              {description && <Description description={description} styles={styles} />}
 
               {pathParams && (
                 <div className={styles.section}>
@@ -245,6 +245,55 @@ const ApiReference = ({
         </Form>
       </Formik>
     </>
+  );
+};
+
+/** Allows the description to include markdown links */
+const Description = ({
+  description,
+  styles,
+}: {
+  description: string;
+  styles: Record<string, string>;
+}) => {
+  const parseLinksFromDescription = (description: string) => {
+    // Matches [text](url) in the description
+    const mdLinkRegex = /\[([\w\s\d]+)\]\(((?:\/|https?:\/\/)[\w\d./?=#]+)\)/;
+    const pieces: string[] = [];
+    const links: { text: string; url: string }[] = [];
+
+    let descriptionCopy = description;
+    while (descriptionCopy.length) {
+      const match = descriptionCopy.match(mdLinkRegex);
+
+      if (!null) {
+        pieces.push(descriptionCopy);
+        break;
+      }
+
+      pieces.push(descriptionCopy.slice(0, match.index));
+      links.push({
+        text: match[1],
+        url: match[2],
+      });
+      descriptionCopy = descriptionCopy.slice(match.index + match[0].length);
+    }
+
+    return { pieces, links };
+  };
+
+  const { pieces, links } = parseLinksFromDescription(description);
+  return (
+    <div className={styles.section}>
+      <p>
+        {pieces.map((description, index) => (
+          <span>
+            {description}
+            {links[index] && <a href={links[index].url}>{links[index].text}</a>}
+          </span>
+        ))}
+      </p>
+    </div>
   );
 };
 
