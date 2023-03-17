@@ -5,7 +5,7 @@ sidebar_position: 7
 import ApiReference from "@site/src/components/ApiReference";
 import config from "../configs/lists/post-subscribe";
 
-# POST /lists/:list_id/subscriptions
+# Add subscribers to a list
 
 <ApiReference {...config} />
 
@@ -17,40 +17,41 @@ URL: `https://api.courier.com/lists/abcdefgh12345678/subscriptions`
 
 Body:
 ​
+
 ```json
 {
-    "recipientId": "0460766e-8463-4905-ae98-b72c7aef41d6",
-    "preferences": {
-        "notifications": {
-            "abcdefgh12345678": {
-                "channel_preferences": [
-                    {
-                        "channel": "direct_message"
-                    }
-                ],
-                "rules": [
-                    {
-                        "type": "snooze"
-                    }
-                ],
-                "status": "OPTED_IN"
-            }
-        },
-        "categories": {
-            "cooking": {
-                "channel_preferences": [
-                    {
-                        "channel": "direct_message"
-                    }
-                ],
-                "rules": [
-                    {
-                        "type": "snooze"
-                    }
-                ],
-                "status": "OPTED_IN"
-            }
-        }
+  "recipientId": "0460766e-8463-4905-ae98-b72c7aef41d6",
+  "preferences": {
+    "notifications": {
+      "abcdefgh12345678": {
+        "channel_preferences": [
+          {
+            "channel": "direct_message"
+          }
+        ],
+        "rules": [
+          {
+            "type": "snooze"
+          }
+        ],
+        "status": "OPTED_IN"
+      }
+    },
+    "categories": {
+      "cooking": {
+        "channel_preferences": [
+          {
+            "channel": "direct_message"
+          }
+        ],
+        "rules": [
+          {
+            "type": "snooze"
+          }
+        ],
+        "status": "OPTED_IN"
+      }
     }
+  }
 }
 ```

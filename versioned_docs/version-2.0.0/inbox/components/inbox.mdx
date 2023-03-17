@@ -1,0 +1,118 @@
+---
+sidebar_position: 20
+sidebar_label: Inbox
+slug: ./inbox
+toc_max_heading_level: 2
+---
+
+import Image from "@theme/IdealImage";
+
+# Inbox
+
+Github Docs: [@trycourier/react-inbox](https://github.com/trycourier/courier-react/tree/main/packages/react-inbox)
+
+<Image width="500px" img={require("../assets/inbox.png")} alt="Courier Provider" />
+
+Inbox is a React component that you can add to your application and show a user a list of recent messages they have received. Each message supports the following events:
+
+- **Opened:** When the Inbox is opened and a message is in view, we will fire off opened events. One event per message. We will not send > 1 opened per message.
+- **Read/Unread**
+- **Archived:**  Archived messages will not be returned when fetching messages from the API.
+- **Clicked:** If Click Tracking is enabled, clicking a message that has an _action_ will created a **clicked** event and also mark the message as **read**.
+
+## Installation
+
+Similarly to `Toast` also requires the `CourierProvider`.  
+
+```
+yarn add @trycourier/react-provider
+yarn add @trycourier/react-inbox
+```
+
+or 
+
+```
+npm i @trycourier/react-provider
+npm i @trycourier/react-inbox
+```
+
+## Headless React
+
+Github Docs: [@trycourier/react-hooks](https://github.com/trycourier/courier-react/tree/main/packages/react-hooks)
+
+React Hooks (useInbox, useToast, useCourier) exist as a separate package so that you can build your own interface using our api and state management without having to install all the dependencies that @trycourier/react-inbox or other react-dom based packages include.
+
+This also enables using this package with react-native in a much simpler way.
+
+```ts
+import { CourierProvider } from "@trycourier/react-provider";
+// const CourierProvider = require("@trycourier/react-provider").CourierProvider;
+
+import { useInbox } from "@trycourier/react-hooks";
+// const useInbox = require("@trycourier/react-hooks").useInbox;
+
+
+const MyInbox = () => {
+  const inbox = useInbox();
+
+  useEffect(() => {
+    inbox.fetchMessages();
+  }, []);
+
+  const handleReadMessage = (message) => (event) => {
+    event.preventDefault();
+    inbox.markMessageRead(
+      message.messageId,
+      message.trackingIds.readTrackingId
+    );
+  };
+
+  const handleUnreadMessage = (message) => (event) => {
+    event.preventDefault();
+    inbox.markMessageUnread(message.messageId);
+  };
+
+  const handleArchiveMessage = (message) => (event) => {
+    event.preventDefault();
+    inbox.markMessageArchived(message.messageId);
+  };
+
+  return (
+    <Container>
+      {inbox.messages.map((message) => {
+        return (
+          <Message>
+            {message.read ? (
+              <>
+                <button onClick={handleUnreadMessage(message)}>
+                  Unread Me
+                </button>
+                <button onClick={handleArchiveMessage(message)}>
+                  Archive Me
+                </button>
+              </>
+            ) : (
+              <button onClick={handleReadMessage(message)}>Read Me</button>
+            )}
+          </Message>
+        );
+      })}
+    </Container>
+  );
+};
+
+const MyApp = () => {
+  return (
+    <CourierProvider userId="MY_USER_ID" clientKey="MY_CLIENT_KEY">
+      <MyInbox />
+    </CourierProvider>
+  );
+};
+```
+
+## Other Frameworks
+
+Github Docs: [Embedded Inbox](https://github.com/trycourier/courier-react/tree/main/packages/components)
+
+All of the Inbox components are built in React but we do have options for non-react development teams.  These components can be embedded in any website using a simple `<script>` tag and courier specific html tags. This is useful if you don't have a React build but still want to use Courier's components.
+

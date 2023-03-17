@@ -25,6 +25,12 @@ const recipientList: ApiParam = {
       },
       {
         type: "string",
+        name: "audience_id",
+        description:
+          "A unique identifier associated with a Courier Audiences. A message will be sent to each user in the audience.",
+      },
+      {
+        type: "string",
         name: "list_id",
         description:
           "A unique identifier associated with a Courier list of subscribers. A message will be sent to each subscriber in the list.",
@@ -69,6 +75,12 @@ const recipient: ApiParam = {
       type: "string",
       name: "user_id",
       description: "A unique identifier associated with the recipient of the delivered message.",
+    },
+    {
+      type: "string",
+      name: "audience_id",
+      description:
+        "A unique identifier associated with a Courier Audiences. A message will be sent to each user in the audience.",
     },
     {
       type: "string",
@@ -485,17 +497,20 @@ export const delay: ApiParam = {
 export const expiry: ApiParam = {
   type: "object",
   name: "expiry",
-  description: "Expiry allows you to set an absolute or relative time in which a message expires.  Note: This is only valid for the Courier Inbox channel as of 12-08-2022.",
+  description:
+    "Expiry allows you to set an absolute or relative time in which a message expires.  Note: This is only valid for the Courier Inbox channel as of 12-08-2022.",
   fields: [
     {
       type: "string",
       name: "expires_at",
-      description: "An epoch timestamp or ISO8601 timestamp with timezone (YYYY-MM-DDThh:mm:ss.sTZD) that describes the time in which a message expires.",
+      description:
+        "An epoch timestamp or ISO8601 timestamp with timezone (YYYY-MM-DDThh:mm:ss.sTZD) that describes the time in which a message expires.",
     },
     {
       type: "string",
       name: "expires_in",
-      description: "A duration in the form of milliseconds or an ISO8601 Duration format (i.e. P1DT4H).  https://tc39.es/proposal-temporal/docs/duration.html",
+      description:
+        "A duration in the form of milliseconds or an ISO8601 Duration format (i.e. P1DT4H).  https://tc39.es/proposal-temporal/docs/duration.html",
     },
   ],
 };
@@ -504,7 +519,18 @@ const Send: ApiParam = {
   type: "object",
   name: "message",
   displayName: "message",
-  fields: [to, contentOrTemplate, brand_id, routing, channels, providers, metadata, timeout, delay, expiry],
+  fields: [
+    to,
+    contentOrTemplate,
+    brand_id,
+    routing,
+    channels,
+    providers,
+    metadata,
+    timeout,
+    delay,
+    expiry,
+  ],
 };
 
 export default Send;
