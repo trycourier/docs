@@ -74,6 +74,26 @@ Audience operators are used to match a user's profile against a set of criteria.
 }
 ```
 
+- `IS_BEFORE` (checks if specified attribute is before given value, e.g. user's last_login is before 2021-01-01)
+
+```ts
+{
+  "operator": "IS_BEFORE",
+  "value": "2021-01-01",
+  "path": "last_login"
+}
+```
+
+- `IS_AFTER` (checks if specified attribute is after given value, e.g. user's last_login is after 2021-01-01)
+
+```ts
+{
+  "operator": "IS_AFTER",
+  "value": "2021-01-01",
+  "path": "last_login"
+}
+```
+
 - `LT` (checks any specific numeric attribute in user's profile is less than specified value)
 
 ```ts
