@@ -521,7 +521,7 @@ const Send: ApiParam = {
     metadata,
     template,
     timeout,
-//    to,
+    to,
 //    contentOrTemplate
   ],
 };
