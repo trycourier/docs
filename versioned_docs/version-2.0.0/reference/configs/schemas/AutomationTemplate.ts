@@ -29,7 +29,7 @@ const AutomationTemplate: ApiParam = {
       name: "data",
       example: { name: "Jane Doe", age: 27 },
       description:
-        "An object that includes any data you want to pass to a message template. The data will populate the corresponding template variables.",
+        "An object that includes any data you want to pass to the automation. This data can be referenced throughout the automation using `refs.data`. The data will also be passed along to any send call made by the automation.",
     },
     {
       type: "json",
