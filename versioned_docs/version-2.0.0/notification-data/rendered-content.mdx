@@ -6,7 +6,7 @@ import Image from "@theme/IdealImage";
 
 # Get Rendered Notification Content
 
-> The Courier [Messages API](../reference/messages/history-by-id.mdx) lets you get the rendered output of any Courier notification in your send history using the history endpoint.
+> The Courier [Messages API](../reference/logs/history-by-id.mdx) lets you get the rendered output of any Courier notification in your send history using the history endpoint.
 
 The Courier Messages API allows you to fetch the array of events of a message you've previously sent, including the rendered content by using the endpoint.
 
@@ -18,7 +18,7 @@ To fetch the content for a given message there are two API calls that you need t
 
 ## Fetch Message History
 
-Message history can be fetched by calling the history [endpoint](../reference/messages/history-by-id.mdx) or by calling the getMessageHistory function in our SDKs.
+Message history can be fetched by calling the history [endpoint](../reference/logs/history-by-id.mdx) or by calling the getMessageHistory function in our SDKs.
 
 Message history will contain a `RENDERED` event that contains links to the rendered output for the message.
 
