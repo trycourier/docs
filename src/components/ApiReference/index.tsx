@@ -11,6 +11,7 @@ import ApiParamButton from "./ApiParamButton";
 import ApiExamples, { stringifyJSON, filterOutEmpty } from "./ApiExamples";
 import { ApiReferenceTokenContext } from "./ApiReferenceToken";
 import makeMetaDescription from "@site/src/utils/makeMetaDescription";
+import Markdown from "markdown-to-jsx";
 
 export interface ApiReferenceProps {
   method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
@@ -136,7 +137,7 @@ const ApiReference = ({
                 {path}
               </div>
 
-              {description && <div className={styles.section}>{description}</div>}
+              {description && <Markdown className={styles.section}>{description}</Markdown>}
 
               {pathParams && (
                 <div className={styles.section}>
