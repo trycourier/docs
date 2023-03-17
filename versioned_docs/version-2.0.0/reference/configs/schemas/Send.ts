@@ -100,13 +100,13 @@ const recipient: ApiParam = {
 //   field: recipient
 // };
 
-const to: ApiParam = {
-  type: "oneOf",
-  name: "to",
-  displayName: "to",
-  required: true,
-  options: [recipient], // , recipientList
-};
+// const to: ApiParam = {
+//   type: "oneOf",
+//   name: "to",
+//   displayName: "to",
+//   required: true,
+//   options: [recipient], // , recipientList
+// };
 
 export const brand_id: ApiParam = {
   type: "string",
@@ -521,7 +521,7 @@ const Send: ApiParam = {
     metadata,
     template,
     timeout,
-    to,
+    recipient,
 //    contentOrTemplate
   ],
 };
