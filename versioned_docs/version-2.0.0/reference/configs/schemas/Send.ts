@@ -1,110 +1,103 @@
 import { ApiParam } from "@site/src/components/ApiReference/ApiParamField";
 
-const recipientList: ApiParam = {
-  type: "array",
-  displayName: "Recipient List",
-  description: "The recipient of the message. Can also be a list of Recipient objects.",
-  field: {
-    type: "object",
-    fields: [
-      {
-        type: "json",
-        name: "data",
-        description:
-          "An object that includes any data you want to pass to the message. The data will populate the corresponding template or elemental variables.",
-      },
-      {
-        type: "string",
-        name: "email",
-        description: "A unique email address associated to the recipient of message.",
-      },
-      {
-        type: "string",
-        name: "user_id",
-        description: "A unique identifier associated with the recipient of the delivered message.",
-      },
-      {
-        type: "string",
-        name: "audience_id",
-        description:
-          "A unique identifier associated with a Courier Audiences. A message will be sent to each user in the audience.",
-      },
-      {
-        type: "string",
-        name: "list_id",
-        description:
-          "A unique identifier associated with a Courier list of subscribers. A message will be sent to each subscriber in the list.",
-      },
-      {
-        type: "string",
-        name: "list_pattern",
-        description:
-          "A unique identifier associated with a Courier pattern used to identify specific list(s) intended to send. A message will be sent to each subscriber in the specific list(s).",
-      },
-      {
-        type: "string",
-        name: "phone_number",
-        description: "A unique phone number associated to the recipient of message.",
-      },
-      {
-        type: "json",
-        name: "preferences",
-        description: "An object that includes any preferences for the recipient.",
-      },
-    ],
-  },
+const data: ApiParam['field'] = {
+  name: "data",
+  type: "json",
+  description:
+    "An object that includes any data you want to pass to the message. The data will populate the corresponding template or elemental variables.",
 };
 
-const recipient: ApiParam = {
+const userRecipient: ApiParam = {
   type: "object",
   displayName: "Recipient",
   description: "The recipient of the message. Can also be a list of Recipient objects.",
   fields: [
     {
-      type: "json",
-      name: "data",
-      description:
-        "An object that includes any data you want to pass to the message. The data will populate the corresponding template or elemental variables.",
-    },
-    {
-      type: "string",
-      name: "email",
-      description: "A unique email address associated to the recipient of message.",
-    },
-    {
-      type: "string",
       name: "user_id",
+      type: "string",
       description: "A unique identifier associated with the recipient of the delivered message.",
     },
     {
+      name: "email",
       type: "string",
-      name: "audience_id",
-      description:
-        "A unique identifier associated with a Courier Audiences. A message will be sent to each user in the audience.",
+      description: "A unique email address associated to the recipient of message.",
     },
     {
-      type: "string",
-      name: "list_id",
-      description:
-        "A unique identifier associated with a Courier list of subscribers. A message will be sent to each subscriber in the list.",
-    },
-    {
-      type: "string",
-      name: "list_pattern",
-      description:
-        "A unique identifier associated with a Courier pattern used to identify specific list(s) intended to send. A message will be sent to each subscriber in the specific list(s).",
-    },
-    {
-      type: "string",
       name: "phone_number",
+      type: "string",
       description: "A unique phone number associated to the recipient of message.",
     },
     {
-      type: "json",
-      name: "preferences",
-      description: "An object that includes any preferences for the recipient.",
+      name: "locale",
+      type: "string",
+      description: "The locale of the user.",
     },
+    {
+      name: "preferences",
+      type: "json",
+      description: "User preferences. If you specify preferences, you must also specify user_id",
+    },
+    data
   ],
+};
+
+const listRecipient: ApiParam = {
+  type: "object",
+  displayName: "List",
+  description: "A pre-defined list of users.",
+  fields: [
+    {
+      name: "list_id",
+      type: "string",
+      description:
+        "A unique identifier associated with a Courier list of subscribers. A message will be sent to each subscriber in the list.",
+    },
+    data,
+  ],
+};
+
+const audienceRecipient: ApiParam = {
+  type: "object",
+  displayName: "Audience",
+  description: "An audience (computed set) of users.",
+  fields: [
+    {
+      name: "audience_id",
+      type: "string",
+      description:
+        "A unique identifier associated with a Courier Audiences. A message will be sent to each user in the audience.",
+    },
+    data,
+  ],
+};
+
+const listPatternRecipient: ApiParam = {
+  type: "object",
+  displayName: "List pattern",
+  description: "Pattern identifying mulitple pre-defined lists of subscribers.",
+  fields: [
+    {
+      name: "list_id",
+      type: "string",
+      description:
+        "A unique identifier associated with a Courier list of subscribers. A message will be sent to each subscriber in the list.",
+    },
+    data,
+  ],
+};
+
+const recipient: ApiParam = {
+  type: "oneof",
+  displayName: "Recipient",
+  description: "The recipient of the message.",
+  options: [userRecipient, listRecipient, listPatternRecipient, audienceRecipient],
+};
+
+const recipientList: ApiParam = {
+  type: "array",
+  displayName: "Recipient List",
+  description: "A list of Recipient objects.",
+  field: recipient
 };
 
 const to: ApiParam = {
@@ -371,16 +364,13 @@ export const providers: ApiParam = {
 export const template: ApiParam = {
   type: "string",
   name: "template",
-  required: true,
-  example: "NOTIFICATION_TEMPLATE",
-  description: "A notification template id or event mapping from Courier Studio.",
+  description: "A notification template id or event mapping from Courier Studio. Either this or content must be specified.",
 };
 
 export const content: ApiParam = {
   type: "object",
   name: "content",
-  required: true,
-  description: " A simple content object or a complete Courier Elemental document.",
+  description: " A simple content object or a complete Courier Elemental document. Either this or template must be specified.",
   fields: [
     {
       type: "string",
@@ -395,12 +385,12 @@ export const content: ApiParam = {
   ],
 };
 
-export const contentOrTemplate: ApiParam = {
-  type: "oneOf",
-  displayName: "content or template",
-  required: true,
-  options: [template, content],
-};
+// export const contentOrTemplate: ApiParam = {
+//   type: "oneOf",
+//   displayName: "content or template",
+//   required: true,
+//   options: [template, content],
+// };
 
 export const metadata: ApiParam = {
   type: "object",
@@ -520,16 +510,18 @@ const Send: ApiParam = {
   name: "message",
   displayName: "message",
   fields: [
-    to,
-    contentOrTemplate,
     brand_id,
-    routing,
     channels,
-    providers,
-    metadata,
-    timeout,
+    content,
+    data,
     delay,
     expiry,
+    routing,
+    providers,
+    metadata,
+    template,
+    timeout,
+    to,
   ],
 };
 
