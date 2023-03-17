@@ -3,7 +3,6 @@ import { ApiReferenceProps } from "@site/src/components/ApiReference";
 import AutomationRun from "../schemas/AutomationRun";
 
 const config: ApiReferenceProps = {
-  description: "Invoke an ad hoc automation run.",
   method: "POST",
   path: "/automations/invoke",
   bodyParam: AutomationRun,
