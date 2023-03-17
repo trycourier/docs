@@ -385,12 +385,12 @@ export const content: ApiParam = {
   ],
 };
 
-// export const contentOrTemplate: ApiParam = {
-//   type: "oneOf",
-//   displayName: "content or template",
-//   required: true,
-//   options: [template, content],
-// };
+export const contentOrTemplate: ApiParam = {
+  type: "oneOf",
+  displayName: "content or template",
+  required: true,
+  options: [template, content],
+};
 
 export const metadata: ApiParam = {
   type: "object",
@@ -522,6 +522,7 @@ const Send: ApiParam = {
     template,
     timeout,
     to,
+    contentOrTemplate
   ],
 };
 
