@@ -86,12 +86,12 @@ const listPatternRecipient: ApiParam = {
   ],
 };
 
-const recipient: ApiParam = {
-  type: "oneof",
-  displayName: "Recipient",
-  description: "The recipient of the message.",
-  options: [userRecipient, listRecipient, listPatternRecipient, audienceRecipient],
-};
+// const recipient: ApiParam = {
+//   type: "oneof",
+//   displayName: "Recipient",
+//   description: "The recipient of the message.",
+//   options: [userRecipient, listRecipient, listPatternRecipient, audienceRecipient],
+// };
 
 // const recipientList: ApiParam = {
 //   type: "array",
@@ -521,7 +521,10 @@ const Send: ApiParam = {
     metadata,
     template,
     timeout,
-    recipient,
+    userRecipient,
+    listRecipient,
+    listPatternRecipient,
+    audienceRecipient,
 //    contentOrTemplate
   ],
 };
