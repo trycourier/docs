@@ -1,8 +1,8 @@
 import { ApiParam } from "@site/src/components/ApiReference/ApiParamField";
 
-const data: ApiParam['field'] = {
-  name: "data",
+const data = {
   type: "json",
+  name: "data",
   description:
     "An object that includes any data you want to pass to the message. The data will populate the corresponding template or elemental variables.",
 };
@@ -13,28 +13,28 @@ const userRecipient: ApiParam = {
   description: "The recipient of the message. Can also be a list of Recipient objects.",
   fields: [
     {
-      name: "user_id",
       type: "string",
+      name: "user_id",
       description: "A unique identifier associated with the recipient of the delivered message.",
     },
     {
-      name: "email",
       type: "string",
+      name: "email",
       description: "A unique email address associated to the recipient of message.",
     },
     {
-      name: "phone_number",
       type: "string",
+      name: "phone_number",
       description: "A unique phone number associated to the recipient of message.",
     },
     {
-      name: "locale",
       type: "string",
+      name: "locale",
       description: "The locale of the user.",
     },
     {
-      name: "preferences",
       type: "json",
+      name: "preferences",
       description: "User preferences. If you specify preferences, you must also specify user_id",
     },
     data
@@ -47,8 +47,8 @@ const listRecipient: ApiParam = {
   description: "A pre-defined list of users.",
   fields: [
     {
-      name: "list_id",
       type: "string",
+      name: "list_id",
       description:
         "A unique identifier associated with a Courier list of subscribers. A message will be sent to each subscriber in the list.",
     },
@@ -62,8 +62,8 @@ const audienceRecipient: ApiParam = {
   description: "An audience (computed set) of users.",
   fields: [
     {
-      name: "audience_id",
       type: "string",
+      name: "audience_id",
       description:
         "A unique identifier associated with a Courier Audiences. A message will be sent to each user in the audience.",
     },
@@ -77,8 +77,8 @@ const listPatternRecipient: ApiParam = {
   description: "Pattern identifying mulitple pre-defined lists of subscribers.",
   fields: [
     {
-      name: "list_id",
       type: "string",
+      name: "list_id",
       description:
         "A unique identifier associated with a Courier list of subscribers. A message will be sent to each subscriber in the list.",
     },
@@ -513,7 +513,7 @@ const Send: ApiParam = {
     brand_id,
     channels,
     content,
-    data,
+//    data,
     delay,
     expiry,
     routing,
@@ -521,8 +521,8 @@ const Send: ApiParam = {
     metadata,
     template,
     timeout,
-    to,
-    contentOrTemplate
+//    to,
+//    contentOrTemplate
   ],
 };
 
