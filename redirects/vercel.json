@@ -624,6 +624,11 @@
       "source": "/",
       "destination": "https://www.courier.com/docs/",
       "permanent": true
+    },
+    {
+      "source": "/docs/reference/preferences/:path*",
+      "destination": "https://www.courier.com/docs/1.0.0/reference/preferences/:path*",
+      "permanent": true
     }
   ]
 }
