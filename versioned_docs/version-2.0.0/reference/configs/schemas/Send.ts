@@ -87,7 +87,7 @@ const listPatternRecipient: ApiParam = {
 };
 
 const recipient: ApiParam = {
-  type: "oneof",
+  type: "oneOf",
   displayName: "Recipient",
   description: "The recipient of the message.",
   options: [userRecipient, listRecipient, listPatternRecipient, audienceRecipient],
