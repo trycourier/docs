@@ -447,27 +447,27 @@
     },
     {
       "source": "/reference/preferences-api",
-      "destination": "https://www.courier.com/docs/reference/preferences/",
+      "destination": "https://www.courier.com/docs/1.0.0/reference/preferences/",
       "permanent": true
     },
     {
       "source": "/reference/getallpreferences",
-      "destination": "https://www.courier.com/docs/reference/preferences/list/",
+      "destination": "https://www.courier.com/docs/1.0.0/reference/preferences/list/",
       "permanent": true
     },
     {
       "source": "/reference/getpreferencesbyrecipientid",
-      "destination": "https://www.courier.com/docs/reference/preferences/recipient/",
+      "destination": "https://www.courier.com/docs/1.0.0/reference/preferences/recipient/",
       "permanent": true
     },
     {
       "source": "/reference/replacepreferencesbyrecipientid",
-      "destination": "https://www.courier.com/docs/reference/preferences/replace/",
+      "destination": "https://www.courier.com/docs/1.0.0/reference/preferences/replace/",
       "permanent": true
     },
     {
       "source": "/reference/patchpreferencesbyrecipientid",
-      "destination": "https://www.courier.com/docs/reference/preferences/patch/",
+      "destination": "https://www.courier.com/docs/1.0.0/reference/preferences/patch/",
       "permanent": true
     },
     {
