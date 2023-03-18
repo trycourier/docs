@@ -514,14 +514,14 @@ const Send: ApiParam = {
     template,
     content,
     brand_id,
-    channels,
     data,
-    delay,
-    expiry,
-    routing,
+    channels,
     providers,
+    routing,
     metadata,
     timeout,
+    delay,
+    expiry,
   ],
 };
 

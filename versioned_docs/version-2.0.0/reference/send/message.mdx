@@ -7,6 +7,11 @@ import config from "../configs/send/message";
 
 # Send a message
 
+Use the send API to send a message to one or more recipients. The send API is very flexible, and has a large number of options available.
+Most of these are optional, and can be ignored unless you want to override the default behavior.
+
+You are required to specify a `to` with at least one recipient. You must also specify either `template` or `content`.
+
 <ApiReference {...config} />
 
 ## Example
