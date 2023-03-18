@@ -9,7 +9,7 @@ const data = {
 
 const userRecipient: ApiParam = {
   type: "object",
-  displayName: "Recipient",
+  displayName: "User",
   description: "The recipient of the message. Can also be a list of Recipient objects.",
   fields: [
     {
@@ -43,7 +43,7 @@ const userRecipient: ApiParam = {
 
 const listRecipient: ApiParam = {
   type: "object",
-  displayName: "List",
+  displayName: "List (by ID)",
   description: "A pre-defined list of users.",
   fields: [
     {
@@ -58,7 +58,7 @@ const listRecipient: ApiParam = {
 
 const audienceRecipient: ApiParam = {
   type: "object",
-  displayName: "Audience",
+  displayName: "Audience (by ID)",
   description: "An audience (computed set) of users.",
   fields: [
     {
@@ -93,10 +93,10 @@ const recipient: ApiParam = {
   options: [userRecipient, listRecipient, listPatternRecipient, audienceRecipient],
 };
 
-const recipientList: ApiParam = {
+const recipientArray: ApiParam = {
   type: "array",
-  displayName: "Recipient List",
-  description: "A list of Recipient objects.",
+  displayName: "Array of recipients",
+  description: "Array of recipients.",
   field: recipient
 };
 
@@ -104,8 +104,9 @@ const to: ApiParam = {
   type: "oneOf",
   name: "to",
   displayName: "to",
+  description: "Recipient or array of recipients.",
   required: true,
-  options: [recipient, recipientList],
+  options: [recipient, recipientArray],
 };
 
 export const brand_id: ApiParam = {
@@ -388,6 +389,7 @@ export const content: ApiParam = {
 export const contentOrTemplate: ApiParam = {
   type: "oneOf",
   displayName: "content or template",
+  description: "Content or template (pick one)"
   required: true,
   options: [template, content],
 };
@@ -512,17 +514,17 @@ const Send: ApiParam = {
   fields: [
     brand_id,
     channels,
-    content,
+    contentOrTemplate,
     data,
     delay,
     expiry,
+    content,
     routing,
     providers,
-    metadata,
     template,
+    metadata,
     timeout,
     recipient,
-    contentOrTemplate,
     to
   ],
 };
