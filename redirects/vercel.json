@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+      "source": "/docs",
+      "destination": "https://www.courier.com/docs/",
+      "permanent": true
+    },
+    {
       "source": "/docs/integrations-introduction",
       "destination": "https://www.courier.com/docs/guides/providers/",
       "permanent": true
