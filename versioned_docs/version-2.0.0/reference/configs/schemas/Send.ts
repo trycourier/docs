@@ -93,20 +93,20 @@ const recipient: ApiParam = {
   options: [userRecipient, listRecipient, listPatternRecipient, audienceRecipient],
 };
 
-// const recipientList: ApiParam = {
-//   type: "array",
-//   displayName: "Recipient List",
-//   description: "A list of Recipient objects.",
-//   field: recipient
-// };
+const recipientList: ApiParam = {
+  type: "array",
+  displayName: "Recipient List",
+  description: "A list of Recipient objects.",
+  field: recipient
+};
 
-// const to: ApiParam = {
-//   type: "oneOf",
-//   name: "to",
-//   displayName: "to",
-//   required: true,
-//   options: [recipient], // , recipientList
-// };
+const to: ApiParam = {
+  type: "oneOf",
+  name: "to",
+  displayName: "to",
+  required: true,
+  options: [recipient, recipientList],
+};
 
 export const brand_id: ApiParam = {
   type: "string",
@@ -513,7 +513,7 @@ const Send: ApiParam = {
     brand_id,
     channels,
     content,
-//    data,
+    data,
     delay,
     expiry,
     routing,
@@ -521,12 +521,9 @@ const Send: ApiParam = {
     metadata,
     template,
     timeout,
-    // userRecipient,
-    // listRecipient,
-    // listPatternRecipient,
-    // audienceRecipient,
     recipient,
-//    contentOrTemplate
+    contentOrTemplate,
+    to
   ],
 };
 
