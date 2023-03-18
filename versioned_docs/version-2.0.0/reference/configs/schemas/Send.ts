@@ -389,7 +389,7 @@ export const content: ApiParam = {
 export const contentOrTemplate: ApiParam = {
   type: "oneOf",
   displayName: "content or template",
-  description: "Content or template (pick one)"
+  description: "Content or template (pick one)",
   required: true,
   options: [template, content],
 };
