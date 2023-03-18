@@ -85,17 +85,6 @@ const metadata = require("./src/theme/metadata");
         { docsRouteBasePath: "/", indexBlog: false, ignoreFiles: /1\.0\.0/ },
       ],
       "./plugins/sitemap",
-      [
-        "@docusaurus/plugin-client-redirects",
-        {
-          redirects: [
-            {
-              from: "/docs/aws-ses",
-              to: "/docs/guides/providers/email/aws-ses/",
-            },
-          ],
-        },
-      ],
     ],
   }
 );
