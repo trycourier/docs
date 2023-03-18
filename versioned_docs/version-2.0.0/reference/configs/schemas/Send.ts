@@ -88,15 +88,15 @@ const listPatternRecipient: ApiParam = {
 
 const recipient: ApiParam = {
   type: "oneOf",
-  displayName: "Recipient",
+  displayName: "Single recipient",
   description: "The recipient of the message.",
   options: [userRecipient, listRecipient, listPatternRecipient, audienceRecipient],
 };
 
 const recipientArray: ApiParam = {
   type: "array",
-  displayName: "Array of recipients",
-  description: "Array of recipients.",
+  displayName: "Mulitple recipients",
+  description: "The recipients of the message.",
   field: recipient
 };
 
@@ -104,7 +104,7 @@ const to: ApiParam = {
   type: "oneOf",
   name: "to",
   displayName: "to",
-  description: "Recipient or array of recipients.",
+  description: "Single or multiple recipients.",
   required: true,
   options: [recipient, recipientArray],
 };
@@ -388,8 +388,6 @@ export const content: ApiParam = {
 
 export const contentOrTemplate: ApiParam = {
   type: "oneOf",
-  displayName: "content or template",
-  description: "Content or template (pick one)",
   required: true,
   options: [template, content],
 };
@@ -512,20 +510,18 @@ const Send: ApiParam = {
   name: "message",
   displayName: "message",
   fields: [
+    to,
+    template,
+    content,
     brand_id,
     channels,
-    contentOrTemplate,
     data,
     delay,
     expiry,
-    content,
     routing,
     providers,
-    template,
     metadata,
     timeout,
-    recipient,
-    to
   ],
 };
 
