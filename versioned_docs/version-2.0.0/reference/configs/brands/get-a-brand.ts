@@ -1,6 +1,6 @@
 import { ApiReferenceProps } from "@site/src/components/ApiReference";
 
-import Brand from "../schemas/Brand";
+import { BrandResponse } from "../schemas/Brand";
 
 const config: ApiReferenceProps = {
   description: "Fetch a specific brand by brand ID.",
@@ -18,7 +18,7 @@ const config: ApiReferenceProps = {
     {
       status: 200,
       description: "Successfully retrieved",
-      body: Brand,
+      body: BrandResponse,
     },
     {
       status: 404,

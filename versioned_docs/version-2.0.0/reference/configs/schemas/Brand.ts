@@ -3,6 +3,8 @@ import { ApiParam } from "@site/src/components/ApiReference/ApiParamField";
 import BrandSettings from "./BrandSettings";
 import BrandSnippets from "./BrandSnippets";
 
+import removeProperty from "@site/lib/remove-property";
+
 const Brand: ApiParam = {
   type: "object",
   displayName: "Brand",
@@ -51,5 +53,10 @@ const Brand: ApiParam = {
     },
   ],
 };
+
+export const BrandResponse = {
+  ...Brand,
+  fields: removeProperty(Brand.fields, "required"),
+}
 
 export default Brand;
