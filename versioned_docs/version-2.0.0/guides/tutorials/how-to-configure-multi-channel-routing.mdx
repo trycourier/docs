@@ -15,7 +15,7 @@ Courier makes it easy to set custom routing rules and ensure your user's get exa
 
 The `routing` object allows you to select various channels and decide which ones you want to send messages to.
 
-When the `method` property is defined as `single`, Courier will attempt to the send messages to only one channel. In the example below, it will first attempt SMS and fail since  `phone_number` is not included in the user profile. Next, it will attempt to send via email *instead*. If the email is sent successfully, it will not attempt to send a push or chat notification.
+When the `method` property is defined as `single`, Courier will attempt to the send messages to only one channel. In the example below, it will first attempt SMS and fail since `phone_number` is not included in the user profile. Next, it will attempt to send via email _instead_. If the email is sent successfully, it will not attempt to send a push or chat notification.
 
 ```javascript
 message: {
@@ -74,4 +74,4 @@ Now Courier will always send this notification via email as well as to the best 
 
 <Image img={require("../../assets/guides/tutorials/notification-always-send-to.png")} alt="" />
 
-The routing settings created in the designer can always be overridden using the [preferences API](../../reference/preferences/intro.mdx). This will override the hierarchy of the channel rules and send the message only via the Integration specified in the recipient’s [profile](../../reference/profiles/intro.mdx).
+The routing settings created in the designer can always be overridden using the [preferences API](../../reference/user-preferences/intro.mdx). This will override the hierarchy of the channel rules and send the message only via the Integration specified in the recipient’s [profile](../../reference/profiles/intro.mdx).
