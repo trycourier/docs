@@ -1,25 +1,26 @@
 ---
-sidebar_position: 3
+sidebar_position: 0
 ---
 
 import ApiReference from "@site/src/components/ApiReference";
-import config from "../configs/brands/replace";
+import config from "../configs/brands/create-a-brand";
 
-# Update brand
+# Create a brand
 
 <ApiReference {...config} />
 
 ## Example
 
-Method: `PUT`
+Method: `POST`
 
-URL: `https://api.courier.com/brands/C8CPX6HQZ5M7Q5KAMW5CXC4N98DH`
+URL: `https://api.courier.com/brands`
 
 Body:
 ​
 
 ```json
 {
+  "id": "C8CPX6HQZ5M7Q5KAMW5CXC4N98DH",
   "name": "Example Brand Name",
   "settings": {
     "colors": {

@@ -1,6 +1,6 @@
 import { ApiReferenceProps } from "@site/src/components/ApiReference";
 
-import Brand from "../schemas/Brand";
+import { BrandResponse } from "../schemas/Brand";
 import BrandSettings from "../schemas/BrandSettings";
 import BrandSnippets from "../schemas/BrandSnippets";
 
@@ -39,7 +39,7 @@ const config: ApiReferenceProps = {
     {
       status: 200,
       description: "OK",
-      body: Brand,
+      body: BrandResponse,
     },
     {
       status: 400,

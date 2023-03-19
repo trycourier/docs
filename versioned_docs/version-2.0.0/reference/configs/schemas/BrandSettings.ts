@@ -30,6 +30,41 @@ const BrandSettings: ApiParam = {
       ],
     },
     {
+      type: "object", 
+      name: "inapp",
+      description: "Contains brand settings for inapp (inbox and toast)",
+      fields: [
+        {
+          type: "boolean",
+          name: "disableMessageIcon",
+          description: "Signifies weather the 'Powered by Courier' footer is active or not",
+        },
+        {
+          type: "string",
+          name: "placement",
+          description: "Describes the placement of the inbox relative to the inbox.  (bottom | left | right)",
+        },
+        {
+          type: "object",
+          name: "preferences",
+          description: "Settings relevant to viewing and updating the preferences section of the Inbox.  See: https://www.courier.com/docs/courier-preferences/",
+          fields: [
+            {
+              
+                type: "array",
+                name: "templateIds",
+                description: "List of preference template ids",
+                field: {
+                  type: "string",
+                  name: "templateId",
+                  description: "Your preference template Id"
+                }
+            }
+          ]
+        },
+      ]
+    },
+    {
       type: "object",
       name: "email",
       description: "Contains brand settings for emails",

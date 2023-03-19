@@ -1,7 +1,7 @@
 import { ApiReferenceProps } from "@site/src/components/ApiReference";
 
 import Paging from "../schemas/Paging";
-import Brand from "../schemas/Brand";
+import { BrandResponse } from "../schemas/Brand";
 
 const config: ApiReferenceProps = {
   description: "Get the list of brands",
@@ -30,7 +30,7 @@ const config: ApiReferenceProps = {
             type: "array",
             name: "results",
             description: "An array of brands",
-            field: Brand,
+            field: BrandResponse,
           },
         ],
       },
