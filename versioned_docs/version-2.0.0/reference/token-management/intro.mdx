@@ -4,13 +4,36 @@ sidebar_position: 0
 
 # Introduction
 
-The Token Management API is used to store and track the status of user device tokens. When a
-`/send` call is made with a `user_id`, Courier will automatically load and use the appropriate
-tokens. No need to include them in the call.
+The Token Management API is used to store and track user device tokens. 
+User device tokens are commonly used to send push notifications. 
 
-With Token Management, multiple tokens for a user can be registered to the same provider,
-allowing apps to send to multiple devices with a single `/send` call.
+This API allows you to [`/send`](https://www.courier.com/docs/reference/send/) messages to a `:user_id` 
+and Courier will automatically route the messages to the correct device tokens.
 
-Token statuses are also automatically tracked. The API will not send to stale or invalid tokens.
+Multiple tokens with mulitiple providers can be managed in Courier for a user,
+allowing you to send a message to multiple devices with a single [`/send`](https://www.courier.com/docs/reference/send/) call.
 
-Token Management is all endpoints prefixed with `/users/:user_id/tokens`
+Token status is automatically tracked and invalid or expired tokens are handled for you.
+
+Token Management APIs are all endpoints prefixed with `/users/:user_id/tokens`
+
+Push Notification Providers:
+- [(FCM) Firebase Cloud Messaging](https://app.courier.com/channels/firebase-fcm)
+- [(APNS) Apple Push Notification Service](https://app.courier.com/channels/apn)
+- [Expo](https://app.courier.com/channels/expo)
+- [OneSignal](https://app.courier.com/channels/onesignal)
+
+Courier Mobile SDKs:
+- [iOS](https://github.com/trycourier/courier-ios)
+- [Android](https://github.com/trycourier/courier-android)
+- [Flutter](https://github.com/trycourier/courier-flutter)
+- [React Native](https://github.com/trycourier/courier-react-native)
+
+If are you using a Courier Mobile SDK:
+- iOS will automatically manage APNS tokens
+- Android will automatically manage FCM tokens
+
+If you need to support FCM on iOS, see the mobile docs for your SDK for more details:
+- [iOS FCM](https://github.com/trycourier/courier-ios#support-fcm-firebase-cloud-messaging)
+- [Flutter FCM](https://github.com/trycourier/courier-flutter#5-managing-user-state)
+- [React Native FCM](https://github.com/trycourier/courier-react-native#courier-react-native-overview)

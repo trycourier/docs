@@ -9,6 +9,8 @@ $ yarn
 $ yarn run vercel link
 ```
 
+⚠️ Node version `16` is required
+
 ### Running locally
 
 ```
