@@ -3,7 +3,7 @@ import { BaseUserTokenFields } from "../schemas/UserToken";
 
 const config: ApiReferenceProps = {
   description:
-    "Associate a group of tokens with the supplied :user_id. Will overwrite any existing tokens associated with that user.",
+    "Adds multiple tokens to a user and overwrites matching existing tokens.",
   method: "PUT",
   path: "/users/:user_id/tokens",
   pathParams: [
