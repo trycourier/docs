@@ -6,6 +6,7 @@ toc_max_heading_level: 2
 ---
 
 import Image from "@theme/IdealImage";
+import videoThumbnail from "./assets/video-thumbnail.png";
 import connectingNodesURL from "./assets/connecting-nodes.mp4";
 import draggingNodesURL from "./assets/dragging-nodes.mp4";
 import ifNodeURL from "./assets/if-node.mp4";
@@ -43,7 +44,7 @@ The bottom one acts as a placeholder for action and control flow nodes.
 To add nodes, expand from the list on the left and then click and drag a node onto the right. The
 first trigger and action node will snap into their respective placeholders:
 
-<video width="783" loop autoPlay muted controls>
+<video width="783" loop autoPlay muted controls poster={videoThumbnail}>
   <source src={draggingNodesURL} />
 </video>
 
@@ -51,7 +52,7 @@ Nodes are executed sequentially through their connections, from top to bottom. T
 nodes, click and drag from the white dot at the bottom of the source node to the top of the
 target node:
 
-<video width="783" loop autoPlay muted controls>
+<video width="783" loop autoPlay muted controls poster={videoThumbnail}>
   <source src={connectingNodesURL} />
 </video>
 
@@ -64,7 +65,7 @@ with the template.
 For example, you may want to send one template if one data field represents a certain value,
 or another template if it does not:
 
-<video width="783" loop autoPlay muted controls>
+<video width="783" loop autoPlay muted controls poster={videoThumbnail}>
   <source src={ifNodeURL} />
 </video>
 

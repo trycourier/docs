@@ -5,6 +5,7 @@ slug: ./scheduling
 toc_max_heading_level: 2
 ---
 
+import videoThumbnail from "./assets/video-thumbnail.png";
 import scheduleURL from "./assets/schedule.mp4";
 
 # Scheduling
@@ -22,6 +23,6 @@ Courier offers three scheduling methods:
 2. Date, schedule the automation to be invoked one time on a specific future date.
 3. Cron. Similar to Recurrence but with more specificity using [crontab expressions](https://crontab.guru/).
 
-<video width="783" loop autoPlay muted controls>
+<video width="783" loop autoPlay muted controls poster={videoThumbnail}>
   <source src={scheduleURL} />
 </video>
