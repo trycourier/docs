@@ -1,12 +1,12 @@
 ---
-sidebar_position: 6
+sidebar_position: 2
 description: Learn how-to send browser and mobile push notifications using Segment and Courier.
 ---
 
 import Image from "@theme/IdealImage";
 import GifWrapper from "@site/src/components/GifWrapper";
 
-# How To Send Notifications With Segment
+# Segment
 
 Courier’s Destination for Segment provides an easy way to send data from Web or Mobile applications into Courier to improve notification delivery and management. Data and events flow from your application through Segment’s integration to Courier. In order to use Courier's Segment destination, you must already have Segment installed in your application.
 
@@ -39,7 +39,7 @@ Within Courier, you can access the Segment integration to:
 You will need to connect Courier as a destination within Segment. At this stage, you will see your segment event table empty and waiting for events.
 
 <Image
-  img={require("../../assets/guides/tutorials/segment-no-events.png")}
+  img={require("../assets/external-integrations/segment/segment-no-events.png")}
   alt="Courier - Segment"
 />
 
@@ -51,7 +51,7 @@ By connecting Segment to Courier, you can use the `analytics.identify` and `anal
 
 <GifWrapper width={952} height={500} caption="Segment Courier Destination Setup">
 
-![Segment Courier Destination Setup](../../assets/guides/tutorials/segment-destination-setup.gif)
+![Segment Courier Destination Setup](../assets/external-integrations/segment/segment-destination-setup.gif)
 
 </GifWrapper>
 
@@ -66,14 +66,14 @@ By connecting Segment to Courier, you can use the `analytics.identify` and `anal
 In order to receive your first event from Segment, navigate to the destination's "Event Tester" and click "Send Event" at the bottom of the page.
 
 <Image
-  img={require("../../assets/guides/tutorials/segment-test-event.png")}
+  img={require("../assets/external-integrations/segment/segment-test-event.png")}
   alt="Segment - Test Event"
 />
 
 In the Courier Studio, refresh the page or wait a couple of seconds and you will see the event appear in a list if the destination setup and test event send were successful. Below is an example of a test track event sent through Segment.
 
 <Image
-  img={require("../../assets/guides/tutorials/segment-event-received.png")}
+  img={require("../assets/external-integrations/segment/segment-event-received.png")}
   alt="Courier - Event Received"
 />
 
@@ -99,15 +99,15 @@ Additionally, `refs.data` points to the data object from Segment. `refs.data.use
 }
 ```
 
-[Learn more about Courier Automations >](./how-to-automate-message-sequences.mdx)
+[Learn more about Courier Automations >](../guides/tutorials/how-to-automate-message-sequences.mdx)
 
 <Image
-  img={require("../../assets/guides/tutorials/segment-modal.png")}
+  img={require("../assets/external-integrations/segment/segment-modal.png")}
   alt="Courier - Map Segment Event to Automation"
 />
 
 <Image
-  img={require("../../assets/guides/tutorials/segment-new-automation.png")}
+  img={require("../assets/external-integrations/segment/segment-new-automation.png")}
   alt="Courier - Automation Send Step"
 />
 
@@ -117,47 +117,49 @@ You can also configure Courier to send events to your segment integration. This 
 
 <GifWrapper width={952} height={500} caption="Add Couier as Segment Sourcep">
 
-![Add Couier as Segment Source](../../assets/guides/tutorials/segment-courier-add-source.gif)
+![Add Couier as Segment Source](../assets/external-integrations/segment/segment-courier-add-source.gif)
 
 </GifWrapper>
 
 <GifWrapper width={1920} height={1080} caption="Add Segment Write Key">
 
-![Add Segment Write Key](../../assets/guides/tutorials/segment-courier-source-setup.gif)
+![Add Segment Write Key](../assets/external-integrations/segment/segment-courier-source-setup.gif)
 
 </GifWrapper>
 
 1. In Segment, navigate to the Sources page (under “Connections”).
 2. Select your framework of choice (e.g. Node.js).
 3. Get a write key.
-  - Once you’ve added Node.js as a source, you’ll see a page with instructions on how to add Segment to your Node.js codebase. You’ll be given a write key, which you can copy.
+
+- Once you’ve added Node.js as a source, you’ll see a page with instructions on how to add Segment to your Node.js codebase. You’ll be given a write key, which you can copy.
+
 4. Insert your [Segment Write Key](https://segment.com/docs/connections/find-writekey/) in the Segment source write key input in Courier Studio.
-5. *Click away from the input field* to save and the value will be masked like below.
+5. _Click away from the input field_ to save and the value will be masked like below.
 
 <Image
-  img={require("../../assets/guides/tutorials/segment-write-key.png")}
+  img={require("../assets/external-integrations/segment/segment-write-key.png")}
   alt="Courier - Segment Write Key Saved"
 />
 
-After adding your Segment write key, Courier will send updates to Segment. 
-Update events include messages being sent, opened, clicked, delivered, unroutable, and undeliverable. 
+After adding your Segment write key, Courier will send updates to Segment.
+Update events include messages being sent, opened, clicked, delivered, unroutable, and undeliverable.
 
 <Image
-  img={require("../../assets/guides/tutorials/segment-courier-events.png")}
+  img={require("../assets/external-integrations/segment/segment-courier-events.png")}
   alt="Courier - Example Courier Segment Event"
 />
 
 These events will also be forwarded to Courier, if you've set it as a destination
 
 <Image
-  img={require("../../assets/guides/tutorials/segment-events-from-courier.png")}
+  img={require("../assets/external-integrations/segment/segment-events-from-courier.png")}
   alt="Courier - Courier Events from Segment"
 />
 
-You can then use these events to map other automations 
+You can then use these events to map other automations
 
 <Image
-  img={require("../../assets/guides/tutorials/segment-courier-events-configured.png")}
+  img={require("../assets/external-integrations/segment/segment-courier-events-configured.png")}
   alt="Courier - Courier Events from Segment Configured"
 />
 
@@ -167,7 +169,7 @@ Segment Identify calls allow you to connect a user to their actions (Segment eve
 
 [Learn more about Segment Identify >](https://segment.com/docs/connections/spec/identify/)
 
-[Learn more about Courier Profiles >](../../reference/profiles/intro.mdx)
+[Learn more about Courier Profiles >](../reference/profiles/intro.mdx)
 
 ### Recipients
 
@@ -249,9 +251,9 @@ Once linked to an event, try to refresh the template and check if the reicipient
 
 **3. How do I disable Courier as a Segment source?**
 
-In Courier Studio Segment Integration page click the edit/pencil button next to the Write key input, delete the write key and *click away from the input field*.
+In Courier Studio Segment Integration page click the edit/pencil button next to the Write key input, delete the write key and _click away from the input field_.
 
 <Image
-  img={require("../../assets/guides/tutorials/segment-edit-write-key.png")}
+  img={require("../assets/external-integrations/segment/segment-edit-write-key.png")}
   alt="Courier - Edit Segment Write Key"
 />
