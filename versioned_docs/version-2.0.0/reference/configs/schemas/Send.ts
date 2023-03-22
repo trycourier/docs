@@ -37,7 +37,7 @@ const userRecipient: ApiParam = {
       name: "preferences",
       description: "User preferences. If you specify preferences, you must also specify user_id",
     },
-    data
+    data,
   ],
 };
 
@@ -97,7 +97,7 @@ const recipientArray: ApiParam = {
   type: "array",
   displayName: "Mulitple recipients",
   description: "The recipients of the message.",
-  field: recipient
+  field: recipient,
 };
 
 const to: ApiParam = {
@@ -150,10 +150,9 @@ export const routingChannel: ApiParam = {
     {
       type: "string",
       name: "method",
-      required: true,
       enum: ["all", "single"],
       description:
-        "The method for selecting channels to send the message with. If no method is specified, then 'single' will be used as default.",
+        "The method for selecting channels to send the message with. Value can be either 'single' or 'all'. If not provided will default to 'single'",
     },
     {
       type: "json",
@@ -188,9 +187,9 @@ export const routing: ApiParam = {
     {
       type: "string",
       name: "method",
-      required: true,
       enum: ["all", "single"],
-      description: "The method for selecting channels to send the message with.",
+      description:
+        "The method for selecting channels to send the message with. Value can be either 'single' or 'all'. If not provided will default to 'single'",
     },
     {
       type: "array",
@@ -365,13 +364,15 @@ export const providers: ApiParam = {
 export const template: ApiParam = {
   type: "string",
   name: "template",
-  description: "A notification template id or event mapping from Courier Studio. Either this or content must be specified.",
+  description:
+    "A notification template id or event mapping from Courier Studio. Either this or content must be specified.",
 };
 
 export const content: ApiParam = {
   type: "object",
   name: "content",
-  description: " A simple content object or a complete Courier Elemental document. Either this or template must be specified.",
+  description:
+    " A simple content object or a complete Courier Elemental document. Either this or template must be specified.",
   fields: [
     {
       type: "string",
