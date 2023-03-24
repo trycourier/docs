@@ -5,6 +5,7 @@ sidebar_position: 5
 import Image from "@theme/IdealImage";
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import GifWrapper from "@site/src/components/GifWrapper";
 
 # Slack
 
@@ -587,6 +588,49 @@ You can mention users in a Slack message using the syntax `<@USER_ID>` in a Noti
 />
 
 Learn more about [Advanced formatting with special parsing](https://api.slack.com/reference/surfaces/formatting#advanced).
+
+## Updating Slack Notifications
+
+> How to set the replacement key path in the Slack channel integration settings.
+
+### Via Replacement Key
+
+To update the content of a Slack notification previously sent via Courier, you need to set the "replacement key" path in the Slack [channel settings](../../../sending-notifications/channel-settings.mdx) within your notification template.
+
+We typically use `ts` as the value. Courier will then look for this key in the data block you pass to our API and use that to update an existing message instead of posting a new one.
+
+<GifWrapper width={915} height={437} caption="Slack Channel Settings">
+
+![Slack settings](../../../assets/guides/slack/slack-ts.gif)
+
+</GifWrapper>
+
+### Replacement Key Path
+
+You can set the replacement key path from the channel settings.
+
+1. Open the notification
+2. Hover over the Slack Channel (or Direct Message channel with Slack set as the integration)
+3. Click on the Channel Settings slide out menu
+
+<Image
+  img={require("../../../assets/guides/slack/slack-settings.png")}
+  alt="Slack Channel Settings"
+/>
+
+4. Click to open the Slack integration 
+
+<Image
+  img={require("../../../assets/guides/slack/slack-integration.png")}
+  alt="Slack Integration Tab"
+/>
+
+5. Set the Replacement Key Path
+
+<Image
+  img={require("../../../assets/guides/slack/slack-replacement-key.png")}
+  alt="Slack Replacement Key Path"
+/>
 
 ## Deprecated
 
