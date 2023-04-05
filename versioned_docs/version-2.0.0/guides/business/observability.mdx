@@ -1,0 +1,90 @@
+---
+sidebar_position: 7
+---
+
+import Image from "@theme/IdealImage";
+
+# Observability
+
+**Note:** This feature only available to Business Tier customers.
+
+Courier provides observability integrations to help you gain insights into your message delivery. You can use these insights to understand how your messages are being delivered and to identify any issues with your message delivery. Courier currently supports Datadog as an observability integration. We are working on adding more integrations.
+
+## Metrics
+
+Courier provides the following metrics:
+
+### Message Delivery
+
+- courier.message.delivered
+- courier.message.sent
+- courier.message.unique.opened
+- courier.message.unique.clicked
+- courier.message.total.opened
+- courier.message.total.clicked
+
+### User Profile
+
+- courier.user.created
+- courier.user.updated
+- courier.user.deleted
+
+### Channel Delivery
+
+[channel] can be any of the following: `email`, `sms`, `push`, or `chat`.
+
+- courier.[channel].delivered
+- courier.[channel].error
+- courier.[channel].sent
+- courier.[channel].undeliverable
+
+### List Subscription and Unsubscription
+
+- courier.list.subscribed
+- courier.list.unsubscribed
+
+### Audiences
+
+- courier.audience.matched
+- courier.audience.unmatched
+
+These metrics are sent in near real-time to your observability integration (Datadog) when a message is delivered, sent, or undeliverable from Courier. Metrics are pre-aggregated by a tumbling window of 10 seconds.
+
+## Logs
+
+Courier also provides logs that correspond to the metrics. These logs are also sent to your observability integration. Logs are sent in near real-time.
+
+**Note:** All the metrics and logs are segmented by your Courier `environment`, which could be `production` or `test`. You can use this to filter the metrics and logs by environment.
+
+We are working on adding more metrics and logs. If you have any suggestions, please reach out to us at support@courier.com or via intercomm.
+
+## Datadog
+
+Courier supports Datadog as an observability integration. You can follow the steps below to setup the Datadog integration.
+
+### Setup
+
+- Create a Datadog account if you don't have one.
+- Create a Datadog API key.
+- Login to Courier and navigate to the Channels page.
+- Click on Datadog channel and enter the API key.
+
+### Dashboard
+
+You can use the download dashboard json and import the Courier dashboard into your Datadog account.
+
+<a
+  class="button button--primary button--md"
+  target="_blank"
+  href="/data/courier-datadog-dashboard.json"
+  download="courier-datadog-dashboard.json"
+>
+  Download Dashboard JSON
+</a>
+
+**Diagram**
+
+<Image
+  img={require("../../assets/guides/observability/datadog-dashboard.png")}
+  alt="datadog-dashboard"
+/>
