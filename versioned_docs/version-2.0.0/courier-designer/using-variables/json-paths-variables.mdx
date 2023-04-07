@@ -38,6 +38,53 @@ If you want to access data from the profile object or data from the User Profile
 
 **Learn More:** [JSONPath Sytax](https://www.npmjs.com/package/jsonpath#jsonpath-syntax).
 
+## Referencing Brand Information
+
+If you want to access data from the active brand, use a full JSONPath expression such as `$.brand`. 
+
+```
+{
+  id: string;
+  colors: {
+    primary: string;
+    secondary: string;
+    tertiary: string;
+  };
+  inapp: {
+    borderRadius: string;
+    disableMessageIcon: boolean;
+    placement: "top" | "bottom" | "left" | "right";
+    emptyState: {
+      textColor: string;
+      text: string;
+    };
+    icons: {
+      bell: string;
+      message: string;
+    };
+  };
+  email: {
+    header: {
+      barColor: string;
+      logo: {
+        href: string;
+        image: string;
+      };
+    };
+  };
+  social: {
+    facebook?: string;
+    instagram?: string;
+    linkedin?: string;
+    medium?: string;
+    twitter?: string;
+  };
+}
+
+``
+**Learn More:** [JSONPath Sytax](https://www.npmjs.com/package/jsonpath#jsonpath-syntax).
+
+
 ## Referencing Data Information
 
 Because the majority of the data you'll want to access is in the `data` object, Courier has simplified that Path. Instead of providing a full JSONPath expression such as `$.data.someProp`, you can just use `someProp`. Courier will query `data` for any Path not prefixed with `$.` 
