@@ -1,0 +1,216 @@
+{
+  "title": "Notification Health Dashboard",
+  "description": "## Notification Health Dashboard\n\nThe Notification Health Dashboard provides greater visibility into the transactional notifications sent via Courier. This dashboard is designed to help you monitor the health and performance of your notification system, so you can quickly identify and resolve any issues that arise.\n\n### Key Metrics\n\nThe dashboard includes several key metrics that provide insight into the health of your notification system, including:\n\n- **Notification Volume:** The number of notifications generated over a specified period of time.\n- **Notification Error Rate:** The percentage of notifications that failed to be delivered or encountered errors during delivery.\n\n### Use Cases\n\nThe Notification Health Dashboard can be used in a variety of ways, including:\n\n- **Monitoring Notification Performance:** By tracking metrics like notification sent and error rate, you can identify any issues impacting your notification system's performance.\n- **Identifying Trends and Patterns:** By analyzing notification volume over time, you can identify trends and patterns in user behavior that may impact your notification system.\n- **Improving Notification Delivery:** By identifying and resolving issues with notification delivery, you can improve the overall effectiveness of your notification system.\n\nOverall, the Notification Health Dashboard is a powerful tool for monitoring and optimizing the performance of your notification system. With its comprehensive set of metrics and customizable alerts, you can ensure that your users receive the notifications they need when needed. \n\n",
+  "widgets": [
+    {
+      "id": 606428425506566,
+      "definition": {
+        "title": "[Channel] Error and success count ",
+        "title_size": "16",
+        "title_align": "left",
+        "show_legend": true,
+        "legend_layout": "vertical",
+        "legend_columns": ["avg", "min", "max", "value", "sum"],
+        "type": "timeseries",
+        "requests": [
+          {
+            "formulas": [
+              { "style": { "palette": "green" }, "alias": "Sent", "formula": "query1" },
+              { "style": { "palette": "red" }, "alias": "Not Sent", "formula": "query2" }
+            ],
+            "queries": [
+              {
+                "name": "query1",
+                "data_source": "metrics",
+                "query": "sum:courier.email.sent{*} by {provider}.as_count()"
+              },
+              {
+                "name": "query2",
+                "data_source": "metrics",
+                "query": "sum:courier.email.undeliverable{*} by {provider}.as_count()"
+              }
+            ],
+            "response_format": "timeseries",
+            "style": { "palette": "semantic", "line_type": "solid", "line_width": "thick" },
+            "display_type": "line"
+          }
+        ]
+      }
+    },
+    {
+      "id": 2443661250317360,
+      "definition": {
+        "title": "Errors",
+        "title_size": "16",
+        "title_align": "left",
+        "requests": [
+          {
+            "response_format": "event_list",
+            "query": {
+              "data_source": "logs_stream",
+              "query_string": "@level:error @service:courier",
+              "indexes": [],
+              "storage": "hot"
+            },
+            "columns": [
+              { "field": "status_line", "width": "auto" },
+              { "field": "timestamp", "width": "auto" },
+              { "field": "host", "width": "auto" },
+              { "field": "service", "width": "auto" },
+              { "field": "content", "width": "compact" }
+            ]
+          }
+        ],
+        "type": "list_stream"
+      }
+    },
+    {
+      "id": 5550377712673386,
+      "definition": {
+        "title": "[Message] Sent and Clicked",
+        "title_size": "16",
+        "title_align": "left",
+        "show_legend": true,
+        "legend_layout": "vertical",
+        "legend_columns": ["avg", "min", "max", "value", "sum"],
+        "type": "timeseries",
+        "requests": [
+          {
+            "formulas": [
+              { "style": { "palette": "cool" }, "alias": "Sent", "formula": "query1" },
+              { "style": { "palette": "purple" }, "alias": "Not Sent", "formula": "query2" }
+            ],
+            "queries": [
+              {
+                "name": "query1",
+                "data_source": "metrics",
+                "query": "sum:courier.message.sent{*} by {provider}.as_count()"
+              },
+              {
+                "name": "query2",
+                "data_source": "metrics",
+                "query": "sum:courier.message.total.clicked{*} by {provider}.as_count()"
+              }
+            ],
+            "response_format": "timeseries",
+            "style": { "palette": "semantic", "line_type": "solid", "line_width": "thick" },
+            "display_type": "line"
+          }
+        ]
+      }
+    },
+    {
+      "id": 1457809083561304,
+      "definition": {
+        "title": "Tracked User Updates",
+        "title_size": "16",
+        "title_align": "left",
+        "show_legend": true,
+        "legend_layout": "vertical",
+        "legend_columns": ["avg", "min", "max", "value", "sum"],
+        "type": "timeseries",
+        "requests": [
+          {
+            "formulas": [
+              { "style": { "palette": "green" }, "formula": "query1" },
+              { "style": { "palette": "green" }, "formula": "query2" },
+              { "style": { "palette": "warm", "palette_index": 5 }, "formula": "query3" }
+            ],
+            "queries": [
+              {
+                "name": "query1",
+                "data_source": "metrics",
+                "query": "sum:courier.user.created{environment:*} by {source}.as_count()"
+              },
+              {
+                "name": "query2",
+                "data_source": "metrics",
+                "query": "sum:courier.user.updated{environment:*} by {source}.as_count()"
+              },
+              {
+                "name": "query3",
+                "data_source": "metrics",
+                "query": "sum:courier.user.deleted{*}.as_count()"
+              }
+            ],
+            "response_format": "timeseries",
+            "style": { "palette": "dog_classic", "line_type": "solid", "line_width": "thick" },
+            "display_type": "line"
+          }
+        ]
+      }
+    },
+    {
+      "id": 3159434040939690,
+      "definition": {
+        "title": "Audience Memberships",
+        "title_size": "16",
+        "title_align": "left",
+        "show_legend": true,
+        "legend_layout": "vertical",
+        "legend_columns": ["avg", "min", "max", "value", "sum"],
+        "type": "timeseries",
+        "requests": [
+          {
+            "formulas": [{ "formula": "query1" }, { "formula": "query2" }],
+            "queries": [
+              {
+                "name": "query1",
+                "data_source": "metrics",
+                "query": "sum:courier.audience.matched{*} by {audience_id,source}.as_count()"
+              },
+              {
+                "name": "query2",
+                "data_source": "metrics",
+                "query": "sum:courier.audience.unmatched{*}.as_count()"
+              }
+            ],
+            "response_format": "timeseries",
+            "style": { "palette": "dog_classic", "line_type": "solid", "line_width": "thick" },
+            "display_type": "line"
+          }
+        ]
+      }
+    },
+    {
+      "id": 8784947782731388,
+      "definition": {
+        "title": "List Subscriptions",
+        "title_size": "16",
+        "title_align": "left",
+        "show_legend": true,
+        "legend_layout": "vertical",
+        "legend_columns": ["avg", "min", "max", "value", "sum"],
+        "type": "timeseries",
+        "requests": [
+          {
+            "formulas": [
+              { "style": { "palette": "cool" }, "formula": "query1" },
+              { "style": { "palette": "red" }, "formula": "query2" }
+            ],
+            "queries": [
+              {
+                "name": "query1",
+                "data_source": "metrics",
+                "query": "sum:courier.list.subscribed{*} by {environment}.as_count()"
+              },
+              {
+                "name": "query2",
+                "data_source": "metrics",
+                "query": "sum:courier.list.unsubscribed{*} by {environment}.as_count()"
+              }
+            ],
+            "response_format": "timeseries",
+            "style": { "palette": "dog_classic", "line_type": "solid", "line_width": "thick" },
+            "display_type": "line"
+          }
+        ]
+      }
+    }
+  ],
+  "template_variables": [],
+  "layout_type": "ordered",
+  "notify_list": [],
+  "reflow_type": "auto",
+  "id": "rg2-44t-hfi"
+}
