@@ -109,7 +109,7 @@ This is a common example request you can make to the [`send`](../../../../refere
 1. `providers.firebase-fcm.override.body.data.YOUR_CUSTOM_KEY` for adding custom data to your payload. This is usually used for opening a specific screen in your app when the user takes action on a push notification. Firebase requires the `data` key to be flat. More details about FCM custom data [here](https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages#Message.FIELDS.data).
 2. `providers.firebase-fcm.override.body.apns` for applying iOS specific values. You can learn more about these [here](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification).
 
-### Sending to a `user_id`
+### Sending to a `user_id` (Recommended)
 
 ```bash title=cURL
 curl --request POST \
@@ -169,6 +169,54 @@ curl --request POST \
 			"to": {
 				"firebaseToken": "YOUR_FCM_TOKEN"
 			},
+			"content": {
+				"title": "Hey there 👋",
+				"body": "Have a great day 😁"
+			},
+			"routing": {
+				"method": "all",
+				"channels": [
+					"firebase-fcm"
+				]
+			},
+			"providers": {
+				"firebase-fcm": {
+					"override": {
+						"body": {
+							"data": {
+								"YOUR_CUSTOM_KEY": "YOUR_CUSTOM_VALUE"
+							},
+							"apns": {
+								"payload": {
+									"aps": {
+										"sound": "ping.aiff",
+										"badge": 99
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}'
+```
+
+### Sending to multiple `firebaseTokens`
+
+```bash title=cURL
+curl --request POST \
+  --url https://api.courier.com/send \
+  --header 'Authorization: Bearer YOUR_AUTH_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+	{
+		"message": {
+			"to": [
+				{ "firebaseToken": "FCM_TOKEN_ONE" },
+				{ "firebaseToken": "FCM_TOKEN_TWO" }
+			],
 			"content": {
 				"title": "Hey there 👋",
 				"body": "Have a great day 😁"
