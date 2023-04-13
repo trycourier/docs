@@ -14,13 +14,12 @@ There are multiple ways to internationalize your notifications with Courier. The
 
 ### Multiple Channels, One Template
 
-In this model (one channel per language), the logic defining which notification to fire lives in Courier under the channel settings as [send conditions](https://help.courier.com/en/articles/4323960-using-send-conditions).
-<!-- Link follow-up doc -->
+In this model (one channel per language), the logic defining which notification to fire lives in Courier under the channel settings as [send conditions](../notification-settings/send-conditions.mdx).
 This model works well for single-channel notifications or multi-channel notifications when you support just a few languages. Notifications templates can get large and complex when you have multiple channel types (email, SMS, DM, push) and support many languages. If this is true for your use case, consider using the multiple templates (one per language) model for internationalization.
 
 **To use this internationalization model, you'll need to use:**
 
-- [Channel-level conditionals](https://help.courier.com/en/articles/4323960-using-send-conditions) <!-- Link follow-up doc -->
+- [Channel-level conditionals](../notification-settings/send-conditions.mdx/#for-notifications-and-channels)
 - Profile data (either sent as part of the send command [profile object](https://help.courier.com/en/articles/4339703-json-paths-and-variables) or stored in Courier as part of a recipient [profile](../../reference/profiles/intro.mdx)
 
 ### Steps
