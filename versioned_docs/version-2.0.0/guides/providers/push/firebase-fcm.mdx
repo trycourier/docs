@@ -154,15 +154,11 @@ curl --request POST \
 }'
 ```
 
-## Recommended Courier Mobile SDK Formatting
+## Automatic Courier Mobile SDK Formatting
 
-By default, Courier automatically formats the FCM payload to make a better developer experience for you if you are working with a Courier Mobile SDK](#with-a-courier-mobile-sdk). Here you can manage the [automatic FCM settings](https://app.courier.com/channels/firebase-fcm).
-```
-<Image img={require("../../../assets/guides/providers/fcm-override-setting.png")} alt="" />
-```
-<Image img={require("../../../assets/guides/providers/apple-add-key.png")} alt="" />
+By default, Courier automatically formats the FCM payload to make a better developer experience for you if you are working with a [Courier Mobile SDK](#with-a-courier-mobile-sdk). Here you can manage the [automatic FCM settings](https://app.courier.com/channels/firebase-fcm).
 
-<img width="1000" src="../../../assets/guides/providers/fcm-override-setting.png" />
+<Image img={require("../../../assets/guides/providers/fcm-auto-override.png")} alt="" />
 
 What this setting does:
 1. Automatically delivers Android push notifications in the background. This allows you to get more accurate push notification delivery tracking and to use your own [custom Android notification style](https://github.com/trycourier/courier-android#2-setup) all the time.
