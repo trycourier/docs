@@ -14,10 +14,21 @@ Courier provides observability integrations to help you gain insights into your 
 
 Courier provides the following metrics:
 
+## Automation Metrics
+
+- courier.automation.invoked
+
 ### Message Delivery
 
+- courier.message.received
 - courier.message.delivered
+- courier.message.filtered
+- courier.message.throttled
+- courier.message.unmapped
+- courier.message.unroutable
+- courier.message.undeliverable
 - courier.message.sent
+- courier.message.unique.sent
 - courier.message.unique.opened
 - courier.message.unique.clicked
 - courier.message.total.opened
@@ -37,6 +48,13 @@ Courier provides the following metrics:
 - courier.[channel].error
 - courier.[channel].sent
 - courier.[channel].undeliverable
+
+### Inbox Connection Metrics
+
+- courier.inbox.connection_attempt
+- courier.inbox.connection_error
+- courier.inbox.notified
+- courier.inbox.reconnection_attempt
 
 ### List Subscription and Unsubscription
 
@@ -65,9 +83,9 @@ Courier supports Datadog as an observability integration. You can follow the ste
 ### Setup
 
 - Create a Datadog account if you don't have one.
-- Create a Datadog API key.
+- Create a Datadog [API key](https://app.datadoghq.com/organization-settings/api-keys).
 - Login to Courier and navigate to the Channels page.
-- Click on Datadog channel and enter the API key.
+- Click on Datadog channel and enter the API key from step 2.
 
 ### Dashboard
 
