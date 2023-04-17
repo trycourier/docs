@@ -32,11 +32,6 @@ const userRecipient: ApiParam = {
       name: "locale",
       description: "The locale of the user.",
     },
-    {
-      type: "json",
-      name: "preferences",
-      description: "User preferences. If you specify preferences, you must also specify user_id",
-    },
     data,
   ],
 };
@@ -387,6 +382,19 @@ export const content: ApiParam = {
   ],
 };
 
+export const preferences: ApiParam = {
+  type: "object",
+  name: "preferences",
+  description: "A object that contains a field for the subscription topic you wish to respect.",
+  fields: [
+    {
+      type: "string",
+      name: "subscription_topic_id",
+      description: "The id of the subscription topic whose preferences you wish to respect.",
+    },
+  ],
+};
+
 export const contentOrTemplate: ApiParam = {
   type: "oneOf",
   required: true,
@@ -515,6 +523,7 @@ const Send: ApiParam = {
     template,
     content,
     brand_id,
+    preferences,
     data,
     channels,
     providers,
