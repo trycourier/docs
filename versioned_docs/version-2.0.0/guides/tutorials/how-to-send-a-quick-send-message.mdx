@@ -5,166 +5,73 @@ description: Learn how-to send browser and mobile push notifications using Segme
 
 import Image from "@theme/IdealImage";
 
-# How to Send a Notification with Quick Send
+# Introducing Quick Send 2.0
 
 ## What is Quick Send?
 
-Quick Send is a product feature that enables a one time send to be crafted and sent to your users in under 5 minutes. 
+Quick Send is a product feature that enables a one time send to be crafted and sent to your users in under 5 minutes.
 
-## How to Send a Message with Quick Send
+Quick Send is intended to send off messages through one channel and one channel only. If you need to update your users quickly with a notification, Quick Send is the tool for you. 
 
-### Creating Content to Send
+### How to send a message with Quick Send
 
-First, start by creating content that you’d wish to send to your users. Enter a title and a message to send. You may also decide
-what language you want this content to be displayed as by using the drop down menu shown below.
+Select which channel you’d like to send a notification through. A provider will then automatically be chosen for you. This
+ selection is only made given that you have configured providers on your account. From here, write your message, and then send the message immediately or schedule the message for later.
 
-Here, you can also choose to bold or italicize your message as well.
+### How do I send messages with the SMS channel?
 
-<Image
-  img={require("../../assets/guides/tutorials/image1.png")}
-/>
+The SMS channel includes a safeguard for sending messages. First, write out a text message you would like to send to a user. In order to have this message sent, first input text and then hit the 
+‘enter/return’ key on your keyboard to *activate* a text. Your UI will have your text appear activated within a blue text bubble. To send this SMS message, after activation, you must then click on
+"Send Now" or "Schedule", depending on whether you'd want to send this message immediately or schedule it for later.
 
-
-
-
-### Branding
-
-Your default brand will only be present within Quick Send.
-
-
-### Adding a Button
-
-You can also add a button to your message and customize its title.
+It’s important to note that texts are sent in the order of the blue text bubbles. You can delete blue text bubbles as well by clicking on the “x” found within the bubble. We will be 
+introducing more functionality to this section in the near future. Below is an image of what it looks like upon hitting ‘enter/return’, *activating* a SMS message.
 
 <Image
-  img={require("../../assets/guides/tutorials/image2.png")}
+  img={require("../../assets/guides/tutorials/qs-sms-channel-screenshot.png")}
 />
 
-For the Button URL, “https://” is not required. For instance, “courier.com” is acceptable as a URL.
+### How do I change my branding?
 
-### Adding Tags
+Your default brand will only be present within Quick Send. Ensure that you have a **default branding option** selected, this option will show up within Quick Send for you automatically. To change your branding default settings, visit https://app.courier.com/designer/brands. 
 
-Tags allow for more visibility within logs. To add a tag, simply type the name of the tag you’d wish to add, then hit “return”/”enter” key on your keyboard or click “create [tag name]” within the dropdown that appears.
+Once you’ve created the branding that you’d like to view within Quick Send, then hit the gear icon on the top left to visit the settings module in order to make it your default branding.
 
 <Image
-  img={require("../../assets/guides/tutorials/image3.png")}
+  img={require("../../assets/guides/tutorials/qs-branding.png")}
 />
 
-Here, we’ll add a tag named “Welcome”. 
+From here, select the option “Set as Default”. Note, if you do **not see this option** this means that this brand is currently **set as your default branding**.
+
 
 <Image
-  img={require("../../assets/guides/tutorials/image4.png")}
+  img={require("../../assets/guides/tutorials/qs-set-as-default.png")}
 />
 
-You can now see the tag has been successfully added.
+These changes will be reflected within Quick Send. 
 
 <Image
-  img={require("../../assets/guides/tutorials/image5.png")}
+  img={require("../../assets/guides/tutorials/qs-showing-branding.png")}
 />
 
+### How do I add users?
 
-### Adding Data to Your Message
+If you’re choosing to send to users via Email or SMS, you can directly write the recipient’s email address or phone number (with area code included) right into the “To:” section of Quick Send and 
+ensure that you hit 'enter/return' afterwards to register this input.
 
-Adding data to your message is possible through JSON. For example, you can create variables and use them throughout your message. 
-Here’s an example of a welcome message using variables like title, date, and name. 
+You can also add users by visiting our “Users” tab, https://app.courier.com/users. Here you can add users, and create lists, and audiences as well. Once this is complete, these changes/additions
+will be visible through Quick Send. Simply search for your recipient and you will see them appear in the dropdown of options.
 
-<Image
-  img={require("../../assets/guides/tutorials/image6.png")}
-/>
+### How can I start sending Slack and/or Teams messages?
 
-This data must then be encapsulated by double curly braces as shown.
+Both Slack and Teams are providers that connect to the Courier app within the 'Chat' channel. In order to start sending Quick  Send messages through Slack and/or Teams, both providers must 
+be configured providers. 
 
-<Image
-  img={require("../../assets/guides/tutorials/image7.png")}
-/>
-
-This data will be populated when previewing your Quick Send message, as shown below. 
-
-<Image
-  img={require("../../assets/guides/tutorials/image8.png")}
-/>
+https://www.courier.com/docs/guides/providers/direct-message/ on the left-hand side of this link, you will see our Chat providers. Click whichever you need to be configured. Upon configuration, you
+will see your configuration appear within Quick Send. 
 
 
-### Adding Data to Your Message
+### How do I preview a message?
 
-Quick Send allows you to add any of the following three recipient types: User, List, or Audience. Use the dropdown menu to see what Users, Lists, or Audiences are present within your workspace. 
-
-Each dropdown option will display their name and ID.
-
-<Image
-  img={require("../../assets/guides/tutorials/image9.png")}
-/>
-
-
-Quick Send requires that you have Users, Lists, or Audiences created prior to using Quick Send. There is no ability to create a recipient within this feature. 
-
-<Image
-  img={require("../../assets/guides/tutorials/image10.png")}
-/>
-
-
-### Configuring Routing Options
-
-<Image
-  img={require("../../assets/guides/tutorials/image11.png")}
-/>
-
-Every Quick Send message requires routing to be properly configured. This means adding a channel to both sections, “Always sent to” and “Send to the best of”. When clicking on “Add Channel”, you will see the following.
-
-<Image
-  img={require("../../assets/guides/tutorials/image12.png")}
-/>
-
-Select whichever channel you want for your notification. For the sake of this example, we’ll choose the “Email” option. After making this selection, we see the following.
-
-<Image
-  img={require("../../assets/guides/tutorials/image13.png")}
-/>
-
-Now that we’ve selected this channel, we must add a configured provider. Clicking on this channel will give us channel options/settings. 
-
-<Image
-  img={require("../../assets/guides/tutorials/image14.png")}
-/>
-
-Click on “Add Provider”, which will give you the following module view.
-
-<Image
-  img={require("../../assets/guides/tutorials/image15.png")}
-/>
-
-Select a provider you’d like to use. For this example, we will use “Gmail”. Lastly, don’t forget to click “Save Changes” before clicking outside of this module to save your changes that you just made.
-
-<Image
-  img={require("../../assets/guides/tutorials/image16.png")}
-/>
-
-Now, click “Add Channel” under “Send to the best of”.
-
-<Image
-  img={require("../../assets/guides/tutorials/image17.png")}
-/>
-
-For this example, the “Email” option is chosen once more, and an “Email" channel will automatically add/configure the provider that was recently configured. For this example, we used “Gmail”. We see that an “Email” channel with “Gmail” as a provider was automatically configured under the “Send to the best of” section of our routing settings. 
-
-<Image
-  img={require("../../assets/guides/tutorials/image18.png")}
-/>
-
-This is just one example, showing how “Email”, configured with “Gmail” works. However, there are many options to choose from in terms of channels and providers to send a message with Quick Send.
-
-### How to Preview a Message
-
-In order to preview, ensure that you add a recipient. 
-
-<Image
-  img={require("../../assets/guides/tutorials/image19.png")}
-/>
-
-Ensure that you select a recipient. Once you do this, you will have the ability to see how said recipient will receive your Quick Send message. 
-
-<Image
-  img={require("../../assets/guides/tutorials/image20.png")}
-/>
-
-Click on “Send Notification” to send your Quick Message to your recipient(s).
+Crafting and previewing a message is synchronous within Quick Send 2.0. We’ve completely gotten rid of the preview as the message that you craft is what the user will evidently see. Give this a try, 
+craft an email message, and send it to yourself. You’ll see that the experience of crafting a message and receiving is quite literally the same. This applies to all channels and hopefully makes your experience much easier as a customer. 
