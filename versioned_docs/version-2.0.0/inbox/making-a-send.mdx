@@ -23,7 +23,7 @@ The simplest way to send an Inbox message is to use our inline [Elemental](/docs
 
 > `data` will be passed _automatically_ through to the websocket connection and be retrievable through the GQL query
 
-```ts
+```json
 {
 	"message": {
 		"to": {
@@ -32,8 +32,7 @@ The simplest way to send an Inbox message is to use our inline [Elemental](/docs
 		},
 		"content": {
 			"version": "2020-01-01",
-			"elements": [
-				{
+			"elements": [{
 					"type": "text",
 					"content": "**Hello World**"
 				},
@@ -41,7 +40,7 @@ The simplest way to send an Inbox message is to use our inline [Elemental](/docs
 					"type": "text",
 					"content": "We <3 [Courier](https://www.courier.com)"
 				},
-        {
+				{
 					"type": "action",
 					"content": "Click me",
 					"href": "https://example.com",
@@ -49,18 +48,18 @@ The simplest way to send an Inbox message is to use our inline [Elemental](/docs
 						"foo": "bar"
 					}
 				}
-      ]
+			]
 		},
 		"data": {
-			"hello": "world",
+			"hello": "world"
 		},
 		"metadata": {
 			"tags": ["hello"]
 		},
-    "routing": {
-      "method": "single",
-      "channels": ["inbox"]
-    }
+		"routing": {
+			"method": "single",
+			"channels": ["inbox"]
+		}
 	}
 }
 ```
@@ -69,7 +68,7 @@ The simplest way to send an Inbox message is to use our inline [Elemental](/docs
 
 Sending a template message has not changed at all, all you do is reference your template, or event in the Send API.
 
-```ts
+```json
 {
 	"message": {
 		"to": {
