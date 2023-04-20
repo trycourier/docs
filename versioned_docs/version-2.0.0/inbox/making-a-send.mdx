@@ -1,0 +1,91 @@
+---
+pagination_label: "Making A Send"
+sidebar_position: 60
+slug: ./making-a-send
+toc_max_heading_level: 2
+---
+
+import Image from "@theme/IdealImage";
+
+
+# Making A Send
+
+Interfacing with Courier's Send API for Inbox can be done 2 ways. 
+
+- Inline Send
+- Template Send
+
+## Inline
+
+The simplest way to send an Inbox message is to use our inline [Elemental](/docs/elemental/) syntax.  This allows you to send a message without having to interact with our [Studio](https://app.courier.com).
+
+> Use "inbox" as your channel identifier in the `routing` object.
+
+> `data` will be passed _automatically_ through to the websocket connection and be retrievable through the GQL query
+
+```ts
+{
+	"message": {
+		"to": {
+			"email": "email@courier.com",
+			"user_id": "USER_ID"
+		},
+		"content": {
+			"version": "2020-01-01",
+			"elements": [
+				{
+					"type": "text",
+					"content": "**Hello World**"
+				},
+				{
+					"type": "text",
+					"content": "We <3 [Courier](https://www.courier.com)"
+				},
+        {
+					"type": "action",
+					"content": "Click me",
+					"href": "https://example.com",
+					"data": {
+						"foo": "bar"
+					}
+				}
+      ]
+		},
+		"data": {
+			"hello": "world",
+		},
+		"metadata": {
+			"tags": ["hello"]
+		},
+    "routing": {
+      "method": "single",
+      "channels": ["inbox"]
+    }
+	}
+}
+```
+
+## Template
+
+Sending a template message has not changed at all, all you do is reference your template, or event in the Send API.
+
+```ts
+{
+	"message": {
+		"to": {
+			"email": "email@courier.com",
+			"user_id": "USER_ID"
+		},
+		"template": "MY_TEMPLATE_OR_EVENT",
+		"data": {
+			"foo": "bar",
+		},
+		"metadata": {
+			"tags": ["foobar"]
+		}
+	}
+}
+```
+
+> `data` will be passed through, but requires "data mapping" inside of the template's channel settings to send to the websocket connection and be retrievable through the GQL query
+
