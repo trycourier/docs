@@ -57,8 +57,8 @@ The simplest way to send an Inbox message is to use our inline [Elemental](/docs
 		"metadata": {
 			"tags": ["hello"]
 		},
-		 "routing": {
-      "method": "all",
+    "routing": {
+      "method": "single",
       "channels": ["inbox"]
     }
 	}
@@ -87,5 +87,5 @@ Sending a template message has not changed at all, all you do is reference your 
 }
 ```
 
-> `data` will be passed through, but requires "data mapping" inside of the template to send to the websocket connection and be retrievable through the GQL query
+> `data` will be passed through, but requires "data mapping" inside of the template's channel settings to send to the websocket connection and be retrievable through the GQL query
 
