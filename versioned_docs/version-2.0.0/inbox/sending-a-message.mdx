@@ -20,7 +20,9 @@ Interfacing with Courier's [Send API](/docs/reference/send/message/ ) for Inbox 
 The simplest way to send an Inbox message is to use our inline [Elemental](/docs/elemental/) syntax.  This allows you to send a message without having to interact with our [Studio](https://app.courier.com).
 
 > Use "inbox" as your channel identifier in the `routing` object.
+
 > Only "text" and "action" elemental nodes are supported in inbox.
+
 > `data` will be passed _automatically_ through to the websocket connection and be retrievable through the GQL query
 
 ```json
