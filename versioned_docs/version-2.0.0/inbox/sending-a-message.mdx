@@ -10,14 +10,14 @@ import Image from "@theme/IdealImage";
 
 # Sending a Message
 
-Interfacing with Courier's [Send API](/docs/reference/send/message/ ) for Inbox can be done 2 ways. 
+Interfacing with Courier's [Send API](https://www.courier.com/docs/reference/send/message/ ) for Inbox can be done 2 ways.
 
 - Inline Send
 - Template Send
 
 ## Inline / Elemental
 
-The simplest way to send an Inbox message is to use our inline [Elemental](/docs/elemental/) syntax.  This allows you to send a message without having to interact with our [Studio](https://app.courier.com).
+The simplest way to send an Inbox message is to use our inline [Elemental](https://www.courier.com/docs/elemental/) syntax.  This allows you to send a message without having to interact with our [Studio](https://app.courier.com).
 
 > Use "inbox" as your channel identifier in the `routing` object.
 
@@ -89,4 +89,3 @@ Sending a template message has not changed at all, all you do is reference your 
 ```
 
 > `data` will be passed through, but requires "data mapping" inside of the template's channel settings to send to the websocket connection and be retrievable through the GQL query
-
