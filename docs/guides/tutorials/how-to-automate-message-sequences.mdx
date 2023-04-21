@@ -194,8 +194,6 @@ The response from the `fetch-data` step will be merged with the existing automat
 
 Important: When using the delay step, an automation will be processed serially. Each item in the automation is processed one at a time and the next step will not be undertaken until the current one has completed.
 
-**Note:** There is a 5-15 minute variance in when delay step actions will finish processing.
-
 There are two ways to delay an automation step
 
 - Delay until a specific time
@@ -784,3 +782,43 @@ Data for each message can vary per step. This includes data, profile, and the te
   }
 }
 ```
+
+### Send a notification only if another event doesn't occur
+
+A common use case is to cancel sending a notification if another event occurs. For example, if a user has already completed a task, you may not want to send them a reminder notification. You can use the `cancel` step to cancel an automation that is already in progress to achieve this.
+
+First, configure a new Automation with a delay step. This will delay the automation for a specified amount of time.
+
+```json title=JSON
+{
+  "automation": {
+    "cancelationToken": "<CANCELATION_TOKEN>",
+    "steps": [
+      {
+        "action": "delay",
+        "duration": "PT1H"
+      },
+      {
+        "action": "send",
+        "template": "REMINDER",
+        "recipient": "<RECIPIENT_ID>"
+      }
+    ]
+  }
+}
+```
+
+Then, set up a second automation that will cancel the first automation if the event occurs.
+
+```json title=JSON
+{
+  "steps": [
+    {
+      "action": "cancel",
+      "cancelationToken": "<CANCELATION_TOKEN>",
+    }
+  ]
+}
+```
+
+You can configure both automations to use triggers as well, for example starting the first automation on a Segment Track event such as `user_signup`, and the second automation on another Segment Track event such as `user_completed_setup`. Ensure that you set up a dynamic cancelationToken for each automation, so that the cancelationToken is unique for each user.
