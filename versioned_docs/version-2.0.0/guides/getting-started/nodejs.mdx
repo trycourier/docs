@@ -7,6 +7,8 @@ import Image from "@theme/IdealImage";
 
 # Get Started with Node.js
 
+You will need a Node.js project before starting. If you don't have one, create a new project and create an app.js file. This is where you will add your code.
+
 1. Make sure you have the latest version of Node installed: https://nodejs.org/en/download/
 2. Sign up for Courier to get access to your API key: https://app.courier.com/signup
 3. Add the channel(s) you wish to send your message to: https://app.courier.com/channels
@@ -38,8 +40,8 @@ const { requestId } = await courier.send({
 });
 ```
 
-7. Replace `YOUR_AUTH_TOKEN_HERE` with your API key: https://app.courier.com/settings/api-keys
-8. Replace the JSON within the body to match the type and content of notification you want to send.
+6. Replace `YOUR_AUTH_TOKEN_HERE` with your API key: https://app.courier.com/settings/api-keys
+7. Replace the JSON within the body to match the type and content of notification you want to send.
     There are 4 main properties within this example notification:
 
     - `to`: provide information used by Courier to identify the recipient of the notification. Here you can include details such as the recipient’s email address for email, phone number for SMS.
@@ -48,6 +50,11 @@ const { requestId } = await courier.send({
     - `routing`: customize which channel(s) Courier will potentially deliver the message. If no routing key is specified, Courier will use the default routing configured in the Courier Studio UI.
 
     [Explore how to customize your notification with more properties >](../../../reference/send/message/)
+8. Run your code. Upon running this API call, only a requestId will be returned.
+    ```json
+    { "requestId": "87e7c05b-4f46-fda24e356e23" }
+    ```
+9. Monitor the status of your notification (once sent) in the logs: https://app.courier.com/logs
 
 # Resources
 
@@ -60,17 +67,9 @@ const { requestId } = await courier.send({
     - Create a list and add users in the UI (**recommended**): https://app.courier.com/users?create-list=true
     - Create a list and add users programmatically with the API: https://www.courier.com/docs/reference/lists/put-subscribe/
 4. How can I access user profiles from Courier?
-    If you have your users saved in Courier's user database https://app.courier.com/users, you can access them in the JSON:
+    If you have your users saved in Courier's user database https://app.courier.com/users, you can replace the JSON `"email"` field in the `"to"` object with:
     - individual profiles with `"user_id": "ADD_USER_ID"`
     - list of multiple users: `"list_id": "ADD_LIST_ID"`
-
-Upon running this API call, only a requestId will be returned.
-
-```json
-{ "requestId": "87e7c05b-4f46-fda24e356e23" }
-```
-
-Monitor the status of your notification once sent in the Courier app's logs https://app.courier.com/logs.
 
 ## Questions?
 
