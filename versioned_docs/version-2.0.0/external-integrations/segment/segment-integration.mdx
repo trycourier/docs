@@ -15,7 +15,7 @@ import GifWrapper from "@site/src/components/GifWrapper";
 
 By connecting Segment to Courier, you can use the `analytics.identify` and `analytics.track` API calls to direct information about users and their actions (Segment events) from Segment to Courier.
 
-### Connecting Segment
+## Connecting Segment
 
 <GifWrapper width={952} height={500} caption="Segment Courier Destination Setup">
 
@@ -29,7 +29,7 @@ By connecting Segment to Courier, you can use the `analytics.identify` and `anal
 4. In the [Courier Integrations Page](https://app.courier.com/integrations), search for Segment and click on it to access the Courier API Key. (If you do not see a key here, go to the [Courier Settings Page](https://app.courier.com/settings) and copy the Auth Token from the API Keys section.)
 5. Enter the Courier API Key or Auth Token in the Courier destination settings field API Key in Segment.
 
-### Check for Segment Events
+## Check for Segment Events
 
 In order to receive your first event from Segment, navigate to the destination's "Event Tester" and click "Send Event" at the bottom of the page.
 
@@ -45,7 +45,7 @@ In the Courier Studio, refresh the page or wait a couple of seconds and you will
   alt="Courier - Event Received"
 />
 
-**Troubleshooting:**
+## Troubleshooting
 
 If you continue to see the "No Segment events received yet." message in Courier, this could mean that Segment was unable to successfully setup your Courier workspace as a destination. To ensure that the test event sent by Segment is successfully received by Courier, **double check that your API Key was copied accurately into Segment**.
 

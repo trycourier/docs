@@ -23,10 +23,18 @@ import GifWrapper from "@site/src/components/GifWrapper";
 
 </GifWrapper>
 
+## From Segment
+
 1. In Segment, navigate to the Sources page (under “Connections”).
 2. Select your framework of choice (e.g. Node.js).
 3. Get a write key.
-  - Once you've added Node.js as a source, you'll see a page with instructions on how to add Segment to your Node.js codebase. You'll be given a write key, which you can copy.
+
+:::tip Write Key
+
+Once you've added Node.js as a source, you'll see a page with instructions on how to add Segment to your Node.js codebase. You'll be given a write key, which you can copy.
+
+:::
+
 4. Insert your [Segment Write Key](https://segment.com/docs/connections/find-writekey/) in the Segment source write key input in Courier Studio.
 5. *Click away from the input field* to save and the value will be masked like below.
 
@@ -42,6 +50,8 @@ Update events include messages being sent, opened, clicked, delivered, unroutabl
   img={require("../../assets/guides/tutorials/segment-courier-events.png")}
   alt="Courier - Example Courier Segment Event"
 />
+
+## Inside Courier
 
 These events will also be forwarded to Courier, if you've set it as a destination
 
