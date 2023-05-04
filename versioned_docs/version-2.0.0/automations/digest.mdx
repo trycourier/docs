@@ -56,9 +56,14 @@ Now that we have a digest configured in preferences, lets talk about adding even
 First step is to configure an automation to add events to the digest. Open an automation template and drag in the `Add to Digest` node under the `Actions` section in the lefthand pane. Select the subscription topic with the digest configured. This will add any event that comes in to that digest **by user**.
 Note: currently `user_id` and `userId` are accepted in the event data
 
+<Image img={require("./assets/add-to-digest.png")} alt="Automation add to digest" />
+
 ### Digest trigger
 
 Second step is to configure an automation to release and interact with the digested events data. Open an automation template and drag in the `Digest` node under the `Trigger` section in the lefthand pane. Select the subscription topic with the digest configured. This automation template will now be invoked on any scheduled intervals configured for that digest. Reminder: digests are done at the user level so each invocation will be for a particular user based on the default schedule or the schedule they selected in preferences
+
+<Image img={require("./assets/digest-trigger.png")} alt="Automation digest trigger" />
+
 The digest data payload will come into the automation in the structure
 
 ```
