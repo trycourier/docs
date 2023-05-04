@@ -70,7 +70,7 @@ Batches have the following configuration options:
 | **Max Items**    | (Optional) Defines the maximum number of events to include in a batch before completion. When a batch has received this number of events, it will immediately finalize and send the batch to the next step.                                                                                                                                          |
 | **Category Key** | (Optional) Allows events to be grouped by categories. See [Working with Categories](./#working-with-categories) for more details.                                                                                                                                                                                                                    |
 
-## Invoking a Batch |
+## Invoking a Batch
 
 When a batch node is invoked, Courier checks if there is an ongoing batch run for that node. If not,
 Courier creates one, marks the automation as pending, and does not proceed to the next step until
