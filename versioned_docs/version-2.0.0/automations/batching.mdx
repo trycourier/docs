@@ -8,7 +8,12 @@ toc_max_heading_level: 2
 import videoThumbnail from "./assets/video-thumbnail.png";
 import creatingABatchUrl from "./assets/digests-batching-throttling/creating-a-batch.mp4";
 
-# Batching (Beta)
+# Batching
+
+```
+Status: This product is under active development and is available in a Private Beta, please
+contact Courier support for access.
+```
 
 Batching is a powerful feature of Courier Automations that aggregates events and processes them
 collectively after a specified period of inactivity, a maximum event count, or a maximum wait time.
@@ -64,29 +69,14 @@ To configure a batch, click on the batch node to open an editor in the sidebar.
 
 Batches have the following configuration options:
 
-- Wait Period: Defines the period inactivity before a batch is considered complete. If no events are
-  received within this time frame, the batch will be finalized and sent to the next step.
-- Max Wait: Defines the maximum amount of time to wait before finalizing the batch. If this time
-  frame is reached, the batch will immediately complete, even if an event had been receive within
-  the "wait period".
-- Retain Items: Defines the amount of items to be retained and sent along with the batch. Retention
-  does not affect the tracked count. If retain is set to 10 items and 15 items are received, the
-  passed count will be 15, and the passed items will be 10.
-  - First 10: The first 10 items received will be included in the batch
-  - Last 10: The last 10 items received will be included in the batch
-  - Highest 10: The highest 10 items received will be included in the batch. When this option is
-    selected, a sort key must also be provided.
-  - Lowest 10: The lowest 10 items received will be included in the batch. When this option is
-    selected, a sort key must also be provided.
-- Sort Key: Required when Highest or Lowest is selected for Retain Items. Defines the key of the
-  data object to be used to determine item ordering. For example, if sort key is set to upvotes, and
-  the automation is invoked with `{ "data": { "upvotes": 5 } }`, 5 will be the value used to
-  determine the order and position of the event in the items array.
-- Max Items (Optional): Defines the maximum number of events to include in a batch before
-  completion. When a batch has receive this number of events, it will immediately finalize and send
-  the batch to the next step.
-- Category Key (Optional): Defines the key the batch data will be attached to on the data object.
-  See "Working with Multiple Categories" for more details.
+| Parameter    | Description                                                                                                                                                                                                                                                                                                                                          |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Wait Period  | Defines the period of inactivity before a batch is considered complete. If no events are received within this time frame, the batch will be finalized and sent to the next step.                                                                                                                                                                     |
+| Max Wait     | Defines the maximum amount of time to wait before finalizing the batch. If this time frame is reached, the batch will immediately complete, even if an event had been received within the "wait period."                                                                                                                                             |
+| Retain Items | Defines the number of items to be retained and sent along with the batch. Retention does not affect the tracked count. If retain is set to 10 items and 15 items are received, the passed count will be 15, and the passed items will be 10. Options: First 10, Last 10, Highest 10 (requires Sort Key), Lowest 10 (requires Sort Key).              |
+| Sort Key     | Required when Highest or Lowest is selected for Retain Items. Defines the key of the data object to be used to determine item ordering. For example, if sort key is set to upvotes, and the automation is invoked with `{ "data": { "upvotes": 5 } }`, 5 will be the value used to determine the order and position of the event in the items array. |
+| Max Items    | (Optional) Defines the maximum number of events to include in a batch before completion. When a batch has received this number of events, it will immediately finalize and send the batch to the next step.                                                                                                                                          |
+| Category Key | (Optional) Defines the key the batch data will be attached to on the data object. See "Working with Multiple Categories" for more details.                                                                                                                                                                                                           |
 
 ## Working With Completed Batch Data
 
@@ -114,21 +104,21 @@ following values before completion:
 // Invoke 1
 {
   data: {
-    like_from: "Drew"
+    like_from: "Drew";
   }
 }
 
 // Invoke 2
 {
   data: {
-    like_from: "Alex"
+    like_from: "Alex";
   }
 }
 
 // Invoke 3
 {
   data: {
-    like_from: "Abby"
+    like_from: "Abby";
   }
 }
 ```
