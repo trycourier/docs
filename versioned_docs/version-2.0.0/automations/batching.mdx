@@ -105,11 +105,10 @@ interface:
 }
 ```
 
-By default, `category_key` is set to `batch`. So to access the data from a batch in steps following
-the batch node, you would use `refs.data.batch.count` or `refs.data.batch.items`. If a category_key
-is specified, you would use that value instead, `refs.data.<category_key value here>`.
-
-For example, if a batch was invoked 3 times with the following values before completion:
+By default, category_key is set to batch. To access the data from a batch in subsequent steps, use
+refs.data.batch.count or refs.data.batch.items. If a category_key is specified, use that value
+instead: refs.data.<category_key value here>. For example, if a batch was invoked 3 times with the
+following values before completion:
 
 ```js
 // Invoke 1
@@ -129,7 +128,7 @@ For example, if a batch was invoked 3 times with the following values before com
 // Invoke 3
 {
   data: {
-    like_from: "Alex";
+    like_from: "Abby";
   }
 }
 ```
