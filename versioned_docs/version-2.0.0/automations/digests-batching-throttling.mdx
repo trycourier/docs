@@ -26,8 +26,8 @@ An article is posted on a news site. An event is generated for each view, commen
 article. The author would not to receive a notification for each one of these events. Instead, these
 events can be added to a batch within an automation. The post may generate a huge amount of events
 within the first few days of posting. Once the activity has died down (or the max wait time has been
-reached), the batch will collect the view count, top comments, and share count and send this data
-to the next step. The user can then be sent a summary of this data in one email.
+reached), the batch will collect the view count, top comments, and share count and send this data to
+the next step. The user can then be sent a summary of this data in one email.
 
 **Data Warehouse Analytics**
 
@@ -40,22 +40,22 @@ send them in a single email once all the reports for that day have been generate
 
 A user makes a popular post that receives a large number of likes in the first few minutes of being
 posted. Rather than sending a notification for every like received, a batch can be used to notify
-the user once the post hasn't received any new likes for a few minutes. E.g. You're post received
-17 likes.
+the user once the post hasn't received any new likes for a few minutes. E.g. You're post received 17
+likes.
 
 ### Creating A Batch
 
-To create a batch, use the "Add to Batch" action, then click anywhere within the batch node to
-open the editor within the sidebar.
+To create a batch, use the "Add to Batch" action, then click anywhere within the batch node to open
+the editor within the sidebar.
 
 <video width="783" loop autoPlay muted controls poster={videoThumbnail}>
   <source src={creatingABatchUrl} />
 </video>
 
-When a batch node is invoked, Courier will check to see if there is an in progress batch run for that
-node. If there _is not_ an existing run, Courier will create one. The automation will be marked as pending,
-and will not move onto the next step until the batch is complete. The current data object is added
-to the batch.
+When a batch node is invoked, Courier will check to see if there is an in progress batch run for
+that node. If there _is not_ an existing run, Courier will create one. The automation will be marked
+as pending, and will not move onto the next step until the batch is complete. The current data
+object is added to the batch.
 
 If there _is_ an existing batch run, Courier will add the data object for that run to the existing
 batch and terminate / complete the automation run. Any steps connected to the batch will not be
@@ -67,9 +67,29 @@ To configure a batch, click on the batch node to open an editor in the sidebar.
 
 Batches have the following configuration options:
 
-- Wait Period: Defines the period inactivity before a batch is considered complete. If no events
-  are received within this time frame, the batch will be finalized and sent to the next step.
--
+- Wait Period: Defines the period inactivity before a batch is considered complete. If no events are
+  received within this time frame, the batch will be finalized and sent to the next step.
+- Max Wait: Defines the maximum amount of time to wait before finalizing the batch. If this time
+  frame is reached, the batch will immediately complete, even if an event had been receive within
+  the "wait period".
+- Retain Items: Defines the amount of items to be retained and sent along with the batch. Retention
+  does not affect the tracked count. If retain is set to 10 items and 15 items are received, the
+  passed count will be 15, and the passed items will be 10.
+  - First 10: The first 10 items received will be included in the batch
+  - Last 10: The last 10 items received will be included in the batch
+  - Highest 10: The highest 10 items received will be included in the batch. When this option is
+    selected, a sort key must also be provided.
+  - Lowest 10: The lowest 10 items received will be included in the batch. When this option is
+    selected, a sort key must also be provided.
+- Sort Key: Required when Highest or Lowest is selected for Retain Items. Defines the key of the
+  data object to be used to determine item ordering. For example, if sort key is set to upvotes, and
+  the automation is invoked with `{ "data": { "upvotes": 5 } }`, 5 will be the value used to
+  determine the order and position of the event in the items array.
+- Max Items (Optional): Defines the maximum number of events to include in a batch before
+  completion. When a batch has receive this number of events, it will immediately finalize and send
+  the batch to the next step.
+- Category Key (Optional): Defines the key the batch data will be attached to on the data object.
+  See "Working with Multiple Categories" for more details.
 
 ### Working With Completed Batch Data
 
@@ -132,9 +152,9 @@ The steps following the batch node would be provided this data object:
 }
 ```
 
-This data can be accessed from a notification template using variable syntax. Because fields
-from the data object are spread globally onto the template, there `refs.data` is omitted from
-within a template:
+This data can be accessed from a notification template using variable syntax. Because fields from
+the data object are spread globally onto the template, there `refs.data` is omitted from within a
+template:
 
 <Image
   img={require("./assets/digests-batching-throttling/batch-data-in-notification-template.png")}
@@ -143,13 +163,14 @@ within a template:
 
 ### Working With Multiple Categories
 
-It is possible to have more than one category in a single batch run if the category key is set
-to a dynamic value such as `refs.data.category_key`. In such a case, each separate category
-can be accessed separately on the data object.
+It is possible to have more than one category in a single batch run if the category key is set to a
+dynamic value such as `refs.data.category_key`. In such a case, each separate category can be
+accessed separately on the data object.
 
 <Image
   img={require("./assets/digests-batching-throttling/dynamic-category-key.png")}
-  alt="Accessing batch data from a notification template"
+  alt="Accessing
+  batch data from a notification template"
 />
 
 If the batch run was invoked with the following data:
