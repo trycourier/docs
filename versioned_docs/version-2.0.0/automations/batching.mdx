@@ -1,16 +1,14 @@
 ---
 sidebar_position: 8
-sidebar_label: Digests, Batching and Throttling
-slug: ./digests-batching-throttling
-toc_max_heading_level: 3
+sidebar_label: Batching
+slug: ./batching
+toc_max_heading_level: 2
 ---
 
 import videoThumbnail from "./assets/video-thumbnail.png";
 import creatingABatchUrl from "./assets/digests-batching-throttling/creating-a-batch.mp4";
 
-# Digests, Batching and Throttling (Beta)
-
-## Batching
+# Batching (Beta)
 
 In Courier Automations, batching is the process of collecting events and pushing them to the next
 step after a period of inactivity. This is especially useful in situations where a spike in activity
@@ -18,7 +16,7 @@ generates a large number of events over an arbitrary period of time. Batching gr
 into a collection and passes them onto the next step after a period of inactivity, a maximum event
 count has been reached, or a maximum period of time has been reached.
 
-### Use Cases
+## Use Cases
 
 **Article Performance Summarization**
 
@@ -43,7 +41,7 @@ posted. Rather than sending a notification for every like received, a batch can 
 the user once the post hasn't received any new likes for a few minutes. E.g. You're post received 17
 likes.
 
-### Creating A Batch
+## Creating A Batch
 
 To create a batch, use the "Add to Batch" action, then click anywhere within the batch node to open
 the editor within the sidebar.
@@ -61,7 +59,7 @@ If there _is_ an existing batch run, Courier will add the data object for that r
 batch and terminate / complete the automation run. Any steps connected to the batch will not be
 executed. This means the nodes following a batch node will only be executed once per batch run.
 
-### Configuring A Batch
+## Configuring A Batch
 
 To configure a batch, click on the batch node to open an editor in the sidebar.
 
@@ -91,7 +89,7 @@ Batches have the following configuration options:
 - Category Key (Optional): Defines the key the batch data will be attached to on the data object.
   See "Working with Multiple Categories" for more details.
 
-### Working With Completed Batch Data
+## Working With Completed Batch Data
 
 Once a batch run is completed, the batch will be added to the data object with the following
 interface:
