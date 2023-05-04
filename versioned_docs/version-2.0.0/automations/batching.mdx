@@ -114,21 +114,21 @@ following values before completion:
 // Invoke 1
 {
   data: {
-    like_from: "Drew";
+    like_from: "Drew"
   }
 }
 
 // Invoke 2
 {
   data: {
-    like_from: "Alex";
+    like_from: "Alex"
   }
 }
 
 // Invoke 3
 {
   data: {
-    like_from: "Abby";
+    like_from: "Abby"
   }
 }
 ```
@@ -191,8 +191,8 @@ If the batch run was invoked with the following data:
 // Invoke 3
 {
   data: {
-    category_key: "comments"
-    comment: "Excellent post!";
+    category_key: "comments",
+    comment: "Excellent post!"
   }
 }
 ```
@@ -204,8 +204,13 @@ The data object passed to the steps following the batch node would be:
   likes: {
     count: 2,
     items: [
-      { like_from: "Drew"; }
-    ]
-  }
+      { like_from: "Drew" },
+      { like_from: "Alex" }
+    ],
+  },
+  comments: {
+    count: 1,
+    items: [{ comment: "Excellent post!" }],
+  },
 }
 ```
