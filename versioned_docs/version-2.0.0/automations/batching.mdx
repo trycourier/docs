@@ -10,36 +10,34 @@ import creatingABatchUrl from "./assets/digests-batching-throttling/creating-a-b
 
 # Batching (Beta)
 
-In Courier Automations, batching is the process of collecting events and pushing them to the next
-step after a period of inactivity. This is especially useful in situations where a spike in activity
-generates a large number of events over an arbitrary period of time. Batching groups those events
-into a collection and passes them onto the next step after a period of inactivity, a maximum event
-count has been reached, or a maximum period of time has been reached.
+Batching is a powerful feature of Courier Automations that aggregates events and processes them
+collectively after a specified period of inactivity, a maximum event count, or a maximum wait time.
+This is particularly useful in cases where a surge in activity produces an arbitrary number of events
+over a short period.
 
 ## Use Cases
 
 **Article Performance Summarization**
 
-An article is posted on a news site. An event is generated for each view, comment, and share of the
-article. The author would not to receive a notification for each one of these events. Instead, these
-events can be added to a batch within an automation. The post may generate a huge amount of events
-within the first few days of posting. Once the activity has died down (or the max wait time has been
-reached), the batch will collect the view count, top comments, and share count and send this data to
-the next step. The user can then be sent a summary of this data in one email.
+Imagine an article published on a news website that generates an event for each view, comment, and
+share. Instead of sending a notification for each individual event, these events can be batched
+within an automation. Once the initial surge of activity has subsided or the maximum wait time is
+reached, the batch compiles view count, top comments, and share count data. This information is then
+forwarded to the next step, allowing the author to receive a summarized report via email.
 
 **Data Warehouse Analytics**
 
-A company collects and processes a large amount of data. Reports on this data are constantly being
-generated. The time to complete each report and/or the number of reports generated may vary from
-day. An event is generated each time a report is completed. A batch can collect these reports and
-send them in a single email once all the reports for that day have been generated.
+A company dealing with large amounts of data may produce a varying number of reports with different
+completion times. An event is generated upon the completion of each report. With batching, these
+reports can be grouped together and sent in a single email once all the reports for the day are
+generated.
 
 **Social Media Engagement**
 
-A user makes a popular post that receives a large number of likes in the first few minutes of being
-posted. Rather than sending a notification for every like received, a batch can be used to notify
-the user once the post hasn't received any new likes for a few minutes. E.g. You're post received 17
-likes.
+Consider a user who creates a popular post that receives numerous likes within minutes of being
+published. Instead of sending a notification for each like, batching can be employed to notify the
+user once the post hasn't received new likes for a few minutes. For example, "Your post received 17
+likes."
 
 ## Creating A Batch
 
@@ -50,14 +48,15 @@ the editor within the sidebar.
   <source src={creatingABatchUrl} />
 </video>
 
-When a batch node is invoked, Courier will check to see if there is an in progress batch run for
-that node. If there _is not_ an existing run, Courier will create one. The automation will be marked
-as pending, and will not move onto the next step until the batch is complete. The current data
-object is added to the batch.
+When a batch node is invoked, Courier checks if there is an ongoing batch run for that node. If not,
+Courier creates one, marks the automation as pending, and does not proceed to the next step until
+the batch is complete.
 
 If there _is_ an existing batch run, Courier will add the data object for that run to the existing
 batch and terminate / complete the automation run. Any steps connected to the batch will not be
 executed. This means the nodes following a batch node will only be executed once per batch run.
+
+Once a batch is completed, the data objects are aggregated and passed onto the next step.
 
 ## Configuring A Batch
 
