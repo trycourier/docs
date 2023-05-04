@@ -55,16 +55,6 @@ the editor within the sidebar.
   <source src={creatingABatchUrl} />
 </video>
 
-When a batch node is invoked, Courier checks if there is an ongoing batch run for that node. If not,
-Courier creates one, marks the automation as pending, and does not proceed to the next step until
-the batch is complete.
-
-If there _is_ an existing batch run, Courier will add the data object for that run to the existing
-batch and terminate / complete the automation run. Any steps connected to the batch will not be
-executed. This means the nodes following a batch node will only be executed once per batch run.
-
-Once a batch is completed, the data objects are aggregated and passed onto the next step.
-
 ## Configuring A Batch
 
 To configure a batch, click on the batch node to open an editor in the sidebar.
@@ -78,16 +68,24 @@ Batches have the following configuration options:
 | **Retain Items** | Defines the number of items to be retained and sent along with the batch. Retention does not affect the tracked count. If retain is set to 10 items and 15 items are received, the passed count will be 15, and the passed items will be 10. Options: First 10, Last 10, Highest 10 (requires Sort Key), Lowest 10 (requires Sort Key).              |
 | **Sort Key**     | Required when Highest or Lowest is selected for Retain Items. Defines the key of the data object to be used to determine item ordering. For example, if sort key is set to upvotes, and the automation is invoked with `{ "data": { "upvotes": 5 } }`, 5 will be the value used to determine the order and position of the event in the items array. |
 | **Max Items**    | (Optional) Defines the maximum number of events to include in a batch before completion. When a batch has received this number of events, it will immediately finalize and send the batch to the next step.                                                                                                                                          |
-| **Category Key** | (Optional) Defines the key the batch data will be attached to on the data object. See [Working with Multiple Categories](./#working-with-multiple-categories) for more details.                                                                                                                                                                      |
+| **Category Key** | (Optional) Allows events to be grouped by categories. See [Working with Categories](./#working-with-categories) for more details.                                                                                                                                                                                                                    |
 
-## Working With Completed Batch Data
+## Invoking a Batch |
 
-Once a batch run is completed, the batch will be added to the data object with the following
-interface:
+When a batch node is invoked, Courier checks if there is an ongoing batch run for that node. If not,
+Courier creates one, marks the automation as pending, and does not proceed to the next step until
+the batch is complete.
+
+If there _is_ an existing batch run, Courier will add the data object for that run to the existing
+batch and terminate / complete the automation run. Any steps connected to the batch will not be
+executed. This means the nodes following a batch node will only be executed once per batch run.
+
+Once a batch is complete, the data objects from each invocation are aggregated and passed onto the
+next step
 
 ```typescript
 {
-  [category_key: string]: {
+  batch: {
     // The number of events received for this category, may be different than items.length
     // depending on item retention configuration.
     count: number;
@@ -97,11 +95,7 @@ interface:
 }
 ```
 
-By default, `category_key` is set to `batch`. To access the data from a batch in subsequent steps, use
-`refs.data.batch.count` or `refs.data.batch.items`. If a `category_key` is specified, use that value
-instead: `refs.data.<category_key>`.
-
-**For example** if a batch was invoked 3 times with the following values before completion:
+**For example** if a batch automation was invoked 3 times with the following values
 
 ```js
 // Invoke 1
@@ -110,14 +104,18 @@ instead: `refs.data.<category_key>`.
     like_from: "Drew";
   }
 }
+```
 
+```js
 // Invoke 2
 {
   data: {
     like_from: "Alex";
   }
 }
+```
 
+```js
 // Invoke 3
 {
   data: {
@@ -150,11 +148,11 @@ template:
   alt="Accessing batch data from a notification template"
 />
 
-### Working With Multiple Categories
+### Working With Categories
 
-It is possible to have more than one category in a single batch run if the category key is set to a
-dynamic value such as `refs.data.category_key`. In such a case, each separate category can be
-accessed separately on the data object.
+It is possible to group events by category in a batch run when the `Category Key` is set to a
+dynamic value such as `refs.data.category_key`. In such a case, the batch is aggregated by
+category:
 
 <Image
   img={require("./assets/digests-batching-throttling/dynamic-category-key.png")}
@@ -162,7 +160,10 @@ accessed separately on the data object.
   batch data from a notification template"
 />
 
-If the batch run was invoked with the following data:
+**For example**, in the batch node, `Category Key` is set to `refs.data.category_key`. Each time
+the automation is invoked, a category_key is supplied.
+
+Given the following invocations:
 
 ```js
 // Invoke 1
@@ -172,7 +173,9 @@ If the batch run was invoked with the following data:
     like_from: "Drew"
   }
 }
+```
 
+```js
 // Invoke 2
 {
   data: {
@@ -180,14 +183,17 @@ If the batch run was invoked with the following data:
     like_from: "Alex"
   }
 }
+```
 
+```js
 // Invoke 3
 {
-  data: {
-    category_key: "comments",
-    comment: "Excellent post!"
+data: {
+  category_key: "comments",
+  comment: "Excellent post!"
   }
 }
+
 ```
 
 The data object passed to the steps following the batch node would be:
