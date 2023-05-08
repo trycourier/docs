@@ -21,13 +21,13 @@ const { CourierClient } = require("@trycourier/courier");
 
 6. Add the following code and replace `<auth_token>` with your [Courier API key](https://app.courier.com/settings/api-keys):
 
-```
+```jsx
 const courier = CourierClient({ authorizationToken: "<auth_token>" });
 ```
 
 7. Add the following code to send the message:
 
-```
+```jsx
 const { requestId } = await courier.send({
   message: {
     to: {
