@@ -65,17 +65,21 @@ const { requestId } = await courier.send({
 
 # FAQs
 
-1. How to add a channel?
+1. **How to add a channel?**
+    
     [How to: Integrate a New Notification Channel - SMS, Email, Chat, or Push](https://www.youtube.com/watch?v=nAbRLOMv96w)
-2. What's the difference between production and test API keys?
+2. **What's the difference between production and test API keys?**
+    
     Every Courier tenant has two notification development environments: “Live” and “Test”. The two environments are isolated from one another, and all the assets within them (templates, brands, tags, categories integrations, API keys, log data, etc.) belong only to that environment.
 
     Any changes made to a template and its associated assets are only applied within the current environment until you migrate the template and overwrite any changes to the corresponding Notification ID and assets in the other environment.
-3. How can I send to multiple users or contacts?
+3. **How can I send to multiple users or contacts?**
+    
     You will need to create a list of users in Courier and 
     - Create a list and add users in the UI (**recommended**): https://app.courier.com/users?create-list=true
     - Create a list and add users programmatically with the API: https://www.courier.com/docs/reference/lists/put-subscribe/
-4. How can I access user profiles from Courier?
+4. **How can I access user profiles from Courier?**
+    
     If you have your users saved in Courier's user database https://app.courier.com/users, you can replace the JSON `"email"` field in the `"to"` object with:
     - individual profiles with `"user_id": "ADD_USER_ID"`
     - list of multiple users: `"list_id": "ADD_LIST_ID"`
