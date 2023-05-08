@@ -19,13 +19,13 @@ This quickstart demonstrates how to send messages from a Node.js application.
 const { CourierClient } = require("@trycourier/courier");
 ```
 
-6. Add the following code and replace `<auth_token>` with your [Courier API key](https://app.courier.com/settings/api-keys).
+6. Add the following code and replace `<auth_token>` with your [Courier API key](https://app.courier.com/settings/api-keys):
 
 ```
 const courier = CourierClient({ authorizationToken: "<auth_token>" });
 ```
 
-7. Add the following code to send the message.
+7. Add the following code to send the message:
 
 ```
 const { requestId } = await courier.send({
@@ -66,9 +66,11 @@ const { requestId } = await courier.send({
 # FAQs
 
 1. How to add a channel?
-    https://www.youtube.com/watch?v=nAbRLOMv96w
+    [How to: Integrate a New Notification Channel - SMS, Email, Chat, or Push](https://www.youtube.com/watch?v=nAbRLOMv96w)
 2. What's the difference between production and test API keys?
-    https://forum.courier.com/t/the-difference-between-production-and-test-environments/115
+    Every Courier tenant has two notification development environments: “Live” and “Test”. The two environments are isolated from one another, and all the assets within them (templates, brands, tags, categories integrations, API keys, log data, etc.) belong only to that environment.
+
+    Any changes made to a template and its associated assets are only applied within the current environment until you migrate the template and overwrite any changes to the corresponding Notification ID and assets in the other environment.
 3. How can I send to multiple users or contacts?
     You will need to create a list of users in Courier and 
     - Create a list and add users in the UI (**recommended**): https://app.courier.com/users?create-list=true
