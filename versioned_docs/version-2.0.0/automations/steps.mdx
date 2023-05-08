@@ -11,6 +11,44 @@ import TOCInline from "@theme/TOCInline";
 
 <TOCInline maxHeadingLevel={2} toc={toc} />
 
+## Add to Batch
+
+Add the data object to a batch. Any steps after "add-to-batch" are not executed until the batch
+conditions are met and the batch is released. The subsequent steps are only invoked once per batch
+run.
+
+### Fields
+
+| Field           | Type   | Required | Description                                                                                                                                                                                               |
+| --------------- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| action          | string | required | The type of element. For the add to batch Automation Step, this value should be `"add-to-batch"`.                                                                                                         |
+| batch_id        | string | required | A unique id for the batch. This value must be the same for each event expected to be added to the batch                                                                                                   |
+| wait_period     | string | required | Defines the period of inactivity before the batch is released. Specified as an ISO 8601 duration, https://en.wikipedia.org/wiki/ISO_8601#Durations                                                        |
+| max_wait_period | string | required | Defines the maximum wait time before the batch should be released. Must be less than wait period. Maximum of 60 days. Specified as an ISO 8601 duration, https://en.wikipedia.org/wiki/ISO_8601#Durations |
+| max_items       | number |          | If specified, the batch will release as soon as this number is reached                                                                                                                                    |
+| retain          | object | required | Defines what items should be retained and passed along to the next steps when the batch is released                                                                                                       |
+| retain.type     | string | required | One of `first`, `last`, `highest`, `lowest`.                                                                                                                                                              |
+| retain.count    | number | required | Currently, only 10 is supported                                                                                                                                                                           |
+| retain.sort_key | string |          | Defines the data value `data[sort_key]` that is used to sort the stored items. Required when type is set to `highest` or `lowest`.                                                                        |
+| category_key    | string |          | Defines the field of the data object the batch is set to when complete. Defaults to `batch`                                                                                                               |
+
+### Schema
+
+```json
+{
+  "action": "add-to-batch",
+  "wait_period": "",
+  "max_wait_period": "",
+  "max_items": 10,
+  "retain": {
+    "type": "first" | "last" | "highest" | "lowest",
+    "count": 10,
+    "sort_key": ""
+  },
+  "category_key": ""
+}
+```
+
 ## Cancel
 
 Cancel an Automation Run that is In Progress.
