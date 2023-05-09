@@ -243,14 +243,14 @@ This helper will throw if an invalid date is provided.
 {{datetime-format 1554145200000 "%a, %B %d %I:%M %p"}}
 <!-- Output: Mon, April 01 7:00 pm-->
 
-{{datetime-format "2019-04-01T12:00:00.000Z" "%a, %B %d %I:%M %p"}}
-<!-- Output: Mon, April 01 7:00 pm-->
-
 {{datetime-format 1554145200000 "%a, %B %d %I:%M %p" "America/Los_Angeles"}}
 <!-- Output: Mon, April 01 12:00 pm-->
 
-{{datetime-format "2019-04-01T12:00:00.000Z" "%a, %B %d %I:%M %p" "America/Los_Angeles"}}
+{{datetime-format "2019-04-01T12:00:00.000Z" "%a, %B %d %I:%M %p"}}
 <!-- Output: Mon, April 01 12:00 pm-->
+
+{{datetime-format "2019-04-01T12:00:00.000Z" "%a, %B %d %I:%M %p" "America/Los_Angeles"}}
+<!-- Output: Mon, April 01 5:00 am-->
 
 ```
 
