@@ -228,6 +228,38 @@ Returns a formatted string given a format and set of arguments.
 <!-- If number = 1 | Output: 1.00 -->
 ```
 
+### datetime-format
+
+Returns a formatted date string, can be set to a user IANA Timezone
+This helper will throw if an invalid date is provided.
+
+**Parameters**
+
+- `input` **{String|Number}**
+
+**Examples**
+
+```handlebars
+{{datetime-format 1554145200000 "%a, %B %d %I:%M %p"}}
+<!-- Output: Mon, April 01 7:00 pm-->
+
+{{datetime-format "2019-04-01T12:00:00.000Z" "%a, %B %d %I:%M %p"}}
+<!-- Output: Mon, April 01 7:00 pm-->
+
+{{datetime-format 1554145200000 "%a, %B %d %I:%M %p" "America/Los_Angeles"}}
+<!-- Output: Mon, April 01 12:00 pm-->
+
+{{datetime-format "2019-04-01T12:00:00.000Z" "%a, %B %d %I:%M %p" "America/Los_Angeles"}}
+<!-- Output: Mon, April 01 12:00 pm-->
+
+```
+
+:::info
+
+[See full list of format options](https://support.sendwithus.com/jinja/jinja_time/#datetime-format)
+along with an additional option %p to add am, pm
+:::
+
 ### inc
 
 Increase value by 1.
