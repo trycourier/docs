@@ -1,0 +1,51 @@
+---
+sidebar_position: 9
+sidebar_label: Throttle
+slug: ./throttle
+toc_max_heading_level: 2
+---
+
+import Image from "@theme/IdealImage";
+import videoThumbnail from "./assets/video-thumbnail.png";
+import creatingAThrottleUrl from "./assets/digests-batching-throttling/creating-a-throttle.mp4";
+
+# Throttle
+
+:::note
+
+Status: This product is under active development and is available in a Private Beta, please
+contact Courier support for access.
+
+:::
+
+The Throttle step in automation limits the number of events that can pass into the next node within a specific period, dropping any additional events. This prevents customers from receiving too many messages about the same event.
+
+## Example Use Cases
+
+**Alert Notifications**
+
+When sending alert notifications, you may want to limit the number of notifications sent to a user in a given period to avoid bombarding them with too many alerts.
+
+**Email Campaigns**
+
+If you are running an email campaign, you may want to limit the number of emails sent to a customer within a specific timeframe to avoid overwhelming them with too many messages.
+
+In general, a Throttle step can be useful in any situation where you need to control the flow of data or limit the frequency of an action to prevent overload or overwhelm.
+
+## Creating A Throttle Step
+
+To create a Throttle, use the "Throttle" action, then fill out details in the step node.
+
+Specify maximum number of events to allow through the throttle, and the time period to throttle by.
+
+You have the options to throttle by:
+
+- user_id
+- automation template id
+
+<video width="783" loop autoPlay muted controls poster={videoThumbnail}>
+  <source src={creatingAThrottleUrl} />
+</video>
+
+
+
