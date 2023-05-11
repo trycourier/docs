@@ -12,66 +12,23 @@ import segmentCheckoutCompleteURL from "./assets/segment-checkout-complete.mp4";
 import segmentCancelNodeURL from "./assets/segment-cancel-node.mp4";
 import segmentSendCheckoutCompleteURL from "./assets/segment-send-checkout-complete.mp4";
 
-# Segment
+# Inbound Event Triggers
 
-One of the most common use cases for automations is hooking up notifications to segment events.
+Automations Designer supports a variety of methods to trigger an automation. Courier ingests inbound events such as tracking or user identify,
+and persists them such that they can later get used as a trigger.
 
-## A Simple Example
+## Courier Inbound
 
-In this example, we'll imagine an e-commerce site that sends out an email when a user successfully
-checks out, or a reminder to finish checking out when they visit the page, but do not finish their
-purchase.
+[CourierJS SDK](https://github.com/trycourier/courier-js/tree/main/packages/courier-js) interfaces with our `track` API to send client-side application events
+to Courier that can be then used in an Automations trigger node.
 
-For this, we'll need two automations. One for the reminder condition, the other for the checkout
-success condition. We'll start with the reminder condition.
+## Segment
 
-1. Create a new automation
-2. Drag over the segment trigger and attach it to the correct track event. In our case, that is
-   "Checkout Page Visited". Note: The track event dropdown is populated with events Courier has
-   already received from Segment.
+With a [Segment third-party integration](https://courier.com/docs/external-integrations/segment/segment-integration/) both [`track`](https://segment.com/docs/connections/spec/track/)
+and [`identify`](https://segment.com/docs/connections/spec/identify/) are automatically ingested using the Segment trigger node in Automations.
+Refer to [Segment use cases](https://www.courier.com/docs/automations/segment/) for more information.
 
-<video width="783" loop autoPlay muted controls poster={videoThumbnail}>
-  <source src={segmentTrackVisitedURL} />
-</video>
+## Rudderstack
 
-3. The reminder should be sent out a couple of hours after the checkout page was visited, so
-   add a delay node with the desired delay time
-4. Connect the delay node to a new send node and select the desired template. We set the userId to
-   `refs.data.userId`, which is the userId sent to us by segment.
-
-<video width="783" loop autoPlay muted controls poster={videoThumbnail}>
-  <source src={settingUpDelayAndSendURL} />
-</video>
-
-5. If the user successfully checks out, we won't want to send this notification. We'll add a
-   cancellation token so we can cancel this run in from our next automation. Navigate to the
-   settings tab and set `cancellation` to `refs.data.userId`. This way we can cancel any instance
-   of this automation associated with the same user the notification would otherwise be sent to.
-6. Click publish to finalize the template
-
-<video width="783" loop autoPlay muted controls poster={videoThumbnail}>
-  <source src={settingUpCancellationURL} />
-</video>
-
-The next automation will cancel the reminder automation from above, and send an invoice on
-successful checkout.
-
-1. Create a new automation.
-2. Add a Segment trigger node with a track event set to "Checkout Complete"
-
-<video width="783" loop autoPlay muted controls poster={videoThumbnail}>
-  <source src={segmentCheckoutCompleteURL} />
-</video>
-
-3. Add a cancel automation node and set the token to the user id. This will prevent the reminder
-   to finish checking out from sending.
-
-<video width="783" loop autoPlay muted controls poster={videoThumbnail}>
-  <source src={segmentCancelNodeURL} />
-</video>
-
-4. Send the Checkout Complete notification
-
-<video width="783" loop autoPlay muted controls poster={videoThumbnail}>
-  <source src={segmentSendCheckoutCompleteURL} />
-</video>
+With an existing [Rudderstack third-party integration](https://www.courier.com/docs/external-integrations/rudderstack/) both [`track`](https://www.rudderstack.com/docs/event-spec/standard-events/track/)
+and [`identify`](https://www.rudderstack.com/docs/event-spec/standard-events/identify/) are automatically ingested into the Rudderstack trigger node in Automations.
