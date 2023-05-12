@@ -17,7 +17,7 @@ contact Courier support for access.
 
 :::
 
-The Throttle step in automation limits the number of events that can pass into the next node within a specific period, dropping any additional events. This prevents customers from receiving too many messages about the same event.
+The Throttle step in an automation limits the number of events that can pass into the next node within a specific period, dropping any additional events. This prevents customers from receiving too many messages about the same event.
 
 ## Example Use Cases
 
@@ -41,37 +41,28 @@ Specify maximum number of events to allow through the throttle, and the time per
 
 You have the options to throttle by:
 
-- user_id
-- automation template id
+| Scope       | Usage                                                |
+|:------------|:-----------------------------------------------------|
+| `user_id`   | Apply throttling by using `user_id` coming from `data`|
+| `GLOBAL`    | Let Courier decide the throttle parameter.            |
+
 
 **Note:** This is a beta feature, and we are working on adding more options for throttling.
 
 Below is an example of a throttle step that will allow 2 event to pass through for a given user in a 24 hour period before throttling.
 
-In this example, the throttle is set to throttle by user_id. You would supply `user_id` in following steps to throttle by user.
+In this example, the throttle is set to be applied by `user_id`. You have to supply `user_id` in the following manner to throttle the user.
 
-```ts
-import axios from "axios";
-
-const options = {
-  method: "POST",
-  url: "https://api.courier.com/automations/<automation_template_id>/invoke",
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: "Bearer <replace_with_api_key>",
-  },
-  data: { data: { user_id: "foobar" } },
-};
-
-axios
-  .request(options)
-  .then(function (response) {
-    console.log(response.data);
-  })
-  .catch(function (error) {
-    console.error(error);
-  });
-```
+```bash
+curl --request POST \
+  --url https://api.courier.com/automations/<automation_template_id>/invoke \
+  --header 'Authorization: Bearer <replace_with_api_key>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "data": {
+		"user_id": "<user_id>"
+  }
+}
 
 <Image
   img={require("./assets/digests-batching-throttling/throttle-step.png")}
