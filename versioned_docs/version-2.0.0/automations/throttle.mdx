@@ -45,3 +45,35 @@ You have the options to throttle by:
 - automation template id
 
 **Note:** This is a beta feature, and we are working on adding more options for throttling.
+
+Below is an example of a throttle step that will allow 2 event to pass through for a given user in a 24 hour period before throttling.
+
+In this example, the throttle is set to throttle by user_id. You would supply `user_id` in following steps to throttle by user.
+
+```ts
+import axios from "axios";
+
+const options = {
+  method: "POST",
+  url: "https://api.courier.com/automations/<automation_template_id>/invoke",
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: "Bearer <replace_with_api_key>",
+  },
+  data: { data: { user_id: "foobar" } },
+};
+
+axios
+  .request(options)
+  .then(function (response) {
+    console.log(response.data);
+  })
+  .catch(function (error) {
+    console.error(error);
+  });
+```
+
+<Image
+  img={require("./assets/digests-batching-throttling/throttle-step.png")}
+  alt="Creating throttle step"
+/>
