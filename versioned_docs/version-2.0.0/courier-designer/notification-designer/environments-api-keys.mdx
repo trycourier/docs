@@ -28,7 +28,7 @@ Use the **Environments Toggle** in the right-side menu to switch between your Pr
 
 :::info Info
 
-Simply switching from **Live** to **Test** does not impact your notifications in either environment in any way. It just changes the environment you are viewing. 
+Simply switching from **Live** to **Test** does not impact your notifications in either environment in any way. It just changes the environment you are viewing.
 
 :::
 
@@ -38,26 +38,26 @@ Within each environment, Production and Test, there are two states: `draft` and 
 
 The keys are prefaced in a way that helps you identify which key you are using:
 
-- **pk\_prod_** = The API key for your published data in the Production environment
-- **dk\_prod_** = The API key for your draft data in the Production environment
-- **pk\_test_** = The API key for your published data in the Test environment
-- **dk\_test_** = The API key for your draftdata in the Test environment
+- **pk_prod\_** = The API key for your published data in the Production environment
+- **dk_prod\_** = The API key for your draft data in the Production environment
+- **pk_test\_** = The API key for your published data in the Test environment
+- **dk_test\_** = The API key for your draftdata in the Test environment
 
 <Image
   img={require("../../assets/guides/environments/environments-api-keys.png")}
   alt="Your Test Environment API Keys"
 />
 
-### Courier Business Feature: Generate New API Keys
+### Generate New API Keys
 
-Courier customers with a Business contract have the ability to create new API keys and have more than 2 keys per environment to enable additional development workflows.
+Courier customers have the ability to create new API keys and have more than 2 keys per environment to enable additional development workflows.
 
 <Image
   img={require("../../assets/guides/environments/environments-generate-keys.png")}
   alt="Generate New API Keys With a Courier Business Account"
 />
 
-### Define the Routing Behavior of Custom API Keys 
+### Define the Routing Behavior of Custom API Keys
 
 In addition to the ability to create new API Keys, Business Tier customers can define the routing behavior of their API Keys. A `mock` key will simulate the Courier notification/message lifecycle - but won't invoke the downstream provider. This lets you see how the request flows inside of Courier without incurring any send cost.
 
@@ -166,12 +166,14 @@ The Test Configuration means Courier will use this configuration when sending a 
 ## Data Logs, Metrics, and Environments
 
 Your [Data Logs](https://help.courier.com/en/articles/4364860-using-the-data-logs) and Metrics are environment-specific. Sends of Notifications using the `pk_test_` and `dk_test_` keys will only appear in the Data and Metrics dashboard of the Test environment. While `pk_prod_` and `dk_prod_` sends will only appear in the Data Logs and Metrics for the Production environment.
+
 <!-- Link follow-up doc -->
+
 ### Courier APIs and Environments
 
-The environment and state-specific API key **(pk\_prod\_, dk\_prod\_, pk\_test\_, dk\_test\_)** you use when interacting with [Courier's APIs](../../reference/intro.mdx) will perform the command for that environment and state only.
+The environment and state-specific API key **(pk_prod\_, dk_prod\_, pk_test\_, dk_test\_)** you use when interacting with [Courier's APIs](../../reference/intro.mdx) will perform the command for that environment and state only.
 
-In other words, if you create a list via the Lists API using the Draft Test API key **(dk\_test\_)**, you will create a list that can only be used to send notifications in the draft state in the Test environment.
+In other words, if you create a list via the Lists API using the Draft Test API key **(dk_test\_)**, you will create a list that can only be used to send notifications in the draft state in the Test environment.
 
 ## Segment and Environments
 
@@ -179,12 +181,14 @@ To use Courier environments with Segment, create multiple Courier sources in Seg
 
 One way to implement this could be:
 
-1. Send your production data from Segment to your Courier production environment using the published Production key `pk_prod_`. 
+1. Send your production data from Segment to your Courier production environment using the published Production key `pk_prod_`.
 2. Set up a second destination to send data from Segment to your Courier Test environment using the published Test key `pk_test_`.
 3. [Map the Track events to your templates](../../sending-notifications/create-map-events.mdx) in the test environment.
 
 **For more details, read:** [Setting up Courier's Segment integration](https://help.courier.com/en/articles/4438651-setting-up-courier-s-segment-integration).
+
 <!-- Link follow-up doc -->
+
 ## Environments and Billing
 
 Note that billing takes both test and production sends into account.
