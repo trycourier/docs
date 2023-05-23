@@ -12,7 +12,8 @@ import videoThumbnail from "./assets/video-thumbnail.png";
 
 :::note
 
-Status: This product is under active development and is available as a Beta feature.
+Status: This product is under active development and is available in a Private Beta, please
+contact Courier support for access.
 
 :::
 
@@ -40,10 +41,11 @@ Specify maximum number of events to allow through the throttle, and the time per
 
 You have the options to throttle by:
 
-| Scope     | Usage                                                  |
-| :-------- | :----------------------------------------------------- |
-| `user_id` | Apply throttling by using `user_id` coming from `data` |
-| `GLOBAL`  | Let Courier decide the throttle parameter.             |
+| Scope     | Usage                                                                                                      |
+| :-------- | :--------------------------------------------------------------------------------------------------------- |
+| `user_id` | Apply throttling by using `user_id` coming from `data`                                                     |
+| `GLOBAL`  | Let Courier decide the throttle parameter.                                                                 |
+| `Dynamic` | You can use arbitary value available in your `run_context` by referencing it like `refs.data.throttle_key` |
 
 **Note:** This is a beta feature, and we are working on adding more options for throttling.
 
