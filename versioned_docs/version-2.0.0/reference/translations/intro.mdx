@@ -1,0 +1,16 @@
+---
+sidebar_position: -1
+sidebar_label: Introduction
+pagination_label: Translations
+slug: ./
+---
+
+# Translations
+
+The Translations API allows you to read/write translations to Courier in the form of .po files (https://www.gnu.org/software/gettext/manual/html_node/PO-Files.html).
+
+A typical translations workflow would look like:
+
+1. Inserting/Updating a .po file per locale for your workspace
+2. Using Courier's `t` handlerbars helper in the notification template where you would like Courier to use translated content. (https://www.courier.com/docs/courier-designer/notification-designer/handlebars-helpers/#translate)
+3. Courier will look at profile locale and pick up corresponding translation content.
