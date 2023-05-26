@@ -747,6 +747,8 @@ Translates a string based on the key, profile locale and .po translations you ha
 - `args` **{String}** (multiple, space separated arguments)
 - `domain` **{String}** (only scoped to "default" right now)
 - `locale` **{String}** (fetched automatically from profile right now)
+- `plural` **{String}** (pluralization key)
+- `count` **{Number}** (plurlization count)
 
 **Examples**
 
@@ -757,6 +759,10 @@ Translates a string based on the key, profile locale and .po translations you ha
 <!-- Pass profile attributes as arguments -->
 {{t "Salutation" profile.first_name profile.last_name}}
 <!-- Output: "Welcome, John Doe" -->
+
+<!-- Pluralization -->
+{{t "Salutation" plural="Salutations" count=42}}
+<!-- Output: "Welcome everyone!" -->
 ```
 
 ## Common use-cases
