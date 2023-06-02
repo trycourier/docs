@@ -1,0 +1,251 @@
+---
+sidebar_position: 1
+sidebar_label: "React.js SDK"
+slug: ./react-sdk
+toc_max_heading_level: 2
+---
+# Using the React.js Web SDK
+
+## Installation
+
+In your React.js project, install the following dependency:
+
+```
+yarn add @trycourier/react-provider
+```
+
+or 
+
+```
+npm i @trycourier/react-provider
+```
+
+The `react-provider` component is required in order to use other components like `react-inbox` and `react-toast` and is responsible for authentication, API calls and state management.
+
+You can initialize the `react-provider` in your app like this:
+
+```javascript
+import { CourierProvider } from "@trycourier/react-provider";
+
+function App() {
+  return (
+    <CourierProvider 
+      userId={<userId>} 
+      clientKey={<clientKey>}>
+    </CourierProvider>
+  );
+}
+```
+
+## Authentication
+
+There are two methods for handling authentication: JWT and HMAC. JWT is our recommended method, HMAC is being deprecated.
+
+### JWT Auth Enabled
+
+```javascript
+import { useState, useEffect } from "react";
+import { CourierProvider } from "@trycourier/react-provider";
+
+function App() {
+  const [authentication, setAuthentication] = useState();
+
+  useEffect(() => {
+    const response = await fetchJWTAuthTokenFromYourBackend(<userId>);
+    setAuthentication(response);
+  }, []);
+
+  return (
+    <CourierProvider 
+      userId={<userId>} 
+      authentication={authentication}>
+    </CourierProvider>
+  );
+}
+```
+
+### HMAC Auth Enabled
+
+```javascript
+import { useState, useEffect } from "react";
+import { CourierProvider } from "@trycourier/react-provider";
+
+function App() {
+  const [userSignature, setUserSignature] = useState();
+
+  useEffect(() => {
+    const response = await fetchHMACUserSignatureFromYourBackend(<userId>);
+    setUserSignature(response);
+  }, []);
+
+  return (
+    <CourierProvider 
+      clientKey={process.env.CLIENT_KEY} 
+      userId={<userId>} 
+      userSignature={userSignature}>
+    </CourierProvider>
+  );
+}
+```
+
+## `<Inbox>`
+
+The `<Inbox>` React component displays list of recent notifications that the user has received. 
+
+```
+yarn add @trycourier/react-inbox
+```
+
+or 
+
+```
+npm i @trycourier/react-inbox
+```
+
+In order to use `<Inbox>` you need to ensure that it is included in the component tree below where you have defined the `<CourierProvider>` ([read more about React Context](https://react.dev/learn/passing-data-deeply-with-context)). Here's a simple example:
+
+```jsx
+<CourierProvider 
+  clientKey={<clientKey>} 
+  userId={<userId>} 
+  <Inbox/>
+</CourierProvider>
+```
+
+### Events
+
+Each message in the inbox supports the following events:
+
+- When the Inbox is opened and a message is in view, an `opened` event will fire for that message. The `opened` event will only fire once per message.
+- Messages can be marked as `read` and `unread` by the user, which will fire the corresponding events.
+- Messages can be marked as `archived` by the user, which will fire the corresponding event. Archived messages will not be returned when fetching messages from the API.
+- If "Click Tracking" is enabled, clicking a message that has an action will created a `clicked` event and also mark the message as `read`.
+
+Github Docs: [@trycourier/react-inbox](https://github.com/trycourier/courier-react/tree/main/packages/react-inbox)
+
+
+## `<Toast>`
+
+The `<Toast>` component displays a toast message when a new message has been received.
+
+```
+yarn add @trycourier/react-toast
+```
+
+or 
+
+```
+npm i @trycourier/react-toast
+```
+
+```jsx
+<CourierProvider 
+  clientKey={<clientKey>} 
+  userId={<userId>} 
+  <Toast/>
+</CourierProvider>
+```
+
+Github Docs: [@trycourier/react-toast](https://github.com/trycourier/courier-react/tree/main/packages/react-toast)
+
+## React Hooks
+
+React Hooks (`useInbox`, `useToast`, `useCourier`) exist as a separate package so that you can build your own interface using our api and state management without having to install all the dependencies that `@trycourier/react-inbox` or other react-dom based packages include.
+
+This also enables using this package with react-native in a much simpler way.
+
+### `useInbox`
+
+```javascript
+import { CourierProvider } from "@trycourier/react-provider";
+import { useInbox } from "@trycourier/react-hooks";
+
+const MyInbox = () => {
+  const inbox = useInbox();
+
+  useEffect(() => {
+    inbox.fetchMessages();
+  }, []);
+
+  const handleReadMessage = (message) => (event) => {
+    event.preventDefault();
+    inbox.markMessageRead(
+      message.messageId,
+      message.trackingIds.readTrackingId
+    );
+  };
+
+  const handleUnreadMessage = (message) => (event) => {
+    event.preventDefault();
+    inbox.markMessageUnread(message.messageId);
+  };
+
+  const handleArchiveMessage = (message) => (event) => {
+    event.preventDefault();
+    inbox.markMessageArchived(message.messageId);
+  };
+
+  return (
+    <Container>
+      {inbox.messages.map((message) => {
+        return (
+          <Message>
+            {message.read ? (
+              <>
+                <button onClick={handleUnreadMessage(message)}>
+                  Unread Me
+                </button>
+                <button onClick={handleArchiveMessage(message)}>
+                  Archive Me
+                </button>
+              </>
+            ) : (
+              <button onClick={handleReadMessage(message)}>Read Me</button>
+            )}
+          </Message>
+        );
+      })}
+    </Container>
+  );
+};
+
+const MyApp = () => {
+  return (
+    <CourierProvider userId={<userId>} clientKey={<clientKey>}>
+      <MyInbox />
+    </CourierProvider>
+  );
+};
+```
+
+Github Docs: [@trycourier/react-hooks](https://github.com/trycourier/courier-react/tree/main/packages/react-hooks)
+
+### `useToast`
+
+If you do not want to use Courier to trigger a toast notification then you can always invoke the toast locally with the useToast hook. Below is an example creating a notification from the client rather than creating it from a transport. Do not forget to wrap this component with a CourierProvider somewhere up the component hierarchy chain.
+
+```javascript
+import { CourierProvider } from "@trycourier/react-provider";
+import { Toast, useToast } from "@trycourier/react-toast";
+
+const MyComponent = () => {
+  // We can access this because the parent is a `CourierProvider`
+  const [toast] = useToast();
+
+  return (
+    <button onClick={() => toast("You just made a notification 🎉")}></button>
+  );
+};
+
+const App = () => {
+  return (
+    <CourierProvider userId={<userId>} clientKey={<clientKey>}>
+      <Toast />
+      <MyComponent />
+    </CourierProvider>
+  );
+};
+```
+
+Github Docs: [@trycourier/react-toast](https://github.com/trycourier/courier-react/tree/main/packages/react-toast)
+

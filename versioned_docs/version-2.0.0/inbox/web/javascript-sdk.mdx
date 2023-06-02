@@ -1,0 +1,33 @@
+---
+sidebar_position: 2
+sidebar_label: JavaScript SDK
+slug: ./javascript-sdk
+toc_max_heading_level: 2
+---
+# JavaScript Web SDK
+
+For non-React apps, we have a set of custom elements that you can embed in your web app. 
+
+## Initialization
+
+If you have all the neccessary information to initialize the SDK when the page renders (`clientKey`, `userId`, etc) you can initialize the SDK like this:
+
+```html
+<body>
+  <section>
+    <h1>Hello World</h1>
+    <courier-toast></courier-toast>
+    <courier-inbox></courier-inbox>
+  </section>
+  <script type="text/javascript">
+    window.courierConfig = {
+      clientKey: "{{CLIENT_KEY}}",
+      userId: "{{USER_ID}}",
+    };
+  </script>
+  <!-- Be sure to use the appropriate version -->
+  <script src="https://courier-components-xvdza5.s3.amazonaws.com/v{{CURRENT_VERSION}}.js"></script>
+</body>
+```
+
+Github Docs: [Courier Inbox JS SDK](https://github.com/trycourier/courier-react/tree/main/packages/components)

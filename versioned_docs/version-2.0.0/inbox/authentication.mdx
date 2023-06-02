@@ -1,29 +1,27 @@
 ---
-sidebar_position: 20
-sidebar_label: Authentication
+sidebar_label: Installing the Provider
+sidebar_position: 3
 slug: ./authentication
 toc_max_heading_level: 2
 ---
 
 import Image from "@theme/IdealImage";
 
-# Authentication
+# Installing the Provider
 
-Before we get started with Courier's Inbox, we need to talk about _Authentication_.  The preferred way of building an inbox is to integrate with our [components](http://www.courier.com/docs/inbox/components/) into **your frontend** and have these components talk _directly_ to Courier's API.  These API's are different than our normal endpoints at https://api.courier.com as our Inbox APIs have CORS (Cross Origin) enabled.  When you first install the Courier provider, we do not require strict authentication beyond a public Client Keys and User ID.
+In order to send notifications to Inbox, you need to [log-in](https://app.courier.com/login) to your Courier account and install the [Courier Provider](https://app.courier.com/channels/courier). Once you've done that, make note of the Client Key. You'll need that value to initialize the Inbox SDK.
 
-If you haven't installed the Courier Provider yet, you can do so [here](https://app.courier.com/channels/courier).  
+Once you've installed the Provider, you'll notice some authentication options that allow you to secure the notification data that is delivered to the client SDKs.
 
 ## Default (No Auth)
 
-To started with the Courier Provider, we do not require authentication beyond your Client Key and User ID.  This is to help with development and help get you up and running.  You can find your Client Key [here](https://app.courier.com/channels/courier).
+By default, you can use the Web Inbox SDK components without authentication beyond your `client_key` and `user_id`. Before going to production, you should implement stricter authentication using JWT tokens.
 
-Before going to _production_, you should implement stricter authentication as described below.
+When initializing the mobile SDKs (iOS and Android) you must supply an `accessToken` in addition to the `client_key` and `user_id`. Please review the authentication docs for [iOS](https://github.com/trycourier/courier-ios/blob/master/Docs/Authentication.md) and [Android](https://github.com/trycourier/courier-android/blob/master/Docs/Authentication.md) for more information about how set the accessToken both for development and production.
 
-<Image img={require("./assets/provider.png")} alt="Courier Provider" />
+## JSON Web Tokens
 
-## JSON Web Token (JWT)
-
-When getting ready for production, we recommend implementing authentication in the form of a [JWT](https://jwt.io/).  You can use our [Issue Token API](https://www.courier.com/docs/reference/auth/issue-token/) to make things easier.  A JWT should be generated on a `per-user` level in your _backend_ and be supplied to your frontend through an API or embedding in your HTML.
+When getting ready for production, we recommend implementing authentication in the form of a [JWT](https://jwt.io/).  You can use our [Issue Token API](https://www.courier.com/docs/reference/auth/issue-token/) to make things easier.  A JWT should be generated on a per-user basis in your backend and be supplied to your frontend.
 
 An example payload for an issue-token would look like:
 
@@ -53,11 +51,11 @@ The result of this API will look like:
 }
 ```
 
-This token will then be passed into the client components and serve as your `per-user` authentication.
+This token will then be passed into the client components and serve as your per-user authentication.
 
 ## HMAC (Deprecated)
 
-We recommend JWT over HMAC as JWT allows us to set more specific scopes.  
+We recommend JWT over HMAC as JWT allows developers to set more specific scopes.  
 
 HMAC is a way to add extra security to your application, more so than just having approved domains and a client key. HMAC allows you to generate a signature for each user you have in your system. It is a hash of your User ID and your API Key.
 
@@ -71,4 +69,8 @@ const userSignature =
     .digest("hex");
 ```
 
-Make sure you **DO NOT** do this on your frontend because your API Key is private and you do not want to leak it. This HMAC should be generated on the backend and either embedded in your frontend via SSR or can be returned with an API endpoint (for each user).
+:::caution
+
+Make sure you DO NOT do this on your frontend because your API Key is private and you do not want to leak it. This HMAC should be generated on the backend and either embedded in your frontend via SSR or can be returned with an API endpoint (for each user).
+
+:::
