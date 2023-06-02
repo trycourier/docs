@@ -1,45 +1,35 @@
 ---
-pagination_label: "Courier Inbox: Introduction"
-sidebar_position: 10
+sidebar_label: Introduction
+sidebar_position: 1
 slug: ./
 toc_max_heading_level: 2
 ---
-
 import Image from "@theme/IdealImage";
 
+# Courier Inbox
 
-# Introduction
+Courier Inbox is a set of APIs and SDKs that make it easy to add a modern notification inbox to your web or mobile application.
 
-<img width="500px" src="https://www.courier.com/_next/image/?url=https%3A%2F%2Fimages.ctfassets.net%2Fz7iqk1q8njt4%2FNoLW1lGVBYDxg3rTGjX8n%2Fd687aac97ba30ad78d101d6f293c79bd%2FInbox_2.0_thumbnail.png&w=1080&q=100" alt="Courier Provider" />
+Inbox is available for web, iOS and Android applications and is fully customizable, so you can tailor the look and feel to match your app's branding and style. You can also configure Inbox to work alongside other messaging channels that you use, including email, SMS, push notifications and more. For example, if you send a notification to both the `inbox` and `email` channels and the user opens the email, their Inbox notification will be marked as read.
 
+## Key Features
 
-> [Check out the demo >](https://reactinappnotification.com/)
+Inbox includes a number of key features, such as:
 
+- Sending notifications using a single, simple REST API.
+- Supporting web, iOS and Android apps.
+- Delivering notifications in realtime over our websocket infrastructure.
+- Providing unread notification counts.
+- Triggering events when notifications are delivered/opened and when users mark notifications as read.
 
+## Live Demo
 
-Courier's Inbox is a powerful set of components that make it easy to add a modern inbox to your web or mobile application. With the Inbox, you can centralize all of your users' notifications and messages in one place, making it easy for them to stay on top of their communication with your app.
+Check out a live demo of Inbox for Web at: [reactinappnotification.com](https://reactinappnotification.com).
 
-The Inbox is fully customizable, so you can tailor the look and feel of the Inbox to match your application's branding and style. You can also configure the Inbox to work alongside other messaging channels that you use, including email, SMS, push notifications, and more.  For example, if you send a message to both _Inbox_ and _Email_, if you open the email... the inbox message will be **marked as read**.
+## The Legacy Push Channel
 
-The Inbox includes a number of key features, such as:
-
-- **Message Lists:** Fetches a list of messages
-- **Badge Counts:** Users can quickly see how many new messages they have waiting for them.
-- **Filters:**  Filters can be used to create lists based on `tags`, `read/unread`, `from date`, etc..
-- **Realtime updates:** New messages and events are delivered to the inbox over our websocket infrastructure.
-- **Eventing:** Users can trigger events such as `read/unread/archive`.  There are also analytical events such as `opened/delivered` to help understand how your users are using the inbox.
-
-> You can get started by installing Courier into your workspace [here](https://app.courier.com/channels/courier)
-
---- 
-
-Overall, the Inbox is a powerful tool for any application that relies on messaging and notifications to communicate with users. With its modern design, powerful features, and customization options, the Inbox can help you take your user communication to the next level.
-
-## React Components
-
-[Github Docs](https://github.com/trycourier/courier-react)
-
-## Embedded (Non-React) Solution
-
-[Github Docs](https://github.com/trycourier/courier-react/blob/main/packages/components)
-
+- There is no plan sunset the legacy `push` channel, but feature development has stopped.
+- New features will only be built into the `inbox` channel.
+- Customers who had the Courier provider configured prior to the launch of the Inbox channel will see both Push and Inbox.
+- Customers can have a mix of Inbox and Push in their workspace without any problems.
+- We encourage customers to build new notifications using Inbox moving forward.

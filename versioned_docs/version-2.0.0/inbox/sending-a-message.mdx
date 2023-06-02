@@ -1,6 +1,6 @@
 ---
 pagination_label: "Sending a Message"
-sidebar_position: 60
+sidebar_position: 4
 slug: ./making-a-send
 toc_max_heading_level: 2
 ---
@@ -10,54 +10,21 @@ import Image from "@theme/IdealImage";
 
 # Sending a Message
 
-Interfacing with Courier's [Send API](https://www.courier.com/docs/reference/send/message/ ) for Inbox can be done 2 ways.
-
-- Inline Send
-- Template Send
-
-## Inline / Elemental
-
-The simplest way to send an Inbox message is to use our inline [Elemental](https://www.courier.com/docs/elemental/) syntax.  This allows you to send a message without having to interact with our [Studio](https://app.courier.com).
-
-> Use "inbox" as your channel identifier in the `routing` object.
-
-> Only "text" and "action" elemental nodes are supported in inbox.
-
-> `data` will be passed _automatically_ through to the websocket connection and be retrievable through the GQL query
+When you're ready to [send a message](https://www.courier.com/docs/reference/send/message/), it's exactly like sending any other Courier notification, with the difference being that you are sending it to the `inbox` channel.
 
 ```json
 {
 	"message": {
 		"to": {
-			"email": "email@courier.com",
-			"user_id": "USER_ID"
+			"user_id": <USER_ID>
 		},
 		"content": {
-			"version": "2020-01-01",
-			"elements": [{
-					"type": "text",
-					"content": "**Hello World**"
-				},
-				{
-					"type": "text",
-					"content": "We <3 [Courier](https://www.courier.com)"
-				},
-				{
-					"type": "action",
-					"content": "Click me",
-					"href": "https://example.com",
-					"data": {
-						"foo": "bar"
-					}
-				}
-			]
+			"title": "How does {{ villian }} like his toast?",
+			"body": "On the dark side."
 		},
 		"data": {
-			"hello": "world"
-		},
-		"metadata": {
-			"tags": ["hello"]
-		},
+			"villian": "Darth Vader"
+		}
 		"routing": {
 			"method": "single",
 			"channels": ["inbox"]
@@ -66,26 +33,17 @@ The simplest way to send an Inbox message is to use our inline [Elemental](https
 }
 ```
 
-## Template
+## Passing Data
 
-Sending a template message has not changed at all, all you do is reference your template, or event in the Send API.
+If you provide information in the `data` field, it will be passed automatically through to SDK.
 
-```json
-{
-	"message": {
-		"to": {
-			"email": "email@courier.com",
-			"user_id": "USER_ID"
-		},
-		"template": "MY_TEMPLATE_OR_EVENT",
-		"data": {
-			"foo": "bar",
-		},
-		"metadata": {
-			"tags": ["foobar"]
-		}
-	}
-}
-```
+## Using Elemental Syntax
 
-> `data` will be passed through, but requires "data mapping" inside of the template's channel settings to send to the websocket connection and be retrievable through the GQL query
+Inbox SDKs support a subset of Elemental syntax for composing messages. 
+
+| Element  	| Web	 | iOS	| Android 	|                                                                                          
+| :---------| :------| :-----|:---------|
+| Title		| ✅		| ✅		| ✅		  |
+| Body		| ✅		| ✅		| ✅		  |
+| Text		| ✅		| 		| 			|
+| Action 	| ✅		| ✅		| ✅ 		|
