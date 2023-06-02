@@ -19,3 +19,19 @@ Use Cases:
 
 - Sending branded notifications on behalf of an organization
 - Creating slack-bots on behalf of an organization
+
+## Usage in a send call
+
+```js
+POST https://api.courier.com/send
+
+{
+  message: {
+    template: "my_template",
+    to: {
+      user_id: "person",
+      account_id: "ACME"
+    }
+  }
+}
+```
