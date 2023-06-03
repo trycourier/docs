@@ -4,9 +4,6 @@ sidebar_position: 3
 slug: ./authentication
 toc_max_heading_level: 2
 ---
-
-import Image from "@theme/IdealImage";
-
 # Installing the Provider
 
 In order to send notifications to Inbox, you need to [log-in](https://app.courier.com/login) to your Courier account and install the [Courier Provider](https://app.courier.com/channels/courier). Once you've done that, make note of the Client Key. You'll need that value to initialize the Inbox SDK.
@@ -15,9 +12,9 @@ Once you've installed the Provider, you'll notice some authentication options th
 
 ## Default (No Auth)
 
-By default, you can use the Web Inbox SDK components without authentication beyond your `client_key` and `user_id`. Before going to production, you should implement stricter authentication using JWT tokens.
+By default, you can use the Web Inbox SDK components without authentication beyond your `clientKey` and `userId`. Before going to production, you should implement stricter authentication using JWT tokens.
 
-When initializing the mobile SDKs (iOS and Android) you must supply an `accessToken` in addition to the `client_key` and `user_id`. Please review the authentication docs for [iOS](https://github.com/trycourier/courier-ios/blob/master/Docs/Authentication.md) and [Android](https://github.com/trycourier/courier-android/blob/master/Docs/Authentication.md) for more information about how set the accessToken both for development and production.
+When initializing the mobile SDKs (iOS and Android) you must supply an `accessToken` in addition to the `clientKey` and `userId`. Please review the authentication docs for [iOS](https://github.com/trycourier/courier-ios/blob/master/Docs/Authentication.md) and [Android](https://github.com/trycourier/courier-android/blob/master/Docs/Authentication.md) for more information about how set the accessToken both for development and production.
 
 ## JSON Web Tokens
 
@@ -27,7 +24,7 @@ An example payload for an issue-token would look like:
 
 ```json
 {
-  "scope": "user_id:{{USER_ID}} inbox:read:messages inbox:write:events"
+  "scope": "user_id:{{userId}} inbox:read:messages inbox:write:events"
 }
 ```
 
@@ -38,7 +35,7 @@ You can also set an expiration date for the JWT by providing the following scope
 
 ```json
 {
-  "scope": "user_id:{{USER_ID}} inbox:read:messages inbox:write:events",
+  "scope": "user_id:{{userId}} inbox:read:messages inbox:write:events",
   "expires_in": "2 days"
 }
 ```
@@ -57,7 +54,7 @@ This token will then be passed into the client components and serve as your per-
 
 We recommend JWT over HMAC as JWT allows developers to set more specific scopes.  
 
-HMAC is a way to add extra security to your application, more so than just having approved domains and a client key. HMAC allows you to generate a signature for each user you have in your system. It is a hash of your User ID and your API Key.
+HMAC is a way to add extra security to your application, more so than just having approved domains and a client key. HMAC allows you to generate a signature for each user you have in your system. It is a hash of the `userId` and your API Key.
 
 ```ts
 import crypto from "crypto";

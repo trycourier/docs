@@ -19,11 +19,11 @@ When you're ready to [send a message](https://www.courier.com/docs/reference/sen
 			"user_id": <USER_ID>
 		},
 		"content": {
-			"title": "How does {{ villian }} like his toast?",
+			"title": "How does {{ villain }} like his toast?",
 			"body": "On the dark side."
 		},
 		"data": {
-			"villian": "Darth Vader"
+			"villain": "Darth Vader"
 		}
 		"routing": {
 			"method": "single",
@@ -36,6 +36,10 @@ When you're ready to [send a message](https://www.courier.com/docs/reference/sen
 ## Passing Data
 
 If you provide information in the `data` field, it will be passed automatically through to SDK.
+
+Note: If you pass information in `data` that isn't referenced in your `content` payload or in a `template` that you specify, it will still be passed through to your app. For example, this is useful when trying to launch a specific screen in your app on mobile with a deep link:
+
+`data.deeplinkUrl = https://starwars.com/villains/darth_maul`
 
 ## Using Elemental Syntax
 
