@@ -1,0 +1,67 @@
+---
+sidebar_position: 3
+sidebar_label: Update an Account
+slug: ./update
+toc_max_heading_level: 2
+---
+
+# Update an Account
+
+**URL:** `https://api.courier.com/accounts/:account_id`
+
+**Method:** `POST`
+
+**Path Parameters:**
+
+| Key        | Type   |
+| ---------- | ------ |
+| account_id | string |
+
+**Body:**
+
+| Field             | Type   | Optional | Default | Description                                            |
+| ----------------- | ------ | -------- | ------- | ------------------------------------------------------ |
+| name              | string | yes      |         |                                                        |
+| parent_account_id | string | yes      |         |                                                        |
+| properties        | object | yes      |         | arbitrary properties accessible from the template      |
+| user_profile      | object | yes      |         | a user profile object merged with user profile on send |
+
+**Response Body:**
+
+**Response Body**
+
+The updated account.
+
+| Field             | Type   | Description                                            |
+| ----------------- | ------ | ------------------------------------------------------ |
+| id                | string | Id of the account                                      |
+| name              | string |                                                        |
+| parent_account_id | string |                                                        |
+| properties        | object | Arbitrary properties accessible from the template      |
+| user_profile      | object | A user profile object merged with user profile on send |
+
+**Example:**
+
+```js
+// POST https://api.courier.com/accounts/ACME
+
+// BODY
+{
+  name: "ACME Inc PRO MAX ULTRA",
+  user_profile: {
+    locale: "fr",
+  }
+}
+
+// Response Body
+{
+  id: "ACME",
+  name: "ACME Inc PRO MAX ULTRA",
+  properties: {
+    ceo: "Person",
+  },
+  user_profile: {
+    locale: "fr",
+  }
+}
+```
