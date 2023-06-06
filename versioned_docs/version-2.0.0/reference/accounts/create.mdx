@@ -1,15 +1,15 @@
 ---
 sidebar_position: 2
-sidebar_label: Create an Account
-slug: ./create
+sidebar_label: Create or Replace an Account
+slug: ./create-replace
 toc_max_heading_level: 2
 ---
 
-# Create an Account
+# Create or Replace an Account
 
 **URL:** `https://api.courier.com/accounts/:account_id`
 
-**Method:** `POST`
+**Method:** `PUT`
 
 **Path Parameters:**
 
@@ -41,7 +41,7 @@ A copy of the created account.
 **Example:**
 
 ```js
-// POST https://api.courier.com/accounts/ACME
+// PUT https://api.courier.com/accounts/ACME
 
 // BODY
 {
