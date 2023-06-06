@@ -104,12 +104,17 @@ npm i @trycourier/react-inbox
 
 In order to use `<Inbox>` you need to ensure that it is included in the component tree below where you have defined the `<CourierProvider>` ([read more about React Context](https://react.dev/learn/passing-data-deeply-with-context)). Here's a simple example:
 
-```jsx
-<CourierProvider 
-  clientKey={<clientKey>} 
-  userId={<userId>} 
-  <Inbox/>
-</CourierProvider>
+```javascript
+import { CourierProvider } from "@trycourier/react-provider";
+import { Inbox } from "@trycourier/react-inbox";
+
+function App() {
+  return (
+    <CourierProvider userId={<userId>} clientKey={<clientKey>}>
+      <Inbox/>
+    </CourierProvider>
+  );
+}
 ```
 
 ### Events
@@ -138,12 +143,17 @@ or
 npm i @trycourier/react-toast
 ```
 
-```jsx
-<CourierProvider 
-  clientKey={<clientKey>} 
-  userId={<userId>} 
-  <Toast/>
-</CourierProvider>
+```javascript
+import { CourierProvider } from "@trycourier/react-provider";
+import { Toast } from "@trycourier/react-toast";
+
+function App() {
+  return (
+    <CourierProvider userId={<userId>} clientKey={<clientKey>}>
+      <Toast/>
+    </CourierProvider>
+  );
+}
 ```
 
 Github Docs: [@trycourier/react-toast](https://github.com/trycourier/courier-react/tree/main/packages/react-toast)
