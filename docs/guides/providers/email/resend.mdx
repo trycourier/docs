@@ -1,0 +1,45 @@
+---
+sidebar_position: 9
+sidebar_label: Resend
+title: Send Email Notifications Using Resend
+description: Looking for a way to send email notifications via Resend? This step-by-step tutorial will show you how to integrate Resend's API the easy way.
+---
+
+# Resend
+
+## Profile Requirements
+
+To deliver a message to a recipient over Resend, Courier must be provided the recipient's email address. This value should be included in the recipient profile as `email`.
+
+```json title=JSON
+// Recipient Profile
+{
+  "email": "example@example.com"
+}
+```
+
+## Override
+
+You can use a provider override to replace what we send to Resend's Email API. For example, you can use [Resend's Tagging](https://resend.com/docs/api-reference/emails/send-email) with your request:
+
+```json title=JSON
+{
+  "message": {
+    "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "to": {
+      "email": "example@example.com"
+    },
+    "providers": {
+      "resend": {
+        "override": {
+          "body": {
+            "tags": [{ "name": "environment", "value": "development" }]
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+The `override.resend` can be used to replace what we send to Resend's Email API. Note: the override does not replace the entire object, only the elements that you define in the body of the override. You can see all the available options by visiting the [Resend API docs](https://resend.com/docs/api-reference/emails/send-email).
