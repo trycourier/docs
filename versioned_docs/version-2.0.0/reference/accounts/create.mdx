@@ -19,12 +19,13 @@ toc_max_heading_level: 2
 
 **Body:**
 
-| Field             | Type   | Optional | Default | Description                                                        |
-| ----------------- | ------ | -------- | ------- | ------------------------------------------------------------------ |
-| name              | string | no       |         |                                                                    |
-| parent_account_id | string | yes      |         |                                                                    |
-| properties        | object | yes      |         | arbitrary properties accessible from the template                  |
-| user_profile      | object | yes      |         | a base profile object merged with user profile on supplied on send |
+| Field             | Type   | Optional | Default | Description                                                                                                                                          |
+| ----------------- | ------ | -------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name              | string | no       |         |                                                                                                                                                      |
+| parent_account_id | string | yes      |         |                                                                                                                                                      |
+| properties        | object | yes      |         | arbitrary properties accessible from the template                                                                                                    |
+| user_profile      | object | yes      |         | a base profile object merged with user profile on supplied on send                                                                                   |
+| brand_id          | string | yes      |         | When specified, this brand will be used over the default workspace brand. A brand specified directly in the send call still takes highest precedence |
 
 **Response Body**
 
@@ -37,6 +38,7 @@ A copy of the created account.
 | parent_account_id | string |                                                        |
 | properties        | object | Arbitrary properties accessible from the template      |
 | user_profile      | object | A user profile object merged with user profile on send |
+| brand_id          | string |                                                        |
 
 **Example:**
 
@@ -46,6 +48,7 @@ A copy of the created account.
 // BODY
 {
   name: "ACME Inc",
+  brand_id: "acme_brand",
   properties: {
     ceo: "Person",
   },
@@ -61,6 +64,7 @@ A copy of the created account.
 {
   id: "ACME",
   name: "ACME Inc",
+  brand_id: "acme_brand",
   properties: {
     ceo: "Person",
   },
