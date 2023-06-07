@@ -390,3 +390,17 @@ Templates ready for import will appear as selectable checkboxes that you can cho
   img={require("../../../assets/guides/providers/template-import.png")}
   alt="Template Import Page"
 />
+
+### SendGrid API Key Permissions
+
+Before you can successfully import SendGrid Dynamic Templates, you will need to make sure of the following:
+
+- SendGrid templates must be saved as [Dynamic Templates](https://docs.sendgrid.com/ui/sending-email/how-to-send-an-email-with-dynamic-templates).
+- Your SendGrid API key must have [full access](https://docs.sendgrid.com/ui/account-and-settings/api-keys) for `Template Engine`.
+
+<Image
+  img={require("../../../assets/guides/providers/sg-api-permissions.png")}
+  alt="SendGrid API Key Permissions"
+/>
+
+Once your SendGrid API key has the appropriate permissions, you will be able to see your templates ready for import from the template import tool.
