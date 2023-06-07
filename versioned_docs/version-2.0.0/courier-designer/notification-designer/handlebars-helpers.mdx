@@ -97,7 +97,7 @@ Use the if statement to specify a block of code to be executed if a condition is
 
 **Parameters**
 
-- `input` **{String|Number}** 
+- `input` **{String|Number}**
 
 **Note:** Data and profile can have booleans.
 
@@ -105,24 +105,24 @@ Use the if statement to specify a block of code to be executed if a condition is
 
 ```handlebars
 {{#if (condition (var "eligible") "==" "yes")}}
-<strong>Hello!</strong>
+  <strong>Hello!</strong>
 {{else}}
-<strong>Bye</strong>
+  <strong>Bye</strong>
 {{/if}}
 <!-- Output: dependent on variable -->
 
 <!-- Reference a "profile" variable -->
 {{#if (condition (var "profile.name") "==" "rod")}}
-<strong>Hello {{var "profile.name"}}!</strong>
+  <strong>Hello {{var "profile.name"}}!</strong>
 {{else}}
-<strong>Hello there</strong>
+  <strong>Hello there</strong>
 {{/if}}
 
 <!-- Reference a boolean -->
 {{#if (condition (var "profile.hungry") "==" "true")}}
-<strong>{{var "profile.name"}} is hungry!</strong>
+  <strong>{{var "profile.name"}} is hungry!</strong>
 {{else}}
-<strong>{{var "profile.name"}} is not hungry</strong>
+  <strong>{{var "profile.name"}} is not hungry</strong>
 {{/if}}
 ```
 
@@ -132,12 +132,15 @@ Use the if statement to specify a block of code to be executed if a condition is
 - Loops through all arguments and ensures one is truthy if using the "or" logical operator.
 - Returns true if the conditions passed, false otherwise (use #unless helper to hide content if condition passes).
 
-- `input` **{String|Number}** 
+- `input` **{String|Number}**
 
 **Note:** Data and profile can have booleans.
 
 ```handlebars
-{{conditional (filter "data" "customer.name" "EQUALS" "josh") (filter "profile" "email" "CONTAINS" "@trycourier.com")}}
+{{conditional
+  (filter "data" "customer.name" "EQUALS" "josh")
+  (filter "profile" "email" "CONTAINS" "@trycourier.com")
+}}
 <!-- Output: dependent on variable -->
 ```
 
@@ -147,7 +150,7 @@ Returns the `value` if it is not nullish.
 
 **Parameters**
 
-- `input` **{String|Number}** 
+- `input` **{String|Number}**
 
 **Note:** Data and profile can have booleans.
 
@@ -186,9 +189,9 @@ Iterates over a list. Inside the block, you can use `this` to reference the elem
 
 ```handlebars
 <ul>
-{{#each people}}
-<li>{{this.name}}</li>
-{{/each}}
+  {{#each people}}
+    <li>{{this.name}}</li>
+  {{/each}}
 </ul>
 <!-- Output: unordered list -->
 ```
@@ -219,14 +222,46 @@ This is a modified version of [this Handlebars helper](https://github.com/handle
 Returns a formatted string given a format and set of arguments.
 
 **Parameters**
+
 - `input` **{String | Number}**
 
 **Example:**
 
 ```handlebars
-{{format "%.2f"  (var "number")}}
+{{format "%.2f" (var "number")}}
 <!-- If number = 1 | Output: 1.00 -->
 ```
+
+### datetime-format
+
+Returns a formatted date string, can be set to a user IANA Timezone
+This helper will throw if an invalid date is provided.
+
+**Parameters**
+
+- `input` **{String|Number}**
+
+**Examples**
+
+```handlebars
+{{datetime-format 1554145200000 "%a, %B %d %I:%M %p"}}
+<!-- Output: Mon, April 01 7:00 pm-->
+
+{{datetime-format 1554145200000 "%a, %B %d %I:%M %p" "America/Los_Angeles"}}
+<!-- Output: Mon, April 01 12:00 pm-->
+
+{{datetime-format "2019-04-01T12:00:00.000Z" "%a, %B %d %I:%M %p"}}
+<!-- Output: Mon, April 01 12:00 pm-->
+
+{{datetime-format "2019-04-01T12:00:00.000Z" "%a, %B %d %I:%M %p" "America/Los_Angeles"}}
+<!-- Output: Mon, April 01 5:00 am-->
+```
+
+:::info
+
+[See full list of format options](https://support.sendwithus.com/jinja/jinja_time/#datetime-format)
+along with an additional option %p to add am, pm
+:::
 
 ### inc
 
@@ -702,6 +737,28 @@ Returns an Unix epoch timestamp (seconds) as a millisecond epoch time value. Thi
 {{swu_timestamp_to_time (var "profile.some_timestamp")}}
 ```
 
+### translate
+
+Translates a string based on the key, profile locale and .po translations you have uploaded to Courier.
+
+**Parameters**
+
+- `key` **{String}**
+- `args` **{String}** (multiple, space separated arguments)
+- `domain` **{String}** (only scoped to "default" right now)
+- `locale` **{String}** (fetched automatically from profile right now)
+
+**Examples**
+
+```handlebars
+{{t "Salutation"}}
+<!-- Output: "Welcome" -->
+
+<!-- Pass profile attributes as arguments -->
+{{t "Salutation" profile.first_name profile.last_name}}
+<!-- Output: "Welcome, John Doe" -->
+```
+
 ## Common use-cases
 
 ### Conditionally rendering content
@@ -745,4 +802,22 @@ Returns an Unix epoch timestamp (seconds) as a millisecond epoch time value. Thi
 {{#if (condition (var "some_array.length") "<=" 0)}}
   <mj-text align="center">Hello!</mj-text>
 {{/if}}
+```
+
+### Pluralizing Text
+
+The `formatMessage` helper can be used to pluralize text in rendered content. Pluralization respects the [ICU format](https://unicode-org.github.io/icu/userguide/format_parse/messages/) and entries follow [Unicode CLDR rules](https://cldr.unicode.org/index/cldr-spec/plural-rules).
+
+**Example**
+
+```handlebars
+Your list contains
+{{formatMessage
+  "{itemCount, plural,
+    =0 {no items}
+    one {# item}
+    other {# items}
+}"
+  itemCount=itemCount
+}}.
 ```

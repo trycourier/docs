@@ -7,6 +7,12 @@ slug: ./
 
 import Image from "@theme/IdealImage";
 
-# Lists API
+# Lists
 
 The Lists API lets you create Lists and subscribe one or more recipient profiles to them in the Courier database. You can send a message to all the recipients you subscribed to that list with a single Send API call.
+
+:::info List_id is not reuseable
+
+A deleted `list_id` can be restored via the [Restore a List API](restore.mdx) and once deleted **cannot be used to create a new list**.
+
+:::

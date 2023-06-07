@@ -1,130 +1,228 @@
 ---
 sidebar_position: 1
-sidebar_label: Apple Push Notification
-title: Setup Notifications Using Apple Push Notification
-description: Looking for a way to send push notifications via Apple Push Notification? This step-by-step tutorial will show you how to integrate Apple Push Notification's API the easy way.
+sidebar_label: Apple Push Notifications Service (APNS)
+title: Setup Push Notifications with Apple Push Notifications Service
+description: Looking for a way to send push notifications via Apple Push Notifications Service? This step-by-step tutorial will show you how to integrate APNS's API the easy way.
 ---
 
 import Image from "@theme/IdealImage";
 
-# Apple Push Notification
+# Apple Push Notifications Service (APNS)
 
-## Generating .p8 key file
+<div 
+  style={{
+    position: 'relative',
+    width: '100%',
+    height: 0,
+    paddingBottom: '56.25%'
+  }}>
+  <iframe 
+    style={{
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%'
+    }} 
+    src="https://www.youtube.com/embed/xe_JHG9h-0Q?rel=0" 
+    title="YouTube video player" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+    allowfullscreen></iframe>
+</div>
 
-To generate a .p8 key file, go to the [Apple developer account page](https://developer.apple.com/account/), then select **Certificates, IDs & Profiles.**
+## Setup
 
-<Image img={require("../../../assets/guides/providers/apple-developer-resources.png")} alt="" />
+[Setup Video](#)
 
-Next, select **Keys**.
+1. Go to your [Apple Developer Account](https://developer.apple.com/account)
+2. Click "Certificates"
+3. Click "Keys"
+4. Click the "+" button
+5. Name the Key
+6. Click "Enable" on "Apple Push Notifications Service (APNs)"
+7. Click "Continue"
+8. Click "Register"
+9. Click "Download"
+10. Go to the [APNS Provider Configuration](https://app.courier.com/channels/apn)
+11. Enter the required information
+12. Click "Install Provider" or "Save"
 
-<Image img={require("../../../assets/guides/providers/apple-certificate-keys.png")} alt="" />
+## Getting APNS Tokens
 
-Click the “+” button to add a new key.
+### With a Courier Mobile SDK
 
-<Image img={require("../../../assets/guides/providers/apple-add-key.png")} alt="" />
+Using a Courier Mobile SDK is the best way to set this up. All Courier Mobile SDKs sync APNS tokens to Courier and will be automatically managed. This allows you to send pushes directly to a `user_id` rather than APNS tokens.
 
-On the new key page, type in your key name and check the Apple Push Notification service (APNs) box, then click “Continue” and click “Register".
+| Mobile SDK | APNS Token Management | Tracking Analytics |
+| :-- | :--: | :--: |
+| [iOS](https://github.com/trycourier/courier-ios#readme) | Automatic | Automatic | 
+| [Android](https://github.com/trycourier/courier-android#readme) | Not Supported | Not Supported | 
+| [React Native](https://github.com/trycourier/courier-react-native#readme) | Automatic | Automatic | 
+| [Flutter](https://github.com/trycourier/courier-flutter#readme) | Automatic | Automatic | 
 
-<Image img={require("../../../assets/guides/providers/apple-register-key-form.png")} alt="" />
+### Without a Courier Mobile SDK
 
-Then proceed to download the key file by clicking Download.
+Follow [Apple's Documentation](https://developer.apple.com/documentation/usernotifications) to setup push notifications on your iOS device.
 
-<Image img={require("../../../assets/guides/providers/apple-download-key.png")} alt="" />
-
-The Auth Key filename will look like this: `AuthKeyABCD1234.p8`, the `ABCD1234` is the Key ID for this key, we will need this Key ID to configure APN in Courier.
-
-As for the Team ID, you can get this on your [Apple developer account membership page](https://developer.apple.com/account/#/membership):
-
-<Image img={require("../../../assets/guides/providers/apple-team-id.png")} alt="" />
-
-### Install APN in Courier
-
-<Image img={require("../../../assets/guides/providers/apple-install-apn.png")} alt="" />
-
-## Profile Requirements
-
-Courier support sending Apple Push Notifications using single and multiple tokens. To deliver a message to a recipient over Apple Push Notifications, Courier must be provided the recipient's [APN registration token](https://developer.apple.com/documentation/usernotifications/registering_your_app_with_apns). These tokens should be included in the recipient profile as `apn.token` for single tokens and `apn.tokens` for multiple.
-
-### Single Token
-
-```json title=JSON
-{
-  "message": {
-    "to": {
-      "apn": {
-        "token": "YOUR TOKEN"
-      }
-    }
-
-    // ... rest of message definition
-  }
-}
+What APNS tokens look like:
+```
+469d754f85604fa6bcf98c4299ba9aa760a5a3b01c5ca7277342cf3fbcea5c91
 ```
 
-### Multiple Tokens
+:::danger Manual Implementation Requirements
 
-```json title=JSON
-{
-  "message": {
-    "to": {
-      "apn": {
-        "tokens": ["YOUR TOKEN 1", "YOUR TOKEN 2"]
-      }
-    }
-  }
-}
-```
+You will need to sync, store, and manage your user's APNS tokens. This likely will require you to create entries in your database, deploy separate endpoints, and add extra development time that can be avoided with a [Courier Mobile SDK](#with-a-courier-mobile-sdk).
 
-## Override
-
-You can use a provider override to replace what we send to the Apple Push Notifications API or provide an optional data payload for any of the APN [alert types](https://developer.apple.com/library/archive/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/PayloadKeyReference.html#//apple_ref/doc/uid/TP40008194-CH17-SW5).
-
-You can optionally specify if you want to route APN to the development/sandbox account by specifying the `isProduction` flag. Courier defaults this flag to `true`
-
-```json title=JSON
-{
-  "message": {
-    "to": {
-      "apn": {
-        "token": "some_token"
-      }
-    },
-  "providers": {
-    "apn": {
-      "override": {
-        "body": {
-          "apns-priority": "number",
-          "badge": "Number",
-          "content-available": "number",
-          "expiry": "number", // e.g Math.floor(Date.now() / 1000) + 3600 Expires 1 hour from now.
-          "sound": "String",
-          "alert": "String or Dictionary", // https://developer.apple.com/library/archive/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/PayloadKeyReference.html#//apple_ref/doc/uid/TP40008194-CH17-SW5
-          "payload": "'{\"messageFrom\":\"Courier\"}'",
-          "topic": "your-app-bundle-id",
-          "mutable-content": "number" // 1 will set the flag (default is unset)
-        },
-        "config": {
-          "isProduction": false | true, // defaults to true
-          "key": "*******",
-          "topic": "your_app_topic"
-        }
-      }
-    }
-  }
-  }
-}
-```
-
-Everything inside of `providers.apn.override.body` will replace what we send to the APN API. Values that are not replaced will still be sent.
-
-:::info Overriding APN Default Badge
-
-Courier sets a default `badge` property to your APN request. If you wish to remove a `badge` you can set the override to `0` in the request.
+If you'd like Courier delivery and click tracking, you will also need to manually make a request to the `trackingUrl`.
 
 :::
 
-## Tracking Events
+## Sending Messages
 
-Courier will include tracking URL information in the `data` attribute on the incoming [message payload](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/sending_notification_requests_to_apns/).
+This is a common example request you can make to the [`send`](../../../../reference/send/message/) api that shows:
+1. `providers.apn.override.body.aps.YOUR_CUSTOM_KEY` for adding custom data to your payload. This is usually used for opening a specific screen in your app when the user takes action on a push notification.
+2. `providers.apn.override.body.aps` for applying iOS specific values. You can learn more about these [here](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification).
 
-See [Courier push notification tracking](../push/intro.mdx#tracking)
+### Sending to a `user_id` (Recommended)
+
+```bash title=cURL
+curl --request POST \
+  --url https://api.courier.com/send \
+  --header 'Authorization: Bearer YOUR_AUTH_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"message": {
+		"to": {
+			"user_id": "YOUR_USER_ID"
+		},
+		"content": {
+			"title": "Hey there 👋",
+			"body": "Have a great day 😁"
+		},
+		"routing": {
+			"method": "all",
+			"channels": [
+				"apn"
+			]
+		},
+		"providers": {
+			"apn": {
+				"override": {
+					"body": {
+						"aps": {
+							"alert": {
+								"title": "Hey there 👋",
+								"body": "Have a great day 😁"
+							},
+							"sound": "ping.aiff",
+							"badge": 99,
+							"YOUR_CUSTOM_KEY": "YOUR_CUSTOM_VALUE"
+						}
+					}
+				}
+			}
+		}
+	}
+}'
+```
+
+### Sending to a `token`
+
+```bash title=cURL
+curl --request POST \
+  --url https://api.courier.com/send \
+  --header 'Authorization: Bearer YOUR_AUTH_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"message": {
+		"to": {
+			"apn": {
+				"token": "YOUR_APNS_TOKEN"
+			}
+		},
+		"content": {
+			"title": "Hey there 👋",
+			"body": "Have a great day 😁"
+		},
+		"routing": {
+			"method": "all",
+			"channels": [
+				"apn"
+			]
+		},
+		"providers": {
+			"apn": {
+				"override": {
+					"body": {
+						"aps": {
+							"alert": {
+								"title": "Hey there 👋",
+								"body": "Have a great day 😁"
+							},
+							"sound": "ping.aiff",
+							"badge": 99,
+							"YOUR_CUSTOM_KEY": "YOUR_CUSTOM_VALUE"
+						}
+					}
+				}
+			}
+		}
+	}
+}'
+```
+
+### Sending to multiple `tokens`
+
+```bash title=cURL
+curl --request POST \
+  --url https://api.courier.com/send \
+  --header 'Authorization: Bearer YOUR_AUTH_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"message": {
+		"to": {
+			"apn": {
+				"tokens": ["APNS_TOKEN_ONE", "APNS_TOKEN_TWO"]
+			}
+		},
+		"content": {
+			"title": "Hey there 👋",
+			"body": "Have a great day 😁"
+		},
+		"routing": {
+			"method": "all",
+			"channels": [
+				"apn"
+			]
+		},
+		"providers": {
+			"apn": {
+				"override": {
+					"body": {
+						"aps": {
+							"alert": {
+								"title": "Hey there 👋",
+								"body": "Have a great day 😁"
+							},
+							"sound": "ping.aiff",
+							"badge": 99,
+							"YOUR_CUSTOM_KEY": "YOUR_CUSTOM_VALUE"
+						}
+					}
+				}
+			}
+		}
+	}
+}'
+```
+
+## Automatic Courier Mobile SDK Formatting
+
+By default, Courier automatically formats parts of the APNS payload to make a better developer experience for you if you are working with a [Courier Mobile SDK](#with-a-courier-mobile-sdk). Here you can manage the [automatic APNS settings](https://app.courier.com/channels/apn).
+
+<Image img={require("../../../assets/guides/providers/apns-auto-override.png")} alt="" />
+
+What this setting does:
+1. Creates a simple toggle to send to Apple's production or sandbox push notification environment. Production (switch is on) is used in your production app and Sandbox (switch is off) is used for testing and development. [More Details](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/sending_notification_requests_to_apns#2947606)
+2. "Attach Mutable Content" supports Courier's [iOS Notification Service Extension](https://github.com/trycourier/courier-ios/blob/master/Docs/PushNotifications.md#4-add-the-notification-service-extension-optional-but-recommended) for better push notification delivery tracking.

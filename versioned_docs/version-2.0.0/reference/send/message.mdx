@@ -1,33 +1,47 @@
 ---
-sidebar_position: 0
+sidebar_position: 1
 ---
 
 import ApiReference from "@site/src/components/ApiReference";
 import config from "../configs/send/message";
 
-# POST /send
+# Send a message
 
-### Custom Formatting
+Use the send API to send a message to one or more recipients. The send API is very flexible, and has a large number of options available.
+Most of these are optional, and can be ignored unless you want to override the default behavior.
 
-To improve working with cURL, Courier also supports a custom urlencoded format that can be used in the place of JSON.
-This format allows nested data values using square bracket syntax. This is useful when passing `profile` and `data` parameters.
-For example, a cURL `--data` option with the `profile` parameter and a nested `email` would look like this:
-```bash
---data "profile[email]=test@example.com"
-```
-
-## Send Response Data
-
-Sending a message is an async process. So upon submission of a message,
-only a requestId will be returned.
-
-```json
-{ "requestId": "87e7c05b-4f46-fda24e356e23" }
-```
+You are required to specify a `to` with at least one recipient. You must also specify either `template` or `content`.
 
 <ApiReference {...config} />
 
 ## Example
+
+This example uses an existing notification template, and sends to a user by ID.
+We don't need to specify any other configuration or settings, since we will use the defaults.
+We don't need to provide any additional information about the user either, since we can rely
+on the user profile data already stored with Courier to customize the message.
+
+Method: `POST`
+
+URL: `https://api.courier.com/send`
+
+Body:
+​
+```json
+{
+	"message": {
+		"to": {
+            "user_id": "a1b2c3d4"
+        },
+		"template": "abcdef12345678"
+	}
+}
+```
+
+## Example
+
+This example uses an existing notification template, but overrides the template's `routing` to force the message to be sent by email.
+The user's email is specified in the `to` field, while the user's name appears in the `data` field. This makes the variable `name` available to the template for inclusion in the text of the message.
 
 Method: `POST`
 
@@ -53,4 +67,52 @@ Body:
 		}
 	}
 }
+```
+
+## Example
+
+This example uses an existing notification template, and sends to multiple recipients: 2 lists and an audience.
+
+Method: `POST`
+
+URL: `https://api.courier.com/send`
+
+Body:
+
+```json
+{
+	"message": {
+		"to": [
+			{
+				"list_id": "LI56789"
+			},
+			{
+				"list_id": "LI12345"
+			},
+			{
+				"audience_id": "AUD334455"
+			}
+		],
+		"template": "abcdef12345678"
+	}
+}
+```
+
+## Send Response Data
+
+Sending a message is an async process. So upon submission of a message,
+only a requestId will be returned.
+
+```json
+{ "requestId": "87e7c05b-4f46-fda24e356e23" }
+```
+
+
+### Custom Formatting
+
+To improve working with cURL, Courier also supports a custom urlencoded format that can be used in the place of JSON.
+This format allows nested data values using square bracket syntax. This is useful when passing `profile` and `data` parameters.
+For example, a cURL `--data` option with the `profile` parameter and a nested `email` would look like this:
+```bash
+--data "profile[email]=test@example.com"
 ```

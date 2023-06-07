@@ -1,0 +1,26 @@
+---
+sidebar_label: Inbound Event Triggers
+toc_max_heading_level: 2
+sidebar_position: 4
+---
+
+# Inbound Event Triggers
+
+Automations Designer supports a variety of methods to trigger an automation. Courier ingests inbound events such as tracking or user identify,
+and persists them such that they can later get used as a trigger.
+
+## Courier Inbound
+
+[CourierJS SDK](https://github.com/trycourier/courier-js/tree/main/packages/courier-js) interfaces with our `track` API to send client-side application events
+to Courier that can be then used in an Automations trigger node.
+
+## Segment
+
+With a [Segment third-party integration](https://courier.com/docs/external-integrations/segment/segment-integration/) both [`track`](https://segment.com/docs/connections/spec/track/)
+and [`identify`](https://segment.com/docs/connections/spec/identify/) are automatically ingested using the Segment trigger node in Automations.
+Refer to [Segment use cases](https://www.courier.com/docs/automations/segment/) for more information.
+
+## Rudderstack
+
+With an existing [Rudderstack third-party integration](https://www.courier.com/docs/external-integrations/rudderstack/) both [`track`](https://www.rudderstack.com/docs/event-spec/standard-events/track/)
+and [`identify`](https://www.rudderstack.com/docs/event-spec/standard-events/identify/) are automatically ingested into the Rudderstack trigger node in Automations.

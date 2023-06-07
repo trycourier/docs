@@ -1,0 +1,55 @@
+---
+sidebar_position: 8
+---
+
+import Image from "@theme/IdealImage";
+
+# Send Limits
+
+Courier's business tier customers get access to Send Limits, which lets you set upper limits on the number of messages that can be sent per time period.
+
+We allow you to set limits on any/all of the following:
+- Global (all messages)
+- Per-user
+- Per-user per-subscription topic
+
+In addition, you may exclude some subscription topics from the global and per-user limits.
+
+Available time periods are:
+- billing period
+- hour
+- day
+- week (starting on Sunday)
+- month
+
+## How it works
+
+Each time a message is sent, we increment a counter against each of the limits you have configured that apply to that message. If the message pushes the counter over one of the limits, we will not send the message.
+The message will appear in the logs as "Throttled". We will send an email notifying your administrator(s) when this happens. You will receive at most one such email in a 24-hour period. You can check the logs for more details
+on which messages are affected.
+
+## Observability
+
+If you use our Observability features, you will receive a metric counting throttled messages, as well as a log record.
+
+## Settings
+
+You can configure Send Limits in your workspace settings. More details below.
+
+### Global message limit
+
+This limits the total number of messages you can send during each time period. Any message with an excluded subscription topic will still count toward the limit, but will not itself be throttled, even if you go over the limit.
+
+### Per-user message limit
+
+This limits the number of messages you can send to an individual user. To work, users must have a profile with Courier. Any message with an excluded subscription topic will still count toward the limit, but will not itself be throttled, even if you go over the limit.
+
+### Per-user Subcription Topic limit
+
+This limits the number of messages you can send to an individual user, for a given subscription topic. You can set a different limit for each topic, or no limit at all.
+
+### Limit exclusions
+
+Some messages should always be sent, even if they would normally go over a limit. For example, important system updates, password-reset emails, etc.. Simply add the subscription topic(s) of messages you want excluded from limits here. Messages with these topics will still cound toward the limits, but will never themselves be throttled.
+
+<Image img={require("../../assets/guides/guardrails/settings.png")} alt="Send Limits settings screenshot" />

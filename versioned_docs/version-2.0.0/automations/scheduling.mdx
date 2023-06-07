@@ -1,0 +1,28 @@
+---
+sidebar_position: 6
+sidebar_label: Scheduling
+slug: ./scheduling
+toc_max_heading_level: 2
+---
+
+import videoThumbnail from "./assets/video-thumbnail.png";
+import scheduleURL from "./assets/schedule.mp4";
+
+# Scheduling
+
+Courier Automations can offers the ability to be invoked on a schedule. This can be useful
+for scheduling a notification to be sent periodically.
+
+To setup a scheduled automation, drag over the Schedule trigger from the triggers section
+onto the canvas.
+
+Courier offers three scheduling methods:
+
+1. Recurrence, schedule the automation to be invoked on a repeated schedule. Similar to how
+   one would schedule a repeat event in their favorite calendar application.
+2. Date, schedule the automation to be invoked one time on a specific future date.
+3. Cron. Similar to Recurrence but with more specificity using [crontab expressions](https://crontab.guru/).
+
+<video width="783" loop autoPlay muted controls poster={videoThumbnail}>
+  <source src={scheduleURL} />
+</video>

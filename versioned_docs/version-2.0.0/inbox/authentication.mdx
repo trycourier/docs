@@ -1,0 +1,73 @@
+---
+sidebar_label: Installing the Provider
+sidebar_position: 3
+slug: ./authentication
+toc_max_heading_level: 2
+---
+# Installing the Provider
+
+In order to send notifications to Inbox, you need to [log-in](https://app.courier.com/login) to your Courier account and install the [Courier Provider](https://app.courier.com/channels/courier). Once you've done that, make note of the Client Key. You'll need that value to initialize the Inbox SDK.
+
+Once you've installed the Provider, you'll notice some authentication options that allow you to secure the notification data that is delivered to the client SDKs.
+
+## Default (No Auth)
+
+By default, you can use the Web Inbox SDK components without authentication beyond your `clientKey` and `userId`. Before going to production, you should implement stricter authentication using JWT tokens.
+
+When initializing the mobile SDKs (iOS and Android) you must supply an `accessToken` in addition to the `clientKey` and `userId`. Please review the authentication docs for [iOS](https://github.com/trycourier/courier-ios/blob/master/Docs/Authentication.md) and [Android](https://github.com/trycourier/courier-android/blob/master/Docs/Authentication.md) for more information about how set the accessToken both for development and production.
+
+## JSON Web Tokens
+
+When getting ready for production, we recommend implementing authentication in the form of a [JWT](https://jwt.io/).  You can use our [Issue Token API](https://www.courier.com/docs/reference/auth/issue-token/) to make things easier.  A JWT should be generated on a per-user basis in your backend and be supplied to your frontend.
+
+An example payload for an issue-token would look like:
+
+```json
+{
+  "scope": "user_id:{{userId}} inbox:read:messages inbox:write:events"
+}
+```
+
+### JWT Expiration
+
+You can also set an expiration date for the JWT by providing the following scope:
+
+
+```json
+{
+  "scope": "user_id:{{userId}} inbox:read:messages inbox:write:events",
+  "expires_in": "2 days"
+}
+```
+
+The result of this API will look like:
+
+```json
+{
+  "token": "MY_JWT_TOKEN"
+}
+```
+
+This token will then be passed into the client components and serve as your per-user authentication.
+
+## HMAC (Deprecated)
+
+We recommend JWT over HMAC as JWT allows developers to set more specific scopes.  
+
+HMAC is a way to add extra security to your application, more so than just having approved domains and a client key. HMAC allows you to generate a signature for each user you have in your system. It is a hash of the `userId` and your API Key.
+
+```ts
+import crypto from "crypto";
+
+const userSignature =
+  crypto
+    .createHmac("sha256", apiKey)
+    .update(userId)
+    .digest("hex");
+```
+
+:::caution
+
+Make sure you DO NOT do this on your frontend because your API Key is private and you do not want to leak it. This HMAC should be generated on the backend and either embedded in your frontend via SSR or can be returned with an API endpoint (for each user).
+
+:::

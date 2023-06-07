@@ -12,7 +12,7 @@ const config: ApiReferenceProps = {
         name: "scope",
         required: true,
         description: "Permissions to apply to the token.",
-        example: "user_id:me read:messages",
+        example: "user_id:user_id_you_want_to_create_scope_for read:messages",
       },
       {
         type: "string",

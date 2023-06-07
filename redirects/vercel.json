@@ -82,7 +82,7 @@
     },
     {
       "source": "/docs/apple-push-notification",
-      "destination": "https://www.courier.com/docs/guides/providers/push/apple-push-notification/",
+      "destination": "https://www.courier.com/docs/guides/providers/push/apns/",
       "permanent": true
     },
     {
@@ -97,7 +97,12 @@
     },
     {
       "source": "/docs/courier-push",
-      "destination": "https://www.courier.com/docs/guides/providers/push/courier-push/",
+      "destination": "https://www.courier.com/docs/inbox/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/providers/in-app/courier-push/",
+      "destination": "https://www.courier.com/docs/inbox/",
       "permanent": true
     },
     {
@@ -447,27 +452,27 @@
     },
     {
       "source": "/reference/preferences-api",
-      "destination": "https://www.courier.com/docs/reference/preferences/",
+      "destination": "https://www.courier.com/docs/1.0.0/reference/preferences/",
       "permanent": true
     },
     {
       "source": "/reference/getallpreferences",
-      "destination": "https://www.courier.com/docs/reference/preferences/list/",
+      "destination": "https://www.courier.com/docs/1.0.0/reference/preferences/list/",
       "permanent": true
     },
     {
       "source": "/reference/getpreferencesbyrecipientid",
-      "destination": "https://www.courier.com/docs/reference/preferences/recipient/",
+      "destination": "https://www.courier.com/docs/1.0.0/reference/preferences/recipient/",
       "permanent": true
     },
     {
       "source": "/reference/replacepreferencesbyrecipientid",
-      "destination": "https://www.courier.com/docs/reference/preferences/replace/",
+      "destination": "https://www.courier.com/docs/1.0.0/reference/preferences/replace/",
       "permanent": true
     },
     {
       "source": "/reference/patchpreferencesbyrecipientid",
-      "destination": "https://www.courier.com/docs/reference/preferences/patch/",
+      "destination": "https://www.courier.com/docs/1.0.0/reference/preferences/patch/",
       "permanent": true
     },
     {
@@ -562,7 +567,7 @@
     },
     {
       "source": "/reference/createbrand",
-      "destination": "https://www.courier.com/docs/reference/brands/create/",
+      "destination": "https://www.courier.com/docs/reference/brands/create-a-brand/",
       "permanent": true
     },
     {
@@ -623,6 +628,11 @@
     {
       "source": "/",
       "destination": "https://www.courier.com/docs/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/reference/preferences/:path*",
+      "destination": "https://www.courier.com/docs/1.0.0/reference/preferences/:path*",
       "permanent": true
     }
   ]

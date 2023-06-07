@@ -4,6 +4,7 @@ sidebar_label: Mailgun
 title: Send Email Notifications Using Mailgun
 description: Looking for a way to send email notifications via Mailgun? This step-by-step tutorial will show you how to integrate Mailgun's API the easy way.
 ---
+import Image from "@theme/IdealImage";
 
 # Mailgun
 
@@ -101,3 +102,26 @@ To include an attachment in the email, you can use the following override:
 Mailgun offers an [additional security](https://help.mailgun.com/hc/en-us/articles/360012244474-IP-Allowlist) feature that can whitelist certain IP addresses from accessing their API. Courier is hosted on AWS and does not provide an IP range in the form of an allow list.
 
 AWS provides [a workaround](https://docs.aws.amazon.com/general/latest/gr/aws-ip-ranges.html#subscribe-notifications) by allowing users to subscribe and update the changes themselves. Whenever there is a change to the AWS IP address ranges, AWS will send notifications to subscribers of the `AmazonIpSpaceChanged` topic.
+
+## Setup mailhooks for delivery status updates
+
+By default, after we send a message, Courier will poll Mailgun periodically to find out if the message was delivered successfully or not.
+To get faster status updates, you can setup a webhook so Mailgun can report delivery status directly to Courier.
+
+To start, login to Courier and visit the Mailgun provider configuration screen (from the Channels menu on the left side). There, you will find a Webhook URL.
+
+<Image img={require("../../../assets/guides/mailgun/courier-ui.png")} alt="" />
+
+Copy this URL, then login to Mailgun. On the left side, choose Sending, then Webhooks.
+
+<Image img={require("../../../assets/guides/mailgun/mailgun-ui.png")} alt="" />
+
+On the webhooks screen, first make sure the Domain selected on the top-right matches the Mailgun Domain on the Courier Mailgun configuration screen.
+Then, click the green "Add webhook" button. For event type, choose "Delivered Messages". Now paste the webhook URL into the URL field and press "Create webhook."
+
+<Image img={require("../../../assets/guides/mailgun/mailgun-form.png")} alt="" />
+
+Repeat the process to create a webhook for event type "Permanent Failure." Use the same URL for both webhooks.
+
+Now that the webhook is configured, you will no longer need Courier to poll for status updates. We recommend waiting about an hour before disabling polling in order to make sure there is no gap in status reporting of any messages already in-flight.
+When you are ready, return to the Courier Mailgun configuration screen. Flip the toggle switch labeled "Enable polling for status updates" into the off position. Then, press the Save button at the bottom of the screen.

@@ -2,7 +2,7 @@ import { ApiReferenceProps } from "@site/src/components/ApiReference";
 import { UserToken } from "../schemas/UserToken";
 
 const config: ApiReferenceProps = {
-  description: "Returns data associated with a token including token status.",
+  description: "Get single token available for a `:token`",
   method: "GET",
   path: "/users/:user_id/tokens/:token",
   pathParams: [
@@ -17,7 +17,7 @@ const config: ApiReferenceProps = {
       type: "string",
       name: "token",
       required: true,
-      description: "The full token string.",
+      description: "The value of the token you are trying to get",
       example: "ABW7HO9Y7XAQXZ7Y",
     },
   ],

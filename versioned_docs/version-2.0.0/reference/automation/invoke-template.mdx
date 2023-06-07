@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+sidebar_label: Run a templated automation
 ---
 
 import ApiReference from "@site/src/components/ApiReference";
@@ -17,18 +18,19 @@ URL: `https://api.courier.com/automations/S6CME56DCCM6DVQA7CVZR1MTPFPA/invoke`
 
 Body:
 ​
+
 ```json
 {
-    "brand": "W50NC77P524K14M5300PGPEK4JMJ",
-    "template": "S6CME56DCCM6DVQA7CVZR1MTPFPA",
-    "recipient": "8ec8c99a-c5f7-455b-9f60-8222b8a27056",
-    "data": {
-      "name": "Jane Doe",
-      "age": 27
-    },
-    "profile": {
-      "phone_number": "2025550125",
-      "email": "hello@example.com"
-    }
+  "brand": "W50NC77P524K14M5300PGPEK4JMJ",
+  "template": "S6CME56DCCM6DVQA7CVZR1MTPFPA",
+  "recipient": "8ec8c99a-c5f7-455b-9f60-8222b8a27056",
+  "data": {
+    "name": "Jane Doe",
+    "age": 27
+  },
+  "profile": {
+    "phone_number": "2025550125",
+    "email": "hello@example.com"
+  }
 }
 ```

@@ -2,7 +2,7 @@ import { ApiReferenceProps } from "@site/src/components/ApiReference";
 import { UserToken } from "../schemas/UserToken";
 
 const config: ApiReferenceProps = {
-  description: "Returns all tokens associated with the supplied user_id.",
+  description: "Gets all tokens available for a `:user_id`",
   method: "GET",
   path: "/users/:user_id/tokens",
   pathParams: [

@@ -1,0 +1,215 @@
+---
+sidebar_position: 9
+sidebar_label: Batching
+slug: ./batching
+toc_max_heading_level: 2
+---
+
+import Image from "@theme/IdealImage";
+import videoThumbnail from "./assets/video-thumbnail.png";
+import creatingABatchUrl from "./assets/digests-batching-throttling/creating-a-batch.mp4";
+
+# Batching
+
+:::note
+
+Status: This product is under Public Beta. While every effort has been made to ensure stability, disruptions may still arise as the product receives wider adoption. Feedback is highly encouraged.
+
+:::
+
+Batching is a powerful feature of Courier Automations that aggregates events and processes them
+collectively after a specified period of inactivity, a maximum event count, or a maximum wait time.
+This is particularly useful in cases where a surge in activity produces an arbitrary number of events
+over a short period.
+
+## Example Use Cases
+
+**Article Performance Summarization**
+
+Imagine an article published on a news website that generates an event for each view, comment, and
+share. Instead of sending a notification for each individual event, these events can be batched
+within an automation. Once the initial surge of activity has subsided or the maximum wait time is
+reached, the batch compiles view count, top comments, and share count data. This information is then
+forwarded to the next step, allowing the author to receive a summarized report via email.
+
+**Data Warehouse Analytics**
+
+A company dealing with large amounts of data may produce a varying number of reports with different
+completion times. An event is generated upon the completion of each report. With batching, these
+reports can be grouped together and sent in a single email once all the reports for the day are
+generated.
+
+**Social Media Engagement**
+
+Consider a user who creates a popular post that receives numerous likes within minutes of being
+published. Instead of sending a notification for each like, batching can be employed to notify the
+user once the post hasn't received new likes for a few minutes. For example, "Your post received 17
+likes."
+
+## Creating A Batch
+
+To create a batch, use the "Add to Batch" action, then click anywhere within the batch node to open
+the editor within the sidebar.
+
+<video width="783" loop autoPlay muted controls poster={videoThumbnail}>
+  <source src={creatingABatchUrl} />
+</video>
+
+## Configuring A Batch
+
+To configure a batch, click on the batch node to open an editor in the sidebar.
+
+Batches have the following configuration options:
+
+| Parameter        | Description                                                                                                                                                                                                                                                                                                                                          |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Wait Period**  | Defines the period of inactivity before a batch is considered complete. If no events are received within this time frame, the batch will be finalized and sent to the next step.                                                                                                                                                                     |
+| **Max Wait**     | Defines the maximum amount of time to wait before finalizing the batch. If this time frame is reached, the batch will immediately complete, even if an event had been received within the "wait period."                                                                                                                                             |
+| **Retain Items** | Defines the number of items to be retained and sent along with the batch. Retention does not affect the tracked count. If retain is set to 10 items and 15 items are received, the passed count will be 15, and the passed items will be 10. Options: First 10, Last 10, Highest 10 (requires Sort Key), Lowest 10 (requires Sort Key).              |
+| **Sort Key**     | Required when Highest or Lowest is selected for Retain Items. Defines the key of the data object to be used to determine item ordering. For example, if sort key is set to upvotes, and the automation is invoked with `{ "data": { "upvotes": 5 } }`, 5 will be the value used to determine the order and position of the event in the items array. |
+| **Max Items**    | (Optional) Defines the maximum number of events to include in a batch before completion. When a batch has received this number of events, it will immediately finalize and send the batch to the next step.                                                                                                                                          |
+| **Category Key** | (Optional) Allows events to be grouped by categories. See [Working with Categories](./#working-with-categories) for more details.                                                                                                                                                                                                                    |
+
+## Invoking a Batch
+
+When a batch node is invoked, Courier checks if there is an ongoing batch run for that node. If not,
+Courier creates one, marks the automation as pending, and does not proceed to the next step until
+the batch is complete.
+
+If there _is_ an existing batch run, Courier will add the data object for that run to the existing
+batch and terminate / complete the automation run. Any steps connected to the batch will not be
+executed. This means the nodes following a batch node will only be executed once per batch run.
+
+Once a batch is complete, the data objects from each invocation are aggregated and passed onto the
+next step
+
+```typescript
+{
+  batch: {
+    // The number of events received for this category, may be different than items.length
+    // depending on item retention configuration.
+    count: number;
+    // The an array of the data objects of each automation added to this batch.
+    items: any[];
+  }
+}
+```
+
+**For example** if a batch automation was invoked 3 times with the following values
+
+```js
+// Invoke 1
+{
+  data: {
+    like_from: "Drew";
+  }
+}
+```
+
+```js
+// Invoke 2
+{
+  data: {
+    like_from: "Alex";
+  }
+}
+```
+
+```js
+// Invoke 3
+{
+  data: {
+    like_from: "Abby";
+  }
+}
+```
+
+The steps following the batch node would be provided this data object:
+
+```js
+{
+  batch: {
+    count: 3,
+    items: [
+      { like_from: "Drew" },
+      { like_from: "Alex" },
+      { like_from: "Abby" },
+    ]
+  }
+}
+```
+
+This data can be accessed from a notification template using variable syntax. Because fields from
+the data object are spread globally onto the template, there `refs.data` is omitted from within a
+template:
+
+<Image
+  img={require("./assets/digests-batching-throttling/batch-data-in-notification-template.png")}
+  alt="Accessing batch data from a notification template"
+/>
+
+### Working With Categories
+
+It is possible to group events by category in a batch run when the `Category Key` is set to a
+dynamic value such as `refs.data.category_key`. In such a case, the batch is aggregated by
+category:
+
+<Image
+  img={require("./assets/digests-batching-throttling/dynamic-category-key.png")}
+  alt="Accessing
+  batch data from a notification template"
+/>
+
+**For example**, in the batch node, `Category Key` is set to `refs.data.category_key`. Each time
+the automation is invoked, a category_key is supplied.
+
+Given the following invocations:
+
+```js
+// Invoke 1
+{
+  data: {
+    category_key: "likes",
+    like_from: "Drew"
+  }
+}
+```
+
+```js
+// Invoke 2
+{
+  data: {
+    category_key: "likes",
+    like_from: "Alex"
+  }
+}
+```
+
+```js
+// Invoke 3
+{
+data: {
+  category_key: "comments",
+  comment: "Excellent post!"
+  }
+}
+
+```
+
+The data object passed to the steps following the batch node would be:
+
+```js
+{
+  likes: {
+    count: 2,
+    items: [
+      { like_from: "Drew" },
+      { like_from: "Alex" }
+    ],
+  },
+  comments: {
+    count: 1,
+    items: [{ comment: "Excellent post!" }],
+  },
+}
+```

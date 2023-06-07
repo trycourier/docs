@@ -5,7 +5,7 @@ const NotificationRoutingMethodField: ApiParam = {
   type: "string",
   name: "method",
   description:
-    "The method for selecting channels to send the message with. If no method is specified, then 'single' will be used as default.",
+    "The method for selecting channels to send the message with. Value can be either 'single' or 'all'. If not provided will default to 'single'",
   enum: ["all", "single"],
 };
 

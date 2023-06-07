@@ -1,0 +1,48 @@
+---
+sidebar_position: 6
+sidebar_label: Cancelling
+slug: ./cancel
+toc_max_heading_level: 2
+---
+
+import videoThumbnail from "./assets/video-thumbnail.png";
+import settingUpCancellationURL from "./assets/setting-up-cancellation-token.mp4";
+import segmentCancelNodeURL from "./assets/segment-cancel-node.mp4";
+import Image from "@theme/IdealImage";
+
+# Cancelling An Automation
+
+Often times you may want to cancel an automation run. For example, one automation may send out
+a reminder notification to complete a task. However, this reminder may no longer be necessary
+if the task is already completed.
+
+To allow an automation to be cancelled:
+
+1. Navigate to the settings tab of the automation
+2. Add a cancellation token. This can be any value desired. Its best to use a dynamic value so
+   a specific automation invocation may be cancelled, rather than all running instances. For
+   example, you may use `refs.data.userId`, which would allow the automation run to be associated
+   with the user the automation would send to.
+3. Publish
+
+<video width="783" loop autoPlay muted controls a poster={videoThumbnail}>
+  <source src={settingUpCancellationURL} />
+</video>
+
+4. Create a new automation
+5. Add the `Cancel Automation` node
+6. Set the token to the same token from step 2.
+7. Publish
+
+<video width="783" loop autoPlay muted controls poster={videoThumbnail}>
+  <source src={segmentCancelNodeURL} />
+</video>
+
+An automation can also be canceled from automation logs. 
+
+1. Navigate to the [automation logs page](https://app.courier.com/logs/automations) in Courier.  
+2. Find your automation in the logs, you can search with a run Id or source.
+3. If your automation has not finished processing, a cancel button will be shown in the run summary.
+4. Clicking this button will cancel your automation.
+
+<Image img={require("./assets/cancel-button-logs.png")} alt="Canceling an automation from logs" />

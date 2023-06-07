@@ -1,0 +1,53 @@
+---
+pagination_label: "Sending a Message"
+sidebar_position: 4
+slug: ./making-a-send
+toc_max_heading_level: 2
+---
+
+import Image from "@theme/IdealImage";
+
+
+# Sending a Message
+
+When you're ready to [send a message](https://www.courier.com/docs/reference/send/message/), it's exactly like sending any other Courier notification, with the difference being that you are sending it to the `inbox` channel.
+
+```json
+{
+	"message": {
+		"to": {
+			"user_id": <USER_ID>
+		},
+		"content": {
+			"title": "How does {{ villain }} like his toast?",
+			"body": "On the dark side."
+		},
+		"data": {
+			"villain": "Darth Vader"
+		}
+		"routing": {
+			"method": "single",
+			"channels": ["inbox"]
+		}
+	}
+}
+```
+
+## Passing Data
+
+If you provide information in the `data` field, it will be passed automatically through to SDK.
+
+Note: If you pass information in `data` that isn't referenced in your `content` payload or in a `template` that you specify, it will still be passed through to your app. For example, this is useful when trying to launch a specific screen in your app on mobile with a deep link:
+
+`data.deeplinkUrl = https://starwars.com/villains/darth_maul`
+
+## Using Elemental Syntax
+
+Inbox SDKs support a subset of Elemental syntax for composing messages. 
+
+| Element  	| Web	 | iOS	| Android 	|                                                                                          
+| :---------| :------| :-----|:---------|
+| Title		| ✅		| ✅		| ✅		  |
+| Body		| ✅		| ✅		| ✅		  |
+| Text		| ✅		| 		| 			|
+| Action 	| ✅		| ✅		| ✅ 		|

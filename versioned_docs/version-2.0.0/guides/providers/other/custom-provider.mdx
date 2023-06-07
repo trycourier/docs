@@ -73,3 +73,28 @@ interface PushMessage {
   }
 }
 ```
+
+### Override
+
+You can use an override to replace what we send to your custom provider.
+
+```json title=JSON
+{
+  "message": {
+    "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "to": {
+      "email": "example@example.com"
+    },
+    "providers": {
+      "custom": {
+        "override": {
+          "body": {},
+          "headers": {},
+          "method": "POST",
+          "url": ""
+        }
+      }
+    }
+  }
+}
+```

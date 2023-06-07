@@ -17,6 +17,12 @@ Courier allows you to use variables to insert values from two sources into your 
 
 An object included in the [send](../../reference/send/intro.mdx) command to provide any data you want to pass into a message template via variables.
 
+:::tip The data property
+
+Courier will automatically reference the `data` path by default. You **do not need** to include it in your variable path if the key-value is at the top level of the data tree. Nested values will need to begin the path where the data value originates. `{first_layer.second_layer}`
+
+:::
+
 ### The User Profile
 
 - Profile data can be provided in the profile object of the [Send API](../../reference/send/intro.mdx) request.

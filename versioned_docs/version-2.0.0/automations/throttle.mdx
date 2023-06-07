@@ -1,0 +1,71 @@
+---
+sidebar_position: 9
+sidebar_label: Throttle
+slug: ./throttle
+toc_max_heading_level: 2
+---
+
+import Image from "@theme/IdealImage";
+import videoThumbnail from "./assets/video-thumbnail.png";
+
+# Throttle
+
+:::note
+
+Status: This product is under active development and is available in a Private Beta, please
+contact Courier support for access.
+
+:::
+
+The Throttle step in an automation limits the number of events that can pass into the next node within a specific period, dropping any additional events. This prevents customers from receiving too many messages about the same event.
+
+## Example Use Cases
+
+**Alert Notifications**
+
+When sending alert notifications, you may want to limit the number of notifications sent to a user in a given period to avoid bombarding them with too many alerts.
+
+**Email Campaigns**
+
+If you are running an email campaign, you may want to limit the number of emails sent to a customer within a specific timeframe to avoid overwhelming them with too many messages.
+
+In general, a Throttle step can be useful in any situation where you need to control the flow of data or limit the frequency of an action.
+
+Courier will allow you to specify what next steps should be taken when the throttle is triggered, and what steps should be taken when the throttle is not triggered.
+
+## Creating A Throttle Step
+
+To create a Throttle, use the "Throttle" action, then fill out details in the step node.
+
+Specify maximum number of events to allow through the throttle, and the time period to throttle by.
+
+You have the options to throttle by:
+
+| Scope     | Usage                                                                                                      |
+| :-------- | :--------------------------------------------------------------------------------------------------------- |
+| `user_id` | Apply throttling by using `user_id` coming from `data`                                                     |
+| `GLOBAL`  | Let Courier decide the throttle parameter.                                                                 |
+| `Dynamic` | You can use arbitary value available in your `run_context` by referencing it like `refs.data.throttle_key` |
+
+**Note:** This is a beta feature, and we are working on adding more options for throttling.
+
+Below is an example of a throttle step that will allow 2 event to pass through for a given user in a 24 hour period before throttling.
+
+In this example, the throttle is set to be applied by `user_id`. You have to supply `user_id` in the following manner to throttle the user.
+
+```bash
+curl --request POST \
+  --url https://api.courier.com/automations/<automation_template_id>/invoke \
+  --header 'Authorization: Bearer <replace_with_api_key>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "data": {
+		"user_id": "<user_id>"
+  }
+}
+```
+
+<Image
+  img={require("./assets/digests-batching-throttling/throttle-step.png")}
+  alt="Creating throttle step"
+/>

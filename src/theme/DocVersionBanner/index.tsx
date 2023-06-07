@@ -91,8 +91,8 @@ function DocVersionV2Banner({
     previousDocSuggestion ??
     previousVersion.docs.find((doc) => doc.id === previousVersion.mainDocId);
 
-  return (
-    <div
+  return (<></>
+    /*<div
       className={clsx(
         className,
         ThemeClassNames.docs.docVersionBanner,
@@ -115,7 +115,7 @@ function DocVersionV2Banner({
         </Link>
         .
       </div>
-    </div>
+    </div>*/
   );
 }
 

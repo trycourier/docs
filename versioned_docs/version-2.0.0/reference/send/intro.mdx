@@ -1,12 +1,26 @@
 ---
-sidebar_position: -1
-sidebar_label: Introduction
-pagination_label: Send API
+sidebar_position: 0
 slug: ./
 ---
 
 import Image from "@theme/IdealImage";
 
-# Send API
+# Introduction
 
-The send API lets you send a notification to a specified recipient asynchronously with a single call.
+The send API lets you send a message to one or more recipients with a single call. Messages are sent asynchronously, so when you call the send API,
+the response will contain a request ID that you can use to check the status of your message later.
+
+Recipients come in several forms:
+- User - A single user
+- List (by ID) - A pre-defined list of users stored with Courier
+- List pattern - A pattern that can target multiple lists of users at once
+- Audience - A Courier audience containing users.
+
+You may also pass an array containing any combination of the above.
+
+There are two styles of notification sending:
+- by template
+- ad-hoc
+
+To send by template, first create a notification using Courier Studio, then pass the template ID in your send call.
+To send ad-hoc, include the content of the notification directly in the send call using Elemental.

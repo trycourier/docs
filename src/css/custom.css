@@ -473,6 +473,10 @@ code {
   text-transform: uppercase;
 }
 
+video {
+  max-width: 100%;
+}
+
 .sidebar-home .menu__link:before {
   background-image: url(/img/sidebar-icons/home.svg);
 }
@@ -521,6 +525,14 @@ code {
   background-image: url(/img/sidebar-icons/channels-active.svg);
 }
 
+.sidebar-external-integrations .menu__link:before {
+  background-image: url(/img/sidebar-icons/external-integrations.svg);
+}
+
+.sidebar-external-integrations .menu__link--active:before {
+  background-image: url(/img/sidebar-icons/external-integrations.svg);
+}
+
 .sidebar-client-libraries .menu__link:before {
   background-image: url(/img/sidebar-icons/client-libraries.svg);
 }
@@ -551,6 +563,10 @@ code {
 
 .sidebar-automations .menu__link--active:before {
   background-image: url(/img/sidebar-icons/automations-active.svg);
+}
+
+.sidebar-inbox .menu__link:before {
+  background-image: url(/img/sidebar-icons/inbox.svg);
 }
 
 .sidebar-sequences .menu__link:before {

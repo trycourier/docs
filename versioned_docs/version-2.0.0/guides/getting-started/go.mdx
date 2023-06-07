@@ -7,38 +7,11 @@ import Image from "@theme/IdealImage";
 
 # Get Started with Go
 
-Welcome to the Go Quickstart! Here we will walk through the process of getting your API keys, installing the SDK, and making your first API call with Go. If you have any questions, join our Discourse community: [https://forum.courier.com/](https://forum.courier.com/)
-
-## Prerequisites
-
-- [Sign up for Courier](https://app.courier.com/)
-- [Integrate the provider for the type of notification you want to](https://youtu.be/nAbRLOMv96w)
-- Install the latest version of Go: [https://go.dev/doc/install](https://go.dev/doc/install)
-
-## Getting Your API Keys
-
-Navigate to the Courier API Keys page in Settings (https://app.courier.com/settings/api-keys) to get access to all API keys, including production and test keys. [Learn more about the difference between production and test keys >](https://forum.courier.com/t/the-difference-between-production-and-test-environments/115)
-
-<Image img={require("../../assets/guides/courier-app/settings.png")} alt="Courier Settings" />
-
-<Image
-  img={require("../../assets/guides/courier-app/api-keys.png")}
-  alt="Courier Settings: API Keys"
-/>
-
-## Using the SDK
-
-### Installing the SDK
-
-Add this line to your go package:
-
-```
-import "github.com/trycourier/courier-go"
-```
-
-### Sending a notification with Courier Elemental
-
-Courier Elemental is a new JSON syntax built to describe your notification, including recipient data, notification content, variables, and routing. Here is an example of a simple notification sent with Elemental:
+1. Make sure you have the [latest version of Go](https://go.dev/doc/install) installed.
+2. [Sign up for Courier](https://app.courier.com/signup) to get access to your API key.
+3. [Add the channel(s)](https://app.courier.com/channels) you wish to send your message to.
+4. Run `npm install @trycourier/courier` to install the [Courier Go SDK](https://github.com/trycourier/courier-go).
+5. Add the following code to initialize your SDK:
 
 ```go
 import (
@@ -47,10 +20,14 @@ import (
 
     "github.com/trycourier/courier-go/v2"
 )
+```
 
+6. Add the following code and replace `<auth_token>` with your [Courier API key](https://app.courier.com/settings/api-keys):
+
+```golang
 func send() {
 
-    client := courier.CreateClient("YOUR_AUTH_TOKEN_HERE", nil)
+    client := courier.CreateClient("<auth_token>", nil)
 
     requestID, err := client.SendMessage(
       context.Background(),
@@ -61,7 +38,7 @@ func send() {
           },
           "content": map[string]string{
             "title": "Welcome!",
-            "community": "Thanks for signing up, {{name}}",
+            "body": "Thanks for signing up, {{name}}",
           },
           "data": map[string]string{
             "name": "Peter Parker",
@@ -81,45 +58,42 @@ func send() {
   }
 ```
 
-Replace the JSON within the body to match the type and content of notification you want to send.
+7. Replace the JSON within the body to match the type and content of notification you want to send.
+    There are 4 main properties within this example notification:
 
-There are 4 main properties within this example notification:
+    - `to`: provide information used by Courier to identify the recipient of the notification. Here you can include details such as the recipient’s email address for email, phone number for SMS.
+    - `content`: add your notification’s title and body.
+    - `data`: include any data you want to pass to a message template. The data will populate the corresponding template variables.
+    - `routing`: customize which channel(s) Courier will potentially deliver the message. If no routing key is specified, Courier will use the default routing configured in the Courier Studio UI.
 
-- `to`: provide information used by Courier to identify the recipient of the notification. Here you can include details such as the recipient’s email address for email, phone number for SMS.
-- `content`: add your notification’s title and body.
-- `data`: include any data you want to pass to a message template. The data will populate the corresponding template variables.
-- `routing`: customize which channel(s) Courier will potentially deliver the message. If no routing key is specified, Courier will use the default routing configured in the Courier Studio UI.
+    [Explore how to customize your notification with more properties >](../../../reference/send/message/)
+8. Run your code. Upon running this API call, only a requestId will be returned.
+    ```json
+    { "requestId": "87e7c05b-4f46-fda24e356e23" }
+    ```
+9. Monitor the status of your notification (once sent) in the logs: https://app.courier.com/logs
 
-[Explore how to customize your notification with more properties >](../../../reference/send/message/)
+# FAQs
 
-### Create a Notification: In the Designer
+1. **How to add a channel?**
+    
+    [How to: Integrate a New Notification Channel - SMS, Email, Chat, or Push](https://www.youtube.com/watch?v=nAbRLOMv96w)
+2. **What's the difference between production and test API keys?**
+    
+    Every Courier tenant has two notification development environments: “Live” and “Test”. The two environments are isolated from one another, and all the assets within them (templates, brands, tags, categories integrations, API keys, log data, etc.) belong only to that environment.
 
-This is **optional**, and only recommended when you want to use the Courier app to design a notification. Once you have designed the notification template in the Courier Designer, you can replace the JSON body with the following:
-
-```json
-{
-  "message": {
-    "to": {
-      "email": "email@example.com"
-    },
-    //Notification ID can be found in the template settings in the Courier Designer
-    "template": "a-courier-notification-id-or-event-mapping"
-  }
-}
-```
-
-[Learn how to design your first notification >](https://youtu.be/lvhRdNJMLbY)
-
-### Send & Test the Notification
-
-Sending a message is an async process. So upon submission of a message, only a requestId will be returned.
-
-```json
-{ "requestId": "87e7c05b-4f46-fda24e356e23" }
-```
-
-Monitor the status of your notification once sent in the Courier app's [Data Dashboard](https://app.courier.com/data/messages).
+    Any changes made to a template and its associated assets are only applied within the current environment until you migrate the template and overwrite any changes to the corresponding Notification ID and assets in the other environment.
+3. **How can I send to multiple users or contacts?**
+    
+    You will need to create a list of users in Courier and 
+    - Create a list and add users in the UI (**recommended**): https://app.courier.com/users?create-list=true
+    - Create a list and add users programmatically with the API: https://www.courier.com/docs/reference/lists/put-subscribe/
+4. **How can I access user profiles from Courier?**
+    
+    If you have your users saved in Courier's user database https://app.courier.com/users, you can replace the JSON `"email"` field in the `"to"` object with:
+    - individual profiles with `"user_id": "ADD_USER_ID"`
+    - list of multiple users: `"list_id": "ADD_LIST_ID"`
 
 ## Questions?
 
-Join our developer community on [forum.courier.com](https://forum.courier.com/).
+Join our developer community on [Discord](https://discord.com/invite/courier) and ask questions in the #ask-support channel.

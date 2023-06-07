@@ -1,0 +1,41 @@
+---
+sidebar_label: Using a Template
+sidebar_position: 5
+slug: ./designer
+toc_max_heading_level: 2
+---
+import Image from "@theme/IdealImage";
+
+# Using a Template
+
+Instead of defining the content of the entire notification in-line, you can leverage Templates to send a message. 
+
+You can create  notification templates using the [Designer](https://app.courier.com/designer). After you create a template (or edit an existing one), add a new channel and select "Inbox". This will provide you with a blank template that you can use to customize the content that will delivered with that notification.
+
+:::info
+
+Note: pinning is not available in the mobile (iOS and Android) SDKs.
+
+:::
+
+When calling the API, simply replace the `content` field with a `template` field that defines either a Template ID or an Event ID. 
+
+```json
+{
+	"message": {
+		"to": {
+			"user_id": <USER_ID>
+		},
+		"template": <TEMPLATE ID or EVENT ID>,
+		"data": {
+			"villian": "Darth Vader"
+		}
+		"routing": {
+			"method": "single",
+			"channels": ["inbox"]
+		}
+	}
+}
+```
+
+Information in `data` will be passed through, but requires "data mapping" inside of the template's channel settings to pass through to the SDK.
