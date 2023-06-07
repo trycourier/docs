@@ -5,6 +5,8 @@ title: Set Up Email Using Mandrill
 description: Looking for a way to send email notifications via Mandrill? This step-by-step tutorial will show you how to integrate Mandrill's API the easy way.
 ---
 
+import Image from "@theme/IdealImage";
+
 # Mandrill
 
 ## Profile Requirements
@@ -56,3 +58,20 @@ You can use a provider override to replace what we send to Mandrill's Messages A
 ````
 
 Everything inside of `messageproviders.mandrill.override` will replace what we send to Mandrill's Messages API. You can see all the available options by visiting [Mandrill API docs](https://mandrillapp.com/api/docs/messages.JSON.html).
+
+## Template Import
+
+You can import your Mandrill templates to use with Courier from the [Mandrill configuration page](https://app.courier.com/channels/mandrill). 
+
+:::info
+
+You will need to provide your Mandrill credentials in the configuration page to retrieve your saved templates from Mandrill.
+
+:::
+
+Templates ready for import will appear as selectable checkboxes that you can choose to import.
+
+<Image
+  img={require("../../../assets/guides/providers/template-import.png")}
+  alt="Template Import Page"
+/>
