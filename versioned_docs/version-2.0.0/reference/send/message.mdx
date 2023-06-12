@@ -27,14 +27,15 @@ URL: `https://api.courier.com/send`
 
 Body:
 ​
+
 ```json
 {
-	"message": {
-		"to": {
-            "user_id": "a1b2c3d4"
-        },
-		"template": "abcdef12345678"
-	}
+  "message": {
+    "to": {
+      "user_id": "a1b2c3d4"
+    },
+    "template": "abcdef12345678"
+  }
 }
 ```
 
@@ -49,23 +50,22 @@ URL: `https://api.courier.com/send`
 
 Body:
 ​
+
 ```json
 {
-	"message": {
-		"to": {
-			"email": "hello@example.com"
-		},
-		"template": "abcdef12345678",
-        "data": {
-            "name": "John Doe"
-        },
-		"routing": {
-			"method": "single",
-			"channels": [
-				"email"
-			]
-		}
-	}
+  "message": {
+    "to": {
+      "email": "hello@example.com"
+    },
+    "template": "abcdef12345678",
+    "data": {
+      "name": "John Doe"
+    },
+    "routing": {
+      "method": "single",
+      "channels": ["email"]
+    }
+  }
 }
 ```
 
@@ -81,20 +81,20 @@ Body:
 
 ```json
 {
-	"message": {
-		"to": [
-			{
-				"list_id": "LI56789"
-			},
-			{
-				"list_id": "LI12345"
-			},
-			{
-				"audience_id": "AUD334455"
-			}
-		],
-		"template": "abcdef12345678"
-	}
+  "message": {
+    "to": [
+      {
+        "list_id": "LI56789"
+      },
+      {
+        "list_id": "LI12345"
+      },
+      {
+        "audience_id": "AUD334455"
+      }
+    ],
+    "template": "abcdef12345678"
+  }
 }
 ```
 
@@ -104,15 +104,100 @@ Sending a message is an async process. So upon submission of a message,
 only a requestId will be returned.
 
 ```json
-{ "requestId": "87e7c05b-4f46-fda24e356e23" }
+{ "requestId": "1-6486479a-fbc8dd2cb356b1d8b4bb95a5" }
 ```
 
+### RequestId Details
+
+#### Single-Recipient Message Requests
+
+For send requests that have a single, end user, recipient, the `requestId` is assigned to the derived message as its `message_id`.
+Therefore the `requestId` can be supplied to the Message’s API for single recipient messages. Therefore the `requestId` can be
+supplied to the Message's API via the `messageId` query parameter. i.e. `https://api.courier.com/messages?messageId=1-6486479a-fbc8dd2cb356b1d8b4bb95a5`
+
+Here is an example of a `POST /send` request body that contains a single-recipient message:
+
+```json
+{
+  "message": {
+    "to": {
+      "email": "marty@backtothefuture.com"
+    },
+    "content": {
+      "title": "TEST",
+      "body": "TEST"
+    },
+    "routing": {
+      "method": "single",
+      "channels": ["email"]
+    }
+  }
+}
+```
+
+Given this request, Courier responds with a `200` status code and the following response body:
+
+```json
+{ "requestId": "1-6486479a-fbc8dd2cb356b1d8b4bb95a5" }
+```
+
+To obtain the derived message, its individual message id and current delivery status from this request, use the `messageId` query parameter on the Message's API.
+
+```
+GET https://api.courier.com/messages?messageId=1-6486479a-fbc8dd2cb356b1d8b4bb95a5
+```
+
+#### Multi-Recipient Message Requests
+
+For send requests that have multiple recipients (accounts, audiences, lists, etc.), Courier assigns a unique id to each derived
+message as its `message_id`. Therefore the `requestId` can only be supplied to the Message's API via the `listMessageId` query parameter.
+
+Here is an example of a `POST /send` request body that contains a multi-recipient message:
+
+```json
+{
+  "message": {
+    "to": [
+      {
+        "email": "marty@backtothefuture.com"
+      },
+      {
+        "email": "doc_brown@backtothefuture.com"
+      },
+      {
+        "email": "biff@backtothefuture.com"
+      }
+    ],
+    "content": {
+      "title": "TEST",
+      "body": "TEST"
+    },
+    "routing": {
+      "method": "single",
+      "channels": ["email"]
+    }
+  }
+}
+```
+
+Given this request, Courier responds with a `200` status code and the following response body:
+
+```json
+{ "requestId": "1-6486479a-fbc8dd2cb356b1d8b4bb95a5" }
+```
+
+To obtain all derived messages, their individual message id's and current delivery statuses from this request, use the `listMessageId` query parameter on the Message's API.
+
+```
+GET https://api.courier.com/messages?listMessageId=1-6486479a-fbc8dd2cb356b1d8b4bb95a5
+```
 
 ### Custom Formatting
 
 To improve working with cURL, Courier also supports a custom urlencoded format that can be used in the place of JSON.
 This format allows nested data values using square bracket syntax. This is useful when passing `profile` and `data` parameters.
 For example, a cURL `--data` option with the `profile` parameter and a nested `email` would look like this:
+
 ```bash
 --data "profile[email]=test@example.com"
 ```
