@@ -8,6 +8,7 @@ const MessageStatus: ApiParam = {
     "CLICKED",
     "DELIVERED",
     "OPENED",
+    "CANCELED",
     "SENT",
     "UNDELIVERABLE",
     "ENQUEUED",
@@ -21,6 +22,7 @@ Message Status:
 * \`DELIVERED\` - The provider successfully delivered the message to the recipient.
 * \`ENQUEUED\` - The request has been received to send a message, is waiting in the work queue.
 * \`OPENED\` - The recipient has opened the message at least one time.
+* \`CANCELED\` - The message has been canceled such that it will not be delivered.
 * \`SENT\` - The message has been accepted by the provider.
 * \`UNDELIVERABLE\` - The message could not be delivered to at least one provider, or the provider could not deliver the message to the recipient. This can happen for multiple reasons: an error, insufficient profile data, invalid notification setup, invalid integration configuration, etc.
 * \`UNMAPPED\` - Could not find a corresponding notification or event for the messages.
