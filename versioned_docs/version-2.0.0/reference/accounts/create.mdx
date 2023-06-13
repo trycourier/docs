@@ -19,13 +19,13 @@ toc_max_heading_level: 2
 
 **Body:**
 
-| Field             | Type   | Optional | Default | Description                                                                                                                                          |
+| Field             | Type   | Required | Default | Description                                                                                                                                          |
 | ----------------- | ------ | -------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| name              | string | no       |         |                                                                                                                                                      |
-| parent_account_id | string | yes      |         |                                                                                                                                                      |
-| properties        | object | yes      |         | arbitrary properties accessible from the template                                                                                                    |
-| user_profile      | object | yes      |         | a base profile object merged with user profile on supplied on send                                                                                   |
-| brand_id          | string | yes      |         | When specified, this brand will be used over the default workspace brand. A brand specified directly in the send call still takes highest precedence |
+| brand_id          | string | no       |         | When specified, this brand will be used over the default workspace brand. A brand specified directly in the send call still takes highest precedence |
+| name              | string | yes      |         |                                                                                                                                                      |
+| parent_account_id | string | no       |         |                                                                                                                                                      |
+| properties        | object | no       |         | arbitrary properties accessible from the template                                                                                                    |
+| user_profile      | object | no       |         | a base profile object merged with user profile on supplied on send                                                                                   |
 
 **Response Body**
 
@@ -33,12 +33,12 @@ A copy of the created account.
 
 | Field             | Type   | Description                                            |
 | ----------------- | ------ | ------------------------------------------------------ |
+| brand_id          | string |                                                        |
 | id                | string | Id of the account                                      |
 | name              | string |                                                        |
 | parent_account_id | string |                                                        |
 | properties        | object | Arbitrary properties accessible from the template      |
 | user_profile      | object | A user profile object merged with user profile on send |
-| brand_id          | string |                                                        |
 
 **Example:**
 
