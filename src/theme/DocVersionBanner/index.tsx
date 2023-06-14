@@ -7,9 +7,8 @@ import {
   useActiveDocContext,
   useVersions,
   useDocVersionSuggestions,
-} from "@docusaurus/plugin-content-docs/client";
-
-import { ThemeClassNames, useDocsPreferredVersion } from "@docusaurus/theme-common";
+} from "@theme/hooks/useDocs";
+import { ThemeClassNames, useDocsPreferredVersion, useDocsVersion } from "@docusaurus/theme-common";
 import DocVersionBanner from "@theme-original/DocVersionBanner";
 import Head from "@docusaurus/Head";
 import { useBaseUrlUtils } from "@docusaurus/useBaseUrl";
@@ -81,9 +80,8 @@ function DocVersionV2Banner({
 }: Props & {
   versionMetadata: PropVersionMetadata;
 }): JSX.Element {
+  const { activeDoc } = useActiveDocContext();
   const { pluginId } = useActivePlugin({ failfast: true })!;
-  const { activeDoc } = useActiveDocContext(pluginId);
-
   const versions = useVersions(pluginId);
   const { savePreferredVersionName } = useDocsPreferredVersion(pluginId);
 
@@ -122,5 +120,12 @@ function DocVersionV2Banner({
 }
 
 export default function CustomDocVersionBanner({ className }: Props): JSX.Element | null {
- return null;
+  const versionMetadata = useDocsVersion();
+  if (versionMetadata.banner) {
+    return <DocVersionBanner className={className} />;
+  }
+  if (versionMetadata.isLast) {
+    return <DocVersionV2Banner className={className} versionMetadata={versionMetadata} />;
+  }
+  return <DocVersionV1Banner className={className} versionMetadata={versionMetadata} />;
 }
