@@ -18,7 +18,7 @@ module.exports = function pluginSitemap(context) {
       // Generate sitemap.
 
       const filteredRoutesPaths = routesPaths.filter((path) => !path.includes("1.0.0"));
-      const generatedSitemap = await createSitemap(siteConfig, filteredRoutesPaths, options);
+      const generatedSitemap = await createSitemap(siteConfig, filteredRoutesPaths, {}, options);
 
       // Write sitemap file.
       const sitemapPath = path.join(outDir, "sitemap.xml");
