@@ -67,6 +67,12 @@ const config: ApiReferenceProps = {
       description: "A comma delimited list of 'tags' associated with a message",
       example: "tag-1,tag-2",
     },
+    {
+      type: "string",
+      name: "enqueued_after",
+      description: "The enqueued datetime of a message to filter out messages received before",
+      example: "1686752793725",
+    },
   ],
   responses: [
     {
