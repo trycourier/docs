@@ -14,7 +14,7 @@ import GifWrapper from "@site/src/components/GifWrapper";
 
 This step-by-step guide will walk you through sending an email notification using Courier and SendGrid. You will:
 
-<TOCInline toc={toc.slice(1, -1)} maxHeadingLevel={2} />
+<TOCInline toc={toc.slice(1, 0)} maxHeadingLevel={2} />
 
 ### Prerequisites
 
@@ -418,9 +418,9 @@ Copy this URL, then login to Sendgrid. On the left side, choose Settings, then M
 
 On the next page, click the Create new webhook button. Then fill out the form.
 
-Friendly Name - Whatever you like
-Post URL - Paste the URL you copied earlier from Courier's website.
-Deliverability Data - Check all 5 boxes.
+- Friendly Name - Whatever you like
+- Post URL - Paste the URL you copied earlier from Courier's website.
+- Deliverability Data - Check all 5 boxes.
 
 Security features - You can leave these disabled. The HTTPS URL you pasted includes a cryptographic token that Courier can use to verify incoming events belong only to you.
 
