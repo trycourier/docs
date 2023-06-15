@@ -1,0 +1,34 @@
+---
+sidebar_position: 2
+---
+
+import ApiReference from "@site/src/components/ApiReference";
+import config from "../configs/logs/cancel";
+
+# Cancel message
+
+This API allows users to cancel a message that is currently in the process of being delivered.
+
+A well-formatted API call to the cancel message API will return either `200` status code for a successful cancelation or `409` status code for an unsuccessful cancelation. Both cases will include the actual `message` record in the response body (see details below).
+
+# A Note On Successful Cancelations
+
+A successful cancelation will return a  `200` status code along with the updated `message` record in the response body. Because the cancelation was a success, this `message` record will include a status of `CANCELLED` as well as a `cancelled_at` timestamp.
+
+This successful response with status code `200` communicates a **_soft guarantee_** of message cancelation. It is still possible that the message has actually already been sent and that the `SENT` event is still on its way and has not been processed yet by the Courier Event Log Service. **_This fact will be explicitly communicated in the official API documentation._**
+
+# A Note On `:message_id`
+
+A successful call to `POST /send` returns a `202` status code along with a `requestId` in the response body.
+
+For send requests that have a single recipient, the `requestId` is assigned to the derived message as its `message_id`. Therefore the `requestId` can be supplied to the Message’s API for single recipient messages.
+
+For send requests that have multiple recipients (accounts, audiences, lists, etc.), Courier assigns a unique id to each derived message as its `message_id`. Therefore the `requestId` cannot be supplied to the Message’s API for single-recipient messages. This is a currently a feature gap and will be explained in /send API documentation(https://linear.app/trycourier/issue/C-9704/update-documentation-for-request-id-and-post-send)
+
+<ApiReference {...config} />
+
+## Example
+
+Method: `POST`
+
+URL: `https://api.courier.com/messages/1-5e2b2615-05efbb3acab9172f88dd3f6f/cancel`
