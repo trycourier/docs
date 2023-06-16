@@ -14,7 +14,7 @@ Courier Automations can offers the ability to be invoked on a schedule. This can
 for scheduling a notification to be sent periodically.
 
 To setup a scheduled automation, drag over the Schedule trigger from the triggers section
-onto the canvas.
+onto the canvas. `Publishing` an automation template is sufficient to allow the trigger to invoke the automation on the provided schedule. You **do not** need to make a separate API call to invoke.
 
 Courier offers three scheduling methods:
 
@@ -26,3 +26,9 @@ Courier offers three scheduling methods:
 <video width="783" loop autoPlay muted controls poster={videoThumbnail}>
   <source src={scheduleURL} />
 </video>
+
+:::info
+
+The schedule trigger works on `UTC 0` [timezone](https://dayspedia.com/time/zones/utc+0/)
+
+:::
