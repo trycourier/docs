@@ -62,8 +62,15 @@ You can see all the available options by visiting [Mailgun API docs](https://doc
 
 :::note EU Host
 
-When sending from Mailgun's EU infrastructure, be sure to substitute the beginning of the endpoint `https://api.mailgun.net` with `https://api.eu.mailgun.net`, and include it in the `config` object of the override along with the `apiKey` and `domain`.
+If you want to send emails using Mailgun's EU infrastructure, set the `host` to `api.eu.mailgun.net`:
 
+```json
+"config": {
+  "apiKey": "<your API Key>",
+  "domain": "<domain>",
+  "host": "api.eu.mailgun.net"
+}
+```
 :::
 
 ## Sending Attachments
