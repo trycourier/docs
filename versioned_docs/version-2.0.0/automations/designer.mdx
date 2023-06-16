@@ -73,12 +73,14 @@ or another template if it does not:
 
 **Be sure to publish the template before invoking (using the publish button in the upper right)**
 
-There are a few ways to invoke a template, either through a trigger node, or through an api call.
+### API/Trigger
+
+There are a few ways to invoke a template, either through a trigger node or through an api call.
 
 See [Scheduling automations](./scheduling.mdx) or [Triggering With Segment](./segment.mdx) for to get
 a feel of how trigger nodes work.
 
-To run an automation by api call, grab the automation template id from the settings section of
+To run an automation by api call, grab the automation template id or the alias from the settings section of
 the designer and invoke it by calling POST `api/automations/:template_id_here/invoke`. View
 [Automations API docs](https://www.courier.com/docs/reference/automation/invoke-template/) for
 more details.
@@ -87,3 +89,10 @@ more details.
   img={require("./assets/template-id-location.png")}
   alt="Template ID location, settings tab"
 />
+
+### From the designer
+
+You can invoke the automation template directly from the designer in the **Invoke** tab. This can be a good way to test the automation or to invoke very simple automation templates.
+_Note:_ Invoking from the designer will pass an empty data payload `{}` to the automation run
+
+<Image img={require("./assets/template-invoke.png")} alt="Template invoke tab" />
