@@ -9,13 +9,13 @@ import config from "../configs/logs/cancel";
 
 This API allows users to cancel a message that is currently in the process of being delivered.
 
-A well-formatted API call to the cancel message API will return either `200` status code for a successful cancelation or `409` status code for an unsuccessful cancelation. Both cases will include the actual `message` record in the response body (see details below).
+A well-formatted API call to the cancel message API will return either `200` status code for a successful cancellation or `409` status code for an unsuccessful cancellation. Both cases will include the actual `message` record in the response body (see details below).
 
-# A Note On Successful Cancelations
+# A Note On Successful Cancellations
 
-A successful cancelation will return a  `200` status code along with the updated `message` record in the response body. Because the cancelation was a success, this `message` record will include a status of `CANCELLED` as well as a `cancelled_at` timestamp.
+A successful cancellation will return a  `200` status code along with the updated `message` record in the response body. Because the cancellation was a success, this `message` record will include a status of `CANCELLED` as well as a `cancelled_at` timestamp.
 
-This successful response with status code `200` communicates a **_soft guarantee_** of message cancelation. It is still possible that the message has actually already been sent and that the `SENT` event is still on its way and has not been processed yet by the Courier Event Log Service. **_This fact will be explicitly communicated in the official API documentation._**
+This successful response with status code `200` communicates a **_soft guarantee_** of message cancellation. It is still possible that the message has actually already been sent and that the `SENT` event is still on its way and has not been processed yet by the Courier Event Log Service. **_This fact will be explicitly communicated in the official API documentation._**
 
 # A Note On `:message_id`
 
