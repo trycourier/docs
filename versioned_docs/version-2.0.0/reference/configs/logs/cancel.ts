@@ -1,6 +1,7 @@
 import { ApiReferenceProps } from "@site/src/components/ApiReference";
 import { ApiParam } from "@site/src/components/ApiReference/ApiParamField";
 import PartialMessage from "../schemas/PartialMessage";
+import MessageStatus from "../schemas/MessageStatus";
 
 /**
  * {
@@ -24,18 +25,67 @@ recipient: string, // the recipient email or id
   sent: number // the milli-second timestamp of the sent event
 }
  */
+
 const Message: ApiParam = {
   type: "object",
   displayName: "Message",
   fields: [
-    ...(PartialMessage.type === "object" ? PartialMessage.fields : []),
-
+    {
+      type: "string",
+      name: "event",
+      example: "TAFGNB3GNQ4MZVHW4WV4R8Q8ZVN4",
+      description: "A unique identifier associated with the message.",
+    },
+    {
+      type: "string",
+      name: "id",
+      example: "1-5e2b2615-05efbb3acab9172f88dd3f6f",
+      description:
+        "A unique identifier associated with the message you wish to retrieve (results from a send).",
+    },
+    {
+      ...MessageStatus,
+      name: "status",
+    },
+    {
+      type: "string",
+      name: "recipient",
+      example: "1-5e2b2615-05efbb3acab9172f88dd3f6f",
+      description: "A unique identifier associated with the message recipient.",
+    },
     {
       type: "number",
       name: "canceledAt",
       description:
         "A UTC timestamp at which Courier received the cancel request. This is stored as a millisecond representation of the Unix epoch (the time passed since January 1, 1970).",
       required: true,
+    },
+    {
+      type: "number",
+      name: "clicked",
+      example: 1562611084123,
+      description:
+        "A UTC timestamp at which the recipient clicked on a tracked link for the first time. This is stored as a millisecond representation of the Unix epoch (the time passed since January 1, 1970).",
+    },
+    {
+      type: "number",
+      name: "delivered",
+      example: 1562611077139,
+      description:
+        "A UTC timestamp at which the Integration provider delivered the message. This is stored as a millisecond representation of the Unix epoch (the time passed since January 1, 1970).",
+    },
+    {
+      type: "number",
+      name: "enqueued",
+      example: 1562611073426,
+      description:
+        "A UTC timestamp at which Courier received the message request. This is stored as a millisecond representation of the Unix epoch (the time passed since January 1, 1970).",
+    },
+    {
+      type: "string",
+      name: "error",
+      example: "400 Bad Request",
+      description: "A message describing the error that occurred.",
     },
     {
       type: "string",
@@ -55,9 +105,29 @@ const Message: ApiParam = {
     },
     {
       type: "string",
+      name: "notification",
+      example: "TAFGNB3GNQ4MZVHW4WV4R8Q8ZVN4",
+      description: "A unique identifier associated with the notification of the delivered message.",
+    },
+    {
+      type: "number",
+      name: "opened",
+      example: 1562611083411,
+      description:
+        "A UTC timestamp at which the recipient opened a message for the first time. This is stored as a millisecond representation of the Unix epoch (the time passed since January 1, 1970).",
+    },
+    {
+      type: "string",
       name: "runId",
       description: "A unique identifier associated with the automation run.",
       example: "1-5e2b2615-05efbb3acab9172f88dd3f6f",
+    },
+    {
+      type: "number",
+      name: "sent",
+      example: 1562611074138,
+      description:
+        "A UTC timestamp at which Courier passed the message to the Integration provider. This is stored as a millisecond representation of the Unix epoch (the time passed since January 1, 1970).",
     },
   ],
 };
