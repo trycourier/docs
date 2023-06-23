@@ -13,9 +13,9 @@ A well-formatted API call to the cancel message API will return either `200` sta
 
 # A Note On Successful Cancellations
 
-A successful cancellation will return a  `200` status code along with the updated `message` record in the response body. Because the cancellation was a success, this `message` record will include a status of `CANCELLED` as well as a `cancelled_at` timestamp.
+A successful cancellation will return a  `200` status code along with the updated `message` record in the response body. Because the cancellation was a success, this `message` record will include a status of `CANCELED` as well as a `canceledAt` timestamp.
 
-This successful response with status code `200` communicates a **_soft guarantee_** of message cancellation. It is still possible that the message has actually already been sent and that the `SENT` event is still on its way and has not been processed yet by the Courier Event Log Service. **_This fact will be explicitly communicated in the official API documentation._**
+This successful response with status code `200` communicates a **_soft guarantee_** of message cancellation. It is still possible that the message has actually already been sent and that the `SENT` event is still on its way and has not been processed yet by the Courier Event Log Service.
 
 # A Note On `:message_id`
 
