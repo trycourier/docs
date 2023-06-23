@@ -1,0 +1,78 @@
+---
+sidebar_position: 8
+sidebar_label: Ops Genie
+title: Set Up Push Notifications Using Ops Genie
+description: Looking for a way to send push notifications via Ops Genie? This step-by-step tutorial will show you how to integrate Ops Genie's API the easy way.
+---
+
+# Ops Genie
+
+## Profile Requirements
+
+No profile data is required for Ops Genie. If the Channel is included in your notification template, it will be routed.
+
+```json title=JSON
+// Recipient Profile
+{}
+```
+
+## Configuration
+
+The OpsGenie provider has a configuration requirement of setting the message in the channel configuration. The message can be static or augmented by using the `data` property in the api call payload.
+
+![opsgenie-config](../../../assets/platform/channels/opsgenie-channel-configuration.png)
+
+The following API Call with the `data` property will augment the message we configured in the aformentioned step.
+```json title=JSON
+{
+  "message": {
+    "brand_id": "some-brand",
+    "data": {
+      "metadata": {
+        "greeting": "Hey... DO NOT PANIC..."
+      }
+    },
+    "providers": {
+      "opsgenie": {
+        "override": {
+          "config": {
+            "apiKey": "YOUR API KEY"
+          }
+        }
+      }
+    },
+    "template": "TEMPLATE_ID",
+    "to": {
+      "user_id": "some-recipient"
+    }
+  }
+}
+```
+
+After processing the request, we can see the notification be correctly augmented with the `data` property value.
+![config](../../../assets/platform/channels/opsgenie-resulting-notification.png)
+
+## Override
+
+Overrides can be used to change the request body that Courier uses to send a push message. Overrides are useful when a field is not yet supported by Courier or you would like to override the value that Courier generates.
+
+**Note:** If you are using it in Europe region, be sure to https://api.eu.opsgenie.com/v2 and the apiKey tied to your EU region.
+
+```json title=JSON
+{
+  "providers": {
+    "opsgenie": {
+      "override": {
+        "config": {
+          "accessToken": "YOUR TOKEN",
+          "url": "URL"
+        },
+        "headers": {},
+        "body": {
+          "message": "YOUR MESSAGE"
+        }
+      }
+    }
+  }
+}
+```

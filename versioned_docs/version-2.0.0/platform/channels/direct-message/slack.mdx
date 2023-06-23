@@ -1,0 +1,653 @@
+---
+sidebar_position: 5
+---
+
+import Image from "@theme/IdealImage";
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import GifWrapper from "@site/src/components/GifWrapper";
+
+# Slack
+
+## Set Up Chat Using Slack
+
+### Introduction
+
+This step-by-step guide will walk you through sending a Slack Direct Message using Courier. You will:
+
+#### Prerequisites
+
+You will need both Courier and Slack accounts to complete this tutorial. If you don't have accounts already, sign up before proceeding. You will also need permission to create a Slack app, configure that app, and add it to a Slack workspace. If you do not have access already, you can create your own free Slack workspace.
+
+- [Sign up for Courier](https://app.courier.com/register)
+- [Sign up for Slack](https://slack.com/get-started)
+- [Create a Slack Workspace](https://slack.com/create#email)
+
+:::info Related Resources
+
+- [Courier API Reference](../../../../reference)
+- ["An Introduction to Slack Apps"](https://api.slack.com/start/overview)
+- ["Managing Slack Apps"](https://api.slack.com/slack-apps)
+- [Slack API Documentation](https://api.slack.com/)
+- [Bash Environment Variables](https://www.gnu.org/software/bash/manual/html_node/Environment.html)
+- [cURL](https://curl.haxx.se/)
+
+:::
+
+### Add the Slack Integration
+
+Once logged in to Courier, navigate to the ["Integrations" page](https://app.courier.com/integrations). Click on the Slack Integration to configure it.
+
+<Image img={require("../../../assets/guides/slack/integration.png")} alt="Courier Slack Integration" />
+
+Courier Integrations each require different pieces of information based on the needs of the Integration provider. We will send our configuration details as part of our request body when sending a message. For now, click "Install."
+
+#### Slack App
+
+Our Slack app will be relatively simple. Slack allows for complex interactivity and menu interactions. For a full overview of what's possible, visit ["An Introduction to Slack Apps"](https://api.slack.com/start/overview). We will create an app that delivers direct messages only. If you would like to use an existing Slack App, you can skip to [OAuth Permissions](#oauth-permissions).
+
+**Create a Slack App**
+
+Once logged in to Slack, navigate to the ["Apps"](https://api.slack.com/apps) page, and click the "Create an App" button. This will open a modal with two form fields: "App Name," and "Slack Development Workspace."
+
+<Image img={require("../../../assets/guides/slack/create-app.png")} alt="Create a Slack App" />
+
+For the "App Name," use something like "Courier Test App." The "Development Slack Workspace" drop-down should display Slack workspaces where you are authenticated. Select the workspace you will be using to build this app. Then, click "Create App."
+
+<Image img={require("../../../assets/guides/slack/app-console.png")} alt="Slack App Console" />
+
+**OAuth Permissions**
+
+For this tutorial, we'll be sending a direct message using the email address associated with the recipient's Slack account. To do this, your app will need the following scopes: `chat:write`, `im:write`, `users:read`, and `users:read.email`. Navigate to the "OAuth & Permissions" page in the sidebar menu. In the Scopes section of the page, add these scopes as Bot Token Scopes.
+
+<Image img={require("../../../assets/guides/slack/oauth-scopes.png")} alt="Slack OAuth Scopes" />
+
+At the top of this page is a button labeled "Install App to Workspace" or "Reinstall App" if you're using an existing Slack App. Click this button.
+
+<Image img={require("../../../assets/guides/slack/install-app.png")} alt="Slack OAuth & Permissions" />
+
+You should see a "Bot User OAuth Access Token." Make note of this value.
+
+<Image
+  img={require("../../../assets/guides/slack/workspace-token.png")}
+  alt="Slack OAuth & Permissions after App install"
+/>
+
+Congratulations, you've configured your Integration with Slack. Now, let's create a Notification.
+
+### Create a Courier Notification
+
+Navigate to the Courier ["Notifications" page](https://app.courier.com/designer/notifications) and click "Create Notification." Click on “Untitled Notification” to rename your notification — for this tutorial, call it “Test Appointment Reminder.” From your list of configured Integrations, click on the Slack button. Then, click the “Slack” box that has been added to the sidebar in order to bring up a Slack template.
+
+<Image
+  img={require("../../../assets/guides/slack/courier-notification-template.png")}
+  alt="Courier Notification Template"
+/>
+
+Courier provides a visual template editor, so you can send notifications that are formatted professionally. You can add content blocks to the template by clicking appropriate icons. If you remove a content block, it is moved to your Library in the sidebar and can be dragged back to the template if necessary.
+
+These content blocks can include variables using a mustache-like template syntax. Surround text with a single set of curly braces and that text will be interpreted as a variable (it will also be highlighted in green). For example, you may want to include a {name} variable (we'll cover the source of this variable data later in this tutorial).
+
+For now, add a text block and fill it with whatever text you want to send. You can also copy the example below, which contains a few variables for demonstration.
+
+```text title=Text
+Hello {name},
+
+This is an appointment reminder from Courier. We look forward to seeing you on {apt_date} at {apt_time}.
+
+If you need to change your appointment for any reason, please contact us at least 24 hours in advance at {support_url} or {support_phone}.
+
+Best regards,
+
+Courier
+```
+
+<Image
+  img={require("../../../assets/guides/slack/courier-notification-template-sample.png")}
+  alt="Courier Notification Template with Sample Message"
+/>
+
+When you are finished, click Publish in the upper right corner and give it a Publish Message of "Initial notification."
+
+### Send a Message
+
+Courier passes messages to Integrations via the [Send endpoint](../../../../reference). For this tutorial, we will send our messages with cURL, but you can use your preferred language and HTTP library. You can also use an API testing tool such as [Postman](https://www.getpostman.com/) or [Insomnia](https://insomnia.rest/). For additional code samples, see the ["Courier API Reference"](../../../../reference).
+
+#### Authorization
+
+Courier supports both basic and token authorization. For this tutorial, we will use token authorization. You can read more about authorization in Courier's ["Authorization Overview"](../../../../reference).
+
+We must send an `Authorization` header with each request. The Courier Send API also requires an `event`. The authorization token and event values are the "Auth Token" and "Notification ID" we see in the detail view of our “Test Appointment Reminder” event. Click the gear icon next to the Notification's name to reveal them.
+
+<Image
+  img={require("../../../assets/guides/slack/auth-credentials.png")}
+  alt="Courier Authorization Credentials"
+/>
+
+As a best practice, let's assign these values to environment variables. In a Bash terminal, you can add the variables by typing `VARIABLE_NAME="<value>"`. Some examples are provided below. Note that the values are just examples. Do not copy them — be sure to use the tokens associated with your account instead.
+
+**Courier Auth Token Variable**
+
+```shell
+COURIER_AUTH_TOKEN="YpW2yEaMDyNg6agN9yGkc9ycEg8MxiKVTiiu2WVc8"
+```
+
+**Notification ID**
+
+```shell
+COURIER_NOTIFICATION_ID="YpW2yEaMDyNg6agN9yGkc9ycEg8"
+```
+
+These variables will persist for as long as your Bash session remains alive. If you quit your terminal, you will need to recreate them. However you handle your authorization tokens, keep them secure, and never add them to source control.
+
+To verify that you created the variables correctly, you can see them by typing `echo $VARIABLE_NAME`. For example, typing `echo $COURIER_AUTH_TOKEN` will print the Courier Auth Token value to the terminal.
+
+#### Building the cURL Request
+
+We want to send a POST request to `https://api.courier.com/send`. Let's build our cURL request line-by-line. First, we'll tell cURL this is a POST request.
+
+```bash
+curl --request POST
+```
+
+Next, add the `Authorization` header using the `COURIER_AUTH_TOKEN` variable we set earlier. We send this as a Bearer token.
+
+```bash
+curl --request POST \
+--header "Authorization: Bearer $COURIER_AUTH_TOKEN" \
+```
+
+We also have a `Content-Type` header, which is `application/json`.
+
+```bash
+curl --request POST \
+--header "Authorization: Bearer $COURIER_AUTH_TOKEN" \
+--header "Content-Type: application/json" \
+```
+
+We will pass the body of our request using the cURL `--data` option. You will often send this data in JSON format. To improve working with cURL, Courier also supports a custom urlencoded format that can be used in the place of JSON. This format allows nested data values using square bracket syntax. This guide provides examples in both formats, so feel free to use the format that you like best.
+
+Our `--data` option must also contain an `event` and `recipient`. Additionally, we will send `profile` and `data` objects.
+
+The `event` value, for this example, is the "Notification ID" that we assigned to our `COURIER_NOTIFICATION_ID` environment variable earlier.
+
+A `recipient` should be a unique identifier that does not change. This prevents duplicate entries in the event that a recipient changes their email or some other identifying value. We do not have any recipients in this tutorial, so we can enter any string value. Something like `“spike_spiegel”` will work.
+
+The `profile` information is an object that includes any key-value pairs required by our Integrations. In the case of Slack, we need the "Bot User OAuth Access Token" and "Email associated with the recipient's Slack Account." These are sent as `access_token` and `email` respectively in a `slack` object. You can find the required keys for any Integration by selecting an Integration on the ["Integrations" page](../../../providers).
+
+Lastly, we define message variables inside the `data` object. Remember the variables we set in the visual template editor? This is where we provide the values. Our example message had `name`, `apt_date`, `apt_time`, `support_phone`, and `support_url` variables. For this tutorial, we can assign example strings to each.
+
+Our `--data` object should look like this:
+
+<Tabs groupId="code">
+<TabItem value="json" label="JSON">
+
+```json
+{
+  "event": "'"$COURIER_NOTIFICATION_ID"'",
+  "recipient": "spike_spiegel",
+  "profile": {
+    "slack": {
+      "access_token": "xoxb-487947363398-212718859602-bXYRRbrQHAijFnfnuKLM7JV1",
+      "email": "spiegel@bebop.com"
+    }
+  },
+  "data": {
+    "name": "Spike Spiegel",
+    "apt_date": "June 26",
+    "apt_time": "8:44 PM",
+    "support_phone": "555-555-5555",
+    "support_url": "https://courier.com/docs"
+  }
+}
+```
+
+</TabItem>
+<TabItem value="bash" label="cURL urlencoded">
+
+```bash
+--data "event=$COURIER_NOTIFICATION_ID" \
+--data "recipient=spike_spiegel" \
+--data "profile[slack][access_token]=xoxb-487947363398-212718859602-bXYRRbrQHAijFnfnuKLM7JV1" \
+--data "profile[slack][email]=spiegel@bebop.com" \
+--data "data[name]=Spike Spiegel" \
+--data "data[apt_date]=June 26" \
+--data "data[apt_time]=8:44 PM" \
+--data "data[support_phone]=555-555-5555" \
+--data "data[support_url]=https://www.courier.com/docs/" \
+```
+
+</TabItem>
+</Tabs>
+
+Now add the Send URL, `https://api.courier.com/send`, to complete the cURL request.
+
+**Complete cURL Request in both Formats**
+
+<Tabs>
+<TabItem value="bash" label="cURL in JSON">
+
+```bash
+curl --request POST \
+--header "Authorization: Bearer $COURIER_AUTH_TOKEN" \
+--header "Content-Type: application/json" \
+--data '{
+  "event": "'"$COURIER_NOTIFICATION_ID"'",
+  "recipient": "spike_spiegel",
+  "profile": {
+    "slack": {
+      "access_token": "xoxb-487947363398-212718859602-bXYRRbrQHAijFnfnuKLM7JV1",
+      "email": "spiegel@bebop.com"
+    }
+  },
+ "data":  {
+    "name": "Spike Spiegel",
+    "apt_date": "June 26",
+    "apt_time": "8:44 PM",
+    "support_phone": "555-555-5555",
+    "support_url": "https://courier.com/docs"
+   }
+ }' \
+https://api.courier.com/send
+```
+
+</TabItem>
+<TabItem value="bash-urlencoded" label="cURL urlencoded">
+
+```bash
+curl --request POST \
+--header "Authorization: Bearer $COURIER_AUTH_TOKEN" \
+--header "Content-Type: application/json" \
+--data "event=$COURIER_NOTIFICATION_ID" \
+--data "recipient=spike_spiegel" \
+--data "profile[slack][access_token]=xoxb-487947363398-212718859602-bXYRRbrQHAijFnfnuKLM7JV1" \
+--data "profile[slack][email]=spiegel@bebop.com" \
+--data "data[name]=Spike Spiegel" \
+--data "data[apt_date]=June 26" \
+--data "data[apt_time]=8:44 PM" \
+--data "data[support_phone]=555-555-5555" \
+--data "data[support_url]=https://www.courier.com/docs/" \
+https://api.courier.com/send
+```
+
+</TabItem>
+</Tabs>
+
+Before sending this request, be sure to replace the `access_token` and `email` values with the Bot User OAuth Access Token and recipient's Slack Email. Also, note the `"'"$COURIER_NOTIFICATION_ID"'"` formatting in the JSON formatted `--data` option. The quotes are necessary to escape the JSON quotes and access the `COURIER_NOTIFICATION_ID` variable.
+
+Paste your complete cURL request in either format in your terminal and hit "Return." You should receive a response like `{"messageId":"<message id string>"}`. You will also receive a Slack message from your Slack app.
+
+<Image
+  img={require("../../../assets/guides/slack/send-curl-request.png")}
+  alt="Send the cURL Request"
+/>
+
+<Image
+  img={require("../../../assets/guides/slack/delivered-message.png")}
+  alt="Delivered Slack Message"
+/>
+
+## Slack App Requirements
+
+To send notifications via Slack, a Slack App is required. You may use an existing or [create a new basic app](https://api.slack.com/authentication/basics).
+
+### Scopes
+
+The Slack App must be granted the `chat:write` scope. Additional scopes may be required based on the type of message you send. You can modify scopes by selecting the Slack App from [Your Apps](https://api.slack.com/apps) and clicking “OAuth & Permissions” from the side menu.
+
+### Bot User OAuth Access Token
+
+In order to send a message on behalf of your Slack App using Courier, a Bot User Oauth Access Token will need to be passed in the recipient profile. We’ll refer to this token as the `access_token`. You can find this token by selecting the Slack App from [Your Apps](https://api.slack.com/apps) and clicking “OAuth & Permissions” from the side menu.
+
+<Image
+  img={require("../../../assets/platform/channels/slack-oauth.png")}
+  alt="Location of Bot User OAuth Access Token in Your Apps."
+/>
+
+:::tip Helpful tip
+The bot access token will always start with `xoxb-`.
+:::
+
+## Profile Requirements
+
+The information required in the recipient profile is different based on the type of message you are sending.
+
+### Sending a Direct Message
+
+To send a message to a user, you’ll need to specify the user along with `access_token`. There are 3 ways to do this.
+
+:::caution Additional Scopes Required
+Sending Direct Messages requires an additional scope. Be sure to grant the `im:write` scope to your Slack App.
+:::
+
+#### Use the Slack Button
+
+Slack’s [Slack Button](https://api.slack.com/docs/slack-button) lets you easily connect your Slack App with your customer’s account. As part of the OAuth process that the Slack Button initiates, Slack will fire a webhook to your servers. Simply store what they send you for that user and send it along to Courier, we’ll take care of the rest.
+
+```json title=JSON
+{
+  "message": {
+    // Recipient Profile
+    "to": {
+      "slack": {
+        // Contents of the JSON object provided by Slack's OAuth access method
+      }
+    }
+  }
+}
+```
+
+#### Using the email associated with Slack
+
+To simplify setting up the recipient profile, we allow you to specify the `email` used to log into the Slack Workspace and Courier will do the `user_id` lookup for you.
+
+```json title=JSON
+{
+  "message": {
+    // Recipient Profile
+    "to": {
+      "slack": {
+        "access_token": "xoxb-xxxxx",
+        "email": "user@example.com"
+      }
+    }
+  }
+}
+```
+
+:::caution Additional Scopes Required
+Using this method requires additional scopes. Be sure to grant the `users:read` and `users:read.email` scopes to your Slack App.
+:::
+
+#### Using `user_id`
+
+For testing, the `user_id` is found by finding the user in the Workspace Directory, clicking the … button, and selecting “Copy member ID”. For production use cases you would likely retrieve these IDs via the Slack API.
+
+```json title=JSON
+{
+  "message": {
+    // Recipient Profile
+    "to": {
+      "slack": {
+        "access_token": "xoxb-xxxxx",
+        "user_id": "UEFNTF6QL"
+      }
+    }
+  }
+}
+```
+
+:::tip Helpful tip
+A `user_id` will always start with a `U` or `W`.
+:::
+
+### Sending to a Public or Private Channel
+
+:::caution Additional Scopes Required
+To send to a public channel your app isn't a member of, be sure to grant your Slack app the `chat:write.public` scope.
+:::
+
+To send a message to a public or private channel, you’ll need to pass its `channel` along with the `access_token`. The easiest way to get this value is to open Slack in a browser, navigate to the desired channel and copy it from the URL.
+
+<Image
+  img={require("../../../assets/platform/channels/slack-channel-id.png")}
+  alt="Locating the channel in the Slack web client."
+/>
+
+```json title=JSON
+{
+  "message": {
+    // Recipient Profile
+    "to": {
+      "slack": {
+        "access_token": "xoxb-xxxxx",
+        "channel": "CL2MR6HEX"
+      }
+    }
+  }
+}
+```
+
+In the event that you don't have direct access to the Slack Workspace, you can also retrieve the channel ids using the [`conversations.list`](https://api.slack.com/methods/conversations.list) method of the Slack Web API using the `access_token`. Be sure to request the `channels:read` scope.
+
+Here is an example that will fetch all public Slack Channels for a workspace and create a Courier Profile for each one using the [Courier Node.js SDK](https://github.com/trycourier/courier-node).
+
+```js
+const { CourierClient } = require("@trycourier/courier");
+const { WebClient } = require("@slack/web-api");
+
+// Courier Access Token is stored in COURIER_ACCESS_TOKEN environment variable
+const courier = CourierClient();
+// SLACK TOKEN must be granted channels:read scope
+const web = new WebClient(process.env.SLACK_TOKEN);
+
+const main = async () => {
+  // Fetch all public channels for Slack Workspace
+  const { channels } = await web.conversations.list({
+    types: "public_channel",
+    exclude_archived: true,
+  });
+
+  // Create a Courier Profile for each channel
+  for (let channel of channels) {
+    const { id, name } = channel;
+    const recipientId = `CHANNEL_${name.toUpperCase()}`;
+    try {
+      await courier.replaceProfile({
+        recipientId,
+        profile: {
+          slack: {
+            access_token: process.env.SLACK_TOKEN,
+            channel: id,
+          },
+        },
+      });
+      console.log(`${recipientId}: Profile saved for channel ${name}`);
+    } catch (ex) {
+      console.log(`Error saving profile for channel: ${name}`, ex);
+    }
+  }
+};
+
+main();
+```
+
+This will allow you to send to a channel using a user id of `CHANNEL_` + the channel name in all upper case .If you wanted to send a message to the general channel, it would look like the following:
+
+```json title=JSON
+{
+  "message": {
+    "to": {
+      "user_id": "CHANNEL_GENERAL"
+    },
+    "template": "HELLO_SLACK",
+    "data": {
+      "hello": "world"
+    }
+  }
+}
+```
+
+:::tip Helpful Tips
+
+- A `channel` will always start with a `C`.
+- Before you can send to a channel, your Slack app must be invited into it.
+
+:::
+
+### Responding to a Slash Command
+
+If you are working with a [Slash Command](https://api.slack.com/interactivity/slash-commands) and would like to respond to it, you can use the `response_url` from the [POST payload](https://api.slack.com/interactivity/slash-commands#app_command_handling). This URL can be passed to Courier as a Slack Incoming Webhook.
+
+```json title=JSON
+{
+  "message": {
+    // Recipient Profile
+    "to": {
+      "slack": {
+        "incoming_webhook": {
+          "url": "https://hooks.slack.com/commands/1234/5678"
+        }
+      }
+    }
+  }
+}
+```
+
+:::note Setting the `response_type`
+Slash Command responses can either be sent as `in_channel` or `ephemeral`. You can set this using an override. Set `override.slack.body.response_type` to either `in_channel` or `ephemeral` in the `POST /send` payload. The default is `ephemeral`.
+:::
+
+Since the POST payload also contains the `channel_id` and `user_id`, you may also respond using the methods above. However, you will need to also use the `access_token`, make sure the proper scopes are applied, and make sure your app is in the channel if you are responding in channel.
+
+### Incoming Webhooks
+
+Incoming Webhooks are a simple way to post messages from your app to a specific public channel. Unless you have a specific use case, we recommend sending using one of the methods outlined above. Follow the [Incoming Webhooks Setup Guide](https://api.slack.com/messaging/webhooks) and pass the Webhook URL via `slack.incoming_webhook.url` to the recipient profile.
+
+```json title=JSON
+{
+  "message": {
+    // Recipient Profile
+    "to": {
+      "slack": {
+        "incoming_webhook": {
+          "url": "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
+        }
+      }
+    }
+  }
+}
+```
+
+### Order of Precedence
+
+The Slack profile should only contain an OAuth Response, Incoming Webhook, or the `access_token` and one of the following: `channel`, `user_id`, or `email`. If there are multiples, the order of precedence is as follows: `channel` > `user_id` > `email`. For example, if your profile is as follows:
+
+```json title=JSON
+{
+  "message": {
+    "to": {
+      "slack": {
+        "access_token": "xoxb-xxxxx",
+        "channel": "CL2MR6HEX",
+        "user_id": "UEFNTF6QL"
+      }
+    }
+  }
+}
+```
+
+The notification will be sent using the `channel`.
+
+:::tip Helpful Tips
+
+We look for `channel`, `user_id`, or `email` in the incoming request to decide what channel to send the notifications to, and our logic is as follow:
+
+- if `channel` is provided in the request, we just use `channel`.
+- if `channel` is missing but `user_id` is provided in the request, we use `user_id`.
+- if `channel` and `user_id` are missing but `email` is provided in the request, we use `email` to derive the `channel`
+
+:::
+
+## Override
+
+You can use a provider override to replace what we send to Slack’s [chat.postMessage](https://api.slack.com/methods/chat.postMessage) method. For example, you can choose to have links unfurl.
+
+```json title=JSON
+{
+  "message": {
+    "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "to": {
+      "slack": {
+        "access_token": "xoxb-xxxxx",
+        "user_id": "UEFNTF6QL"
+      }
+    },
+    "providers": {
+      "slack": {
+        "override": {
+          "body": {
+            "unfurl_links": true
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+## Common Uses
+
+### Mentioning Users
+
+You can mention users in a Slack message using the syntax `<@USER_ID>` in a Notification Designer Block. You can also use a variable to set the Slack User ID.
+
+<Image
+  img={require("../../../assets/platform/channels/slack-mention.png")}
+  alt="Mentioning a user in a Slack message using a variable."
+/>
+
+Learn more about [Advanced formatting with special parsing](https://api.slack.com/reference/surfaces/formatting#advanced).
+
+## Updating Slack Notifications
+
+> How to set the replacement key path in the Slack channel integration settings.
+
+### Via Replacement Key
+
+To update the content of a Slack notification previously sent via Courier, you need to set the "replacement key" path in the Slack [channel settings](../../../platform/sending/channel-settings.mdx) within your notification template.
+
+We typically use `ts` as the value. Courier will then look for this key in the data block you pass to our API and use that to update an existing message instead of posting a new one.
+
+<GifWrapper width={915} height={437} caption="Slack Channel Settings">
+
+![Slack settings](../../../assets/guides/slack/slack-ts.gif)
+
+</GifWrapper>
+
+### Replacement Key Path
+
+You can set the replacement key path from the channel settings.
+
+1. Open the notification
+2. Hover over the Slack Channel (or Direct Message channel with Slack set as the integration)
+3. Click on the Channel Settings slide out menu
+
+<Image
+  img={require("../../../assets/guides/slack/slack-settings.png")}
+  alt="Slack Channel Settings"
+/>
+
+4. Click to open the Slack integration 
+
+<Image
+  img={require("../../../assets/guides/slack/slack-integration.png")}
+  alt="Slack Integration Tab"
+/>
+
+5. Set the Replacement Key Path
+
+<Image
+  img={require("../../../assets/guides/slack/slack-replacement-key.png")}
+  alt="Slack Replacement Key Path"
+/>
+
+## Deprecated
+
+### Legacy Profile Format
+
+When the Courier Slack Integration first launched, the profile data was accepted in a different format. While it is recommended that you use the format outlined above, the following profile format may still work for some Slack Apps.
+
+```json title=JSON
+{
+  "message": {
+    // Recipient Profile
+    "to": {
+      "slackToken": "xoxb-xxxxx",
+      "slackChannel": "CL2MR6HEX"
+    }
+  }
+}
+```
+
+Congratulations, you’re on your way to crafting a better notification strategy that your audience is sure to appreciate.

@@ -7,7 +7,7 @@ const ProfileAirship: ApiParam = {
     {
       type: "object",
       name: "airship",
-      description: "[Learn more](/docs/guides/providers/push/airship)",
+      description: "[Learn more](/docs/platform/channels/push/airship)",
       fields: [
         {
           type: "object",

@@ -7,7 +7,7 @@ const ProfileFacebookMessenger: ApiParam = {
     {
       type: "string",
       name: "facebookPSID",
-      description: "[Learn more](/docs/guides/providers/direct-message/facebook-messenger)",
+      description: "[Learn more](/docs/platform/channels/direct-message/facebook-messenger)",
     },
   ],
 };

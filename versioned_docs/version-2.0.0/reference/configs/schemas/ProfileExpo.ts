@@ -7,7 +7,7 @@ const ProfileExpo: ApiParam = {
     {
       type: "oneOf",
       name: "expo",
-      description: "[Learn more](/docs/guides/providers/push/expo)",
+      description: "[Learn more](/docs/platform/channels/push/expo)",
       options: [
         {
           type: "object",

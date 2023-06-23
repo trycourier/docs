@@ -541,6 +541,14 @@ video {
   background-image: url(/img/sidebar-icons/client-libraries-active.svg);
 }
 
+.sidebar-sdk-libraries .menu__link:before {
+  background-image: url(/img/sidebar-icons/client-libraries.svg);
+}
+
+.sidebar-sdk-libraries .menu__link--active:before {
+  background-image: url(/img/sidebar-icons/client-libraries-active.svg);
+}
+
 .sidebar-business .menu__link:before {
   background-image: url(/img/sidebar-icons/business.svg);
 }
@@ -556,6 +564,15 @@ video {
 .sidebar-elemental .menu__link--active:before {
   background-image: url(/img/sidebar-icons/elemental-active.svg);
 }
+
+.sidebar-platform .menu__link:before {
+  background-image: url(/img/sidebar-icons/elemental.svg);
+}
+
+.sidebar-platform .menu__link--active:before {
+  background-image: url(/img/sidebar-icons/elemental-active.svg);
+}
+
 
 .sidebar-automations .menu__link:before {
   background-image: url(/img/sidebar-icons/automations.svg);

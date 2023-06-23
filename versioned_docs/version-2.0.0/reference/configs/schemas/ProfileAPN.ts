@@ -7,7 +7,7 @@ const ProfileAPN: ApiParam = {
     {
       type: "string",
       name: "apn",
-      description: "[Learn more](/docs/guides/providers/push/apple-push-notification)",
+      description: "[Learn more](/docs/platform/channels/push/apple-push-notification)",
     },
   ],
 };

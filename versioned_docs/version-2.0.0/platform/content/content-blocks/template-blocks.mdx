@@ -1,0 +1,103 @@
+---
+sidebar_position: 3
+---
+
+import Image from "@theme/IdealImage";
+
+# Template Blocks
+
+> Use template blocks to insert markup language into your notification.
+
+**Availability:** Email only
+
+## Working With Template Blocks
+
+<Image
+  img={require("../../../assets/guides/template-blocks/template-block-new.png")}
+  alt="New Template Block"
+/>
+
+The Template Block allows you to use [Handlebars](../notification-designer/handlebars-designer.mdx) templates along with HTML and CSS to add customized content to your notifications.
+
+<Image
+  img={require("../../../assets/guides/template-blocks/template-block-standard.png")}
+  alt="Template Block Boilerplate"
+/>
+
+The template block presents you with an HTML editor containing a `div` and `style` element. Starting with these elements, you can build out the look and feel of the block content. 
+
+:::info Note
+
+HTML and CSS support varies by email client.
+
+:::
+
+## Handlebars Templating Language
+
+The Template Block supports Handlebars. You can learn about the language syntax from the [Handlebars Language Guide](https://handlebarsjs.com/guide/#language-features).
+
+**Read more:** [Custom Courier Handlebars helpers](../notification-designer/handlebars-helpers.mdx).
+
+### Using CSS With Handlebars
+
+1. In the notification designer, add a template block to an email notification.
+
+<Image
+  img={require("../../../assets/guides/template-blocks/template-block-styling.png")}
+  alt="Template Block With CSS and Handlebars"
+/>
+
+2. Open the `preview` tab and create a test event providing the data values for the template block.
+
+<Image
+  img={require("../../../assets/guides/template-blocks/template-block-data.png")}
+  alt="Test Event Data"
+/>
+
+3. Select the test event in the preview to see the code rendered in the email.
+
+<Image
+  img={require("../../../assets/guides/template-blocks/template-block-data-preview.png")}
+  alt="Template Preview"
+/>
+
+### Using Markdown in a Template Block 
+
+If you like to compose in markdown, you can do that using the template block. Just add a template block to your notification, add the following syntax:
+
+```handlebars
+<div>{{#markdown}} YOUR MARKDOWN GOES HERE {{/markdown}}</div>
+```
+
+Then write in your markdown between the `{{#markdown}}` and close with `{{/markdown}}`.
+
+<Image
+  img={require("../../../assets/guides/template-blocks/template-block-md.png")}
+  alt="Template Block and Markdown"
+/>
+
+<Image
+  img={require("../../../assets/guides/template-blocks/template-block-md-preview.png")}
+  alt="Markdown Preview"
+/>
+
+### Using Replacement Variables in Handlebars
+
+To insert a variable from your JSON event, you need the variable handlebars helper 
+
+```handlebars
+{{var "variable_name"}}
+```
+
+**Read More:**
+
+- [Using replacement variables in Courier](../using-variables/inserting-variables.mdx)
+- [Courier Handlebars helpers](../notification-designer/handlebars-helpers.mdx)
+
+### Inserting HTML Into a Handlebars Block
+
+To pull in a data object variable containing `HTML`, wrap the variable with triple curly brackets like:
+
+```handlebars
+{{{body}}}
+```

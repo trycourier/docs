@@ -1,0 +1,146 @@
+---
+sidebar_position: 2
+---
+
+import Image from "@theme/IdealImage";
+
+# Hosted Page
+
+> The hosted Preference Center is an external page that recipients are redirected to where they can customize and set their preferred notification delivery methods.
+
+<Image
+  img={require("../../../assets/guides/preferences-ui/preferences-hosted-page-example.png")}
+  alt="Recipient Preference Center"
+/>
+
+A recipient can select to opt-in or out of a notification (depending on the subscription topic default state)
+as well as select the preferred delivery channel for a notification (business-tier feature) from this page.
+
+## Preference Center Link
+
+When using a notification template, users can attach a Courier Preference Center hyperlink that will provide an auto-generated link. This link will open the hosted Preference Center; the recipient will be able to establish their notifications preferences at this page.
+
+:::info User Id
+
+In order for a recipient to successfully set their preferences from a notification, you must include `to.user_id` in the [Send request](/reference/send/message). This is because the `user_id` ties the recipient profile to their set preferences. If no `user_id` is present in the request, the preferences method will not register. For send v1, the `user_id` can be mapped to the `recipient` parameter.
+
+:::
+
+### Adding Preferences Link To Notification Text
+
+Add text to the notification template, highlight it, and select the create link icon.
+
+<Image
+  img={require("../../../assets/guides/preferences-ui/preferences-hyperlink-create.png")}
+  alt="Preferences URL Creation"
+/>
+
+In the hyperlink modal, add `{$.urls.preferences}` inside the URL form.
+
+<Image
+  img={require("../../../assets/guides/preferences-ui/preferences-hyperlink.png")}
+  alt="Preferences URL"
+/>
+
+The resulting link will look like this.
+
+<Image
+  img={require("../../../assets/guides/preferences-ui/preferences-notification-template.png")}
+  alt="Notification Template With Preferences Hyperlink"
+/>
+
+### Adding Preferences Link To Brand Footer
+
+Edit footer text, highlight it, and select the create link icon.
+
+<Image
+  img={require("../../../assets/guides/preferences-ui/preferences-page-brand.png")}
+  alt="Brand Editor Footer Edit"
+/>
+
+<Image
+  img={require("../../../assets/guides/preferences-ui/preferences-hyperlink-brand-create.png")}
+  alt="Brand Editor Footer Preferences URL Creation"
+/>
+
+In the hyperlink modal, add `{$.urls.preferences}` inside the URL form.
+
+<Image
+  img={require("../../../assets/guides/preferences-ui/preferences-hyperlink-brand.png")}
+  alt="Brand Editor Preferences URL"
+/>
+
+The resulting link will look like this.
+
+<Image
+  img={require("../../../assets/guides/preferences-ui/preferences-brand-with-link.png")}
+  alt="Brand Template With Preferences Hyperlink"
+/>
+
+When you use this brand when using a notification, the hyperlink will be shown like this.
+
+<Image
+  img={require("../../../assets/guides/preferences-ui/preferences-notification-brand-link.png")}
+  alt="Notification Template Using Brand With Preferences Hyperlink"
+/>
+
+### Preference Center Branding
+
+Just like with email templates, the Preference Center can be customized to fit your [branding style](../../content/brands/customize-default-brand.mdx). The Preference Center will use the the specified default brand.
+
+<Image
+  img={require("../../../assets/guides/preferences-ui/preferences-default-brand.png")}
+  alt="Default Brand Selected"
+/>
+
+<Image
+  img={require("../../../assets/guides/preferences-ui/preferences-page-branding.png")}
+  alt="Customized Preference Center"
+/>
+
+### Previewing the Preference Center
+
+You can see a preview of the Preference Center from the [Preferences tab in the Courier designer](https://app.courier.com/designer/preferences).
+
+:::info Select Preview Recipients
+
+Sending a preview email will **attach a mock URL** instead of the preference hosted page.
+
+:::
+
+<Image
+  img={require("../../../assets/guides/preferences-ui/preferences-preview-page.png")}
+  alt="Email Preview Will Send a Mock Preference URL"
+/>
+
+To preview the Hosted Preference Page, navigate to the [Preference Designer](designer.mdx) and click on `Preview Page`.
+
+<Image
+  img={require("../../../assets/guides/preferences-ui/preferences-designer-zoomed-in.png")}
+  alt="Preference designer view"
+/>
+
+## Customizing Delivery Channels
+
+If a notification template has multiple delivery channels configured, a recipient will be able to customize and set their preferred delivery channel from the Preferences Page.
+
+:::info Business Tier Feature
+
+Delivery Channel customization is a Courier Business feature. Please [contact](https://www.courier.com/request-demo/) our Product Experts for more details.
+
+:::
+
+Once a recipient receives a notification with a link to the Preference Center, they will have the option to select their preferred delivery channel method. Any further notifications sent to this recipient will adhere by the delivery rules set going forward.
+
+<Image
+  img={require("../../../assets/guides/preferences-ui/preferences-hosted-page.png")}
+  alt="Preference Center With Delivery Channels"
+/>
+
+### Removing Powered by Courier branding
+
+[Developer and Business tier](https://www.courier.com/pricing/) customers have the option to remove Courier branding from the Preference Center.
+
+1. Go to the [workspace settings](https://app.courier.com/settings/general)
+2. Toggle Powered by Courier Footer to `Hide`
+3. Republish hosted page in [Preference Center](https://app.courier.com/designer/preferences)
