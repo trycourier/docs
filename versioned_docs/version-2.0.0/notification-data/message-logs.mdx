@@ -9,10 +9,7 @@ import YoutubeEmbed from "@site/src/components/YoutubeEmbed";
 
 > A guide to the Courier data logs and how to navigate the information they provide about messages, automation, recipients and lists.
 
-<Image
-  img={require("../assets/guides/data-logs/logs-navbar.png")}
-  alt="Courier Message Logs"
-/>
+<Image img={require("../assets/guides/data-logs/logs-navbar.png")} alt="Courier Message Logs" />
 
 <YoutubeEmbed videoId="eWc2QJLZCfE" />
 
@@ -20,10 +17,7 @@ import YoutubeEmbed from "@site/src/components/YoutubeEmbed";
 
 The Courier Message Logs provide a timeline and insights into the status of your notifications, recipients, lists and automations.
 
-<Image
-  img={require("../assets/guides/data-logs/logs-overview.png")}
-  alt="Message Logs Tab"
-/>
+<Image img={require("../assets/guides/data-logs/logs-overview.png")} alt="Message Logs Tab" />
 
 ### Your Notification Data at a Glance
 
@@ -33,26 +27,21 @@ The message logs convey a great deal of information in the summary view:
 - The `Notification` and `Recipient` of associate with each `Send` status
 - The `Provider` channels for the notification
 
-<Image
-  img={require("../assets/guides/data-logs/logs-glance.png")}
-  alt="Message Logs Overview"
-/>
+<Image img={require("../assets/guides/data-logs/logs-glance.png")} alt="Message Logs Overview" />
 
 ### Send Status Key and Definitions
 
-Each step in the Send status has a visual representation. 
+Each step in the Send status has a visual representation.
 
-<Image
-  img={require("../assets/guides/data-logs/logs-status-keys.png")}
-  alt="Status Keys"
-/>
+<Image img={require("../assets/guides/data-logs/logs-status-keys.png")} alt="Status Keys" />
 
 - **Queued:** Courier has received a properly formatted and valid Send API request and is attempting to Send the Notification.
 - **Sent:** means that the channel provider sent the message to the recipient
 - **Delivered:** certain channel providers allow us to confirm that the message was accepted (in the case of Email this means it hit their inbox).
 - **Opened:** the message was delivered and opened by the recipient (only available for certain channel providers).
+- **Canceled:** The message delivery was canceled.
 - **Clicked:** user clicked a link in the notification. (This is only available for certain channel providers and only after you enable [click tracking in Courier settings](../getting-started/workspace-settings/track-email-opens.mdx)).
-- **Undeliverable:** The channel provider did not accept the send request from Courier. 
+- **Undeliverable:** The channel provider did not accept the send request from Courier.
 - **Unmapped:** the Notification ID does not exist or the Event ID included in the send command is not mapped to a Notification.
 - **Has Errors:** indicates that the timeline in theSend detail view includes an error response.
 
@@ -60,35 +49,26 @@ Each step in the Send status has a visual representation.
 
 To view the details of a Notification Send, click the Notification in the list view to open the Log details.
 
-<Image
-  img={require("../assets/guides/data-logs/logs-detailed.png")}
-  alt="Detailed View"
-/>
+<Image img={require("../assets/guides/data-logs/logs-detailed.png")} alt="Detailed View" />
 
-### Send Detail View 
+### Send Detail View
 
-When you click a Notification to open the Log Detail view you will see a Summary and Timeline.   
+When you click a Notification to open the Log Detail view you will see a Summary and Timeline.
 
-- **Summary -** See details like the Message and Recipient IDs, as well as Date and time stamps for Send stages (Enqueued, Sent, First Delivery, Status, etc.). 
+- **Summary -** See details like the Message and Recipient IDs, as well as Date and time stamps for Send stages (Enqueued, Sent, First Delivery, Status, etc.).
 - **Timeline -** Detailed timeline of every step in the timeline. The timeline can be scrolled and events in the timeline can be clicked to open additional details.
 
 ### Timeline Event View
 
 If you want to see the details of any event in the timeline, click it to open. As an example, you can click into the `Error Encountered` tab in the timeline to review the error message.
 
-<Image
-  img={require("../assets/guides/data-logs/logs-error.png")}
-  alt="Error Tab"
-/>
+<Image img={require("../assets/guides/data-logs/logs-error.png")} alt="Error Tab" />
 
 ### Filtering your Message Logs
 
 The message log includes a filter to search and narrow your notification logs by send `Status`, `Errors`, or to inspect the results of specific `Providers`, `Notifications`, or `Recipient`.
 
-<Image
-  img={require("../assets/guides/data-logs/logs-error.png")}
-  alt="Error Tab"
-/>
+<Image img={require("../assets/guides/data-logs/logs-error.png")} alt="Error Tab" />
 
 ### Date, Recipient and Notification Filters
 
@@ -96,10 +76,7 @@ The message log includes a filter to search and narrow your notification logs by
 - Filter by Email or Recipient ID
 - Filter by a specific Notification or search them all.
 
-<Image
-  img={require("../assets/guides/data-logs/logs-date.png")}
-  alt="Date Filter"
-/>
+<Image img={require("../assets/guides/data-logs/logs-date.png")} alt="Date Filter" />
 
 ### Notification Status Filter
 
@@ -111,19 +88,13 @@ Unmapped means that an Event was posted to our Send API with an `eventId` that d
 
 :::
 
-<Image
-  img={require("../assets/guides/data-logs/logs-status.png")}
-  alt="Status Filter"
-/>
+<Image img={require("../assets/guides/data-logs/logs-status.png")} alt="Status Filter" />
 
 ### Error Status Filter
 
 You can also identify notifications with any status that also have errors.
 
-<Image
-  img={require("../assets/guides/data-logs/logs-filter-error.png")}
-  alt="Error Filter"
-/>
+<Image img={require("../assets/guides/data-logs/logs-filter-error.png")} alt="Error Filter" />
 
 ### Provider Filter
 
@@ -135,10 +106,7 @@ The [Automation](../automations/intro.mdx) logs provide detailed insights into t
 
 ### Automation Run List
 
-<Image
-  img={require("../assets/guides/data-logs/logs-automation.png")}
-  alt="Automation Logs"
-/>
+<Image img={require("../assets/guides/data-logs/logs-automation.png")} alt="Automation Logs" />
 
 Clicking into one of the automation in log opens the run summary, providing details on each of the steps in the automation.
 
