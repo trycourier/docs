@@ -40,7 +40,7 @@ The message logs convey a great deal of information in the summary view:
 
 ### Send Status Key and Definitions
 
-Each step in the Send status has a visual representation. 
+Each step in the Send status has a visual representation.
 
 <Image
   img={require("../../assets/guides/data-logs/logs-status-keys.png")}
@@ -51,8 +51,9 @@ Each step in the Send status has a visual representation.
 - **Sent:** means that the channel provider sent the message to the recipient
 - **Delivered:** certain channel providers allow us to confirm that the message was accepted (in the case of Email this means it hit their inbox).
 - **Opened:** the message was delivered and opened by the recipient (only available for certain channel providers).
-- **Clicked:** user clicked a link in the notification. (This is only available for certain channel providers and only after you enable [click tracking in Courier settings](../workspaces/track-email-opens.mdx)).
-- **Undeliverable:** The channel provider did not accept the send request from Courier. 
+- **Canceled:** The message delivery was canceled.
+- **Clicked:** user clicked a link in the notification. (This is only available for certain channel providers and only after you enable [click tracking in Courier settings](../getting-started/workspace-settings/track-email-opens.mdx)).
+- **Undeliverable:** The channel provider did not accept the send request from Courier.
 - **Unmapped:** the Notification ID does not exist or the Event ID included in the send command is not mapped to a Notification.
 - **Has Errors:** indicates that the timeline in theSend detail view includes an error response.
 
@@ -65,11 +66,11 @@ To view the details of a Notification Send, click the Notification in the list v
   alt="Detailed View"
 />
 
-### Send Detail View 
+### Send Detail View
 
-When you click a Notification to open the Log Detail view you will see a Summary and Timeline.   
+When you click a Notification to open the Log Detail view you will see a Summary and Timeline.
 
-- **Summary -** See details like the Message and Recipient IDs, as well as Date and time stamps for Send stages (Enqueued, Sent, First Delivery, Status, etc.). 
+- **Summary -** See details like the Message and Recipient IDs, as well as Date and time stamps for Send stages (Enqueued, Sent, First Delivery, Status, etc.).
 - **Timeline -** Detailed timeline of every step in the timeline. The timeline can be scrolled and events in the timeline can be clicked to open additional details.
 
 ### Timeline Event View

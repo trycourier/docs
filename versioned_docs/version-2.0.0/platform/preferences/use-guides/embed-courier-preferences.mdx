@@ -10,7 +10,7 @@ import Image from "@theme/IdealImage";
 > Courier provides an npm package [@trycourier/react-preferences](https://www.npmjs.com/package/@trycourier/react-preferences) that contains Courier preference enabled React components.
 Courier Preferences components are ready to plug into your React app to immediately configure user preferences.
 
-In this Guide, we will add the PreferencesList component into a simple Typescript React App that will allow a user to configure which notifications they wish to receive.
+In this Guide, we will add the `PreferencesList` component into a simple Typescript React App that will allow a user to configure which notifications they wish to receive.
 You can see the final code here [Newsletter Preferences](https://github.com/trycourier/courier-guides/tree/main/preferences-center)
 
 ## Context
@@ -18,30 +18,30 @@ Let's imagine we have created a newsletter for bird lovers using Courier. When a
 Our newsletter also allows a user to receive bird pictures and bird jokes, but they must choose to sign up for extra communications.
 We want to create a Typescript React app that will allow users to see and customize their subscribed topics.
 
-## Set up our newsletter notifications
+### Set Up Newsletter Notifications
 We want to have 3 subscription topics for our fellow bird lovers: facts, pictures, and jokes. 
 Let's create a notification to template for these subscription topics for 3 birds: Pigeons, Humminbirds, and Budgies. 
 For simplicity and demonstration, we can create 1 template per bird per topic for a total of 9 notifications. 
 
-Example Fact Notification
+**Example Fact Notification:**
 <Image
   img={require("./assets/fact-notification.png")}
   alt="Example Fact Notification"
 />
 
-Example Picture Notification
+**Example Picture Notification:**
 <Image
   img={require("./assets/picture-notification.png")}
   alt="Example Picture Notification"
 />
 
-Example Joke Notification
+**Example Joke Notification:**
 <Image
   img={require("./assets/joke-notification.png")}
   alt="Example Joke Notification"
 />
 
-Total Notifications
+**Total Notifications:**
 <Image
   img={require("./assets/notification-screenshot.png")}
   alt="Total Notifications"
@@ -53,7 +53,7 @@ In order to easily know which message we are sending, we can add a descriptive e
   alt="Notification with event"
 />
 
-## Set up the newsletter preferences
+### Set Up the Newsletter Preferences
 
 Let's set up our newsletter preferences section by navigating the preferences in Courier Designer.
 We can edit the section, and name it Newsletter, as well as pick the channels for delivery. 
@@ -122,7 +122,7 @@ In our code we used the following:
 - Yarn
 
 
-## Adding and configuring Courier Provider
+## Adding and Configuring Courier Provider
 
 In Courier Studio, configure the Courier Provider under [channels.](https://app.courier.com/channels/courier) 
 Scroll all the way to the bottom and click install provider. Copy and paste your public Client Key and add it to your app as an environment variable in an .env file.
@@ -155,7 +155,7 @@ import {CourierProvider} from '@trycourier/react-provider';
 
 :::info Configuration
 
-clientKey is obtained from the [Courier Provider](https://app.courier.com/channels/courier) in the Studio App.
+`clientKey` is obtained from the [Courier Provider](https://app.courier.com/channels/courier) in the Studio App.
 userId is a unique id for the user whose preferences you wish to target. 
 In order for a recipient to successfully have their preferences respected by a notification, you must include `to.user_id` in the Send request. 
 This is because the `user_id` ties the recipient profile to their set preferences. If no `user_id` is present in the request, the preferences method will not register.
@@ -164,7 +164,7 @@ This is because the `user_id` ties the recipient profile to their set preference
 In the sample app, a dialogue has been created for user input, but the user_id can be hardcoded or an environment variable.
 :::
 
-## Adding Courier Preferences list
+## Adding Courier Preferences List
 
 Now we can add PreferencesList as a child of CourierProvider. CourierProvider will provide preferences with our user context,
 this will allow PreferencesList to configure the user preferences without the need for more code configuration. 
@@ -201,7 +201,7 @@ This list will look the same as the preview of our published preferences center.
   alt="Preferences App Default"
 />
 
-## Subscribing to notifications
+### Subscribing to Notifications
 
 We can switch the subscription toggles on to subscribe the user into the pictures and jokes subscription topics. 
 We can send the user a message with a picture.
@@ -226,7 +226,7 @@ The Courier log determining subscription will look like this
   alt="User preferences opted in"
 />
 
-## Unsubscribing from notifications
+### Unsubscribing from Notifications
 We can click the toggles again to unsubscribe the user from the bird jokes topic.
 We can send the user a message with a joke. 
 
@@ -249,5 +249,26 @@ The Courier log determining unsubscribe will look like this
   img={require("./assets/user-opted-out.png")}
   alt="User preferences opted out"
 />
+
+
+## Embedding the Preferences Center to Non-React Builds
+
+You can embed the Preferences Center to non-React builds by using the implementation below:
+
+```html
+<div id="root">
+  <noscript>JavaScript is required.</noscript>
+	<!-- This embedded component comes from the courier-component script defined below and should render the same UI as the hosted preferences page from Courier -->
+  <courier-preference-page /> 
+  <div id="root" />
+  <script type="text/javascript">
+    window.courierConfig = {
+      clientKey: clientKey, // You can get your client key from https://app.courier.com/settings/api-keys
+      userId: userId // The user ID corresponding to the user who is viewing and modifying preferences.
+    }
+  </script>
+  <script src="https://courier-components-xvdza5.s3.amazonaws.com/v3.6.4.js"></script>
+</div>
+```
 
 We hope this guide was useful to embed the Courier Preferences Center into a simple Typescript React app.
