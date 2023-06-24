@@ -633,3 +633,25 @@ video {
 .sidebar-data .menu__link--active:before {
   background-image: url(/img/sidebar-icons/notification-data-active.svg);
 }
+
+.platform-list {
+  display: flex;
+  flex-wrap: wrap 
+}
+
+.platform-item {
+  width: 250px;
+  background-color: #eee;
+  border-radius: 4px;
+  padding: 8px 16px;
+  margin: 0 16px 16px 0;
+}
+
+.platform-name {
+  font-size: 120%;
+  text-align: center;
+}
+
+.platform-desc {
+  font-size: 80%;
+}
