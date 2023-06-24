@@ -19,8 +19,8 @@ You will need both Courier and a channel provider account integrated with Courie
 
 :::info Related Resources
 
-- [Courier API Reference](../reference/intro.mdx)
-- [Courier Integration Docs](../platform/channels/intro.mdx)
+- [Courier API Reference](../../reference/intro.mdx)
+- [Courier Integration Docs](../channels/intro.mdx)
 - [Courier Integrations Settings page](https://app.courier.com/integrations)
 - [Bash Environment Variables](https://www.gnu.org/software/bash/manual/html_node/Environment.html)
 - [cURL](https://curl.haxx.se/)
@@ -38,7 +38,7 @@ Navigate to the Courier [Notifications page](https://app.courier.com/designer/no
 You can add message blocks to the template by clicking one of the content block icons on the mock-up email.
 
 <Image
-  img={require("../assets/guides/send-message/courier-notification-template.png")}
+  img={require("../../assets/guides/send-message/courier-notification-template.png")}
   alt="Courier Notification Template"
 />
 
@@ -61,7 +61,7 @@ Courier
 ```
 
 <Image
-  img={require("../assets/guides/send-message/courier-notification-template-sample.png")}
+  img={require("../../assets/guides/send-message/courier-notification-template-sample.png")}
   alt="Courier Notification Template with Sample Message"
 />
 
@@ -69,16 +69,16 @@ When you are finished, click Publish in the upper right corner.
 
 ## Send a Message
 
-Courier passes messages to Integrations via the [Send endpoint](../reference/send/message.mdx) . For this tutorial, we will send our messages with cURL, but you can use your preferred language and HTTP library. You can also use an API testing tool such as [Postman](https://www.getpostman.com/) or [Insomnia](https://insomnia.rest/). For additional code samples, see the ["Courier API Reference."](../reference/intro.mdx)
+Courier passes messages to Integrations via the [Send endpoint](../../reference/send/message.mdx) . For this tutorial, we will send our messages with cURL, but you can use your preferred language and HTTP library. You can also use an API testing tool such as [Postman](https://www.getpostman.com/) or [Insomnia](https://insomnia.rest/). For additional code samples, see the ["Courier API Reference."](../../reference/intro.mdx)
 
 ### Authorization
 
-Courier supports both basic and token authorization. For this tutorial, we will use token authorization. You can read more about authorization in Courier's ["Authorization Overview"](../reference/authorization.mdx).
+Courier supports both basic and token authorization. For this tutorial, we will use token authorization. You can read more about authorization in Courier's ["Authorization Overview"](../../reference/authorization.mdx).
 
 We must send an `Authorization` header with each request. The Courier Send API also requires an `event`. The authorization token and event values are the "Auth Token" and "Notification ID" we see in the detail view of our “Test Appointment Reminder” event. Click the gear icon next to the Notification's name to reveal them.
 
 <Image
-  img={require("../assets/guides/send-message/courier-auth-credentials.png")}
+  img={require("../../assets/guides/send-message/courier-auth-credentials.png")}
   alt="Courier Authorization Credentials"
 />
 
@@ -127,7 +127,7 @@ The `event` value, for this example, is the "Notification ID" that we assigned t
 
 A `recipient` should be a unique identifier that does not change. This prevents duplicate entries in the event that a recipient changes their email or some other identifying value. We do not have any recipients in this tutorial, so we can enter any string value. Something like “katherine_pryde” will work.
 
-The `profile` information is an object that includes any key-value pairs required by our Integrations. You can find the required keys for any Integration by selecting an Integration on the ["Integrations" page](https://app.courier.com/integrations). See the ["Integration Provider Requirements"](../platform/channels/intro.mdx) for details.
+The `profile` information is an object that includes any key-value pairs required by our Integrations. You can find the required keys for any Integration by selecting an Integration on the ["Integrations" page](https://app.courier.com/integrations). See the ["Integration Provider Requirements"](../channels/intro.mdx) for details.
 
 Lastly, we define message variables inside the `data` object. Remember the variables we set in the
 visual template editor? This is where we provide the values. Our example message had `name`,
@@ -227,12 +227,12 @@ Before sending this request, be sure to replace the `kpryde@xavierinstitute.edu`
 Paste your complete cURL request in either format in your terminal and hit "Return." You should receive a response like `{"messageId":"<message id string>"}`. You will also receive an email at the address you specified in the request body. Be sure to check your spam folder if the message doesn’t arrive in your inbox.
 
 <Image
-  img={require("../assets/guides/send-message/send-curl-request.png")}
+  img={require("../../assets/guides/send-message/send-curl-request.png")}
   alt="Send the cURL Request"
 />
 
 <Image
-  img={require("../assets/guides/send-message/delivered-email.png")}
+  img={require("../../assets/guides/send-message/delivered-email.png")}
   alt="Delivered Email"
 />
 
@@ -242,7 +242,7 @@ Congratulations, you’re on your way to crafting a better notification strategy
 
 Overrides can be used to change the request body that Courier uses to send an email. Overrides are useful when a field is not yet supported by Courier or you would like to override the value that Courier generates.
 
-For a list of fields you can override for any Courier integration provider, see the "Overrides" section of that provider's [integration doc](../platform/channels/intro.mdx).
+For a list of fields you can override for any Courier integration provider, see the "Overrides" section of that provider's [integration doc](../channels/intro.mdx).
 
 Below is an example of overriding the subject and adding an attachment to a SendGrid email.
 
