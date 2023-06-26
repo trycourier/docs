@@ -40,6 +40,12 @@ If there is a conflict, data in the `profile` object of the Send API call wins o
 
 Variables can be used to insert data throughout the content of your Courier notifications.
 
+:::caution variable case type
+
+Please note that variables should be in either camel case or snake case when mapping them to your data. Using dashes will result in a rendering `[error]`.
+
+:::
+
 - All Notification types
 - Content Blocks (Text, Action, Markdown, Quote, Template, List)
 - Handlebars code (Template blocks / Email templates / Brands)
