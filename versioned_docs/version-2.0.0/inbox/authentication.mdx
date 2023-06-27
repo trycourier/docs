@@ -1,18 +1,26 @@
 ---
-sidebar_label: Installing the Provider
-sidebar_position: 3
+sidebar_label: Authentication
+sidebar_position: 2
 slug: ./authentication
 toc_max_heading_level: 2
 ---
-# Installing the Provider
+# Authentication
 
-In order to send notifications to Inbox, you need to [log-in](https://app.courier.com/login) to your Courier account and install the [Courier Provider](https://app.courier.com/channels/courier). Navigate to [app.courier.com](https://app.courier.com/) and click on the Channels page in the left menu to find a list of all notification channels, including the Courier Provider.
+## Installing the Provider
 
-Once you've done that, make note of the Client Key. You'll need that value to initialize the Inbox SDK.
+In order to send notifications to your Inbox, you need to install the [Courier Provider](https://app.courier.com/channels/courier). Navigate to [app.courier.com](https://app.courier.com/) and click on the Channels page in the left menu to find a list of all notification channels, including the Courier Provider.
 
-Once you've installed the Provider, you'll notice some authentication options that allow you to secure the notification data that is delivered to the client SDKs.
+Once you've installed it, make note of the `Client Key`, which you will need access to when initializing the SDK.
+
+To add the Inbox component to your app, install the SDK:
+- [React SDK](../web/react-sdk/)
+- [JavaScript SDK](../web/javascript-sdk/)
+- [iOS SDK](../mobile/ios-sdk/)
+- [Android SDK](../mobile/android-sdk/)
 
 ## Default (No Auth)
+
+On the [Courier Provider](https://app.courier.com/channels/courier) page, you'll notice some authentication options that allow you to secure the notification data that is delivered to the client SDKs.
 
 By default, you can use the Web Inbox SDK components without authentication beyond your `clientKey` and `userId`. Before going to production, you should implement stricter authentication using JWT tokens.
 
@@ -33,7 +41,6 @@ An example payload for an issue-token would look like:
 ### JWT Expiration
 
 You can also set an expiration date for the JWT by providing the following scope:
-
 
 ```json
 {
