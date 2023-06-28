@@ -24,6 +24,7 @@ toc_max_heading_level: 2
 | id                | string | Id of the account                                      |
 | name              | string |                                                        |
 | parent_account_id | string |                                                        |
+| preferences       | object | Account level preferences object                       |
 | properties        | object | Arbitrary properties accessible from the template      |
 | user_profile      | object | A user profile object merged with user profile on send |
 | brand_id          | string | Brand associated with the account                      |
@@ -39,6 +40,12 @@ toc_max_heading_level: 2
   name: "ACME Inc",
   properties: {
     ceo: "Person",
+  },
+  preferences: {
+    topics: [{
+      defaultStatus: "OPTED_IN",
+      id: "my-topic"
+    }]
   },
   user_profile: {
     locale: "en-US",
