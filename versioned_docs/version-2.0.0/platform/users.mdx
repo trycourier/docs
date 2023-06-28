@@ -1,0 +1,61 @@
+---
+sidebar_label: Users
+pagination_label: Users
+sidebar_position: 1
+slug: ./users
+---
+# Users
+
+Courier uses the term `user` to describe the recipient of a notification. You'll sometimes see the term `recipient` used, but these mean the same thing. There are several different ways to define which users will recieve a notification. 
+
+The code samples below illustrate a subset of the `message` object used to make a call to the [send API](../../reference/send).
+
+## Inline
+
+The simplest way to send a notification is to specify either an `email` or a `phone_number`.
+
+```json
+"to": {
+    "email": "luke@skywalker.com"
+}
+```
+
+## Profiles
+
+Courier supports storing user contact information in a [Profile](../../reference/profiles) record, and then referencing a `user_id` when calling `send`. One of the benefits of this approach is that the specific channel that is used to deliver the notification can be deferred to a later step where routing rules are applied. 
+
+```json
+"to": {
+    "user_id": "luke1234"
+}
+```
+
+## Lists
+
+If you want to send a notification to more than one user, you can add as many users as you like to a [List](../../reference/lists) and then pass the `list_id`.
+
+```json
+"to": {
+    "list_id": "rebel_alliance"
+}
+```
+
+## Audiences
+
+```json
+"to": {
+    "audience_id": ""
+}
+```
+
+## Accounts
+
+```json
+"to": {
+    "user_id": "luke1234",
+    "account_id" : "hoth"
+}
+```
+
+## Tokens
+

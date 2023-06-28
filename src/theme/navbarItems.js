@@ -6,12 +6,12 @@ const navbarItems = [
   },
   {
     to: "/reference/",
-    label: "API Reference",
+    label: "REST API",
     activeBasePath: "reference",
   },
   {
     to: "/sdk-libraries/",
-    label: "SDK Reference",
+    label: "SDK Libraries",
     activeBasePath: "sdk-reference",
   },
   {

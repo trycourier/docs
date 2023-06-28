@@ -634,6 +634,11 @@
       "source": "/docs/reference/preferences/:path*",
       "destination": "https://www.courier.com/docs/1.0.0/reference/preferences/:path*",
       "permanent": true
+    },
+    {
+      "source": "/docs/inbox/:path*",
+      "destination": "https://www.courier.com/docs/plaform/inbox/:path*",
+      "permanent": true
     }
   ]
 }
