@@ -1,7 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
-    { "source": "/docs/api/:match*", "destination": "/api/:match*" },
+    { "source": "/docs/api/:match*", "destination": "/api/:match*" }
+  ],
+  "redirects": [
     { "source": "/docs/inbox/:match*", "destination": "/docs/platform/inbox/:match*" },
     { "source": "/docs/guides/tutorials/:match*", "destination": "/docs/tutorials/:match*" }
   ]
