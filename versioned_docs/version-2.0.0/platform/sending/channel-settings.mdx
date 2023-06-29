@@ -1,0 +1,94 @@
+---
+sidebar_position: 3
+---
+
+import Image from "@theme/IdealImage";
+import GifWrapper from "@site/src/components/GifWrapper";
+
+# Channel Settings Overview
+
+> A quick introduction to the Channel settings: where they are, what information they provide and what you can do with them.
+
+The Channel Settings contain important configurations that allow you to define if and when the Channel will send to users or be disabled. You can also add integrations and order the send priority when there are multiple integrations in a channel. Channel and integration-specific settings are here as well. 
+
+ There are three sections of the Channel Settings. Read on for details.
+
+- General
+- Conditions
+- Integrations
+
+## Opening the Channel Settings
+
+To view the Channel Settings, open the Notification in the designer list, then click the settings icon next to the Notification name
+
+<Image
+  img={require("../../assets/guides/channel-settings/channel-settings.png")}
+  alt="Channel Settings"
+/>
+
+## General Settings
+
+<Image
+  img={require("../../assets/guides/channel-settings/channel-general-settings.png")}
+  alt="General Notification Settings"
+/>
+
+### Rename
+
+- Name or rename the Channel
+
+### Always Send To
+
+- When set to "Best Of" the Channel will only attempt to send if none of the channels prioritized above it were unsuccessful. 
+- When set to "Always" the Channel will be removed from the send priority hierarchy so that every recipient receives the message via this Channel (provided their profile contains the necessary data).
+
+Continue reading about setting [Channel priority rules](channel-priority.mdx).
+
+### Disable
+
+- When set to Disabled, the Channel will not send under any conditions and will be skipped in the "Best of" Channel send hierarchy.
+
+### Remove
+
+- The Channel will be removed from the Notification and can be done safely without deleting any content created in this Channel from the Library.
+
+### Email-specific General Settings
+
+- To configure the From address, Reply-To address, CC addresses, and BCC addresses on an email, open the Channel settings.
+- For a more advanced approach, you can use [replacement variables](https://help.courier.com/en/articles/4260757-using-variables-to-insert-data-into-a-notification) in these fields to customize the addresses.
+<!-- Link follow-up doc -->
+<Image
+  img={require("../../assets/guides/channel-settings/channel-email-specific.png")}
+  alt="Email Specific Settings"
+/>
+
+## Conditions
+
+Using the Conditions tool in the Channel settings allows you to use properties from the `data` or `profile` objects provided by the [Send API](../../reference/send/intro.mdx) call or [User Profile](../../reference/profiles/intro.mdx) to prevent the Notification from sending when specific conditions are met.
+
+:::info Note
+
+Channel Conditions are applied only to the specific Channel within the Notification where you set them.
+
+:::
+
+**Read more:** [Using Send Conditions](https://help.courier.com/en/articles/4323960-using-send-conditions).
+<!-- Link follow-up doc -->
+
+## Integrations
+
+You can manage and configure integrations for each Channel within the channel settings.
+
+- View and add previously configured integrations
+- Integrate new channel providers. 
+- Set [integration send priority](channel-priority.mdx).
+
+<Image
+  img={require("../../assets/guides/channel-settings/channel-integrations.png")}
+  alt="Channel Integrations"
+/>
+
+<Image
+  img={require("../../assets/guides/channel-settings/channel-integration-settings.png")}
+  alt="Channel Integration Configs"
+/>

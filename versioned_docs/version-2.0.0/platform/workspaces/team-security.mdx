@@ -1,0 +1,70 @@
+---
+sidebar_position: 1
+---
+
+import Image from "@theme/IdealImage";
+
+# Workspace Security Settings
+
+> How to add teammates to your Courier Account, require Google SSO, and making your workspace domain discoverable for your teammates.
+
+You can invite teammates to your workspace, require them to login via Google SSO, and choose to make your workspace discoverable to teammates who sign up on their own using your verified email domain.
+
+## Inviting Team Members to your Workspace
+
+1. Open [Settings](https://app.courier.com/settings) > Team
+2. Click 'Invite User'
+3. Invite one email at a time
+
+<Image img={require("../../assets/guides/workspace-security/workspace-settings.png")} alt="Workspace Settings" />
+
+<Image img={require("../../assets/guides/workspace-security/workspace-team.png")} alt="Invite a User" />
+
+<Image img={require("../../assets/guides/workspace-security/workspace-invite.png")} alt="Send Invite" />
+
+## Security Settings
+
+Single sign-on options for workspace team members.
+
+### Require Google SSO
+
+To require your teammates to log in via Google SSO:
+
+1. Open [Settings](https://app.courier.com/settings) > Team
+2. Check `Require Google SSO` from configured domains
+
+<Image img={require("../../assets/guides/workspace-security/workspace-sso.png")} alt="SSO Settings" />
+
+### Make your Workspace Discoverable
+
+You can elect to allow users who sign up with emails that match your domain to discover and request joining this workspace. They will not have access unless you grant it.
+
+1. Open [Settings](https://app.courier.com/settings) > Team
+2. Confirm your email domain is in the list of Approved Domains (if not, contact support).
+3. Check `Users from approved domains should be able to discover my workspace` under **Discoverability & Security**.
+4. This will allow for your workspace to be discoverable and give you 3 options from a drop down menu from which you can toggle your preferences.
+    - Everyone from an approved domain can request access means an admin needs to approve the request.
+    - Everyone from approved domain can join means users from an approved domain can join right away.
+    - Must be added by an IT admin means an IT admin needs to manually add new members (this is specific for companies using Okta provisioning).
+
+<Image img={require("../../assets/guides/workspace-security/workspace-discoverability.png")} alt="Discoverability Settings" />
+
+<Image img={require("../../assets/guides/workspace-security/workspace-dropdown.png")} alt="Discoverability Dropdown" />
+
+### Okta SSO
+
+Allow your team members to sign in to Courier with Okta Single-Sign-On.
+
+:::info
+
+Okta SSO is a Courier Business feature. Please [contact](https://www.courier.com/request-demo/) our Product Experts for more details on our pricing plans.
+
+:::
+
+**Read more:** [Okta Integration](./okta-integration.mdx)
+
+## Remove Users From Your Account
+
+To remove a user, you can open the drop-down menu to the right of the user's email address, and select `Remove User`.
+
+<Image img={require("../../assets/guides/workspace-security/workspace-remove.png")} alt="Remove a User" />

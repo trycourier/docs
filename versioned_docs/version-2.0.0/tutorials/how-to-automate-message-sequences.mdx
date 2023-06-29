@@ -1,0 +1,788 @@
+---
+sidebar_position: 5
+description: Learn how to send sequences & automate push, email, SMS and other product notifications based on rules. Using code or Courier's visual designer.
+---
+
+import Image from "@theme/IdealImage";
+
+# How To Automate Message Sequences
+
+> An overview of Courier's automation feature, its core concepts and example use cases.
+
+## Introduction to Courier Automations
+
+**Overview**
+
+- Automations provides a toolset to design and implement complex notification workflows with one API.
+- An Automation is a schema definition that enables developers to easily express complex use cases such as digests, delayed messages, scheduled messages, sending messages to an ad hoc list, and escalation messages.
+- Automations can be defined and triggered ad-hoc with a single API call or by calling a re-usable Automation template defined in the [automations visual designer](https://help.courier.com/en/articles/5437032-using-the-automation-visual-designer).
+- At a high level, an Automation schema is composed of two parts, Context Properties and Steps–like send, delay, update profile, fetch-data– where each step represents a specific action that the automation will execute on your behalf when an event is sent to the [Automation API](../reference/automation/invoke.mdx).
+
+```json title=JSON
+{
+  "automation": {
+    "recipient": "abcd-1234-wxyz-6789",
+    "data": {
+      "title": "Weekly Digest"
+    },
+    "steps": [
+      {
+        "action": "fetch-data",
+        "webhook": {
+          "url": "https://main.app/digest"
+        },
+        "merge_strategy": "replace"
+      },
+      {
+        "action": "send",
+        "template": "WEEKLY-DIGEST",
+        "profile": {
+          "email": "test@courier.com"
+        }
+      }
+    ]
+  }
+}
+```
+
+## Automation Run Context
+
+- Run Context refers to a set of special properties, that are used to invoke an automation. Context properties are available to all steps at Step Execution Time (aka runtime).
+- Run Context can be defined as part of an Ad Hoc Automation or passed as a first-class object to an Automation Template.
+- Run Context is composed of the following properties:
+  - `brand`
+    - type: string
+    - description: A unique identifier that represents the brand that should be used for rendering the notification.
+  - `data`
+    - type: object
+    - description: An object that includes any data you want to pass to a message template or accessor type. The data will populate the corresponding template variables.
+  - `profile`
+    - type: object
+    - description: an object that includes any key-value pairs required by your chosen Integrations (see our Provider Documentation for the requirements for each Integration.) If profile information is included in the request and that information already exists in the profile for the recipientId, that information will be merged.
+  - `template`
+    - type: string
+    - description: A unique identifier that can be mapped to an individual Notification. This could be the "Notification ID” on Notification detail pages (see the Notifications page in the Courier app) or a custom string mapped to the event in settings.
+  - `recipient`
+    - type: string
+    - description: A unique identifier associated with the recipient of the delivered message, which can optionally map to a Courier managed profile.
+
+## Structuring An Automation
+
+### Steps
+
+Steps are the fundamental building blocks of an Automation schema. Automation steps are a set of discrete actions the automation will execute on your behalf, which are used together to implement complex messaging workflows.
+
+There are seven Automation steps that you can use to build your workflow:
+
+- [`send`](#send)
+- [`send-list`](#send-list)
+- [`fetch-data`](#fetch-data)
+- [`delay`](#delay)
+- [`update-profile`](#update-profile)
+- [`invoke`](#invoke)
+- [`cancel`](#cancel)
+
+#### `send`
+
+A `send` step will deliver a single notification to a recipient. The recipient and template properties are required. Template refers to the event or Notification ID of the notification to be sent, and recipient refers to any nonempty Recipient ID that you can define to keep track of and identify the notification's recipient across messages.
+
+```json title=JSON
+{
+  "action": "send",
+  "data": {}, // optional
+  "if": "<CONDITIONAL_EXPRESSION>", // optional javascript boolean expression
+  "override": {}, // optional: send provider override
+  "profile": {}, // optional
+  "recipient": "<RECIPIENT_ID>",
+  "ref": "<REFERENCE>", // optional
+  "template": "<TEMPLATE_ID>",
+  "idempotency_expiry": "<IDEMPOTENT_EXPIRATION>", // optional
+  "idempotency_key": "<IDEMPOTENT_KEY>" // optional
+}
+```
+
+#### `send-list`
+
+A send-list step will deliver a message to a list of recipients. The list and template properties are required. See the article [How To Create And Send To A List Or List Pattern](./how-to-send-to-a-list-or-list-pattern-using-wildcarding.mdx) for more information on lists.
+
+```json title=JSON
+{
+  "action": "send-list",
+  "brand": "<BRAND_ID>", // optional
+  "if": "<CONDITIONAL_EXPRESSION>", // optional boolean expression
+  "ref": "<REFERENCE>", // optional
+  "override": {}, // optional: send provider override
+  "data": {}, // optional
+  "list": "<LIST_ID>",
+  "template": "<TEMPLATE_NAME_OR_ID>",
+  "data_source": { // optional
+    "webhook": {
+      "body": {}, // optional
+      "headers": {}, // optional
+      "params": {}, // optional
+      "method": "GET" | "POST", // optional, default GET
+      "url": "<API_RESOURCE>"
+    },
+    "merge_strategy": "replace|overwrite|soft-merge|none"
+   },
+  "idempotency_expiry": "<IDEMPOTENT_EXPIRATION>", // optional
+  "idempotency_key": "<IDEMPOTENT_KEY>" // optional
+}
+```
+
+- You can use the `data-source` property to define an API resource to be used to render a notification template. If using `data-source`, a [merge strategy](#merge-strategy) and a webhook with a url must be given.
+- The `data_source.webhooks.url` should accept a `recipientId` query string parameter.
+- The response from the `data_source` property will be merged with the existing automation `data` that was defined at runtime, based on the merge strategy, and will be passed to the notification template as the data property. See more on the different merge strategies under the `update-profile` section.
+
+**Example: Idempotent `send` step**
+
+```json title=JSON
+{
+  "action": "fetch-data",
+  "webhook": {
+    "body": {}, // optional
+    "headers": {}, // optional
+    "params": {}, // optional
+    "method": "GET" | "POST", // optional, default GET
+    "url": "<API_RESOURCE>"
+  },
+  "merge_strategy": "replace|overwrite|soft-merge|none",
+  "if": "<CONDITIONAL_EXPRESSION>", // optional boolean expression
+  "ref": "<REFERENCE>", // optional
+  "idempotency_expiry": "<IDEMPOTENT_EXPIRATION>", // optional
+  "idempotency_key": "<IDEMPOTENT_KEY>" // optional
+}
+```
+
+**Automation `send` idempotency**
+
+:::info Send Idempotency features
+`send` and `send-list` steps support idempotency for safely retrying requests without accidentally performing the same operation twice.
+
+To define an idempotent `send` or `send-list` step, provide an `idempotency_key` property on the step. An idempotency key is a unique value generated by the client which the server uses to recognize subsequent retries of the same request. How you create unique keys is up to you, but we suggest using V4 UUIDs, or another random string with enough entropy to avoid collisions.
+
+In addition to the `idempotency_key` , you can define an `idempotency_expiry` that allows you to set an expiration on the `idempotency_key` that is longer than 24 hours (up to 1 year).
+
+**See [Idempotent Requests](../reference/idempotent-requests.mdx) for more on Idempotency.**
+:::
+
+#### `fetch-data`
+
+A fetch-data step will fetch data from an API resource and store it into run context to be used for subsequent step executions. webhook and merge_strategy are required.
+
+```json title=JSON
+{
+  "action": "fetch-data",
+  "webhook": {
+    "body": {}, // optional
+    "headers": {}, // optional
+    "params": {}, // optional
+    "method": "GET" | "POST", // optional, default GET
+    "url": "<API_RESOURCE>"
+  },
+  "merge_strategy": "replace|overwrite|soft-merge|none",
+  "if": "<CONDITIONAL_EXPRESSION>", // optional boolean expression
+  "ref": "<REFERENCE>", // optional
+  "idempotency_expiry": "<IDEMPOTENT_EXPIRATION>", // optional
+  "idempotency_key": "<IDEMPOTENT_KEY>" // optional
+}
+```
+
+The response from the `fetch-data` step will be merged with the existing automation `data` that was defined at runtime, based on the [merge strategy](#merge-strategy), and will be passed to the notification template as the `data` property.
+
+#### `delay`
+
+Important: When using the delay step, an automation will be processed serially. Each item in the automation is processed one at a time and the next step will not be undertaken until the current one has completed.
+
+**Note:** There is a 5-15 minute variance in when delay step actions will finish processing.
+
+There are two ways to delay an automation step
+
+- Delay until a specific time
+- Delay for a period of time
+
+##### Delay until a specific time
+
+To delay a step until a specific time, set the time using an [ISO-8601 timestamp](https://www.w3.org/TR/NOTE-datetime).
+
+```json title=JSON
+{
+  "action": "delay",
+  "until": "2021-02-18T18:40:05.960Z", // ISO-8601timestamp
+  "if": "<CONDITIONAL_EXPRESSION>", // optional boolean expression
+  "ref": "<REFERENCE>" // optional
+}
+```
+
+##### Delay for a period of time
+
+You are able to delay an automation step for the following whole increments: -
+
+- minute(s)
+- hours(s)
+- day(s)
+- month(s)
+
+```json title=JSON
+{
+  "action": "delay",
+  "duration": "1 hour",
+  "if": "<CONDITIONAL_EXPRESSION>", // optional boolean expression
+  "ref": "<REFERENCE>" // optional
+}
+```
+
+#### `update-profile`
+
+An update-profile step will update the recipient's profile according to the "merge" strategy provided in the step. `recipient_id, profile`, and `merge` are required.
+
+```json title=JSON
+{
+  "action": "update-profile",
+  "recipient_id": "<RECIPIENT_ID>",
+  "profile": {},
+  "merge": "replace|overwrite|soft-merge|none",
+  "if": "<CONDITIONAL_EXPRESSION>", // optional boolean expression
+  "ref": "<REFERENCE>" // optional
+}
+```
+
+#### `invoke`
+
+The invoke step allows you to execute another automation template. The template property is required, and the optional context object defines the data and properties to invoke the new, targeted template with.
+
+```json title=JSON
+{
+  "action": "invoke",
+  "template": "<TEMPLATE_ID>",
+  "context": {
+    //optional
+    "brand": "<BRAND_ID>", // optional
+    "data": {}, // optional
+    "profile": {}, // optional
+    "template": "<NOTIFICATION_TEMPLATE>", // optional
+    "recipient": "<RECIPIENT_ID>" // optional
+  },
+  "if": "<CONDITIONAL_EXPRESSION>", // optional boolean expression
+  "ref": "<REFERENCE>" // optional
+}
+```
+
+#### `cancel`
+
+Automations can be marked as cancelable by providing a `cancelationToken` then canceled by providing a cancelation token on a subsequent automation. All automations with a matching cancelation token will be canceled.
+
+##### Providing a `cancelationToken`
+
+```json title=JSON
+{
+  "cancelationToken": "<CANCELATION_TOKEN>",
+  "steps": [
+    // ... step configuration
+  ]
+}
+```
+
+##### If you want to cancel automation on a per-recipient basis there are two options:
+
+1. Use Ad Hoc automation and provide a unique `cancelationToken` per recipient
+2. OR Use an automation template and set a dynamic cancellation token each time you invoke the automation like this:
+
+```json title=JSON
+{
+  "cancelation_token": {
+    "$ref": "data.foo.token"
+  },
+  "steps": [
+    {
+      "action": "",
+      "template": "",
+      "recipient": "",
+      "profile": {
+        "email": ""
+      }
+    }
+  ]
+}
+```
+
+##### Cancelling automations using a `cancelationToken`
+
+```json title=JSON
+{
+  "steps": [
+    {
+      "action": "cancel",
+      "cancelationToken": "<CANCELATION_TOKEN>",
+      "if": "<CONDITIONAL_EXPRESSION>", // optional boolean expression
+      "ref": "<REFERENCE>" // optional
+    }
+  ]
+}
+```
+
+### Step Conditionals
+
+- For each type of step, you can define conditions that will determine if a step is executed or not. - Adding an `if` property to a step makes it a conditional step.
+- The value of the `if` property should be a valid javascript expression that evaluates to a boolean.
+- Properties set in the run context are available for use in these expressions.
+
+**Example**
+The following send step has a conditional expression that should evaluate to true. Therefore, the step will be executed.
+
+```json title=JSON
+{
+  "template": "TEST",
+  "recipient": "abcd-1234-efgh-5678",
+  "profile": {
+    "email": "test@gmail.com"
+  },
+  "data": {
+    "foo": "send-it"
+  },
+  "automation": {
+    "steps": [
+      {
+        "action": "send",
+        "if": "data.foo === 'send-it'"
+      }
+    ]
+  }
+}
+```
+
+### Step References
+
+- You can define a step-level reference, by adding a `ref` property to a step definition.
+- In the conditionals of subsequent steps, you can then reference metadata about the sent message using the word "refs."
+
+**Example**
+If you only want to send a follow-up message if that message hasn't been opened yet, you can define the following automation run:
+
+```json title=JSON
+{
+  "automation": {
+    "steps": [
+      {
+        "action": "send",
+        "template": "OUTREACH",
+        "ref": "outreach"
+      },
+      {
+        "action": "delay",
+        "delayFor": "24 hours"
+      },
+      {
+        "action": "send",
+        "template": "FOLLOWUP",
+        "ref": "followup",
+        "if": "refs.outreach.status < MessageStatus.Opened"
+      }
+    ]
+  }
+}
+```
+
+In the above example, `refs.outreach` allows us to access information in the step context of the first send step. For send steps, this step context includes information about the status of the send notification.
+
+### Merge Strategy
+
+Some automation steps require or include a merge strategy.
+
+In the following merge strategy definitions, A = data defined in the step; B = existing data.
+
+- `replace`: overwrites all properties in B from A; remove properties in B that do not exist in A
+- `overwrite`: overwrite all properties in B from A
+- `soft-merge`: only overwrite properties in B from A that do not yet exist in B
+- `none`: No changes to B if B already exists; else B = A
+
+### Run-Step Composition
+
+There are a few object properties that can be defined at both the step and the run level. Run level data and profile properties will compose into each step, with already provided step level properties taking precedence.
+
+For example, the "Title" property will compose into and be available for each step.
+
+```json title=JSON
+{
+  [...]
+  "data": {
+    "Title": "Back to the Future"
+  }
+  "automation": {
+    "steps": [
+      {
+        [...]
+        "data": {
+          "Username": "Doc Brown"
+        }
+      },
+      {
+        [...]
+        "data": {
+          "Username": "Marty McFly"
+        }
+      },
+      [...]
+    ]
+  }
+}
+```
+
+## Automation Schema
+
+It is possible to define an Automation Schema in two ways:
+
+1. Ad Hoc
+2. Automation template
+
+### Ad Hoc Automations
+
+- Ad hoc automations are one-time schema definitions that allow run context to be defined in the schema itself:
+- For more detail see "How to trigger an ad hoc automation via /invoke"
+
+```json title=JSON
+{
+  "automation": {
+    "recipient": "abcd-1234-wxyz-6789",
+    "data": {
+      "title": "Weekly Digest"
+    }
+      "steps": [
+      {
+        "action": "fetch-data",
+        "webhook": {
+          "url": "https://main.app/digest"
+        },
+        "merge_strategy": "replace"
+      },
+      {
+        "action": "send",
+        "template": "WEEKLY-DIGEST",
+        "profile": {
+          "email": "test@courier.com"
+        }
+      }
+    ]
+  }
+}
+```
+
+### Automation Templates
+
+:::info Automation Template Visual Designer
+An automation template is a re-usable, pre-defined list of automation steps created in the [automation design studio](https://help.courier.com/en/articles/5437032-using-the-automation-visual-designer).
+
+Published templates are run or "invoked" using the Courier Automation API automations/{templateId}/invoke endpoint.
+:::
+
+By default, an Automation Template is a JSON schema definition of the following format:
+
+```json title=JSON
+{
+  "cancelation_token": "",
+  "steps": []
+}
+```
+
+Run Context is passed in the API request body as a first-class object, and its values are referenced at the step level by using Accessor Types.
+
+#### Structure
+
+```json title=JSON
+// define global variables here
+{
+  sources: ["<EVENT_NAME>"], // list of event source that this
+  template can be triggered by
+  steps: [], // a list of automation steps
+}
+```
+
+At runtime, you can pass a data and/or profile property into your template.
+
+```json title=JSON
+//1.define the template to send to a list of users
+local list=data('users', []);
+{
+  steps: [
+    {
+      action: "send",
+      profile: {
+        email: email
+      },
+      recipient: item.userId,
+
+    }
+    for item in list
+  for email in item.email
+  ]
+}
+
+//2.make the api call and provide the user list
+
+{
+  event: "SEND-TO-USERS",
+  user: "abc-123",
+  //defaultrecipientdata: {
+    users: [
+      {
+        userId: "123-abc-123",
+        email: [
+          'user1@gmail.com',
+          'user1_altl@gmail.com'
+        ]
+      },
+      {
+        userId: "abc-123-abc",
+        email: [
+          'user2@yahoo.com'
+        ]
+      },
+
+    ]
+  }
+}
+```
+
+## Invoking An Automation
+
+To trigger an automation run, there are two apis that can be called with your Courier API token.
+
+- `automations/invoke`
+- `automations/{templateId}/invoke`
+
+### Invoke an ad hoc automation via API
+
+`POST - /automations/invoke`
+
+Invoke an ad hoc automation run, by providing a valid automation definition in the request body.
+
+#### Structure
+
+```json title=JSON
+{
+  "brand": "<BRAND_ID>", // optional: brand id
+  "template": "<TEMPLATE_NAME_OR_ID>", //optional
+  "recipient": "<RECIPIENT_ID>", //optional: user id for automation
+  "data": {}, //optional: root level data for the ad hoc automation
+  "profile": {},
+  //optional root level profile information for ad hoc
+  "automation": {
+    "cancelationToken": "<CANCELATION_TOKEN>",
+    //optional: can be used to later cancel the running automation
+    "steps": [
+      {
+        "action": "send",
+        "data": {}, //optional: uses root level data if not present
+        "profile": {},
+        //optional: uses root level profile if not present
+        "recipient": "<RECIPIENT_ID>",
+        //recipient of the message. will fallback to root recipient
+        "template": "<TEMPLATE_ID>",
+        //the notification template to use,
+        "brand": "<BRAND_ID>",
+        //optional: will use root level brand_id if not present
+        "override": {}, //optional: send provider override
+        "if": "<CONDITIONAL_EXPRESSION>"
+        //optional javascript boolean expression
+        //see send step documtenation above for more details
+      },
+      {
+        "action": "delay"
+        //either duration or until is required
+        //see delay step documentation above for more details
+      },
+      {
+        "action": "cancel",
+        "cancelationToken": "<CANCELATION_TOKEN>",
+        "if": "<CONDITIONAL_EXPRESSION>"
+        //optional javascript boolean expression
+        //see cancel step documentation above for more details
+      }
+    ]
+  }
+}
+```
+
+### Invoke an automation template via API
+
+`POST - /automations/{templateId}/invoke`
+
+#### Structure
+
+```json title=JSON
+{
+  "template": "<TEMPLATE_NAME_OR_ID>",
+   // optional: the automation template name
+  "recipient": "<RECIPIENT_ID>",
+   // optional: recipient id for the automation run
+  "data": {}
+   // optional: root level data to be passed into automation template
+  "profile": {}
+   // optional: root level profile information to be passed into your automation template
+}
+```
+
+### Invoke a template via Segment event
+
+You can trigger an automation template via Segment event in the [Automations Visual Designer](https://app.courier.com/designer/automations).
+
+:::info Integrate Segment
+
+You can follow Courier's Segment [integration guide here](../external-integrations/segment/segment-integration.mdx).
+
+:::
+
+Once you have fished setting up Courier's Segment Integration
+
+1. Open the Automation you wish to trigger via Segment event
+2. Click to open the Start step
+3. Select the segment event type(s) you want to trigger this event.
+
+<Image
+  img={require("../assets/tutorials/segment-event-trigger.png")}
+  alt={'Open the "Start" step settings, to choose a Segment event trigger.'}
+/>
+
+:::caution Track Event requires an exact name match
+If you select a Segment Track event trigger to invoke your template, you must provide an event name that is the exact match to the event's name in Segment.
+:::
+
+<Image
+  img={require("../assets/tutorials/track-event-exact-match.png")}
+  alt="You must provide a track event name matches the event name in Segment exactly."
+/>
+
+## Automation Examples
+
+### Sending a digest notification
+
+#### Generic digest
+
+Use automations to fetch data and render it in a group digest or send a digest with recipient-specific data to every member of a list.
+
+A generic digest is when every recipient in the list receives the same notification with the same data. To automate a generic digest, simply define a fetch-data step, followed by a send-list step. The data that is fetched, will be used to render a notification that is sent to each recipient.
+
+This automation definition can be saved as an [automation template](https://help.courier.com/en/articles/5437032-using-the-automation-visual-designer#h_f980e712e4) and scheduled to be invoked on any recurring interval or once on a specific date.
+
+```json title=JSON
+{
+  "automation": {
+    "steps": [
+      {
+        "action": "fetch-data",
+        "webhook": {
+          "url": "https://main.app/digest"
+        },
+        "merge_strategy": "replace"
+      },
+      {
+        "action": "send-list",
+        "list": "TEAM-LIST",
+        "template": "WEEKLY-GENERIC-DIGEST"
+      }
+    ]
+  }
+}
+```
+
+#### Recipient Digest
+
+A recipient digest is when every recipient in the list receives a unique notification with recipient-specific data.
+
+To automate a recipient digest, define a send-list step with a `data_source` property. Specific data will be fetched for each recipient and will be used to render a notification that is sent to each recipient. Note that the `data_source.url` should accept a recipientId query string parameter.
+
+This automation definition can be saved as a template and scheduled to be invoked on any recurring interval or once on a specific date.
+
+```json title=JSON
+{
+  "automation": {
+    "steps": [
+      {
+        "action": "send-list",
+        "list": "TEAM-LIST",
+        "template": "WEEKLY-RECIPIENT-DIGEST",
+        "data_source": {
+          "webhook": {
+            "url": "https://main.app/digest",
+            "method": "GET"
+          },
+          "merge_strategy": "replace"
+        }
+      }
+    ]
+  }
+}
+```
+
+#### Example recipient digest
+
+As an example, you could use the recipient digest to send a weekly update to students of an online school platform.
+
+By calling the data source, and getting the following payload:
+
+```json title=JSON
+{
+  "data": {
+    "title": "Weekly Progress Report",
+    "username": "Count von Count",
+    "school": "B.Birds's Online Math Academy",
+    "nums": 1,
+    "courses": [
+      {
+        "name": "Counting",
+        "progress": "90%",
+        "grade": "A+"
+      }
+    ]
+  },
+  "profile": {},
+  "override": {}
+}
+```
+
+You could send the following notification with each individual student's progress:
+
+<Image
+  img={require("../assets/tutorials/example-notification-weekly-progress.png")}
+  alt="Recipient digest notification template example."
+/>
+
+<Image
+  img={require("../assets/tutorials/example-notification-weekly-progress-preview.png")}
+  alt="Preview of the recipient digest template."
+/>
+
+### Batch send to an ad hoc list of recipients
+
+How to use Courier automations to batch send notifications to an ad hoc group of multiple recipients built at run time.
+
+Automations allows you to use the `send` action to deliver a message, or series of messages, to a list of users that you build dynamically at run time with a single [Automation API](../reference/automation/invoke.mdx) call.
+
+Data for each message can vary per step. This includes data, profile, and the template.
+
+**Here is an example:**
+
+```json title=JSON
+// POST /automations/invoke
+{
+  "automation": {
+    "steps": [
+      {
+        "action": "send",
+        "data": {},
+        "profile": {},
+        "recipient": "<RECIPIENT_ID_1>",
+        "template": "<TEMPLATE_ID_1>"
+      },
+      {
+        "action": "send",
+        "data": {},
+        "profile": {},
+        "recipient": "RECIPIENT_ID_2",
+        "template": "TEMPLATE_ID_2"
+      }
+      // ... more send events
+    ]
+  }
+}
+```

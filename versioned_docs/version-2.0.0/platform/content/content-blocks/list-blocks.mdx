@@ -1,0 +1,133 @@
+---
+sidebar_position: 2
+---
+
+import Image from "@theme/IdealImage";
+
+# List Blocks
+
+> A detailed look at Courier's list block functionality, use cases and best practices.
+
+## Working With List Blocks
+
+**Availability:** All channels
+
+<Image
+  img={require("../../../assets/guides/list-blocks/list-block-new.png")}
+  alt="New List Block"
+/>
+
+The repeatable list block allows you to easily display more complex layered data. This data is passed in the data object as an array during a send. There are 4 types of repeatable list blocks. They differ based on their ability to display images and whether or not children need to be displayed on each item. The option to display an image differs by channel.
+
+The four types of repeatable lists are:
+
+- Simple list
+- List with children
+- List with images
+- List with children and images
+
+<Image
+  img={require("../../../assets/guides/list-blocks/list-block-simple.png")}
+  alt="Simple List Block"
+/>
+
+To switch from bulleted lists to numbered lists, add a list then open the list details:
+
+<Image
+  img={require("../../../assets/guides/list-blocks/list-block-details.png")}
+  alt="List Block Details"
+/>
+
+### Simple List
+
+A simple list block will display a row for each item in the array specified by the path. This block works similar to a [text block](text-blocks.mdx) with variables scoped to the array.
+
+### List With Children
+
+A list with children block is similar to a simple list block with the addition of child rows. A child row will be displayed for each item of an array inside the list block scope specified in the child path.
+
+### List With Images
+
+:::info
+
+This option is for email only, others display as list with children
+
+:::
+
+- List with images and list with children blocks are similar to a list with images block with the addition of child rows that can also include images. 
+- A child row will be displayed for each item of an array inside the list block scope specified in the child path. 
+- Selecting `Edit Image` in the child row will present you with a modal where you can set the path of the image to display. 
+- You can also make the image a link by adding an `href` link. You can use variables scoped to the path in both the image path and href field.
+
+## Common List Options
+
+### Path
+
+This is the `JSONPath` expression for the items you want to display in the list. It points to an array in the data object passed over during a send. Using the sample JSON below, to list all the Pokemon, the path would be set to `pokemon`.
+
+```json
+{
+  "data": {
+    "name": "Ash Ketchum",
+    "region": "Kanto",
+    "pokemon": [
+      {
+        "name": "Bulbasaur",
+        "image": "https://example.com/001.png",
+        "types": [
+          { "name": "grass", "image": "https://example.com/grass.png" },
+          { "name": "poison", "image": "https://example.com/poison.png" }
+        ]
+      },
+      {
+        "name": "Ivysaur",
+        "image": "https://example.com/002.png",
+        "types": [
+          { "name": "grass", "image": "https://example.com/grass.png" },
+          { "name": "poison", "image": "https://example.com/poison.png" }
+        ]
+      },
+      {
+        "name": "Venusaur",
+        "image": "https://example.com/003.png",
+        "types": [
+          { "name": "grass", "image": "https://example.com/grass.png" },
+          { "name": "poison", "image": "https://example.com/poison.png" }
+        ]
+      }
+    ]
+  }
+}
+```
+
+### Referencing Data Inside the Path Scope
+
+If you are referencing values inside an item of the path, you can simply create a variable using the property name.
+
+Using the sample JSON above, to display the name of the Pokemon, if the path is set to `pokemon`, you can use the variable `{name}`.
+
+### Referencing Data Outside of the Path Scope
+
+If you need to reference values a level up from the path, you can do that in a couple ways. If there isn't a property name conflict, you can simply create a variable using the property name. Using the sample JSON above, to display the region, you can use the variable `{region}`.
+
+Otherwise, you'll need to specify the JSONPath expression in the variable. Again, using the same sample JSON, to display the top level `name` (Ash Ketchum), you can use the variable `{$.data.name}`.
+
+### Referencing Values From an Array of Strings
+
+You can use `@` to reference values from an array of strings. If you have the following JSON example:
+
+```json
+{
+  "data": {
+    "trainers": [ "Ash", "Misty", "Brock"  ]
+  }
+}
+```
+
+You can set the path to `trainers` and use `{@}` to get the value for each item.
+
+## Color
+
+For supported channels, this option will set the background color of the box containing the list. Selecting this option will present you with a color picker to select a color. You can use a color from the palette or enter the hex value for a custom color.
+
+**Read More:** [Content block basics](content-block-basics.mdx)

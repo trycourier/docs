@@ -1,0 +1,60 @@
+---
+sidebar_position: 5
+slug: ./export-to-elemental
+toc_max_heading_level: 2
+---
+
+import Image from "@theme/IdealImage";
+import TOCInline from "@theme/TOCInline";
+
+# Export to Elemental
+
+> [Courier Elemental](intro.mdx) offers a powerful JSON based syntax to send notifications in lieu of using notification templates.
+
+Courier's Designer Studio offers DnD functionalities to build notification templates where users can invoke a notification by just referencing the template ID.
+
+Courier now offers interoperability between notification templates and Elemental, so users can now get the best of both worlds.
+
+With the `Export to Elemental` feature, users can use the designer to build notification templates and export them as Elemental syntax whether it's for sending raw code templates, or for establishing a template review process.
+
+## Exporting Elemental Assets
+
+Select the dropdown option on top-right of notification `Publish` button, and click `Export to Elemental`.
+
+<Image
+  img={require("../../../assets/guides/elemental/export-to-elemental.png")}
+  alt="Export to Elemental Dropdown"
+/>
+
+Copy the JSON output to use the Elemental syntax inside your `/send` request's payload.
+
+<Image
+  img={require("../../../assets/guides/elemental/export-to-elemental-output.png")}
+  alt="Export to Elemental Output JSON"
+/>
+
+Once copied, the Elemental syntax can be passed inside a `content` object of your send request.
+
+## Block Types and Node Type Mappings
+
+Below are the following supported block types that can be exported as Elemental syntax.
+
+| Block type | Elemental Node Type(s)       |
+| ---------- | ---------------------------- |
+| text       | combination of text and list |
+| image      | image                        |
+| action     | action                       |
+| divider    | divider                      |
+| markdown   | text (format markdown)       |
+| quote      | quote                        |
+| template   | html                         |
+
+
+:::caution Note
+
+**List** and **jsonnet** blocks, **locales** at the block level are not supported.
+
+:::
+
+
+Please reach out to [support](mailto:support@courier.com) if you have any questions or feedback.

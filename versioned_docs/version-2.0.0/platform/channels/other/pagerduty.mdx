@@ -1,0 +1,66 @@
+---
+sidebar_position: 9
+sidebar_label: PagerDuty
+title: Set Up Push Notifications Using PagerDuty
+description: Looking for a way to send push notifications via PagerDuty? This step-by-step tutorial will show you how to integrate PagerDuty's API the easy way.
+---
+
+import Image from "@theme/IdealImage";
+
+# PagerDuty
+
+## How to configure PagerDuty:
+
+### Prerequisites
+
+- Pagerduty [account](https://www.pagerduty.com/sign-up/) with elevated privileges
+- Pagerduty Service created and configured with Events-v2 integration
+
+#### Add Event-v2 integration to your Pagerduty Service
+
+<Image img={require("../../../assets/platform/channels/pd-event-v2-integration.png")} alt="" />
+
+#### Once the integration is configured, you will see something like this:
+
+<Image img={require("../../../assets/platform/channels/pd-after-installation.png")} alt="" />
+
+#### Click on the setting toggle on the top right corner, and copy Integration Key:
+
+<Image img={require("../../../assets/platform/channels/pd-routing-key.png")} alt="" />
+
+#### Navigate to PagerDuty channel installation page in your [Courier account](https://app.courier.com/channels/pagerduty) and fill up the form fields, Paste your Integration key in the Routing Key field:
+
+<Image img={require("../../../assets/platform/channels/pd-provider-page.png")} alt="" />
+
+#### Create notification Template in Courier like following, hit publish and start using this template to send push notifications to your PagerDuty service:
+
+<Image img={require("../../../assets/platform/channels/pd-notification-template.png")} alt="" />
+
+## Override
+
+You can use the provider override to replace what we send to PagerDuty's Events API. Supported overrides include the Severity and Source. Here's an example where we override both:
+
+```json title=JSON
+{
+  "message": {
+    "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "to": {
+      "user_id": "1234567890"
+    },
+    "providers": {
+      "pagerduty": {
+        "override": {
+          "body": {
+            "payload": {
+              "severity": "error",
+              "source": "a different source"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+Other supported payload overrides are [here](https://v2.developer.pagerduty.com/docs/send-an-event-events-api-v2).

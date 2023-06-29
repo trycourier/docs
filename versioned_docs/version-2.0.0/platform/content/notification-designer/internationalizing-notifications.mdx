@@ -1,0 +1,93 @@
+---
+sidebar_position: 8
+---
+
+import Image from "@theme/IdealImage";
+
+# Internationalization of Notification Content
+
+> How to send multi-language notifications with Courier.
+
+There are multiple ways to internationalize your notifications with Courier. The best option for your use case depends on the number of languages you support and the complexity of your notification templates.
+
+## Multi-language Internationalization Models for Notifications
+
+### Multiple Channels, One Template
+
+In this model (one channel per language), the logic defining which notification to fire lives in Courier under the channel settings as [send conditions](../notification-settings/send-conditions.mdx).
+This model works well for single-channel notifications or multi-channel notifications when you support just a few languages. Notifications templates can get large and complex when you have multiple channel types (email, SMS, DM, push) and support many languages. If this is true for your use case, consider using the multiple templates (one per language) model for internationalization.
+
+**To use this internationalization model, you'll need to use:**
+
+- [Channel-level conditionals](../notification-settings/send-conditions.mdx/#for-notifications-and-channels)
+- Profile data (either sent as part of the send command [profile object](https://help.courier.com/en/articles/4339703-json-paths-and-variables) or stored in Courier as part of a recipient [profile](../../../reference/profiles/intro.mdx)
+
+### Steps
+
+1. Store a "locale" property on each user profile inside of Courier, with [ISO 639-1](https://www.andiamo.co.uk/resources/iso-language-codes/) language code values like `en-us`, `en`, `fr`, `fr-be`, `fr-ca`, etc. (or include it as part of the send command data payload).
+2. Add a channel for each language to your template:
+
+<Image
+  img={require("../../../assets/guides/internationalization-content/internationalization-template.png")}
+  alt="Each Channel Corresponds to a Different Language"
+/>
+
+3. Set up a conditional to match the corresponding language:
+
+<Image
+  img={require("../../../assets/guides/internationalization-content/internationalization-conditional.png")}
+  alt="Set a Conditional"
+/>
+
+## Multiple Templates
+
+In this internationalization model (one template per language), the logic defining which notification to fire lives in your system rather than within Courier. This model is best for multi-channel notifications when you support many languages.
+
+ **To implement this internationalization model:**
+
+1. Create a [notification template](design-a-notification.mdx) for each language you support (i.e., five supported languages = five versions of the same notification).
+2. Map a unique language-based event to each template.
+3. Trigger the language-specific event to send the notification to users with that.
+
+<Image
+  img={require("../../../assets/guides/internationalization-content/internationalization-designer-overview.png")}
+  alt="Templates Organized by Region"
+/>
+
+<Image
+  img={require("../../../assets/guides/internationalization-content/internationalization-event.png")}
+  alt="Map an Event"
+/>
+
+## Pull Translated Content From the Data Payload
+
+To use this (one template) method, you will need to send the translated content as part of the data payload and pull it into the [content block(s)](https://help.courier.com/en/articles/4193090-content-block-basics) in the notification template with Variables or handlebars code.
+<!-- Link follow-up doc -->
+1. Translate the content and store it in your backend
+2. Include the translated content in the JSON data object of the [Send event](reference/send/intro.mdx)
+3. Pull the translated content into the notification template from the Send event data payload using variables.
+
+### Template Using Variables
+
+<Image
+  img={require("../../../assets/guides/internationalization-content/internationalization-variables.png")}
+  alt="Populate Your Template with Variables"
+/>
+
+### Test Event With Variable Values 
+
+<Image
+  img={require("../../../assets/guides/internationalization-content/internationalization-test-event.png")}
+  alt="Test Out Your Variables Inside a Test Event"
+/>
+
+### Preview Your Language-Specific Template With Values Pulled From Variables
+
+<Image
+  img={require("../../../assets/guides/internationalization-content/internationalization-preview.png")}
+  alt="Preview Your Template"
+/>
+
+## Internationalization Specification
+
+Courier Business customers have access to [Internationalization Specification](../internationalization-specification.mdx) features.

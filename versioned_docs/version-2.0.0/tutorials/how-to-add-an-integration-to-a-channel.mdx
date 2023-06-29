@@ -1,0 +1,120 @@
+---
+sidebar_position: 1
+---
+
+import Image from "@theme/IdealImage";
+import GifWrapper from "@site/src/components/GifWrapper";
+
+# How To Add A Provider To A Channel
+
+> A step-by-step guide integrating and to adding a provider to a Courier notification channel.
+
+:::info Every notification channel needs an integration before it can send.
+Multiple channels, and multiple providers within a channel, can be added and managed with a single template. This can be changed at any time.
+
+If you've already configured an Integration for the Channel type(s) in your Notification you'll be able to add them with a single click.
+
+If you haven't already completed an Integration for the Channel type, you will need to configure one.
+:::
+
+## There are two places to configure a Provider integration:
+
+1. The Channel Settings in the Notification you're designing
+2. The Integrations tab of the Courier app.
+
+## 1. Integrate a Provider via the Channel Settings
+
+A 0, disconnected plug icon or red exclamation mark❗️ on a notification channel all indicate the channel does not have an integrated Provider. _Until you add an integrated provider, you won't be able to send the Notification via that channel_. If your channel indicates that there are no providers integrated, hover over the channel and click the settings icon ⚙️ .
+
+<Image
+  img={require("../assets/tutorials/inline-channel-settings.png")}
+  alt="Email channel with zero providers integrated and settings icon open on hover."
+/>
+
+The **Channel Settings** allow you to add integrations from the Designer view in the Notification you're currently building by:
+
+1. Clicking Add Integration and EITHER
+2. Selecting a Channel Integration that is already configured OR
+3. Configure a new integration
+
+<Image
+  img={require("../assets/tutorials/channel-settings-dialog.png")}
+  alt="Email channel settings for selecting an integration provider."
+/>
+
+**Adding a configured Integration to a Channel**
+
+1. Click "Add Integration"
+2. Select one (or more) of your configured integrations.
+
+<GifWrapper width={1069} height={685} caption="Adding a configured email provider in the channel settings.">
+
+![Adding a configured email provider in the channel settings.](../assets/tutorials/adding-configured-integrations.gif)
+
+</GifWrapper>
+
+**Configuring an Integration via the Channel Settings**
+
+- The requirements to configure an integration depend on the specific Channel Provider.
+- The Integration form will indicate all the information needed from your provider account to complete the configuration.
+
+<GifWrapper width={1069} height={685} caption="Configuring a new Integration in the channel settings.">
+
+![Configuring a new Integration in the channel settings.](../assets/tutorials/configuring-an-integration.gif)
+
+</GifWrapper>
+
+**Success!**
+
+If you've successfully integrated your channel, you will see the provider icon when you close the Channel Settings. If you've configured more than one provider, you will see a count of the number of providers.
+
+<Image
+  img={require("../assets/tutorials/inline-channel-provider-logo.png")}
+  alt="A provider logo in the channel tab indicates the channel is integrated."
+/>
+
+Multiple providers can be added to a channel and managed with a single template. If you select channel type when adding a new channel (ie Email, push, SMS, Direct Message).
+
+<Image
+  img={require("../assets/tutorials/add-notification-channels.png")}
+  alt="Adding channel types in the channel settings."
+/>
+
+If you add more than one integration, a number on the channel will indicate how many integrations have been added.
+
+<Image
+  img={require("../assets/tutorials/inline-channel-multiple-providers.png")}
+  alt="An email channel with two integrations added."
+/>
+
+:::note
+The configuration process does not validate the integration information you've provided.
+:::
+
+## 2. Integrating a Channel via the Integrations Tab
+
+The [Integrations tab](https://app.courier.com/integrations) allows you to add new integrations, view and manage installed Integrations, and see the entire catalog of Courier Integration options.
+
+<Image
+  img={require("../assets/tutorials/integrations-tab-icon.png")}
+  alt="The integrations tab icon in the lefthand navigation bar."
+/>
+
+**To configure a new Integration via the integration settings page:**
+
+1. Open the Integrations tab
+2. Search for and choose your channel provider from the Integration Catalog.
+3. Configure the integration by completing the form with the required information.
+4. You will see your newly configured provider in the Installed Integrations section.
+5. Open the Notification Designer and follow the steps outlined above for [adding a configured Integration to a Channel](#1-integrate-a-provider-via-the-channel-settings).
+
+<Image
+  img={require("../assets/tutorials/integration-provider-settings.png")}
+  alt="The integration provider settings page with search and sort by channel type."
+/>
+
+:::caution Integration requirements
+The specific information required depends on the provider.
+
+⚠️ Note also that Courier does not validate your configuration in the Integration dialogue.
+:::

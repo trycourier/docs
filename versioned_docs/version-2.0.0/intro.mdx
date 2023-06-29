@@ -2,45 +2,76 @@
 sidebar_position: 1
 slug: ./
 sidebar_label: Home
-title: "Courier Docs: API Reference, Quickstart Guides, and Integrations"
+title: "Courier Platform Docs"
 description: "API reference, quickstart guides, and code snippets for integrating the Courier API into your web or mobile app. SDKs for popular programming languages."
 ---
-
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
-import ClientLibraries from "@site/src/components/ClientLibraries";
 
-# Home
+# Documentation
 
-> Explore our guides and examples to integrate Courier
+Learn how to use Courier to design and deliver notifications across multiple channels (email, SMS, mobile push, in-app) and integrate rich inbox experiences into your web and mobile apps.
 
-Courier is the smartest way to design & deliver notifications. Design once, deliver to any channel with one API.
+## Getting Started
 
-## Get Started
+You can get started building with Courier for free. Learn [what Courier is](./getting-started/what-is-courier), what the [key concepts](./getting-started/courier-concepts) are how to send your first notification using your programming language and framework of choice.
 
-Use one of our Getting Started Guides to help you start sending notifications.
+## Tutorials
 
-- [Setup Email using SendGrid](./guides/providers/email/sendgrid.mdx)
-- [Setup SMS using Twilio](./guides/providers/sms/twilio.mdx)
-- [Setup Chat using Slack](./guides/providers/direct-message/slack.mdx)
+Our tutorials help developers learn basic Courier platform concepts, everything from [adding providers](./tutorials/how-to-add-an-integration-to-a-channel) to [sending notifications to a list](./tutorials/how-to-send-to-a-list-or-list-pattern-using-wildcarding).
 
-## API Reference
+## Platform
 
-Learn more about the [Courier REST API](./reference/intro.mdx)
+Our platform is designed around a small number of key concepts that make it easy to build powerful notification experiences while also being flexible enough to integrate into whatever kind of application or system you may be building.
 
-## Blogs
+<div className="platform-list">
+  <div className="platform-item">
+    <div className="platform-name"><a href="/platform/users">Users</a></div>
+    <div className="platform-desc">Specifying the recipient or recipients of the notification.</div>
+  </div>
+  <div className="platform-item">
+    <div className="platform-name"><a href="/platform/content">Content</a></div>
+    <div className="platform-desc">Constructing the content of the notification, including the use of templates, dynamic variables and channel agnostic markup.</div>
+  </div>
+  <div className="platform-item">
+    <div className="platform-name"><a href="/platform/channels">Channels</a></div>
+    <div className="platform-desc">The channels and providers being used to deliver the notification.</div>
+  </div>
+  <div className="platform-item">
+    <div className="platform-name"><a href="/platform/sending">Sending</a></div>
+    <div className="platform-desc">Sending notifications, including setting limits and handling retries.</div>
+  </div>
+  <div className="platform-item">
+    <div className="platform-name"><a href="/platform/preferences">Preferences</a></div>
+    <div className="platform-desc">Respecting user delivery preferences and drop-in user preference components.</div>
+  </div>
+  <div className="platform-item">
+    <div className="platform-name"><a href="/platform/automations">Automations</a></div>
+    <div className="platform-desc">Create fully managed notification workflows and implements scheduling, batching and throttling with zero lines of code.</div>
+  </div>
+  <div className="platform-item">
+    <div className="platform-name"><a href="/platform/inbox">Inbox</a></div>
+    <div className="platform-desc">Embed a modern notification inbox to your app with our web, iOS and Android SDKs.</div>
+  </div>
+  <div className="platform-item">
+    <div className="platform-name"><a href="/platform/workspaces">Workspaces</a></div>
+    <div className="platform-desc">Setup test and production environments, manage access control and configure the behavior of your apps.</div>
+  </div>
+  <div className="platform-item">
+    <div className="platform-name"><a href="/platform/logging">Logging</a></div>
+    <div className="platform-desc">Logging, analytics and observability.</div>
+  </div>
+</div>
 
-[Take a look at our blogs](https://www.courier.com/blog/) for product updates, walkthroughs, use cases and more! 
+## REST API
 
-## Integrations
+The [Courier API](/reference) is organized around REST. Our API has predictable resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs.
 
-[Learn](./guides/providers/intro.mdx) what is needed to integrate with the many supported channel providers.
+## SDK Libraries
 
-## Client Libraries
+### Server SDK Libraries
 
-Prebuilt libraries and sample code for popular languages.
-
-<ClientLibraries />
+You can access our REST API and integrate Courier into your application using one of our [server SDK](/sdk-libraries/server-sdks) libraries.
 
 <Tabs groupId="code">
 <TabItem value="js" label="courier-node">
@@ -219,16 +250,10 @@ System.out.println(sendEnhancedResponseBody2);
 
 </Tabs>
 
+### Client SDK Libraries
+
+The Courier Platform included embeddable [Inbox](/platform/inbox) and [Preference](/platform/preferences) components and [client SDKs](/sdk-libraries/client-sdks) for web, iOS and Android. 
+
 ## Join the Community
 
 Connect with the Courier developer community on the [Courier Discord Server](https://discord.gg/courier). Get community support, share ideas and inspiration, join our beta programs, and much more.
-
-## Live Streaming
-
-Courier streams on Twitch. Follow [trycourier](https://www.twitch.tv/trycourier) to be notified of future streams.
-
-### Previous Stream Recordings
-
-Recordings of previous streams are published to the [Courier YouTube Channel](https://www.youtube.com/channel/UCuONBIOzl-hypZ5qqWKDeeg). Be sure to subscribe to be notified of new content.
-
-You can also check out the [blog posts for all our previous Courier Live episodes](https://www.courier.com/blog/tags/courier-live).

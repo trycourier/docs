@@ -7,7 +7,7 @@ const ProfileOneSignalPush: ApiParam = {
     {
       type: "string",
       name: "oneSignalPlayerID",
-      description: "[Learn more](/docs/guides/providers/push/onesignal-push)",
+      description: "[Learn more](/docs/platform/channels/push/onesignal-push)",
     },
   ],
 };

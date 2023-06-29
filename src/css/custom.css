@@ -541,6 +541,14 @@ video {
   background-image: url(/img/sidebar-icons/client-libraries-active.svg);
 }
 
+.sidebar-sdk-libraries .menu__link:before {
+  background-image: url(/img/sidebar-icons/client-libraries.svg);
+}
+
+.sidebar-sdk-libraries .menu__link--active:before {
+  background-image: url(/img/sidebar-icons/client-libraries-active.svg);
+}
+
 .sidebar-business .menu__link:before {
   background-image: url(/img/sidebar-icons/business.svg);
 }
@@ -556,6 +564,15 @@ video {
 .sidebar-elemental .menu__link--active:before {
   background-image: url(/img/sidebar-icons/elemental-active.svg);
 }
+
+.sidebar-platform .menu__link:before {
+  background-image: url(/img/sidebar-icons/elemental.svg);
+}
+
+.sidebar-platform .menu__link--active:before {
+  background-image: url(/img/sidebar-icons/elemental-active.svg);
+}
+
 
 .sidebar-automations .menu__link:before {
   background-image: url(/img/sidebar-icons/automations.svg);
@@ -615,4 +632,26 @@ video {
 
 .sidebar-data .menu__link--active:before {
   background-image: url(/img/sidebar-icons/notification-data-active.svg);
+}
+
+.platform-list {
+  display: flex;
+  flex-wrap: wrap 
+}
+
+.platform-item {
+  width: 250px;
+  background-color: #eee;
+  border-radius: 4px;
+  padding: 8px 16px;
+  margin: 0 16px 16px 0;
+}
+
+.platform-name {
+  font-size: 120%;
+  text-align: center;
+}
+
+.platform-desc {
+  font-size: 80%;
 }

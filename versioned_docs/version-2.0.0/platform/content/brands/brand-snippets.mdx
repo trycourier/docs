@@ -1,0 +1,42 @@
+---
+sidebar_position: 1
+---
+
+import Image from "@theme/IdealImage";
+
+# Brand Snippets
+
+## Create Custom, Reusable Code With Snippets
+
+Snippets are pieces of [handlebars](https://handlebarsjs.com/) code that you can copy and paste or pull into a Template Block using the snippet name.
+
+<Image img={require("../../../assets/guides/courier-app/brand-snippet.png")} alt="Brand Snippet" />
+
+To use Snippets add a **Template Block** to an email Notification, and simply call it using a Template Block: `{{>snippet_name}}`
+
+<Image
+  img={require("../../../assets/guides/courier-app/brand-snippet-block.png")}
+  alt="Brand Snippet Block"
+/>
+
+Using the Notification preview allows you to see the Snippet rendered:
+
+<Image
+  img={require("../../../assets/guides/courier-app/brand-snippet-preview.png")}
+  alt="Brand Snippet Preview"
+/>
+
+### Customize your Snippet Content Using Variables
+
+You can use variables to pull customized content into the Snippet, supplying the value for the variable inside the user profile sent via the Send API call.
+
+<Image
+  img={require("../../../assets/guides/courier-app/brand-snippet-variables.png")}
+  alt="Brand Snippet Variables"
+/>
+
+### Snippets and the Default Brand
+
+If a snippet exists in the default brand, but not in a custom brand, the default brand snippet _will_ render in the custom brand as long as there isn't a snippet with the same name native to that custom brand.
+
+This means you can put any or all of your snippets in the default brand and call them into multiple custom brands. Think of custom brands as extending the default. They can still have their own custom snippets as well.

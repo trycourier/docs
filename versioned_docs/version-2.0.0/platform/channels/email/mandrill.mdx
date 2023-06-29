@@ -1,0 +1,77 @@
+---
+sidebar_position: 6
+sidebar_label: Mandrill
+title: Set Up Email Using Mandrill
+description: Looking for a way to send email notifications via Mandrill? This step-by-step tutorial will show you how to integrate Mandrill's API the easy way.
+---
+
+import Image from "@theme/IdealImage";
+
+# Mandrill
+
+## Profile Requirements
+
+To deliver a message to a recipient over Mandrill, Courier must be provided the recipient's email address. This value should be included in the recipient profile as `email`.
+
+````json title=JSON
+{
+  "message": {
+    // Recipient Profile
+    "to": {
+      "email": "example@example.com"
+    }
+
+    // ... rest of message definition
+  }
+}
+
+## Override
+
+You can use a provider override to replace what we send to Mandrill's Messages API. For example, you can add an attachment to your request:
+
+```json title=JSON
+{
+  "message": {
+    "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "to": {
+      "email": "example@example.com"
+    },
+    "providers": {
+      "mandrill": {
+        "override": {
+          "body": {
+            "message": {
+              "attachments": [
+                {
+                  "type": "text/plain",
+                  "name": "myfile.txt",
+                  "content": "ZXhhbXBsZSBmaWxl"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
+````
+
+Everything inside of `messageproviders.mandrill.override` will replace what we send to Mandrill's Messages API. You can see all the available options by visiting [Mandrill API docs](https://mandrillapp.com/api/docs/messages.JSON.html).
+
+## Template Import
+
+You can import your Mandrill templates to use with Courier from the [Mandrill configuration page](https://app.courier.com/channels/mandrill). 
+
+:::info
+
+You will need to provide your Mandrill credentials in the configuration page to retrieve your saved templates from Mandrill.
+
+:::
+
+Templates ready for import will appear as selectable checkboxes that you can choose to import.
+
+<Image
+  img={require("../../../assets/platform/channels/template-import.png")}
+  alt="Template Import Page"
+/>

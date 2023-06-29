@@ -73,7 +73,7 @@ const AutomationRun: ApiParam = {
       name: "profile",
       example: { phone_number: "2025550125", email: "hello@example.com" },
       description:
-        "An object that includes any key-value pairs required by your chosen Integrations (see our [Provider Documentation](/docs/guides/providers) for the requirements for each Integration.) If profile information is included in the request and that information already exists in the profile for the recipientId, that information will be merged.",
+        "An object that includes any key-value pairs required by your chosen Integrations (see our [Provider Documentation](/docs/platform/channels) for the requirements for each Integration.) If profile information is included in the request and that information already exists in the profile for the recipientId, that information will be merged.",
     },
   ],
 };

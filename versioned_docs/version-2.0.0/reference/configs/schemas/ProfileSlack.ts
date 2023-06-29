@@ -7,7 +7,7 @@ const ProfileSlack: ApiParam = {
     {
       type: "oneOf",
       name: "slack",
-      description: "[Learn more](/docs/guides/providers/direct-message/slack)",
+      description: "[Learn more](/docs/platform/channels/direct-message/slack)",
       options: [
         {
           type: "object",

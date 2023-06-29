@@ -6,12 +6,17 @@ const navbarItems = [
   },
   {
     to: "/reference/",
-    label: "API Reference",
+    label: "REST API",
     activeBasePath: "reference",
   },
   {
-    href: "https://updates.courier.com",
-    label: "Product Updates",
+    to: "/sdk-libraries/",
+    label: "SDK Libraries",
+    activeBasePath: "sdk-reference",
+  },
+  {
+    href: "https://courier.com/changelog",
+    label: "Changelog",
   },
   {
     href: "https://status.courier.com",

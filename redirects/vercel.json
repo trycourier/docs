@@ -7,337 +7,332 @@
     },
     {
       "source": "/docs/integrations-introduction",
-      "destination": "https://www.courier.com/docs/guides/providers/",
+      "destination": "https://www.courier.com/docs/platform/channels/",
       "permanent": true
     },
     {
       "source": "/docs/email-integrations",
-      "destination": "https://www.courier.com/docs/guides/providers/email/",
+      "destination": "https://www.courier.com/docs/platform/channels/email/",
       "permanent": true
     },
     {
       "source": "/docs/aws-ses",
-      "destination": "https://www.courier.com/docs/guides/providers/email/aws-ses/",
+      "destination": "https://www.courier.com/docs/platform/channels/email/aws-ses/",
       "permanent": true
     },
     {
       "source": "/docs/gmail",
-      "destination": "https://www.courier.com/docs/guides/providers/email/gmail/",
+      "destination": "https://www.courier.com/docs/platform/channels/email/gmail/",
       "permanent": true
     },
     {
       "source": "/docs/mailersend",
-      "destination": "https://www.courier.com/docs/guides/providers/email/mailersend/",
+      "destination": "https://www.courier.com/docs/platform/channels/email/mailersend/",
       "permanent": true
     },
     {
       "source": "/docs/mailgun",
-      "destination": "https://www.courier.com/docs/guides/providers/email/mailgun/",
+      "destination": "https://www.courier.com/docs/platform/channels/email/mailgun/",
       "permanent": true
     },
     {
       "source": "/docs/mailjet",
-      "destination": "https://www.courier.com/docs/guides/providers/email/mailjet/",
+      "destination": "https://www.courier.com/docs/platform/channels/email/mailjet/",
       "permanent": true
     },
     {
       "source": "/docs/mandrill",
-      "destination": "https://www.courier.com/docs/guides/providers/email/mandrill/",
+      "destination": "https://www.courier.com/docs/platform/channels/email/mandrill/",
       "permanent": true
     },
     {
       "source": "/docs/onesignal-email",
-      "destination": "https://www.courier.com/docs/guides/providers/email/onesignal-email/",
+      "destination": "https://www.courier.com/docs/platform/channels/email/onesignal-email/",
       "permanent": true
     },
     {
       "source": "/docs/postmark",
-      "destination": "https://www.courier.com/docs/guides/providers/email/postmark/",
+      "destination": "https://www.courier.com/docs/platform/channels/email/postmark/",
       "permanent": true
     },
     {
       "source": "/docs/sendgrid",
-      "destination": "https://www.courier.com/docs/guides/providers/email/sendgrid/",
+      "destination": "https://www.courier.com/docs/platform/channels/email/sendgrid/",
       "permanent": true
     },
     {
       "source": "/docs/smtp",
-      "destination": "https://www.courier.com/docs/guides/providers/email/smtp/",
+      "destination": "https://www.courier.com/docs/platform/channels/email/smtp/",
       "permanent": true
     },
     {
       "source": "/docs/sparkpost",
-      "destination": "https://www.courier.com/docs/guides/providers/email/sparkpost/",
+      "destination": "https://www.courier.com/docs/platform/channels/email/sparkpost/",
       "permanent": true
     },
     {
       "source": "/docs/push-integrations",
-      "destination": "https://www.courier.com/docs/guides/providers/push/",
+      "destination": "https://www.courier.com/platform/channels/push/",
       "permanent": true
     },
     {
       "source": "/docs/airship",
-      "destination": "https://www.courier.com/docs/guides/providers/push/airship/",
+      "destination": "https://www.courier.com/docs/platform/channels/push/airship/",
       "permanent": true
     },
     {
       "source": "/docs/apple-push-notification",
-      "destination": "https://www.courier.com/docs/guides/providers/push/apns/",
+      "destination": "https://www.courier.com/docs/platform/channels/push/apple-push-notification/",
       "permanent": true
     },
     {
       "source": "/docs/aws-sns-push",
-      "destination": "https://www.courier.com/docs/guides/providers/push/aws-sns/",
+      "destination": "https://www.courier.com/docs/platform/channels/other/aws-sns/",
       "permanent": true
     },
     {
       "source": "/docs/beamer",
-      "destination": "https://www.courier.com/docs/guides/providers/push/beamer/",
+      "destination": "https://www.courier.com/docs/platform/channels/other/beamer/",
       "permanent": true
     },
     {
       "source": "/docs/courier-push",
-      "destination": "https://www.courier.com/docs/inbox/",
+      "destination": "https://www.courier.com/docs/platform/inbox/",
       "permanent": true
     },
     {
       "source": "/docs/guides/providers/in-app/courier-push/",
-      "destination": "https://www.courier.com/docs/inbox/",
+      "destination": "https://www.courier.com/docs/platform/inbox/",
       "permanent": true
     },
     {
       "source": "/docs/drift",
-      "destination": "https://www.courier.com/docs/guides/providers/push/drift/",
+      "destination": "https://www.courier.com/docs/platform/channels/other/drift/",
       "permanent": true
     },
     {
       "source": "/docs/expo",
-      "destination": "https://www.courier.com/docs/guides/providers/push/expo/",
+      "destination": "https://www.courier.com/docs/platform/channels/push/expo/",
       "permanent": true
     },
     {
       "source": "/docs/firebase-fcm",
-      "destination": "https://www.courier.com/docs/guides/providers/push/firebase-fcm/",
+      "destination": "https://www.courier.com/docs/platform/channels/push/firebase-fcm/",
       "permanent": true
     },
     {
       "source": "/docs/magicbell",
-      "destination": "https://www.courier.com/docs/guides/providers/push/magicbell/",
+      "destination": "https://www.courier.com/docs/platform/channels/other/magicbell/",
       "permanent": true
     },
     {
       "source": "/docs/nowpush",
-      "destination": "https://www.courier.com/docs/guides/providers/push/nowpush/",
+      "destination": "https://www.courier.com/docs/platform/channels/other/nowpush/",
       "permanent": true
     },
     {
       "source": "/docs/onesignal-push",
-      "destination": "https://www.courier.com/docs/guides/providers/push/onesignal-push/",
+      "destination": "https://www.courier.com/docs/platform/channels/push/onesignal-push/",
       "permanent": true
     },
     {
       "source": "/docs/ops-genie",
-      "destination": "https://www.courier.com/docs/guides/providers/push/ops-genie/",
-      "permanent": true
-    },
-    {
-      "source": "/docs/opsgenie",
-      "destination": "https://www.courier.com/docs/guides/providers/push/ops-genie/",
+      "destination": "https://www.courier.com/docs/platform/channels/other/ops-genie/",
       "permanent": true
     },
     {
       "source": "/docs/pagerduty",
-      "destination": "https://www.courier.com/docs/guides/providers/push/pagerduty/",
+      "destination": "https://www.courier.com/docs/platform/channels/other/pagerduty/",
       "permanent": true
     },
     {
       "source": "/docs/pushbullet",
-      "destination": "https://www.courier.com/docs/guides/providers/push/pushbullet/",
+      "destination": "https://www.courier.com/docs/platform/channels/other/pushbullet/",
       "permanent": true
     },
     {
       "source": "/docs/pusher",
-      "destination": "https://www.courier.com/docs/guides/providers/push/pusher/",
+      "destination": "https://www.courier.com/docs/platform/channels/other/pusher/",
       "permanent": true
     },
     {
       "source": "/docs/splunk-on-call",
-      "destination": "https://www.courier.com/docs/guides/providers/push/splunk-on-call/",
+      "destination": "https://www.courier.com/docs/platform/channels/other/splunk-on-call/",
       "permanent": true
     },
     {
       "source": "/docs/custom-provider",
-      "destination": "https://www.courier.com/docs/guides/providers/push/custom-provider/",
+      "destination": "https://www.courier.com/docs/platform/channels/other/custom-provider/",
       "permanent": true
     },
     {
       "source": "/docs/sms-integrations",
-      "destination": "https://www.courier.com/docs/guides/providers/sms/",
+      "destination": "https://www.courier.com/docs/platform/channels/sms/",
       "permanent": true
     },
     {
       "source": "/docs/africas-talking",
-      "destination": "https://www.courier.com/docs/guides/providers/sms/africas-talking/",
+      "destination": "https://www.courier.com/docs/platform/channels/sms/africas-talking/",
       "permanent": true
     },
     {
       "source": "/docs/aws-sns-sms",
-      "destination": "https://www.courier.com/docs/guides/providers/sms/aws-sns/",
+      "destination": "https://www.courier.com/docs/platform/channels/other/aws-sns/",
       "permanent": true
     },
     {
       "source": "/docs/aws-sns",
-      "destination": "https://www.courier.com/docs/guides/providers/push/aws-sns/",
+      "destination": "https://www.courier.com/docs/platform/channels/other/aws-sns/",
       "permanent": true
     },
     {
       "source": "/docs/messagebird",
-      "destination": "https://www.courier.com/docs/guides/providers/sms/messagebird/",
+      "destination": "https://www.courier.com/docs/platform/channels/sms/messagebird/",
       "permanent": true
     },
     {
       "source": "/docs/messagemedia",
-      "destination": "https://www.courier.com/docs/guides/providers/sms/messagemedia/",
+      "destination": "https://www.courier.com/docs/platform/channels/sms/messagemedia/",
       "permanent": true
     },
     {
       "source": "/docs/plivo",
-      "destination": "https://www.courier.com/docs/guides/providers/sms/plivo/",
+      "destination": "https://www.courier.com/docs/platform/channels/sms/plivo/",
       "permanent": true
     },
     {
       "source": "/docs/sinch",
-      "destination": "https://www.courier.com/docs/guides/providers/sms/sinch/",
+      "destination": "https://www.courier.com/docs/platform/channels/sms/sinch/",
       "permanent": true
     },
     {
       "source": "/docs/telnyx",
-      "destination": "https://www.courier.com/docs/guides/providers/sms/telnyx/",
+      "destination": "https://www.courier.com/docs/platform/channels/sms/telnyx/",
       "permanent": true
     },
     {
       "source": "/docs/twilio",
-      "destination": "https://www.courier.com/docs/guides/providers/sms/twilio/",
+      "destination": "https://www.courier.com/docs/platform/channels/sms/twilio/",
       "permanent": true
     },
     {
       "source": "/docs/vonage",
-      "destination": "https://www.courier.com/docs/guides/providers/sms/vonage/",
+      "destination": "https://www.courier.com/docs/platform/channels/sms/vonage/",
       "permanent": true
     },
     {
       "source": "/docs/direct-message-integrations",
-      "destination": "https://www.courier.com/docs/guides/providers/direct-message/",
+      "destination": "https://www.courier.com/docs/platform/channels/direct-message/",
       "permanent": true
     },
     {
       "source": "/docs/chat-api",
-      "destination": "https://www.courier.com/docs/guides/providers/direct-message/chat/",
+      "destination": "https://www.courier.com/docs/platform/channels/direct-message/",
       "permanent": true
     },
     {
       "source": "/docs/discord",
-      "destination": "https://www.courier.com/docs/guides/providers/direct-message/discord/",
+      "destination": "https://www.courier.com/docs/platform/channels/direct-message/discord/",
       "permanent": true
     },
     {
       "source": "/docs/facebook-messenger",
-      "destination": "https://www.courier.com/docs/guides/providers/direct-message/facebook-messenger/",
+      "destination": "https://www.courier.com/docs/platform/channels/other/facebook-messenger/",
       "permanent": true
     },
     {
       "source": "/docs/intercom",
-      "destination": "https://www.courier.com/docs/guides/providers/direct-message/intercom/",
+      "destination": "https://www.courier.com/docs/platform/channels/other/intercom/",
       "permanent": true
     },
     {
       "source": "/docs/microsoft-teams",
-      "destination": "https://www.courier.com/docs/guides/providers/direct-message/microsoft-teams/",
+      "destination": "https://www.courier.com/docs/platform/channels/direct-message/microsoft-teams/",
       "permanent": true
     },
     {
       "source": "/docs/slack",
-      "destination": "https://www.courier.com/docs/guides/providers/direct-message/slack/",
+      "destination": "https://www.courier.com/docs/platform/channels/direct-message/slack/",
       "permanent": true
     },
     {
       "source": "/docs/stream-chat-api",
-      "destination": "https://www.courier.com/docs/guides/providers/direct-message/stream-chat/",
+      "destination": "https://www.courier.com/docs/platform/channels/direct-message/stream-chat/",
       "permanent": true
     },
     {
       "source": "/docs/stream-chat",
-      "destination": "https://www.courier.com/docs/guides/providers/direct-message/stream-chat/",
+      "destination": "https://www.courier.com/docs/platform/channels/direct-message/stream-chat/",
       "permanent": true
     },
     {
       "source": "/docs/viber",
-      "destination": "https://www.courier.com/docs/guides/providers/direct-message/viber/",
+      "destination": "https://www.courier.com/docs/platform/channels/direct-message/viber/",
       "permanent": true
     },
     {
       "source": "/docs/whatsapp",
-      "destination": "https://www.courier.com/docs/guides/providers/direct-message/whatsapp/",
+      "destination": "https://www.courier.com/docs/platform/channels/direct-message/whatsapp/",
       "permanent": true
     },
     {
       "source": "/docs/webhook-integration",
-      "destination": "https://www.courier.com/docs/guides/providers/webhook-integration/",
+      "destination": "https://www.courier.com/docs/platform/channels/other/webhook-integration/",
       "permanent": true
     },
     {
       "source": "/docs/getting-started-sendgrid",
-      "destination": "https://www.courier.com/docs/guides/getting-started/sendgrid/",
+      "destination": "https://www.courier.com/docs/platform/channels/email/sendgrid/",
       "permanent": true
     },
     {
       "source": "/docs/setup-email-using-aws-ses",
-      "destination": "https://www.courier.com/docs/guides/getting-started/aws-ses/",
+      "destination": "https://www.courier.com/docs/platform/channels/email/aws-ses/",
       "permanent": true
     },
     {
       "source": "/docs/getting-started-twilio",
-      "destination": "https://www.courier.com/docs/guides/getting-started/twilio/",
+      "destination": "https://www.courier.com/docs/platform/channels/sms/twilio/",
       "permanent": true
     },
     {
       "source": "/docs/getting-started-slack",
-      "destination": "https://www.courier.com/docs/guides/getting-started/slack/",
+      "destination": "https://www.courier.com/docs/platform/channels/direct-message/slack/",
       "permanent": true
     },
     {
       "source": "/docs/getting-started-microsoft-teams",
-      "destination": "https://www.courier.com/docs/guides/getting-started/microsoft-teams/",
+      "destination": "https://www.courier.com/docs/platform/channels/direct-message/microsoft-teams/",
       "permanent": true
     },
     {
       "source": "/docs/send-a-message",
-      "destination": "https://www.courier.com/docs/guides/getting-started/send-message/",
+      "destination": "https://www.courier.com/docs/platform/sending/",
       "permanent": true
     },
     {
       "source": "/docs/outbound-webhooks",
-      "destination": "https://www.courier.com/docs/guides/getting-started/outbound-webhooks/",
+      "destination": "https://www.courier.com/docs/platform/workspaces/outbound-webhooks/",
       "permanent": true
     },
     {
       "source": "/docs/internationalization-specification",
-      "destination": "https://www.courier.com/docs/guides/enterprise/internationalization-specification/",
+      "destination": "https://www.courier.com/docs/platform/content/internationalization-specification/",
       "permanent": true
     },
     {
       "source": "/docs/checks-system",
-      "destination": "https://www.courier.com/docs/guides/enterprise/checks-system/",
+      "destination": "https://www.courier.com/docs/platform/content/checks-system/",
       "permanent": true
     },
     {
       "source": "/docs/custom-domain-tracking",
-      "destination": "https://www.courier.com/docs/guides/enterprise/custom-domain-tracking/",
+      "destination": "https://www.courier.com/docs/platform/logging/custom-domain-tracking/",
       "permanent": true
     },
     {
       "source": "/docs/set-up-sign-in-with-okta",
-      "destination": "https://www.courier.com/docs/guides/enterprise/okta-integration/",
+      "destination": "https://www.courier.com/docs/platform/workspaces/okta-integration/",
       "permanent": true
     },
     {
@@ -357,7 +352,7 @@
     },
     {
       "source": "/docs/how-to-send-a-notification",
-      "destination": "https://www.courier.com/docs/guides/tutorials/how-to-send-a-notification/",
+      "destination": "https://www.courier.com/docs/tutorials/how-to-send-a-one-time-notification/",
       "permanent": true
     },
     {
@@ -633,6 +628,11 @@
     {
       "source": "/docs/reference/preferences/:path*",
       "destination": "https://www.courier.com/docs/1.0.0/reference/preferences/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/docs/inbox/:path*",
+      "destination": "https://www.courier.com/docs/plaform/inbox/:path*",
       "permanent": true
     }
   ]

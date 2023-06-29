@@ -7,7 +7,7 @@ const ProfileWebhook: ApiParam = {
     {
       type: "object",
       name: "webhook",
-      description: "[Learn more](/docs/guides/providers/webhook-integration)",
+      description: "[Learn more](/docs/platform/channels/webhook-integration)",
       fields: [
         {
           type: "string",
