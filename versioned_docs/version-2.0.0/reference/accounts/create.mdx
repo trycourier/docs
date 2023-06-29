@@ -52,7 +52,7 @@ Preferences topics object can include following attributes:
 
 | Field         | Type   | Optional | Description                                              |
 | ------------- | ------ | -------- | -------------------------------------------------------- |
-| defaultStatus | string | no       | Possible values are "OPTED_OUT", "OPTED_IN" or "REQUIRED |
+| default_status| string | no       | Possible values are "OPTED_OUT", "OPTED_IN" or "REQUIRED |
 | id            | string | no       | Topic ID                                                 |
 
 **Example:**
@@ -69,7 +69,7 @@ Preferences topics object can include following attributes:
   },
   preferences: {
     topics: [{
-      defaultStatus: "OPTED_IN",
+      default_status: "OPTED_IN",
       id: "my-topic"
     }]
   },
@@ -91,7 +91,7 @@ Preferences topics object can include following attributes:
   },
   preferences: {
     topics: [{
-      defaultStatus: "OPTED_IN",
+      default_status: "OPTED_IN",
       id: "my-topic"
     }]
   },
