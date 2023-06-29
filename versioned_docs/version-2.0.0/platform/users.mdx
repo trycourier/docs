@@ -36,26 +36,54 @@ If you want to send a notification to more than one user, you can add as many us
 
 ```json
 "to": {
-    "list_id": "rebel_alliance"
+    "list_id": "rebel-alliance"
 }
 ```
 
 ## Audiences
 
+Instead of using a static list of users, you can create an [Audience](/reference/audiences) that will dynamically include users based on their attributes and a set of custom filtering rules that you define.
+
 ```json
 "to": {
-    "audience_id": ""
+    "audience_id": "currently-on-hoth"
 }
 ```
 
 ## Accounts
 
+Courier support multi-tenant applications with the [Accounts](/reference/accounts) API. A single user can be associated with multiple accounts, and you can specify an `account_id` when sending a message in order to...
+
+
 ```json
 "to": {
     "user_id": "luke1234",
-    "account_id" : "hoth"
+    "account_id" : "red-squadron"
 }
 ```
 
 ## Tokens
 
+When sending push notifications to mobile devices, developers need to [create tokens](/reference/token-management) that are mapped to the users they are sending notifications to.
+
+Once you create a token and attach it to a user and provider, you do not need to include it in the call to the [Send API](/reference/send) when you send a push notification.
+
+```json
+"message": {
+    "to": {
+        "user_id": "luke1234",
+    },
+    "content": {
+        "title": "Where do Sith go shopping?",
+        "body": "At the Darth Maul!"
+    },
+    "routing": {
+        "method": "single",
+        "channels": [
+            "push"
+        ]
+    }
+}
+```
+
+Additionally, if you use use the Courier [client SDK libraries](/sdk-libraries/) in your mobile application, they will automatically handle token generation and rotation for you automatically, so you won't need to handle [token management](/reference/token-management) in your code.
