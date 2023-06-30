@@ -74,6 +74,28 @@ Audience operators are used to match a user's profile against a set of criteria.
 }
 ```
 
+- `IS_AFTER` (checks if specified date attribute is after given date, e.g. date of birth is after 1990-01-01) the date should be in ISO 8601 format
+
+```ts
+{
+  "operator": "IS_AFTER",
+  "value": "1990-01-01",
+  "path": "date_of_birth"
+}
+```
+
+- `IS_BEFORE` (checks if specified date attribute is before given date, e.g. date of birth is before 1990-01-01) the date should be in ISO 8601 format
+
+```ts
+{
+  "operator": "IS_BEFORE",
+  "value": "1990-01-01",
+  "path": "date_of_birth"
+}
+```
+
+-
+
 - `LT` (checks any specific numeric attribute in user's profile is less than specified value)
 
 ```ts
