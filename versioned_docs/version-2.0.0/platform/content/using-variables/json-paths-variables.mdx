@@ -14,7 +14,7 @@ Paths are used in the following:
 - [Channel Conditions](../notification-settings/send-conditions.mdx/#for-notifications-and-channels) to disable channels within a Notification.
 - [Filters](https://help.courier.com/en/articles/4193090-content-block-basics) to hide or show blocks.
 - [Repeatable List Blocks](https://help.courier.com/en/articles/4209135-working-with-list-blocks) to set the list scope.
-- [Substitution Variables](https://help.courier.com/en/articles/4260757-using-variables-to-insert-user-data-into-a-notification) to insert values into Notifications.  
+- [Substitution Variables](https://help.courier.com/en/articles/4260757-using-variables-to-insert-user-data-into-a-notification) to insert values into Notifications.
 
 ## Path
 
@@ -30,17 +30,21 @@ A Path is a [JSONPath](https://www.npmjs.com/package/jsonpath) expression used t
 }
 ```
 
-You can build JSONPath expressions to access different data from this object. 
+You can build JSONPath expressions to access different data from this object.
+
+**Learn More:** [JSONPath Sytax](https://www.npmjs.com/package/jsonpath#jsonpath-syntax).
 
 ## Referencing Profile Information
 
 If you want to access data from the profile object or data from the User Profile created with the [Profiles API](../../../reference/profiles/intro.mdx), use a full JSONPath expression such as `$.profile.someProp`. IE if you wanted to access the email, you could use the expression `$.profile.email`.
 
-**Learn More:** [JSONPath Sytax](https://www.npmjs.com/package/jsonpath#jsonpath-syntax).
+## Referencing Account Information
+
+If you want to access properties from the associated account object created with the [Accounts API](../../../reference/accounts/intro.mdx), use a full JSONPath expression such as `$.account.company_name`.
 
 ## Referencing Brand Information
 
-If you want to access data from the active brand, use a full JSONPath expression such as `$.brand`. 
+If you want to access data from the active brand, use a full JSONPath expression such as `$.brand`.
 
 ```typescript
 {
@@ -84,14 +88,13 @@ If you want to access data from the active brand, use a full JSONPath expression
 
 **Learn More:** [JSONPath Sytax](https://www.npmjs.com/package/jsonpath#jsonpath-syntax).
 
-
 ## Referencing Data Information
 
-Because the majority of the data you'll want to access is in the `data` object, Courier has simplified that Path. Instead of providing a full JSONPath expression such as `$.data.someProp`, you can just use `someProp`. Courier will query `data` for any Path not prefixed with `$.` 
+Because the majority of the data you'll want to access is in the `data` object, Courier has simplified that Path. Instead of providing a full JSONPath expression such as `$.data.someProp`, you can just use `someProp`. Courier will query `data` for any Path not prefixed with `$.`
 
 ## Substitution Variables
 
-Substitution Variables allow you to display the value of a Path. You can create one by wrapping the Path with curly braces. If you want to display the value of the name property passed in the data object, you can use `{name}`. 
+Substitution Variables allow you to display the value of a Path. You can create one by wrapping the Path with curly braces. If you want to display the value of the name property passed in the data object, you can use `{name}`.
 
 You can include variables in your content blocks. At send time, Courier will replace the variable with the value located in the Path.
 
