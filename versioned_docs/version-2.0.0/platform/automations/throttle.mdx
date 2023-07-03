@@ -10,14 +10,13 @@ import videoThumbnail from "./assets/video-thumbnail.png";
 
 # Throttle
 
-:::note
-
-Status: This product is under active development and is available in a Private Beta, please
-contact Courier support for access.
-
+:::note NOTE
+This product is in Private Beta and is under active development. Please email support@courier.com for access.
 :::
 
-The Throttle step in an automation limits the number of events that can pass into the next node within a specific period, dropping any additional events. This prevents customers from receiving too many messages about the same event.
+The Throttle feature in Automations restricts the number of events that can trigger notification automations. This avoids overwhelming users with messages pertaining to the same event. With throttling, any events that exceed a predefined limit will be dropped for a specific duration of time and will not pass to the next node. 
+
+Because Throttle is a part of Automations, it can apply across channels (eg. email, SMS, chat, in-app inbox, push) and providers (eg. Twilio, Sendgrid, email SMTP, Slack, MS Teams, WeChat).
 
 ## Example Use Cases
 

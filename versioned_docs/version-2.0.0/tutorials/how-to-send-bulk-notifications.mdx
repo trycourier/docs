@@ -7,8 +7,9 @@ import GifWrapper from "@site/src/components/GifWrapper";
 
 # How To Send Bulk Notifications
 
-Bulk processing allows executing multiple job definitions across arbitrarily large set of input.
-Currently, we have added a feature that enables sending message definitions to large numbers of users in a single API invocation.
+The Bulk API makes it possible to incrementally build a notification that goes out to a very large number of users and then execute the send with a single API call. While the [Send API](/reference/send) can be used to deliver messages to multiple recipients, the Bulk API provides more tools to examine the progress of the job as it executes.
+
+Like sending a single message, the Bulk API can used across channels (eg. email, SMS, chat, in-app inbox, push) and providers (eg. Twilio, Sendgrid, email SMTP, Slack, MS Teams, WeChat).
 
 ## Create a Bulk Job
 
