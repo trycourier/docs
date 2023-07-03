@@ -10,25 +10,21 @@ import scheduleURL from "./assets/schedule.mp4";
 
 # Scheduling
 
-Courier Automations can offers the ability to be invoked on a schedule. This can be useful
-for scheduling a notification to be sent periodically.
+Scheduling is a feature of Automations that enables scheduling of a notification automation via three methods:
 
-To setup a scheduled automation, drag over the Schedule trigger from the triggers section
-onto the canvas. `Publishing` an automation template is sufficient to allow the trigger to invoke the automation on the provided schedule. You **do not** need to make a separate API call to invoke.
+* **One-time:** Set the specific time and date to invoke the automation.
+* **Recurrence:** Identify a repeat schedule for the automation to be invoked. This is similar to scheduling a repeat event in a calendar application.
+* **Cron:** Similar to Recurrence but with more specificity using [crontab expressions](https://crontab.guru/).
 
-Courier offers three scheduling methods:
+Because scheduling is a part of Automations, it can be used across channels (eg. email, SMS, chat, in-app inbox, push) and providers (eg. Twilio, Sendgrid, email SMTP, Slack, MS Teams, WeChat).
 
-1. Recurrence, schedule the automation to be invoked on a repeated schedule. Similar to how
-   one would schedule a repeat event in their favorite calendar application.
-2. Date, schedule the automation to be invoked one time on a specific future date.
-3. Cron. Similar to Recurrence but with more specificity using [crontab expressions](https://crontab.guru/).
+## Setup Scheduling
+
+To setup a scheduled automation, drag over the Schedule trigger from the triggers section onto the canvas. Publishing an automation template is sufficient to allow the trigger to invoke the automation on the provided schedule. You do not need to make a separate API call to invoke.
+
+Please note that the schedule trigger is set to the [UTC-0 timezone](https://dayspedia.com/time/zones/utc+0/).
 
 <video width="783" loop autoPlay muted controls poster={videoThumbnail}>
   <source src={scheduleURL} />
 </video>
 
-:::info
-
-The schedule trigger works on `UTC 0` [timezone](https://dayspedia.com/time/zones/utc+0/)
-
-:::
