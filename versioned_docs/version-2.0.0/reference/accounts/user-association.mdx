@@ -1,0 +1,64 @@
+---
+sidebar_position: 6
+sidebar_label: User Membership
+slug: ./user-membership
+toc_max_heading_level: 2
+---
+
+# Add a User to Accounts
+
+This endpoint is used to add a user to multiple accounts in one call.
+
+A custom profile can also be supplied for each account. This profile will be merged with the user's main profile when sending to the user with that account.
+
+**URL:** `https://api.courier.com/users/:user_id/accounts`
+
+**Method:** `PUT`
+
+**Path Parameters:**
+
+| Key     | Type   |
+| ------- | ------ |
+| user_id | string |
+
+**Body**
+
+| Field    | Type                     | Optional | Default | Description                                                                   |
+| -------- | ------------------------ | -------- | ------- | ----------------------------------------------------------------------------- |
+| accounts | UserAccountAssociation[] | no       | n/a     | An array of user account associations. See UserAccountAssociation for details |
+
+**UserAccountAssociation Object**
+
+| Field      | Type   | Optional | Default   | Description                                                                                |
+| ---------- | ------ | -------- | --------- | ------------------------------------------------------------------------------------------ |
+| account_id | string | no       | n/a       | The account id the user is a member of                                                     |
+| profile    | string | yes      | undefined | A profile to merge with the user's main profile when sending to the user with this account |
+
+**Example:**
+
+`PUT /users/john/accounts`
+
+```
+{
+  "accounts": [
+    {
+      "account_id": "acme",
+      "profile": {
+        "email": "john@acme.com",
+      }
+    },
+    {
+      "account_id": "bizcorp",
+      "profile": {
+        "email": "john@bizcorp.com",
+      }
+    },
+  ]
+}
+```
+
+Response:
+
+```
+status: 204
+```
