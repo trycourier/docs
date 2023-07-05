@@ -23,7 +23,7 @@ toc_max_heading_level: 2
 | ----------------- | ------ | -------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | name              | string | no       |         |                                                                                                                                                      |
 | parent_account_id | string | yes      |         |                                                                                                                                                      |
-| preferences       | object | yes      |         | Account level preferences object                                                                                                                     |
+| preferences       | object | yes      |         | Account level default_preferences object                                                                                                                     |
 | properties        | object | yes      |         | arbitrary properties accessible from the template                                                                                                    |
 | user_profile      | object | yes      |         | a base profile object merged with user profile on supplied on send                                                                                   |
 | brand_id          | string | yes      |         | When specified, this brand will be used over the default workspace brand. A brand specified directly in the send call still takes highest precedence |
@@ -32,27 +32,27 @@ toc_max_heading_level: 2
 
 A copy of the created account.
 
-| Field             | Type   | Description                                            |
-| ----------------- | ------ | ------------------------------------------------------ |
+| Field                      | Type             | Description                                            |
+| -------------------------- | -----------------| ------------------------------------------------------ |
 | id                | string | Id of the account                                      |
 | name              | string |                                                        |
 | parent_account_id | string |                                                        |
-| preferences       | object | Account level preferences object                       |
+| default_preferences       | object | Account level default_preferences object                       |
 | properties        | object | Arbitrary properties accessible from the template      |
 | user_profile      | object | A user profile object merged with user profile on send |
 | brand_id          | string |                                                        |
 
-Preferences object can include following attributes:
+default_preferences object can include following attributes:
 
 | Field  | Type  | Optional | Description                       |
 | ------ | ----- | -------- | --------------------------------- |
 | topics | array | no       | Array of preference topic objects |
 
-Preferences topics object can include following attributes:
+default_preferences topics object can include following attributes:
 
 | Field          | Type   | Optional | Description                                              |
 | -------------- | ------ | -------- | -------------------------------------------------------- |
-| default_status | string | no       | Possible values are "OPTED_OUT", "OPTED_IN" or "REQUIRED |
+| status         | string | no       | Possible values are "OPTED_OUT", "OPTED_IN" or "REQUIRED |
 | id             | string | no       | Topic ID                                                 |
 
 **Example:**
@@ -67,9 +67,9 @@ Preferences topics object can include following attributes:
   properties: {
     ceo: "Person",
   },
-  preferences: {
-    topics: [{
-      default_status: "OPTED_IN",
+  default_preferences: {
+    items: [{
+      status: "OPTED_IN",
       id: "my-topic"
     }]
   },
@@ -89,9 +89,9 @@ Preferences topics object can include following attributes:
   properties: {
     ceo: "Person",
   },
-  preferences: {
-    topics: [{
-      default_status: "OPTED_IN",
+  default_preferences: {
+    items: [{
+      status: "OPTED_IN",
       id: "my-topic"
     }]
   },
