@@ -19,15 +19,15 @@ toc_max_heading_level: 2
 
 **Response Body:**
 
-| Field             | Type   | Description                                            |
-| ----------------- | ------ | ------------------------------------------------------ |
-| id                | string | Id of the account                                      |
-| name              | string |                                                        |
-| parent_account_id | string |                                                        |
-| preferences       | object | Account level preferences object                       |
-| properties        | object | Arbitrary properties accessible from the template      |
-| user_profile      | object | A user profile object merged with user profile on send |
-| brand_id          | string | Brand associated with the account                      |
+| Field               | Type   | Description                                            |
+| ------------------- | ------ | ------------------------------------------------------ |
+| id                  | string | Id of the account                                      |
+| name                | string |                                                        |
+| parent_account_id   | string |                                                        |
+| default_preferences | object | Account level default_preferences object               |
+| properties          | object | Arbitrary properties accessible from the template      |
+| user_profile        | object | A user profile object merged with user profile on send |
+| brand_id            | string | Brand associated with the account                      |
 
 **Example:**
 
@@ -41,10 +41,11 @@ toc_max_heading_level: 2
   properties: {
     ceo: "Person",
   },
-  preferences: {
-    topics: [{
-      defaultStatus: "OPTED_IN",
-      id: "my-topic"
+  default_preferences: {
+    items: [{
+      status: "OPTED_IN",
+      id: "my-topic",
+      type: "subscription_topic"
     }]
   },
   user_profile: {
