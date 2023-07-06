@@ -4,9 +4,9 @@ sidebar_position: 0
 
 # JSON Paths and Variables
 
-> How to use JSON paths and Variables to insert data supplied in the Send API request or the User Profile into a notification.
+> How to use JSON paths and variables to insert data supplied in the Send API request or the User Profile into a notification.
 
-The Notification Designer allows you to use external data in many places as you build your notification. This data, supplied by the data and profile objects of the [Send API](../../../reference/send/intro.mdx) request or the [Profiles API](../../../reference/profiles/intro.mdx), can be accessed using a Path.
+The Notification Designer allows you to use external data in many places as you build your notification. This data, supplied by the data and profile objects of the [Send API](../../../reference/send/intro.mdx) request or the [Profiles API](../../../reference/profiles/intro.mdx), can be accessed using a path.
 
 Paths are used in the following:
 
@@ -18,7 +18,7 @@ Paths are used in the following:
 
 ## Path
 
-A Path is a [JSONPath](https://www.npmjs.com/package/jsonpath) expression used to query the Courier Notification Context JavaScript object. This object contains notification related information, such as:
+A path is a [JSONPath](https://www.npmjs.com/package/jsonpath) expression used to query the Courier Notification Context JavaScript object. This object contains notification related information, such as:
 
 - `data`- An object passed to the send method
 - `profile` - An object containing merged profile data passed to the send method and stored in Courier.
@@ -90,13 +90,13 @@ If you want to access data from the active brand, use a full JSONPath expression
 
 ## Referencing Data Information
 
-Because the majority of the data you'll want to access is in the `data` object, Courier has simplified that Path. Instead of providing a full JSONPath expression such as `$.data.someProp`, you can just use `someProp`. Courier will query `data` for any Path not prefixed with `$.`
+Because the majority of the data you'll want to access is in the `data` object, Courier has simplified that path. Instead of providing a full JSONPath expression such as `$.data.someProp`, you can just use `someProp`. Courier will query `data` for any path not prefixed with `$.`
 
 ## Substitution Variables
 
-Substitution Variables allow you to display the value of a Path. You can create one by wrapping the Path with curly braces. If you want to display the value of the name property passed in the data object, you can use `{name}`.
+Substitution Variables allow you to display the value of a path. You can create one by wrapping the path with curly braces. If you want to display the value of the name property passed in the data object, you can use `{name}`.
 
-You can include variables in your content blocks. At send time, Courier will replace the variable with the value located in the Path.
+You can include variables in your content blocks. At send time, Courier will replace the variable with the value located in the path.
 
 If we have the following text:
 
