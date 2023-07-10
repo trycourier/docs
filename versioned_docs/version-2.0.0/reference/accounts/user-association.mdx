@@ -5,7 +5,7 @@ slug: ./user-membership
 toc_max_heading_level: 2
 ---
 
-# Add a User to Accounts
+# Add a User to Multiple Accounts
 
 This endpoint is used to add a user to multiple accounts in one call.
 
@@ -32,7 +32,7 @@ A custom profile can also be supplied for each account. This profile will be mer
 | Field      | Type   | Optional | Default   | Description                                                                                |
 | ---------- | ------ | -------- | --------- | ------------------------------------------------------------------------------------------ |
 | account_id | string | no       | n/a       | The account id the user is a member of                                                     |
-| profile    | string | yes      | undefined | A profile to merge with the user's main profile when sending to the user with this account |
+| profile    | object | yes      | undefined | A profile to merge with the user's main profile when sending to the user with this account |
 
 **Example:**
 
@@ -61,4 +61,213 @@ Response:
 
 ```
 status: 204
+```
+
+# Add a User to a Single Account
+
+This endpoint is used to add a single account.
+
+A custom profile can also be supplied with the account. This profile will be merged with the user's main profile when sending to the user with that account.
+
+**URL:** `https://api.courier.com/users/:user_id/accounts/:account_id`
+
+**Method:** `PUT`
+
+**Path Parameters:**
+
+| Key        | Type   |
+| ---------- | ------ |
+| user_id    | string |
+| account_id | string |
+
+**Body**
+
+| Field   | Type   | Optional | Default   | Description                                                                                |
+| ------- | ------ | -------- | --------- | ------------------------------------------------------------------------------------------ |
+| profile | object | yes      | undefined | A profile to merge with the user's main profile when sending to the user with this account |
+
+**Example:**
+
+`PUT /users/john/accounts/acme`
+
+```js
+{
+  "profile": {
+    "email": "john@acme.com",
+  }
+}
+```
+
+Response:
+
+```
+status: 204
+```
+
+# Remove User From All Associated Accounts
+
+Removes a user from any accounts they may have been associated with.
+
+**URL:** `https://api.courier.com/users/:user_id/accounts`
+
+**Method:** `DELETE`
+
+**Path Parameters:**
+
+| Key     | Type   |
+| ------- | ------ |
+| user_id | string |
+
+**Example:**
+
+`DELETE /users/john/accounts`
+
+Response:
+
+```
+status: 204
+```
+
+# Remove User from an Account
+
+Removes a user from the passed account.
+
+**URL:** `https://api.courier.com/users/:user_id/accounts/:account_id`
+
+**Method:** `DELETE`
+
+**Path Parameters:**
+
+| Key        | Type   |
+| ---------- | ------ |
+| user_id    | string |
+| account_id | string |
+
+**Example:**
+
+`DELETE /users/john/accounts/acme`
+
+Response:
+
+```
+status: 204
+```
+
+# Get accounts associated with a given user
+
+Removes a user from any accounts they may have been associated with.
+
+**URL:** `https://api.courier.com/users/:user_id/accounts`
+
+**Method:** `GET`
+
+**Path Parameters:**
+
+| Key     | Type   |
+| ------- | ------ |
+| user_id | string |
+
+**Query Parameters:**
+
+| Key    | Type   | Optional | Default | Description                                                               |
+| ------ | ------ | -------- | ------- | ------------------------------------------------------------------------- |
+| cursor | string | yes      | n/a     | Pagination cursor to retrieve next page, returned by previous get request |
+
+**Response Body**
+
+| Field    | Type                     | Optional | Default | Description                                                                         |
+| -------- | ------------------------ | -------- | ------- | ----------------------------------------------------------------------------------- |
+| items    | UserAccountAssociation[] | no       | n/a     | An array of user account associations. See UserAccountAssociation for details       |
+| has_more | boolean                  | no       | n/a     | An array of user account associations. See UserAccountAssociation for details       |
+| type     | "list"                   | no       | n/a     | Defines the type of object returned by this endpoint                                |
+| cursor   | string                   | yes      | n/a     | Key to retrieve the next page of accounts. Supplied more when `has_more` is `true`. |
+
+**UserAccountAssociation Object**
+
+| Field      | Type   | Optional | Default   | Description                                                                                |
+| ---------- | ------ | -------- | --------- | ------------------------------------------------------------------------------------------ |
+| account_id | string | no       | n/a       | The account id the user is a member of                                                     |
+| profile    | object | yes      | undefined | A profile to merge with the user's main profile when sending to the user with this account |
+
+**Example:**
+
+`GET /users/john/accounts`
+
+Response:
+
+```
+status: 200
+```
+
+```
+{
+	"has_more": false,
+	"items": [
+		{
+			"account_id": "acme",
+			"profile": {
+				"role": "admin"
+			},
+			"user_id": "john"
+		},
+		{
+			"account_id": "biggle",
+			"profile": {
+				"role": "normal"
+			},
+			"user_id": "john"
+		},
+		{
+			"account_id": "example",
+			"profile": {
+				"role": "guest"
+			},
+			"user_id": "john"
+		}
+	],
+	"type": "list"
+}
+```
+
+# Get a User Account Association
+
+Returns the details of a user's membership with the supplied account
+
+**URL:** `https://api.courier.com/users/:user_id/accounts/:account_id`
+
+**Method:** `DELETE`
+
+**Path Parameters:**
+
+| Key        | Type   |
+| ---------- | ------ |
+| user_id    | string |
+| account_id | string |
+
+**Response Body**
+
+| Field      | Type   | Optional | Default | Description                                                                              |
+| ---------- | ------ | -------- | ------- | ---------------------------------------------------------------------------------------- |
+| account_id | string | no       | n/a     | Account id this association is tied to                                                   |
+| user_id    | string | no       | n/a     | The user's id                                                                            |
+| profile    | object | yes      | n/a     | Profile object merged with the user's main profile when sending to them via this account |
+
+**Example:**
+
+`GET /users/john/accounts/acme`
+
+Response:
+
+```
+status: 200
+```
+
+```
+{
+  "account_id": "acme",
+  "profile": {
+    "role": "admin"
+  },
+  "user_id": "john"
+}
 ```
