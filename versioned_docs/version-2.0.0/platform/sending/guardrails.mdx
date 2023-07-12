@@ -9,13 +9,16 @@ import Image from "@theme/IdealImage";
 Courier's business tier customers get access to Send Limits, which lets you set upper limits on the number of messages that can be sent per time period.
 
 We allow you to set limits on any/all of the following:
+
 - Global (all messages)
 - Per-user
 - Per-user per-subscription topic
+- Per-account
 
 In addition, you may exclude some subscription topics from the global and per-user limits.
 
 Available time periods are:
+
 - billing period
 - hour
 - day
@@ -48,8 +51,15 @@ This limits the number of messages you can send to an individual user. To work, 
 
 This limits the number of messages you can send to an individual user, for a given subscription topic. You can set a different limit for each topic, or no limit at all.
 
+### Per-account message limit
+
+This limits the number of messages you can send to an individual account. To work, account must be created using Courier's [Account API](https://www.courier.com/docs/reference/accounts/create-replace/). If you send messages to [users with an account](https://www.courier.com/docs/reference/accounts/user-membership/), the messages will count toward the account limit. Any sends to users without an account will not count toward account limits.
+
 ### Limit exclusions
 
 Some messages should always be sent, even if they would normally go over a limit. For example, important system updates, password-reset emails, etc.. Simply add the subscription topic(s) of messages you want excluded from limits here. Messages with these topics will still cound toward the limits, but will never themselves be throttled.
 
-<Image img={require("../../assets/guides/guardrails/settings.png")} alt="Send Limits settings screenshot" />
+<Image
+  img={require("../../assets/guides/guardrails/settings-v2.png")}
+  alt="Send Limits settings screenshot"
+/>
