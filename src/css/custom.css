@@ -13,9 +13,9 @@
 /**
  * Import figma token css
  */
-@import "../build/figma-tokens/sd-output/core.css";
-@import "../build/figma-tokens/sd-output/light.css";
-@import "../build/figma-tokens/sd-output/dark.css";
+@import "../../tailwind/build/figma-tokens/sd-output/core.css";
+@import "../../tailwind/build/figma-tokens/sd-output/light.css";
+@import "../../tailwind/build/figma-tokens/sd-output/dark.css";
 
 /**
  * Tailwind does not support 2 text-decoration styles at the same time.
