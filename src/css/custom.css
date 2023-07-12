@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /**
  * Any CSS included here will be global. The classic template
  * bundles Infima by default. Infima is a CSS framework designed to
@@ -5,6 +9,27 @@
  */
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+/**
+ * Import figma token css
+ */
+@import "../build/figma-tokens/sd-output/core.css";
+@import "../build/figma-tokens/sd-output/light.css";
+@import "../build/figma-tokens/sd-output/dark.css";
+
+/**
+ * Tailwind does not support 2 text-decoration styles at the same time.
+ * underline-and-strikethrough is a custom tailwind utility class that combines the two.
+ */
+@layer utilities {
+  .underline-and-strikethrough {
+    text-decoration: underline line-through;
+  }
+
+  .border-default {
+    border-color: var(--structure-default);
+  }
+}
 
 @font-face {
   font-family: "Gellix";
@@ -573,7 +598,6 @@ video {
   background-image: url(/img/sidebar-icons/elemental-active.svg);
 }
 
-
 .sidebar-automations .menu__link:before {
   background-image: url(/img/sidebar-icons/automations.svg);
 }
@@ -636,7 +660,7 @@ video {
 
 .platform-list {
   display: flex;
-  flex-wrap: wrap 
+  flex-wrap: wrap;
 }
 
 .platform-item {

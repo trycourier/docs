@@ -22,3 +22,7 @@ yarn-error.log*
 .vercel
 .env
 .vscode
+
+# Tailwind Build
+
+tailwind/build
