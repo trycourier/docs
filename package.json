@@ -5,8 +5,8 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "NODE_OPTIONS=\"--openssl-legacy-provider\" vercel dev",
-    "dev": "NODE_OPTIONS=\"--openssl-legacy-provider\" yarn tw-build && docusaurus start",
-    "build": "NODE_OPTIONS=\"--openssl-legacy-provider\" yarn tw-build && docusaurus build",
+    "dev": "yarn tw-build && NODE_OPTIONS=\"--openssl-legacy-provider\" && docusaurus start",
+    "build": "yarn tw-build && NODE_OPTIONS=\"--openssl-legacy-provider\" docusaurus build",
     "tw-build": "yarn token-transform && yarn build-style-dictionary",
     "token-transform-core": "npx token-transformer tailwind/figma-tokens.json tailwind/build/figma-tokens/core.json core --expandTypography",
     "token-transform-light": "npx token-transformer tailwind/figma-tokens.json tailwind/build/figma-tokens/light.json core,light,theme core --expandTypography",
