@@ -5,9 +5,9 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "NODE_OPTIONS=\"--openssl-legacy-provider\" vercel dev",
-    "dev": "yarn tw-build && NODE_OPTIONS=\"--openssl-legacy-provider\" docusaurus start",
-    "build": "yarn tw-build && NODE_OPTIONS=\"--openssl-legacy-provider\" docusaurus build",
-    "tw-build": "yarn token-transform && yarn build-style-dictionary",
+    "dev": "yarn build-tw-tokens && NODE_OPTIONS=\"--openssl-legacy-provider\" docusaurus start",
+    "build": "yarn build-tw-tokens && NODE_OPTIONS=\"--openssl-legacy-provider\" docusaurus build",
+    "build-tw-tokens": "yarn token-transform && yarn build-style-dictionary",
     "token-transform-core": "npx token-transformer tailwind/figma-tokens.json tailwind/build/figma-tokens/core.json core --expandTypography",
     "token-transform-light": "npx token-transformer tailwind/figma-tokens.json tailwind/build/figma-tokens/light.json core,light,theme core --expandTypography",
     "token-transform-dark": "npx token-transformer tailwind/figma-tokens.json tailwind/build/figma-tokens/dark.json core,dark,theme core --expandTypography",
@@ -48,6 +48,8 @@
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^2.0.0-beta.14",
+    "@headlessui/tailwindcss": "^0.1.3",
+    "@tailwindcss/forms": "^0.5.4",
     "@tsconfig/docusaurus": "^1.0.4",
     "@types/jsonwebtoken": "^8.5.6",
     "@types/lodash": "^4.14.176",
@@ -69,9 +71,9 @@
     "eslint-plugin-react": "^7.20.3",
     "eslint-plugin-react-hooks": "^4.0.8",
     "postcss": "^8.4.25",
-    "style-dictionary": "^3.8.0",
+    "style-dictionary": "3.7.2",
     "tailwindcss": "^3.3.2",
-    "token-transformer": "^0.0.33",
+    "token-transformer": "0.0.30",
     "typescript": "^4.3.5",
     "vercel": "^23.1.2"
   },

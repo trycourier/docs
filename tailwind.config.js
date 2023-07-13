@@ -276,7 +276,7 @@ const darkFontSizesWithDefaults = {
 
 module.exports = {
   darkMode: "class",
-  content: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
+  content: ["./versioned_docs/**/*.{js,ts,jsx,tsx,mdx}", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       boxShadow: {
