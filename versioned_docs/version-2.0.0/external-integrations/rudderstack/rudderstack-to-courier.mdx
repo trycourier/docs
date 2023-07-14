@@ -53,6 +53,10 @@ RudderStack identify event when sent to Courier creates or updates the user prof
 
 RudderStack track event when sent to Courier can trigger an automation or supply inline automations payload. The `properties` used inside the payload will be used for mapping it to Courier.
 
+### Group
+
+RudderStack group event when sent to Courier can create an account or trigger an automation. The `groupId` will be used as Account ID and `userId` (if not exists, `anonymousId`) will be used as User Identifier.
+
 ## Event mapping
 
 Received RudderStack Events can be mapped to an existing automation, or a new automation can be initialized where the event is set as a trigger.
