@@ -15,8 +15,8 @@ How do Segment API calls send notifications?
 
 1. Segment identifies some user action and creates a track API call
 2. The track API call sends the event to Courier
-    - Segment `properties` JSON data is passed into the Courier Send API as elements of the `data` JSON object
-    - Segment's `userId` is used to locate the recipient in Courier with the same ID or create a new one when none are found
+   - Segment `properties` JSON data is passed into the Courier Send API as elements of the `data` JSON object
+   - Segment's `userId` is used to locate the recipient in Courier with the same ID or create a new one when none are found
 3. Courier receives the event from Segment
 4. The event within Courier triggers all automations linked to it
 5. The linked automations run send any notifications that are linked to them
@@ -44,14 +44,22 @@ Initially, you will need to connect Courier as a destination within Segment. At 
 
 ## Configure Segment
 
-By connecting Segment to Courier, you can use the `analytics.identify` and `analytics.track` API calls to direct information about users and their actions (Segment events) from Segment to Courier.
+Segment supports Courier as a destination. Once you configure Courier destination inside Segment, you should be able to connect one or more sources, and you should see events flowing into Courier.
+
+Events flowing in from Segment into Courier are visible on [Segment integration page](https://app.courier.com/channels/segment) inside Courier Studio, from where you can map it to trigger notification workflows. For instance, you can trigger an automation that welcomes a new user if an `analytics.identify` event flows in from Segment.
+
+Supported Segment Events:
+
+- analytics.group
+- analytics.identify
+- analytics.track
 
 ### Connecting Segment
 
 1. Once logged into the Segment app, navigate to the [Destinations](https://app.segment.com/courier-shreya/destinations) catalog page and click **Add Destination**.
 2. Search for Courier in the Destinations Catalog, and select the Courier destination.
 3. Choose which Source should send data to the Courier destination.
-4. In the [Courier Integrations Page](https://app.courier.com/integrations), search for Segment and click on it to access the Courier API Key.  (If you do not see a key here, go to the [Courier Settings Page](https://app.courier.com/settings) and copy the Auth Token from the API Keys section.)
+4. In the [Courier Integrations Page](https://app.courier.com/integrations), search for Segment and click on it to access the Courier API Key. (If you do not see a key here, go to the [Courier Settings Page](https://app.courier.com/settings) and copy the Auth Token from the API Keys section.)
 5. Enter the Courier API Key or Auth Token in the Courier destination settings field API Key in Segment.
 
 ### Check for Segment Events
@@ -80,7 +88,7 @@ Another suggestion is to check where the `email` property is placed within the t
 
 Linking an automation to a Segment event allows you to create a flow of actions that will be triggered by that specific event. This means that whenever an event is sent through Segment, any and all all linked automations will be triggered.
 
-Locate the event you want to link, click the + sign on the second column, and select the automation(s) of your choice. 
+Locate the event you want to link, click the + sign on the second column, and select the automation(s) of your choice.
 
 The easiest way to successfully link an automation to a segment event is to click “create new automation”. This new automation will use the linked Segment event as a trigger, and have an autopopulated recipient ID in the send step. All you’ll need to do is select the notification template that should be sent.
 
@@ -167,10 +175,10 @@ The following is how the above JSON object is mapped into the Courier data objec
 ```json
 {
   "data": {
-		"property1": 1,
+    "property1": 1,
     "property2": "test",
     "property3": true
-	}
+  }
 }
 ```
 
@@ -181,11 +189,11 @@ If the email property isn’t being read into Courier, try to place `email` with
 ## FAQs
 
 1. **What is the difference between Courier's live and test environments in relation to Segment?**
-  
-  Segment API keys will follow the environment you're in. If you'd like to configure Segment with your production API keys, configure in it the product environment. If you'd like to configure Segment with your test API keys, configure it in the test environment.
+
+Segment API keys will follow the environment you're in. If you'd like to configure Segment with your production API keys, configure in it the product environment. If you'd like to configure Segment with your test API keys, configure it in the test environment.
 
 2. **What should I do if the recipient ID in the Automation template does not autopopulate?**
 
-  The reicipient ID will only autopopulate if and when the template is linked to a Segment event. To ensure this, head over to the Segment integration page and make sure that your automation is linked to the correct event. You can also do this by checking the first step of the Automation template itself, labelled "Start".
+The reicipient ID will only autopopulate if and when the template is linked to a Segment event. To ensure this, head over to the Segment integration page and make sure that your automation is linked to the correct event. You can also do this by checking the first step of the Automation template itself, labelled "Start".
 
-  Once linked to an event, try to refresh the template and check if the reicipient ID appears. If it does not, you can manually write `refs.data.userid` into the recipient ID field.
+Once linked to an event, try to refresh the template and check if the reicipient ID appears. If it does not, you can manually write `refs.data.userid` into the recipient ID field.
