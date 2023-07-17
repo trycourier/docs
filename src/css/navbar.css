@@ -57,6 +57,7 @@
 .navbar__link {
   margin: 0 var(--ifm-navbar-item-padding-horizontal);
   font-size: 12px;
+  font-weight: 400;
 }
 
 .navbar__item {

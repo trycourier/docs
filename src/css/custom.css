@@ -181,6 +181,7 @@ html[data-theme="dark"] .docusaurus-highlight-code-line {
 @import url("./platform.css");
 @import url("./pagination.css");
 @import url("./prism.css");
+@import url("./table.css");
 
 .footer {
   display: none;
