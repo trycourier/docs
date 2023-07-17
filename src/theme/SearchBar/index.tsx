@@ -30,9 +30,9 @@ const CustomSearchBar = () => {
             onClick={loggedIn ? logOut : undefined}
             target="_self"
             rel="noopener noreferrer"
-            className="navbar__item navbar__link"
+            className="navbar__item navbar-login"
           >
-            {loggedIn ? <span>Log Out</span> : <span>Log In</span>}
+            {loggedIn ? <span>Log Out</span> : <span>Login</span>}
           </a>
         )}
       </BrowserOnly>

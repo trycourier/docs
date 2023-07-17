@@ -1,0 +1,26 @@
+.pagination-nav__link {
+  border-color: var(--structure-border);
+  background-color: var(--background-panels);
+}
+
+.pagination-nav__label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-header);
+}
+
+.pagination-nav__item:first-child .pagination-nav__label::before,
+.pagination-nav__item--next .pagination-nav__label::after {
+  content: "";
+}
+
+.pagination-nav__sublabel {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-link);
+}
+
+.pagination-nav__link:hover {
+  background: rgba(44, 19, 56, 0.02);
+  border-color: rgba(44, 19, 56, 0.24);
+}
