@@ -32,7 +32,7 @@ Add Courier API Key
 
 You can trigger events either via the sources you connected or by directly calling rudderstack endpoints.
 
-Courier destination supports `identify` and `track` events, which appear on Courier Rudderstack integration page inside Courier Studio UI.
+Courier destination supports `group`, `identify` and `track` events, which appear on Courier Rudderstack integration page inside Courier Studio UI.
 
 Check <a href="https://www.rudderstack.com/docs/sources/event-streams/sdks/rudderstack-node-sdk/#sending-events">this</a> to learn more on sending events to your RudderStack instance.
 
@@ -52,6 +52,10 @@ RudderStack identify event when sent to Courier creates or updates the user prof
 ### Track
 
 RudderStack track event when sent to Courier can trigger an automation or supply inline automations payload. The `properties` used inside the payload will be used for mapping it to Courier.
+
+### Group
+
+RudderStack group event when sent to Courier can create an account or trigger an automation. The `groupId` will be used as Account ID and `userId` (if not exists, `anonymousId`) will be used as User Identifier.
 
 ## Event mapping
 
