@@ -17,23 +17,35 @@ import { Params, Param } from "@site/src/components/Params";
 
 <Params>
   <Param name="account_id" type="string" required>
-
-Id of the account to be returned.
-
+    Id of the account to be returned.
   </Param>
 </Params>
 
 **Response Body:**
 
-| Field               | Type   | Description                                            |
-| ------------------- | ------ | ------------------------------------------------------ |
-| id                  | string | Id of the account                                      |
-| name                | string |                                                        |
-| parent_account_id   | string |                                                        |
-| default_preferences | object | Account level default_preferences object               |
-| properties          | object | Arbitrary properties accessible from the template      |
-| user_profile        | object | A user profile object merged with user profile on send |
-| brand_id            | string | Brand associated with the account                      |
+<Params>
+  <Param name="id" type="string">
+    Id of the account.
+  </Param>
+  <Param name="name" type="string">
+    Name of the account.
+  </Param>
+  <Param name="parent_account_id" type="string?">
+    Account's parent id (if any).
+  </Param>
+  <Param name="default_preferences" type="object?">
+    Defines the preferences used for the account when the user hasn't specified their own.
+  </Param>
+  <Param name="properties" type="object?">
+    Arbitrary properties accessible to a template.
+  </Param>
+  <Param name="user_profile" type="object?">
+    A user profile object merged with user profile on send.
+  </Param>
+  <Param name="brand_id" type="string">
+    Brand to be used for the account when one is not specified by the send call.
+  </Param>
+</Params>
 
 **Example:**
 
