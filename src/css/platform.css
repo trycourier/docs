@@ -1,0 +1,25 @@
+.platform-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.platform-item {
+  width: 250px;
+  padding: 8px 16px;
+  margin: 0 16px 16px 0;
+  border-radius: 6px;
+  border: 1px solid var(--structure-border, #dcdee4);
+  background: var(--background-panels, #fff);
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.03), 0px 1px 2px 0px rgba(0, 0, 0, 0.03),
+    0px 3px 3px 0px rgba(0, 0, 0, 0.03), 0px 7px 4px 0px rgba(0, 0, 0, 0.02),
+    0px 12px 5px 0px rgba(0, 0, 0, 0), 0px 19px 5px 0px rgba(0, 0, 0, 0);
+}
+
+.platform-name {
+  font-size: 120%;
+  text-align: center;
+}
+
+.platform-desc {
+  font-size: 80%;
+}

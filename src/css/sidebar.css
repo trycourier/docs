@@ -1,0 +1,135 @@
+.menu {
+  scrollbar-gutter: stable;
+  margin-bottom: 20px;
+}
+
+.menu__link {
+  min-height: 30px;
+  font-size: 12px;
+  font-weight: 400;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: 8px;
+  overflow-wrap: anywhere;
+}
+
+.menu__link--active {
+  background: rgba(145, 33, 194, 0.05);
+}
+
+.menu__link:after {
+  opacity: 0.6;
+  margin-left: 0.6rem;
+  height: 1rem;
+  min-width: 1rem;
+  background-size: 1.2rem 1.2rem;
+}
+
+.menu__link svg {
+  margin-left: 10px;
+  opacity: 0.4;
+  transform: scale(0.75);
+}
+
+aside,
+.navbar-sidebar {
+  border-right: 1px solid var(--structure-border, #dcdee4);
+  color: #2c1338;
+  --ifm-menu-color: #2c1338;
+  --ifm-menu-color-active: var(--text-link);
+}
+
+aside > div > a,
+.navbar-sidebar__brand .navbar__brand {
+  width: 6.5rem;
+  background: url(/img/logo-violet.svg) center no-repeat;
+}
+
+aside > div > a > img,
+.navbar-sidebar__brand .navbar__brand .navbar__logo img {
+  display: none !important;
+}
+
+.navbar-sidebar__back {
+  text-transform: uppercase;
+  background: transparent;
+  padding-left: 1rem;
+}
+
+@media (min-width: 997px) {
+  .menu {
+    padding: 1.3rem 1rem !important;
+  }
+}
+
+.theme-doc-sidebar-item-link-level-1,
+.theme-doc-sidebar-item-category-level-1 {
+  position: relative;
+}
+
+.menu__list-item.theme-doc-sidebar-item-category-level-1 {
+  margin-top: 10px;
+}
+
+.theme-doc-sidebar-item-link-level-1 .menu__link,
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible .menu__link {
+  min-height: 38px;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: var(--ifm-heading-font-family);
+  padding-right: 6px;
+  padding-left: 10px;
+}
+
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible {
+  border-radius: 8px;
+}
+
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible .menu__link--active {
+  background: var(--ifm-menu-color-background-active) !important;
+}
+
+.theme-doc-sidebar-item-category-level-1
+  > .menu__list-item-collapsible
+  .menu__link:not(.menu__link--active):hover {
+  background: var(--ifm-menu-color-background-hover) !important;
+}
+
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible .menu__link:after {
+  margin-left: auto;
+  background: none;
+  width: 10px;
+  height: 2px;
+  opacity: 1;
+  background: #2c1338;
+  min-width: unset;
+  margin-right: 8px;
+  border-radius: 2px;
+  transition-property: all;
+}
+
+.menu__list-item--collapsed.theme-doc-sidebar-item-category-level-1
+  > .menu__list-item-collapsible
+  .menu__link:after {
+  background: #747b95;
+}
+
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  width: 10px;
+  height: 2px;
+  transform: translateY(-50%);
+  background: #747b95;
+  border-radius: 2px;
+}
+
+.theme-doc-sidebar-item-category-level-1 > .menu__list {
+  padding-left: 22px;
+}
+
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible:hover {
+  background: transparent;
+}

@@ -1,0 +1,39 @@
+[class^="codeBlockTitle"] {
+  color: white !important;
+  border: 0 !important;
+  background: var(--code-block-bg);
+  padding-left: 3.3rem !important;
+  padding-bottom: 0 !important;
+}
+
+.prism-code {
+  counter-reset: line-number;
+  font-size: 13px;
+  background: var(--code-block-bg);
+}
+
+.prism-code .token-line {
+  position: relative;
+  counter-increment: line-number;
+}
+
+.prism-code .token-line:before {
+  content: counter(line-number);
+  position: sticky;
+  left: 0;
+  display: inline-block;
+  width: 1.9rem;
+  margin: calc(-1 * var(--ifm-pre-padding));
+  margin-right: 0.8rem;
+  padding-right: 0.6rem;
+  text-align: right;
+  background: #1e0c26;
+  color: var(--ifm-color-gray-700);
+}
+
+.prism-code + button {
+  font-size: 10px;
+  font-family: var(--ifm-font-family-monospace);
+  text-transform: lowercase;
+  background: #1e0c26;
+}

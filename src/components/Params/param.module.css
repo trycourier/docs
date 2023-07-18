@@ -1,0 +1,47 @@
+.param {
+  display: flex;
+  padding: 16px 24px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  align-self: stretch;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  width: auto;
+  margin-bottom: 5px;
+}
+
+.header > :not(:last-child) {
+  margin-right: 5px;
+}
+
+.name {
+  color: var(--text-header, #141414);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 171.429% */
+}
+
+.type {
+  color: var(--text-subtext, #696f8c);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.required {
+  color: var(--text-red, #ff3363);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.description > p {
+  margin-bottom: 0px;
+}
