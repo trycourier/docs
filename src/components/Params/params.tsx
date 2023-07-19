@@ -4,9 +4,7 @@ import styles from "./params.module.css";
 /** Will return true when params are children */
 export const ChildContext = createContext(false);
 
-export type ParamsProps = { name?: string };
-
-export const Params: FC<ParamsProps> = ({ children }) => {
+export const Params: FC = ({ children }) => {
   const isChild = useContext(ChildContext);
 
   if (isChild) return <>{children}</>;
@@ -14,14 +12,20 @@ export const Params: FC<ParamsProps> = ({ children }) => {
   return <ParamsList>{children}</ParamsList>;
 };
 
-export const ChildParams: FC<ParamsProps> = ({ children, name = "parameters" }) => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+export const ExtendParams: FC = ({ children }) => (
+  <ChildContext.Provider value={true}>
+    <Params>{children}</Params>
+  </ChildContext.Provider>
+);
+
+export const ChildParams: FC<{ name?: string }> = ({ children, name = "child parameters" }) => {
+  const [isCollapsed, setIsCollapsed] = useState(true);
 
   const toggleCollapsed = () => setIsCollapsed(!isCollapsed);
 
   const showButton = (
     <div className={styles.showChildParamsButton} onClick={toggleCollapsed}>
-      + Show child {name}
+      + Show {name}
     </div>
   );
 
@@ -29,7 +33,7 @@ export const ChildParams: FC<ParamsProps> = ({ children, name = "parameters" }) 
     <div className={styles.childParams}>
       <ParamsList>
         <span className={styles.hideChildParamsButton} onClick={toggleCollapsed}>
-          - Hide child {name}
+          - Hide {name}
         </span>
         <ChildContext.Provider value={true}>{children}</ChildContext.Provider>
       </ParamsList>

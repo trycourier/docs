@@ -5,6 +5,8 @@ slug: ./get-accounts
 toc_max_heading_level: 2
 ---
 
+import { AccountResponse } from "../types/accounts";
+
 # Get a List of Accounts
 
 **URL:** `https://api.courier.com/accounts`
@@ -17,18 +19,32 @@ None
 
 **Query Parameters:**
 
-| Key            | Type   | Required | Default      | Description                               |
-| -------------- | ------ | -------- | ------------ | ----------------------------------------- |
-| limit          | number | No       | 20 (max 100) |                                           |
-| starting_after | string | no       |              | Value of next_page from previous response |
+<Params>
+  <Param name="limit" type="number">
+    The number of accounts to return (defaults to 20, maximum value of 100)
+  </Param>
+  <Param name="starting_after" type="string">
+    Value of next_page from previous response
+  </Param>
+</Params>
 
 **Response Body:**
 
-| Field     | Type                | Description                                          |
-| --------- | ------------------- | ---------------------------------------------------- |
-| items     | Account[]           | An array of account objects                          |
-| has_more  | boolean             |                                                      |
-| next_page | string \| undefined | A cursor to provide for the starting_after parameter |
+<Params>
+  <Param name="items" type="array<Account>">
+    The number of accounts to return (defaults to 20, maximum value of 100)
+    <ChildParams name="account type">
+      <AccountResponse />
+    </ChildParams>
+  </Param>
+  <Param name="has_more" type="boolean">
+    Set to <code>true</code> when there are more items that can be requested.
+  </Param>
+  <Param name="next_page" type="string?">
+    A cursor to provide for the starting_after parameter. Will be supplied whenver{" "}
+    <code>has_more</code> is true.
+  </Param>
+</Params>
 
 **Example:**
 

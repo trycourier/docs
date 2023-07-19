@@ -42,6 +42,10 @@
   line-height: 24px;
 }
 
+.description {
+  width: 100%;
+}
+
 .description > p {
   margin-bottom: 0px;
 }
