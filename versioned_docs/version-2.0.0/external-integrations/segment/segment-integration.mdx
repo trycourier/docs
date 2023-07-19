@@ -13,7 +13,15 @@ import GifWrapper from "@site/src/components/GifWrapper";
 
 ## Configure Segment
 
-By connecting Segment to Courier, you can use the `analytics.identify` and `analytics.track` API calls to direct information about users and their actions (Segment events) from Segment to Courier.
+Segment supports Courier as a destination. Once you configure Courier destination inside Segment, you should be able to connect one or more sources, and you should see events flowing into Courier.
+
+Events flowing in from Segment into Courier are visible on [Segment integration page](https://app.courier.com/channels/segment) inside Courier Studio, from where you can map it to trigger notification workflows. For instance, you can trigger an automation that welcomes a new user if an `analytics.identify` event flows in from Segment.
+
+Supported Segment Events:
+
+- `analytics.group`
+- `analytics.identify`
+- `analytics.track`
 
 ## Connecting Segment
 
