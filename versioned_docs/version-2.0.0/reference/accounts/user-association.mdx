@@ -5,7 +5,13 @@ slug: ./user-membership
 toc_max_heading_level: 2
 ---
 
-# Add a User to Multiple Accounts
+import { UserAccountAssociation } from "../types/accounts";
+import { Profile } from "../types/profile";
+import { PaginatedResponse } from "../types/pagination";
+
+# User Membership
+
+## Add a User to Multiple Accounts
 
 This endpoint is used to add a user to multiple accounts in one call.
 
@@ -17,22 +23,22 @@ A custom profile can also be supplied for each account. This profile will be mer
 
 **Path Parameters:**
 
-| Key     | Type   |
-| ------- | ------ |
-| user_id | string |
+<Params>
+  <Param name="user_id" type="string" required>
+    Id of the user to be added to the supplied accounts
+  </Param>
+</Params>
 
-**Body**
+**Body:**
 
-| Field    | Type                     | Optional | Default | Description                                                                   |
-| -------- | ------------------------ | -------- | ------- | ----------------------------------------------------------------------------- |
-| accounts | UserAccountAssociation[] | no       | n/a     | An array of user account associations. See UserAccountAssociation for details |
-
-**UserAccountAssociation Object**
-
-| Field      | Type   | Optional | Default   | Description                                                                                |
-| ---------- | ------ | -------- | --------- | ------------------------------------------------------------------------------------------ |
-| account_id | string | no       | n/a       | The account id the user is a member of                                                     |
-| profile    | object | yes      | undefined | A profile to merge with the user's main profile when sending to the user with this account |
+<Params>
+  <Param name="accounts" type="UserAccountAssociation">
+    A list of accounts the user a member of.
+    <ChildParams name="user account association type">
+      <UserAccountAssociation />
+    </ChildParams>
+  </Param>
+</Params>
 
 **Example:**
 
@@ -63,7 +69,7 @@ Response:
 status: 204
 ```
 
-# Add a User to a Single Account
+## Add a User to a Single Account
 
 This endpoint is used to add a single account.
 
@@ -75,16 +81,25 @@ A custom profile can also be supplied with the account. This profile will be mer
 
 **Path Parameters:**
 
-| Key        | Type   |
-| ---------- | ------ |
-| user_id    | string |
-| account_id | string |
+<Params>
+  <Param name="user_id" type="string" required>
+    Id of the user to be added to the supplied account.
+  </Param>
+  <Param name="account_id" type="string" required>
+    Id of the account the user should be added to.
+  </Param>
+</Params>
 
-**Body**
+**Body:**
 
-| Field   | Type   | Optional | Default   | Description                                                                                |
-| ------- | ------ | -------- | --------- | ------------------------------------------------------------------------------------------ |
-| profile | object | yes      | undefined | A profile to merge with the user's main profile when sending to the user with this account |
+<Params>
+  <Param name="profile" type="Profile">
+    A profile to merge with the main user profile when sending via this account.
+    <ChildParams name="profile type">
+      <Profile />
+    </ChildParams>
+  </Param>
+</Params>
 
 **Example:**
 
@@ -104,7 +119,7 @@ Response:
 status: 204
 ```
 
-# Remove User From All Associated Accounts
+## Remove User From All Associated Accounts
 
 Removes a user from any accounts they may have been associated with.
 
@@ -114,9 +129,11 @@ Removes a user from any accounts they may have been associated with.
 
 **Path Parameters:**
 
-| Key     | Type   |
-| ------- | ------ |
-| user_id | string |
+<Params>
+  <Param name="user_id" type="string" required>
+    Id of the user to be removed from all accounts.
+  </Param>
+</Params>
 
 **Example:**
 
@@ -128,7 +145,7 @@ Response:
 status: 204
 ```
 
-# Remove User from an Account
+## Remove User from an Account
 
 Removes a user from the passed account.
 
@@ -138,10 +155,14 @@ Removes a user from the passed account.
 
 **Path Parameters:**
 
-| Key        | Type   |
-| ---------- | ------ |
-| user_id    | string |
-| account_id | string |
+<Params>
+  <Param name="user_id" type="string" required>
+    Id of the user to be removed from the supplied account.
+  </Param>
+  <Param name="account_id" type="string" required>
+    Id of the account the user should be removed from.
+  </Param>
+</Params>
 
 **Example:**
 
@@ -153,7 +174,7 @@ Response:
 status: 204
 ```
 
-# Get accounts associated with a given user
+## Get accounts associated with a given user
 
 Removes a user from any accounts they may have been associated with.
 
@@ -163,31 +184,28 @@ Removes a user from any accounts they may have been associated with.
 
 **Path Parameters:**
 
-| Key     | Type   |
-| ------- | ------ |
-| user_id | string |
+<Params>
+  <Param name="user_id" type="string" required>
+    Id of the user to retrieve all associated accounts for.
+  </Param>
+</Params>
 
 **Query Parameters:**
 
-| Key    | Type   | Optional | Default | Description                                                               |
-| ------ | ------ | -------- | ------- | ------------------------------------------------------------------------- |
-| cursor | string | yes      | n/a     | Pagination cursor to retrieve next page, returned by previous get request |
+<Params>
+  <Param name="cursor" type="string">
+    Pagination cursor to retrieve next page, returned by previous get request.
+  </Param>
+</Params>
 
-**Response Body**
+**Response Body:**
 
-| Field    | Type                     | Optional | Default | Description                                                                         |
-| -------- | ------------------------ | -------- | ------- | ----------------------------------------------------------------------------------- |
-| items    | UserAccountAssociation[] | no       | n/a     | An array of user account associations. See UserAccountAssociation for details       |
-| has_more | boolean                  | no       | n/a     | An array of user account associations. See UserAccountAssociation for details       |
-| type     | "list"                   | no       | n/a     | Defines the type of object returned by this endpoint                                |
-| cursor   | string                   | yes      | n/a     | Key to retrieve the next page of accounts. Supplied more when `has_more` is `true`. |
-
-**UserAccountAssociation Object**
-
-| Field      | Type   | Optional | Default   | Description                                                                                |
-| ---------- | ------ | -------- | --------- | ------------------------------------------------------------------------------------------ |
-| account_id | string | no       | n/a       | The account id the user is a member of                                                     |
-| profile    | object | yes      | undefined | A profile to merge with the user's main profile when sending to the user with this account |
+<PaginatedResponse type="array<UserAccountAssociation>">
+  An array of user account associations.
+  <ChildParams name="user account association type">
+    <UserAccountAssociation />
+  </ChildParams>
+</PaginatedResponse>
 
 **Example:**
 
@@ -229,7 +247,7 @@ status: 200
 }
 ```
 
-# Get a User Account Association
+## Get a User Account Association
 
 Returns the details of a user's membership with the supplied account
 
@@ -239,18 +257,31 @@ Returns the details of a user's membership with the supplied account
 
 **Path Parameters:**
 
-| Key        | Type   |
-| ---------- | ------ |
-| user_id    | string |
-| account_id | string |
+<Params>
+  <Param name="user_id" type="string" required>
+    Id of the user to retrieve account details for.
+  </Param>
+  <Param name="account_id" type="string" required>
+    Id of the account to retrieve details for.
+  </Param>
+</Params>
 
-**Response Body**
+**Response Body:**
 
-| Field      | Type   | Optional | Default | Description                                                                              |
-| ---------- | ------ | -------- | ------- | ---------------------------------------------------------------------------------------- |
-| account_id | string | no       | n/a     | Account id this association is tied to                                                   |
-| user_id    | string | no       | n/a     | The user's id                                                                            |
-| profile    | object | yes      | n/a     | Profile object merged with the user's main profile when sending to them via this account |
+<Params>
+  <Param name="user_id" type="string" required>
+    User id the association is tied to.
+  </Param>
+  <Param name="account_id" type="string" required>
+    Account id the association is tied to.
+  </Param>
+  <Param name="profile" type="Profile">
+    A profile merged with the main user profile when sending via this account.
+    <ChildParams name="profile type">
+      <Profile />
+    </ChildParams>
+  </Param>
+</Params>
 
 **Example:**
 
