@@ -12,3 +12,31 @@
 .params > :not(:last-child) {
   border-bottom: 1px solid var(--structure-border, #dcdee4);
 }
+
+.childParams {
+  margin-top: 12px;
+}
+
+.childParams > .params {
+  margin-bottom: 0px;
+}
+
+.showChildParamsButton {
+  margin-top: 12px;
+  padding: 6px 24px;
+  border: 1px solid var(--structure-border, #dcdee4);
+  border-radius: 6px;
+  width: fit-content;
+}
+
+.hideChildParamsButton {
+  display: block;
+  width: 100%;
+  padding: 6px 24px;
+}
+
+.hideChildParamsButton:hover,
+.showChildParamsButton:hover {
+  cursor: pointer;
+  color: var(--structure-border);
+}
