@@ -83,6 +83,14 @@ module.exports = {
       "@easyops-cn/docusaurus-search-local",
       { docsRouteBasePath: "/", indexBlog: false, ignoreFiles: /1\.0\.0/ },
     ],
-    "./plugins/sitemap",
+    [
+      "@docusaurus/plugin-sitemap",
+      {
+        changefreq: "weekly",
+        priority: 0.5,
+        ignorePatterns: ["**/1.0.0/**"],
+        filename: "sitemap.xml",
+      },
+    ],
   ],
 };
