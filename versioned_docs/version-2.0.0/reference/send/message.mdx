@@ -58,7 +58,7 @@ The `POST` accepts a JSON payload with a single message property.
   </Param>
 </Params>
 
-## The Message Property
+### The Message Property
 
 The `message` property has the following primary top-level properties. They define the destination and content of the message.
 
@@ -66,7 +66,7 @@ Additional advanced configuration fields [are defined below](#other-message-prop
 
 <Message />
 
-## The To Property
+### The To Property
 
 **Required.** The recipient or recipients or this message.
 
@@ -93,7 +93,7 @@ Example of sending to multiple recipients:
 
 <ToProfile />
 
-## The Content Property
+### The Content Property
 
 Describes the content of the message in a way that will work for email, push, chat, or any channel. Either this field or template must be specified.
 
@@ -106,7 +106,7 @@ Describes the content of the message in a way that will work for email, push, ch
 
 <Content />
 
-## The Data Property
+### The Data Property
 
 An arbitrary object that includes any data you want to pass to the message. The data can be used to populate corresponding template/content variables or be passed-through to your application via the Courier client SDKs.
 
@@ -118,13 +118,13 @@ An arbitrary object that includes any data you want to pass to the message. The 
 }
 ```
 
-## Other Message Properties
+### Other Message Properties
 
 The following properties support overriding configured values and defaults at run-time and attaching metadata to messages.
 
 <AdvancedMessageProperties />
 
-## The Channels Property
+### The Channels Property
 
 An object whose keys are valid channel identifiers (email, sms, etc) which map to an object with the following properties.
 
@@ -138,7 +138,7 @@ An object whose keys are valid channel identifiers (email, sms, etc) which map t
 
 <ChannelConfig />
 
-## The Expiry Property
+### The Expiry Property
 
 Expiry allows you to set an absolute or relative time in which a message expires.
 
@@ -146,13 +146,13 @@ Note: This is only valid for the Courier Inbox channel as of 12-08-2022.
 
 <Expiry />
 
-## The Metadata Property
+### The Metadata Property
 
 Attach information not related to the content of the message for application or marketing use cases.
 
 <Metadata />
 
-## The Providers Property
+### The Providers Property
 
 An object whose keys are valid provider identifiers which map to an object with the following properties:
 
@@ -166,7 +166,7 @@ An object whose keys are valid provider identifiers which map to an object with 
 
 <ProviderConfig />
 
-## The Routing Property
+### The Routing Property
 
 Allows you to customize which channel(s) Courier will potentially deliver the message. If no
 routing key is specified, Courier will use the default routing configuration or routing
@@ -174,7 +174,7 @@ defined by the template.
 
 <Routing />
 
-### As an Array of Channel Identifiers
+#### As an Array of Channel Identifiers
 
 The simplest option is to specify an array of strings that match the Channel identifies you want to use to send the message.
 
@@ -187,7 +187,7 @@ In this example, courier will send to one of sms, email or inbox depending of us
 }
 ```
 
-### Advanced Routing Strategy
+#### Advanced Routing Strategy
 
 The routing property can be used to define advanced routing scenarios. In this example, we send a
 push notification to both the user's Apple and Android devices. If sending via push fails, we
