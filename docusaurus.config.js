@@ -28,7 +28,7 @@ module.exports = {
             current: {
               label: "1.0.0",
               path: "1.0.0",
-              banner: "none",
+              banner: "unmaintained",
               badge: false,
             },
             "2.0.0": {
