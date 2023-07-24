@@ -24,13 +24,7 @@ Use the send API to send a message to one or more recipients.
 
 **Method:** `POST`
 
-```bash
-curl --request POST \
-     --url https://api.courier.com/send \
-     --header 'Accept: application/json' \
-     --header 'Authorization: Bearer ${ COURIER_AUTH_TOKEN }' \
-     --header 'Content-Type: application/json' \
-     --data '
+```json
 {
   "message": {
     "to": {
@@ -42,7 +36,6 @@ curl --request POST \
     }
   }
 }
-'
 ```
 
 ## Request Body
