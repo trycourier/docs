@@ -14,7 +14,7 @@ export const Profile = () => (
       The user's preferred ISO 639-1 language code.
     </Param>
     <Param name="additional fields" type="[key: string]: any">
-      Arbitrary fields beyond the above definitions may also be supplied.
+      Additional provider specific fields may be specified.
     </Param>
   </Params>
 );
