@@ -70,6 +70,12 @@ export const AdvancedMessageProperties = () => (
         <Delay />
       </ChildParams>
     </Param>
+    <Param name="metadata" type="Metadata">
+      Metadata such as utm tracking attached with the notification.
+      <ChildParams name="metadata object">
+        <Metadata />
+      </ChildParams>
+    </Param>
     <Param name="expiry" type="Expiry">
       Expiry allows you to set an absolute or relative time in which a message expires. Note: This
       is only valid for the Courier Inbox channel as of 12-08-2022.
@@ -136,8 +142,11 @@ export const ChannelConfig = () => (
     <Param name="override" type="object">
       Channel specific overrides.
     </Param>
-    <Param name="metadata" type={<a href="#metadata">Metadata</a>}>
+    <Param name="metadata" type="Metadata">
       Metadata such as utm tracking attached with the notification through this channel.
+      <ChildParams name="metadata object">
+        <Metadata />
+      </ChildParams>
     </Param>
     <Param name="timeout" type="string">
       Time in ms to attempt the channel before failing over to the next available channel.
