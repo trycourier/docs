@@ -91,6 +91,10 @@
   background: rgba(255, 255, 255, 0.16);
 }
 
+.navbar__items--right > :last-child {
+  display: flex;
+}
+
 .navbar__item.dropdown {
   padding: 0;
 }
