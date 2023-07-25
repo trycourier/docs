@@ -26,6 +26,10 @@
   font-size: 12px;
 }
 
+.navbar__search > :last-child {
+  display: none;
+}
+
 .navbar__brand {
   margin: 0px;
 }
