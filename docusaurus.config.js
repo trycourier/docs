@@ -28,7 +28,7 @@ module.exports = {
             current: {
               label: "1.0.0",
               path: "1.0.0",
-              banner: "none",
+              banner: "unmaintained",
               badge: false,
             },
             "2.0.0": {
@@ -78,11 +78,28 @@ module.exports = {
     ...(process.env.SEGMENT_KEY
       ? [["docusaurus-plugin-segment", { apiKey: process.env.SEGMENT_KEY }]]
       : []),
-    ["@docusaurus/plugin-ideal-image", {}],
+    [
+      "@docusaurus/plugin-ideal-image",
+      {
+        quality: 70,
+        max: 1030, // max resized image's size.
+        min: 640, // min resized image's size. if original is lower, use that size.
+        steps: 2, // the max number of images generated between min and max (inclusive)
+        disableInDev: false,
+      },
+    ],
     [
       "@easyops-cn/docusaurus-search-local",
       { docsRouteBasePath: "/", indexBlog: false, ignoreFiles: /1\.0\.0/ },
     ],
-    "./plugins/sitemap",
+    [
+      "@docusaurus/plugin-sitemap",
+      {
+        changefreq: "weekly",
+        priority: 0.5,
+        ignorePatterns: ["**/1.0.0/**"],
+        filename: "sitemap.xml",
+      },
+    ],
   ],
 };

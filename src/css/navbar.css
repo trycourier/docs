@@ -26,6 +26,10 @@
   font-size: 12px;
 }
 
+.navbar__search > :last-child {
+  display: none;
+}
+
 .navbar__brand {
   margin: 0px;
 }
@@ -89,6 +93,10 @@
   border-radius: 8px;
   backdrop-filter: blur(8px);
   background: rgba(255, 255, 255, 0.16);
+}
+
+.navbar__items--right > :last-child {
+  display: flex;
 }
 
 .navbar__item.dropdown {
