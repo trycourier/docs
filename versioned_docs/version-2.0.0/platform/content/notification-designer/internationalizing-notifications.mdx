@@ -20,7 +20,7 @@ This model works well for single-channel notifications or multi-channel notifica
 **To use this internationalization model, you'll need to use:**
 
 - [Channel-level conditionals](../notification-settings/send-conditions.mdx/#for-notifications-and-channels)
-- Profile data (either sent as part of the send command [profile object](https://help.courier.com/en/articles/4339703-json-paths-and-variables) or stored in Courier as part of a recipient [profile](../../../reference/profiles/intro.mdx)
+- Profile data (either sent as part of the send command [profile object](/docs/platform/content/using-variables/inserting-variables/#the-user-profile) or stored in Courier as part of a recipient [profile](../../../reference/profiles/intro.mdx)
 
 ### Steps
 
@@ -43,7 +43,7 @@ This model works well for single-channel notifications or multi-channel notifica
 
 In this internationalization model (one template per language), the logic defining which notification to fire lives in your system rather than within Courier. This model is best for multi-channel notifications when you support many languages.
 
- **To implement this internationalization model:**
+**To implement this internationalization model:**
 
 1. Create a [notification template](design-a-notification.mdx) for each language you support (i.e., five supported languages = five versions of the same notification).
 2. Map a unique language-based event to each template.
@@ -61,8 +61,10 @@ In this internationalization model (one template per language), the logic defini
 
 ## Pull Translated Content From the Data Payload
 
-To use this (one template) method, you will need to send the translated content as part of the data payload and pull it into the [content block(s)](https://help.courier.com/en/articles/4193090-content-block-basics) in the notification template with Variables or handlebars code.
+To use this (one template) method, you will need to send the translated content as part of the data payload and pull it into the [content block(s)](/docs/platform/content/notification-designer/notification-designer-overview/#reusable-drag-and-drop-content) in the notification template with Variables or handlebars code.
+
 <!-- Link follow-up doc -->
+
 1. Translate the content and store it in your backend
 2. Include the translated content in the JSON data object of the [Send event](reference/send/intro.mdx)
 3. Pull the translated content into the notification template from the Send event data payload using variables.
@@ -74,7 +76,7 @@ To use this (one template) method, you will need to send the translated content 
   alt="Populate Your Template with Variables"
 />
 
-### Test Event With Variable Values 
+### Test Event With Variable Values
 
 <Image
   img={require("../../../assets/guides/internationalization-content/internationalization-test-event.png")}

@@ -1,6 +1,6 @@
 ---
 sidebar_position: 7
-sidebar_label: Firebase FCM 
+sidebar_label: Firebase FCM
 title: Set Up Push Notifications Using Firebase FCM
 description: Looking for a way to send push notifications via Firebase FCM? This step-by-step tutorial will show you how to integrate Firebase FCM's API the easy way.
 ---
@@ -24,7 +24,7 @@ provided the recipient's [Firebase registration token](https://firebase.google.c
 
 ## Override
 
-You can use a provider override to replace what we send to the Firebase FCM API. For example, you can provide an [optional data](https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages#Message) override. If you are overriding `body`, Courier will send the supplied `body` as message payload at the request time to FCM. If you want to change part of the message, you can supply those in the `data` bag in JSON and use [template variables](https://help.courier.com/en/articles/4260757-using-variables-to-insert-data-into-a-notification) to change the message content dynamically.
+You can use a provider override to replace what we send to the Firebase FCM API. For example, you can provide an [optional data](https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages#Message) override. If you are overriding `body`, Courier will send the supplied `body` as message payload at the request time to FCM. If you want to change part of the message, you can supply those in the `data` bag in JSON and use [template variables](/docs/platform/content/using-variables/inserting-variables/) to change the message content dynamically.
 
 ```json title=JSON
 {

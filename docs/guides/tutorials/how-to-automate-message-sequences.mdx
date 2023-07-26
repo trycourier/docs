@@ -15,7 +15,7 @@ import Image from "@theme/IdealImage";
 
 - Automations provides a toolset to design and implement complex notification workflows with one API.
 - An Automation is a schema definition that enables developers to easily express complex use cases such as digests, delayed messages, scheduled messages, sending messages to an ad hoc list, and escalation messages.
-- Automations can be defined and triggered ad-hoc with a single API call or by calling a re-usable Automation template defined in the [automations visual designer](https://help.courier.com/en/articles/5437032-using-the-automation-visual-designer).
+- Automations can be defined and triggered ad-hoc with a single API call or by calling a re-usable Automation template defined in the [automations visual designer](/docs/platform/automations/designer/).
 - At a high level, an Automation schema is composed of two parts, Context Properties and Steps–like send, delay, update profile, fetch-data– where each step represents a specific action that the automation will execute on your behalf when an event is sent to the [Automation API](../../reference/automation/invoke.mdx).
 
 ```json title=JSON
@@ -470,7 +470,7 @@ It is possible to define an Automation Schema in two ways:
 ### Automation Templates
 
 :::info Automation Template Visual Designer
-An automation template is a re-usable, pre-defined list of automation steps created in the [automation design studio](https://help.courier.com/en/articles/5437032-using-the-automation-visual-designer).
+An automation template is a re-usable, pre-defined list of automation steps created in the [automation design studio](/docs/platform/automations/designer/).
 
 Published templates are run or "invoked" using the Courier Automation API automations/{templateId}/invoke endpoint.
 :::
@@ -660,7 +660,7 @@ Use automations to fetch data and render it in a group digest or send a digest w
 
 A generic digest is when every recipient in the list receives the same notification with the same data. To automate a generic digest, simply define a fetch-data step, followed by a send-list step. The data that is fetched, will be used to render a notification that is sent to each recipient.
 
-This automation definition can be saved as an[automation template](https://help.courier.com/en/articles/5437032-using-the-automation-visual-designer#h_f980e712e4) and scheduled to be invoked on any recurring interval or once on a specific date.
+This automation definition can be saved as an[automation template](/docs/platform/automations/designer/#h_f980e712e4) and scheduled to be invoked on any recurring interval or once on a specific date.
 
 ```json title=JSON
 {

@@ -10,7 +10,7 @@ import Image from "@theme/IdealImage";
 
 The Notification settings contain important information required to send the notification along with settings that define how email notifications look, when your notification sends, and its publish history.
 
-There are five sections of the Notification Settings. 
+There are five sections of the Notification Settings.
 
 - General
 - Notes
@@ -20,7 +20,7 @@ There are five sections of the Notification Settings.
 
 ## Opening the Notification Settings
 
-To view the Notification settings, open the notification in the designer list, then click the settings icon next to the Notification name. 
+To view the Notification settings, open the notification in the designer list, then click the settings icon next to the Notification name.
 
 <Image
   img={require("../../../assets/guides/notification-settings/notification-settings-main.png")}
@@ -36,18 +36,18 @@ To view the Notification settings, open the notification in the designer list, t
 
 ### Notification ID
 
-- The Notification ID is a unique string assigned to the notification by Courier. 
-- When you make a successful Send API request, Courier returns the Notification ID mapped to the event used to trigger it. 
-- You can also use the Notification ID as the event object in your Send 
+- The Notification ID is a unique string assigned to the notification by Courier.
+- When you make a successful Send API request, Courier returns the Notification ID mapped to the event used to trigger it.
+- You can also use the Notification ID as the event object in your Send
 
 ### Auth Token
 
-- A Tenant-level token required to send Notifications. 
-- You can also find your Tenant's AuthToken in the [General Settings](https://www.courier.app/settings/general).
+- A Tenant-level token required to send Notifications.
+- You can also find your Tenant's AuthToken in the [General Settings](https://app.courier.com/settings).
 
 ### Brand Config
 
-- Brands are "enabled" by default so each new email notification will use your [Default Brand](../brands/customize-default-brand.mdx) template unless you disable it. 
+- Brands are "enabled" by default so each new email notification will use your [Default Brand](../brands/customize-default-brand.mdx) template unless you disable it.
 - Brands must be "enabled" to use [Custom Brands](../brands/how-to-use-brands-to-customize.mdx) on email notifications.
 
 ### Category
@@ -56,7 +56,7 @@ To view the Notification settings, open the notification in the designer list, t
 
 ### Notification Config
 
-- Even if you've assigned a notification to a Category, you can define whether or not you want the notification to inherit settings from the category or define them at the Notification level with this setting. 
+- Even if you've assigned a notification to a Category, you can define whether or not you want the notification to inherit settings from the category or define them at the Notification level with this setting.
 
 <Image
   img={require("../../../assets/guides/notification-settings/notification-settings-config.png")}
@@ -99,7 +99,7 @@ You can map an existing Event trigger to the notification in the Events section 
   alt="Event Mapping Settings"
 />
 
-**Read more:** [Creating Events](https://help.courier.com/en/articles/4202416-how-to-create-and-map-event-triggers-for-your-notifications)
+**Read more:** [Creating Events](/docs/platform/sending/create-map-events/)
 
 ## Conditions
 
@@ -107,9 +107,8 @@ Using the Conditions tool in the Notification settings allows you to use propert
 
 ## Publish History
 
-- Publish History allows you to see who published versions of the Notification and when they published it.  
+- Publish History allows you to see who published versions of the Notification and when they published it.
 - Rollback allows you to revert to any previously published version.
-
 
 :::caution Note
 
