@@ -28,7 +28,7 @@ While you can send the Notification ID (`id`) as the triggering event you can al
 
 **What Benefits Does Using an Event ID Offer Over the Notification ID as a Trigger?**
 
-Creating an `event` means that you can associate that event string with _any_ notification. In other words, you can avoid code changes on your end when you want to send a different (or additional) notification with the same `event`. 
+Creating an `event` means that you can associate that event string with _any_ notification. In other words, you can avoid code changes on your end when you want to send a different (or additional) notification with the same `event`.
 
 Because the Event ID is a string you create, you can give your events descriptive names that make it clear what action from your application the event represents like `user-created`.
 
@@ -38,14 +38,14 @@ There are several ways to create an event and map it to a Notification ID (id): 
 
 ### Events Settings
 
-To create an Event ID and map it to a Notification using the [Events Settings](https://app.courier.com/settings/events), open Settings > Events in the Courier web app and click ' Create New Event. 
+To create an Event ID and map it to a Notification using the [Events Settings](https://app.courier.com/settings/events), open Settings > Events in the Courier web app and click ' Create New Event.
 
 <Image
   img={require("../../assets/guides/events-designer/events-event-settings.png")}
   alt="Events Settings"
 />
 
-Next, give the new Event ID a name that indicates the user action trigger that it represents (ex: user-created). 
+Next, give the new Event ID a name that indicates the user action trigger that it represents (ex: user-created).
 
 To map the Event ID to a Notification, select the Notification you want to trigger with this event from the Notification drop down menu.
 
@@ -74,8 +74,10 @@ You can map inbound events to a notification in the Data Logs. That can be accom
 
 ### Map an Event From the Notification Settings
 
-You can also map a notification template to an existing event in the [notification settings](https://help.courier.com/en/articles/4333977-notification-settings-overview).
+You can also map a notification template to an existing event in the [notification settings](../content/notification-settings/general-settings.mdx).
+
 <!-- Link follow-up doc -->
+
 <Image
   img={require("../../assets/guides/events-designer/events-notification-settings.png")}
   alt="Map an Event from the Notification Settings"
@@ -91,7 +93,7 @@ You can also map a notification template to an existing event in the [notificati
 1. Click the event to open it
 2. Click on the "Not Delivered" event in the Timeline.
 3. Click "Map to Notification"
-4. Select the notification you want to map the event to. 
+4. Select the notification you want to map the event to.
 
 <Image
   img={require("../../assets/guides/events-designer/events-not-delivered.png")}
