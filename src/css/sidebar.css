@@ -39,13 +39,15 @@ aside,
   --ifm-menu-color-active: var(--text-link);
 }
 
-aside > div > a,
+/* the html changed in version 2.4.1 */
+aside > div > div > a,
 .navbar-sidebar__brand .navbar__brand {
   width: 6.5rem;
   background: url(/img/logo-violet.svg) center no-repeat;
 }
 
-aside > div > a > img,
+/* the html changed in version 2.4.1 */
+aside > div > div > a > img,
 .navbar-sidebar__brand .navbar__brand .navbar__logo img {
   display: none !important;
 }
