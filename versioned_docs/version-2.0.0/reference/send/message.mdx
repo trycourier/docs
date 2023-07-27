@@ -2,202 +2,201 @@
 sidebar_position: 1
 ---
 
-import ApiReference from "@site/src/components/ApiReference";
-import config from "../configs/send/message";
+import {
+  Message,
+  Content,
+  AdvancedMessageProperties,
+  ChannelConfig,
+  Expiry,
+  Metadata,
+  ProviderConfig,
+  Routing,
+} from "../types/message";
+import { ToProfile } from "../types/profile";
 
 # Send a message
 
-Use the send API to send a message to one or more recipients. The send API is very flexible, and has a large number of options available.
-Most of these are optional, and can be ignored unless you want to override the default behavior.
+Use the send API to send a message to one or more recipients.
 
-You are required to specify a `to` with at least one recipient. You must also specify either `template` or `content`.
+**Base URL:** `https://api.courier.com`
 
-<ApiReference {...config} />
+**Path:** `/send`
 
-## Example
-
-This example uses an existing notification template, and sends to a user by ID.
-We don't need to specify any other configuration or settings, since we will use the defaults.
-We don't need to provide any additional information about the user either, since we can rely
-on the user profile data already stored with Courier to customize the message.
-
-Method: `POST`
-
-URL: `https://api.courier.com/send`
-
-Body:
-​
+**Method:** `POST`
 
 ```json
 {
   "message": {
     "to": {
-      "user_id": "a1b2c3d4"
-    },
-    "template": "abcdef12345678"
-  }
-}
-```
-
-## Example
-
-This example uses an existing notification template, but overrides the template's `routing` to force the message to be sent by email.
-The user's email is specified in the `to` field, while the user's name appears in the `data` field. This makes the variable `name` available to the template for inclusion in the text of the message.
-
-Method: `POST`
-
-URL: `https://api.courier.com/send`
-
-Body:
-​
-
-```json
-{
-  "message": {
-    "to": {
-      "email": "hello@example.com"
-    },
-    "template": "abcdef12345678",
-    "data": {
-      "name": "John Doe"
-    },
-    "routing": {
-      "method": "single",
-      "channels": ["email"]
-    }
-  }
-}
-```
-
-## Example
-
-This example uses an existing notification template, and sends to multiple recipients: 2 lists and an audience.
-
-Method: `POST`
-
-URL: `https://api.courier.com/send`
-
-Body:
-
-```json
-{
-  "message": {
-    "to": [
-      {
-        "list_id": "LI56789"
-      },
-      {
-        "list_id": "LI12345"
-      },
-      {
-        "audience_id": "AUD334455"
-      }
-    ],
-    "template": "abcdef12345678"
-  }
-}
-```
-
-## Send Response Data
-
-Sending a message is an async process. So upon submission of a message,
-only a requestId will be returned.
-
-```json
-{ "requestId": "1-6486479a-fbc8dd2cb356b1d8b4bb95a5" }
-```
-
-### RequestId Details
-
-#### Single-Recipient Message Requests
-
-For send requests that have a single, end user, recipient, the `requestId` is assigned to the derived message as its `message_id`.
-Therefore the `requestId` can be supplied to the Message’s API for single recipient messages. Therefore the `requestId` can be
-supplied to the Message's API via the `messageId` query parameter. i.e. `https://api.courier.com/messages?messageId=1-6486479a-fbc8dd2cb356b1d8b4bb95a5`
-
-Here is an example of a `POST /send` request body that contains a single-recipient message:
-
-```json
-{
-  "message": {
-    "to": {
-      "email": "marty@backtothefuture.com"
+      "email": "darth@vader.com"
     },
     "content": {
-      "title": "TEST",
-      "body": "TEST"
-    },
-    "routing": {
-      "method": "single",
-      "channels": ["email"]
+      "title": "Why did Anakin cross the road??",
+      "body": "To get to the dark side."
     }
   }
 }
 ```
 
-Given this request, Courier responds with a `202` status code and the following response body:
+## Request Body
+
+The `POST` accepts a JSON payload with a single message property.
+
+<Params>
+  <Param name="message" type="Message" required>
+    Defines the message to be delivered
+    <ChildParams name="message object">
+      <Message />
+    </ChildParams>
+  </Param>
+</Params>
+
+### The Message Property
+
+The `message` property has the following primary top-level properties. They define the destination and content of the message.
+
+Additional advanced configuration fields [are defined below](#other-message-properties).
+
+<Message />
+
+### The To Property
+
+**Required.** The recipient or recipients or this message.
+
+Example of sending to a single recipient:
 
 ```json
-{ "requestId": "1-6486479a-fbc8dd2cb356b1d8b4bb95a5" }
+"to": {
+	"email": "darth@vader.com"
+}
 ```
 
-To obtain the derived message, its individual message id and current delivery status from this request, use the `messageId` query parameter on the Message's API.
-
-```
-GET https://api.courier.com/messages?messageId=1-6486479a-fbc8dd2cb356b1d8b4bb95a5
-```
-
-#### Multi-Recipient Message Requests
-
-For send requests that have multiple recipients (accounts, audiences, lists, etc.), Courier assigns a unique id to each derived
-message as its `message_id`. Therefore the `requestId` can only be supplied to the Message's API via the `listMessageId` query parameter.
-
-Here is an example of a `POST /send` request body that contains a multi-recipient message:
+Example of sending to multiple recipients:
 
 ```json
-{
-  "message": {
-    "to": [
-      {
-        "email": "marty@backtothefuture.com"
-      },
-      {
-        "email": "doc_brown@backtothefuture.com"
-      },
-      {
-        "email": "biff@backtothefuture.com"
-      }
-    ],
-    "content": {
-      "title": "TEST",
-      "body": "TEST"
-    },
-    "routing": {
-      "method": "single",
-      "channels": ["email"]
-    }
+"to": [
+	{
+		"email": "darth@vader.com"
+	},
+	{
+		"email": "luke@skywalker.com"
+	}
+]
+```
+
+<ToProfile />
+
+### The Content Property
+
+Describes the content of the message in a way that will work for email, push, chat, or any channel. Either this field or template must be specified.
+
+```json
+"content": {
+	"title": "Why did Anakin cross the road?",
+	"body": "To get to the dark side!"
+}
+```
+
+<Content />
+
+### The Data Property
+
+An arbitrary object that includes any data you want to pass to the message. The data can be used to populate corresponding template/content variables or be passed-through to your application via the Courier client SDKs.
+
+```json
+"data": {
+  "real_name": "Anakin Skywalker",
+  "nickname": "Darth Vader",
+  "category": "villain"
+}
+```
+
+### Other Message Properties
+
+The following properties support overriding configured values and defaults at run-time and attaching metadata to messages.
+
+<AdvancedMessageProperties />
+
+### The Channels Property
+
+An object whose keys are valid channel identifiers (email, sms, etc) which map to an object with the following properties.
+
+```json
+"channels": {
+	"sms": {
+		"brand_id": "xxx"
+	}
+}
+```
+
+<ChannelConfig />
+
+### The Expiry Property
+
+Expiry allows you to set an absolute or relative time in which a message expires.
+
+Note: This is only valid for the Courier Inbox channel as of 12-08-2022.
+
+<Expiry />
+
+### The Metadata Property
+
+Attach information not related to the content of the message for application or marketing use cases.
+
+<Metadata />
+
+### The Providers Property
+
+An object whose keys are valid provider identifiers which map to an object with the following properties:
+
+```json
+"providers": {
+  "slack": {
+    "if": "profile.locale === 'en-us'"
   }
 }
 ```
 
-Given this request, Courier responds with a `202` status code and the following response body:
+<ProviderConfig />
+
+### The Routing Property
+
+Allows you to customize which channel(s) Courier will potentially deliver the message. If no
+routing key is specified, Courier will use the default routing configuration or routing
+defined by the template.
+
+<Routing />
+
+#### As an Array of Channel Identifiers
+
+The simplest option is to specify an array of strings that match the Channel identifies you want to use to send the message.
+
+In this example, courier will send to one of sms, email or inbox depending of user preferences.
 
 ```json
-{ "requestId": "1-6486479a-fbc8dd2cb356b1d8b4bb95a5" }
+"routing": {
+  "method": "single",
+  "channels": ["sms", "email", "inbox"]
+}
 ```
 
-To obtain all derived messages, their individual message id's and current delivery statuses from this request, use the `listMessageId` query parameter on the Message's API.
+#### Advanced Routing Strategy
 
+The routing property can be used to define advanced routing scenarios. In this example, we send a
+push notification to both the user's Apple and Android devices. If sending via push fails, we
+send an sms instead.
+
+```json
+"routing": {
+  "method": "single",
+  "channels": [
+    {
+      "method": "all",
+      "channels": ["apn", "firebase-fcm"]
+    },
+    "sms"
+  ]
+}
 ```
-GET https://api.courier.com/messages?listMessageId=1-6486479a-fbc8dd2cb356b1d8b4bb95a5
-```
 
-### Custom Formatting
-
-To improve working with cURL, Courier also supports a custom urlencoded format that can be used in the place of JSON.
-This format allows nested data values using square bracket syntax. This is useful when passing `profile` and `data` parameters.
-For example, a cURL `--data` option with the `profile` parameter and a nested `email` would look like this:
-
-```bash
---data "profile[email]=test@example.com"
-```
+**Note:** Automated failover is a **business tier feature**.
