@@ -78,6 +78,65 @@ Custom Templates combine the best of both worlds by allowing you to ensure brand
 
 You can customize the `<style>` element in the `<head>` section of your Brands using custom templates as well as brands built using the Designer UI. Read more about Courier's [CSS Classnames](css-classnames.mdx).
 
+## Creating Reusable Custom Styling Across Multiple Brands
+
+Customers who want to use custom styling across multiple whitelabled brands can accomplish this in a couple of ways.
+
+1. **Inheritance:** this works if and only if the default brand and the white label brands inheriting its styles are all built using the standard brand type.
+2. **CSS and Brand snippets:** use this method if you want to share styling across standard and custom brand types.
+
+### Inherit Styles
+
+The standard or brand type lets you edit the Head to define your own custom styles. In addition to the normal CSS class names, you can define the CSS for Courier blocks using [Courier's CSS classnames](css-classnames.mdx).
+
+<Image
+  img={require("../../../assets/guides/courier-app/brand-inherit-head.png")}
+  alt="Brand Head"
+/>
+
+Be sure the brand you want to inherit from is listed as your “Default” in the brands list. If not, go to brand settings > set as default.
+
+<Image
+  img={require("../../../assets/guides/courier-app/brand-default-badge.png")}
+  alt="Brand Default Badge"
+/>
+
+Use the toggle to inherit the Head for any standard brand style that you want to inherit the Default brand styles.
+
+<Image
+  img={require("../../../assets/guides/courier-app/brand-inherit-toggle.png")}
+  alt="Inheritance Toggle"
+/>
+
+## CSS and Brand snippets
+
+Use this method when you want to share custom styles across brands built using both the standard brand design and custom brands (Handlebars & MJML).
+
+1. Open your default brand and create a [brand snippet](brand-snippets.mdx) to contain your reusable CSS styling. You can define the CSS for Courier blocks using [Courier's CSS classnames](css-classnames.mdx).
+
+:::caution
+
+Brand snippets in your Default brand can be referenced across all your custom brands **as long as the snippet name is unique**.
+
+:::
+
+2. Open your default brand or create a brand in the Courier designer and select one of the Custom Template types:
+  - MJML/Handle bars 
+  - Handle bars
+3. To pull the CSS from your default brand CSS brand snippet into any other brand, insert the css brand snippet variable inside the style tags:
+
+<Image
+  img={require("../../../assets/guides/courier-app/brand-style-snippet.png")}
+  alt="CSS Style Snippet"
+/>
+
+You can add the snippet referencing your `<style>` in the `head` of the brand template wrapped by `<style>` tags.
+
+```handlebars
+<style> 
+    {{>css}} 
+</style> 
+```
 ### Preview your Brand-Enabled Email Notifications
 
 To preview what your email notification will look like with different brands applied, open the **Preview** then select the **Brand** from the **Preview Details > Brand** menu.
