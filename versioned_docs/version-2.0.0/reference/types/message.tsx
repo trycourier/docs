@@ -39,8 +39,9 @@ export const Content = () => (
       Text content displayed in the notification. Supports markdown.
     </Param>
     <Param name="elements" type="array">
-      Elements describing the content of the notification. Use this field or body. See 
-      <a href="/docs/platform/content/elemental/elements">elements</a> for a list of available elements.
+      Elements describing the content of the notification. Use this field or body. 
+      See <a href="/docs/platform/content/elemental/elements">elements</a> for a list of available 
+      elements.
     </Param>
     <Param name="version" type="string">
       The version of elemental being supplied. Currently, only `2020-01-01` is supported.
