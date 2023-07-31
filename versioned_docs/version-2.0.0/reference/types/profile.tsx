@@ -21,6 +21,9 @@ export const Profile = () => (
 
 export const ToProfile = () => (
   <Params>
+    <ExtendParams>
+      <Profile />
+    </ExtendParams>
     <Param name="user_id" type="string">
       Id of a user stored with Courier.
     </Param>
@@ -44,8 +47,5 @@ export const ToProfile = () => (
       <br />
       <strong>Note: This feature is part of the Accounts Private Beta.</strong>
     </Param>
-    <ExtendParams>
-      <Profile />
-    </ExtendParams>
   </Params>
 );
