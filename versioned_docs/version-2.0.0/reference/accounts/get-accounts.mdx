@@ -6,6 +6,7 @@ toc_max_heading_level: 2
 ---
 
 import { AccountResponse } from "../types/accounts";
+import { PaginatedResponse, PaginatedRequestQueryParams } from "../types/pagination";
 
 # Get a List of Accounts
 
@@ -19,32 +20,16 @@ None
 
 **Query Parameters:**
 
-<Params>
-  <Param name="limit" type="number">
-    The number of accounts to return (defaults to 20, maximum value of 100)
-  </Param>
-  <Param name="starting_after" type="string">
-    Value of next_page from previous response
-  </Param>
-</Params>
+<PaginatedRequestQueryParams />
 
 **Response Body:**
 
-<Params>
-  <Param name="items" type="array<Account>">
-    The number of accounts to return (defaults to 20, maximum value of 100)
-    <ChildParams name="account type">
-      <AccountResponse />
-    </ChildParams>
-  </Param>
-  <Param name="has_more" type="boolean">
-    Set to <code>true</code> when there are more items that can be requested.
-  </Param>
-  <Param name="next_page" type="string?">
-    A cursor to provide for the starting_after parameter. Will be supplied whenver{" "}
-    <code>has_more</code> is true.
-  </Param>
-</Params>
+<PaginatedResponse type="Account">
+  An array of Accounts
+  <ChildParams name="Account properties">
+    <AccountResponse />
+  </ChildParams>
+</PaginatedResponse>
 
 **Example:**
 

@@ -7,7 +7,7 @@ toc_max_heading_level: 2
 
 import { UserAccountAssociation } from "../types/accounts";
 import { Profile } from "../types/profile";
-import { PaginatedResponse } from "../types/pagination";
+import { PaginatedResponse, PaginatedRequestQueryParams } from "../types/pagination";
 
 # User Membership
 
@@ -176,7 +176,7 @@ status: 204
 
 ## Get accounts associated with a given user
 
-Removes a user from any accounts they may have been associated with.
+Returns a paginated list of user account associations.
 
 **URL:** `https://api.courier.com/users/:user_id/accounts`
 
@@ -192,11 +192,7 @@ Removes a user from any accounts they may have been associated with.
 
 **Query Parameters:**
 
-<Params>
-  <Param name="cursor" type="string">
-    Pagination cursor to retrieve next page, returned by previous get request.
-  </Param>
-</Params>
+<PaginatedRequestQueryParams />
 
 **Response Body:**
 
@@ -217,33 +213,33 @@ Response:
 status: 200
 ```
 
-```
+```json
 {
-	"has_more": false,
-	"items": [
-		{
-			"account_id": "acme",
-			"profile": {
-				"role": "admin"
-			},
-			"user_id": "john"
-		},
-		{
-			"account_id": "biggle",
-			"profile": {
-				"role": "normal"
-			},
-			"user_id": "john"
-		},
-		{
-			"account_id": "example",
-			"profile": {
-				"role": "guest"
-			},
-			"user_id": "john"
-		}
-	],
-	"type": "list"
+  "has_more": false,
+  "items": [
+    {
+      "account_id": "acme",
+      "profile": {
+        "role": "admin"
+      },
+      "user_id": "john"
+    },
+    {
+      "account_id": "biggle",
+      "profile": {
+        "role": "normal"
+      },
+      "user_id": "john"
+    },
+    {
+      "account_id": "example",
+      "profile": {
+        "role": "guest"
+      },
+      "user_id": "john"
+    }
+  ],
+  "type": "list"
 }
 ```
 
@@ -293,7 +289,7 @@ Response:
 status: 200
 ```
 
-```
+```json
 {
   "account_id": "acme",
   "profile": {
