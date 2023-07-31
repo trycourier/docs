@@ -21,6 +21,9 @@ export const Profile = () => (
 
 export const ToProfile = () => (
   <Params>
+    <ExtendParams>
+      <Profile />
+    </ExtendParams>
     <Param name="user_id" type="string">
       Id of a user stored with Courier.
     </Param>
@@ -36,8 +39,13 @@ export const ToProfile = () => (
       An object that includes any data you want to pass to the message. The data will populate the
       corresponding template or content variables.
     </Param>
-    <ExtendParams>
-      <Profile />
-    </ExtendParams>
+    <Param name="filters" type="array<Filter>">
+      When sending to a list or audience, this field may be supplied for adhoc filtering criteria.
+      When a member of the list or audience doesn't meet the criteria of each supplied filter, they
+      will be skipped. A list of available operators is available under{" "}
+      <a href="/reference/audiences/operators/">audience operators</a>.
+      <br />
+      <strong>Note: This feature is part of the Accounts Private Beta.</strong>
+    </Param>
   </Params>
 );
