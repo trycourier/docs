@@ -20,7 +20,7 @@ export const PaginatedResponse: FC<{ type: string }> = ({ type, children }) => (
       A pointer to the next page of results. Defined only when
       <code>has_more</code> is set to true
     </Param>
-    <Param name="type" type="'list">
+    <Param name="type" type='"list"'>
       Always set to <code>"list"</code>. Represents the type of this object.
     </Param>
   </Params>
