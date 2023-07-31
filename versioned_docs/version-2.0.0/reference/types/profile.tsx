@@ -43,7 +43,7 @@ export const ToProfile = () => (
       When sending to a list or audience, this field may be supplied for adhoc filtering criteria.
       When a member of the list or audience doesn't meet the criteria of each supplied filter, they
       will be skipped. A list of available operators is available under{" "}
-      <a href="/docs/reference/audiences/operators">audience operators</a>.
+      <a href="/reference/audiences/operators/">audience operators</a>.
       <br />
       <strong>Note: This feature is part of the Accounts Private Beta.</strong>
     </Param>
