@@ -110,15 +110,7 @@ const ApiParamField = ({ prefix, param }: ApiParamFieldProps) => {
 
   return (
     <div className={styles.field}>
-      {PRIMITIVE_TYPES.includes(param.type) ? (
-        <>
-          <ApiParamInfo param={param} />
-
-          <div className={styles.fieldInput}>{field}</div>
-        </>
-      ) : (
-        field
-      )}
+      {PRIMITIVE_TYPES.includes(param.type) ? <ApiParamInfo param={param} /> : field}
     </div>
   );
 };
