@@ -12,6 +12,7 @@ import ApiExamples, { stringifyJSON, filterOutEmpty } from "./ApiExamples";
 import { ApiReferenceTokenContext } from "./ApiReferenceToken";
 import makeMetaDescription from "@site/src/utils/makeMetaDescription";
 import Markdown from "markdown-to-jsx";
+import { Params } from "../Params";
 
 export interface ApiReferenceProps {
   method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
@@ -168,20 +169,20 @@ const ApiReference = ({
               )}
 
               <div className={styles.section}>
-                <div className={styles.sectionTitle}>Responses</div>
+                <div className={styles.sectionTitle}>RESPONSES:</div>
 
                 {responses.map((response, index) => (
                   <div key={index} className={styles.section}>
-                    <div className={styles.group}>
+                    <Params>
                       <ApiResponseField
-                        collapsible
+                        collapsible={false}
                         field={{
                           type: "object",
                           name: `${response.status} ${response.description}`,
                           ...response.body,
                         }}
                       />
-                    </div>
+                    </Params>
                   </div>
                 ))}
               </div>

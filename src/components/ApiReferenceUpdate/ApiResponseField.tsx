@@ -1,9 +1,11 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 
 import { ApiParam, PRIMITIVE_TYPES } from "./ApiParamField";
 import ApiParamInfo from "./ApiParamInfo";
 
 import styles from "./styles.module.css";
+import { ChildParams, Param, Params } from "../Params";
+import Markdown from "markdown-to-jsx";
 
 export interface ApiResponse {
   status: number;
@@ -46,10 +48,7 @@ export const buildResponse = (field: ApiParam) => {
 };
 
 const ApiResponseField = ({ field, collapsible }: { field: ApiParam; collapsible?: boolean }) => {
-  const [collapsed, setCollapsed] = useState(!!collapsible);
   const [expandedIndex, setExpandedIndex] = useState(0);
-
-  const toggleCollapsed = useCallback(() => setCollapsed((collapsed) => !collapsed), []);
 
   if (PRIMITIVE_TYPES.includes(field.type)) {
     const enums = field.type === "string" && field.enum ? `*[${field.enum.join(" | ")}]*` : "";
@@ -68,64 +67,57 @@ const ApiResponseField = ({ field, collapsible }: { field: ApiParam; collapsible
 
   if (field.type === "object") {
     return (
-      <div className={styles.field}>
-        <div className={styles.groupContainer}>
-          {field.name &&
-            (collapsible ? (
-              <button type="button" className={styles.groupHeader} onClick={toggleCollapsed}>
-                <ApiParamInfo param={field} />
-              </button>
-            ) : (
-              <div className={styles.groupHeader}>
-                <ApiParamInfo param={{ ...field, type: "" as any }} />
-              </div>
+      <Param name={field.name} type={field.type}>
+        {field.description && <Markdown>{field.description}</Markdown>}
+        {collapsible && (
+          <ChildParams name="Properties">
+            {field.fields?.map((arrayField, index) => (
+              <ApiResponseField key={index} field={arrayField} collapsible />
             ))}
-
-          {collapsed ? null : (
-            <div className={styles.group}>
-              {field.fields?.map((arrayField, index) => (
-                <ApiResponseField key={index} field={arrayField} />
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
+          </ChildParams>
+        )}
+        {!collapsible && (
+          <Params>
+            {field.fields?.map((arrayField, index) => (
+              <ApiResponseField key={index} field={arrayField} collapsible />
+            ))}
+          </Params>
+        )}
+      </Param>
     );
   }
 
   if (field.type === "array") {
     return (
-      <div className={styles.field}>
-        <div className={styles.groupContainer}>
-          {field.name && (
-            <div className={styles.groupHeader}>
-              <ApiParamInfo param={field} />
-            </div>
-          )}
-
-          <div className={styles.group}>
-            <ApiResponseField field={field.field} />
-          </div>
-        </div>
-      </div>
+      <Param name={field.name} type={field.type}>
+        {field.description && <Markdown>{field.description}</Markdown>}
+        {field.field.type === "object" && (
+          <ChildParams name="Properties">
+            {field.field.fields?.map((arrayField, index) => (
+              <Params>
+                <ApiResponseField key={index} field={arrayField} collapsible />
+              </Params>
+            ))}
+          </ChildParams>
+        )}
+      </Param>
     );
   }
 
   if (field.type === "record") {
     return (
-      <div className={styles.field}>
-        <div className={styles.groupContainer}>
-          {field.name && (
-            <div className={styles.groupHeader}>
-              <ApiParamInfo param={field} />
-            </div>
-          )}
-
-          <div className={styles.group}>
-            <ApiResponseField field={field.field} />
-          </div>
-        </div>
-      </div>
+      <Param name={field.name} type={field.type}>
+        {field.description && <Markdown>{field.description}</Markdown>}
+        {field.field.type === "object" && (
+          <ChildParams name="Properties">
+            {field.field.fields?.map((arrayField, index) => (
+              <Params>
+                <ApiResponseField key={index} field={arrayField} collapsible />
+              </Params>
+            ))}
+          </ChildParams>
+        )}
+      </Param>
     );
   }
 
@@ -156,7 +148,9 @@ const ApiResponseField = ({ field, collapsible }: { field: ApiParam; collapsible
                   </button>
                 )}
 
-                {expandedIndex === index && <ApiResponseField key={index} field={fieldParam} />}
+                {expandedIndex === index && (
+                  <ApiResponseField key={index} field={fieldParam} collapsible />
+                )}
               </React.Fragment>
             ))}
           </div>
