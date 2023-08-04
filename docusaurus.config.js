@@ -88,7 +88,7 @@ module.exports = {
         disableInDev: false,
       },
     ],
-    ["@easyops-cn/docusaurus-search-local", { docsRouteBasePath: "/", indexBlog: false }],
+    ["@easyops-cn/docusaurus-search-local", { docsRouteBasePath: "/", indexBlog: false, hashed: true }],
     [
       "@docusaurus/plugin-sitemap",
       {
