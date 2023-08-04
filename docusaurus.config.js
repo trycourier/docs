@@ -90,7 +90,7 @@ module.exports = {
     ],
     [
       "@easyops-cn/docusaurus-search-local",
-      { docsRouteBasePath: "/", indexBlog: false, ignoreFiles: /1\.0\.0/ },
+      { docsRouteBasePath: "/", indexBlog: false, ignoreFiles: /http(s)?:\/\/.*1\.0\.0.*/ },
     ],
     [
       "@docusaurus/plugin-sitemap",
