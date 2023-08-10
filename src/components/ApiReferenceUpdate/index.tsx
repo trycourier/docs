@@ -7,11 +7,9 @@ import styles from "./styles.module.css";
 
 import ApiResponseField, { ApiResponse, buildResponse } from "./ApiResponseField";
 import ApiParamField, { ApiParam, apiParamInitialValue } from "./ApiParamField";
-import ApiParamButton from "./ApiParamButton";
 import ApiExamples, { stringifyJSON, filterOutEmpty } from "./ApiExamples";
 import { ApiReferenceTokenContext } from "./ApiReferenceToken";
 import makeMetaDescription from "@site/src/utils/makeMetaDescription";
-import Markdown from "markdown-to-jsx";
 import { Params } from "../Params";
 
 export interface ApiReferenceProps {
@@ -132,14 +130,22 @@ const ApiReference = ({
         <Form autoComplete="off" className={styles.form}>
           <div className="row row--no-gutters">
             <div className="col">
-              <div className={styles.url}>
-                <span className={styles.method}>{method}</span>
-                {process.env.API_HOST}
-                {path}
-              </div>
-
-              {description && <Markdown className={styles.section}>{description}</Markdown>}
-
+              <p>
+                <strong>URL: </strong>
+                <code>
+                  {process.env.API_HOST}
+                  {path}
+                </code>
+              </p>
+              <p>
+                <div>
+                  <strong>Method: </strong>
+                  {/* <span className={styles.method}>{method}</span> */}
+                  <code>{method}</code>
+                </div>
+              </p>
+              {/* {description && <Markdown className={styles.section}>{description}</Markdown>}
+               */}
               {pathParams && (
                 <div className={styles.section}>
                   <div className={styles.sectionTitle}>PATH PARAMS</div>
@@ -149,7 +155,6 @@ const ApiReference = ({
                   </div>
                 </div>
               )}
-
               {queryParams && (
                 <div className={styles.section}>
                   <div className={styles.sectionTitle}>Query Parameters:</div>
@@ -157,7 +162,6 @@ const ApiReference = ({
                   <ApiParamField param={{ type: "object", fields: queryParams }} prefix="query" />
                 </div>
               )}
-
               {bodyParam && (
                 <div className={styles.section}>
                   <div className={styles.sectionTitle}>BODY PARAM</div>
@@ -167,7 +171,6 @@ const ApiReference = ({
                   </div>
                 </div>
               )}
-
               <div className={styles.section}>
                 <div className={styles.sectionTitle}>RESPONSES:</div>
 
@@ -188,57 +191,30 @@ const ApiReference = ({
               </div>
             </div>
 
-            <div className="col col--5">
-              <div className={styles.runner}>
-                <div className={styles.inlineForm}>
-                  <div className={styles.sectionTitle}>AUTH TOKEN</div>
-
-                  <input value={token} onChange={onChangeToken} className={styles.input} />
-
-                  <ApiParamButton type="submit" disabled={loading}>
-                    Try It
-                  </ApiParamButton>
+            <div className={styles.runner}>
+              <div className={styles.section}>
+                <div className={styles.sectionTitle}>
+                  Request {responseIndex !== -1 && "Example"}
                 </div>
-
                 <ApiExamples method={method} path={path} />
+              </div>
 
-                <div className={styles.section}>
-                  <div className={styles.inlineForm}>
-                    <div className={styles.sectionTitle}>
-                      Response {responseIndex !== -1 && "Example"}
-                    </div>
-                    <select
-                      value={responseIndex}
-                      className={styles.input}
-                      onChange={handleResponseSelect}
-                    >
-                      {responseIndex === -1 && (
-                        <option disabled value={-1}>
-                          {response?.status} Test Request
-                        </option>
-                      )}
-
-                      {responses.map((response, index) => (
-                        <option key={index} value={index}>
-                          {response.status} {response.description}
-                        </option>
-                      ))}
-                    </select>
+              <div className={styles.section}>
+                <div className={styles.inlineForm}>
+                  <div className={styles.sectionTitle}>
+                    Response {responseIndex !== -1 && "Example"}
                   </div>
-
-                  <CodeBlock className="language-json">
-                    {responseIndex === -1
-                      ? response
-                        ? JSON.stringify(response.body, null, 2)
-                        : "Error with Test Request"
-                      : responses[responseIndex].body
-                      ? stringifyJSON(
-                          deepCompact(buildResponse(responses[responseIndex].body)),
-                          true
-                        )
-                      : "Empty"}
-                  </CodeBlock>
                 </div>
+
+                <CodeBlock className="language-json">
+                  {responseIndex === -1
+                    ? response
+                      ? JSON.stringify(response.body, null, 2)
+                      : "Error with Test Request"
+                    : responses[responseIndex].body
+                    ? stringifyJSON(deepCompact(buildResponse(responses[responseIndex].body)), true)
+                    : "Empty"}
+                </CodeBlock>
               </div>
             </div>
           </div>
