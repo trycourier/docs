@@ -118,6 +118,8 @@ const ApiReference = ({
 
   const onChangeToken = useCallback((event) => setToken(event.currentTarget.value), [setToken]);
 
+  const responseTitle = responses.length > 1 ? "RESPONSES" : "RESPONSE";
+
   return (
     <>
       <Head>
@@ -172,22 +174,30 @@ const ApiReference = ({
                 </div>
               )}
               <div className={styles.section}>
-                <div className={styles.sectionTitle}>RESPONSES:</div>
+                <div className={styles.sectionTitle}>{responseTitle}:</div>
 
-                {responses.map((response, index) => (
-                  <div key={index} className={styles.section}>
-                    <Params>
-                      <ApiResponseField
-                        collapsible={false}
-                        field={{
-                          type: "object",
-                          name: `${response.status} ${response.description}`,
-                          ...response.body,
-                        }}
-                      />
-                    </Params>
-                  </div>
-                ))}
+                {responses.map((response, index) => {
+                  const name = `${response.status} ${response.description}`;
+                  return (
+                    <div key={index} className={styles.section}>
+                      <p>
+                        <strong>status: </strong>
+                        <code>{name}</code>
+                      </p>
+                      <Params>
+                        <ApiResponseField
+                          collapsible={false}
+                          isRoot
+                          field={{
+                            type: "object",
+                            name,
+                            ...response.body,
+                          }}
+                        />
+                      </Params>
+                    </div>
+                  );
+                })}
               </div>
             </div>
 

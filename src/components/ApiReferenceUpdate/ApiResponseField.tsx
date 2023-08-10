@@ -47,7 +47,15 @@ export const buildResponse = (field: ApiParam) => {
   return "";
 };
 
-const ApiResponseField = ({ field, collapsible }: { field: ApiParam; collapsible?: boolean }) => {
+const ApiResponseField = ({
+  field,
+  collapsible,
+  isRoot,
+}: {
+  field: ApiParam;
+  collapsible?: boolean;
+  isRoot?: boolean;
+}) => {
   const [expandedIndex, setExpandedIndex] = useState(0);
 
   if (PRIMITIVE_TYPES.includes(field.type)) {
@@ -66,6 +74,15 @@ const ApiResponseField = ({ field, collapsible }: { field: ApiParam; collapsible
   }
 
   if (field.type === "object") {
+    if (isRoot) {
+      return (
+        <>
+          {field.fields?.map((arrayField, index) => (
+            <ApiResponseField key={index} field={arrayField} collapsible />
+          ))}
+        </>
+      );
+    }
     return (
       <Param name={field.name} type={field.type}>
         {field.description && <Markdown>{field.description}</Markdown>}
