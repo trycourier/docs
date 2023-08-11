@@ -131,8 +131,8 @@ const ApiReference = ({
       </Head>
       <Formik<FormValues> initialValues={initialValues} onSubmit={execCallback}>
         <Form autoComplete="off" className={styles.form}>
-          <div className="row row--no-gutters">
-            <div className="col">
+          <div className={styles.container}>
+            <div>
               <p>
                 <strong>URL: </strong>
                 <code>
@@ -151,11 +151,10 @@ const ApiReference = ({
               <Markdown className={styles.section}>{""}</Markdown>
               {pathParams && (
                 <div className={styles.section}>
-                  <div className={styles.sectionTitle}>PATH PARAMS</div>
-
-                  <div className={styles.group}>
-                    <ApiParamField param={{ type: "object", fields: pathParams }} prefix="path" />
-                  </div>
+                  <p>
+                    <strong>PATH PARAMS</strong>
+                  </p>
+                  <ApiParamField param={{ type: "object", fields: pathParams }} prefix="path" />
                 </div>
               )}
               {queryParams && (
