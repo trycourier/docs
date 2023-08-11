@@ -11,6 +11,7 @@ import ApiExamples, { stringifyJSON, filterOutEmpty } from "./ApiExamples";
 import { ApiReferenceTokenContext } from "./ApiReferenceToken";
 import makeMetaDescription from "@site/src/utils/makeMetaDescription";
 import { Params } from "../Params";
+import Markdown from "markdown-to-jsx";
 
 export interface ApiReferenceProps {
   method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
@@ -142,12 +143,12 @@ const ApiReference = ({
               <p>
                 <div>
                   <strong>Method: </strong>
-                  {/* <span className={styles.method}>{method}</span> */}
                   <code>{method}</code>
                 </div>
               </p>
-              {/* {description && <Markdown className={styles.section}>{description}</Markdown>}
+              {/** //!some global style is modifying this markdown, if removed this will break the response alignment in production
                */}
+              <Markdown className={styles.section}>{""}</Markdown>
               {pathParams && (
                 <div className={styles.section}>
                   <div className={styles.sectionTitle}>PATH PARAMS</div>
@@ -159,8 +160,9 @@ const ApiReference = ({
               )}
               {queryParams && (
                 <div className={styles.section}>
-                  <div className={styles.sectionTitle}>Query Parameters:</div>
-
+                  <p>
+                    <strong>Query Parameters:</strong>
+                  </p>
                   <ApiParamField param={{ type: "object", fields: queryParams }} prefix="query" />
                 </div>
               )}
