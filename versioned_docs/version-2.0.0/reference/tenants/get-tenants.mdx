@@ -1,16 +1,16 @@
 ---
 sidebar_position: 4
-sidebar_label: Get a List of Accounts
-slug: ./get-accounts
+sidebar_label: Get a List of Tenants
+slug: ./get-tenants
 toc_max_heading_level: 2
 ---
 
-import { AccountResponse } from "../types/accounts";
+import { TenantResponse } from "../types/tenants";
 import { PaginatedResponse, PaginatedRequestQueryParams } from "../types/pagination";
 
-# Get a List of Accounts
+# Get a List of Tenants
 
-**URL:** `https://api.courier.com/accounts`
+**URL:** `https://api.courier.com/tenants`
 
 **Method:** `GET`
 
@@ -24,17 +24,17 @@ None
 
 **Response Body:**
 
-<PaginatedResponse type="Account">
-  An array of Accounts
-  <ChildParams name="Account properties">
-    <AccountResponse />
+<PaginatedResponse type="Tenant">
+  An array of Tenants
+  <ChildParams name="Tenant properties">
+    <TenantResponse />
   </ChildParams>
 </PaginatedResponse>
 
 **Example:**
 
 ```js
-GET https://api.courier.com/accounts
+GET https://api.courier.com/tenants
 
 RESPONSE BODY
 {
