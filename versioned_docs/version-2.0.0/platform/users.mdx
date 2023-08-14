@@ -4,9 +4,10 @@ pagination_label: Users
 sidebar_position: 1
 slug: ./users
 ---
+
 # Users
 
-Courier uses the term `user` to describe the recipient of a notification. You'll sometimes see the term `recipient` used, but these mean the same thing. There are several different ways to define which users will recieve a notification. 
+Courier uses the term `user` to describe the recipient of a notification. You'll sometimes see the term `recipient` used, but these mean the same thing. There are several different ways to define which users will recieve a notification.
 
 The code samples below illustrate a subset of the `message` object used to make a call to the [send API](../../reference/send).
 
@@ -22,7 +23,7 @@ The simplest way to send a notification is to specify either an `email` or a `ph
 
 ## Profiles
 
-Courier supports storing user contact information in a [Profile](../../reference/profiles) record, and then referencing a `user_id` when calling `send`. One of the benefits of this approach is that the specific channel that is used to deliver the notification can be deferred to a later step where routing rules are applied. 
+Courier supports storing user contact information in a [Profile](../../reference/profiles) record, and then referencing a `user_id` when calling `send`. One of the benefits of this approach is that the specific channel that is used to deliver the notification can be deferred to a later step where routing rules are applied.
 
 ```json
 "to": {
@@ -50,15 +51,14 @@ Instead of using a static list of users, you can create an [Audience](/reference
 }
 ```
 
-## Accounts
+## Tenants
 
-Courier support multi-tenant applications with the [Accounts](/reference/accounts) API. A single user can be associated with multiple accounts, and you can specify an `account_id` when sending a message in order to...
-
+Courier support multi-tenant applications with the [Tenants](/reference/tenants) API. A single user can be associated with multiple tenants, and you can specify an `tenant_id` when sending a message in order to...
 
 ```json
 "to": {
     "user_id": "luke1234",
-    "account_id" : "red-squadron"
+    "tenant_id" : "red-squadron"
 }
 ```
 
