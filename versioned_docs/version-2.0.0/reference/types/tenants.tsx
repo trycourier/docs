@@ -4,7 +4,7 @@ import { SubscriptionTopic } from "./preferences";
 import { Profile } from "./profile";
 
 /** Defines the server response when the full account object is returned (get, put etc) */
-export const AccountResponse = () => (
+export const TenantResponse = () => (
   <Params>
     <Param name="id" type="string">
       Id of the tenant.
