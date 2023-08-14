@@ -70,7 +70,7 @@ const ApiReferenceContainer = ({
         />
       </Head>
       <Formik<FormValues> initialValues={initialValues} onSubmit={() => {}}>
-        <Form autoComplete="off" className={styles.form}>
+        <Form autoComplete="off">
           <div className={styles.container}>
             {/** //!some global style is modifying this markdown, if removed this will break the response alignment in production
              */}

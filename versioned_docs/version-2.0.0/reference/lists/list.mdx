@@ -2,11 +2,15 @@
 sidebar_position: 0
 ---
 
-import ApiReference from "@site/src/components/ApiReference";
-import ApiReferenceUpdate from "@site/src/components/ApiReferenceUpdate";
 import config from "../configs/lists/list";
-import ApiReferenceContainer from "@site/src/components/ApiReferenceUpdate/ApiReferenceContainer";
+import ApiReferenceQueryParams from "@site/src/components/ApiReferenceUpdate/ApiReferenceQueryParams";
+import ApiReferenceResponses from "@site/src/components/ApiReferenceUpdate/ApiReferenceResponses";
+import ApiReferenceRequestExample from "@site/src/components/ApiReferenceUpdate/ApiReferenceRequestExample";
+import APiReferenceResponseExample from "@site/src/components/ApiReferenceUpdate/ApiReferenceResponseExample";
 
 # Get all Lists
 
-<ApiReferenceUpdate {...config} />
+<ApiReferenceQueryParams {...config} />
+<ApiReferenceResponses {...config} />
+<ApiReferenceRequestExample {...config} />
+<APiReferenceResponseExample {...config} />
