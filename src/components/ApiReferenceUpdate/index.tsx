@@ -8,7 +8,7 @@ import ApiReferenceContainer from "./ApiReferenceContainer";
 import ApiReferenceQueryParams from "./ApiReferenceQueryParams";
 import ApiReferenceResponses from "./ApiReferenceResponses";
 import ApiReferenceRequestExample from "./ApiReferenceRequestExample";
-import APiReferenceResponseExample from "./APiReferenceResponseExample";
+import APiReferenceResponseExample from "./ApiReferenceResponseExample";
 
 export interface ApiReferenceProps {
   method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";

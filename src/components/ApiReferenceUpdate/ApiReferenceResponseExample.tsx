@@ -25,7 +25,7 @@ const deepCompact = (value: unknown) => {
   return value;
 };
 
-const APiReferenceResponseExample = ({ responses }: PropType) => {
+const ApiReferenceResponseExample = ({ responses }: PropType) => {
   const renderResponseBody = () => {
     if (responses.length === 0) {
       return "Error with Test Request";
@@ -45,4 +45,4 @@ const APiReferenceResponseExample = ({ responses }: PropType) => {
   );
 };
 
-export default APiReferenceResponseExample;
+export default ApiReferenceResponseExample;
