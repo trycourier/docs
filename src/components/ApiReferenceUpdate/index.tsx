@@ -44,7 +44,13 @@ const ApiReference = ({
       {queryParams && <ApiReferenceQueryParams queryParams={queryParams} />}
       {bodyParam && <ApiReferenceBodyParam bodyParam={bodyParam} />}
       {responses && <ApiReferenceResponses responses={responses} />}
-      <ApiReferenceRequestExample method={method} path={path} />
+      <ApiReferenceRequestExample
+        method={method}
+        path={path}
+        pathParams={pathParams}
+        queryParams={queryParams}
+        bodyParam={bodyParam}
+      />
       {responses && <ApiReferenceResponseExample responses={responses} />}
     </>
   );
@@ -59,4 +65,6 @@ export {
   ApiReferenceResponseExample,
   ApiReferenceEndPoint,
   ApiReferenceMeta,
+  ApiReferencePathParams,
+  ApiReferenceBodyParam,
 };
