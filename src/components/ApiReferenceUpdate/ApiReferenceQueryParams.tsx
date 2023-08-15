@@ -2,9 +2,8 @@ import React, { useMemo } from "react";
 import ApiParamField, { ApiParam, apiParamInitialValue } from "./ApiParamField";
 
 import styles from "./styles.module.css";
-import { ApiReferenceProps } from ".";
+import { ApiReferenceProps, FormValues } from ".";
 import { Formik } from "formik";
-import { FormValues } from "./ApiReferenceContainer";
 type PropType = NonNullable<Pick<ApiReferenceProps, "queryParams">>;
 
 const ApiReferenceQueryParams = ({ queryParams }: PropType) => {

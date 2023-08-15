@@ -2,15 +2,22 @@
 sidebar_position: 3
 ---
 
-import ApiReference from "@site/src/components/ApiReference";
+import ApiReferenceUpdate from "@site/src/components/ApiReferenceUpdate";
 import config from "../configs/lists/delete";
+import {
+  ApiReferenceResponses,
+  ApiReferenceRequestExample,
+  ApiReferenceResponseExample,
+  ApiReferenceEndPoint,
+  ApiReferenceMeta,
+  ApiReferencePathParams,
+} from "@site/src/components/ApiReferenceUpdate";
 
 # Delete a List
 
-<ApiReference {...config} />
-
-## Example
-
-Method: `DELETE`
-
-URL: `https://api.courier.com/lists/abcdefgh12345678`
+<ApiReferenceMeta {...config} />
+<ApiReferenceEndPoint {...config} />
+<ApiReferencePathParams {...config} />
+<ApiReferenceResponses {...config} />
+<ApiReferenceRequestExample {...config} />
+<ApiReferenceResponseExample {...config} />

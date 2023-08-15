@@ -6,8 +6,9 @@ import { ApiParam, apiParamInitialValue } from "./ApiParamField";
 import { Formik } from "formik";
 import { FormValues } from "../ApiReference";
 
-type PropType = NonNullable<
-  Pick<ApiReferenceProps, "method" | "path" | "pathParams" | "queryParams" | "bodyParam">
+type PropType = Pick<
+  ApiReferenceProps,
+  "method" | "path" | "pathParams" | "queryParams" | "bodyParam"
 >;
 
 const ApiReferenceRequestExample = ({

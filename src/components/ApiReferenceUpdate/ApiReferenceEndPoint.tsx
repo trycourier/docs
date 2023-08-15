@@ -14,10 +14,8 @@ const ApiReferenceEndPoint = ({ method, path }: PropType) => {
         </code>
       </p>
       <p>
-        <div>
-          <strong>Method: </strong>
-          <code>{method}</code>
-        </div>
+        <strong>Method: </strong>
+        <code>{method}</code>
       </p>
     </>
   );
