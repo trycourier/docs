@@ -1,16 +1,15 @@
 import React from "react";
 
-import styles from "./styles.module.css";
-
 import { ApiResponse } from "./ApiResponseField";
-import ApiParamField, { ApiParam } from "./ApiParamField";
-import ApiReferenceContainer from "./ApiReferenceContainer";
+import { ApiParam } from "./ApiParamField";
 import ApiReferenceQueryParams from "./ApiReferenceQueryParams";
 import ApiReferenceResponses from "./ApiReferenceResponses";
 import ApiReferenceRequestExample from "./ApiReferenceRequestExample";
 import ApiReferenceResponseExample from "./ApiReferenceResponseExample";
 import ApiReferenceEndPoint from "./ApiReferenceEndPoint";
 import ApiReferenceMeta from "./ApiReferenceMeta";
+import ApiReferencePathParams from "./ApiReferencePathParams";
+import ApiReferenceBodyParam from "./ApiReferenceBodyParam";
 
 export interface ApiReferenceProps {
   method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
@@ -38,35 +37,16 @@ const ApiReference = ({
   responses,
 }: ApiReferenceProps) => {
   return (
-    <ApiReferenceContainer
-      path={path}
-      description={description}
-      pathParams={pathParams}
-      queryParams={queryParams}
-      bodyParam={bodyParam}
-    >
-      {pathParams && (
-        <div className={styles.section}>
-          <p>
-            <strong>PATH PARAMS</strong>
-          </p>
-          <ApiParamField param={{ type: "object", fields: pathParams }} prefix="path" />
-        </div>
-      )}
+    <>
+      <ApiReferenceMeta description={description} path={path} />
+      <ApiReferenceEndPoint method={method} path={path} />
+      {pathParams && <ApiReferencePathParams pathParams={pathParams} />}
       {queryParams && <ApiReferenceQueryParams queryParams={queryParams} />}
-      {bodyParam && (
-        <div className={styles.section}>
-          <div className={styles.sectionTitle}>BODY PARAM</div>
-
-          <div className={styles.group}>
-            <ApiParamField param={bodyParam} prefix="body" />
-          </div>
-        </div>
-      )}
+      {bodyParam && <ApiReferenceBodyParam bodyParam={bodyParam} />}
       {responses && <ApiReferenceResponses responses={responses} />}
       <ApiReferenceRequestExample method={method} path={path} />
       {responses && <ApiReferenceResponseExample responses={responses} />}
-    </ApiReferenceContainer>
+    </>
   );
 };
 
