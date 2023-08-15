@@ -8,7 +8,9 @@ import ApiReferenceContainer from "./ApiReferenceContainer";
 import ApiReferenceQueryParams from "./ApiReferenceQueryParams";
 import ApiReferenceResponses from "./ApiReferenceResponses";
 import ApiReferenceRequestExample from "./ApiReferenceRequestExample";
-import APiReferenceResponseExample from "./ApiReferenceResponseExample";
+import ApiReferenceResponseExample from "./ApiReferenceResponseExample";
+import ApiReferenceEndPoint from "./ApiReferenceEndPoint";
+import ApiReferenceMeta from "./ApiReferenceMeta";
 
 export interface ApiReferenceProps {
   method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
@@ -63,9 +65,18 @@ const ApiReference = ({
       )}
       {responses && <ApiReferenceResponses responses={responses} />}
       <ApiReferenceRequestExample method={method} path={path} />
-      {responses && <APiReferenceResponseExample responses={responses} />}
+      {responses && <ApiReferenceResponseExample responses={responses} />}
     </ApiReferenceContainer>
   );
 };
 
 export default ApiReference;
+
+export {
+  ApiReferenceQueryParams,
+  ApiReferenceResponses,
+  ApiReferenceRequestExample,
+  ApiReferenceResponseExample,
+  ApiReferenceEndPoint,
+  ApiReferenceMeta,
+};

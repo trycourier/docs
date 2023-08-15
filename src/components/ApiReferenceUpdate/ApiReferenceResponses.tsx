@@ -11,7 +11,9 @@ const ApiReferenceResponses = ({ responses }: PropType) => {
   if (responses.length === 0) return null;
   return (
     <div className={styles.section}>
-      <div className={styles.sectionTitle}>{responseTitle}:</div>
+      <div className={styles.sectionTitle}>
+        <strong>{responseTitle}:</strong>
+      </div>
 
       {responses.map((response, index) => {
         const name = `${response.status} ${response.description}`;
