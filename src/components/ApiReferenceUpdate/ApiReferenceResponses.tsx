@@ -23,17 +23,19 @@ const ApiReferenceResponses = ({ responses }: PropType) => {
               <strong>status: </strong>
               <code>{name}</code>
             </p>
-            <Params>
-              <ApiResponseField
-                collapsible={false}
-                isRoot
-                field={{
-                  type: "object",
-                  name,
-                  ...response.body,
-                }}
-              />
-            </Params>
+            {response.body && (
+              <Params>
+                <ApiResponseField
+                  collapsible={false}
+                  isRoot
+                  field={{
+                    type: "object",
+                    name,
+                    ...response.body,
+                  }}
+                />
+              </Params>
+            )}
           </div>
         );
       })}

@@ -26,21 +26,27 @@ const deepCompact = (value: unknown) => {
 };
 
 const ApiReferenceResponseExample = ({ responses }: PropType) => {
-  const renderResponseBody = () => {
+  const renderResponseBody = (idx: number) => {
     if (responses.length === 0) {
       return "Error with Test Request";
     }
+    const currentResponse = responses[idx];
 
-    const responseBody = deepCompact(buildResponse(responses[0].body));
-    return responseBody ? stringifyJSON(responseBody, true) : "Empty";
+    if (currentResponse.body) {
+      const responseBody = deepCompact(buildResponse(currentResponse.body));
+      return responseBody ? stringifyJSON(responseBody, true) : "Empty";
+    }
+    return "Empty";
   };
 
   return (
     <div className={styles.section}>
       <div className={styles.inlineForm}>
-        <div className={styles.sectionTitle}>Response Example</div>
+        <div className={styles.sectionTitle}>Responses Example</div>
       </div>
-      <CodeBlock className="language-json">{renderResponseBody()}</CodeBlock>
+      {responses.map((_response, idx) => (
+        <CodeBlock className="language-json">{renderResponseBody(idx)}</CodeBlock>
+      ))}
     </div>
   );
 };
