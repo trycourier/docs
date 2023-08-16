@@ -348,7 +348,7 @@ button.groupHeader:focus {
   width: 100%;
   background-color: transparent;
   cursor: pointer;
-  border-bottom: 1px solid var(--structure-border, #dcdee4);
+  border-bottom: 1px solid var(--structure-border, #dcdee4) !important;
 }
 
 .negativeButtonStyle {

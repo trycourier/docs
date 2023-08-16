@@ -1,55 +1,48 @@
 import React from "react";
 
 import { FieldComponentProps, apiParamInitialValue } from "./ApiParamField";
-import ApiParamInfo from "./ApiParamInfo";
 import ApiParamField from "./ApiParamField";
 
 import styles from "./styles.module.css";
+import { ExpandButton, Param, Params, ParamsList } from "../Params";
 
 const ApiParamArrayField = ({ param, field, form }: FieldComponentProps<"array">) => {
   return (
-    <div className={styles.groupContainer}>
-      {param.name && (
-        <div className={styles.groupHeader}>
-          <ApiParamInfo param={param} />
-        </div>
-      )}
-
-      <div className={styles.group}>
-        {[...field.value].map((value, index) => (
-          <div key={index} className={styles.field}>
-            <div className={styles.group}>
-              <div className={styles.groupHeader}>
-                <button
-                  type="button"
-                  onClick={() =>
-                    form.setFieldValue(field.name, [
-                      ...field.value.slice(0, index),
-                      ...field.value.slice(index + 1),
-                    ])
-                  }
-                >
-                  -
-                </button>{" "}
-                {param.name}[{index}]
+    <Params>
+      <Param name={param.name} type={param.type}>
+        {field.value.length > 0 && (
+          <ParamsList>
+            {[...field.value].map((value, index) => (
+              <div key={index}>
+                <div className={styles.negativeButtonContainerStyle}>
+                  <button
+                    className={styles.negativeButtonStyle}
+                    type="button"
+                    onClick={() =>
+                      form.setFieldValue(field.name, [
+                        ...field.value.slice(0, index),
+                        ...field.value.slice(index + 1),
+                      ])
+                    }
+                  >
+                    - {param.name}[{index}]
+                  </button>
+                </div>
+                <ApiParamField param={param.field} prefix={`${field.name}[${index}]`} />
               </div>
+            ))}
+          </ParamsList>
+        )}
 
-              <ApiParamField param={param.field} prefix={`${field.name}[${index}]`} />
-            </div>
-          </div>
-        ))}
-
-        <button
-          type="button"
+        <ExpandButton
           onClick={() => {
             form.setFieldValue(field.name, [...field.value, apiParamInitialValue(param.field)]);
           }}
-          className={styles.groupHeader}
         >
           + ADD
-        </button>
-      </div>
-    </div>
+        </ExpandButton>
+      </Param>
+    </Params>
   );
 };
 

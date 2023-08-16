@@ -40,8 +40,9 @@ const ApiParamRecordField = ({ param, field, form }: FieldComponentProps<"array"
               "": apiParamInitialValue(param.field),
             });
           }}
-          label="+ ADD"
-        />
+        >
+          + ADD
+        </ExpandButton>
       </Param>
     </Params>
   );
