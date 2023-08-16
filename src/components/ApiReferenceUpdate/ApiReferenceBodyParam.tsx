@@ -15,13 +15,13 @@ const ApiReferenceBodyParam = ({
   }, [bodyParam]);
   return (
     <div className={styles.section}>
-      <div className={styles.sectionTitle}>BODY PARAM</div>
+      <p>
+        <strong>BODY PARAM</strong>
+      </p>
 
-      <div className={styles.group}>
-        <Formik<Pick<FormValues, "body">> initialValues={initialValues} onSubmit={() => {}}>
-          <ApiParamField param={bodyParam} prefix="body" />
-        </Formik>
-      </div>
+      <Formik<Pick<FormValues, "body">> initialValues={initialValues} onSubmit={() => {}}>
+        <ApiParamField param={bodyParam} prefix="body" isRoot />
+      </Formik>
     </div>
   );
 };

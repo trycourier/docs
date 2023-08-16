@@ -343,3 +343,26 @@ button.groupHeader:focus {
 .groupHeader .inlineForm {
   margin: 0.25rem 0;
 }
+
+.negativeButtonContainerStyle {
+  width: 100%;
+  background-color: transparent;
+  cursor: pointer;
+  border-bottom: 1px solid var(--structure-border, #dcdee4);
+}
+
+.negativeButtonStyle {
+  outline: 0;
+  border: 0;
+  width: 100%;
+  padding: 0.5rem 1.5rem;
+  text-align: left;
+  background-color: transparent;
+  font-size: var(--default-font-size);
+  font-weight: var(--default-font-weight);
+  line-height: 1.5rem;
+}
+
+.negativeButtonStyle:hover {
+  opacity: 0.5;
+}

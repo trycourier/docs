@@ -18,16 +18,18 @@ export const ExtendParams: FC = ({ children }) => (
   </ChildContext.Provider>
 );
 
+export const ExpandButton = ({ onClick, label }: { onClick: () => void; label: string }) => {
+  return (
+    <div className={styles.showChildParamsButton} onClick={onClick}>
+      {label}
+    </div>
+  );
+};
+
 export const ChildParams: FC<{ name?: string }> = ({ children, name = "child parameters" }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const toggleCollapsed = () => setIsCollapsed(!isCollapsed);
-
-  const showButton = (
-    <div className={styles.showChildParamsButton} onClick={toggleCollapsed}>
-      + Show {name}
-    </div>
-  );
 
   const childParameters = (
     <div className={styles.childParams}>
@@ -40,7 +42,11 @@ export const ChildParams: FC<{ name?: string }> = ({ children, name = "child par
     </div>
   );
 
-  return isCollapsed ? showButton : childParameters;
+  return isCollapsed ? (
+    <ExpandButton onClick={toggleCollapsed} label={`+ Show ${name}`} />
+  ) : (
+    childParameters
+  );
 };
 
-const ParamsList: FC = ({ children }) => <div className={styles.params}>{children}</div>;
+export const ParamsList: FC = ({ children }) => <div className={styles.params}>{children}</div>;

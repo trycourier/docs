@@ -24,7 +24,7 @@ const ApiReferencePathParams = ({
         <strong>PATH PARAMS</strong>
       </p>
       <Formik<Pick<FormValues, "path">> initialValues={initialValues} onSubmit={() => {}}>
-        <ApiParamField param={{ type: "object", fields: pathParams }} prefix="path" />
+        <ApiParamField param={{ type: "object", fields: pathParams }} prefix="path" isRoot />
       </Formik>
     </div>
   );
