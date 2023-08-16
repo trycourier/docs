@@ -1,0 +1,300 @@
+---
+sidebar_position: 6
+sidebar_label: User Membership
+slug: ./user-membership
+toc_max_heading_level: 2
+---
+
+import { UserTenantAssociation } from "../types/tenants";
+import { Profile } from "../types/profile";
+import { PaginatedResponse, PaginatedRequestQueryParams } from "../types/pagination";
+
+# User Membership
+
+## Add a User to Multiple Tenants
+
+This endpoint is used to add a user to multiple tenants in one call.
+
+A custom profile can also be supplied for each tenant. This profile will be merged with the user's main profile when sending to the user with that tenant.
+
+**URL:** `https://api.courier.com/users/:user_id/tenants`
+
+**Method:** `PUT`
+
+**Path Parameters:**
+
+<Params>
+  <Param name="user_id" type="string" required>
+    Id of the user to be added to the supplied tenants
+  </Param>
+</Params>
+
+**Body:**
+
+<Params>
+  <Param name="tenants" type="UserTenantAssociation">
+    A list of tenants the user a member of.
+    <ChildParams name="user tenant association type">
+      <UserTenantAssociation />
+    </ChildParams>
+  </Param>
+</Params>
+
+**Example:**
+
+`PUT /users/john/tenants`
+
+```js
+{
+  "tenants": [
+    {
+      "tenant_id": "acme",
+      "profile": {
+        "email": "john@acme.com",
+      }
+    },
+    {
+      "tenant_id": "bizcorp",
+      "profile": {
+        "email": "john@bizcorp.com",
+      }
+    },
+  ]
+}
+```
+
+Response:
+
+```
+status: 204
+```
+
+## Add a User to a Single Tenant
+
+This endpoint is used to add a single tenant.
+
+A custom profile can also be supplied with the tenant. This profile will be merged with the user's main profile when sending to the user with that tenant.
+
+**URL:** `https://api.courier.com/users/:user_id/tenants/:tenant_id`
+
+**Method:** `PUT`
+
+**Path Parameters:**
+
+<Params>
+  <Param name="user_id" type="string" required>
+    Id of the user to be added to the supplied tenant.
+  </Param>
+  <Param name="tenant_id" type="string" required>
+    Id of the tenant the user should be added to.
+  </Param>
+</Params>
+
+**Body:**
+
+<Params>
+  <Param name="profile" type="Profile">
+    A profile to merge with the main user profile when sending via this tenant.
+    <ChildParams name="profile type">
+      <Profile />
+    </ChildParams>
+  </Param>
+</Params>
+
+**Example:**
+
+`PUT /users/john/tenants/acme`
+
+```js
+{
+  "profile": {
+    "email": "john@acme.com",
+  }
+}
+```
+
+Response:
+
+```
+status: 204
+```
+
+## Remove User From All Associated Tenants
+
+Removes a user from any tenants they may have been associated with.
+
+**URL:** `https://api.courier.com/users/:user_id/tenants`
+
+**Method:** `DELETE`
+
+**Path Parameters:**
+
+<Params>
+  <Param name="user_id" type="string" required>
+    Id of the user to be removed from all tenants.
+  </Param>
+</Params>
+
+**Example:**
+
+`DELETE /users/john/tenants`
+
+Response:
+
+```
+status: 204
+```
+
+## Remove User from a Tenant
+
+Removes a user from the supplied tenant.
+
+**URL:** `https://api.courier.com/users/:user_id/tenants/:tenant_id`
+
+**Method:** `DELETE`
+
+**Path Parameters:**
+
+<Params>
+  <Param name="user_id" type="string" required>
+    Id of the user to be removed from the supplied tenant.
+  </Param>
+  <Param name="tenant_id" type="string" required>
+    Id of the tenant the user should be removed from.
+  </Param>
+</Params>
+
+**Example:**
+
+`DELETE /users/john/tenants/acme`
+
+Response:
+
+```
+status: 204
+```
+
+## Get tenants associated with a given user
+
+Returns a paginated list of user tenant associations.
+
+**URL:** `https://api.courier.com/users/:user_id/tenants`
+
+**Method:** `GET`
+
+**Path Parameters:**
+
+<Params>
+  <Param name="user_id" type="string" required>
+    Id of the user to retrieve all associated tenants for.
+  </Param>
+</Params>
+
+**Query Parameters:**
+
+<PaginatedRequestQueryParams />
+
+**Response Body:**
+
+<PaginatedResponse type="array<UserTenantAssociation>">
+  An array of user tenant associations.
+  <ChildParams name="user tenant association type">
+    <UserTenantAssociation />
+  </ChildParams>
+</PaginatedResponse>
+
+**Example:**
+
+`GET /users/john/tenants`
+
+Response:
+
+```
+status: 200
+```
+
+```json
+{
+  "has_more": false,
+  "items": [
+    {
+      "tenant_id": "acme",
+      "profile": {
+        "role": "admin"
+      },
+      "user_id": "john"
+    },
+    {
+      "tenant_id": "biggle",
+      "profile": {
+        "role": "normal"
+      },
+      "user_id": "john"
+    },
+    {
+      "tenant_id": "example",
+      "profile": {
+        "role": "guest"
+      },
+      "user_id": "john"
+    }
+  ],
+  "type": "list"
+}
+```
+
+## Get a User Tenant Association
+
+Returns the details of a user's membership with the supplied tenant.
+
+**URL:** `https://api.courier.com/users/:user_id/tenants/:tenant_id`
+
+**Method:** `DELETE`
+
+**Path Parameters:**
+
+<Params>
+  <Param name="user_id" type="string" required>
+    Id of the user to retrieve tenant details for.
+  </Param>
+  <Param name="tenant_id" type="string" required>
+    Id of the tenant to retrieve details for.
+  </Param>
+</Params>
+
+**Response Body:**
+
+<Params>
+  <Param name="user_id" type="string" required>
+    User id the association is tied to.
+  </Param>
+  <Param name="tenant_id" type="string" required>
+    Tenant id the association is tied to.
+  </Param>
+  <Param name="profile" type="Profile">
+    A profile merged with the main user profile when sending via this tenant.
+    <ChildParams name="profile type">
+      <Profile />
+    </ChildParams>
+  </Param>
+</Params>
+
+**Example:**
+
+`GET /users/john/tenants/acme`
+
+Response:
+
+```
+status: 200
+```
+
+```json
+{
+  "tenant_id": "acme",
+  "profile": {
+    "role": "admin"
+  },
+  "user_id": "john"
+}
+```

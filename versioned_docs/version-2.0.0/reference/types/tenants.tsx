@@ -4,16 +4,16 @@ import { SubscriptionTopic } from "./preferences";
 import { Profile } from "./profile";
 
 /** Defines the server response when the full account object is returned (get, put etc) */
-export const AccountResponse = () => (
+export const TenantResponse = () => (
   <Params>
     <Param name="id" type="string">
-      Id of the account.
+      Id of the tenant.
     </Param>
     <Param name="name" type="string">
-      Name of the account.
+      Name of the tenant.
     </Param>
-    <Param name="parent_account_id" type="string?">
-      Account's parent id (if any).
+    <Param name="parent_tenant_id" type="string?">
+      Tenant's parent id (if any).
     </Param>
     <Param name="default_preferences" type="object?">
       Defines the preferences used for the account when the user hasn't specified their own.
@@ -30,16 +30,16 @@ export const AccountResponse = () => (
   </Params>
 );
 
-export const AccountRequest = () => (
+export const TenantRequest = () => (
   <Params>
     <Param name="name" type="string" required>
-      Name of the account.
+      Name of the tenant.
     </Param>
-    <Param name="parent_account_id" type="string">
-      Account's parent id (if any).
+    <Param name="parent_tenant_id" type="string">
+      Tenant's parent id (if any).
     </Param>
     <Param name="default_preferences" type="object">
-      Defines the preferences used for the account when the user hasn't specified their own.
+      Defines the preferences used for the tenant when the user hasn't specified their own.
       <ChildParams name="fields">
         <Param name="items" type="array<SubscriptionTopic>">
           A list of subscription topic preferences
@@ -61,13 +61,13 @@ export const AccountRequest = () => (
   </Params>
 );
 
-export const UserAccountAssociation = () => (
+export const UserTenantAssociation = () => (
   <Params>
-    <Param name="account_id" type="string" required>
-      Account ID the user association is tied to.
+    <Param name="tenant_id" type="string" required>
+      Tenant ID the user association is tied to.
     </Param>
     <Param name="profile" type="Profile" required>
-      Account ID the user association is tied to.
+      Tenant ID the user association is tied to.
       <ChildParams name="profile type">
         <Profile />
       </ChildParams>

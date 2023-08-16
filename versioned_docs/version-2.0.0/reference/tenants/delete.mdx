@@ -1,0 +1,30 @@
+---
+sidebar_position: 5
+sidebar_label: Delete a Tenant
+slug: ./delete-tenant
+toc_max_heading_level: 2
+---
+
+# Delete a Tenant
+
+**URL:** `https://api.courier.com/tenants/:tenant_id`
+
+**Method:** `DELETE`
+
+**Path Parameters:**
+
+<Params>
+  <Param name="tenant_id" type="string" required>
+    Id of the tenant to be deleted.
+  </Param>
+</Params>
+
+**Response:**
+
+Status: 204
+
+**Example:**
+
+```js
+DELETE https://api.courier.com/tenants/ACME
+```

@@ -1,33 +1,33 @@
 ---
 sidebar_position: 3
-sidebar_label: Get an Account
-slug: ./get-account
+sidebar_label: Get a Tenant
+slug: ./get-tenant
 ---
 
-import { AccountResponse } from "../types/accounts";
+import { TenantResponse } from "../types/tenants";
 
-# Get an Account
+# Get a Tenant
 
-**URL:** `https://api.courier.com/accounts/:account_id`
+**URL:** `https://api.courier.com/tenants/:tenant_id`
 
 **Method:** `GET`
 
 **Path Parameters:**
 
 <Params>
-  <Param name="account_id" type="string" required>
-    Id of the account to be returned.
+  <Param name="tenant_id" type="string" required>
+    Id of the tenant to be returned.
   </Param>
 </Params>
 
 **Response Body:**
 
-<AccountResponse />
+<TenantResponse />
 
 **Example:**
 
 ```js
-// GET https://api.courier.com/accounts/ACME
+// GET https://api.courier.com/tenant/ACME
 
 // RESPONSE BODY
 {
@@ -52,28 +52,28 @@ import { AccountResponse } from "../types/accounts";
 }
 ```
 
-# Get an Account
+# Get a Tenant
 
-**URL:** `https://api.courier.com/accounts/:account_id`
+**URL:** `https://api.courier.com/tenants/:tenant_id`
 
 **Method:** `GET`
 
 **Path Parameters:**
 
 <Params>
-  <Param name="account_id" type="string" required>
-    Id of the account to be returned.
+  <Param name="tenant_id" type="string" required>
+    Id of the tenant to be returned.
   </Param>
 </Params>
 
 **Response Body:**
 
-<FullAccountResponse />
+<FullTenantResponse />
 
 **Example:**
 
 ```js
-// GET https://api.courier.com/accounts/ACME
+// GET https://api.courier.com/tenants/ACME
 
 // RESPONSE BODY
 {
