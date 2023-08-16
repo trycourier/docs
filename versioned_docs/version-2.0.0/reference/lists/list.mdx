@@ -2,15 +2,21 @@
 sidebar_position: 0
 ---
 
-import ApiReference from "@site/src/components/ApiReference";
 import config from "../configs/lists/list";
+import {
+  ApiReferenceQueryParams,
+  ApiReferenceResponses,
+  ApiReferenceRequestExample,
+  ApiReferenceResponseExample,
+  ApiReferenceEndPoint,
+  ApiReferenceMeta,
+} from "@site/src/components/ApiReferenceUpdate";
 
 # Get all Lists
 
-<ApiReference {...config} />
-
-## Example
-
-Method: `GET`
-
-URL: `https://api.courier.com/lists`
+<ApiReferenceMeta {...config} />
+<ApiReferenceEndPoint {...config} />
+<ApiReferenceQueryParams {...config} />
+<ApiReferenceResponses {...config} />
+<ApiReferenceRequestExample {...config} />
+<ApiReferenceResponseExample {...config} />
