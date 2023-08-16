@@ -361,6 +361,7 @@ button.groupHeader:focus {
   font-size: var(--default-font-size);
   font-weight: var(--default-font-weight);
   line-height: 1.5rem;
+  cursor: pointer;
 }
 
 .negativeButtonStyle:hover {
