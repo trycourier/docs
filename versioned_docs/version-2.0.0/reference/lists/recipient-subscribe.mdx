@@ -2,14 +2,29 @@
 sidebar_position: 8
 ---
 
-import ApiReference from "@site/src/components/ApiReference";
+import {
+  ApiReferenceQueryParams,
+  ApiReferenceResponses,
+  ApiReferenceRequestExample,
+  ApiReferenceResponseExample,
+  ApiReferenceEndPoint,
+  ApiReferenceMeta,
+  ApiReferencePathParams,
+  ApiReferenceBodyParam,
+} from "@site/src/components/ApiReferenceUpdate";
 import config from "../configs/lists/recipient-subscribe";
 
 # Subscribe a user to a List
 
-<ApiReference {...config} />
+<ApiReferenceMeta {...config} />
+<ApiReferenceEndPoint {...config} />
+<ApiReferencePathParams {...config} />
+<ApiReferenceBodyParam {...config} />
+<ApiReferenceResponses {...config} />
+<ApiReferenceRequestExample {...config} />
+<ApiReferenceResponseExample {...config} />
 
-## Example
+#### Example
 
 Method: `PUT`
 
