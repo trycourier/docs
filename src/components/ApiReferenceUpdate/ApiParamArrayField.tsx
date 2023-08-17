@@ -7,7 +7,7 @@ import styles from "./styles.module.css";
 import { ExpandButton, Param, ParamsList } from "../Params";
 import Markdown from "markdown-to-jsx";
 
-const ApiParamArrayField = ({ param, field, form, prefix }: FieldComponentProps<"array">) => {
+const ApiParamArrayField = ({ param, field, form }: FieldComponentProps<"array">) => {
   return (
     <Param name={param.name} type={param.type}>
       {param.description && <Markdown>{param.description}</Markdown>}
