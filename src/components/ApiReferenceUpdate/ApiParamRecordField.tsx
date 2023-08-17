@@ -5,7 +5,7 @@ import { FieldComponentProps, apiParamInitialValue } from "./ApiParamField";
 import ApiParamField from "./ApiParamField";
 
 import styles from "./styles.module.css";
-import { ExpandButton, Param, Params, ParamsList } from "../Params";
+import { ExpandButton, Param, ParamsList } from "../Params";
 import Markdown from "markdown-to-jsx";
 
 const ApiParamRecordField = ({ param, field, form }: FieldComponentProps<"array">) => {
@@ -22,26 +22,28 @@ const ApiParamRecordField = ({ param, field, form }: FieldComponentProps<"array"
                   onClick={() => form.setFieldValue(field.name, omit(field.value, key))}
                   className={styles.negativeButtonStyle}
                 >
-                  - {param.name}[KEY]
+                  - {`${param.name}[KEY]`}
                 </button>
               </div>
-              <ApiParamField param={param.field} prefix={`${field.name}[${key}]`} />
+              <ApiParamField param={{ ...param.field }} prefix={`${field.name}[${key}]`} />
             </div>
           ))}
         </ParamsList>
       )}
-      <ExpandButton
-        onClick={() => {
-          if (field.value[""]) return;
+      {Object.entries(field.value)?.length === 0 && (
+        <ExpandButton
+          onClick={() => {
+            if (field.value[""]) return;
 
-          form.setFieldValue(field.name, {
-            ...field.value,
-            "": apiParamInitialValue(param.field),
-          });
-        }}
-      >
-        + ADD
-      </ExpandButton>
+            form.setFieldValue(field.name, {
+              ...field.value,
+              "": apiParamInitialValue(param.field),
+            });
+          }}
+        >
+          + Show Properties
+        </ExpandButton>
+      )}
     </Param>
   );
 };

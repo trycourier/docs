@@ -44,8 +44,10 @@ const ApiReferenceResponseExample = ({ responses }: PropType) => {
       <div className={styles.inlineForm}>
         <div className={styles.sectionTitle}>Responses Example</div>
       </div>
-      {responses.map((_response, idx) => (
-        <CodeBlock className="language-json">{renderResponseBody(idx)}</CodeBlock>
+      {responses.map((response, idx) => (
+        <CodeBlock className="language-json" key={JSON.stringify(response)}>
+          {renderResponseBody(idx)}
+        </CodeBlock>
       ))}
     </div>
   );

@@ -7,11 +7,11 @@ import styles from "./styles.module.css";
 import { ExpandButton, Param, ParamsList } from "../Params";
 import Markdown from "markdown-to-jsx";
 
-const ApiParamArrayField = ({ param, field, form }: FieldComponentProps<"array">) => {
+const ApiParamArrayField = ({ param, field, form, prefix }: FieldComponentProps<"array">) => {
   return (
     <Param name={param.name} type={param.type}>
       {param.description && <Markdown>{param.description}</Markdown>}
-      {field.value.length > 0 && (
+      {field?.value?.length > 0 && (
         <ParamsList>
           {[...field.value].map((value, index) => (
             <div key={index}>
@@ -26,7 +26,7 @@ const ApiParamArrayField = ({ param, field, form }: FieldComponentProps<"array">
                     ])
                   }
                 >
-                  - {param.name}[{index}]
+                  - {`${param.name}[index]`}
                 </button>
               </div>
               <ApiParamField param={param.field} prefix={`${field.name}[${index}]`} />
@@ -35,13 +35,15 @@ const ApiParamArrayField = ({ param, field, form }: FieldComponentProps<"array">
         </ParamsList>
       )}
 
-      <ExpandButton
-        onClick={() => {
-          form.setFieldValue(field.name, [...field.value, apiParamInitialValue(param.field)]);
-        }}
-      >
-        + ADD
-      </ExpandButton>
+      {field?.value?.length === 0 && (
+        <ExpandButton
+          onClick={() => {
+            form.setFieldValue(field.name, [...field.value, apiParamInitialValue(param.field)]);
+          }}
+        >
+          + Show Properties
+        </ExpandButton>
+      )}
     </Param>
   );
 };
