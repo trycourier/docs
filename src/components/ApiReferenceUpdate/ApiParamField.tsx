@@ -37,6 +37,7 @@ export interface FieldComponentProps<
 > extends FieldProps<Type extends "array" ? unknown[] : Value> {
   param: Param;
   isRoot?: boolean;
+  skipShowProperties?: boolean;
 }
 
 const apiParamComponents: Record<
@@ -59,10 +60,11 @@ export const buildParamPath = (param: ApiParam | string, prefix?: string) =>
   [prefix, typeof param === "string" ? param : param.name].filter((x) => x != null).join(".") ||
   null;
 
-interface ApiParamFieldProps {
+export interface ApiParamFieldProps {
   prefix: string;
   param: ApiParam;
   isRoot?: boolean;
+  skipShowProperties?: boolean;
 }
 
 export const apiParamInitialValue = (param: ApiParam) => {
@@ -100,12 +102,19 @@ const validateField = (param: ApiParam) => (value: string) => {
   }
 };
 
-const ApiParamField = ({ prefix, param, isRoot }: ApiParamFieldProps) => {
+const ApiParamField = ({ prefix, param, isRoot, skipShowProperties }: ApiParamFieldProps) => {
   const Component = apiParamComponents[param.type];
 
   const field = (
     <Field name={buildParamPath(param, prefix)} validate={validateField(param)}>
-      {(props: FieldProps) => <Component {...props} param={param} isRoot={isRoot} />}
+      {(props: FieldProps) => (
+        <Component
+          {...props}
+          param={param}
+          isRoot={isRoot}
+          skipShowProperties={skipShowProperties}
+        />
+      )}
     </Field>
   );
 
