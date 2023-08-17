@@ -39,7 +39,7 @@ const ApiReference = ({
   return (
     <>
       <ApiReferenceMeta description={description} path={path} />
-      <ApiReferenceEndPoint method={method} path={path} />
+      <ApiReferenceEndPoint method={method} path={path} description={description} />
       {pathParams && <ApiReferencePathParams pathParams={pathParams} />}
       {queryParams && <ApiReferenceQueryParams queryParams={queryParams} />}
       {bodyParam && <ApiReferenceBodyParam bodyParam={bodyParam} />}
