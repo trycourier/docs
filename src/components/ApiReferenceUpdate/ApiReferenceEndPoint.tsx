@@ -1,9 +1,10 @@
 import React from "react";
 import { ApiReferenceProps } from "../ApiReference";
+import Markdown from "markdown-to-jsx";
 
-type PropType = NonNullable<Pick<ApiReferenceProps, "method" | "path">>;
+type PropType = NonNullable<Pick<ApiReferenceProps, "method" | "path" | "description">>;
 
-const ApiReferenceEndPoint = ({ method, path }: PropType) => {
+const ApiReferenceEndPoint = ({ method, path, description }: PropType) => {
   return (
     <>
       <p>
@@ -17,6 +18,7 @@ const ApiReferenceEndPoint = ({ method, path }: PropType) => {
         <strong>Method: </strong>
         <code>{method}</code>
       </p>
+      <Markdown>{description}</Markdown>
     </>
   );
 };

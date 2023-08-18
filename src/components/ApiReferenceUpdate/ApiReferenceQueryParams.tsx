@@ -24,7 +24,7 @@ const ApiReferenceQueryParams = ({ queryParams }: PropType) => {
       </p>
 
       <Formik<Pick<FormValues, "query">> initialValues={initialValues} onSubmit={() => {}}>
-        <ApiParamField param={{ type: "object", fields: queryParams }} prefix="query" />
+        <ApiParamField param={{ type: "object", fields: queryParams }} prefix="query" isRoot />
       </Formik>
     </div>
   );

@@ -2,7 +2,15 @@
 sidebar_position: 2
 ---
 
-import ApiReference from "@site/src/components/ApiReference";
+import ApiReferenceUpdate, {
+  ApiReferenceEndPoint,
+  ApiReferenceMeta,
+  ApiReferencePathParams,
+  ApiReferenceBodyParam,
+  ApiReferenceRequestExample,
+  ApiReferenceResponses,
+  ApiReferenceResponseExample,
+} from "@site/src/components/ApiReferenceUpdate";
 import config from "../configs/lists/replace";
 
 # Update a List
@@ -13,11 +21,16 @@ A deleted `list_id` can be restored via the [Restore a List API](restore.mdx) an
 
 :::
 
-<ApiReference {...config} />
+<ApiReferenceMeta {...config} />
+<ApiReferenceEndPoint {...config} />
+<ApiReferencePathParams {...config} />
+<ApiReferenceBodyParam {...config} />
+<ApiReferenceResponses {...config} />
+<ApiReferenceRequestExample {...config} />
+<ApiReferenceResponseExample {...config} />
 
-## Example
+#### Response Example
 
-​
 Method: `PUT`
 
 URL: `https://api.courier.com/lists/abcdefgh12345678`

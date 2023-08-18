@@ -11,8 +11,6 @@ import ApiParamRecordField from "./ApiParamRecordField";
 import ApiParamObjectField from "./ApiParamObjectField";
 import ApiParamOneOfField from "./ApiParamOneOfField";
 
-import styles from "./styles.module.css";
-
 interface ApiBaseParam<Type extends string, Value = never> {
   name?: string;
   displayName?: string;
@@ -38,6 +36,8 @@ export interface FieldComponentProps<
   Value extends ApiParam["example"] = Param["example"]
 > extends FieldProps<Type extends "array" ? unknown[] : Value> {
   param: Param;
+  isRoot?: boolean;
+  skipShowProperties?: boolean;
 }
 
 const apiParamComponents: Record<
@@ -60,9 +60,11 @@ export const buildParamPath = (param: ApiParam | string, prefix?: string) =>
   [prefix, typeof param === "string" ? param : param.name].filter((x) => x != null).join(".") ||
   null;
 
-interface ApiParamFieldProps {
+export interface ApiParamFieldProps {
   prefix: string;
   param: ApiParam;
+  isRoot?: boolean;
+  skipShowProperties?: boolean;
 }
 
 export const apiParamInitialValue = (param: ApiParam) => {
@@ -100,19 +102,25 @@ const validateField = (param: ApiParam) => (value: string) => {
   }
 };
 
-const ApiParamField = ({ prefix, param }: ApiParamFieldProps) => {
+const ApiParamField = ({ prefix, param, isRoot, skipShowProperties }: ApiParamFieldProps) => {
   const Component = apiParamComponents[param.type];
+
   const field = (
     <Field name={buildParamPath(param, prefix)} validate={validateField(param)}>
-      {(props: FieldProps) => <Component {...props} param={param} />}
+      {(props: FieldProps) => (
+        <Component
+          {...props}
+          param={param}
+          isRoot={isRoot}
+          skipShowProperties={skipShowProperties}
+        />
+      )}
     </Field>
   );
 
-  return (
-    <div className={styles.field}>
-      {PRIMITIVE_TYPES.includes(param.type) ? <ApiParamInfo param={param} /> : field}
-    </div>
-  );
+  if (PRIMITIVE_TYPES.includes(param.type)) return <ApiParamInfo param={param} />;
+
+  return field;
 };
 
 export default ApiParamField;

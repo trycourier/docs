@@ -2,12 +2,27 @@
 sidebar_position: 7
 ---
 
-import ApiReference from "@site/src/components/ApiReference";
 import config from "../configs/lists/post-subscribe";
+import {
+  ApiReferenceQueryParams,
+  ApiReferenceResponses,
+  ApiReferenceRequestExample,
+  ApiReferenceResponseExample,
+  ApiReferenceEndPoint,
+  ApiReferenceMeta,
+  ApiReferencePathParams,
+  ApiReferenceBodyParam,
+} from "@site/src/components/ApiReferenceUpdate";
 
 # Add subscribers to a list
 
-<ApiReference {...config} />
+<ApiReferenceMeta {...config} />
+<ApiReferenceEndPoint {...config} />
+<ApiReferencePathParams {...config} />
+<ApiReferenceBodyParam {...config} />
+<ApiReferenceResponses {...config} />
+<ApiReferenceRequestExample {...config} />
+<ApiReferenceResponseExample {...config} />
 
 ## Example
 
