@@ -4,7 +4,7 @@ import Preferences from "../schemas/Preferences";
 
 const config: ApiReferenceProps = {
   description:
-    "Subscribes the users to the list, overwriting existing subscriptions. If the List does not exist, it will be automatically created.",
+    "Subscribes the users to the list, overwriting existing subscriptions. If the list does not exist, it will be automatically created.",
   method: "PUT",
   path: "/lists/:list_id/subscriptions",
   pathParams: [
