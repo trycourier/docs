@@ -4,9 +4,9 @@ import Preferences from "../schemas/Preferences";
 
 const config: ApiReferenceProps = {
   description:
-    "Subscribe a recipient to an existing list (note: if the List does not exist, it will be automatically created).",
+    "Subscribe a user to an existing list (note: if the List does not exist, it will be automatically created).",
   method: "PUT",
-  path: "/lists/:list_id/subscriptions/:recipient_id",
+  path: "/lists/:list_id/subscriptions/:user_id",
   pathParams: [
     {
       type: "string",

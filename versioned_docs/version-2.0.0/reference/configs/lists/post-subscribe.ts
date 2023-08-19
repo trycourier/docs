@@ -5,7 +5,7 @@ import putConfig from "./put-subscribe";
 const config: ApiReferenceProps = {
   ...putConfig,
   description:
-    "Subscribes additional recipients to the list (note: if the list does not exist, it will be automatically created).",
+    "Subscribes additional users to the list, without modifying existing subscriptions. If the list does not exist, it will be automatically created.",
   method: "POST",
 };
 

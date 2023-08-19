@@ -3,7 +3,7 @@ import { ApiReferenceProps } from "@site/src/components/ApiReference";
 import List from "../schemas/List";
 
 const config: ApiReferenceProps = {
-  description: "Get the list items.",
+  description: "Returns a list based on the list ID provided.",
   method: "GET",
   path: "/lists/:list_id",
   pathParams: [

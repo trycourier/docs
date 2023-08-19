@@ -1,7 +1,7 @@
 import { ApiReferenceProps } from "@site/src/components/ApiReference";
 
 const config: ApiReferenceProps = {
-  description: "Restore an existing list.",
+  description: "Restore a previously deleted list.",
   method: "PUT",
   path: "/lists/:list_id/restore",
   pathParams: [

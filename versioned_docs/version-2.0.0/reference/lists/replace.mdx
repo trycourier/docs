@@ -3,6 +3,7 @@ sidebar_position: 2
 ---
 
 import ApiReferenceUpdate, {
+  ApiReferenceDescription,
   ApiReferenceEndPoint,
   ApiReferenceMeta,
   ApiReferencePathParams,
@@ -13,14 +14,9 @@ import ApiReferenceUpdate, {
 } from "@site/src/components/ApiReferenceUpdate";
 import config from "../configs/lists/replace";
 
-# Update a List
+# Update a list
 
-:::info List_id is not reuseable
-
-A deleted `list_id` can be restored via the [Restore a List API](restore.mdx) and once deleted **cannot be used to create a new list**.
-
-:::
-
+<ApiReferenceDescription {...config} />
 <ApiReferenceMeta {...config} />
 <ApiReferenceEndPoint {...config} />
 <ApiReferencePathParams {...config} />

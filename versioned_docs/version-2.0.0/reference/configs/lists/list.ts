@@ -4,14 +4,14 @@ import Paging from "../schemas/Paging";
 import List from "../schemas/List";
 
 const config: ApiReferenceProps = {
-  description: "Get the list of lists",
+  description: "Returns all of the lists, with the ability to filter based on a pattern.",
   method: "GET",
   path: "/lists",
   queryParams: [
     {
       type: "string",
       name: "cursor",
-      description: "A unique identifier that allows for fetching the next set of lists.",
+      description: "A unique identifier that allows for fetching the next page of lists.",
       example: "MTU4OTQ5NTI1ODY4NywxLTVlYmRjNWRhLTEwODZlYWFjMWRmMjEwMTNjM2I0ZjVhMA==",
     },
     {
