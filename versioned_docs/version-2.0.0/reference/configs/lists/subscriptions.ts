@@ -4,7 +4,7 @@ import Paging from "../schemas/Paging";
 import ListSubscription from "../schemas/ListSubscription";
 
 const config: ApiReferenceProps = {
-  description: "Get the list's subscriptions",
+  description: "Get the list's subscriptions.",
   method: "GET",
   path: "/lists/:list_id/subscriptions",
   pathParams: [

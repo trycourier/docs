@@ -1,9 +1,9 @@
 import { ApiReferenceProps } from "@site/src/components/ApiReference";
 
 const config: ApiReferenceProps = {
-  description: "Delete a subscription to a list by list and recipient ID.",
+  description: "Delete a subscription to a list by list ID and user ID.",
   method: "DELETE",
-  path: "/lists/:list_id/subscriptions/:recipient_id",
+  path: "/lists/:list_id/subscriptions/:user_id",
   pathParams: [
     {
       type: "string",
@@ -14,9 +14,9 @@ const config: ApiReferenceProps = {
     },
     {
       type: "string",
-      name: "recipient_id",
+      name: "user_id",
       required: true,
-      description: "A unique identifier representing the recipient associated with the list",
+      description: "A unique identifier representing the user associated with the list",
       example: "0460766e-8463-4905-ae98-b72c7aef41d6",
     },
   ],

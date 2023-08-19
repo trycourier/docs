@@ -10,6 +10,7 @@ import ApiReferenceEndPoint from "./ApiReferenceEndPoint";
 import ApiReferenceMeta from "./ApiReferenceMeta";
 import ApiReferencePathParams from "./ApiReferencePathParams";
 import ApiReferenceBodyParam from "./ApiReferenceBodyParam";
+import ApiReferenceDescription from "./ApiReferenceDescription";
 
 export interface ApiReferenceProps {
   method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
@@ -67,4 +68,5 @@ export {
   ApiReferenceMeta,
   ApiReferencePathParams,
   ApiReferenceBodyParam,
+  ApiReferenceDescription
 };
