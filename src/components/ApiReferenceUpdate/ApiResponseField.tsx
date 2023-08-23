@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { ApiParam, PRIMITIVE_TYPES } from "./ApiParamField";
 import ApiParamInfo from "./ApiParamInfo";
@@ -56,8 +56,6 @@ const ApiResponseField = ({
   collapsible?: boolean;
   isRoot?: boolean;
 }) => {
-  const [expandedIndex, setExpandedIndex] = useState(0);
-
   if (PRIMITIVE_TYPES.includes(field.type)) {
     const enums = field.type === "string" && field.enum ? `*[${field.enum.join(" | ")}]*` : "";
 
@@ -140,39 +138,21 @@ const ApiResponseField = ({
 
   if (field.type === "oneOf") {
     return (
-      <div className={styles.field}>
-        <div className={styles.groupContainer}>
-          {field.name && (
-            <div className={styles.groupHeader}>
-              <ApiParamInfo param={field} />
-            </div>
-          )}
-
-          <div className={styles.group}>
-            {field.options.map((fieldParam, index) => (
-              <React.Fragment key={index}>
-                {expandedIndex === index ? (
-                  <div className={styles.groupHeader}>
-                    {fieldParam.displayName || fieldParam.name || `Option ${index + 1}`}
-                  </div>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() => setExpandedIndex(index)}
-                    className={styles.groupHeader}
-                  >
-                    {fieldParam.displayName || fieldParam.name || `Option ${index + 1}`}
-                  </button>
-                )}
-
-                {expandedIndex === index && (
-                  <ApiResponseField key={index} field={fieldParam} collapsible />
-                )}
-              </React.Fragment>
-            ))}
-          </div>
-        </div>
-      </div>
+      <Param name={field.name} type={field.type}>
+        {field.displayName && <Markdown>{field.description}</Markdown>}
+        <ChildParams name="Properties">
+          {field.options.map((fieldParam, index) => (
+            <ApiResponseField
+              key={index}
+              field={{
+                ...fieldParam,
+                name: fieldParam.displayName || fieldParam.name || `Option ${index + 1}`,
+              }}
+              collapsible
+            />
+          ))}
+        </ChildParams>
+      </Param>
     );
   }
 
