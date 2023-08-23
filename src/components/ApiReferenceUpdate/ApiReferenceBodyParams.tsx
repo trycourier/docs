@@ -5,7 +5,7 @@ import ApiParamField, { apiParamInitialValue } from "./ApiParamField";
 import styles from "./styles.module.css";
 import { Formik } from "formik";
 
-const ApiReferenceBodyParam = ({
+const ApiReferenceBodyParams = ({
   bodyParam,
 }: NonNullable<Pick<ApiReferenceProps, "bodyParam">>) => {
   const initialValues = useMemo(() => {
@@ -26,4 +26,4 @@ const ApiReferenceBodyParam = ({
   );
 };
 
-export default ApiReferenceBodyParam;
+export default ApiReferenceBodyParams;

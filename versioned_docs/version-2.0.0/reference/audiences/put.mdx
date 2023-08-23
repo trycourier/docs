@@ -3,13 +3,23 @@ sidebar_position: 3
 ---
 
 import ApiReference from "@site/src/components/ApiReference";
+import {
+  ApiReferenceDescription,
+  ApiReferenceResponses,
+  ApiReferenceRequestExample,
+  ApiReferenceResponseExample,
+  ApiReferenceEndPoint,
+  ApiReferenceMeta,
+  ApiReferencePathParams,
+  ApiReferenceBodyParams,
+} from "@site/src/components/ApiReferenceUpdate";
 import config from "../configs/audiences/put";
 
 # Update an audience
 
 A `audience_id` should be uniquely identifiable using a string ID that will not change.
 
-### Examples
+#### Examples
 
 ```json title=JSON
 {
@@ -61,9 +71,16 @@ The above will result with:
 }
 ```
 
-<ApiReference {...config} />
+<ApiReferenceDescription {...config} />
+<ApiReferenceMeta {...config} />
+<ApiReferenceEndPoint {...config} />
+<ApiReferencePathParams {...config} />
+<ApiReferenceBodyParams {...config} />
+<ApiReferenceResponses {...config} />
+<ApiReferenceRequestExample {...config} />
+<ApiReferenceResponseExample {...config} />
 
-## Example
+#### Example
 
 Method: `PUT`
 

@@ -1,17 +1,15 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useFormikContext } from "formik";
 import { isPlainObject } from "lodash";
-import { MdExpandLess, MdExpandMore } from "react-icons/md";
 
 import {
   FieldComponentProps,
   apiParamInitialValue,
   buildParamPath,
 } from "../ApiReference/ApiParamField";
-import ApiParamInfo from "./ApiParamInfo";
 import ApiParamField from "./ApiParamField";
 
-import styles from "./styles.module.css";
+import { ChildParams, Param } from "../Params";
 
 const ApiParamOneOfField = ({ param, field }: FieldComponentProps<"oneOf">) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -47,32 +45,20 @@ const ApiParamOneOfField = ({ param, field }: FieldComponentProps<"oneOf">) => {
   useEffect(() => selectOption(0), []);
 
   return (
-    <div className={styles.groupContainer}>
-      {param.name && (
-        <div className={styles.groupHeader}>
-          <ApiParamInfo param={param} />
-        </div>
-      )}
-
-      <div className={styles.group}>
+    <Param name={param.name} type={param.type}>
+      <ChildParams name="Properties">
         {param.options?.map((fieldParam, index) => (
-          <React.Fragment key={index}>
-            <button
-              type="button"
-              onClick={() =>
-                selectOption(activeIndex === index ? (index + 1) % param.options.length : index)
-              }
-              className={styles.groupHeader}
-            >
-              {activeIndex === index ? <MdExpandLess /> : <MdExpandMore />}{" "}
-              {fieldParam.displayName || fieldParam.name || `Option ${index + 1}`}
-            </button>
-
-            {activeIndex === index && <ApiParamField param={fieldParam} prefix={field.name} />}
-          </React.Fragment>
+          <ApiParamField
+            key={index}
+            param={{
+              ...fieldParam,
+              name: fieldParam.displayName || fieldParam.name || `Option ${index + 1}`,
+            }}
+            prefix={field.name}
+          />
         ))}
-      </div>
-    </div>
+      </ChildParams>
+    </Param>
   );
 };
 

@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-
 import { FieldComponentProps, apiParamInitialValue } from "./ApiParamField";
 import ApiParamField from "./ApiParamField";
 
@@ -8,7 +7,11 @@ import Markdown from "markdown-to-jsx";
 
 const ApiParamArrayField = ({ param, field, form }: FieldComponentProps<"array">) => {
   useEffect(() => {
-    form.setFieldValue(field.name, [...field.value, apiParamInitialValue(param.field)]);
+    if (field) {
+      form.setFieldValue(field.name, [
+        Array.isArray(field?.value) ? [...field?.value] : apiParamInitialValue(param.field),
+      ]);
+    }
   }, []);
 
   return (

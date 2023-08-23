@@ -9,7 +9,7 @@ import ApiReferenceResponseExample from "./ApiReferenceResponseExample";
 import ApiReferenceEndPoint from "./ApiReferenceEndPoint";
 import ApiReferenceMeta from "./ApiReferenceMeta";
 import ApiReferencePathParams from "./ApiReferencePathParams";
-import ApiReferenceBodyParam from "./ApiReferenceBodyParam";
+import ApiReferenceBodyParams from "./ApiReferenceBodyParams";
 import ApiReferenceDescription from "./ApiReferenceDescription";
 
 export interface ApiReferenceProps {
@@ -43,7 +43,7 @@ const ApiReference = ({
       <ApiReferenceEndPoint method={method} path={path} description={description} />
       {pathParams && <ApiReferencePathParams pathParams={pathParams} />}
       {queryParams && <ApiReferenceQueryParams queryParams={queryParams} />}
-      {bodyParam && <ApiReferenceBodyParam bodyParam={bodyParam} />}
+      {bodyParam && <ApiReferenceBodyParams bodyParam={bodyParam} />}
       {responses && <ApiReferenceResponses responses={responses} />}
       <ApiReferenceRequestExample
         method={method}
@@ -67,6 +67,6 @@ export {
   ApiReferenceEndPoint,
   ApiReferenceMeta,
   ApiReferencePathParams,
-  ApiReferenceBodyParam,
-  ApiReferenceDescription
+  ApiReferenceBodyParams,
+  ApiReferenceDescription,
 };

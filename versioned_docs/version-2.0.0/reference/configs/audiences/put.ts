@@ -1,5 +1,5 @@
 import { ApiReferenceProps } from "@site/src/components/ApiReference";
-import Audience from "../schemas/Audience";
+import Audience, { AudiencePut } from "../schemas/Audience";
 
 const config: ApiReferenceProps = {
   description: "Creates or updates audience.",
@@ -21,13 +21,7 @@ const config: ApiReferenceProps = {
       description: "OK",
       body: {
         type: "object",
-
-        fields: [
-          {
-            type: "object",
-            fields: [Audience],
-          },
-        ],
+        fields: [AudiencePut],
       },
     },
     {

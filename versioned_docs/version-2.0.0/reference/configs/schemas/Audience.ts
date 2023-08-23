@@ -66,6 +66,7 @@ var GroupFilter: ApiParam = {
 const Audience: ApiParam = {
   type: "object",
   displayName: "Audience",
+  name: "audience",
   fields: [
     {
       type: "string",
@@ -92,6 +93,26 @@ const Audience: ApiParam = {
       required: true,
       options: [SingleFilter, GroupFilter],
     },
+  ],
+};
+
+export const AudiencePut: ApiParam = {
+  ...Audience,
+  fields: [
+    ...Audience.fields.slice(0, Audience.fields.length - 1),
+    {
+      type: "string",
+      name: "created_at",
+      description: "When audience was created",
+      example: "2023-08-23T18:40:59.143Z",
+    } as ApiParam,
+    {
+      type: "string",
+      name: "updated_at",
+      description: "When audience was updated",
+      example: "2023-08-23T18:45:26.199Z",
+    } as ApiParam,
+    ...Audience.fields.slice(Audience.fields.length - 1),
   ],
 };
 
