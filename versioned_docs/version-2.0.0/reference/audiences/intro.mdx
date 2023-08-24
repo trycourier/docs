@@ -4,21 +4,6 @@ sidebar_label: Introduction
 pagination_label: Audiences API
 slug: ./
 ---
+# Audiences
 
-# Audience Object
-
-Audience is an arbitrary user collection that adheres to a set of rules. These rules can be as simple as "users in California," but can also be extended to a complex set of operations. For example, a product owner may need to build out a notification to send billing or usage alerts to workspace administrators who are from California. Doing this manually with Courier requires a lot of tedious work up front, which we want to unload from developers and product teams. The Audiences API is meant to solve this problem by having Courier do all the heavy lifting to make it "just work" for you.
-
-## Audience structure
-
-```json
-{
-  "description": "(optional) description for this audience",
-  "name": "(optional) name for this audience",
-  "filter": {
-    "path": "title", // assumes you are using Courier profiles API and your user has title field
-    "value": "Software Engineer",
-    "operator": "EQ"
-  }
-}
-```
+The Audiences API helps you build collections of users based on rules. These rules can be as simple as "users in California," but can also be extended to more complex sets of operations. This is different from [lists](/reference/lists) in which the members of the collection are statically defined by subscribe and unsubscribe actions.
