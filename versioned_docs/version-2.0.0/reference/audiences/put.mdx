@@ -17,60 +17,6 @@ import config from "../configs/audiences/put";
 
 # Update an audience
 
-A `audience_id` should be uniquely identifiable using a string ID that will not change.
-
-#### Examples
-
-```json title=JSON
-{
-  "name": "Developers from San Francisco",
-  "filter": {
-    "operator": "AND",
-    "filters": [
-      {
-        "path": "location",
-        "operator": "EQ",
-        "value": "San Francisco"
-      },
-      {
-        "path": "job_title",
-        "operator": "EQ",
-        "value": "Developer"
-      }
-    ]
-  }
-}
-```
-
-The above will result with:
-
-```json title=200
-{
-  "audience": {
-    "id": "<audience-id>",
-    "name": "My favorite people",
-    "description": "People I like",
-    "created_at": "<iso-8601-formatted-string>",
-    "updated_at": "<iso-8601-formatted-string>",
-    "filter": {
-      "operator": "AND",
-      "filters": [
-        {
-          "path": "location",
-          "operator": "EQ",
-          "value": "San Francisco"
-        },
-        {
-          "path": "job_title",
-          "operator": "EQ",
-          "value": "Developer"
-        }
-      ]
-    }
-  }
-}
-```
-
 <ApiReferenceDescription {...config} />
 <ApiReferenceMeta {...config} />
 <ApiReferenceEndPoint {...config} />
@@ -80,19 +26,13 @@ The above will result with:
 <ApiReferenceRequestExample {...config} />
 <ApiReferenceResponseExample {...config} />
 
-#### Example
-
-Method: `PUT`
-
-URL: `https://api.courier.com/audiences/abcdefgh12345678`
-
-Body:
+#### Example of an OR operator
 
 ```json
 {
   "id": "abcdefgh12345678",
-  "name": "Developer Audience",
-  "description": "Audience for developers",
+  "name": "Product Team",
+  "description": "Members of the product team, including both engineers and product managers.",
   "filter": {
     "Multiple Filters": {
       "operator": "OR",
@@ -109,6 +49,30 @@ Body:
         }
       ]
     }
+  }
+}
+```
+
+#### Example of an AND operator
+
+```json title=JSON
+{
+  "id": "abcdefgh12345678",
+  "name": "Developers from San Francisco",
+  "filter": {
+    "operator": "AND",
+    "filters": [
+      {
+        "path": "location",
+        "operator": "EQ",
+        "value": "San Francisco"
+      },
+      {
+        "path": "job_title",
+        "operator": "EQ",
+        "value": "Developer"
+      }
+    ]
   }
 }
 ```
