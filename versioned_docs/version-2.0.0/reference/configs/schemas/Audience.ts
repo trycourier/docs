@@ -97,6 +97,7 @@ const Audience: ApiParam = {
 
 export const AudiencePut: ApiParam = {
   ...Audience,
+  name: "audience",
   fields: [
     ...Audience.fields.slice(0, Audience.fields.length - 1),
     {

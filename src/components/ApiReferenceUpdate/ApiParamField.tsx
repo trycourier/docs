@@ -69,19 +69,37 @@ export interface ApiParamFieldProps {
 
 export const apiParamInitialValue = (param: ApiParam) => {
   if (param.type === "oneOf") {
+    if (Array.isArray(param.options) && param.options.length > 0) {
+      return { [param.name]: apiParamInitialValue(param?.options?.[0]) };
+    }
     return {};
   }
 
   const path = param.name ? buildParamPath(param) : null;
-  const value = PRIMITIVE_TYPES.includes(param.type)
-    ? param.example
-    : param.type === "object"
-    ? param.fields.reduce((obj, field) => ({ ...obj, ...apiParamInitialValue(field) }), {})
-    : param.type === "array"
-    ? []
-    : param.type === "record"
-    ? {}
-    : undefined;
+  let value;
+  switch (param.type) {
+    case "object":
+      value = param.fields.reduce((obj, field) => ({ ...obj, ...apiParamInitialValue(field) }), {});
+      break;
+    case "array":
+      if (param.type === "array" && "fields" in param.field && Array.isArray(param.field.fields)) {
+        value = [
+          param.field.fields.reduce(
+            (obj, field) => ({ ...obj, ...apiParamInitialValue(field) }),
+            {}
+          ),
+        ];
+        break;
+      }
+      value = [];
+      break;
+    case "record":
+      value = {};
+      break;
+    default:
+      value = PRIMITIVE_TYPES.includes(param.type) ? param.example : undefined;
+      break;
+  }
 
   if (path) {
     return { [path]: value };
