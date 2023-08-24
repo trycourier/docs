@@ -82,7 +82,7 @@ const ApiResponseField = ({
       );
     }
     return (
-      <Param name={field.name} type={field.type}>
+      <Param name={field.name || field.displayName} type={field.type}>
         {field.description && <Markdown>{field.description}</Markdown>}
         {collapsible && (
           <ChildParams name="Properties">

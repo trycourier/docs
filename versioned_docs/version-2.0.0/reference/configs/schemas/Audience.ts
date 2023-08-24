@@ -66,7 +66,6 @@ var GroupFilter: ApiParam = {
 const Audience: ApiParam = {
   type: "object",
   displayName: "Audience",
-  name: "audience",
   fields: [
     {
       type: "string",
@@ -98,6 +97,7 @@ const Audience: ApiParam = {
 
 export const AudiencePut: ApiParam = {
   ...Audience,
+  name: "audience",
   fields: [
     ...Audience.fields.slice(0, Audience.fields.length - 1),
     {

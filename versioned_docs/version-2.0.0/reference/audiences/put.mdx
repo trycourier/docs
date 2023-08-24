@@ -2,7 +2,6 @@
 sidebar_position: 3
 ---
 
-import ApiReference from "@site/src/components/ApiReference";
 import {
   ApiReferenceDescription,
   ApiReferenceResponses,
@@ -30,24 +29,26 @@ import config from "../configs/audiences/put";
 
 ```json
 {
-  "id": "abcdefgh12345678",
-  "name": "Product Team",
-  "description": "Members of the product team, including both engineers and product managers.",
-  "filter": {
-    "Multiple Filters": {
-      "operator": "OR",
-      "filters": [
-        {
-          "operator": "EQ",
-          "value": "engineer",
-          "path": "title"
-        },
-        {
-          "operator": "EQ",
-          "value": "product manager",
-          "path": "title"
-        }
-      ]
+  "audience": {
+    "id": "abcdefgh12345678",
+    "name": "Product Team",
+    "description": "Members of the product team, including both engineers and product managers.",
+    "filter": {
+      "Multiple Filters": {
+        "operator": "OR",
+        "filters": [
+          {
+            "operator": "EQ",
+            "value": "engineer",
+            "path": "title"
+          },
+          {
+            "operator": "EQ",
+            "value": "product manager",
+            "path": "title"
+          }
+        ]
+      }
     }
   }
 }
@@ -57,22 +58,24 @@ import config from "../configs/audiences/put";
 
 ```json title=JSON
 {
-  "id": "abcdefgh12345678",
-  "name": "Developers from San Francisco",
-  "filter": {
-    "operator": "AND",
-    "filters": [
-      {
-        "path": "location",
-        "operator": "EQ",
-        "value": "San Francisco"
-      },
-      {
-        "path": "job_title",
-        "operator": "EQ",
-        "value": "Developer"
-      }
-    ]
+  "audience": {
+    "id": "abcdefgh12345678",
+    "name": "Developers from San Francisco",
+    "filter": {
+      "operator": "AND",
+      "filters": [
+        {
+          "path": "location",
+          "operator": "EQ",
+          "value": "San Francisco"
+        },
+        {
+          "path": "job_title",
+          "operator": "EQ",
+          "value": "Developer"
+        }
+      ]
+    }
   }
 }
 ```
