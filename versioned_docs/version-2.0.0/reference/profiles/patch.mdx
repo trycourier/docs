@@ -2,7 +2,17 @@
 sidebar_position: 2
 ---
 
-import ApiReference from "@site/src/components/ApiReference";
+import {
+  ApiReferenceDescription,
+  ApiReferenceResponses,
+  ApiReferenceRequestExample,
+  ApiReferenceResponseExample,
+  ApiReferenceEndPoint,
+  ApiReferenceMeta,
+  ApiReferencePathParams,
+  ApiReferenceBodyParams,
+} from "@site/src/components/ApiReferenceUpdate";
+
 import config from "../configs/profiles/patch";
 
 # Update a profile
@@ -68,9 +78,16 @@ For more details about JSON Patch syntax:
 
 :::
 
-<ApiReference {...config} />
+<ApiReferenceMeta {...config} />
+<ApiReferenceEndPoint {...config} />
+<ApiReferenceDescription {...config} />
+<ApiReferencePathParams {...config} />
+<ApiReferenceBodyParams {...config} />
+<ApiReferenceResponses {...config} />
+<ApiReferenceRequestExample {...config} />
+<ApiReferenceResponseExample {...config} />
 
-## Example
+#### Example
 
 Method: `PATCH`
 
@@ -78,6 +95,7 @@ URL: `https://api.courier.com/profiles/abcdefgh12345678`
 
 Body:
 ​
+
 ```json
 {
   [

@@ -2,14 +2,23 @@
 sidebar_position: 1
 ---
 
-import ApiReference from "@site/src/components/ApiReference";
 import config from "../configs/profiles/create";
+import {
+  ApiReferenceDescription,
+  ApiReferenceResponses,
+  ApiReferenceRequestExample,
+  ApiReferenceResponseExample,
+  ApiReferenceEndPoint,
+  ApiReferenceMeta,
+  ApiReferencePathParams,
+  ApiReferenceBodyParams,
+} from "@site/src/components/ApiReferenceUpdate";
 
 # Create a profile
 
 A `recipient` should be uniquely identifiable using a string ID that will not change. For this reason, you should not use data such as an email address or phone number when assigning a recipient ID. This type of data may change over time.
 
-### More Examples
+#### More Examples
 
 The following types of requests will not change the body of an existing Profile:
 
@@ -28,9 +37,16 @@ The above will result with:
 }
 ```
 
-<ApiReference {...config} />
+<ApiReferenceMeta {...config} />
+<ApiReferenceEndPoint {...config} />
+<ApiReferenceDescription {...config} />
+<ApiReferencePathParams {...config} />
+<ApiReferenceBodyParams {...config} />
+<ApiReferenceResponses {...config} />
+<ApiReferenceRequestExample {...config} />
+<ApiReferenceResponseExample {...config} />
 
-## Example
+#### Example
 
 Method: `POST`
 
@@ -38,6 +54,7 @@ URL: `https://api.courier.com/profiles/abcdefgh12345678`
 
 Body:
 ​
+
 ```json
 {
   "profile": {
