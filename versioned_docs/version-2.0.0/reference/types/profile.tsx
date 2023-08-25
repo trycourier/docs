@@ -1,5 +1,6 @@
 import React from "react";
-import { Params, Param, ExtendParams } from "@site/src/components/Params";
+import { Params, Param, ExtendParams, ChildParams } from "@site/src/components/Params";
+import { Context } from "./context";
 
 /** Does not include user_id */
 export const Profile = () => (
@@ -42,6 +43,13 @@ export const ToProfile = () => (
     <Param name="data" type="object">
       An object that includes any data you want to pass to the message. The data will populate the
       corresponding template or content variables.
+    </Param>
+    <Param name="context" type="Context">
+      Context to load with this recipient. Will override any context set on{" "}
+      <code>message.context</code>.
+      <ChildParams name="context">
+        <Context />
+      </ChildParams>
     </Param>
     <Param name="filters" type="array<Filter>">
       When sending to a list or audience, this field may be supplied for adhoc filtering criteria.
