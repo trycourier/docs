@@ -18,7 +18,13 @@ Use Cases:
 - Sending branded notifications on behalf of a tenant
 - Creating slack-bots on behalf of a tenant
 
-## Usage in a send call
+## Send Call Examples
+
+**Send to a user using the `ACME` tenant as context:**
+
+The notification will be sent using ACME
+branding and will load default preferences from the ACME tenant if the user hasn't configured
+the notification preferences for themselves.
 
 ```js
 POST https://api.courier.com/send
@@ -28,6 +34,26 @@ POST https://api.courier.com/send
     template: "my_template",
     to: {
       user_id: "person",
+    },
+    context: {
+      tenant_id: "ACME"
+    }
+  }
+}
+```
+
+**Send to all members of the ACME tenant:**
+
+The following call address ACME as the recipient of the notification. This will deliver the
+notification to all members of ACME.
+
+```js
+POST https://api.courier.com/send
+
+{
+  message: {
+    template: "acme_company_news_letter",
+    to: {
       tenant_id: "ACME"
     }
   }

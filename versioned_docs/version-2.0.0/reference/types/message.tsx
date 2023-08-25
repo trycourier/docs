@@ -2,6 +2,7 @@ import React from "react";
 import { Params, Param, ChildParams } from "@site/src/components/Params";
 import { ToProfile } from "./profile";
 import Markdown from "markdown-to-jsx";
+import {} from "@docusaurus/router";
 
 export const Message = () => (
   <Params>
@@ -39,8 +40,8 @@ export const Content = () => (
       Text content displayed in the notification. Supports markdown.
     </Param>
     <Param name="elements" type="array">
-      Elements describing the content of the notification. Use this field or body. 
-      See <a href="/docs/platform/content/elemental/elements">elements</a> for a list of available 
+      Elements describing the content of the notification. Use this field or body. See{" "}
+      <a href="/docs/platform/content/elemental/elements">elements</a> for a list of available
       elements.
     </Param>
     <Param name="version" type="string">
@@ -63,6 +64,12 @@ export const AdvancedMessageProperties = () => (
       </Markdown>
       <ChildParams name="channel config object">
         <ChannelConfig />
+      </ChildParams>
+    </Param>
+    <Param name="context" type="Context">
+      Context information such as tenant_id to send the notification with.
+      <ChildParams name="context config object">
+        <Context />
       </ChildParams>
     </Param>
     <Param name="delay" type="Delay">
@@ -255,6 +262,15 @@ export const Timeout = () => (
     <Param name="provider" type="number">
       Time in ms to attempt a provider before failover.
       <strong>Business tier</strong>
+    </Param>
+  </Params>
+);
+
+export const Context = () => (
+  <Params>
+    <Param name="tenant_id" type="string">
+      An id of a tenant, <a href="/docs/reference/tenants">see tenants api docs</a>. Will load
+      brand, default preferences and any other base context data associated with this tenant.
     </Param>
   </Params>
 );

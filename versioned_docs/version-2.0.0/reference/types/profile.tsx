@@ -35,6 +35,10 @@ export const ToProfile = () => (
       A unique identifier associated with an Audience. A message will be sent to each user in the
       audience.
     </Param>
+    <Param name="tenant_id" type="string">
+      A unique identifier associated with an Tenant. A message will be sent to each member of the
+      tenant using any branding or default preferences associated with that tenant.
+    </Param>
     <Param name="data" type="object">
       An object that includes any data you want to pass to the message. The data will populate the
       corresponding template or content variables.
