@@ -44,8 +44,24 @@ const ApiParamOneOfField = ({ param, field }: FieldComponentProps<"oneOf">) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => selectOption(0), []);
 
+  if (!param.name && !param.displayName)
+    return (
+      <ChildParams name="Properties">
+        {param.options?.map((fieldParam, index) => (
+          <ApiParamField
+            key={index}
+            param={{
+              ...fieldParam,
+              name: fieldParam.displayName || fieldParam.name || `Option ${index + 1}`,
+            }}
+            prefix={field.name}
+          />
+        ))}
+      </ChildParams>
+    );
+
   return (
-    <Param name={param.name} type={param.type}>
+    <Param name={param.name || param.displayName} type={param.type}>
       <ChildParams name="Properties">
         {param.options?.map((fieldParam, index) => (
           <ApiParamField

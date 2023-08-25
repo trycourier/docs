@@ -3,14 +3,31 @@ sidebar_position: 1
 sidebar_label: Run a templated automation
 ---
 
-import ApiReference from "@site/src/components/ApiReference";
+import {
+  ApiReferenceDescription,
+  ApiReferenceResponses,
+  ApiReferenceRequestExample,
+  ApiReferenceResponseExample,
+  ApiReferenceEndPoint,
+  ApiReferenceMeta,
+  ApiReferencePathParams,
+  ApiReferenceBodyParams,
+} from "@site/src/components/ApiReferenceUpdate";
+
 import config from "../configs/automations/invoke-template";
 
 # POST /automations/:templateId/invoke
 
-<ApiReference {...config} />
+<ApiReferenceMeta {...config} />
+<ApiReferenceDescription {...config} />
+<ApiReferenceEndPoint {...config} />
+<ApiReferencePathParams {...config} />
+<ApiReferenceBodyParams {...config} />
+<ApiReferenceResponses {...config} />
+<ApiReferenceRequestExample {...config} />
+<ApiReferenceResponseExample {...config} />
 
-## Example
+#### Example
 
 Method: `POST`
 
