@@ -2,8 +2,16 @@
 sidebar_position: 2
 ---
 
-import ApiReference from "@site/src/components/ApiReference";
 import config from "../configs/logs/cancel";
+import {
+  ApiReferenceDescription,
+  ApiReferenceResponses,
+  ApiReferenceRequestExample,
+  ApiReferenceResponseExample,
+  ApiReferenceEndPoint,
+  ApiReferenceMeta,
+  ApiReferencePathParams,
+} from "@site/src/components/ApiReferenceUpdate";
 
 # Cancel message
 
@@ -25,9 +33,15 @@ For send requests that have a single recipient, the `requestId` is assigned to t
 
 For send requests that have multiple recipients (accounts, audiences, lists, etc.), Courier assigns a unique id to each derived message as its `message_id`. Therefore the `requestId` cannot be supplied to the Message’s API for single-recipient messages.
 
-<ApiReference {...config} />
+<ApiReferenceMeta {...config} />
+<ApiReferenceEndPoint {...config} />
+<ApiReferenceDescription {...config} />
+<ApiReferencePathParams {...config} />
+<ApiReferenceResponses {...config} />
+<ApiReferenceRequestExample {...config} />
+<ApiReferenceResponseExample {...config} />
 
-## Example
+#### Example
 
 Method: `POST`
 
