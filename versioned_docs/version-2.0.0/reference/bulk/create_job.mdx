@@ -2,14 +2,29 @@
 sidebar_position: 1
 ---
 
-import ApiReference from "@site/src/components/ApiReference";
+import {
+  ApiReferenceDescription,
+  ApiReferenceResponses,
+  ApiReferenceRequestExample,
+  ApiReferenceResponseExample,
+  ApiReferenceEndPoint,
+  ApiReferenceMeta,
+  ApiReferenceBodyParams,
+} from "@site/src/components/ApiReferenceUpdate";
+
 import config from "../configs/bulk/create-job";
 
 # Create a bulk job
 
-<ApiReference {...config} />
+<ApiReferenceMeta {...config} />
+<ApiReferenceEndPoint {...config} />
+<ApiReferenceDescription {...config} />
+<ApiReferenceBodyParams {...config} />
+<ApiReferenceResponses {...config} />
+<ApiReferenceRequestExample {...config} />
+<ApiReferenceResponseExample {...config} />
 
-## Example
+#### Example
 
 Method: `POST`
 
@@ -17,19 +32,20 @@ URL: `https://api.courier.com/bulk`
 
 Body:
 ​
+
 ```json
 {
-    "message": {
-        "event": "abcdefgh12345678",
-        "brand": "W50NC77P524K14M5300PGPEK4JMJ",
-        "data": {
-            "name": "Jane Doe",
-            "age": 27
-        },
-        "routing": {
-            "method": "single"
-        },
-        "template": "NOTIFICATION_TEMPLATE"
-    }
+  "message": {
+    "event": "abcdefgh12345678",
+    "brand": "W50NC77P524K14M5300PGPEK4JMJ",
+    "data": {
+      "name": "Jane Doe",
+      "age": 27
+    },
+    "routing": {
+      "method": "single"
+    },
+    "template": "NOTIFICATION_TEMPLATE"
+  }
 }
 ```

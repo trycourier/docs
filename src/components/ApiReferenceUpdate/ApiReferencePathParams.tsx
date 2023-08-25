@@ -18,6 +18,8 @@ const ApiReferencePathParams = ({
     };
   }, [pathParams]);
 
+  if (!pathParams) return <></>;
+
   return (
     <div className={styles.section}>
       <p>
