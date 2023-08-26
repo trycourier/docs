@@ -2,14 +2,31 @@
 sidebar_position: 6
 ---
 
-import ApiReference from "@site/src/components/ApiReference";
 import config from "../configs/profiles/subscribe-to-list";
+import {
+  ApiReferenceDescription,
+  ApiReferenceResponses,
+  ApiReferenceRequestExample,
+  ApiReferenceResponseExample,
+  ApiReferenceEndPoint,
+  ApiReferenceMeta,
+  ApiReferencePathParams,
+  ApiReferenceBodyParams,
+  ApiReferenceQueryParams,
+} from "@site/src/components/ApiReferenceUpdate";
 
-# POST /profiles/:recipient_id/lists
+# Subscribe to one or more lists
 
-<ApiReference {...config} />
+<ApiReferenceMeta {...config} />
+<ApiReferenceDescription {...config} />
+<ApiReferenceEndPoint {...config} />
+<ApiReferencePathParams {...config} />
+<ApiReferenceBodyParams {...config} />
+<ApiReferenceResponses {...config} />
+<ApiReferenceRequestExample {...config} />
+<ApiReferenceResponseExample {...config} />
 
-## Example
+#### Example
 
 Method: `POST`
 
@@ -17,22 +34,23 @@ URL: `https://api.courier.com/profiles/abcdefgh12345678/lists`
 
 Body:
 ​
+
 ```json
 {
-    "notifications": {
-        "{notificationKey}": {
-            "channel_preferences": [
-                {
-                    "channel": "direct_message"
-                }
-            ],
-            "rules": [
-                {
-                    "type": "snooze"
-                }
-            ],
-            "status": "OPTED_IN"
+  "notifications": {
+    "{notificationKey}": {
+      "channel_preferences": [
+        {
+          "channel": "direct_message"
         }
+      ],
+      "rules": [
+        {
+          "type": "snooze"
+        }
+      ],
+      "status": "OPTED_IN"
     }
+  }
 }
 ```

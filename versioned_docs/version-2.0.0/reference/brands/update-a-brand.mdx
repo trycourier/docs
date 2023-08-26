@@ -2,14 +2,30 @@
 sidebar_position: 3
 ---
 
-import ApiReference from "@site/src/components/ApiReference";
 import config from "../configs/brands/update-a-brand";
+import {
+  ApiReferenceDescription,
+  ApiReferenceResponses,
+  ApiReferenceRequestExample,
+  ApiReferenceResponseExample,
+  ApiReferenceEndPoint,
+  ApiReferenceMeta,
+  ApiReferencePathParams,
+  ApiReferenceBodyParams,
+} from "@site/src/components/ApiReferenceUpdate";
 
 # Update a brand
 
-<ApiReference {...config} />
+<ApiReferenceMeta {...config} />
+<ApiReferenceDescription {...config} />
+<ApiReferenceEndPoint {...config} />
+<ApiReferencePathParams {...config} />
+<ApiReferenceBodyParams {...config} />
+<ApiReferenceResponses {...config} />
+<ApiReferenceRequestExample {...config} />
+<ApiReferenceResponseExample {...config} />
 
-## Example
+#### Example
 
 Method: `PUT`
 

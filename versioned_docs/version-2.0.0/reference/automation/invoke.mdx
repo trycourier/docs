@@ -3,14 +3,29 @@ sidebar_position: 2
 sidebar_label: Run an ad-hoc automation
 ---
 
-import ApiReference from "@site/src/components/ApiReference";
+import {
+  ApiReferenceDescription,
+  ApiReferenceResponses,
+  ApiReferenceRequestExample,
+  ApiReferenceResponseExample,
+  ApiReferenceEndPoint,
+  ApiReferenceMeta,
+  ApiReferenceBodyParams,
+} from "@site/src/components/ApiReferenceUpdate";
+
 import config from "../configs/automations/invoke";
 
-# POST /automations/invoke
+# Run an Ad-hoc Automation
 
-<ApiReference {...config} />
+<ApiReferenceMeta {...config} />
+<ApiReferenceDescription {...config} />
+<ApiReferenceEndPoint {...config} />
+<ApiReferenceBodyParams {...config} />
+<ApiReferenceResponses {...config} />
+<ApiReferenceRequestExample {...config} />
+<ApiReferenceResponseExample {...config} />
 
-## Example
+#### Example
 
 Method: `POST`
 

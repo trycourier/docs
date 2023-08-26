@@ -4,16 +4,16 @@ import Profile from "../schemas/Profile";
 import Preferences from "../schemas/Preferences";
 
 const config: ApiReferenceProps = {
-  description: "Returns the specified recipient Profile.",
+  description: "Returns the specified user profile.",
   method: "GET",
-  path: "/profiles/:recipient_id",
+  path: "/profiles/:user_id",
   pathParams: [
     {
       type: "string",
-      name: "recipient_id",
+      name: "user_id",
       required: true,
       description:
-        "A unique identifier representing the recipient associated with the requested profile.",
+        "A unique identifier representing the user associated with the requested profile.",
       example: "0460766e-8463-4905-ae98-b72c7aef41d6",
     },
   ],

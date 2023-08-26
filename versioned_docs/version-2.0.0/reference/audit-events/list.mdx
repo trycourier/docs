@@ -2,9 +2,23 @@
 sidebar_position: 0
 ---
 
-import ApiReference from "@site/src/components/ApiReference";
 import config from "../configs/audit-events/list";
+import {
+  ApiReferenceDescription,
+  ApiReferenceResponses,
+  ApiReferenceRequestExample,
+  ApiReferenceResponseExample,
+  ApiReferenceEndPoint,
+  ApiReferenceMeta,
+  ApiReferenceQueryParams,
+} from "@site/src/components/ApiReferenceUpdate";
 
 # Get all audit events
 
-<ApiReference {...config} />
+<ApiReferenceMeta {...config} />
+<ApiReferenceDescription {...config} />
+<ApiReferenceEndPoint {...config} />
+<ApiReferenceQueryParams {...config} />
+<ApiReferenceResponses {...config} />
+<ApiReferenceRequestExample {...config} />
+<ApiReferenceResponseExample {...config} />

@@ -2,15 +2,23 @@
 sidebar_position: 1
 ---
 
-import ApiReference from "@site/src/components/ApiReference";
 import config from "../configs/notifications/list";
+import {
+  ApiReferenceDescription,
+  ApiReferenceResponses,
+  ApiReferenceRequestExample,
+  ApiReferenceResponseExample,
+  ApiReferenceEndPoint,
+  ApiReferenceMeta,
+  ApiReferenceQueryParams,
+} from "@site/src/components/ApiReferenceUpdate";
 
-# List notifications
+# List templates
 
-<ApiReference {...config} />
-
-## Example
-
-Method: `GET`
-
-URL: `https://api.courier.com/notifications`
+<ApiReferenceMeta {...config} />
+<ApiReferenceDescription {...config} />
+<ApiReferenceEndPoint {...config} />
+<ApiReferenceQueryParams {...config} />
+<ApiReferenceResponses {...config} />
+<ApiReferenceRequestExample {...config} />
+<ApiReferenceResponseExample {...config} />

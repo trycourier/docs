@@ -6,14 +6,14 @@ const config: ApiReferenceProps = {
   description:
     "Merge the supplied values with an existing profile or create a new profile if one doesn't already exist.",
   method: "POST",
-  path: "/profiles/:recipient_id",
+  path: "/profiles/:user_id",
   pathParams: [
     {
       type: "string",
-      name: "recipient_id",
+      name: "user_id",
       required: true,
       description:
-        "A unique identifier representing the recipient associated with the requested profile.",
+        "A unique identifier representing the user associated with the requested profile. We do not advise using an email address or phone number for this value because those values may change over time.",
       example: "0460766e-8463-4905-ae98-b72c7aef41d6",
     },
   ],

@@ -2,10 +2,31 @@
 sidebar_position: 2
 ---
 
-import ApiReference from "@site/src/components/ApiReference";
+import {
+  ApiReferenceDescription,
+  ApiReferenceResponses,
+  ApiReferenceRequestExample,
+  ApiReferenceResponseExample,
+  ApiReferenceEndPoint,
+  ApiReferenceMeta,
+  ApiReferencePathParams,
+  ApiReferenceBodyParams,
+} from "@site/src/components/ApiReferenceUpdate";
+
 import config from "../configs/profiles/patch";
 
 # Update a profile
+
+<ApiReferenceMeta {...config} />
+<ApiReferenceDescription {...config} />
+<ApiReferenceEndPoint {...config} />
+<ApiReferencePathParams {...config} />
+<ApiReferenceBodyParams {...config} />
+<ApiReferenceResponses {...config} />
+<ApiReferenceRequestExample {...config} />
+<ApiReferenceResponseExample {...config} />
+
+## Constructing a Patch
 
 Unlike a `PUT` request, a `PATCH` request will update only a portion of a recipient's profile. `PATCH` syntax is a little more complicated. Courier uses the [JSON Patch](http://jsonpatch.com/) syntax described below.
 
@@ -41,7 +62,7 @@ If you want to update multiple values, your patch will look like this:
 ]
 ```
 
-### More Examples
+## More Examples
 
 The following types of requests will not change the body of an existing Profile:
 
@@ -57,40 +78,5 @@ The above will result with:
 ```json title=200
 {
   "status": "SUCCESS"
-}
-```
-
-:::info
-For more details about JSON Patch syntax:
-
-- http://jsonpatch.com/
-- https://tools.ietf.org/html/rfc6902
-
-:::
-
-<ApiReference {...config} />
-
-## Example
-
-Method: `PATCH`
-
-URL: `https://api.courier.com/profiles/abcdefgh12345678`
-
-Body:
-​
-```json
-{
-  [
-    {
-      "op": "replace",
-      "path": "/email",
-      "value": "test@example.com"
-    },
-    {
-      "op": "add",
-      "path": "/phone_number",
-      "value": "1234567890"
-    }
-  ]
 }
 ```

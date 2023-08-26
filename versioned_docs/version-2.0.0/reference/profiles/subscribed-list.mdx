@@ -2,14 +2,31 @@
 sidebar_position: 5
 ---
 
-import ApiReference from "@site/src/components/ApiReference";
 import config from "../configs/profiles/subscribed-list";
+import {
+  ApiReferenceDescription,
+  ApiReferenceResponses,
+  ApiReferenceRequestExample,
+  ApiReferenceResponseExample,
+  ApiReferenceEndPoint,
+  ApiReferenceMeta,
+  ApiReferencePathParams,
+  ApiReferenceBodyParams,
+  ApiReferenceQueryParams,
+} from "@site/src/components/ApiReferenceUpdate";
 
-# GET /profiles/:recipient_id/lists
+# Get list subscriptions
 
-<ApiReference {...config} />
+<ApiReferenceMeta {...config} />
+<ApiReferenceDescription {...config} />
+<ApiReferenceEndPoint {...config} />
+<ApiReferencePathParams {...config} />
+<ApiReferenceQueryParams {...config} />
+<ApiReferenceResponses {...config} />
+<ApiReferenceRequestExample {...config} />
+<ApiReferenceResponseExample {...config} />
 
-## Example
+#### Example
 
 Method: `GET`
 

@@ -2,15 +2,24 @@
 sidebar_position: 4
 ---
 
-import ApiReference from "@site/src/components/ApiReference";
 import config from "../configs/profiles/delete";
+import {
+  ApiReferenceDescription,
+  ApiReferenceResponses,
+  ApiReferenceRequestExample,
+  ApiReferenceResponseExample,
+  ApiReferenceEndPoint,
+  ApiReferenceMeta,
+  ApiReferencePathParams,
+  ApiReferenceBodyParams,
+} from "@site/src/components/ApiReferenceUpdate";
 
 # Delete a profile
 
-<ApiReference {...config} />
-
-## Example
-
-Method: `DELETE`
-
-URL: `https://api.courier.com/profiles/0460766e-8463-4905-ae98-b72c7aef41d6`
+<ApiReferenceMeta {...config} />
+<ApiReferenceDescription {...config} />
+<ApiReferenceEndPoint {...config} />
+<ApiReferencePathParams {...config} />
+<ApiReferenceResponses {...config} />
+<ApiReferenceRequestExample {...config} />
+<ApiReferenceResponseExample {...config} />

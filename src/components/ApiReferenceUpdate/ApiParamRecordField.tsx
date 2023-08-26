@@ -8,7 +8,7 @@ import Markdown from "markdown-to-jsx";
 
 const ApiParamRecordField = ({ param, field, form }: FieldComponentProps<"array">) => {
   useEffect(() => {
-    if (Object.entries(field.value)?.length === 0) {
+    if (field?.value && Object.entries(field?.value ?? {})?.length === 0) {
       if (field.value[""]) return;
 
       form.setFieldValue(field.name, {
@@ -19,15 +19,16 @@ const ApiParamRecordField = ({ param, field, form }: FieldComponentProps<"array"
   }, []);
 
   const key = useMemo(() => {
-    if (Object.entries(field.value).length > 0) {
-      return Object.entries(field.value)[0][0];
+    if (field && field.value) {
+      return JSON.stringify(field.value);
     }
-  }, [Object.entries(field.value).length]);
+    return Math.random().toString();
+  }, []);
 
   return (
     <Param name={param.name} type={param.type}>
       {param.description && <Markdown>{param.description}</Markdown>}
-      {Object.entries(field.value).length > 0 && (
+      {Object.entries(field?.value ?? {}).length > 0 && (
         <ApiParamField
           param={{ ...param.field }}
           prefix={`${field.name}[${key}]`}

@@ -4,16 +4,16 @@ import Paging from "../schemas/Paging";
 import List from "../schemas/List";
 
 const config: ApiReferenceProps = {
-  description: "Returns the subscribed lists for a specified recipient Profile.",
+  description: "Returns the subscribed lists for a specified user.",
   method: "GET",
-  path: "/profiles/:recipient_id/lists",
+  path: "/profiles/:user_id/lists",
   pathParams: [
     {
       type: "string",
-      name: "recipient_id",
+      name: "user_id",
       required: true,
       description:
-        "A unique identifier representing the recipient associated with the requested profile.",
+        "A unique identifier representing the user associated with the requested profile.",
       example: "0460766e-8463-4905-ae98-b72c7aef41d6",
     },
   ],

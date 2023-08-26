@@ -2,16 +2,16 @@ import { ApiReferenceProps } from "@site/src/components/ApiReference";
 
 const config: ApiReferenceProps = {
   description:
-    "Apply a JSON Patch (RFC 6902) to the specified profile or create one if a profile doesn't already exist.",
+    "Apply a patch to the specified profile or create one if a profile doesn't already exist.",
   method: "PATCH",
-  path: "/profiles/:recipient_id",
+  path: "/profiles/:user_id",
   pathParams: [
     {
       type: "string",
-      name: "recipient_id",
+      name: "user_id",
       required: true,
       description:
-        "A unique identifier representing the recipient associated with the requested profile.",
+        "A unique identifier representing the user associated with the requested profile.",
       example: "0460766e-8463-4905-ae98-b72c7aef41d6",
     },
   ],
@@ -21,7 +21,7 @@ const config: ApiReferenceProps = {
       {
         type: "array",
         name: "patch",
-        description: "An array of patch operations. [Learn more](http://jsonpatch.com/)",
+        description: "An array of patch operations. [More information on how to issue patch instructions](/docs/reference/profiles/patch/#constructing-a-patch).",
         field: {
           type: "object",
           fields: [
