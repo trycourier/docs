@@ -16,27 +16,6 @@ import {
 
 # Create a profile
 
-A `recipient` should be uniquely identifiable using a string ID that will not change. For this reason, you should not use data such as an email address or phone number when assigning a recipient ID. This type of data may change over time.
-
-#### More Examples
-
-The following types of requests will not change the body of an existing Profile:
-
-```json title=JSON
-// Empty Profile Object
-{
-  "profile": {}
-}
-```
-
-The above will result with:
-
-```json title=200
-{
-  "status": "SUCCESS"
-}
-```
-
 <ApiReferenceMeta {...config} />
 <ApiReferenceDescription {...config} />
 <ApiReferenceEndPoint {...config} />
@@ -45,22 +24,3 @@ The above will result with:
 <ApiReferenceResponses {...config} />
 <ApiReferenceRequestExample {...config} />
 <ApiReferenceResponseExample {...config} />
-
-#### Example
-
-Method: `POST`
-
-URL: `https://api.courier.com/profiles/abcdefgh12345678`
-
-Body:
-​
-
-```json
-{
-  "profile": {
-    "name": "John Doe",
-    "email": "user@example.com",
-    "phone_number": "555-555-5555"
-  }
-}
-```

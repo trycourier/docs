@@ -4,16 +4,16 @@ import Preferences from "../schemas/Preferences";
 
 const config: ApiReferenceProps = {
   description:
-    "Subscribes the given {recipient_id} to the lists. If the list does not exist, Courier will create it",
+    "Subscribes the given user to one or more lists. If the list does not exist, it will be created.",
   method: "POST",
-  path: "/profiles/:recipient_id/lists",
+  path: "/profiles/:user_id/lists",
   pathParams: [
     {
       type: "string",
-      name: "recipient_id",
+      name: "user_id",
       required: true,
       description:
-        "A unique identifier representing the recipient associated with the requested profile.",
+        "A unique identifier representing the user associated with the requested profile.",
       example: "0460766e-8463-4905-ae98-b72c7aef41d6",
     },
   ],

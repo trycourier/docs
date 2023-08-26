@@ -16,7 +16,16 @@ import {
 
 # Replace a profile
 
-When using `PUT`, be sure to include all the key-value pairs required by the recipient's profile. Any key-value pairs that exist in the profile but fail to be included in the `PUT` request will be removed from the profile. Remember, a `PUT` update is a full replacement of the data. For partial updates, use the [PATCH /profiles/{recipient_id}](../../reference/profiles/patch.mdx) request.
+When using `PUT`, be sure to include all the key-value pairs required by the recipient's profile. Any key-value pairs that exist in the profile but fail to be included in the `PUT` request will be removed from the profile. Remember, a `PUT` update is a full replacement of the data. For partial updates, use the [Patch](./patch.mdx) request.
+
+<ApiReferenceMeta {...config} />
+<ApiReferenceDescription {...config} />
+<ApiReferenceEndPoint {...config} />
+<ApiReferencePathParams {...config} />
+<ApiReferenceBodyParams {...config} />
+<ApiReferenceResponses {...config} />
+<ApiReferenceRequestExample {...config} />
+<ApiReferenceResponseExample {...config} />
 
 ### More Examples
 
@@ -44,15 +53,6 @@ The Profile will now be:
   "profile": {}
 }
 ```
-
-<ApiReferenceMeta {...config} />
-<ApiReferenceDescription {...config} />
-<ApiReferenceEndPoint {...config} />
-<ApiReferencePathParams {...config} />
-<ApiReferenceBodyParams {...config} />
-<ApiReferenceResponses {...config} />
-<ApiReferenceRequestExample {...config} />
-<ApiReferenceResponseExample {...config} />
 
 #### Example
 
