@@ -57,7 +57,7 @@ export const ToProfile = () => (
       will be skipped. A list of available operators is available under{" "}
       <a href="/reference/audiences/operators/">audience operators</a>.
       <br />
-      <strong>Note: This feature is part of the Accounts Private Beta.</strong>
+      <strong>Note: This feature is part of the Tenants Private Beta.</strong>
     </Param>
   </Params>
 );
