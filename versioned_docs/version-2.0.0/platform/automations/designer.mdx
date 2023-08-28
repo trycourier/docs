@@ -56,22 +56,13 @@ target node:
   <source src={connectingNodesURL} />
 </video>
 
-## Control Flow
+## Invoking an Automation Template
 
-Automations can conditionally execute a branch of the workflow. This can be useful in any
-case where you may want to change the actions of an automation based on certain data sent
-with the template.
+:::caution Publish
 
-For example, you may want to send one template if one data field represents a certain value,
-or another template if it does not:
+**Be sure to publish the template before invoking (using the publish button on the upper right)**
 
-<video width="783" loop autoPlay muted controls poster={videoThumbnail}>
-  <source src={ifNodeURL} />
-</video>
-
-## Invoking A Template
-
-**Be sure to publish the template before invoking (using the publish button in the upper right)**
+:::
 
 ### API/Trigger
 
@@ -90,7 +81,7 @@ more details.
   alt="Template ID location, settings tab"
 />
 
-### From the designer
+### From the Designer
 
 You can invoke the automation template directly from the designer in the **Invoke** tab. This can be a good way to test the automation or to invoke very simple automation templates.
 _Note:_ Invoking from the designer will pass an empty data payload `{}` to the automation run
