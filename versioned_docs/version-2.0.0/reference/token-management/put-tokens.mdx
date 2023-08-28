@@ -2,14 +2,28 @@
 sidebar_position: 1
 ---
 
-import ApiReference from "@site/src/components/ApiReference";
 import config from "../configs/token-management/put-tokens";
+import {
+  ApiReferenceDescription,
+  ApiReferenceResponses,
+  ApiReferenceRequestExample,
+  ApiReferenceResponseExample,
+  ApiReferenceEndPoint,
+  ApiReferenceMeta,
+  ApiReferencePathParams,
+} from "@site/src/components/ApiReferenceUpdate";
 
 # Add multiple tokens to user
 
-<ApiReference {...config} />
+<ApiReferenceMeta {...config} />
+<ApiReferenceDescription {...config} />
+<ApiReferenceEndPoint {...config} />
+<ApiReferencePathParams {...config} />
+<ApiReferenceResponses {...config} />
+<ApiReferenceRequestExample {...config} />
+<ApiReferenceResponseExample {...config} />
 
-## Examples
+#### Examples
 
 - URL: `/users/user-1234/tokens`
 - Method: `PUT`
