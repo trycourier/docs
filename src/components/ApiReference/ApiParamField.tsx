@@ -11,8 +11,6 @@ import ApiParamRecordField from "./ApiParamRecordField";
 import ApiParamObjectField from "./ApiParamObjectField";
 import ApiParamOneOfField from "./ApiParamOneOfField";
 
-import styles from "./styles.module.css";
-
 interface ApiBaseParam<Type extends string, Value = never> {
   name?: string;
   displayName?: string;
@@ -38,6 +36,8 @@ export interface FieldComponentProps<
   Value extends ApiParam["example"] = Param["example"]
 > extends FieldProps<Type extends "array" ? unknown[] : Value> {
   param: Param;
+  isRoot?: boolean;
+  skipShowProperties?: boolean;
 }
 
 const apiParamComponents: Record<
@@ -60,26 +60,46 @@ export const buildParamPath = (param: ApiParam | string, prefix?: string) =>
   [prefix, typeof param === "string" ? param : param.name].filter((x) => x != null).join(".") ||
   null;
 
-interface ApiParamFieldProps {
+export interface ApiParamFieldProps {
   prefix: string;
   param: ApiParam;
+  isRoot?: boolean;
+  skipShowProperties?: boolean;
 }
 
 export const apiParamInitialValue = (param: ApiParam) => {
   if (param.type === "oneOf") {
+    if (Array.isArray(param.options) && param.options.length > 0) {
+      return { [param.name]: apiParamInitialValue(param?.options?.[0]) };
+    }
     return {};
   }
 
   const path = param.name ? buildParamPath(param) : null;
-  const value = PRIMITIVE_TYPES.includes(param.type)
-    ? param.example
-    : param.type === "object"
-    ? param.fields.reduce((obj, field) => ({ ...obj, ...apiParamInitialValue(field) }), {})
-    : param.type === "array"
-    ? []
-    : param.type === "record"
-    ? {}
-    : undefined;
+  let value;
+  switch (param.type) {
+    case "object":
+      value = param.fields.reduce((obj, field) => ({ ...obj, ...apiParamInitialValue(field) }), {});
+      break;
+    case "array":
+      if (param.type === "array" && "fields" in param.field && Array.isArray(param.field.fields)) {
+        value = [
+          param.field.fields.reduce(
+            (obj, field) => ({ ...obj, ...apiParamInitialValue(field) }),
+            {}
+          ),
+        ];
+        break;
+      }
+      value = [];
+      break;
+    case "record":
+      value = {};
+      break;
+    default:
+      value = PRIMITIVE_TYPES.includes(param.type) ? param.example : undefined;
+      break;
+  }
 
   if (path) {
     return { [path]: value };
@@ -100,27 +120,25 @@ const validateField = (param: ApiParam) => (value: string) => {
   }
 };
 
-const ApiParamField = ({ prefix, param }: ApiParamFieldProps) => {
+const ApiParamField = ({ prefix, param, isRoot, skipShowProperties }: ApiParamFieldProps) => {
   const Component = apiParamComponents[param.type];
+
   const field = (
     <Field name={buildParamPath(param, prefix)} validate={validateField(param)}>
-      {(props: FieldProps) => <Component {...props} param={param} />}
+      {(props: FieldProps) => (
+        <Component
+          {...props}
+          param={param}
+          isRoot={isRoot}
+          skipShowProperties={skipShowProperties}
+        />
+      )}
     </Field>
   );
 
-  return (
-    <div className={styles.field}>
-      {PRIMITIVE_TYPES.includes(param.type) ? (
-        <>
-          <ApiParamInfo param={param} />
+  if (PRIMITIVE_TYPES.includes(param.type)) return <ApiParamInfo param={param} />;
 
-          <div className={styles.fieldInput}>{field}</div>
-        </>
-      ) : (
-        field
-      )}
-    </div>
-  );
+  return field;
 };
 
 export default ApiParamField;

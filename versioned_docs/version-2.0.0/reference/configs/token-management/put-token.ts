@@ -2,8 +2,7 @@ import { ApiReferenceProps } from "@site/src/components/ApiReference";
 import { BaseUserTokenFields } from "../schemas/UserToken";
 
 const config: ApiReferenceProps = {
-  description:
-    "Adds a single token to a user and overwrites a matching existing token.",
+  description: "Adds a single token to a user and overwrites a matching existing token.",
   method: "PUT",
   path: "/users/:user_id/tokens/:token",
   pathParams: [

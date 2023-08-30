@@ -4,7 +4,7 @@ import styles from "./styles.module.css";
 import ApiExamples from "./ApiExamples";
 import { ApiParam, apiParamInitialValue } from "./ApiParamField";
 import { Formik } from "formik";
-import { FormValues } from "../ApiReference";
+import { FormValues } from ".";
 
 type PropType = Pick<
   ApiReferenceProps,

@@ -21,8 +21,7 @@ const config: ApiReferenceProps = {
       name: "topic_id",
       required: true,
       example: "FW0YU64P4TMYKMMHH67D6FENX8VS",
-      description:
-        "A unique identifier associated with a subscription topic.",
+      description: "A unique identifier associated with a subscription topic.",
     },
   ],
 
@@ -33,10 +32,11 @@ const config: ApiReferenceProps = {
       body: {
         type: "object",
         fields: [
-          {        
+          {
             name: "topic",
-            description: "The Preferences associated with the user_id for a particular subscription topic.",
-            ...SubscriptionTopic
+            description:
+              "The Preferences associated with the user_id for a particular subscription topic.",
+            ...SubscriptionTopic,
           },
         ],
       },

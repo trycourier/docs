@@ -57,6 +57,6 @@ const Brand: ApiParam = {
 export const BrandResponse = {
   ...Brand,
   fields: removeProperty(Brand.fields, "required"),
-}
+};
 
 export default Brand;

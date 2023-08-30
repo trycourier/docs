@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 
-import { FieldComponentProps } from "../ApiReference/ApiParamField";
+import { FieldComponentProps } from "./ApiParamField";
 
 import styles from "./styles.module.css";
 

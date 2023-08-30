@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { ApiReferenceProps, FormValues } from "../ApiReference";
+import { ApiReferenceProps, FormValues } from ".";
 import ApiParamField, { ApiParam, apiParamInitialValue } from "./ApiParamField";
 import { Formik } from "formik";
 

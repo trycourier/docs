@@ -29,7 +29,8 @@ const AutomationRun: ApiParam = {
         {
           type: "oneOf",
           name: "cancelation_token",
-          description: "A unique id or accessor that can be used to cancel this automation from executing from another automation via the Cancel Automation step.",
+          description:
+            "A unique id or accessor that can be used to cancel this automation from executing from another automation via the Cancel Automation step.",
           options: [
             {
               type: "string",
