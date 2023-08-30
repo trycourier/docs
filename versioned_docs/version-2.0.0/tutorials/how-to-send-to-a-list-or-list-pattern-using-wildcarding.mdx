@@ -1,5 +1,4 @@
 ---
-sidebar_position: 4
 displayed_sidebar: sidebar
 ---
 
@@ -8,9 +7,9 @@ import YoutubeEmbed from "@site/src/components/YoutubeEmbed";
 
 # How To Create And Send To A List Or List Pattern
 
-> How to structure the List IDs you create via the Lists API according to the pattern guidelines that enable wildcard sending.
+How to structure the List IDs you create via the Lists API according to the pattern guidelines that enable wildcard sending.
 
-\*\*The Courier Lists API lets you create Lists and associate one or more recipients with them in the Courier database. Then send to a list or a list pattern. Following the list pattern guidelines outlined in this document enables wildcarding.
+The Courier Lists API lets you create Lists and associate one or more recipients with them in the Courier database. Then send to a list or a list pattern. Following the list pattern guidelines outlined in this document enables wildcarding.
 
 <YoutubeEmbed videoId="0k70TmgSK8o" />
 
@@ -20,14 +19,12 @@ Many times there are groups of users you want to message with the same notificat
 
 When you send to a list, Courier handles the message fanout–following user preferences and your channel priorities–to deliver across Push, Email, SMS, Messaging Apps, and more.
 
-:::info **With the Lists API, you can easily do things like:**
+With the Lists API, you can easily do things like:
 
 - Reach every user in a shared workspace.
 - Notify all users who follow a specific project.
 - Alert users subscribed to a blog category
 - Message users who opt into specific notifications.
-
-:::
 
 ## What are Lists and Lists Patterns?
 
@@ -48,12 +45,16 @@ Thinking about how to structure your List IDs according to Courier's List patter
 - `part1.part2.spart3`
 - `part1.part2.part3.part4`
 
-:::warn You must specifically subscribe users to every List or List part that apply to them.
+:::caution
+
+You must specifically subscribe users to every List or List part that apply to them.
+
+:::
 
 Each ID string is its own List. If you provide `part1.part2` as the List id when creating a List, that's a single List with the id of `part1.part2`
 
 Example: subscribing a user to `part1.part2` *does not *automatically subscribe users to `part1`
-:::
+
 
 ## List Pattern Examples
 
