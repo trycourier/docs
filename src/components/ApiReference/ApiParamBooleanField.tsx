@@ -1,6 +1,6 @@
 import React from "react";
 
-import { FieldComponentProps } from "../ApiReference/ApiParamField";
+import { FieldComponentProps } from "./ApiParamField";
 
 import ApiParamBaseInput from "./ApiParamBaseInput";
 

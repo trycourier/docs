@@ -24,7 +24,7 @@ const Paging: ApiParam = {
       field: {
         type: "string",
         enum: ["email", "push", "direct_message", "sms", "webhook"],
-        example: "email"
+        example: "email",
       },
     },
     {

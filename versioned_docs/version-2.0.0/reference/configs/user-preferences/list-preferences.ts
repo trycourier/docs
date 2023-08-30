@@ -33,7 +33,7 @@ const config: ApiReferenceProps = {
             type: "array",
             name: "items",
             description: "The Preferences associated with the user_id.",
-            field: SubscriptionTopic
+            field: SubscriptionTopic,
           },
         ],
       },

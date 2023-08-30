@@ -21,7 +21,8 @@ const config: ApiReferenceProps = {
       {
         type: "array",
         name: "patch",
-        description: "An array of patch operations. [More information on how to issue patch instructions](/docs/reference/profiles/patch/#constructing-a-patch).",
+        description:
+          "An array of patch operations. [More information on how to issue patch instructions](/docs/reference/profiles/patch/#constructing-a-patch).",
         field: {
           type: "object",
           fields: [

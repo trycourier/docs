@@ -1,8 +1,7 @@
 import { ApiReferenceProps } from "@site/src/components/ApiReference";
-import topicPreferenceInput from "../schemas/topic-preference-input"
+import topicPreferenceInput from "../schemas/topic-preference-input";
 const config: ApiReferenceProps = {
-  description:
-    "Update or Create user preferences for a specific subscription topic",
+  description: "Update or Create user preferences for a specific subscription topic",
   method: "PUT",
   path: "/users/:user_id/preferences/:topic_id",
   pathParams: [
@@ -19,8 +18,7 @@ const config: ApiReferenceProps = {
       name: "topic_id",
       required: true,
       example: "FW0YU64P4TMYKMMHH67D6FENX8VS",
-      description:
-        "A unique identifier associated with a subscription topic.",
+      description: "A unique identifier associated with a subscription topic.",
     },
   ],
   bodyParam: topicPreferenceInput,

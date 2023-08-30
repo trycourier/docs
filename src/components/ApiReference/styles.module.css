@@ -2,10 +2,12 @@
   position: relative;
   z-index: 1;
   margin: 2rem 0;
+  width: 100%;
 }
 
 .runner {
   padding-top: 2rem;
+  max-width: 100%;
 }
 
 @media (min-width: 997px) {
@@ -16,8 +18,11 @@
   .runner {
     position: sticky;
     top: var(--ifm-navbar-height);
-    padding: 1rem 0 0 var(--ifm-spacing-horizontal);
   }
+}
+
+.container {
+  display: block;
 }
 
 .form:before,
@@ -43,14 +48,14 @@
 }
 
 .section > .sectionTitle {
-  padding-bottom: 0.5rem;
+  padding-bottom: 1.25rem;
 }
 
 .sectionTitle {
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
-  color: var(--ifm-font-color-secondary);
+  color: var(--ifm-font-color-base);
 }
 
 .sectionTitle + .section {

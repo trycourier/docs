@@ -2,7 +2,7 @@ import React, { useState, useCallback } from "react";
 import clsx from "clsx";
 import TextareaAutosize from "react-textarea-autosize";
 
-import { FieldComponentProps } from "../ApiReference/ApiParamField";
+import { FieldComponentProps } from "./ApiParamField";
 import ApiParamInputOverlay from "./ApiParamInputOverlay";
 import styles from "./styles.module.css";
 

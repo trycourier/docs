@@ -3,7 +3,8 @@ import { ApiParam } from "@site/src/components/ApiReference/ApiParamField";
 const Paging: ApiParam = {
   type: "object",
   name: "topic",
-  description: "The topic preferences for a user. has_custom_routing and custom_routing are available to business tier customers.",
+  description:
+    "The topic preferences for a user. has_custom_routing and custom_routing are available to business tier customers.",
   fields: [
     {
       type: "string",
@@ -17,7 +18,8 @@ const Paging: ApiParam = {
       type: "boolean",
       name: "has_custom_routing",
       required: false,
-      description: "Whether or not a user has set a channel preference for subscription topic. If false, custom_routing is ignored and the topic preference is used.",
+      description:
+        "Whether or not a user has set a channel preference for subscription topic. If false, custom_routing is ignored and the topic preference is used.",
     },
     {
       type: "array",
@@ -27,9 +29,9 @@ const Paging: ApiParam = {
       field: {
         type: "string",
         enum: ["email", "push", "direct_message", "sms", "webhook"],
-        example: "sms"
+        example: "sms",
       },
-    }
+    },
   ],
 };
 
