@@ -1,6 +1,5 @@
 import { ApiReferenceProps } from "@site/src/components/ApiReference";
 
-import Paging from "../../../reference/configs/schemas/Paging";
 import SubscriptionTopic from "../schemas/subscription-topic";
 
 const config: ApiReferenceProps = {

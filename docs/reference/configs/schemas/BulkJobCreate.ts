@@ -6,7 +6,7 @@ import {
   metadata,
   providers,
   routing,
-} from "@site/versioned_docs/version-2.0.0/reference/configs/schemas/Send";
+} from "@site/versioned_docs/version-2.0.0/api-specs/configs/schemas/Send";
 
 const BulkJobCreate: ApiParam = {
   type: "object",
