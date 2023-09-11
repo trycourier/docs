@@ -1,0 +1,19 @@
+---
+sidebar_position: 7
+sidebar_label: SMSCentral
+title: Send SMS Notifications Using SMSCentral
+description: Looking for a way to send text message notifications via SMSCentral? This step-by-step tutorial will show you how to integrate SMSCentral's API the easy way.
+---
+
+# SMSCentral
+
+## Profile Requirements
+
+To deliver an SMS message through SMSCentral, Courier must be provided the recipient's SMS-compatible phone number. This value should be included in the recipient profile as `phone_number`.
+
+```json title=JSON
+// Recipient Profile
+{
+  "phone_number": "+12345678901"
+}
+```
