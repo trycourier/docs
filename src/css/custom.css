@@ -128,10 +128,10 @@ html[data-theme="dark"] .docusaurus-highlight-code-line {
 
 @import url("./navbar.css");
 @import url("./sidebar.css");
-@import url("./platform.css");
 @import url("./pagination.css");
 @import url("./prism.css");
 @import url("./table.css");
+@import url("./card.css");
 
 .footer {
   display: none;

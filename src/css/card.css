@@ -1,11 +1,21 @@
-.platform-list {
+.card-list {
   display: flex;
   flex-wrap: wrap;
 }
 
-.platform-item {
-  width: 250px;
-  padding: 8px 16px;
+.card-list.small > div {
+  min-width: 250px;
+}
+
+.card-list.medium > div {
+  min-width: 400px;
+}
+
+.card-item {
+  display:flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 24px;
   margin: 0 16px 16px 0;
   border-radius: 6px;
   border: 1px solid var(--structure-border, #dcdee4);
@@ -15,11 +25,18 @@
     0px 12px 5px 0px rgba(0, 0, 0, 0), 0px 19px 5px 0px rgba(0, 0, 0, 0);
 }
 
-.platform-name {
+.card-name {
   font-size: 120%;
+  font-weight: bold;
   text-align: center;
 }
 
-.platform-desc {
+.card-desc {
+  font-size: 90%;
+  flex: 1;
+}
+
+.card-more {
+  margin-top:16px;
   font-size: 80%;
 }
