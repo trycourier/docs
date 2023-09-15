@@ -1,0 +1,78 @@
+.container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top: 1px solid #dcdee4;
+  display: flex;
+}
+
+.helpfulTextContainer {
+  display: flex;
+  padding: 32px;
+}
+
+.docslyToolboxStyles {
+  position: static !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.docslyToolboxStyles:nth-child(2) > button:nth-child(1) {
+  display: none;
+}
+
+.docslyToolboxStyles:nth-child(2) > button:nth-child(3) {
+  position: relative;
+  bottom: 8px;
+  left: 12px;
+  border: 1px solid #dcdee4;
+  width: 72px;
+  height: 40px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.docslyToolboxStyles:nth-child(2) > button:nth-child(3):hover {
+  border: 1px solid var(--text-content) !important;
+}
+
+.docslyToolboxStyles:nth-child(2) > button:nth-child(3)::after {
+  content: "Yes";
+  position: relative;
+  left: -2px;
+}
+
+.docslyToolboxStyles:nth-child(2) > button:nth-child(3) > svg {
+  display: none;
+}
+
+.docslyToolboxStyles:nth-child(2) > button:nth-child(4) {
+  position: relative;
+  bottom: 8px;
+  left: 20px;
+  border: 1px solid #dcdee4;
+  width: 72px;
+  height: 40px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.docslyToolboxStyles:nth-child(2) > button:nth-child(4) > svg {
+  display: none;
+}
+
+.docslyToolboxStyles:nth-child(2) > button:nth-child(4)::after {
+  content: "No";
+}
+
+.docslyToolboxStyles:nth-child(2) > button:nth-child(4):hover {
+  border: 1px solid var(--text-content) !important;
+}
