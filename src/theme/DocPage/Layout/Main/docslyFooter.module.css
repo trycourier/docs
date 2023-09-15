@@ -10,6 +10,17 @@
 .helpfulTextContainer {
   display: flex;
   padding: 32px;
+  padding-left: 16px;
+}
+
+@media (min-width: 997px) {
+  .helpfulTextContainer {
+    padding-left: 32px;
+  }
+}
+
+.helpfulTextContainer > div {
+  z-index: 2;
 }
 
 .docslyToolboxStyles {
