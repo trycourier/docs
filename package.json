@@ -16,6 +16,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@docsly/react": "^1.8.6",
     "@docusaurus/core": "^2.4.1",
     "@docusaurus/plugin-ideal-image": "^2.4.1",
     "@docusaurus/preset-classic": "^2.4.1",

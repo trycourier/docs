@@ -1,3 +1,6 @@
+.pagination-nav {
+  display: none;
+}
 .pagination-nav__link {
   border-color: var(--structure-border);
   background-color: var(--background-panels);
