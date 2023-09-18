@@ -1,18 +1,19 @@
 .card-list {
   display: flex;
   flex-wrap: wrap;
+  gap: 20px;
 }
 
-.card-list.small > div {
+.card-list.small > a {
   min-width: 250px;
 }
 
-.card-list.medium > div {
+.card-list.medium > a {
   min-width: min(300px, 90vw);
 }
 
 .card-item {
-  display:flex;
+  display: flex;
   flex-direction: column;
   flex: 1;
   padding: 24px;
@@ -37,6 +38,6 @@
 }
 
 .card-more {
-  margin-top:16px;
+  margin-top: 16px;
   font-size: 80%;
 }
