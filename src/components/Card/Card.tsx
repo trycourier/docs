@@ -3,12 +3,14 @@ import clsx from "clsx";
 import styles from "./card.module.css";
 import Link from "@docusaurus/Link";
 
-type PropType = {
+export type CardType = {
   href: string;
   title: string;
   description: string;
   linkText?: string;
 };
+
+type PropType = CardType;
 
 const Card = ({ href, title, description, linkText }: PropType) => {
   return (

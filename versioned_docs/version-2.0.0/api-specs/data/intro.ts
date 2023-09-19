@@ -1,9 +1,4 @@
-type CardType = {
-  title: string;
-  href: string;
-  description: string;
-  linkText?: string;
-};
+import { CardType } from "@site/src/components/Card/Card";
 
 export const welcomeCardData: CardType[] = [
   {

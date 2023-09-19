@@ -1,0 +1,13 @@
+.cardList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.cardList.small > a {
+  min-width: 250px;
+}
+
+.cardList.medium > a {
+  min-width: min(300px, 90vw);
+}
