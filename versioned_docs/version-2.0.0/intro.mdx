@@ -5,89 +5,23 @@ sidebar_label: Home
 title: "Courier Docs"
 description: "Learn how to use Courier to design and deliver notifications across multiple channels (email, SMS, mobile push, in-app) and integrate rich inbox experiences into your web and mobile apps."
 ---
+
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import { CardList } from "@site/src/components/CardList";
+import { welcomeCardData, platformCardData } from "../version-2.0.0/api-specs/data/intro";
 
 # Welcome to the Courier Docs
 
 Find all the tutorials and resources you need to build product notifications with Courier.
 
-<div className="card-list medium">
-  <div className="card-item">
-    <div className="card-name">Getting Started</div>
-    <div className="card-desc">Learn what Courier is, what the key concepts are how to send your first notification using your programming language of choice.
-    </div>
-    <div className="card-more"><a href="/getting-started/what-is-courier/">Learn More →</a></div>
-  </div>
-  <div className="card-item">
-    <div className="card-name">Tutorials</div>
-    <div className="card-desc">Learn basic Courier platform concepts that cover everything from adding providers to sending notifications to a list.</div>
-    <div className="card-more"><a href="/tutorials">Learn More →</a></div>
-  </div>
-  <div className="card-item">
-    <div className="card-name">UI Components</div>
-    <div className="card-desc">Courier provides embeddable UI components and client SDKs for web, iOS and Android.</div>
-    <div className="card-more"><a href="/sdk-libraries/client-sdks/">Learn More →</a></div>
-  </div>
-  <div className="card-item">
-    <div className="card-name">API Reference</div>
-    <div className="card-desc">The Courier REST API has predictable resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs.
-</div>
-    <div className="card-more"><a href="/reference">Learn More →</a></div>
-  </div>
-</div>
+<CardList size="medium" cardData={welcomeCardData} />
 
 ## Platform
 
 Our platform is designed around a small number of key concepts that make it easy to build powerful notification experiences while also being flexible enough to integrate into whatever kind of application or system you may be building.
 
-<div className="card-list small">
-  <div className="card-item">
-    <div className="card-name">Users</div>
-    <div className="card-desc">Specifying the recipient or recipients of the notification.</div>
-    <div className="card-more"><a href="/platform/users">Learn More →</a></div>
-  </div>
-  <div className="card-item">
-    <div className="card-name">Content</div>
-    <div className="card-desc">Constructing the content of the notification, including the use of templates, dynamic variables and channel agnostic markup.</div>
-    <div className="card-more"><a href="/platform/content">Learn More →</a></div>
-  </div>
-  <div className="card-item">
-    <div className="card-name">Channels</div>
-    <div className="card-desc">The channels and providers being used to deliver the notification.</div>
-    <div className="card-more"><a href="/platform/channels">Learn More →</a></div>
-  </div>
-  <div className="card-item">
-    <div className="card-name">Sending</div>
-    <div className="card-desc">Sending notifications, including setting limits and handling retries.</div>
-    <div className="card-more"><a href="/platform/sending">Learn More →</a></div>
-  </div>
-  <div className="card-item">
-    <div className="card-name">Preferences</div>
-    <div className="card-desc">Respecting user delivery preferences and drop-in user preference components.</div>
-    <div className="card-more"><a href="/platform/preferences">Learn More →</a></div>
-  </div>
-  <div className="card-item">
-    <div className="card-name">Automations</div>
-    <div className="card-desc">Create fully managed notification workflows and implements scheduling, batching and throttling with zero lines of code.</div>
-    <div className="card-more"><a href="/platform/automations">Learn More →</a></div>
-  </div>
-  <div className="card-item">
-    <div className="card-name">Inbox</div>
-    <div className="card-desc">Embed a modern notification inbox to your app with our web, iOS and Android SDKs.</div>
-    <div className="card-more"><a href="/platform/inbox">Learn More →</a></div>
-  </div>
-  <div className="card-item">
-    <div className="card-name">Workspaces</div>
-    <div className="card-desc">Setup test and production environments, manage access control and configure the behavior of your apps.</div>
-    <div className="card-more"><a href="/platform/workspaces">Learn More →</a></div>
-  </div>
-  <div className="card-item">
-    <div className="card-name">Logging</div>
-    <div className="card-desc">Logging, analytics and observability.</div>
-    <div className="card-more"><a href="/platform/logging">Learn More →</a></div>
-  </div>
-</div>
+<CardList size="small" cardData={platformCardData} />
 
 ## Server SDK Libraries
 
