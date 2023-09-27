@@ -48,6 +48,7 @@ export const ApiReferenceTokenProvider = (props: React.PropsWithChildren<{}>) =>
         return response.json();
       })
       .then((body) => {
+        console.log("respbody", body);
         setToken(body.token);
         setSsoToken(body.token);
       })
