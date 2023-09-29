@@ -64,7 +64,7 @@ const config: ApiReferenceProps = {
     {
       type: "string",
       name: "tags",
-      description: "A comma delimited list of 'tags' associated with a message",
+      description: "A comma delimited list of 'tags'. Messages will be returned if they match any of the tags passed in.",
       example: "tag-1,tag-2",
     },
     {
