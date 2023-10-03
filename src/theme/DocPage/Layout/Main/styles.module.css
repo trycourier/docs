@@ -1,8 +1,9 @@
 .docMainContainer {
-  display: flex;
   width: 100%;
-  position: relative;
-  padding-bottom: 82px;
+}
+
+.docMainContainer > div:first-of-type {
+  min-height: calc(100% - 92px);
 }
 
 @media (min-width: 997px) {
