@@ -7,12 +7,17 @@ const ServiceStatus = () => {
   if (isLoading) return <div className={styles.serviceStatusWrapper}>...</div>;
   if (!statusData) return <></>;
   return (
-    <div className={styles.serviceStatusWrapper}>
+    <a
+      className={styles.serviceStatusWrapper}
+      href="https://status.courier.com/"
+      target="_blank"
+      rel="noreferrer"
+    >
       <div className={`${styles.indicator} ${styles[`${statusData.indicator}Indicator`]}`} />
       <div className={`${styles[`${statusData.indicator}Description`]}`}>
         {statusData.description}
       </div>
-    </div>
+    </a>
   );
 };
 

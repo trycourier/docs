@@ -6,6 +6,9 @@
   gap: 8px;
   align-items: center;
 }
+.serviceStatusWrapper:hover {
+  text-decoration: none;
+}
 
 .indicator {
   height: 12px;
