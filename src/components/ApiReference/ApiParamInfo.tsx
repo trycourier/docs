@@ -22,7 +22,7 @@ const ApiParamInfo = ({ param }: ApiParamInfoProps) => {
     return [];
   };
 
-  const enumString = getEnumString().reduce((a, c, i) => a + (i === 0 ? "" : " | ") + c, "");
+  const enumString = getEnumString().reduce((a, c, i) => a + (i === 0 ? "" : " | ") + `"${c}"`, "");
 
   return (
     <Param name={param.name ?? enumString} type={param.type} required={param.required}>
