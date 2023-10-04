@@ -1,0 +1,38 @@
+.serviceStatusWrapper {
+  color: var(--ifm-navbar-link-color);
+  font-size: 12px;
+  font-weight: 400;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.indicator {
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+}
+
+.noneIndicator {
+  background-color: #00aa13;
+}
+
+.minorIndicator {
+  background-color: #e09d43;
+}
+
+.majorIndicator {
+  background-color: #e53935;
+}
+
+.noneDescription {
+  color: #00730d;
+}
+
+.minorDescription {
+  color: #7d5014;
+}
+
+.majorDescription {
+  color: #8a201e;
+}
