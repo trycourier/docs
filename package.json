@@ -17,9 +17,9 @@
   },
   "dependencies": {
     "@docsly/react": "^1.8.6",
-    "@docusaurus/core": "^2.4.1",
-    "@docusaurus/plugin-ideal-image": "^2.4.1",
-    "@docusaurus/preset-classic": "^2.4.1",
+    "@docusaurus/core": "^2.4.3",
+    "@docusaurus/plugin-ideal-image": "^2.4.3",
+    "@docusaurus/preset-classic": "^2.4.3",
     "@easyops-cn/docusaurus-search-local": "^0.35.0",
     "@mdx-js/react": "^1.6.21",
     "@svgr/webpack": "^5.5.0",
@@ -42,7 +42,7 @@
     "url-loader": "^4.1.1"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^2.4.1",
+    "@docusaurus/module-type-aliases": "^2.4.3",
     "@tsconfig/docusaurus": "^1.0.4",
     "@types/jsonwebtoken": "^8.5.6",
     "@types/lodash": "^4.14.176",
