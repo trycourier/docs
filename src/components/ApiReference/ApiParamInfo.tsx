@@ -9,10 +9,26 @@ interface ApiParamInfoProps {
   param: ApiParam;
 }
 
-const ApiParamInfo = ({ param }: ApiParamInfoProps) => (
-  <Param name={param.name} type={param.type} required={param.required}>
-    {param.description && <Markdown>{param.description}</Markdown>}
-  </Param>
-);
+const ApiParamInfo = ({ param }: ApiParamInfoProps) => {
+  const getEnumString = () => {
+    if (
+      "type" in param &&
+      param.type === "string" &&
+      "enum" in param &&
+      Array.isArray(param.enum) &&
+      param.enum.length > 0
+    )
+      return param.enum;
+    return [];
+  };
+
+  const enumString = getEnumString().reduce((a, c, i) => a + (i === 0 ? "" : " | ") + c, "");
+
+  return (
+    <Param name={param.name ?? enumString} type={param.type} required={param.required}>
+      {param.description && <Markdown>{param.description}</Markdown>}
+    </Param>
+  );
+};
 
 export default ApiParamInfo;
