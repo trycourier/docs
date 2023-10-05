@@ -16,7 +16,7 @@ const ApiReferenceBodyParams = ({
   return (
     <div className={styles.section}>
       <p>
-        <strong>BODY PARAMS</strong>
+        <strong>Body Parameters</strong>
       </p>
 
       <Formik<Pick<FormValues, "body">> initialValues={initialValues} onSubmit={() => {}}>

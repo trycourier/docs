@@ -20,7 +20,7 @@ const ApiReferenceQueryParams = ({ queryParams }: PropType) => {
   return (
     <div className={styles.section}>
       <p>
-        <strong>Query Parameters:</strong>
+        <strong>Query Parameters</strong>
       </p>
 
       <Formik<Pick<FormValues, "query">> initialValues={initialValues} onSubmit={() => {}}>
