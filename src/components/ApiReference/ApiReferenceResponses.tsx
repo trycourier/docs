@@ -8,7 +8,7 @@ import Header2 from "../Header2";
 type PropType = NonNullable<Pick<ApiReferenceProps, "responses">>;
 
 const ApiReferenceResponses = ({ responses }: PropType) => {
-  const responseTitle = responses.length > 1 ? "RESPONSES" : "RESPONSE";
+  const responseTitle = responses.length > 1 ? "Responses" : "Response";
   if (responses.length === 0) return null;
   return (
     <div className={styles.section}>
