@@ -25,32 +25,3 @@ import {
 <ApiReferenceResponses {...config} />
 <ApiReferenceRequestExample {...config} />
 <ApiReferenceResponseExample {...config} />
-
-#### Example
-
-Method: `POST`
-
-URL: `https://api.courier.com/profiles/abcdefgh12345678/lists`
-
-Body:
-​
-
-```json
-{
-  "notifications": {
-    "{notificationKey}": {
-      "channel_preferences": [
-        {
-          "channel": "direct_message"
-        }
-      ],
-      "rules": [
-        {
-          "type": "snooze"
-        }
-      ],
-      "status": "OPTED_IN"
-    }
-  }
-}
-```

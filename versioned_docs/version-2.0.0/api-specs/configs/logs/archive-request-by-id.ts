@@ -1,7 +1,7 @@
 import { ApiReferenceProps } from "@site/src/components/ApiReference";
 
 const config: ApiReferenceProps = {
-  description: "Archive request",
+  description: "Archive a message by its ID. Messages that are sent to a list or audience can be archived in bulk using this API with the returned request_id.",
   method: "PUT",
   path: "/requests/:request_id/archive",
   pathParams: [

@@ -23,59 +23,56 @@ import config from "../../api-specs/configs/audiences/put";
 <ApiReferenceBodyParams {...config} />
 <ApiReferenceResponses {...config} />
 <ApiReferenceRequestExample {...config} />
-<ApiReferenceResponseExample {...config} />
 
-#### Example of an OR operator
+## Example of an `OR` operator
 
 ```json
 {
-  "audience": {
-    "id": "abcdefgh12345678",
-    "name": "Product Team",
-    "description": "Members of the product team, including both engineers and product managers.",
-    "filter": {
-      "Multiple Filters": {
-        "operator": "OR",
-        "filters": [
-          {
-            "operator": "EQ",
-            "value": "engineer",
-            "path": "title"
-          },
-          {
-            "operator": "EQ",
-            "value": "product manager",
-            "path": "title"
-          }
-        ]
-      }
-    }
-  }
-}
-```
+  ...
 
-#### Example of an AND operator
-
-```json title=JSON
-{
-  "audience": {
-    "id": "abcdefgh12345678",
-    "name": "Developers from San Francisco",
-    "filter": {
-      "operator": "AND",
+  "filter": {
+    "Multiple Filters": {
+      "operator": "OR",
       "filters": [
         {
-          "path": "location",
           "operator": "EQ",
-          "value": "San Francisco"
+          "value": "engineer",
+          "path": "title"
         },
         {
-          "path": "job_title",
           "operator": "EQ",
-          "value": "Developer"
+          "value": "product manager",
+          "path": "title"
         }
       ]
     }
   }
 }
 ```
+
+## Example of an `AND` operator
+
+```json title=JSON
+{
+  ...
+
+  "filter": {
+    "operator": "AND",
+    "filters": [
+      {
+        "path": "location",
+        "operator": "EQ",
+        "value": "San Francisco"
+      },
+      {
+        "path": "job_title",
+        "operator": "EQ",
+        "value": "Developer"
+      }
+    ]
+  }
+}
+```
+
+<ApiReferenceResponseExample {...config} />
+
