@@ -4,6 +4,7 @@ import CodeBlock from "@theme/CodeBlock";
 import { ApiReferenceProps } from ".";
 import { stringifyJSON } from "./ApiExamples";
 import { buildResponse } from "./ApiResponseField";
+import Header2 from "../Header2";
 
 type PropType = NonNullable<Pick<ApiReferenceProps, "responses">>;
 
@@ -41,9 +42,7 @@ const ApiReferenceResponseExample = ({ responses }: PropType) => {
 
   return (
     <div className={styles.section}>
-      <div className={styles.inlineForm}>
-        <div className={styles.sectionTitle}>Responses Example</div>
-      </div>
+      <Header2>Responses Example</Header2>
       {responses.map((response, idx) => (
         <CodeBlock className="language-json" key={JSON.stringify(response)}>
           {renderResponseBody(idx)}

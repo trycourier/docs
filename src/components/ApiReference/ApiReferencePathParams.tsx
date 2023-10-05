@@ -4,6 +4,7 @@ import ApiParamField, { ApiParam, apiParamInitialValue } from "./ApiParamField";
 import { Formik } from "formik";
 
 import styles from "./styles.module.css";
+import Header2 from "../Header2";
 
 const ApiReferencePathParams = ({
   pathParams,
@@ -22,9 +23,7 @@ const ApiReferencePathParams = ({
 
   return (
     <div className={styles.section}>
-      <p>
-        <strong>Path Parameters</strong>
-      </p>
+      <Header2>Path Parameters</Header2>
       <Formik<Pick<FormValues, "path">> initialValues={initialValues} onSubmit={() => {}}>
         <ApiParamField param={{ type: "object", fields: pathParams }} prefix="path" isRoot />
       </Formik>
