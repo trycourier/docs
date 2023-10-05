@@ -4,6 +4,7 @@ import ApiParamField, { ApiParam, apiParamInitialValue } from "./ApiParamField";
 import styles from "./styles.module.css";
 import { ApiReferenceProps, FormValues } from ".";
 import { Formik } from "formik";
+import Header2 from "../Header2";
 type PropType = NonNullable<Pick<ApiReferenceProps, "queryParams">>;
 
 const ApiReferenceQueryParams = ({ queryParams }: PropType) => {
@@ -19,9 +20,7 @@ const ApiReferenceQueryParams = ({ queryParams }: PropType) => {
 
   return (
     <div className={styles.section}>
-      <p>
-        <strong>Query Parameters:</strong>
-      </p>
+      <Header2>Query Parameters</Header2>
 
       <Formik<Pick<FormValues, "query">> initialValues={initialValues} onSubmit={() => {}}>
         <ApiParamField param={{ type: "object", fields: queryParams }} prefix="query" isRoot />

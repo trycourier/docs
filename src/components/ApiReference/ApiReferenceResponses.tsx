@@ -3,17 +3,16 @@ import { ApiReferenceProps } from ".";
 import styles from "./styles.module.css";
 import { Params } from "../Params";
 import ApiResponseField from "./ApiResponseField";
+import Header2 from "../Header2";
 
 type PropType = NonNullable<Pick<ApiReferenceProps, "responses">>;
 
 const ApiReferenceResponses = ({ responses }: PropType) => {
-  const responseTitle = responses.length > 1 ? "RESPONSES" : "RESPONSE";
+  const responseTitle = responses.length > 1 ? "Responses" : "Response";
   if (responses.length === 0) return null;
   return (
     <div className={styles.section}>
-      <div className={styles.sectionTitle}>
-        <strong>{responseTitle}:</strong>
-      </div>
+      <Header2>{responseTitle}</Header2>
 
       {responses.map((response, index) => {
         const name = `${response.status} ${response.description}`;

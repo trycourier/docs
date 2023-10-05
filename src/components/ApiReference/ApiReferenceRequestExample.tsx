@@ -5,6 +5,7 @@ import ApiExamples from "./ApiExamples";
 import { ApiParam, apiParamInitialValue } from "./ApiParamField";
 import { Formik } from "formik";
 import { FormValues } from ".";
+import Header2 from "../Header2";
 
 type PropType = Pick<
   ApiReferenceProps,
@@ -36,7 +37,7 @@ const ApiReferenceRequestExample = ({
 
   return (
     <div className={styles.section}>
-      <div className={styles.sectionTitle}>Request Example</div>
+      <Header2>Request Example</Header2>
       <Formik<FormValues> initialValues={initialValues} onSubmit={() => {}}>
         <ApiExamples method={method} path={path} />
       </Formik>

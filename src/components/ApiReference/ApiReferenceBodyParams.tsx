@@ -4,6 +4,7 @@ import ApiParamField, { apiParamInitialValue } from "./ApiParamField";
 
 import styles from "./styles.module.css";
 import { Formik } from "formik";
+import Header2 from "../Header2";
 
 const ApiReferenceBodyParams = ({
   bodyParam,
@@ -15,9 +16,7 @@ const ApiReferenceBodyParams = ({
   }, [bodyParam]);
   return (
     <div className={styles.section}>
-      <p>
-        <strong>BODY PARAMS</strong>
-      </p>
+      <Header2>Body Parameters</Header2>
 
       <Formik<Pick<FormValues, "body">> initialValues={initialValues} onSubmit={() => {}}>
         <ApiParamField param={bodyParam} prefix="body" isRoot />
