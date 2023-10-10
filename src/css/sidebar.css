@@ -34,9 +34,7 @@
 aside,
 .navbar-sidebar {
   border-right: 1px solid var(--structure-border, #dcdee4);
-  color: #2c1338;
-  --ifm-menu-color: #2c1338;
-  --ifm-menu-color-active: var(--text-link);
+  color: var(--ifm-menu-color);
 }
 
 /* the html changed in version 2.4.1 */
