@@ -6,46 +6,13 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;&display=swap");
 
-[data-theme="light"]{
-  /** Figma */
-  --background-frame: #f7f8fa;
-  --text-content: #292929;
-  --structure-border: #dcdee4;
-  --background-panels: #ffffff;
-  --text-header: #141414;
-  --table-row-even: #f8f8f8;
-  --table-row-odd: #ffffff;
+:root {
   --text-link: #0085ff;
-  --text-button: #696f8c;
-  --text-placeholder: #bdbfcf;
-  --background-field-input: #ffffff;
-  --status-active: #0085ff;
-  --text-subtext: #696f8c;
-  --structure-default: #dcdee4;
-  --text-red: #ff3363;
-  --icon-default: #80849d;
-  --background-header-default: #fcfcfc;
-  --item-background-color: rgba(0, 133, 255, 0.05);
   --default-font-size: 14px;
   --default-font-weight: 400;
   --navbar-item-font-size: 12px;
-
-  /** IFM / Docusuarus */
   --ifm-code-font-size: 12px;
-  --ifm-color-primary: #0085ff;
-  --ifm-color-primary-dark: #0078e6;
-  --ifm-color-primary-darker: #0071d9;
-  --ifm-color-primary-darkest: #005db3;
-  --ifm-color-primary-light: #1a91ff;
-  --ifm-color-primary-lighter: #2697ff;
-  --ifm-color-primary-lightest: #4daaff;
-  --ifm-pre-background: blue;
   --ifm-navbar-height: 4.5rem;
-  --ifm-navbar-link-color: var(--ifm-font-color-base-inverse);
-  --ifm-navbar-shadow: none;
-  --ifm-navbar-item-padding-horizontal: 0.5rem;
-  --ifm-menu-color: #2c1338;
-  --ifm-menu-color-active: var(--ifm-menu-color);
   --ifm-h1-font-size: 20px;
   --ifm-h2-font-size: 18px;
   --ifm-h3-font-size: 16px;
@@ -55,12 +22,6 @@
   --ifm-heading-font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
     Noto Sans, sans-serif, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  --ifm-menu-color-background-active: var(--item-background-color);
-  --ifm-menu-color-background-hover: var(--item-background-color);
-  --ifm-toc-border-color: rgba(0, 0, 0, 0.05);
-  --ifm-heading-color: #141414;
-  --ifm-font-color-base: #292929;
-  --ifm-color-danger: #de5063;
   --ifm-badge-padding-vertical: 0.4rem;
   --ifm-badge-padding-horizontal: 0.8rem;
   --ifm-heading-font-weight: 500;
@@ -69,6 +30,47 @@
   --ifm-blockquote-padding-horizontal: 1rem;
   --ifm-blockquote-border-left-width: 3px;
   --ifm-badge-padding-horizontal: 0.5rem;
+  --ifm-navbar-item-padding-horizontal: 0.5rem;
+  --ifm-navbar-shadow: none;
+  --text-red: #ff3363;
+  --ifm-navbar-link-color: var(--ifm-font-color-base-inverse);
+  --ifm-color-danger: #de5063;
+}
+
+[data-theme="light"] {
+  /** Figma */
+  --background-frame: #f7f8fa;
+  --text-content: #292929;
+  --structure-border: #dcdee4;
+  --background-panels: #ffffff;
+  --text-header: #141414;
+  --table-row-even: #f8f8f8;
+  --table-row-odd: #ffffff;
+  --text-button: #696f8c;
+  --text-placeholder: #bdbfcf;
+  --background-field-input: #ffffff;
+  --status-active: #0085ff;
+  --text-subtext: #696f8c;
+  --structure-default: #dcdee4;
+  --icon-default: #80849d;
+  --background-header-default: #fcfcfc;
+  --item-background-color: rgba(0, 133, 255, 0.05);
+  /** IFM / Docusuarus */
+  --ifm-color-primary: #0085ff;
+  --ifm-color-primary-dark: #0078e6;
+  --ifm-color-primary-darker: #0071d9;
+  --ifm-color-primary-darkest: #005db3;
+  --ifm-color-primary-light: #1a91ff;
+  --ifm-color-primary-lighter: #2697ff;
+  --ifm-color-primary-lightest: #4daaff;
+  --ifm-pre-background: blue;
+  --ifm-menu-color: #2c1338;
+  --ifm-menu-color-active: var(--ifm-menu-color);
+  --ifm-menu-color-background-active: var(--item-background-color);
+  --ifm-menu-color-background-hover: var(--item-background-color);
+  --ifm-toc-border-color: rgba(0, 0, 0, 0.05);
+  --ifm-heading-color: #141414;
+  --ifm-font-color-base: #292929;
   --code-block-bg: linear-gradient(to right, #1e0c26 2.5rem, #2d1339 2.5rem);
   --search-local-modal-background: #fdfbfe;
 }
@@ -91,8 +93,8 @@
   --ifm-hover-overlay: hsla(0, 0%, 100%, 0.05);
   --ifm-color-content: #e3e3e3;
   --ifm-color-content-secondary: #fff;
-	--ifm-font-color-base: var(--ifm-color-content);
-	--text-content: var(--ifm-font-color-base):
+  --ifm-font-color-base: var(--ifm-color-content);
+  --text-content: var(--ifm-font-color-base);
   --ifm-breadcrumb-separator-filter: invert(64%) sepia(11%) saturate(0%) hue-rotate(149deg)
     brightness(99%) contrast(95%);
   --ifm-code-background: hsla(0, 0%, 100%, 0.1);
@@ -133,17 +135,15 @@
   --docsearch-footer-shadow: inset 0 1px 0 0 rgba(73, 76, 106, 0.5), 0 -4px 8px 0 rgba(0, 0, 0, 0.2);
   --docsearch-logo-color: #fff;
   --docsearch-muted-color: #7f8497;
-	--background-panels: var(--ifm-background-surface-color);
-	--ifm-menu-color: var(--ifm-menu-color-emphasis-700);
-	--ifm-menu-color-background-active: var(--ifm-hover-overlay);
-
+  --background-panels: var(--ifm-background-surface-color);
+  --ifm-menu-color: var(--ifm-menu-color-emphasis-700);
+  --ifm-menu-color-background-active: var(--ifm-hover-overlay);
   --ifm-heading-color: inherit;
   --text-header: var(--ifm-color-content-secondary);
   --background-field-input: var(--docsearch-searchbox-background);
-	--text-subtext: var(--ifm-color-content);
-	--search-local-modal-background: var(--ifm-background-color);
+  --text-subtext: var(--ifm-color-content);
+  --search-local-modal-background: var(--ifm-background-color);
 }
-
 
 @media (min-width: 997px) {
   :root {
