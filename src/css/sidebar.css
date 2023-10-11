@@ -37,6 +37,10 @@ aside,
   color: var(--ifm-menu-color);
 }
 
+.navbar-sidebar__brand > :last-child {
+  margin-left: auto;
+}
+
 /* the html changed in version 2.4.1 */
 aside > div > div > a,
 .navbar-sidebar__brand .navbar__brand {

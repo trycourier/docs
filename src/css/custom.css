@@ -65,7 +65,6 @@
   --ifm-color-primary-lightest: #4daaff;
   --ifm-pre-background: blue;
   --ifm-menu-color: #2c1338;
-  --ifm-menu-color-active: var(--ifm-menu-color);
   --ifm-menu-color-background-active: var(--item-background-color);
   --ifm-menu-color-background-hover: var(--item-background-color);
   --ifm-toc-border-color: rgba(0, 0, 0, 0.05);
@@ -293,4 +292,11 @@ video {
 
 .clean-btn {
   color: var(--text-content);
+  margin-left: 4px;
+}
+
+.navbar--primary {
+  --ifm-navbar-background-color: var(--ifm-background-surface-color);
+  --ifm-menu-color: revert;
+  --ifm-menu-color-active: revert;
 }
