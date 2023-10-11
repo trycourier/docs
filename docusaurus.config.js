@@ -53,7 +53,9 @@ module.exports = {
       image: "img/og-image.png",
       metadata,
       colorMode: {
-        disableSwitch: true,
+        disableSwitch: false,
+        defaultMode: "light",
+        respectPrefersColorScheme: false,
       },
       navbar: {
         hideOnScroll: true,
@@ -88,7 +90,10 @@ module.exports = {
         disableInDev: false,
       },
     ],
-    ["@easyops-cn/docusaurus-search-local", { docsRouteBasePath: "/", indexBlog: false, hashed: true }],
+    [
+      "@easyops-cn/docusaurus-search-local",
+      { docsRouteBasePath: "/", indexBlog: false, hashed: true },
+    ],
     [
       "@docusaurus/plugin-sitemap",
       {
