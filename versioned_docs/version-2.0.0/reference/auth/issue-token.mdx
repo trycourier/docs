@@ -25,8 +25,12 @@ import {
 
 # Usage
 
-This token can be used as a bearer token in place of a normal API Key for the following endpoints:
+An auth token can be used as a bearer token in place of a normal API Key for the following endpoints:
 
+- `GET /brands` (must have `read:brands` scope).
+- `PUT | DELETE /brands` (must have `write:brands` scope).
+- `GET /brands/:id` (must have `read:brands` or `read:brand:<id>` for single brand access).
+- `PUT | DELETE /brands/:id` (must have `write:brands` or `write:brand:<id>` for single brand access).
 - `PUT | PATCH | DELETE /users/:user_id/tokens/:token` (must have `write:user-tokens` scope).
 - `GET /users/:user_id/tokens/:token` (must have `read:user-tokens` scope).
 - `PUT | PATCH | DELETE /users/:user_id/preferences/:topic_id` (must have `write:preferences` scope).
