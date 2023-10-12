@@ -23,7 +23,7 @@ import {
 <ApiReferenceRequestExample {...config} />
 <ApiReferenceResponseExample {...config} />
 
-# Usage
+## Usage
 
 An auth token can be used as a bearer token in place of a normal API Key for the following endpoints:
 
@@ -43,7 +43,7 @@ Notes:
 
 - Endpoints that are tied to a user_id require the user_id to be listed in the scope field (i.e `user_id:123`)
 
-# Available Scopes
+## Available Scopes
 
 - `user_id:<user-id>` - Gives the token access to a given user. Multiple can be listed. Ex `user_id:pigeon user_id:bluebird`. User ID scopes must be used in conjunction with other scopes to specify which resources of the user the token can access.
 - `read:messages` - Gives the token access to read messages. Must be used in conjunction with one or more user_ids.
