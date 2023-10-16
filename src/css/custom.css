@@ -72,6 +72,7 @@
   --ifm-font-color-base: #292929;
   --code-block-bg: linear-gradient(to right, #1e0c26 2.5rem, #2d1339 2.5rem);
   --search-local-modal-background: #fdfbfe;
+  --minor-description-color: #7d5014;
 }
 
 [data-theme="dark"] {
@@ -142,6 +143,7 @@
   --background-field-input: var(--docsearch-searchbox-background);
   --text-subtext: var(--ifm-color-content);
   --search-local-modal-background: var(--ifm-background-color);
+  --minor-description-color: #ddae6e;
 }
 
 @media (min-width: 997px) {
