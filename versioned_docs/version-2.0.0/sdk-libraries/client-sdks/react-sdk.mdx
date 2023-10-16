@@ -1,0 +1,106 @@
+---
+pagination_label: "React.js SDK"
+sidebar_position: 2
+---
+# React.js SDK
+
+The Courier React SDK provides access to a set of UI components and hooks that make building rich web applications with Courier easy. 
+
+## The Courier Provider
+
+Before you can use any of the UI components, you need to initialize the Courier Provider. This establishes an authenticated connection to Courier for a specified user and provides a [context](https://reactjs.org/docs/context.html) object that is required for the UI components. 
+
+Installation: `yarn add @trycourier/react-provider`
+
+Usage: 
+
+```
+import { CourierProvider } from "@trycourier/react-provider";
+
+function App() {
+  return (
+    <CourierProvider 
+      userId={<userId>} 
+      clientKey={<clientKey>}>
+    </CourierProvider>
+  );
+}
+```
+
+
+More info: https://github.com/trycourier/courier-react/tree/main/packages/react-provider
+
+## The Toast UI component
+
+The Toast UI component is used to display brief, optional-expiring windows of information to a user. 
+
+Installation: `yarn add @trycourier/react-toast`
+
+Usage: 
+
+```
+import { Toast } from "@trycourier/react-toast";
+
+function Component() {
+  return (
+        <Toast />
+    );
+}
+```
+
+Note: you must ensure that the Courier Provider has been initialized in a parent component in order for the Toast component to work properly.
+
+More info: https://github.com/trycourier/courier-react/tree/main/packages/react-toast
+
+## The Inbox UI component
+
+`Inbox` is a component used to display a history of `read` and `unread` messages to a user. If we send a message to a user when they are not logged in, or if they didn't interact with the message before it disappeared, we also have an Inbox to show the history of messages received.
+
+Installation: Installation: `yarn add @trycourier/react-inbox`
+
+Usage:
+
+```
+import { Toast } from "@trycourier/react-inbox";
+
+function Component() {
+  return (
+        <Inbox />
+    );
+}
+```
+
+Note: you must ensure that the Courier Provider has been initialized in a parent component in order for the Inbox component to work properly.
+
+More info: https://github.com/trycourier/courier-react/tree/main/packages/react-inbox
+
+
+## React Hooks
+
+For developers that want to build their own Inbox UIs, there is a custom React Hook that you can use to receive data about messages and interact with them programmatically.
+
+Installation: `yarn add @trycourier/react-hooks`
+
+Usage:
+
+```
+import { useInbox } from "@trycourier/react-hooks";
+
+const MyInbox = () => {
+  const inbox = useInbox();
+
+  useEffect(() => {
+    inbox.fetchMessages();
+  }, []);
+
+  return (
+    <div>{ JSON.stringify(inbox.messages, null, 2) }</div>
+  )
+}
+```
+
+Note: you must ensure that the Courier Provider has been initialized in a parent component in order for the useInbox hook to work properly.
+
+More info: https://github.com/trycourier/courier-react/tree/main/packages/react-hooks
+
+
