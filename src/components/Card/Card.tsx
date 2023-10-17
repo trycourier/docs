@@ -32,7 +32,7 @@ const Card = ({ href, title, description, linkText, children }: PropType) => {
     <CardContentWrapper href={href}>
       {title && <h5 className={clsx(styles.title)}>{title}</h5>}
       {description && <p className={clsx(styles.description)}>{description}</p>}
-      <p className={clsx(styles.description)}>{children}</p>
+      {children && <p className={clsx(styles.description)}>{children}</p>}
       {linkText && (
         <div className={clsx(styles.linkTextContainer)}>
           <div>
