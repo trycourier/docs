@@ -9,19 +9,67 @@ description: "Learn how to use Courier to design and deliver notifications acros
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import { CardList } from "@site/src/components/CardList";
-import { welcomeCardData, platformCardData } from "../version-2.0.0/data/intro";
+import { Card } from "@site/src/components/Card";
 
 # Welcome to the Courier Docs
 
 Find all the tutorials and resources you need to build product notifications with Courier.
 
-<CardList size="medium" cardData={welcomeCardData} />
+<CardList size="medium">
+  <Card title="Getting Started" href="/getting-started/what-is-courier/" linkText="Learn More">
+    Learn what Courier is, what the key concepts are, and how to send your first notification using
+    your programming language of choice.
+  </Card>
+  <Card title="Tutorials" href="/tutorials" linkText="Learn More">
+    Learn basic Courier platform concepts that cover everything from adding providers to sending
+    notifications to a list.
+  </Card>
+  <Card title="UI Components" href="/sdk-libraries/client-sdks/" linkText="Learn More">
+    Courier provides embeddable UI components and client SDKs for web, iOS, and Android.
+  </Card>
+  <Card title="API Reference" href="/reference" linkText="Learn More">
+    The Courier REST API has predictable resource-oriented URLs, accepts JSON-encoded request
+    bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication,
+    and verbs.
+  </Card>
+</CardList>
 
 ## Platform
 
 Our platform is designed around a small number of key concepts that make it easy to build powerful notification experiences while also being flexible enough to integrate into whatever kind of application or system you may be building.
 
-<CardList size="small" cardData={platformCardData} />
+<CardList size="small">
+  <Card title="Users" href="/platform/users" linkText="Learn More">
+    Specifying the recipient or recipients of the notification.
+  </Card>
+  <Card title="Content" href="/platform/content" linkText="Learn More">
+    Constructing the content of the notification, including the use of templates, dynamic variables
+    and channel agnostic markup.
+  </Card>
+  <Card title="Channels" href="/platform/channels" linkText="Learn More">
+    The channels and providers being used to deliver the notification.
+  </Card>
+  <Card title="Sending" href="/platform/sending" linkText="Learn More">
+    Sending notifications, including setting limits and handling retries.
+  </Card>
+  <Card title="Preferences" href="/platform/preferences" linkText="Learn More">
+    Respecting user delivery preferences and drop-in user preference components.
+  </Card>
+  <Card title="Automations" href="/platform/automations" linkText="Learn More">
+    Create fully managed notification workflows and implement scheduling, batching, and throttling
+    with zero lines of code.
+  </Card>
+  <Card title="Inbox" href="/platform/inbox" linkText="Learn More">
+    Embed a modern notification inbox to your app with our web, iOS, and Android SDKs.
+  </Card>
+  <Card title="Workspaces" href="/platform/workspaces" linkText="Learn More">
+    Setup test and production environments, manage access control and configure the behavior of your
+    apps.
+  </Card>
+  <Card title="Logging" href="/platform/logging" linkText="Learn More">
+    Logging, analytics, and observability.
+  </Card>
+</CardList>
 
 ## Server SDK Libraries
 

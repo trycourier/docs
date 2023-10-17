@@ -33,7 +33,7 @@
 }
 
 .minorDescription {
-  color: #7d5014;
+  color: var(--minor-description-color);
 }
 
 .majorDescription {

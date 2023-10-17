@@ -4,19 +4,35 @@ import styles from "./card.module.css";
 import Link from "@docusaurus/Link";
 
 export type CardType = {
-  href: string;
-  title: string;
-  description: string;
+  href?: string;
+  title?: string;
+  description?: string;
   linkText?: string;
+  children?: React.ReactNode;
 };
 
 type PropType = CardType;
 
-const Card = ({ href, title, description, linkText }: PropType) => {
+const CardContentWrapper = ({
+  href,
+  children,
+}: Partial<Pick<PropType, "href">> & { children: React.ReactNode }) => {
+  if (href)
+    return (
+      <Link to={href} className={clsx(styles.container)}>
+        <>{children}</>
+      </Link>
+    );
+
+  return <div className={clsx(styles.container)}>{children}</div>;
+};
+
+const Card = ({ href, title, description, linkText, children }: PropType) => {
   return (
-    <Link to={href} className={clsx(styles.container)}>
-      <h5 className={clsx(styles.title)}>{title}</h5>
-      <p className={clsx(styles.description)}>{description}</p>
+    <CardContentWrapper href={href}>
+      {title && <h5 className={clsx(styles.title)}>{title}</h5>}
+      {description && <p className={clsx(styles.description)}>{description}</p>}
+      {children && <p className={clsx(styles.description)}>{children}</p>}
       {linkText && (
         <div className={clsx(styles.linkTextContainer)}>
           <div>
@@ -25,7 +41,7 @@ const Card = ({ href, title, description, linkText }: PropType) => {
           </div>
         </div>
       )}
-    </Link>
+    </CardContentWrapper>
   );
 };
 

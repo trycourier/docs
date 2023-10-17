@@ -1,14 +1,12 @@
 import React from "react";
 import clsx from "clsx";
-import { Card } from "@site/src/components/Card";
 import styles from "./cardList.module.css";
-import { CardType } from "../Card/Card";
 
 type PropType = {
   size?: "small" | "medium";
-  cardData: CardType[];
+  children?: React.ReactNode;
 };
-const CardList = ({ size = "medium", cardData }: PropType) => {
+const CardList = ({ size = "medium", children }: PropType) => {
   return (
     <div
       className={clsx(
@@ -17,15 +15,7 @@ const CardList = ({ size = "medium", cardData }: PropType) => {
         size === "small" && styles.small
       )}
     >
-      {cardData.map((card) => (
-        <Card
-          key={card.title}
-          title={card.title}
-          href={card.href}
-          description={card.description}
-          linkText={card.linkText}
-        />
-      ))}
+      {children}
     </div>
   );
 };
