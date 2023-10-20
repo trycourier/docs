@@ -31,6 +31,7 @@
   --ifm-blockquote-border-left-width: 3px;
   --ifm-badge-padding-horizontal: 0.5rem;
   --ifm-navbar-item-padding-horizontal: 0.5rem;
+  --ifm-navbar-height: 3.5rem;
   --ifm-navbar-shadow: none;
   --text-red: #ff3363;
   --ifm-navbar-link-color: var(--ifm-font-color-base-inverse);
