@@ -82,6 +82,12 @@ const NotificationListItem: ApiParam = {
       description:
         "A UTC timestamp at which notification was updated. This is stored as a millisecond representation of the Unix epoch (the time passed since January 1, 1970).",
     },
+    {
+      type: "string",
+      name: "topic_id",
+      example: "VWPV5DPA9C47ZDJAHSSTKZ3R5BF5",
+      description: "Notification's subscription topic ID",
+    },    
   ],
 };
 
