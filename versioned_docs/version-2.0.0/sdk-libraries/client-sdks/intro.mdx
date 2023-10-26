@@ -3,11 +3,16 @@ sidebar_label: "Intro"
 sidebar_position: 1
 slug: ./
 ---
+import { CardList } from "@site/src/components/CardList";
+import { Card } from "@site/src/components/Card";
+
 # Client SDKs
 
-* [JavaScript](https://github.com/trycourier/courier-js)
-* [React.js](./react-sdk)
-* [iOS](https://github.com/trycourier/courier-ios)
-* [Android](https://github.com/trycourier/courier-android)
-* [React Native](https://github.com/trycourier/courier-react-native)
-* [Flutter](https://github.com/trycourier/courier-flutter)
+<CardList size="small">
+  <Card title="React.js" href="./react-sdk" linkText="Learn More"/>
+  <Card title="iOS" href="https://github.com/trycourier/courier-ios" linkText="Learn More"/>
+  <Card title="Android" href="https://github.com/trycourier/courier-android" linkText="Learn More"/>
+  <Card title="JavaScript" href="https://github.com/trycourier/courier-js" linkText="Learn More"/>
+  <Card title="React Native" href="https://github.com/trycourier/courier-react-native" linkText="Learn More"/>
+  <Card title="Flutter" href="https://github.com/trycourier/courier-flutter" linkText="Learn More"/>
+</CardList>
