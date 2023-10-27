@@ -1,6 +1,17 @@
 const fs = require("fs");
 const path = require("path");
 const grayMatter = require("gray-matter");
+const contentToWrite = "This is the content of the file.";
+
+function writeFile(filePath, content, callback) {
+  fs.writeFile(filePath, content, (err) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, `File '${filePath}' was written successfully.`);
+    }
+  });
+}
 
 function readMDXFilesAndExtractFrontmatter(fileNames) {
   const result = [];
@@ -60,6 +71,13 @@ module.exports = async function myPlugin(context, options) {
         )
       ).sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }));
       console.log("tags", tags);
+      writeFile(
+        "./versioned_docs/version-2.0.0/tutorials/index2.mdx",
+        contentToWrite,
+        (err, message) => {
+          console.log("err", err, message);
+        }
+      );
     },
     async contentLoaded({ content, actions }) {
       /* ... */
