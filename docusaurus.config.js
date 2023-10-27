@@ -103,5 +103,7 @@ module.exports = {
         filename: "sitemap.xml",
       },
     ],
+
+    "./my-plugin",
   ],
 };
