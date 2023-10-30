@@ -95,7 +95,7 @@ export const AdvancedMessageProperties = () => (
       Configuration related to this notification and user preferences. Primary used to set the
       subscription_topic associated with this message
       <ChildParams name="preferences object">
-        <Param name="subscription_topic" type="string">
+        <Param name="subscription_topic_id" type="string">
           The id of the subscription topic whose preferences you wish to respect.
         </Param>
       </ChildParams>
