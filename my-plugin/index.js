@@ -1,20 +1,31 @@
 const fs = require("fs");
 const path = require("path");
 const grayMatter = require("gray-matter");
+function removeMdxExtension(fileName) {
+  return fileName.replace(/\.mdx$/, ""); // Replaces ".mdx" at the end of the string with an empty string
+}
 function readMDXFilesAndExtractFrontmatter(fileNames) {
   const result = [];
 
-  fileNames.forEach((fileName) => {
-    const filePath = path.join(__dirname, "../versioned_docs/version-2.0.0/tutorials", fileName); // Adjust the directory if needed
+  fileNames
+    .filter((name) => name !== "index.mdx")
+    .forEach((fileName) => {
+      const filePath = path.join(__dirname, "../versioned_docs/version-2.0.0/tutorials", fileName); // Adjust the directory if needed
 
-    try {
-      const fileContent = fs.readFileSync(filePath, "utf8");
-      const { data } = grayMatter(fileContent);
-      result.push(data);
-    } catch (err) {
-      console.error(`Error reading or parsing file "${fileName}": ${err}`);
-    }
-  });
+      try {
+        const fileContent = fs.readFileSync(filePath, "utf8");
+
+        const match = fileContent.match(/^#\s+(.*)/m);
+        let title = "";
+        if (match) {
+          title = match[1].trim();
+        }
+        const { data } = grayMatter(fileContent);
+        result.push({ ...data, title, slug: removeMdxExtension(fileName) });
+      } catch (err) {
+        console.error(`Error reading or parsing file "${fileName}": ${err}`);
+      }
+    });
 
   return result;
 }
@@ -50,20 +61,24 @@ module.exports = async function myPlugin(context, options) {
       /* ... */
       const files = listFilesInTopLevel();
       const results = readMDXFilesAndExtractFrontmatter(files ?? []) ?? [];
-      return Array.from(
-        new Set(
-          results
-            .filter((res) => res.tags)
-            .map((res) => res.tags)
-            .flat()
-        )
-      ).sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }));
+      console.log("results", results);
+      return {
+        tutorialsTags: Array.from(
+          new Set(
+            results
+              .filter((res) => res.tags)
+              .map((res) => res.tags)
+              .flat()
+          )
+        ).sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" })),
+        allData: results,
+      };
     },
     async contentLoaded({ content, actions }) {
       const { setGlobalData } = actions;
-      const tutorialsTags = content ?? [];
+      const { tutorialsTags = [], allData = [] } = content;
 
-      setGlobalData({ tutorialsTags });
+      setGlobalData({ tutorialsTags, allData });
     },
     /* other lifecycle API */
   };
