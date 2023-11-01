@@ -1,13 +1,21 @@
 .cardList {
-  display: flex;
-  flex-wrap: wrap;
   gap: 20px;
+  display: grid;
+  --min-width-small: 252px;
+  --min-width-large: 280px;
 }
 
-.cardList.small > a {
-  min-width: 250px;
+.cardList.small {
+  grid-template-columns: repeat(auto-fill, minmax(var(--min-width-small), 1fr));
 }
 
-.cardList.medium > a {
-  min-width: min(300px, 90vw);
+.cardList.medium {
+  grid-template-columns: repeat(auto-fill, minmax(var(--min-width-large), 1fr));
+}
+
+@media (min-width: 425px) {
+  .cardList {
+    --min-width-large: 340px;
+    --min-width-small: 220px;
+  }
 }
