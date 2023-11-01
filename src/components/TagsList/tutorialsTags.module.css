@@ -7,3 +7,21 @@
   padding-right: 32px;
   border-right: var(--ifm-global-border-width) solid var(--structure-border);
 }
+
+.listItem {
+  display: flex;
+}
+
+.tagList {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+}
+
+.tagListItem {
+  margin: 0 !important;
+  border: var(--ifm-global-border-width) solid var(--docusaurus-tag-list-border);
+  border-radius: var(--ifm-global-radius);
+  padding: 0px 8px;
+  align-self: flex-start;
+}

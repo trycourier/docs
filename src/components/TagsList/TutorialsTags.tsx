@@ -22,7 +22,7 @@ const TutorialsTags = () => {
   };
 
   // todo: implement filtering
-  console.log("allData", allData);
+  // console.log("allData", allData);
 
   return (
     <div className={styles.container}>
@@ -36,7 +36,16 @@ const TutorialsTags = () => {
       <ul>
         {allData.map((data) => (
           <li key={data.slug}>
-            <Link href={`./${data.slug}`}>{data.title}</Link>
+            <div className={styles.listItem}>
+              <Link href={`./${data.slug}`}>{data.title}</Link>
+              {data?.tags?.length > 0 && (
+                <ul className={styles.tagList}>
+                  {data.tags.map((tag) => (
+                    <li className={styles.tagListItem}>{tag}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </li>
         ))}
       </ul>

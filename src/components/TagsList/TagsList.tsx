@@ -28,7 +28,7 @@ type PropType = {
 //   // Convert the entire string to lowercase
 //   return finalNormalizedString.toLowerCase();
 // }
-const TagsList = ({ tags = [], handleTagsSelection, selectedTags }: PropType) => {
+const TagsList = ({ tags = [], handleTagsSelection, selectedTags = [] }: PropType) => {
   if (!tags.length) return null;
   return (
     <div role="group" aria-labelledby="tags-group-label">

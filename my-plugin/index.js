@@ -61,7 +61,6 @@ module.exports = async function myPlugin(context, options) {
       /* ... */
       const files = listFilesInTopLevel();
       const results = readMDXFilesAndExtractFrontmatter(files ?? []) ?? [];
-      console.log("results", results);
       return {
         tutorialsTags: Array.from(
           new Set(
