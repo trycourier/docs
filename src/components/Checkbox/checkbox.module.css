@@ -1,0 +1,8 @@
+.container {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  user-select: none;
+  cursor: pointer;
+  color: var(--ifm-menu-color);
+}

@@ -1,0 +1,9 @@
+.container {
+  display: flex;
+  gap: 16px;
+}
+
+.tagsContainer {
+  padding-right: 32px;
+  border-right: var(--ifm-global-border-width) solid var(--structure-border);
+}

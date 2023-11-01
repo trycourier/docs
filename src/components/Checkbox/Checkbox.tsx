@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./checkbox.module.css";
 
 type PropType = {
   children: React.ReactNode;
@@ -8,7 +9,7 @@ type PropType = {
 };
 const Checkbox = ({ children: label, checked, value, onChange }: PropType) => {
   return (
-    <label tabIndex={0}>
+    <label tabIndex={0} className={styles.container}>
       <input
         type="checkbox"
         aria-checked={checked.toString() as "true" | "false"}
