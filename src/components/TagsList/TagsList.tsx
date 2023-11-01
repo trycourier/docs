@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import Tag from "@theme/Tag";
 import styles from "./tagsList.module.css";
+import Checkbox from "../Checkbox/Checkbox";
 
 type PropType = {
   tags?: string[];
@@ -27,16 +28,37 @@ function normalizeString(input: string): string {
   return finalNormalizedString.toLowerCase();
 }
 const TagsList = ({ tags = [] }: PropType) => {
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+
+  const handleTagsSelection = (tag: string) => {
+    let nextTags = [...selectedTags];
+    if (selectedTags.includes(tag)) {
+      nextTags = selectedTags.filter((prevTag) => prevTag !== tag);
+    } else {
+      nextTags.push(tag);
+    }
+    setSelectedTags(nextTags);
+  };
   if (!tags.length) return null;
   return (
-    <div className={styles.container}>
-      <b>Tags:</b>
-      <ul className={styles.ul}>
-        {tags.map((tag) => (
-          <li key={tag} className={styles.li}>
-            <Tag permalink={`/tags/${normalizeString(tag)}`} label={tag} />
-          </li>
-        ))}
+    <div role="group" aria-labelledby="tags-group-label">
+      <ul>
+        {tags.map((tag) => {
+          const isChecked: boolean = selectedTags.includes(tag);
+          return (
+            <li key={tag}>
+              <Checkbox
+                value={tag}
+                checked={isChecked}
+                onChange={(e) => {
+                  handleTagsSelection(e.target.value);
+                }}
+              >
+                {tag}
+              </Checkbox>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
