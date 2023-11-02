@@ -6,6 +6,7 @@
 .tagsContainer {
   padding-right: 32px;
   border-right: var(--ifm-global-border-width) solid var(--structure-border);
+  display: none;
 }
 
 .listItem {
@@ -24,4 +25,14 @@
   border-radius: var(--ifm-global-radius);
   padding: 0px 8px;
   align-self: flex-start;
+}
+
+.cardsContainer {
+  flex: 1;
+}
+
+@media (min-width: 425px) {
+  .tagsContainer {
+    display: block;
+  }
 }

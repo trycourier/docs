@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { usePluginData } from "@docusaurus/useGlobalData";
 import TagsList from "./TagsList";
-import Link from "@docusaurus/Link";
 import styles from "./tutorialsTags.module.css";
+import { CardList } from "@site/src/components/CardList";
+import { Card } from "../Card";
 
 type DataType = { slug: string; title: string; tags: string[] };
 
@@ -45,24 +46,18 @@ const TutorialsTags = () => {
           selectedTags={selectedTags}
         />
       </div>
-      <ul>
-        {selectedTagsData.map((data) => (
-          <li key={data.slug}>
-            <div className={styles.listItem}>
-              <Link href={`./${data.slug}`}>{data.title}</Link>
-              {data?.tags?.length > 0 && (
-                <ul className={styles.tagList}>
-                  {data.tags.map((tag) => (
-                    <li className={styles.tagListItem} key={tag}>
-                      {tag}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          </li>
-        ))}
-      </ul>
+      <div className={styles.cardsContainer}>
+        <CardList size="small">
+          {selectedTagsData.map((data) => (
+            <Card
+              key={data.slug}
+              title={data.title}
+              href={`./${data.slug}`}
+              linkText="Learn More"
+            />
+          ))}
+        </CardList>
+      </div>
     </div>
   );
 };
