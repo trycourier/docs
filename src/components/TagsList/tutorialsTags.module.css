@@ -33,6 +33,8 @@
 
 @media (min-width: 425px) {
   .tagsContainer {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
 }

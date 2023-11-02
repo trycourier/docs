@@ -5,50 +5,65 @@ import styles from "./tutorialsTags.module.css";
 import { CardList } from "@site/src/components/CardList";
 import { Card } from "../Card";
 
-type DataType = { slug: string; title: string; tags: string[] };
+type DataType = { slug: string; title: string; type: string[]; product: string[] };
 
 const TutorialsTags = () => {
-  const { tutorialsTags = [], allData } = usePluginData("my-plugin") as {
-    tutorialsTags: string[];
+  const {
+    allData = [],
+    types = [],
+    products = [],
+  } = usePluginData("my-plugin") as {
+    types: string[];
     allData: DataType[];
+    products: string[];
   };
 
-  const [selectedTagsData, setSelectedTagsData] = useState<DataType[]>(allData);
+  const [selectedData, setSelectedData] = useState<DataType[]>(allData);
+  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
 
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const handleTagsSelection = (tag: string) => {
-    let nextTags = [...selectedTags];
-    if (selectedTags.includes(tag)) {
-      nextTags = selectedTags.filter((prevTag) => prevTag !== tag);
+    let nextTags = [...selectedTypes];
+    if (selectedTypes.includes(tag)) {
+      nextTags = selectedTypes.filter((prevTag) => prevTag !== tag);
     } else {
       nextTags.push(tag);
     }
-    setSelectedTags(nextTags);
+    setSelectedTypes(nextTags);
   };
 
   useEffect(() => {
-    if (selectedTags.length === 0) {
-      setSelectedTagsData(allData);
+    if (selectedTypes.length === 0) {
+      setSelectedData(allData);
       return;
     }
-    const filteredData = allData.filter((item) =>
-      item?.tags?.some((tag) => selectedTags.includes(tag))
+    const filteredData = allData.filter(
+      (item) =>
+        item?.type?.some((type) => selectedTypes.includes(type)) ||
+        item?.product?.some((product) => selectedTypes.includes(product))
     );
-    setSelectedTagsData(filteredData);
-  }, [selectedTags, allData]);
+    setSelectedData(filteredData);
+  }, [selectedTypes, allData]);
 
   return (
     <div className={styles.container}>
       <div className={styles.tagsContainer}>
         <TagsList
-          tags={tutorialsTags}
+          tags={types}
           handleTagsSelection={handleTagsSelection}
-          selectedTags={selectedTags}
+          selectedTags={selectedTypes}
+          title="Type"
+        />
+        <TagsList
+          tags={products}
+          handleTagsSelection={handleTagsSelection}
+          selectedTags={selectedTypes}
+          title="Product"
         />
       </div>
+
       <div className={styles.cardsContainer}>
         <CardList size="small">
-          {selectedTagsData.map((data) => (
+          {selectedData.map((data) => (
             <Card
               key={data.slug}
               title={data.title}

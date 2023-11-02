@@ -6,6 +6,7 @@ type PropType = {
   tags: string[];
   handleTagsSelection: (tag: string) => void;
   selectedTags: string[];
+  title?: string;
 };
 
 // function normalizeString(input: string): string {
@@ -28,10 +29,11 @@ type PropType = {
 //   // Convert the entire string to lowercase
 //   return finalNormalizedString.toLowerCase();
 // }
-const TagsList = ({ tags = [], handleTagsSelection, selectedTags = [] }: PropType) => {
+const TagsList = ({ tags = [], handleTagsSelection, selectedTags = [], title }: PropType) => {
   if (!tags.length) return null;
   return (
     <div role="group" aria-labelledby="tags-group-label">
+      {title && <h4 className={styles.header}>{title}</h4>}
       <ul className={styles.list}>
         {tags.map((tag) => {
           const isChecked: boolean = selectedTags.includes(tag);

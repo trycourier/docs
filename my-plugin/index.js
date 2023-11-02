@@ -53,6 +53,17 @@ function listFilesInTopLevel(repositoryPath) {
   }
 }
 
+function getUniqueArray({ objects, key }) {
+  return Array.from(
+    new Set(
+      objects
+        .filter((res) => res[key])
+        .map((res) => res[key])
+        .flat()
+    )
+  ).sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }));
+}
+
 module.exports = async function myPlugin(context, options) {
   // ...
   return {
@@ -62,22 +73,16 @@ module.exports = async function myPlugin(context, options) {
       const files = listFilesInTopLevel();
       const results = readMDXFilesAndExtractFrontmatter(files ?? []) ?? [];
       return {
-        tutorialsTags: Array.from(
-          new Set(
-            results
-              .filter((res) => res.tags)
-              .map((res) => res.tags)
-              .flat()
-          )
-        ).sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" })),
+        types: getUniqueArray({ objects: results, key: "type" }),
+        products: getUniqueArray({ objects: results, key: "product" }),
         allData: results,
       };
     },
     async contentLoaded({ content, actions }) {
       const { setGlobalData } = actions;
-      const { tutorialsTags = [], allData = [] } = content;
+      const { allData = [], types = [], products = [] } = content;
 
-      setGlobalData({ tutorialsTags, allData });
+      setGlobalData({ allData, types, products });
     },
     /* other lifecycle API */
   };
