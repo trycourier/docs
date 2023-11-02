@@ -75,14 +75,15 @@ module.exports = async function myPlugin(context, options) {
       return {
         types: getUniqueArray({ objects: results, key: "type" }),
         products: getUniqueArray({ objects: results, key: "product" }),
+        allTags: getUniqueArray({ objects: results, key: "tags" }),
         allData: results,
       };
     },
     async contentLoaded({ content, actions }) {
       const { setGlobalData } = actions;
-      const { allData = [], types = [], products = [] } = content;
+      const { allData = [], types = [], products = [], allTags = [] } = content;
 
-      setGlobalData({ allData, types, products });
+      setGlobalData({ allData, types, products, allTags });
     },
     /* other lifecycle API */
   };

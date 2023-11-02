@@ -5,17 +5,19 @@ import styles from "./tutorialsTags.module.css";
 import { CardList } from "@site/src/components/CardList";
 import { Card } from "../Card";
 
-type DataType = { slug: string; title: string; type: string[]; product: string[] };
+type DataType = { slug: string; title: string; type: string[]; product: string[]; tags: string[] };
 
 const TutorialsTags = () => {
   const {
     allData = [],
     types = [],
     products = [],
+    allTags = [],
   } = usePluginData("my-plugin") as {
     types: string[];
     allData: DataType[];
     products: string[];
+    allTags: string[];
   };
 
   const [selectedData, setSelectedData] = useState<DataType[]>(allData);
@@ -39,7 +41,8 @@ const TutorialsTags = () => {
     const filteredData = allData.filter(
       (item) =>
         item?.type?.some((type) => selectedTypes.includes(type)) ||
-        item?.product?.some((product) => selectedTypes.includes(product))
+        item?.product?.some((product) => selectedTypes.includes(product)) ||
+        item?.tags?.some((tag) => selectedTypes.includes(tag))
     );
     setSelectedData(filteredData);
   }, [selectedTypes, allData]);
@@ -58,6 +61,12 @@ const TutorialsTags = () => {
           handleTagsSelection={handleTagsSelection}
           selectedTags={selectedTypes}
           title="Product"
+        />
+        <TagsList
+          tags={allTags}
+          handleTagsSelection={handleTagsSelection}
+          selectedTags={selectedTypes}
+          title="Tag"
         />
       </div>
 
