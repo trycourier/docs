@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { usePluginData } from "@docusaurus/useGlobalData";
-import TagsList from "./TagsList";
+import FilterOptionsList from "./FilterOptionsList";
 import styles from "./tutorialsWithFilter.module.css";
 import { CardList } from "@site/src/components/CardList";
 import { Card } from "../Card";
@@ -21,51 +21,51 @@ const TutorialsTags = () => {
   };
 
   const [selectedData, setSelectedData] = useState<DataType[]>(allData);
-  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
+  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
 
-  const handleTagsSelection = (tag: string) => {
-    let nextTags = [...selectedTypes];
-    if (selectedTypes.includes(tag)) {
-      nextTags = selectedTypes.filter((prevTag) => prevTag !== tag);
+  const handleFilterSelection = (filterOption: string) => {
+    let nextFilters = [...selectedFilters];
+    if (selectedFilters.includes(filterOption)) {
+      nextFilters = selectedFilters.filter((prevFilterOption) => prevFilterOption !== filterOption);
     } else {
-      nextTags.push(tag);
+      nextFilters.push(filterOption);
     }
-    setSelectedTypes(nextTags);
+    setSelectedFilters(nextFilters);
   };
 
   useEffect(() => {
-    if (selectedTypes.length === 0) {
+    if (selectedFilters.length === 0) {
       setSelectedData(allData);
       return;
     }
     const filteredData = allData.filter(
       (item) =>
-        item?.type?.some((type) => selectedTypes.includes(type)) ||
-        item?.product?.some((product) => selectedTypes.includes(product)) ||
-        item?.tags?.some((tag) => selectedTypes.includes(tag))
+        item?.type?.some((type) => selectedFilters.includes(type)) ||
+        item?.product?.some((product) => selectedFilters.includes(product)) ||
+        item?.tags?.some((tag) => selectedFilters.includes(tag))
     );
     setSelectedData(filteredData);
-  }, [selectedTypes, allData]);
+  }, [selectedFilters, allData]);
 
   return (
     <div className={styles.container}>
       <div className={styles.tagsContainer}>
-        <TagsList
-          tags={types}
-          handleTagsSelection={handleTagsSelection}
-          selectedTags={selectedTypes}
+        <FilterOptionsList
+          filterOptions={types}
+          handleFilterSelection={handleFilterSelection}
+          selectedTags={selectedFilters}
           title="Type"
         />
-        <TagsList
-          tags={products}
-          handleTagsSelection={handleTagsSelection}
-          selectedTags={selectedTypes}
+        <FilterOptionsList
+          filterOptions={products}
+          handleFilterSelection={handleFilterSelection}
+          selectedTags={selectedFilters}
           title="Product"
         />
-        <TagsList
-          tags={allTags}
-          handleTagsSelection={handleTagsSelection}
-          selectedTags={selectedTypes}
+        <FilterOptionsList
+          filterOptions={allTags}
+          handleFilterSelection={handleFilterSelection}
+          selectedTags={selectedFilters}
           title="Tag"
         />
       </div>

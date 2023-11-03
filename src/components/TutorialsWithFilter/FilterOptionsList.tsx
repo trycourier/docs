@@ -1,21 +1,26 @@
 import React from "react";
 import Checkbox from "../Checkbox/Checkbox";
-import styles from "./tagsList.module.css";
+import styles from "./filterOptionsList.module.css";
 
 type PropType = {
-  tags: string[];
-  handleTagsSelection: (tag: string) => void;
+  filterOptions: string[];
+  handleFilterSelection: (tag: string) => void;
   selectedTags: string[];
   title?: string;
 };
 
-const TagsList = ({ tags = [], handleTagsSelection, selectedTags = [], title }: PropType) => {
-  if (!tags.length) return null;
+const FilterOptionsList = ({
+  filterOptions = [],
+  handleFilterSelection,
+  selectedTags = [],
+  title,
+}: PropType) => {
+  if (!filterOptions.length) return null;
   return (
     <div role="group" aria-labelledby="tags-group-label">
       {title && <h4 className={styles.header}>{title}</h4>}
       <ul className={styles.list}>
-        {tags.map((tag) => {
+        {filterOptions.map((tag) => {
           const isChecked: boolean = selectedTags.includes(tag);
           return (
             <li key={tag} className={styles.listItem}>
@@ -23,7 +28,7 @@ const TagsList = ({ tags = [], handleTagsSelection, selectedTags = [], title }: 
                 value={tag}
                 checked={isChecked}
                 onChange={(e) => {
-                  handleTagsSelection(e.target.value);
+                  handleFilterSelection(e.target.value);
                 }}
               >
                 {tag}
@@ -36,4 +41,4 @@ const TagsList = ({ tags = [], handleTagsSelection, selectedTags = [], title }: 
   );
 };
 
-export default TagsList;
+export default FilterOptionsList;
