@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const SERVICE_STATUS_API = "https://status.courier.com/api/v2/status.json";
-type StatusType = "none" | "minor" | "major";
+type StatusType = "none" | "minor" | "major" | "maintenance";
 
 type StatusData = { indicator: StatusType; description: string };
 

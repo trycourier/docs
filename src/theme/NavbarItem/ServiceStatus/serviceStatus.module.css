@@ -20,7 +20,8 @@
   background-color: #00aa13;
 }
 
-.minorIndicator {
+.minorIndicator,
+.maintenanceIndicator {
   background-color: #e09d43;
 }
 
@@ -32,7 +33,8 @@
   color: #00730d;
 }
 
-.minorDescription {
+.minorDescription,
+.maintenanceDescription {
   color: var(--minor-description-color);
 }
 
