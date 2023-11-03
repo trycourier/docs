@@ -13,7 +13,7 @@ const TutorialsTags = () => {
     types = [],
     products = [],
     allTags = [],
-  } = usePluginData("my-plugin") as {
+  } = usePluginData("tutorial-filters") as {
     types: string[];
     allData: DataType[];
     products: string[];

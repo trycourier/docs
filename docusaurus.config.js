@@ -104,6 +104,6 @@ module.exports = {
       },
     ],
 
-    "./my-plugin",
+    "./tutorial-filters",
   ],
 };
