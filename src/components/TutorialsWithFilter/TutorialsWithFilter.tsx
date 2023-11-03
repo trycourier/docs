@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { usePluginData } from "@docusaurus/useGlobalData";
 import TagsList from "./TagsList";
-import styles from "./tutorialsTags.module.css";
+import styles from "./tutorialsWithFilter.module.css";
 import { CardList } from "@site/src/components/CardList";
 import { Card } from "../Card";
 
