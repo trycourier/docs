@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.ul {
+  display: flex;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+
+.li {
+  list-style: none;
+  margin: 0 !important;
+}
