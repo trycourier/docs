@@ -1,0 +1,81 @@
+---
+sidebar_label: Courier CLI
+description: "Build, test, and manage your Courier integration directly from the command line."
+---
+# Courier CLI
+
+:::note NOTE
+This feature is currently in Public Beta and is under active development. Please note that the API may change and that this feature is not covered under the Enterprise SLA.
+:::
+
+
+The Courier CLI is a developer tool to help you build, test, and manage your integration with Courier directly from the command line. It’s simple to install, works on macOS, Windows, and Linux, and offers a range of functionality to enhance your developer experience with Courier. You can use the Courier CLI to:
+
+- Send messages from the command line to users, lists, or audiences
+- Track events to trigger your Courier Automations
+- Push & pull industry-standard translation files for internationalizing your content
+
+## Installing the Courier CLI
+
+From the command-line, use the following command to install the Courier CLI and set your API key:
+
+```bash
+$ npm install -g @trycourier/cli
+$ courier config --apikey <your-api-key>
+```
+
+### Requirements
+
+- Courier CLI has only been tested on node.js v18+
+
+## Authenticate the CLI
+
+The fastest way to get started is to run:
+
+```
+$ courier config --apikey <your-api-key>
+```
+
+Courier CLI looks for an environment variable named `COURIER_API_KEY`. It will load that key from the first location it finds in the following list:
+
+- A `.courier` file in the current working directory
+- `~/.courier` (in your home directory)
+- A `COURIER_API_KEY` value otherwise set in your environment (such as via `~/.profile` or `~/.zshrc`)
+
+You can find your Courier API key in your [Courier Settings](https://app.courier.com/settings/api-keys).
+
+## Commands
+
+- `courier config` – Set your Courier API key
+- `courier whoami` – Display the currently authenticated workspace
+- `courier send` - Send a notification to a user, list, or audience
+- `courier track` - Send a track event to trigger a Courier Automations
+- `courier users:get` - Fetch the data for a given user ID
+- `courier users:set` - Overwrite a user's profile with the provided data
+- `courier digests:flush` – Flush any currently queued events for a given user + digest
+- `courier translations:upload` - Upload .PO files to your Courier workspace
+- `courier translations:download` - Download .PO files from your Courier workspace
+
+For more details, run `courier` to see a list of commands and their arguments & options.
+
+## Examples
+
+```
+$ courier send --tel 555-867-5309 --body "Hey Jenny\\!"
+$ courier send --user user123 --template my-template-id --foo bar
+$ courier send --email user@example.com --title "My Subject" --body "My Body"
+$ courier send --user user123 --title "Important\\!" --body "Lorem Ipsum" --channels sms,push
+$ courier send --user user123 --elemental my-template.json --foo bar
+
+$ courier track my-event user123 --foo bar
+
+$ courier users:get user123
+$ courier users:set user123 --email user@example.com --tel 555-867-5309
+
+$ courier digests:flush user123 my-digest-id
+
+$ courier translations:upload en-US ./translations/en-US.po
+$ courier translations:download en-US --text > example.en-US.po
+```
+
+You can find the source for the Courier CLI on [Github](https://github.com/trycourier/courier-cli).
