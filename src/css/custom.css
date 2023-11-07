@@ -303,3 +303,7 @@ video {
   --ifm-menu-color: revert;
   --ifm-menu-color-active: revert;
 }
+
+.theme-doc-footer-tags-row {
+  display: none;
+}

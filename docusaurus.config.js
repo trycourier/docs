@@ -103,5 +103,7 @@ module.exports = {
         filename: "sitemap.xml",
       },
     ],
+
+    "./plugins/tutorial-filters",
   ],
 };
