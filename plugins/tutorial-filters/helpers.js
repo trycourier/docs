@@ -35,7 +35,7 @@ function readMDXFilesAndExtractFrontmatter(fileNames) {
   fileNames
     .filter((name) => name !== "index.mdx")
     .forEach((fileName) => {
-      const filePath = path.join(__dirname, "../versioned_docs/version-2.0.0/tutorials", fileName); // Adjust the directory if needed
+      const filePath = path.join(__dirname, "../../versioned_docs/version-2.0.0/tutorials", fileName); // Adjust the directory if needed
 
       try {
         const fileContent = fs.readFileSync(filePath, "utf8");
