@@ -73,6 +73,12 @@ const config: ApiReferenceProps = {
       description: "The enqueued datetime of a message to filter out messages received before",
       example: "1686752793725",
     },
+    {
+      type: "string",
+      name: "traceId",
+      description: "The unique identifier used to trace the requests",
+      example: "1a3b9d40d64fbf34",
+    },
   ],
   responses: [
     {
