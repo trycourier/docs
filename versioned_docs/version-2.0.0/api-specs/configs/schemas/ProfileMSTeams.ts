@@ -45,6 +45,53 @@ const ProfileMSTeams: ApiParam = {
             },
           ],
         },
+        {
+          type: "object",
+          displayName: "Send to an MS Teams Team using email address",
+          fields: [
+            {
+              type: "string",
+              name: "email",
+              required: true,
+            },
+            {
+              type: "string",
+              name: "tenant_id",
+              required: true,
+            },
+            {
+              type: "string",
+              name: "service_url",
+              required: false,
+            },
+          ],
+        },
+        {
+          type: "object",
+          displayName: "Send to an MS Teams Team using team id and channel name",
+          fields: [
+            {
+              type: "string",
+              name: "team_id",
+              required: true,
+            },
+            {
+              type: "string",
+              name: "channel_name",
+              required: true,
+            },
+            {
+              type: "string",
+              name: "tenant_id",
+              required: true,
+            },
+            {
+              type: "string",
+              name: "service_url",
+              required: false,
+            },
+          ],
+        },
       ],
     },
   ],
