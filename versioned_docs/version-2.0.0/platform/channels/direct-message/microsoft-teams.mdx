@@ -235,6 +235,32 @@ You can follow the steps in this [Microsoft Teams article](https://docs.microsof
 }
 ```
 
+:::info
+For sending a message to a user using the `email` field, your bot must have following permissions:
+
+- ChannelSettings.Read.All (requires admin consent)
+- TeamSettings.Read.All (requires admin consent)
+- User.Read.All
+
+This allows Courier to fetch the user's `user_id` or `channel_id` using the Microsoft Graph API.
+:::
+
+You can also send a message to a user by using the `email` field in the `ms_teams` object. This will send a message to the user's email address.
+
+```json title=JSON
+{
+  "message": {
+    // Recipient Profile
+    "to": {
+      "ms_teams": {
+        "email": "<user_email>",
+        "tenant_id": "<tenant_id>"
+      }
+    }
+  }
+}
+```
+
 ### Send a Message to a Microsoft Teams Channel
 
 To deliver a message to a channel over Microsoft Teams, Courier must be provided with the ID of the channel and the service URL associated with that Microsoft Teams tenant.
@@ -250,6 +276,25 @@ To locate the `conversation_id` open Microsoft Teams in the browser and use the 
         "conversation_id": "",
         "tenant_id": "",
         "service_url": "https://smba.trafficmanager.net/amer"
+      }
+    }
+  }
+}
+```
+
+#### Send a Message to a Microsoft Teams Channel by Name
+
+You can also send a message to a channel by using the `channel_name` field in the `ms_teams` object. This will send a message to the channel with the provided name.
+
+```json title=JSON
+{
+  "message": {
+    // Recipient Profile
+    "to": {
+      "ms_teams": {
+        "team_id": "<team_id>",
+        "channel_name": "<channel_name>",
+        "tenant_id": "<tenant_id>"
       }
     }
   }
