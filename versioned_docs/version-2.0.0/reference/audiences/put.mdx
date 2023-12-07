@@ -29,26 +29,24 @@ import config from "../../api-specs/configs/audiences/put";
 
 ```json
 {
-  "audience": {
-    "id": "abcdefgh12345678",
-    "name": "Product Team",
-    "description": "Members of the product team, including both engineers and product managers.",
-    "filter": {
-      "Multiple Filters": {
-        "operator": "OR",
-        "filters": [
-          {
-            "operator": "EQ",
-            "value": "engineer",
-            "path": "title"
-          },
-          {
-            "operator": "EQ",
-            "value": "product manager",
-            "path": "title"
-          }
-        ]
-      }
+  "id": "abcdefgh12345678",
+  "name": "Product Team",
+  "description": "Members of the product team, including both engineers and product managers.",
+  "filter": {
+    "Multiple Filters": {
+      "operator": "OR",
+      "filters": [
+        {
+          "operator": "EQ",
+          "value": "engineer",
+          "path": "title"
+        },
+        {
+          "operator": "EQ",
+          "value": "product manager",
+          "path": "title"
+        }
+      ]
     }
   }
 }
@@ -58,24 +56,22 @@ import config from "../../api-specs/configs/audiences/put";
 
 ```json title=JSON
 {
-  "audience": {
-    "id": "abcdefgh12345678",
-    "name": "Developers from San Francisco",
-    "filter": {
-      "operator": "AND",
-      "filters": [
-        {
-          "path": "location",
-          "operator": "EQ",
-          "value": "San Francisco"
-        },
-        {
-          "path": "job_title",
-          "operator": "EQ",
-          "value": "Developer"
-        }
-      ]
-    }
+  "id": "abcdefgh12345678",
+  "name": "Developers from San Francisco",
+  "filter": {
+    "operator": "AND",
+    "filters": [
+      {
+        "path": "location",
+        "operator": "EQ",
+        "value": "San Francisco"
+      },
+      {
+        "path": "job_title",
+        "operator": "EQ",
+        "value": "Developer"
+      }
+    ]
   }
 }
 ```
