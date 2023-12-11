@@ -106,4 +106,10 @@ module.exports = {
 
     "./plugins/tutorial-filters",
   ],
+  scripts: [
+    {
+      src: "/docs/js/intercom.js",
+      async: true,
+    },
+  ],
 };
