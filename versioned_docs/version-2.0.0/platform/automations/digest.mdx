@@ -41,7 +41,7 @@ Categories provides the ability to separate disparate data within the same diges
   The default value is `digest` and will retain the first 10 items.
   When the digest is released, it will be sent with the following format:
 
-```
+```json
 [category_key]: {
   count: <total number of events>
   items: [...] // the individual events that match the retain setting. Maximum length of 10
@@ -73,7 +73,7 @@ Second step is to configure an automation to release and interact with the diges
 
 The digest data payload will come into the automation in the structure
 
-```
+```json
 [category_key]: {
   count: <total number of events>
   items: [...] // the individual events that match the retain setting. Maximum length of 10

@@ -84,7 +84,7 @@ executed. This means the nodes following a batch node will only be executed once
 Once a batch is complete, the data objects from each invocation are aggregated and passed onto the
 next step
 
-```typescript
+```ts
 {
   batch: {
     // The number of events received for this category, may be different than items.length
@@ -194,7 +194,6 @@ data: {
   comment: "Excellent post!"
   }
 }
-
 ```
 
 The data object passed to the steps following the batch node would be:
