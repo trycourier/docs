@@ -3,8 +3,9 @@ sidebar_position: 6
 ---
 
 import Image from "@theme/IdealImage";
+import CourierSvg from '/img/logo_2023.svg';
 
-# Okta Integration
+# Okta Integration 
 
 ## Introduction
 
@@ -28,20 +29,29 @@ This guide will walk you through the steps necessary to allow your team to sign 
 
 3. Select SAML 2.0 and hit "Next"
 
-<Image img={require("../../assets/guides/okta/saml.png")} alt="" />
+<Image img={require("../../assets/guides/okta/saml.png")} alt="Select Sign-in Method" />
 
-4. Enter "Courier" as the app name and optionally provide the Courier logo (available after the screenshot) then click "Next"
+4. Enter `Courier` as the app name and optionally provide the Courier logo (available after the screenshot) then click "Next"
 
-<Image img={require("../../assets/guides/okta/general-settings.png")} alt="" />
+<Image img={require("../../assets/guides/okta/general-settings.png")} alt="App Name & Logo" />
 
-<Image img={require("../../assets/guides/okta/logo.jpeg")} alt="Courier Logo" />
+:::note Download Courier Logo
+
+<CourierSvg class="" /><br />
+
+<div class="button-group">
+  <a class="button button--primary" href="pathname:///img/logo_2023.svg"  download="courier_logo" >Download SVG </a><br />
+  <a class="button button--primary" href="pathname:///img/logo_2023.png"  download="courier_logo" >Download PNG </a>
+</div>
+
+:::
 
 5. Contact Courier support for a `Single sign on URL` and an `Audience URI`. Enter them in their respective fields under SAML settings.
 
 <Image
   img={require("../../assets/guides/okta/settings-urls.png")}
   alt="SSO URL and Audience URI fields"
-/>
+/>  
 
 6. Under the "Attribute Statements" section, enter the following information:
 
