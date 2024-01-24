@@ -12,4 +12,10 @@
 
 .image img {
   width: 100%;
+  --shadow-color: 220deg 7% 58%;
+  --shadow-elevation-medium:     0.1px 0.2px 0.3px hsl(var(--shadow-color) / 0.03),
+  0.7px 0.8px 1.6px -0.1px hsl(var(--shadow-color) / 0.21),
+  1.5px 1.6px 3.2px -0.1px hsl(var(--shadow-color) / 0.39),
+  3.1px 3.3px 6.7px -0.2px hsl(var(--shadow-color) / 0.57);
+  box-shadow: var(--shadow-elevation-medium);
 }
