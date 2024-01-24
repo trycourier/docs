@@ -6,204 +6,177 @@ import YoutubeEmbed from "@site/src/components/YoutubeEmbed";
 import Image from "@theme/IdealImage";
 import GifWrapper from "@site/src/components/GifWrapper";
 
-# How to Use Brands to Customize Email Notifications
+# Brands in Email Notifications
 
-> Courier's Brands feature lets you give your email notifications a consistent look and feel for you and your customers.
+> Courier's Brands feature enables you to create email notifications with a consistent look and feel.
 
-## Brand or White-Label your Email Notifications
+<Image
+  img={require("../../../assets/guides/courier-app/brand-designer.png")}
+  alt="Brand Designer"
+/>
 
-Courier's Brands feature set lets you apply a consistent look and feel to your email notifications. You can also use this feature to _white-label_ email notifications you send on behalf of your customers to their end-user recipients or if you have multiple brands internally.
+#### White-Label Your Email Notifications
 
-Courier Brands are also fully API enabled. Developers can get, create, update and delete brands programmatically using our [Brands API](../../../reference/brands/intro.mdx).
+You can manage multiple brands, create reusable styling, and **white-label** email notifications sent on behalf of your customers to their end-user recipients, or if you have multiple brands internally.
 
-<YoutubeEmbed videoId="AR5joIs9Zeo" />
 
-### Using Your Default Brand
+#### Brands API
+Courier Brands are fully **API enabled**. Developers can get, create, update and delete brands programmatically using the [Brands API](../../../reference/brands/intro.mdx).
 
-> Your default brand, along with any custom brand, can be customized and renamed. The default brand cannot be deleted.
+
+## The Default Brand
+
+- The default brand, along with any custom brand, can be customized and renamed.
+- The default brand cannot be deleted.
 
 **Customizing your default brand is important because:**
 
 - Every email notification you create uses the Default Brand unless you manually disable Brands in the Notification settings.
 - If you enable brands on a notification, your Default Brand will be the fallback for any Send API call that does not specify a brand in the user profile.
 
-## Creating a New Brand
+## Create a New Brand
 
 - To create a new brand open the notification Designer, select **Brands** in the top menu and click **New Brand**.
 - Giving your Brand an optional `brand_id` will allow your developers to manage your brand programmatically using the Brands API.
 
-<GifWrapper width={845} height={475} caption="New Brand Modal">
+<Image
+  img={require("../../../assets/guides/courier-app/create-brand.png")}
+  alt="New Brand"
+  style={{width: 400}} 
+/>
 
-![New Brand Modal](../../../assets/guides/courier-app/create-brand.gif)
-
-</GifWrapper>
-
-### Setting a Custom Brand as your Default
+### Set a Custom Brand as your Default
 
 To set a custom brand as your default, open the brand settings and click Set As Default.
 
 <Image
-  img={require("../../../assets/guides/courier-app/set-brand-as-default.png")}
-  alt="Brands Settings"
-/>
-<Image
-  img={require("../../../assets/guides/courier-app/brand-settings.png")}
+  img={require("../../../assets/guides/courier-app/default-brand-modal.png")}
   alt="Brand Settings Modal"
 />
 
-## Customizing your Brands
+## Customize Your Brands
 
-### Use the Notification Designer to customize a Brand
+### Standard Template
 
-Using the Notification Designer you can create and customize your Brands in the following ways:
+Create and customize your Standard Template Brands in the following ways:
 
 - Name
-- Logo ([dimensions and requirements](#logo-dimensions-and-file-size-limits)).
+- Logo
 - Brand colors (Primary, Secondary, Tertiary)
 - Brand Header color
-- Brand Footer Social links
+- Brand Footer Social URLs
 
-### Use a Custom Template to create your brand look
+:::note Logo Dimensions and File Size Limits
 
-If you prefer, you can use code to customize your Brand header and footer by selecting the _Use Custom Template_ option in the Brand Designer.
+- The logo must be a JPEG, PNG, or GIF
+- The defined width for email notification logos is 140px. There is no defined height.
+- The maximum file size is 5MB
 
-Custom Templates combine the best of both worlds by allowing you to ensure brand consistency using Handlebars and HTML or [MJML](https://mjml.io/) to customize the header, footer and email body background while using the drag & drop content designer to create the body of the email with content blocks that can be reused across channels.
+:::
+
+### Custom MJML/Handlebars Template
+
+Use a Custom MJML/Handlebars Template to customize the header, footer and background color using HTML, [MJML](https://mjml.io/) or [Handlebars](https://handlebarsjs.com/guide/).
 
 <Image
   img={require("../../../assets/guides/courier-app/brand-custom-template.png")}
   alt="Brand Custom Template"
+  style={{width: 500}}
 />
 
-### Customize your Brand Template CSS
+### Custom CSS style
 
-You can customize the `<style>` element in the `<head>` section of your Brands using custom templates as well as brands built using the Designer UI. Read more about Courier's [CSS Classnames](css-classnames.mdx).
+You can customize the `<style>` element in the `Head` section of your Brands. In addition to the normal CSS class names, you can define the CSS for Courier blocks using Courier's [CSS Classnames](css-classnames.mdx).
 
-## Creating Reusable Custom Styling Across Multiple Brands
+## Re-use Custom Styling in Multiple Brands
 
-Customers who want to use custom styling across multiple whitelabled brands can accomplish this in a couple of ways.
+You can re-use custom styling across multiple brands in two different ways.
 
-1. **Inheritance:** this works if and only if the default brand and the white label brands inheriting its styles are all built using the standard brand type.
-2. **CSS and Brand snippets:** use this method if you want to share styling across standard and custom brand types.
+- **Inherit from Default Brand** if both the default brand and the custom brand use the standard brand type.
+- **Re-use CSS using Brand Snippets** if you want to share styling between standard and custom brand types.
 
-### Inherit Styles
+### Inherit From Default Brand
 
-The standard or brand type lets you edit the Head to define your own custom styles. In addition to the normal CSS class names, you can define the CSS for Courier blocks using [Courier's CSS classnames](css-classnames.mdx).
-
-<Image
-  img={require("../../../assets/guides/courier-app/brand-inherit-head.png")}
-  alt="Brand Head"
-/>
-
-Be sure the brand you want to inherit from is listed as your “Default” in the brands list. If not, go to brand settings > set as default.
-
-<Image
-  img={require("../../../assets/guides/courier-app/brand-default-badge.png")}
-  alt="Brand Default Badge"
-/>
-
-Use the toggle to inherit the Head for any standard brand style that you want to inherit the Default brand styles.
+Use the **Inherit from Default Brand** toggle to inherit the `Head`, `Header`, or `Footer` from the Default brand.
 
 <Image
   img={require("../../../assets/guides/courier-app/brand-inherit-toggle.png")}
-  alt="Inheritance Toggle"
+  alt="Inherit from Default Brand"
+  style={{width: 500}}
 />
 
-## CSS and Brand snippets
+### Re-use CSS using Brand Snippets
 
-Use this method when you want to share custom styles across brands built using both the standard brand design and custom brands (Handlebars & MJML).
+Use Brand Snippets to share custom styles between standard and custom brand templates (Handlebars & MJML).
 
-1. Open your default brand and create a [brand snippet](brand-snippets.mdx) to contain your reusable CSS styling. You can define the CSS for Courier blocks using [Courier's CSS classnames](css-classnames.mdx).
-
-:::caution
-
-Brand snippets in your Default brand can be referenced across all your custom brands **as long as the snippet name is unique**.
-
-:::
-
-2. Open your default brand or create a brand in the Courier designer and select one of the Custom Template types:
-  - MJML/Handle bars 
-  - Handle bars
-3. To pull the CSS from your default brand CSS brand snippet into any other brand, insert the css brand snippet variable inside the style tags:
+1. In your default brand, create a [brand snippet](brand-snippets.mdx) to contain your reusable CSS styling. 
+You can define the CSS for Courier blocks using [Courier's CSS classnames](css-classnames.mdx).
+Brand snippets in your Default brand can be referenced in custom brands **as long as the snippet name is unique**.
 
 <Image
   img={require("../../../assets/guides/courier-app/brand-style-snippet.png")}
-  alt="CSS Style Snippet"
+  alt="CSS Snippet"
+  style={{width: 500}}
 />
 
-You can add the snippet referencing your `<style>` in the `head` of the brand template wrapped by `<style>` tags.
+2. In a custom brand, add the CSS snippet in the `Head` section, wrapped by `<style>` tags:
 
-```handlebars
+```html
 <style> 
-    {{>css}} 
+    {{>css-snippet-1}} 
 </style> 
 ```
-### Preview your Brand-Enabled Email Notifications
+## Preview your Brand-Enabled Email Notifications
 
-To preview what your email notification will look like with different brands applied, open the **Preview** then select the **Brand** from the **Preview Details > Brand** menu.
+To preview what your email notification will look like with different brands applied, open the **Preview** and then select the **Brand** from the **Preview Details > Brand** menu.
 
 <Image
   img={require("../../../assets/guides/courier-app/brand-preview-details.png")}
   alt="Notification Preview Details"
+  style={{width: 250}} 
 />
 
-### Customizing your brand using variables
+## Reference Brand Attributes With Variables
 
-Any brand attribute you can customize in the brand designer UI, you can also set via variables like `{{var "brand.social.facebook"}}` for example.
+You can reference brand attributes using variables e.g. `{{var "brand.social.facebook"}}`. Here is the schema for the brand information accessible via variables:
 
-Here is the schema for the brand information accessible via variables:
-
-```js
+```ts
 export const getBrandVariables = (
-    brand ? : IBrand
+    brand?: IBrand
 ): {
-    id ? : string;
-    colors ? :
-        |
-        {
-            primary: string;
-            secondary: string;
-            tertiary: string;
-        } | {};
-    email ? : {
+    id?: string;
+    colors?:
+    |
+    {
+        primary: string;
+        secondary: string;
+        tertiary: string;
+    } | {};
+    email?: {
         header: {
-            barColor ? : string;
+            barColor?: string;
             logo: {
-                href ? : string;
-                image ? : string;
+                href?: string;
+                image?: string;
             };
         };
     };
-    social ? : {
-        facebook ? : string;
-        instagram ? : string;
-        linkedin ? : string;
-        medium ? : string;
-        twitter ? : string;
+    social?: {
+        facebook?: string;
+        instagram?: string;
+        linkedin?: string;
+        medium?: string;
+        twitter?: string;
     };
 }
 ```
 
-## Sending a Branded Email Notification
+## Send a Branded Email Notification
 
-1. The Notification must be brand enabled in the Notification Settings.
-2. Include a Brand ID in the Send API call (if no Brand ID is provided, Courier will send using the Default Brand. See the [Send API documentation](../../../reference/send/intro.mdx) for details.
+1. The Notification must have Brand Enabled switched on in the Notification Settings.
+2. _(optional)_ Include a Brand ID in the Send API call. If no Brand ID is provided, Courier will send using the Default Brand. See the [Send API documentation](../../../reference/send/intro.mdx) for details.
 
 <Image
   img={require("../../../assets/guides/courier-app/brand-notification-settings.png")}
   alt="Brand Notification Settings"
-/>
-
-**Watch:** [Courier live: building and sending whitelabel emails via the Brands API.](https://help.courier.com/en/articles/4313169-courier-live-branding-and-white-labeling-email-notifications)
-
-## Logo Dimensions and File Size Limits
-
-> Courier Brands and email template logos should be 140px wide and no larger than 5MB.
-
-- The defined width for email notification logos is **140px**. There is no defined height.
-- The maximum file size is **5MB**
-- Courier does not accept SVG uploads for the logo field.
-
-<Image
-  img={require("../../../assets/guides/courier-app/brand-size-limit.png")}
-  alt="Brand Logo Dimensions"
 />
