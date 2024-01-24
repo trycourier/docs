@@ -19,3 +19,8 @@
   3.1px 3.3px 6.7px -0.2px hsl(var(--shadow-color) / 0.57);
   box-shadow: var(--shadow-elevation-medium);
 }
+
+.image>div {
+  margin-left: auto;
+  margin-right: auto;
+}
