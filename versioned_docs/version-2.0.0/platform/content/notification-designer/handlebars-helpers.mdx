@@ -8,11 +8,15 @@ sidebar_position: 7
 
 The default Handlebars helpers can be found [here](https://handlebarsjs.com/guide/block-helpers.html).
 
-## Courier Handlebars Helpers
+:::tip Note
 
 Check out our [common use cases documentation](./handlebars-usecases.mdx) on details on how to use these functions. Don't see a custom handlebars helper you need in the list? [Share your use case](mailto:support@courier.com).
 
-## Universal Helpers
+:::
+
+## Courier Handlebars Helpers
+
+## Logic
 
 ### and
 
@@ -42,51 +46,7 @@ Returns `true` if all arguments are truthy, `false` if one argument is falsy, an
 {{/if}}
 ```
 
-<!-- - `{{#if (and true 1 "yay")}}`
-- `{{#if (and true false)}}`
-- `{{#if (and variable1 variable2)}}` -->
-
-### capitalize
-
-Returns the capitalized first character of a given string.
-
-**Parameters**
-
-- `input` **{string}**
-
-**Example**
-
-```handlebars
-{{capitalize "foo"}}
-<!-- Output: Foo -->
-
-<!-- Reference a "data" variable -->
-{{capitalize (var "name")}}
-
-<!-- Reference a "profile" variable -->
-{{capitalize (var "profile.name")}}
-```
-
-### concat
-
-Stringifies all arguments and joins them using the provided separator. Should use `null` string for the separator by default and should return a null string if no arguments.
-
-**Parameters**
-
-- `input` **{String|Number}**
-
-**Example**
-
-```handlebars
-{{concat "hello" " " "world"}}
-<!-- Output: hello world -->
-
-<!-- Reference a "data" variable -->
-{{concat "hello" " " (var "name")}}
-
-<!-- Reference a "profile" variable -->
-{{concat "hello" " " (var "profile.name")}}
-```
+---
 
 ### condition
 
@@ -126,11 +86,16 @@ Use the if statement to specify a block of code to be executed if a condition is
 {{/if}}
 ```
 
+---
+
 ### conditional
 
 - Loops through all arguments and ensures all are truthy if using the "and" logical operator.
 - Loops through all arguments and ensures one is truthy if using the "or" logical operator.
 - Returns true if the conditions passed, false otherwise (use #unless helper to hide content if condition passes).
+
+
+**Parameters**
 
 - `input` **{String|Number}**
 
@@ -143,6 +108,88 @@ Use the if statement to specify a block of code to be executed if a condition is
 }}
 <!-- Output: dependent on variable -->
 ```
+
+<!-- ### filter
+
+**Usage:**
+
+- `{{conditional (filter "data" "customer.name" "EQUALS" "josh") (filter "profile" "email" "CONTAINS" "@trycourier.com")}}`
+
+**Should:**
+
+- Require a `source`, `sourceProperty` and `operator`.
+- Value is optional as `IS_EMPTY` and `NOT_EMPTY` operators do not need it.
+- Get source operand from `source` + `sourceProperty`.
+- Use operator to compare source `operand` with value `operand`. -->
+
+<!-- ### json-parse
+
+**Usage:**
+
+- `{{text-block (params data=(json-parse "{ \"anInlineObject\": true }"))}}`
+
+**Should:**
+
+- Parse a `JSON` string and return the result.
+- Throw if it encounters a parse error. -->
+
+---
+
+### not
+
+Return `false` if the argument is truthy. Returns `true` if argument is `false`, `undefined`, `null`, `""`, `0`, or `[]`
+
+**Parameters**
+
+- `input` 
+
+**Example**
+
+```handlebars
+{{not true}}
+<!-- Output: false -->
+
+{{not "string"}}
+<!-- Output: false -->
+
+{{not "" }}
+<!-- Output: true -->
+ 
+{{not undefined }}
+<!-- Output: true -->
+```
+
+---
+
+### or
+
+Returns `true` if one argument is truthy, `false` if all argument are falsy, and `false` if no arguments.
+
+**Parameters**
+
+- `input` **{String|Number}**
+
+**Note:** Data and profile can have booleans.
+
+```handlebars 
+{{#if (or (var "boolean") (var "another_boolean"))}}
+  <strong>True</strong>
+{{else}}
+  <strong>False</strong>
+{{/if}}
+<!-- Output: dependent on variables, 'true' will render if condition returns true -->
+
+<!-- Reference a "profile" variable -->
+{{#if (or (var "profile.boolean") (var "profile.another_boolean"))}}
+  <strong>True</strong>
+{{else}}
+  <strong>False</strong>
+{{/if}}
+```
+
+---
+
+## Data 
 
 ### default
 
@@ -160,6 +207,8 @@ Returns the `value` if it is not nullish.
 {{default undefined (var "customer")}}
 <!-- Output: Returns the default value -->
 ```
+
+---
 
 ### each
 
@@ -204,22 +253,181 @@ This is a modified version of [this Handlebars helper](https://github.com/handle
 
 :::
 
-<!-- ### filter
+---
 
-**Usage:**
+### path
 
-- `{{conditional (filter "data" "customer.name" "EQUALS" "josh") (filter "profile" "email" "CONTAINS" "@trycourier.com")}}`
+Use the variable handler to resolve a `JSONPath`, and returns the resolved value. Returns undefined if the value was not found. Similar to [var](#var).
 
-**Should:**
+**Parameters**
 
-- Require a `source`, `sourceProperty` and `operator`.
-- Value is optional as `IS_EMPTY` and `NOT_EMPTY` operators do not need it.
-- Get source operand from `source` + `sourceProperty`.
-- Use operator to compare source `operand` with value `operand`. -->
+- `input` **{String}**
+
+**Example:**
+
+```handlebars
+{{path "profile.doesNotExist"}}
+<!-- Output: -->
+
+{{var "profile.doesNotExist"}}
+<!-- Output: profile.doesNotExist -->
+
+{{#if (path "profile.doesNotExist")}}
+path
+{{/if}}
+<!-- Output: -->
+
+{{#if (var "profile.doesNotExist")}}
+var
+{{/if}}
+<!-- Output: var -->
+```
+
+---
+
+### set
+
+Set the value of a variable specified by `name`. The top level names cannot start with `brand`, `data`, `event`, `profile`, `recipient`, `urls`
+
+**Parameters**
+
+- `name` **{String}**
+- `input` **{String}**
+
+**Example:**
+
+```handlebars
+<!-- Set and re-use a default value-->
+{{set "name" (default (path "profile.firstName") "valued_customer" )}}
+Dear {{name}},
+
+<!-- Make a variable more readable -->
+{{set "city" (path "profile.address.primary.city")}}
+{{city}}
+<!-- Output: Santa Cruz -->
+
+{{set "month" (datetime-format 1554145200000 "%B")}}
+{{month}}
+<!-- Output: April-->
+```
+
+---
+
+### var
+
+Uses the variable handler to resolve a `JSONPath`, and returns the resolved value. Returns undefined if the value was not found. Similar to [path](#path).
+
+**Parameters**
+
+- `input` **{String}**
+
+**Example:**
+
+```handlebars
+{{path "profile.doesNotExist"}}
+<!-- Output: -->
+
+{{var "profile.doesNotExist"}}
+<!-- Output: profile.doesNotExist -->
+
+{{#if (path "profile.doesNotExist")}}
+path
+{{/if}}
+<!-- Output: -->
+
+{{#if (var "profile.doesNotExist")}}
+var
+{{/if}}
+<!-- Output: var -->
+```
+
+---
+
+### with
+
+:::info Note
+
+This helper is a modified version of the [Handlebars `with` helper](https://github.com/handlebars-lang/handlebars.js/blob/212f9d930b1a39599da2646ac23da64f6552b9d0/lib/handlebars/helpers/with.js).
+
+:::
+
+Sets the variable scope when rendering the block content.
+
+**Parameters**
+
+- `input` **{String}**
+
+**Example:**
+
+```handlebars
+{{#with person}}
+{{firstname}} {{lastname}}
+{{/with}}
+<!-- Output: Marty Banks -->
+```
+when run in this context
+```json
+{
+  person: {
+    firstname: "Marty",
+    lastname: "Banks"
+  }
+}
+```
+
+---
+
+## String
+
+### capitalize
+
+Returns the capitalized first character of a given string.
+
+**Parameters**
+
+- `input` **{string}**
+
+**Example**
+
+```handlebars
+{{capitalize "foo"}}
+<!-- Output: Foo -->
+
+<!-- Reference a "data" variable -->
+{{capitalize (var "name")}}
+
+<!-- Reference a "profile" variable -->
+{{capitalize (var "profile.name")}}
+```
+
+---
+
+### concat
+
+Stringifies all arguments and joins them using the provided separator. Should use `null` string for the separator by default and should return a null string if no arguments.
+
+**Parameters**
+
+- `input` **{String|Number}**
+
+**Example**
+
+```handlebars
+{{concat "hello" " " "world"}}
+<!-- Output: hello world -->
+
+<!-- Reference a "data" variable -->
+{{concat "hello" " " (var "name")}}
+
+<!-- Reference a "profile" variable -->
+{{concat "hello" " " (var "profile.name")}}
+```
+
+---
 
 ### format
 
-Returns a formatted string given a format and set of arguments.
+Returns a formatted string given a [format](https://github.com/alexei/sprintf.js) and set of arguments.
 
 **Parameters**
 
@@ -231,6 +439,8 @@ Returns a formatted string given a format and set of arguments.
 {{format "%.2f" (var "number")}}
 <!-- If number = 1 | Output: 1.00 -->
 ```
+
+---
 
 ### datetime-format
 
@@ -263,98 +473,26 @@ This helper will throw if an invalid date is provided.
 along with an additional option %p to add am, pm
 :::
 
-### inc
+---
 
-Increase value by 1.
+### trim-left
+
+Removes whitespace from the beginning of a string, without modifying the original string.
 
 **Parameters**
 
-- `input` **{Number}**
+- `input` **{String}**
 
 **Example:**
 
 ```handlebars
-{{inc (var "value")}}
-<!-- If value = 1 | Output: 2 -->
+{{trim-left "  a string"}}
+<!-- Output: a string -->
 ```
 
-<!-- ### json-parse
-
-**Usage:**
-
-- `{{text-block (params data=(json-parse "{ \"anInlineObject\": true }"))}}`
-
-**Should:**
-
-- Parse a `JSON` string and return the result.
-- Throw if it encounters a parse error. -->
-
-### not
-
-**Usage:**
-
-- `{{#if (and (not false) true)}}`
-
-**Should:**
-
-- Return a `boolean` inverse of the value.
-
-### or
-
-**Usage:**
-
-- `{{#if (or true false)}}`
-
-**Should:**
-
-- Return `true` if one argument is truthy.
-- Return `false` if all argument are falsy.
-- Return `false` if no arguments.
-
-### path
-
-**Usage:**
-
-- `{{#if (path "customer.email")}}`
-
-**Should:**
-
-- Use the variable handler to resolve a `JSONPath`.
-- Return the resolved value.
-- Return undefined if the value was not found.
-
-### set
-
-**Usage:**
-
-- `{{set "name" (default first_name "valued customer")}}`
-
-**Should:**
-
-- Set a value on the root data using the name.
-- Set the value on the root of the variable handler context.
-- Restrict top level names (ex: `data`, `profile`, `brand`).
-
-### trim-left
-
-**Usage:**
-
-- `{{#trim-left}} test {{/trim-left}}`
-- `{{trim-left " a string "}}`
-
-**Should:**
-
-- Return the value trimmed (defaults to block value).
+---
 
 ### trim-one-char-right
-
-**Usage:**
-
-- `{{a-block (params text=(trim-one-char-right "ends with\ "))}}`
-
-**Should:**
-
-- Return the string with the last character removed.
 
 :::info
 
@@ -362,68 +500,75 @@ This helper is for dealing with the following [escaping issue](https://github.co
 
 :::
 
+Returns the string with the last character removed.
+
+**Parameters**
+
+- `input` **{String}**
+
+**Example:**
+
+```handlebars
+{{a-block (params text=(trim-one-char-right "ends with\ "))}}
+```
+
+---
+
 ### trim-right
 
-**Usage:**
+Removes whitespace from the end of a string, without modifying the original string.
 
-- `{{#trim-right}} test {{/trim-right}}`
+**Parameters**
 
-- `{{trim-right " a string "}}`
+- `input` **{String}**
 
-**Should:**
+**Example:**
 
-- Return the value trimmed (defaults to block value).
+```handlebars
+{{trim-right "a string  "}}
+<!-- Output: a string -->
+```
+
+---
 
 ### trim
 
-**Usage:**
+Removes whitespace from the beginning and end of a string, without modifying the original string.
 
-- `{{#trim}} test {{/trim}}`
-- `{{trim " a string "}}`
+**Parameters**
 
-**Should:**
+- `input` **{String}**
 
-- Return the value trimmed (defaults to block value)
+**Example:**
+
+```handlebars
+{{trim "  a string  "}}
+<!-- Output: a string -->
+```
+
+---
 
 ### truncate
 
-**Usage:**
+Truncates the string to the number of characters defined in the helper
 
-- `{{ truncate "some very long string" 9 }} => "some very"`
-- `{{ truncate "some very long string" 9 "..." }} => "some very..."`
+**Parameters**
 
-**Should:**
+- `input` **{String}**
+- `length` **{Number}**
+- *(optional)* `suffix` **{String}** 
 
-- Truncate the string to the number of characters defined in the helper
+**Example:**
 
-### var
+```handlebars
+{{ truncate "some very long string" 9 }}
+<!-- Output: some very -->
 
-**Usage:**
+{{ truncate "some very long string" 9 "..." }}
+<!-- Output: some very... -->
+```
 
-- `"{{var customer.fullName}}" <{{var "customer.email"}}>`
-
-**Should:**
-
-- Use the variable handler to resolve a `JSONPath`.
-- Return the resolved value as a string.
-- Not be a `SafeString` so the value will be encoded.
-
-### with
-
-**Usage:**
-
-- `{{with customers}}`
-
-**Should:**
-
-- Match the Handlebars built-in #with helper.
-- Set the `@variableHandler` scope when rendering the block content.
-
-:::info Note
-
-modified version of [this Handlebars helper](https://github.com/handlebars-lang/handlebars.js/blob/212f9d930b1a39599da2646ac23da64f6552b9d0/lib/handlebars/helpers/with.js).
-
-:::
+---
 
 ## Math
 
@@ -447,6 +592,8 @@ Return the magnitude of a number. This helper will throw an errow if it encounte
 <!-- Reference a "profile" variable -->
 {{abs (var "profile.negative_number")}}
 ```
+
+---
 
 ### add
 
@@ -472,6 +619,8 @@ Returns the the sum of two operands. This helper will throw an error if it encou
 <!-- Reference a "profile" variable -->
 {{add (var "profile.term_1") (var "profile.term_2")}}
 ```
+
+---
 
 ### ceil
 
@@ -500,6 +649,8 @@ Returns the least integer greater than or equal to the decimal number input. Thi
 {{ceil (var "profile.some_number")}}
 ```
 
+---
+
 ### divide
 
 Returns the quotient of its operands where the left operand is the dividend and the right operand is the divisor. This helper will throw an errow if it encounters an input value that is not a number or if the divisor is `0`.
@@ -524,6 +675,8 @@ Returns the quotient of its operands where the left operand is the dividend and 
 <!-- Reference a "profile" variable -->
 {{divide (var "profile.dividend") (var "profile.divisor")}}
 ```
+
+---
 
 ### floor
 
@@ -551,6 +704,25 @@ Returns the largest integer less than or equal to a given number. This helper wi
 <!-- Reference a "profile" variable -->
 {{floor (var "profile.some_number")}}
 ```
+
+---
+
+### inc
+
+Increase value by 1.
+
+**Parameters**
+
+- `input` **{Number}**
+
+**Example:**
+
+```handlebars
+{{inc (var "value")}}
+<!-- If value = 1 | Output: 2 -->
+```
+
+---
 
 ### mod
 
@@ -584,6 +756,8 @@ This helper will throw an errow if it encounters an input value that is not a nu
 {{mod (var "profile.dividend") (var "profile.divisor)}}
 ```
 
+---
+
 ### multiply
 
 Returns the product of two operands. This helper will throw an errow if it encounters an input value that is not a number.
@@ -608,6 +782,8 @@ Returns the product of two operands. This helper will throw an errow if it encou
 <!-- Reference a "profile" variable -->
 {{multiply (var "profile.multiplier") (var "profile.multiplicand")}}
 ```
+
+---
 
 ### round
 
@@ -638,6 +814,8 @@ Returns the value of a number rounded to the nearest integer. This helper will t
 <!-- Reference a "profile" variable -->
 {{round (var "profile.some_variable")}}
 ```
+
+---
 
 ### subtract (sub)
 
@@ -689,6 +867,8 @@ Returns a formatted date string. This helper will throw if an invalid date is pr
 <!-- Output: Mon, April 01 -->
 ```
 
+---
+
 :::info
 
 [See full list of format options](https://support.sendwithus.com/jinja/jinja_time/#datetime-format)
@@ -716,6 +896,8 @@ Returns an ISO-8601 date string as epoch milliseconds. This helper will throw if
 {{swu_iso8601_to_time (var "profile.some_date_variable")}}
 ```
 
+---
+
 ### swu_timestamp_to_time
 
 Returns an Unix epoch timestamp (seconds) as a millisecond epoch time value. This helper will throw if an invalid unix epoch date is not provided.
@@ -736,6 +918,8 @@ Returns an Unix epoch timestamp (seconds) as a millisecond epoch time value. Thi
 <!-- Reference a "profile" variable -->
 {{swu_timestamp_to_time (var "profile.some_timestamp")}}
 ```
+
+---
 
 ### translate
 

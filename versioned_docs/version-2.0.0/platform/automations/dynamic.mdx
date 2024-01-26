@@ -49,7 +49,7 @@ By default, all `data` passed into an automation is passed through to the notifi
 
 2. You can either the user the interactive JSON editor, or just modify the JSON in the text editor directly. The syntax to map the attribute is as follows:
 
-```
+```json
   "<new_attribute>": {
     "$ref": "data.<some_attribute>"
   }
@@ -63,7 +63,7 @@ Let's say we have a segment event as a trigger for our automation. The event has
 
 We would use the following syntax:
 
-```
+```json
   "vendor": {
     "$ref": "data.properties.vendor_name"
   }

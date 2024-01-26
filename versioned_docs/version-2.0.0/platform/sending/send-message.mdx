@@ -7,7 +7,7 @@ import Image from "@theme/IdealImage";
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Create And Send An Email Notification
+# Create and Send an Email Notification
 
 This step-by-step guide will walk you through creating and sending an email notification using Courier.
 
@@ -181,7 +181,7 @@ Now add the Send URL, `https://api.courier.com/send`, to complete the cURL reque
 <Tabs>
 <TabItem value="bash" label="cURL in JSON">
 
-````bash
+```bash
 curl --request POST \
 --header "Authorization: Bearer $COURIER_AUTH_TOKEN" \
 --header "Content-Type: application/json" \
@@ -218,7 +218,7 @@ curl --request POST \
 --data "message[data][support_phone]=555-555-5555" \
 --data "message[data][support_url]=https://www.courier.com/docs/" \
 https://api.courier.com/send
-````
+```
 
 </TabItem>
 </Tabs>
