@@ -10,7 +10,7 @@ The default Handlebars helpers can be found [here](https://handlebarsjs.com/guid
 
 ## Courier Handlebars Helpers
 
-Don't see a custom handlebars helper you need in the list? [Share your use case](mailto:support@courier.com).
+Check out our [common use cases documentation](./handlebars-usecases.mdx) on details on how to use these functions. Don't see a custom handlebars helper you need in the list? [Share your use case](mailto:support@courier.com).
 
 ## Universal Helpers
 
@@ -757,67 +757,4 @@ Translates a string based on the key, profile locale and .po translations you ha
 <!-- Pass profile attributes as arguments -->
 {{t "Salutation" profile.first_name profile.last_name}}
 <!-- Output: "Welcome, John Doe" -->
-```
-
-## Common use-cases
-
-### Conditionally rendering content
-
-`#if` blocks can be used to control whether content is rendered.
-
-**Example**
-
-```handlebars
-<!-- equal -->
-{{#if (condition (var "some_variable") "==" "show")}}
-  <div align="center">Hello!</div>
-{{/if}}
-
-<!-- strict equal -->
-{{#if (condition (var "some_variable") "===" "show")}}
-  <div align="center">Hello!</div>
-{{/if}}
-
-<!-- not equal -->
-{{#if (condition (var "some_variable") "!=" "hide")}}
-  <div align="center">Hello!</div>
-{{/if}}
-
-<!-- greater than -->
-{{#if (condition (var "some_array.length") ">" 0)}}
-  <div align="center">Hello!</div>
-{{/if}}
-
-<!-- greater than or equal -->
-{{#if (condition (var "some_array.length") ">=" 0)}}
-  <div align="center">Hello!</div>
-{{/if}}
-
-<!-- less than -->
-{{#if (condition (var "some_array.length") "<" 0)}}
-  <div align="center">Hello!</div>
-{{/if}}
-
-<!-- less than or equal -->
-{{#if (condition (var "some_array.length") "<=" 0)}}
-  <div align="center">Hello!</div>
-{{/if}}
-```
-
-### Pluralizing Text
-
-The `formatMessage` helper can be used to pluralize text in rendered content. Pluralization respects the [ICU format](https://unicode-org.github.io/icu/userguide/format_parse/messages/) and entries follow [Unicode CLDR rules](https://cldr.unicode.org/index/cldr-spec/plural-rules).
-
-**Example**
-
-```handlebars
-Your list contains
-{{formatMessage
-  "{itemCount, plural,
-    =0 {no items}
-    one {# item}
-    other {# items}
-}"
-  itemCount=itemCount
-}}.
 ```
