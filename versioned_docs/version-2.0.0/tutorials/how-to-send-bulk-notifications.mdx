@@ -18,38 +18,36 @@ Like sending a single message, the Bulk API can used across channels (eg. email,
 
 Bulk jobs must first be defined. The structure of a job mimics the set of available configuration values for sending an individual message.
 
-Request:
+**Request:**
 
 `POST https://api.courier.com/bulk`
 
 ```json
 {
-  "headers": {
-    "idempotency-key": "rbJ9QDcWn84A-rO94HrbP"
-  },
-  "body": {
+  "message": {
+    "event": "my-notification-or-event", // optional if using API v2
+    "brand": "my-brand", // optional brand id
+    "data": {}, // optional data bag
+    "locale": "en_US", // optional
+    "override": {} // optional Courier overrides
     "message": {
-      "event": "my-notification-or-event", // optional if using API v2
-      "brand": "my-brand", // optional brand id
-      "data": {}, // optional data bag
-      "locale": "en_US", // optional
-      "override": {} // optional Courier overrides
-      "message": {
-        // optional API v2 message that supports elemental
-      }
+      // optional API v2 message that supports elemental
     }
   }
 }
 ```
 
-Response:
+:::info Note
+All bulk endpoints also support [idempotent requests](https://www.courier.com/docs/reference/idempotent-requests/) using the `Idempotency-Key` header.
+:::
+
+**Response:**
+
+Status: 201
 
 ```json
 {
-  "status": 201,
-  "body": {
-    "jobId": "1-61e9dd53-b5bb6c863b7ffbe83ad4b28d"
-  }
+  "jobId": "1-61e9dd53-b5bb6c863b7ffbe83ad4b28d"
 }
 ```
 
@@ -63,59 +61,53 @@ The ingestion does **not** have to happen in a single call, you could have multi
 
 :::
 
-Request:
+**Request:**
 
 `POST https://api.courier.com/bulk/{jobId}`
 
 ```json
 {
-  "headers": {
-    "idempotency-key": "rbJ9QDcWn84A-rO94HrbP"
-  },
-  "body": {
-    "users": [
-      {
-        "recipient": "john-001", // optional, auto-generated if not present
-        "profile": {}, // optional, similar to /send profile object
-        "data": {
-          // optional, takes precendence over message data bag
-          "recipientName": "John Doe" // optional
-          // additional [key-values] similar to /send data object
-        },
-        "preferences": {}, // optional, similar to preferences API
-        "to": {
-          // optional json that represents a user recipient
-        }
+  "users": [
+    {
+      "recipient": "john-001", // optional, auto-generated if not present
+      "profile": {}, // optional, similar to /send profile object
+      "data": {
+        // optional, takes precendence over message data bag
+        "recipientName": "John Doe" // optional
+        // additional [key-values] similar to /send data object
+      },
+      "preferences": {}, // optional, similar to preferences API
+      "to": {
+        // optional json that represents a user recipient
       }
-    ]
-  }
+    }
+  ]
 }
 ```
 
-Response:
+**Response:**
+
+Status: 200
 
 ```json
 {
-  "status": 200,
-  "body": {
-    // gives errors for each user if found any
-    "errors": [
-      {
-        "error": "Duplicate user",
-        "user": {
-          "profile": {
-            "email": "foo@bar.com"
-          },
-          "data": {
-            "recipientName": "Foo Bar"
-          },
-          "recipient": "foo-bar"
-        }
+  // gives errors for each user if found any
+  "errors": [
+    {
+      "error": "Duplicate user",
+      "user": {
+        "profile": {
+          "email": "foo@bar.com"
+        },
+        "data": {
+          "recipientName": "Foo Bar"
+        },
+        "recipient": "foo-bar"
       }
-    ],
-    // gives total count of users that were successfully ingested
-    "total": 1
-  }
+    }
+  ],
+  // gives total count of users that were successfully ingested
+  "total": 1
 }
 ```
 
@@ -126,34 +118,21 @@ Once you have added the users to your job, it can be triggered.
 :::info Note
 
 A `jobId` can only be triggered once. If you wish to send messages to more users after the job was triggered, you'll have to create a new job definition and add the remaining users to the new job.
-
 :::
+
+**Request:**
 
 `POST https://api.courier.com/bulk/{jobId}/run`
 
-```json
-{
-  "headers": {
-    "idempotency-key": "rbJ9QDcWn84A-rO94HrbP"
-  }
-}
-```
+**Response:**
 
-Response:
-
-```json
-{
-  "status": 202
-}
-```
+Status: 202
 
 ## Fetching Bulk Job Information
 
 ### Job Status
 
-- `CREATED` a job has been created, but has not yet been invoked/run. This should be the initial status of a bulk job when it is created.
-- `PROCESSING` the bulk job is currently being processed.
-- `COMPLETED` all items in the job have been placed in to the Courier send pipeline
+The jobId can be used to track the status of the individual messages in the bulk job. You should expect the status as you see in the `GET /messages` [endpoint](../reference/logs/by-id.mdx) which includes delivery statistics like sent, delivered, clicked and more.
 
 `GET https://api.courier.com/bulk/{jobId}`
 
@@ -172,10 +151,6 @@ Response:
 ```
 
 ### Job Items/Users
-
-- `PENDING` a job has been populated with the user, but has not yet been invoked/run. This should be the initial status when a user is added to a job
-- `ERROR` an error occurred enqueuing the user/configuration combination in the processing pipeline
-- `ENQUEUED` the user/configuration combination have been enqueued in the processing pipeline
 
 `GET https://api.courier.com/bulk/{jobId}/users?cursor={cursor}`
 
@@ -213,8 +188,4 @@ Response:
 
 ## Message Information
 
-This would be just like how a regular /send call works.
-
-Messages are visible on the Courier UI or can be fetched via Messages API.
-
-If you have webhooks configured, Courier will invoke it with the message data throughout the lifecycle of the message.
+The messageId from each item is the same as you get from looking up an invidual message from `/send`. Messages are visible on the Courier UI or can be fetched via Messages API as expected. If you have [Outbound Webhooks](../platform/workspaces/outbound-webhooks.mdx) configured, Courier will invoke it with the message data throughout the lifecycle of the message.
