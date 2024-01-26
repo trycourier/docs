@@ -132,7 +132,7 @@ Status: 202
 
 ### Job Status
 
-The jobId can be used to track the status of the individual messages in the bulk job. You should expect the status as you see in the `GET /messages` [endpoint](../reference/logs/by-id.mdx) which includes delivery statistics like sent, delivered, clicked and more.
+The jobId can be used to track the status of the individual messages in the bulk job. You should expect the status as you see in the `GET /messages` endpoint which includes delivery statistics like sent, delivered, clicked and more.
 
 `GET https://api.courier.com/bulk/{jobId}`
 
@@ -188,4 +188,4 @@ The jobId can be used to track the status of the individual messages in the bulk
 
 ## Message Information
 
-The messageId from each item is the same as you get from looking up an invidual message from `/send`. Messages are visible on the Courier UI or can be fetched via Messages API as expected. If you have [Outbound Webhooks](../platform/workspaces/outbound-webhooks.mdx) configured, Courier will invoke it with the message data throughout the lifecycle of the message.
+The messageId from each item is the same as you get from looking up an invidual message from `/send`. Messages are visible on the Courier UI or can be fetched via Messages API as expected. If you have Outbound Webhooks configured, Courier will invoke it with the message data throughout the lifecycle of the message.
