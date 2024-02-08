@@ -14,8 +14,6 @@ import YoutubeEmbed from "@site/src/components/YoutubeEmbed";
 
 **Availability:** Slack, [Microsoft Teams](../../../platform/channels/direct-message/microsoft-teams.mdx)
 
-<YoutubeEmbed videoId="KPM4lx2Yq3U" />
-
 [Jsonnet](https://learnxinyminutes.com/docs/jsonnet/) is a JSON to JSON templating language, which means that combining Jsonnet with your user data allows you to build and send dynamic, custom Slack blocks and MS Teams Adaptive Cards in your notifications.
 
 <Image
@@ -23,15 +21,18 @@ import YoutubeEmbed from "@site/src/components/YoutubeEmbed";
   alt="New Jsonnet Block"
 />
 
+#### Data Properties
+
+Reference the data object properties using `data("variable")` syntax, as shown in the screenshot above.
+
 ## Use Cases
 
 - To help you build common Block Kit actions with Jsonnet, Courier has several Jsonnet template blocks to choose from such as buttons, drop-downs, images, and more.
 - You can also build your own [Block Kit](https://api.slack.com/block-kit) elements from scratch. The Jsonnet Block expects a single Block Kit element or an array of elements.
 
-<GifWrapper width={920} height={614} caption="Jsonnet Block">
-
-![jsonnet block](../../../assets/guides/jsonnet-blocks/jsonnet-block-sample.gif)
-
-</GifWrapper>
-
 **Read more:** [Content block basics](content-block-basics.mdx)
+
+## Demo
+#### Designing Slack Notifications using Block Kit and Jsonnet
+
+<YoutubeEmbed videoId="KPM4lx2Yq3U" />
