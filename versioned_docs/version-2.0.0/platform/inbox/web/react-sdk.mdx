@@ -37,6 +37,23 @@ function App() {
 }
 ```
 
+
+
+:::info
+
+Courier React components utilize specific endpoint URLs that may require inclusion in the site's **Content&nbsp;Security&nbsp;Policy&nbsp;(CSP)** records.
+
+**courier-react < v5.0.0**
+  - `https://fxw3r7gdm9.execute-api.us-east-1.amazonaws.com`
+  - `wss://1x60p1o3h8.execute-api.us-east-1.amazonaws.com`
+
+
+**courier-react v5.0.0 + **
+  - `https://inbox.courier.com`
+  - `wss://realtime.courier.com`
+
+:::
+
 ## Authentication
 
 There are two methods for handling authentication: JWT and HMAC. JWT is our recommended method, HMAC is being deprecated.
