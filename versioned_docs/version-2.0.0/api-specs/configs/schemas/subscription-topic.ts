@@ -36,6 +36,18 @@ const Paging: ApiParam = {
     },
     {
       type: "string",
+      name: "section_name",
+      example: "Essential Notifications",
+      description: "section name for the topic",      
+    },
+    {
+      type: "string",
+      name: "section_id",
+      example: "Essential Notifications",
+      description: "section id for the topic",      
+    },    
+    {
+      type: "string",
       name: "topic_id",
       example: "FW0YU64P4TMYKMMHH67D6FENX8VS",
       description: "The id for a subscription topic.",
