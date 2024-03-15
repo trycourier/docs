@@ -127,6 +127,42 @@ curl --request POST \
 }'
 ```
 
+#### Silent Messages
+
+```bash title=cURL
+curl --request POST \
+  --url https://api.courier.com/send \
+  --header 'Authorization: Bearer YOUR_AUTH_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"message": {
+		"to": {
+			"user_id": "YOUR_USER_ID"
+		},
+		"content": {
+			"title": "...",
+			"body": "..."
+		},
+		"routing": {
+			"method": "all",
+			"channels": [
+				"apn"
+			]
+		},
+		"providers": {
+			"apn": {
+				"override": {
+					"silent": true,
+					"body": {
+						"badge": 123
+					}
+				}
+			}
+		}
+	}
+}'
+```
+
 ### Sending to a `token`
 
 ```bash title=cURL
