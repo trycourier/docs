@@ -156,6 +156,11 @@
       "permanent": true
     },
     {
+      "source": "/docs/pusher-beams",
+      "destination": "https://www.courier.com/docs/platform/channels/push/pusher-beams/",
+      "permanent": true
+    },
+    {
       "source": "/docs/splunk-on-call",
       "destination": "https://www.courier.com/docs/platform/channels/other/splunk-on-call/",
       "permanent": true
