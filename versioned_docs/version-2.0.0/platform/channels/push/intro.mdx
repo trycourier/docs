@@ -7,7 +7,7 @@ slug: ./
 
 # Push Providers
 
-Courier supports a number of Push Providers. Each provider has different requirements that need to be met to deliver a message to a recipient. Learn more about each providers requirements by selecting one on the left.
+Courier integrates with many different push providers. Each provider may have specific requirements in order to deliver a message to a recipient.
 
 :::tip  
 
@@ -15,11 +15,11 @@ Can't find a provider? Send us a chat ↘️ or email support@courier.com
 
 :::
 
-## Push channel-level overrides
+## Push channel override
 
-Push channel overrides allow you to set the body, clickAction, data, icon, and title via an override that will apply to all push channels within a template.
+Push channel overrides allow you to set the body, clickAction, data, icon, and title of a push notification.
 
-**Here is the override data structure for the email channel override:**
+**Data structure for the push channel override:**
 
 ```json
 {
@@ -42,7 +42,7 @@ Push channel overrides allow you to set the body, clickAction, data, icon, and t
 
 ## Tracking
 
-Courier will attach a trackingUrl for all push requests that allow the state of the push notification to be updated. Please select a provider on the left to see details about where the tracking URL can be found. To update the status of a notification, the Courier [client-side authentication token](https://www.notion.so/trycourier/Tracking-Push-events-d6fdb9015da44ae5a6acdc5fe6832571#1ea48b560055476db8c07812adf14e90) can be used.
+Courier will attach a trackingUrl for all push requests that allow the state of the push notification to be updated. See the provider-specific documentation for details about where the tracking URL can be found. To update the status of a notification, the Courier [client-side authentication token](https://www.notion.so/trycourier/Tracking-Push-events-d6fdb9015da44ae5a6acdc5fe6832571#1ea48b560055476db8c07812adf14e90) can be used.
 
 ### Example Message
 
