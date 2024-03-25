@@ -122,7 +122,7 @@
     },
     {
       "source": "/docs/magicbell",
-      "destination": "https://www.courier.com/docs/platform/channels/other/magicbell/",
+      "destination": "https://www.courier.com/docs/platform/channels/push/magicbell/",
       "permanent": true
     },
     {
@@ -153,6 +153,11 @@
     {
       "source": "/docs/pusher",
       "destination": "https://www.courier.com/docs/platform/channels/other/pusher/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/pusher-beams",
+      "destination": "https://www.courier.com/docs/platform/channels/push/pusher-beams/",
       "permanent": true
     },
     {

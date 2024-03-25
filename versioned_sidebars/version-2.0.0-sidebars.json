@@ -2,7 +2,7 @@
   "sidebar": [
     {
       "type": "doc",
-      "id": "intro",
+      "id": "home",
       "className": "sidebar-home"
     },
     {

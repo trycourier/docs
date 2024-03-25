@@ -8,7 +8,7 @@ slug: ./
 
 # Email Providers
 
-Courier supports a number of Email Providers. In order to send a notification using an Email Channel, the recipient profile must include an email address in the `email` property.
+Courier integrates with many different email providers, as well as SMTP. In order for a recipient to receive an email notification, their user profile must include an email address in the `email` property.
 
 ```json
 // Recipient Profile
@@ -16,18 +16,24 @@ Courier supports a number of Email Providers. In order to send a notification us
   "email": "support@courier.com"
 }
 ```
+:::tip  
 
-Learn more about specific Email Integrations by selecting them on the left.
+Can't find a provider? Send us a chat ↘️ or email support@courier.com
 
-Can't find a provider? Shoot us a message using Intercom at the bottom of this page.
+:::
 
-## Email channel-level overrides
+## Email channel override
 
-The email channel override allows you to set the subject, reply to, from, cc, and bcc email addresses, as well as the HTML and text via an override that will apply to all your email channels\* within a template.
 
-**\*Note:** attachment overrides done at the channel level will only work with Mailgun, Postmark, AWS SES and Amply currently. To add attachments to other providers, see the `override` section of the integration-specific doc.
+Use the email channel override property to override channel settings such as subject, reply to, from, cc, and bcc email addresses, along with HTML and text content. These overrides will apply to all your email channels within a template.
 
-**Here is the override data structure for the email channel override:
+:::note
+
+Attachment overrides at the channel level are currently supported for Mailgun, Postmark, AWS SES, and Amply. For adding attachment overrides through other email providers, refer to the override section in the respective provider documentation.
+
+:::
+
+**Data structure for the email channel override:
 **
 
 ```json
@@ -56,29 +62,23 @@ The email channel override allows you to set the subject, reply to, from, cc, an
 }
 ```
 
-## Brand override via API
+## Brand override
 
-`overrides.brand` uses same schema as [POST /brands](../../../reference/brands/create-a-brand.mdx)
+The `channels.email.override.brand` property uses same schema as the API request payload for the [POST&nbsp;/brands](../../../reference/brands/create-a-brand.mdx) endpoint.
 
 Brand elements that can be overridden:
 
 - logo
-- topbar color
+- top bar color
 - brand colors
 
-Here is the override data structure for the email channel override. In this example, the override is setting the logo image URL.
+**Example:
+**
 
 ```json
 {
   "message": {
-    "template": "CTJNNFP7NHMKMBPJFZX4P39ABSXR",
-    "to": {
-      "email": "example@someemaildomain.com"
-    },
-    "data": {
-      "name": "Tony",
-      "inviteLink": "https://courier.com/register?code=blah"
-    },
+    // ...rest of request
     "channels": {
       "email": {
         "override": {
@@ -102,8 +102,8 @@ Here is the override data structure for the email channel override. In this exam
 }
 ```
 
-## IP Address Range
+## Allowlist for AWS IP Addresses
 
-Some email providers like Mailgun offer [additional security](https://help.mailgun.com/hc/en-us/articles/360012244474-IP-Allowlist) to whitelist certain IPs from accessing their APIs. Courier is hosted on AWS and does not provide an IP range in the form of an allow list.
+Some email providers, such as Mailgun, offer [additional security](https://help.mailgun.com/hc/en-us/articles/360012244474-IP-Allowlist) to allowlist IP addresses to access their API. Courier is hosted on AWS and does not provide an IP range in the form of an allowlist.
 
-AWS provides [a workaround](https://docs.aws.amazon.com/general/latest/gr/aws-ip-ranges.html#subscribe-notifications) by allowing users to subscribe and update the changes themselves. Whenever there is a change to the AWS IP address ranges, AWS will send notifications to subscribers of the `AmazonIpSpaceChanged` topic.
+As a workaround, users can subscribe to the `AmazonIpSpaceChanged` topic, and receive notifications about any changes to the AWS IP address ranges. For details, refer to the [AWS documentation](https://docs.aws.amazon.com/general/latest/gr/aws-ip-ranges.html#subscribe-notifications).
