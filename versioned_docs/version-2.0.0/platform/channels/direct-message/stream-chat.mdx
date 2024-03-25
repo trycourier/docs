@@ -1,17 +1,17 @@
 ---
 sidebar_position: 6
-sidebar_label: Stream Chat API
-title: Send Notifications Using Stream Chat API
-description: Looking for a way to send notifications via Stream Chat API? This step-by-step tutorial will show you how to integrate Stream Chat API's API the easy way.
+sidebar_label: Stream Chat
+title: Send Notifications Using Stream Chat
+description: Looking for a way to send notifications via Stream Chat? This step-by-step tutorial will show you how to integrate Stream Chat API's API the easy way.
 ---
 
-# Stream Chat API
+# Stream Chat
 
 > https://getstream.io/chat/
 
 ## Profile Requirements
 
-To deliver a message to a recipient over Stream Chat API, Courier must be provided a channelType and channelId OR a messageId
+To deliver a message to a recipient over Stream Chat, Courier must be provided a channelType and channelId OR a messageId
 This value should be included in the recipient profile as `streamChat`.
 
 ```json title=JSON
@@ -45,9 +45,10 @@ This value should be included in the recipient profile as `streamChat`.
 
 Overrides can be used to change the request body that Courier uses to send the message. Overrides are useful when a field is not yet supported by Courier or you would like to override the value that Courier generates.
 
-- You can override any of the fields supported by Stream Chat API `POST /channels/{type}/{id}/message` endpoint ([see all send request body fields here](https://getstream.io/chat/docs/other-rest/message_format/)) via override body object
-- You can also override apiKey, apiSecret and senderId fields via the override config object
-- You can also override baseUrl (defaulted to "https://chat-us-east-1.stream-io-api.com")
+- You can override any of the fields supported by Stream Chat's `POST`&nbsp;`/channels/{type}/{id}/message` API endpoint. 
+[See all send request body fields here.](https://getstream.io/chat/docs/other-rest/message_format/) 
+- You can also override the `apiKey`, `apiSecret` and `senderId` fields via the override config object
+- You can also override `baseUrl` (defaulted to "https://chat-us-east-1.stream-io-api.com")
 
 ```json title=JSON
 {
