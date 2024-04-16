@@ -5,7 +5,7 @@ title: Set Up Push Notifications Using OneSignal Push
 description: Looking for a way to send push notifications via OneSignal Push? This step-by-step tutorial will show you how to integrate OneSignal Push's API the easy way.
 ---
 
-# OneSignal Push
+# OneSignal Email
 
 ## Configuration Requirements
 
@@ -14,11 +14,22 @@ You can get your OneSignal `App ID` and `REST API Key` by following [these instr
 ## Profile Requirements
 
 To deliver a message to a recipient over OneSigal, Courier must be
-provided the recipient's [PlayerId](https://documentation.onesignal.com/docs/users#section-player-id). This ID should be included in the recipient profile as `oneSignalPlayerID`. Courier does not yet support OneSignal's External IDs.
+provided the recipient's [PlayerId](https://documentation.onesignal.com/docs/users#section-player-id) or [ExternalId](https://documentation.onesignal.com/docs/user-model-migration-guide#user-model). This ID should be included in the recipient profile as `oneSignalPlayerID` or `oneSignalExternalUserId`.
 
 ```json title=JSON
-// Recipient Profile
 {
-  "oneSignalPlayerID": ""
+  "message": {
+    "to": {
+       "oneSignalPlayerID": "..."
+    }
+  }
+}
+// or 
+{
+  "message": {
+    "to": {
+       "oneSignalExternalUserId": "..."
+    }
+  }
 }
 ```
