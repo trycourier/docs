@@ -1,0 +1,103 @@
+# Sending With Tenants
+
+There are two ma
+
+## Send to tenant members
+
+You can notify a list of tenant members by specifying the tenant_id in the to field. Courier will fan out the message to each user with a tenant membership, look up each user's profile data, and send the notification.
+
+For example, an inline Inbox notification send:
+
+```javascript
+{
+  "to": {
+    "tenant_id": "tenantA"
+  },
+    "content": {
+      "title": `Hello, {first_name}!`,
+      "body": "Brought to you by {$.tenant.name}"
+  },
+  "routing": {
+    "method": "single",
+    "channels": ["inbox"]
+  }
+}
+```
+
+Will fan out to these list members and send three notifications
+
+```javascript
+// GET /tenants/tenantA/users
+// Returns:
+{
+  "has_more": false,
+  "items": [
+    {
+      "tenant_id": "tenantA",
+      "profile": {},
+      "type": "user",
+      "user_id": "billy_williams"
+    },
+    {
+      "tenant_id": "tenantA",
+      "profile": {},
+      "type": "user",
+      "user_id": "ron_santo"
+    },
+    {
+      "tenant_id": "tenantA",
+      "profile": {},
+      "type": "user",
+      "user_id": "kerry_wood"
+    }
+  ],
+  "next_url": null,
+  "type": "list",
+  "url": "/tenants/tenantA"
+}
+```
+
+## Send to a tenant with context override
+
+You can be explicit about the tenant context when sending a notification. For example, this inbox send
+
+```javascript
+{
+  "message": {
+    "to": {
+      "user_id": "user1",
+      "context": {
+        "tenant_id": "tenantA"
+      }
+    },
+    "content": {
+      "title": `Hello, {first_name}!`,
+      "body": "Brought to you by {$.tenant.name}"
+    },
+    "routing": {
+      "method": "single",
+      "channels": ["inbox"]
+    }
+  }
+}
+```
+
+:::info Tenant Context without Membership
+A user is not required to be a tenant member to use a tenant context. For example, if user1 does not have a tenant membership to tenantA, you still send a call like the following:
+
+```javascript
+{
+  "message": {
+    "to": {
+      "context": {
+        "tenant_id": "tenantA"
+      },
+      "user_id": "user1"
+    },
+    "template": "ABC"
+  }
+}
+```
+
+This pattern is useful when your tenants have metadata or credentials for a provider, but you don't anticipate needing to nofify each user in the tenant.
+:::
