@@ -1,0 +1,30 @@
+# Inbox and Tenants
+
+When you send a notification to the Courier Inbox with a tenant context, you send the notification to a separate inbox that is only accessible when the `tenantId` is configured.
+
+For example, if you send an inbox notification to user1 with context `tenantA` but do not instantiate the Inbox SDK with `tenantA`, you will not see the message. This allows you to build inbox configurations mapping to your different workspaces. Alternatively, you can create a global inbox by not sending a `tenant_id`
+
+:::info Tenant Auto-Infer
+Courier may also be auto-inferring the Tenant based on a single-user tenant membership, so if you have created tenant memberships, you need to set up your Inbox and Toast SDKs with a `tenantId`. More details on [auto-infer here](./1.intro.mdx#auto-infer-tenant-context-for-user)
+
+## React
+
+You can instantiate the Courier React [Inbox](https://www.npmjs.com/package/@trycourier/react-inbox) and [Toast](https://www.npmjs.com/package/@trycourier/react-toast) components
+
+```jsx
+<CourierProvider clientKey="..." userId="user1" tenantId="tenantA">
+  <Inbox />
+  <Toast />
+  {children}
+</CourierProvider>
+```
+
+## Components
+
+```javascript
+window.courier.init({
+  clientKey: "...",
+  userId: "user1",
+  tenantId: "tenantA",
+});
+```
