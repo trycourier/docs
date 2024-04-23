@@ -1,0 +1,226 @@
+---
+pagination_label: Tenants
+sidebar_label: Introduction
+sidebar_position: 0
+slug: ./
+---
+
+# Tenants
+
+Tenants are a flexible hierarchical database object meant for collecting groups of users and metadata belonging to the user group. Tenants can have three types of metadata: User Profile data, Default Preferences, and Properties. In addition to this metadata, Tenants can have their own default brand and parent tenants. Tenants allow you to map your user relationships to entities like organizations, roles, groups, or projects so that users can have different preferences and messages for tenants.
+
+The use cases for tenants
+
+- Users can opt-out of parent tenant notifications but opt-into child tenant notifications. Alternatively, users can opt-out of user-level notifications but opt-in to specific tenant notifications.
+- Sending to a list of tenant members
+- Storing provider credentials like Slack workspace bot keys
+- Provide alternative default branding to a group of users
+- Tenants can have their preference defaults as well as channel defaults. For example, tenant A can override a global preference, such as opting in instead of opting out and only using Slack instead of SMS, Slack, or Email.
+- Disable templates from being sent to a specific tenant by referencing the tenant metadata in the template configuration.
+- Tenants can have a maximum send limit configured in your workspace configuration.
+- Build notifications using tenant metadata, such as company name, workspace name, etc.
+
+## Metadata
+
+### Parent Tenants
+
+Tenants have a built-in hierarchy enabling tenants to have parent tenants. For example, you may have users who belong to roles; those roles belong to a workspace. You can map that same hierarchy with tenants.
+
+While loading tenant profile data, we'll start at the parent and merge in child metadata, with child data overwriting parent data where there are collisions.
+
+:::info Four Layers of hierarchy
+Currently, Courier only supports four layers of tenant hierarchy. For example if you have a hierarchy like the following.
+
+```
+tenant0
+-tenantQ
+--tenantP
+---tenantR1
+----tenantR1D1
+---tenantR2
+----tenantR2D1
+----tenantR2D2
+```
+
+Loading a tenant context of tenantR2 will load in tenant0, tenantQ, tenantP, tenantR2.
+
+However, loading a tenant context of tenantR2D2 will start at tenantQ, and also load tenantP, tenantR2, then finally tenantR2D2
+
+:::
+
+When data is loaded through a hierarchy, the topmost parent is loaded first, then the next, and next, overwriting keys within the metdata properties as it goes.
+
+**For example:**
+
+export const TableCellCode = ({ value }) => {
+  return (
+    <td style={{ width: "99%" }}>
+      <pre>
+        <code>{JSON.stringify(value, null, 2)}</code>
+      </pre>
+    </td>
+  );
+};
+
+<table>
+  <tbody>
+    <tr>
+      <th>Parent Tenant</th>
+      <TableCellCode
+        value={{ brand_id: "brandX", user_profile: { key1: "value1", key3: "valueA" } }}
+      />
+    </tr>
+    <tr>
+      <th>Child Tenant</th>
+      <TableCellCode
+        value={{ brand_id: "brandY", user_profile: { key2: "value2", key3: "valueB" } }}
+      />
+    </tr>
+    <tr>
+      <th>Merged</th>
+      <TableCellCode
+        value={{
+          brand_id: "brandY",
+          user_profile: { key1: "value1", key2: "value2", key3: "valueB" },
+        }}
+      />
+    </tr>
+  </tbody>
+</table>
+
+### Brands
+
+You may specify a brand as the default for a tenant. Specifying a default brand allows inbox, inbox messages, and email messages to be applied based on the tenant context instead of on the global level. Providing the brand in the Notification Send can still override this setting.
+
+### User Profile
+
+There may be data from a tenant you would like applied to the user's profile information based on the tenant context that's loaded. The User Profile section in Courier Studio (`user_profile` key in the API) will merge into the user profile.
+
+All the parent tenant user_metadata will merge, following the rules in [Parent Tenants](#parent-tenants). After that, the User's profile data from Courier is merged following the Send API call's to/profile context.
+
+<table>
+  <tbody>
+    <tr>
+      <th>Resolved Tenant Context</th>
+      <TableCellCode
+        value={{ user_profile: { key1: "value1", key2: "valueA", key3: "X", foo: "bar" } }}
+      />
+    </tr>
+    <tr>
+      <th>Courier User Profile</th>
+      <TableCellCode value={{ key2: "valueB", key4: "Y", foo: "baz" }} />
+    </tr>
+    <tr>
+      <th>Send Context</th>
+      <TableCellCode value={{ to: { key2: "valueC", key5: true } }} />
+    </tr>
+    <tr>
+      <th>Merged Profile Context</th>
+      <TableCellCode
+        value={{
+          foo: "baz",
+          key1: "value1",
+          key2: "valueC",
+          key3: "X",
+          key4: "Y",
+          key5: true,
+        }}
+      />
+    </tr>
+  </tbody>
+</table>
+
+This is also a common place to store per tenant Slack and Microsoft Teams Bot Tokens.
+
+```
+"slack": {
+    "access_token": "xoxb-..."
+}
+```
+
+### Default Preferences
+
+You can set a Tenant's Default Preferences for [Subscription Topics](../preferences/preference-center/designer/#subscription-topics) by providing the topics you want to override. For example if your Product Notifications (id: 72YE3TJK7S40KWN427Y69FD4D4FH) should be defaulted OPTED_IN for one tenant.
+
+Via Courier Studio:
+
+```javascript
+{
+  "items": [
+    {
+      "id": "72YE3TJK7S40KWN427Y69FD4D4FH",
+      "status": "OPTED_IN",
+      "type": "subscription_topic"
+    }
+  ]
+}
+```
+
+Via REST or SDK:
+
+```javascript
+// PUT /tenants/:tenant_id
+// Body
+{
+  "name": "default-preferences-test",
+  "default_preferences": {
+    "items": [
+      {
+        "id": "72YE3TJK7S40KWN427Y69FD4D4FH",
+        "status": "OPTED_IN"
+      }
+    ]
+  }
+}
+```
+
+You may also put a default custom routing for a tenant
+
+```javascript
+{
+  "items": [
+    {
+      "id": "72YE3TJK7S40KWN427Y69FD4D4FH",
+      "status": "OPTED_IN",
+      "type": "subscription_topic",
+      "has_custom_routing": true,
+      "custom_routing": ["inbox", "push", "sms"]
+    }
+  ]
+}
+```
+
+:::info User's Preferences
+
+Default Tenant Preferences will change the default behavior for any user/tenant combination who has not updated their preferences for the subscription_topic_id yet. Users who have already made a selection for this tenant will keep their current preference
+
+:::
+
+### Properties
+
+Tenants allow arbitrary properties that are accessible to a template.
+
+## Customer Data Platform Integrations
+
+For both [Rudderstack](../../external-integrations/rudderstack) and [Segment](../../external-integrations/segment/segment-integration) integrations, we support the `group` event, which will create a user tenant membership between the user_id in the group call and the `groupId`
+
+## Rest API
+
+Courier has a range of APIs for managing [Tenants](/reference/tenants). Including
+
+- CRUD Tenants
+- Add/Remove User Tenant Membership
+- List all tenants for a user
+- List all users for a tenant
+
+## Tenant Membership
+
+## Auto-Infer Tenant Context for User
+
+By default, if a user has a single User Tenant Membership and a Send request does not specify the tenant in the context. Courier will load the tenant information into the context by default. Auto-infer is excellent for studio, list, or audience messages because required provider information may be stored at the tenant level.
+
+:::note Disabling Automatic Tenant Profile Load
+
+In complex deployments with multiple tenants for users or preferences that don't belong to a tenant, we can enable a setting that allows you to control this behavior. Reach out to support@courier.com for access to the setting.
+
+:::

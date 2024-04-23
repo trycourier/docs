@@ -53,24 +53,9 @@ Instead of using a static list of users, you can create an [Audience](/reference
 
 ## Tenants
 
-Courier support multi-tenant applications with the [Tenants](/reference/tenants) API. A single user can be associated with multiple tenants, and you can specify a `tenant_id` when sending a message in order to ensure the correct preferences and configuration values are applied.
+Courier has a hierarchical database object called Tenants that maps to use cases like workspaces, organizations, projects, groups, and/or roles within your application. Users can belong to zero to many tenants, have preferences based on tenants, and separate Inbox's.
 
-```json
-"to": {
-    "user_id": "luke1234",
-    "context": {
-        "tenant_id" : "red-squadron"
-    }
-}
-```
-
-You can also send message to all of the users in a tenant.
-
-```json
-"to": {
-    "tenant_id" : "red-squadron"
-}
-```
+See the Tenants [Documentation](/platform/tenants) or [API](/reference/tenants) for usage. A single user can be associated with multiple tenants, and you can specify a `tenant_id` when sending a message to ensure the correct preferences and configuration values are applied.
 
 ## Tokens
 

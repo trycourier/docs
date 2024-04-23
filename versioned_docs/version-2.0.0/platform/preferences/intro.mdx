@@ -66,8 +66,6 @@ For enterprise customers, the page is styled by your default brand and displays 
 
 When sending a notification that is linked to a subscription topic, user preferences are respected first before tenant preferences, notification conditions, or channel conditions. 
 
-
-
 :::info Prerequisite: User Id
 
 In order for a recipient to successfully set their preferences from a link within a notification, you must include `to.user_id` in the [Send request](/reference/send/message). This is because the `user_id` ties the recipient profile to their set preferences. If no `user_id` is present in the request, the preferences method will not register.
@@ -75,3 +73,9 @@ In order for a recipient to successfully set their preferences from a link withi
 :::
 
 Learn more about the hosted Preference Center [here](./hosted-page).
+
+
+### Tenants and User Preferences
+
+Tenants and User Preferences can be used together to create preferences per user
+
