@@ -1,0 +1,87 @@
+---
+sidebar_position: 2
+---
+
+import Image from "@theme/IdealImage";
+
+# Preference Center
+
+> The Preference Center is a Courier-hosted page that recipients are redirected to where they can customize and set their preferred notification delivery methods.
+
+<Image
+  img={require("../../assets/guides/preferences-ui/preferences-hosted-page.png")}
+  alt="Preference Center"
+/>
+
+A recipient can select to opt-in or out of a notification (depending on the subscription topic default state)
+as well as select the preferred delivery channel for a notification (business-tier feature) from this page.
+
+## Preference Center Link
+
+When designing a notification template, users can insert a variable link `{$.urls.preferences}` to the Courier Preference Center that will provide an auto-generated url. 
+This link will open the hosted Preference Center where the recipient can configure their notifications preferences.
+
+:::info User Id
+
+In order for a recipient to successfully set their preferences from a notification, you must include `to.user_id` in the [Send request](/reference/send/message). 
+This is because the `user_id` maps the recipient profile to their set preferences. If no `user_id` is present in the request, the preferences method will not register. 
+
+:::
+
+### Adding Preferences Link To Notification Text
+
+Link to the Preference Center from within a notification body by creating a link, and specify `{$.urls.preferences}` as the URL.
+
+<Image
+  img={require("../../assets/guides/preferences-ui/preferences-hyperlink.png")}
+  alt="Preferences URL"
+/>
+
+:::info Notification Preview
+
+Sending a preview email from the notification template will **attach a mock URL** instead of the preference hosted page.
+
+:::
+
+### Adding Preferences Link To Brand Footer
+
+The Preference Center link variable `{$.urls.preferences}` can also be added to directly to the brand footer. 
+
+<Image
+  img={require("../../assets/guides/preferences-ui/preferences-brand-with-link.png")}
+  alt="Brand Template With Preferences Hyperlink"
+/>
+
+
+
+## Preference Center Branding
+
+Just like with email templates, the Preference Center can be customized with your [brand](../content/brands/how-to-use-brands-to-customize.mdx/#customize-your-brands). 
+The Preference Center will use the the logo and colors from your [default brand](https://app.courier.com/database/brands).
+
+## Preview the Preference Center
+
+To preview the Hosted Preference Page, navigate to the [Preference Editor](preferences-editor.mdx) and click on `Preview Page`.
+
+<Image
+  img={require("../../assets/guides/preferences-ui/preferences-preview-page.png")}
+  alt="Preview Button in Preference Editor"
+/>
+
+## Delivery Channel Customization
+
+If a notification template has multiple delivery channels configured, a recipient will be able to customize and set their preferred delivery channel from the Preferences Page.
+
+:::info Business Tier Feature
+
+Delivery Channel customization is a Courier Business feature. Please [contact](https://www.courier.com/request-demo/) our Product Experts for more details.
+
+:::
+
+## Remove 'Powered by Courier' Watermark
+
+[Developer and Business tier](https://www.courier.com/pricing/) customers have the option to remove the 'Powered by Courier' watermark from the Preference Center.
+
+1. Go to the [workspace settings](https://app.courier.com/settings/general)
+2. Toggle "Remove Courier branding and watermark"
+3. Re-publish hosted page in [Preference Editor](https://app.courier.com/settings/preferences)

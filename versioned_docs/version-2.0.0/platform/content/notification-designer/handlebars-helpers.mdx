@@ -257,7 +257,7 @@ This is a modified version of [this Handlebars helper](https://github.com/handle
 
 ### path
 
-Use the variable handler to resolve a `JSONPath`, and returns the resolved value. Returns undefined if the value was not found. Similar to [var](#var).
+Use the variable handler to resolve a `JSONPath`, and returns the resolved value, similar to [var](#var). Returns undefined if the value was not found. 
 
 **Parameters**
 
@@ -270,17 +270,17 @@ Use the variable handler to resolve a `JSONPath`, and returns the resolved value
 <!-- Output: -->
 
 {{var "profile.doesNotExist"}}
-<!-- Output: profile.doesNotExist -->
+<!-- Output: {profile.doesNotExist} -->
 
 {{#if (path "profile.doesNotExist")}}
-path
+abc123
 {{/if}}
 <!-- Output: -->
 
 {{#if (var "profile.doesNotExist")}}
-var
+abc123
 {{/if}}
-<!-- Output: var -->
+<!-- Output: abc123 -->
 ```
 
 ---
@@ -315,7 +315,7 @@ Dear {{name}},
 
 ### var
 
-Uses the variable handler to resolve a `JSONPath`, and returns the resolved value. Returns undefined if the value was not found. Similar to [path](#path).
+Uses the variable handler to resolve a `JSONPath`, and returns the resolved value, similar to [path](#path). Returns the variable reference as a string `{data.doesNotExist}` if the value was not found. 
 
 **Parameters**
 
@@ -328,17 +328,17 @@ Uses the variable handler to resolve a `JSONPath`, and returns the resolved valu
 <!-- Output: -->
 
 {{var "profile.doesNotExist"}}
-<!-- Output: profile.doesNotExist -->
+<!-- Output: {profile.doesNotExist} -->
 
 {{#if (path "profile.doesNotExist")}}
-path
+abc123
 {{/if}}
 <!-- Output: -->
 
 {{#if (var "profile.doesNotExist")}}
-var
+abc123
 {{/if}}
-<!-- Output: var -->
+<!-- Output: abc123 -->
 ```
 
 ---
