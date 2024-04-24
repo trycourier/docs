@@ -62,7 +62,8 @@ module.exports = {
         style: "primary",
         logo: {
           alt: "Courier Logo",
-          src: "img/logo.svg",
+          src: "img/courier-light.png",
+          srcDark: "img/courier-dark.png",
           href: "https://www.courier.com",
           target: "_self",
         },
