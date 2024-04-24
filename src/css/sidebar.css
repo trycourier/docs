@@ -44,14 +44,8 @@ aside,
 /* the html changed in version 2.4.1 */
 aside > div > div > a,
 .navbar-sidebar__brand .navbar__brand {
-  width: 6.5rem;
-  background: url(/img/logo-violet.svg) center no-repeat;
-}
-
-/* the html changed in version 2.4.1 */
-aside > div > div > a > img,
-.navbar-sidebar__brand .navbar__brand .navbar__logo img {
-  display: none !important;
+  width: fit-content;
+  background: url(/img/courier-dark.png) center no-repeat;
 }
 
 .navbar-sidebar__back {
