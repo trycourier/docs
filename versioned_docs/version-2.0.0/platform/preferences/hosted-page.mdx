@@ -52,7 +52,27 @@ The Preference Center link variable `{$.urls.preferences}` can also be added to 
   alt="Brand Template With Preferences Hyperlink"
 />
 
+### Unsubscribe Link
 
+In addition to the Preferences Center, an unsubscribe link can be added to unsubscribe recipients from the entire subscription topic. Use `{$.urls.unsubscribe}` to add an auto-generated unsubscribe link to your notification.
+
+<Image
+  img={require("../../assets/guides/preferences-ui/preferences-unsubscribe.png")}
+  alt="Unsubscribe Hyperlink"
+/>
+
+The unsubscribe link will redirect a recipient to a Preferences page confirmation that they have been unsubscribed from the **entire notification and topic**.
+
+:::info Single Subscription Topic
+
+The unsubscribe link will opt a user out of the entire notification including any channels associated to it and redirect them to a _successfully unsubscribed_ confirmation page. The page will only display the subscription topic associated to that notification.
+
+:::
+
+<Image
+  img={require("../../assets/guides/preferences-ui/preferences-unsubscribe-page.png")}
+  alt="Unsubscribe Page"
+/>
 
 ## Preference Center Branding
 
