@@ -1,7 +1,5 @@
 # Sending With Tenants
 
-There are two ma
-
 ## Send to tenant members
 
 You can notify a list of tenant members by specifying the tenant_id in the to field. Courier will fan out the message to each user with a tenant membership, look up each user's profile data, and send the notification.
@@ -57,9 +55,9 @@ Will fan out to these list members and send three notifications
 }
 ```
 
-## Send to a tenant with context override
+## Send to a user with a tenant context
 
-You can be explicit about the tenant context when sending a notification. For example, this inbox send
+You can be explicit about the tenant context when sending a notification. For example, this inbox send:
 
 ```javascript
 {
@@ -82,6 +80,13 @@ You can be explicit about the tenant context when sending a notification. For ex
 }
 ```
 
+Will send a notification to `user1` with the context information from `tenantA`.
+This includes default preferences, profile values, and the brand of tenantA
+and any other data attached to `tenantA` which can be referenced from the template.
+
+Note that user preferences and data take precedent over the context loaded from
+the tenant.
+
 :::info Tenant Context without Membership
 A user is not required to be a tenant member to use a tenant context. For example, if user1 does not have a tenant membership to tenantA, you still send a call like the following:
 
@@ -101,3 +106,4 @@ A user is not required to be a tenant member to use a tenant context. For exampl
 
 This pattern is useful when your tenants have metadata or credentials for a provider, but you don't anticipate needing to nofify each user in the tenant.
 :::
+import { preferences } from "../../api-specs/configs/schemas/Send"
