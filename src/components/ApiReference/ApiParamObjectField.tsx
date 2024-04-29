@@ -30,7 +30,7 @@ const ApiParamObjectField = ({
     );
 
   return (
-    <Param name={param.name} type={param.type}>
+    <Param name={param.name} type={param.type} required={param.required}>
       <ChildParams name="Properties">
         {param.fields?.map((fieldParam, index) => (
           <ApiParamField key={index} param={fieldParam} prefix={field.name} />
