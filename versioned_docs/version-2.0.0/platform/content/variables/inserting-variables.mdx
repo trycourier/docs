@@ -9,18 +9,18 @@ import GifWrapper from "@site/src/components/GifWrapper";
 
 > Personalize your Courier notifications using **variables** from different data sources and insert them into various parts of a notification.
 
-**Read More:** [JSON Paths and Variables Basics](json-paths-variables.mdx)
+**Read More:** [JSONPath Expressions](json-paths-variables.mdx)
 
 ## Data Sources for Substitution Variables
 
-Courier enables you to use **variables** to insert dynamic values into your notifications from three sources:
+Courier enables you to use **variables** to insert dynamic values into your notifications from five sources:
 
 ### The Data Object
 
-The Data Object is an optional property of the [send](../../../reference/send/intro.mdx) command that allows you to pass arbitrary key-value pairs into your message template.
+The **Data** object is an optional property of the [send](../../../reference/send/intro.mdx) command that allows you to pass arbitrary key-value pairs into your message template.
 
 :::tip Referencing Data Object Variables
-Courier automatically references the `data` path by default. You do not need to include `data` in your variable path if the key-value pair is at the top level of the Data Object. For nested values, begin the path where the value originates, e.g., `{first_layer.second_layer}`.
+Courier automatically references the `data` path by default. You do not need to include `data` in your variable path if the key-value pair is at the top level of the **Data** object. Nested values need to begin the path where the data value originates, e.g. `{first_layer.second_layer}`
 :::
 
 :::caution Variable Naming Conventions
@@ -33,10 +33,10 @@ When using variables in your notification content, ensure that the variable name
 
 ### The User Profile
 
-User Profile data can be sourced from two places:
+**User Profile** data can be sourced from two places:
 
 - The `profile` object in the [Send API](../../../reference/send/intro.mdx) request.
-- The User Profile associated with the recipient ID, created via the [Profiles API](../../../reference/profiles/intro.mdx).
+- The **User Profile** associated with the recipient ID, created via the [Profiles API](../../../reference/profiles/intro.mdx).
 
 :::info Precedence of Profile Data
 If a conflict arises between the `profile` object in the Send API request and the User Profile, the `profile` object in the Send API request takes precedence.
@@ -63,43 +63,40 @@ The available built-in variables include:
 - `{urls.unsubscribe}`: *The unsubscribe URL.*
 - `{urls.preferences}`: *The URL for managing the user's notification preferences.*
 
-By leveraging these three sources of variables—the Data Object, User Profile, and Built-in Variables—you can create highly personalized and dynamic notifications tailored to each recipient.
+### Tenant Object
+The **Tenant** object can be referenced to insert values specific to the tenant or organization, such as the tenant name.
+
+### Brand Object
+The **Brand** object can be referenced to insert variables based on the active brand used in the notification. These variables can include brand names, colors, logos, or other branding elements.
 
 ## Using Variables in Notifications
 
 Variables can be used to insert data into:
 
 - Notification content across all types 
-- Content Blocks (Text, Action, Markdown, Quote, Template, List)
-- Handlebars code (Template blocks, Email templates, Brands)  
-- Email subject line and addresses (From, To, CC, BCC)
+- [Content Blocks](../content-blocks/content-block-basics.mdx) (Text, Action, Markdown, Quote, Template, List)
+- [Handlebars code](../notification-designer/handlebars-designer.mdx) (Template blocks, Email templates, Brands)  
+- [Email subject line and addresses](../../sending/channel-settings.mdx) (From, To, CC, BCC)
+- [Notification Conditions](../notification-settings/send-conditions.mdx) to control notification sending
+- [Channel Conditions](../notification-settings/send-conditions.mdx/#for-notifications-and-channels) to enable or disable specific channels
+- [Filters](../notification-designer/notification-designer-overview.mdx/#reusable-drag-and-drop-content) to conditionally show or hide content blocks
 
 <Image
   img={require("../../../assets/guides/notification-data/data-variables-before-after.png")}
   alt="Example of Variable Replacement in Rendered Preview"
 />
 
-### Inserting Data Values Into Content Blocks
+The Notification Designer supports using external data in various places, such as:
 
-To insert values from the `data` object into Content Blocks, enclose the variable name within single curly brackets: `{variable_name}`. Properly formatted variables inside Text, Markdown, Quote, and List Blocks will be highlighted in green.
+
+
+### Inserting Variables Into Content Blocks
+
+To insert variables into Content Blocks, enclose the variable name within single curly brackets: `{variable_name}`. Properly formatted variables inside Text, Markdown, Quote, and List Blocks will be highlighted in green.
 
 <Image
   img={require("../../../assets/guides/notification-data/data-content-block.png")}
   alt="Text Block With Variables"
-/>
-
-### Inserting Profile Values into Content Blocks
-
-To insert values from the `profile` object or data from the User Profile created with the [Profiles API](../../../reference/profiles/intro.mdx), use a full JSONPath expression such as `profile.variable`. For example, to insert the user's first name into an Action Block, use the expression `profile.name.first`.
-
-<Image
-  img={require("../../../assets/guides/notification-data/data-action-block.png")}
-  alt="Action Button with Variables"
-/>
-
-<Image
-  img={require("../../../assets/guides/notification-data/data-action-modal.png")}
-  alt="Variable Expression in Action Modal"
 />
 
 ### Inserting Variables into Handlebars
