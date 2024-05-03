@@ -19,6 +19,55 @@ Courier enables you to use **variables** to insert dynamic values into your noti
 
 The **Data** object is an optional property of the [send](../../../reference/send/intro.mdx) command that allows you to pass arbitrary key-value pairs into your message template.
 
+```json title="Example Data Object"
+{
+  "customer": {
+    "id": "cust_abc123",
+    "name": "Acme Corporation",
+    "email": "contact@acme.com",
+    "plan": {
+      "id": "plan_enterprise",
+      "name": "Enterprise",
+      "price": {
+        "currency": "USD",
+        "amount": 99.99,
+        "interval": "month"
+      },
+      "features": [
+        "Unlimited users",
+        "Priority support",
+        "Custom branding"
+      ]
+    }
+  },
+  "usage": {
+    "period": {
+      "start": "2024-05-01",
+      "end": "2024-05-31"
+    },
+    "activeUsers": 250,
+    "storage": {
+      "used": 2048,
+      "limit": 5120,
+      "unit": "GB"
+    },
+    "apiCalls": 125000,
+    "customDomains": 3
+  },
+  "billing": {
+    "nextInvoiceDate": "2024-06-01",
+    "balance": {
+      "currency": "USD",
+      "amount": 0
+    },
+    "paymentMethod": {
+      "type": "CreditCard",
+      "lastFour": "1234"
+    }
+  }
+}
+```
+
 :::tip Referencing Data Object Variables
 Courier automatically references the `data` path by default. You do not need to include `data` in your variable path if the key-value pair is at the top level of the **Data** object. Nested values need to begin the path where the data value originates, e.g. `{first_layer.second_layer}`
 :::
@@ -37,6 +86,83 @@ When using variables in your notification content, ensure that the variable name
 
 - The `profile` object in the [Send API](../../../reference/send/intro.mdx) request.
 - The **User Profile** associated with the recipient ID, created via the [Profiles API](../../../reference/profiles/intro.mdx).
+
+```json title="Example Profile Object"
+{
+  "userId": "user456",
+  "name": {
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "middleName": "Elizabeth"
+  },
+  "email": "jane.doe@example.com",
+  "phone": "+1 555 9876543",
+  "dateOfBirth": "1992-11-23",
+  "gender": "Female",
+  "address": {
+    "street": "123 Main St",
+    "city": "Anytown",
+    "state": "CA",
+    "zipCode": "12345",
+    "country": "USA"
+  },
+  "locale": "en-US",
+  "timezone": "America/Los_Angeles",
+  "preferences": {
+    "language": "en",
+    "currency": "USD",
+    "theme": "dark"
+  },
+  "account": {
+    "createdAt": "2021-08-15T09:30:12Z",
+    "plan": "basic",
+    "status": "active"
+  },
+  "subscription": {
+    "id": "sub_xyz789",
+    "startDate": "2023-06-01",
+    "endDate": "2024-05-31",
+    "paymentMethod": {
+      "type": "CreditCard",
+      "lastFour": "5678"
+    }
+  },
+  "socialProfiles": {
+    "twitter": "https://twitter.com/janedoe",
+    "linkedin": "https://linkedin.com/in/janedoe"
+  },
+  "permissions": [
+    "view_reports",
+    "manage_users",
+    "create_projects"
+  ],
+  "integrations": [
+    {
+      "name": "GitHub",
+      "enabled": true,
+      "credentials": {
+        "accessToken": "abc123def456"
+      }
+    },
+    {
+      "name": "Slack",
+      "enabled": false
+    }
+  ],
+  "teams": [
+    {
+      "id": "team_abc123",
+      "name": "Marketing Team",
+      "role": "member"
+    },
+    {
+      "id": "team_def456",
+      "name": "Engineering Team",
+      "role": "admin"
+    }
+  ]
+}
+```
 
 :::info Precedence of Profile Data
 If a conflict arises between the `profile` object in the Send API request and the User Profile, the `profile` object in the Send API request takes precedence.
