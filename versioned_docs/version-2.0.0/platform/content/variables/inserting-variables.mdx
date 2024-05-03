@@ -1,0 +1,126 @@
+---
+sidebar_position: -1
+---
+
+import Image from "@theme/IdealImage";
+import GifWrapper from "@site/src/components/GifWrapper";
+
+# Inserting Data with Variables
+
+> Personalize your Courier notifications using **variables** from different data sources and insert them into various parts of a notification.
+
+**Read More:** [JSON Paths and Variables Basics](json-paths-variables.mdx)
+
+## Data Sources for Substitution Variables
+
+Courier enables you to use **variables** to insert dynamic values into your notifications from three sources:
+
+### The Data Object
+
+The Data Object is an optional property of the [send](../../../reference/send/intro.mdx) command that allows you to pass arbitrary key-value pairs into your message template.
+
+:::tip Referencing Data Object Variables
+Courier automatically references the `data` path by default. You do not need to include `data` in your variable path if the key-value pair is at the top level of the Data Object. For nested values, begin the path where the value originates, e.g., `{first_layer.second_layer}`.
+:::
+
+:::caution Variable Naming Conventions
+When using variables in your notification content, ensure that the variable names are in either *camelCase* or *snake_case* format. Using dashes or other unsupported characters in variable names will result in a rendering error.
+
+- Valid variable name: `{firstName}` or `{first_name}`
+- Invalid variable name: `{first-name}`
+
+:::
+
+### The User Profile
+
+User Profile data can be sourced from two places:
+
+- The `profile` object in the [Send API](../../../reference/send/intro.mdx) request.
+- The User Profile associated with the recipient ID, created via the [Profiles API](../../../reference/profiles/intro.mdx).
+
+:::info Precedence of Profile Data
+If a conflict arises between the `profile` object in the Send API request and the User Profile, the `profile` object in the Send API request takes precedence.
+:::
+
+**Read More:** [JSON Paths and Variables Basics](json-paths-variables.mdx)
+
+### Built-in Variables
+
+Courier provides a set of predefined variables that are automatically populated with relevant data during the send process. These built-in variables can be used in your notification content and settings.
+
+The available built-in variables include:
+
+- `{courier.environment}`: *The environment, e.g., "production" or "test".*
+- `{courier.scope}`: *The notification scope, e.g., "published" or "draft".*
+- `{event}`: *The event associated with the notification.*
+- `{messageId}`: *The unique identifier for the message.*
+- `{openTrackingId}`: *The tracking ID for email open events.*
+- `{recipient}`: *The recipient ID.*
+- `{subscriptionTopicId}`: *The ID of the subscription topic, if applicable.*
+- `{template}`: *The name of the template used for the notification.*
+- `{unsubscribeTrackingId}`: *The tracking ID for unsubscribe events.*
+- `{urls.opened}`: *The URL for tracking email opens.*
+- `{urls.unsubscribe}`: *The unsubscribe URL.*
+- `{urls.preferences}`: *The URL for managing the user's notification preferences.*
+
+By leveraging these three sources of variables—the Data Object, User Profile, and Built-in Variables—you can create highly personalized and dynamic notifications tailored to each recipient.
+
+## Using Variables in Notifications
+
+Variables can be used to insert data into:
+
+- Notification content across all types 
+- Content Blocks (Text, Action, Markdown, Quote, Template, List)
+- Handlebars code (Template blocks, Email templates, Brands)  
+- Email subject line and addresses (From, To, CC, BCC)
+
+<Image
+  img={require("../../../assets/guides/notification-data/data-variables-before-after.png")}
+  alt="Example of Variable Replacement in Rendered Preview"
+/>
+
+### Inserting Data Values Into Content Blocks
+
+To insert values from the `data` object into Content Blocks, enclose the variable name within single curly brackets: `{variable_name}`. Properly formatted variables inside Text, Markdown, Quote, and List Blocks will be highlighted in green.
+
+<Image
+  img={require("../../../assets/guides/notification-data/data-content-block.png")}
+  alt="Text Block With Variables"
+/>
+
+### Inserting Profile Values into Content Blocks
+
+To insert values from the `profile` object or data from the User Profile created with the [Profiles API](../../../reference/profiles/intro.mdx), use a full JSONPath expression such as `profile.variable`. For example, to insert the user's first name into an Action Block, use the expression `profile.name.first`.
+
+<Image
+  img={require("../../../assets/guides/notification-data/data-action-block.png")}
+  alt="Action Button with Variables"
+/>
+
+<Image
+  img={require("../../../assets/guides/notification-data/data-action-modal.png")}
+  alt="Variable Expression in Action Modal"
+/>
+
+### Inserting Variables into Handlebars
+
+To insert data into Handlebars, use double curly brackets `{{ }}` around the variable, following the same paths as in Content Blocks. However, you must include the Handlebars [`var`](https://www.courier.com/docs/platform/content/notification-designer/handlebars-helpers/#var) or [`path`](https://www.courier.com/docs/platform/content/notification-designer/handlebars-helpers/#path) helper to insert a variable from your JSON event:
+
+- Data object: `{{var "variable_name"}}`
+- Profile data: `{{var "profile.variable_name"}}`
+
+Handlebars code is used in the Template Content Block type, Brand Templates, and the Handlebars override within Email Notifications.
+
+### Inserting Variables into Email Fields
+
+In addition to the Handlebars Template override, variables are supported in the `Subject` line, `From` address, `Reply-To`, `CC`, and `BCC` fields in the email [channel settings](../notification-settings/email-fields.mdx).
+
+<Image
+  img={require("../../../assets/guides/notification-data/data-email.png")}
+  alt="Email Subject With Variables"
+/>
+
+<Image
+  img={require("../../../assets/guides/notification-data/data-notification-settings.png")}
+  alt="Email Channel Settings"
+/>
