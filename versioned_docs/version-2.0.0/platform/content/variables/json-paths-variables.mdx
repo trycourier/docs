@@ -1,0 +1,77 @@
+---
+sidebar_position: 0
+---
+
+# JSONPath Expressions
+
+> JSON paths and variables allow you to insert data supplied in the Courier Notification Context into your notifications.
+
+## Structure of the Courier Notification Context
+
+The Courier Notification Context object has the following structure:
+
+```json title="Courier Notification Context"
+{
+ "data": { ... },
+ "profile": { ... },
+ "tenant": { ... },
+ "brand": { ... }
+}
+```
+
+- `data`: *An object passed to the* `send` *method*
+- `profile`: *An object containing merged profile data from the* `send` *method and stored in Courier*
+- `tenant`: *An object containing information about the tenant, such as the company name and other settings*
+- `brand`: *An object containing branding information, such as colors, logos, and social media links*
+
+## Accessing Data using JSONPath Expressions
+
+To access data from the Courier Notification Context, you can use **[JSONPath](https://www.npmjs.com/package/jsonpath)** expressions. **JSONPath** is a query language that allows you to extract data from JSON objects using a simple and intuitive syntax.
+
+Here are some examples of how to access data from the Courier Notification Context using JSONPath:
+
+- To access a property from the **[Data](https://www.courier.com/docs/reference/send/message/#the-data-property)** object: `$.profile.someProp` or `data.someProp` or `someProp`. Courier will automatically query the data object for any path not prefixed with `$.data` 
+- To access a property from the **[Profile](../../../reference/profiles/intro.mdx)** object: `$.profile.someProp` or `profile.someProp`
+- To access a property from the **[Tenant](../../../reference/tenants/intro.mdx)** object: `$.tenant.someProp` or `tenant.someProp`
+- To access a property from the **[Brand](../../../reference/brands/intro.mdx)** settings object: `$.brand.someProp` or `brand.someProp`
+
+```ts title="Brand Settings Object"
+{
+  id: string;
+  colors: {
+    primary: string;
+    secondary: string;
+    tertiary: string;
+  };
+  inapp: {
+    borderRadius: string;
+    disableMessageIcon: boolean;
+    placement: "top" | "bottom" | "left" | "right";
+    emptyState: {
+      textColor: string;
+      text: string;
+    };
+    icons: {
+      bell: string;
+      message: string;
+    };
+  };
+  email: {
+    header: {
+      barColor: string;
+      logo: {
+        href: string;
+        image: string;
+      };
+    };
+  };
+  social: {
+    facebook?: string;
+    instagram?: string;
+    linkedin?: string;
+    medium?: string;
+    twitter?: string;
+  };
+}
+```
+
