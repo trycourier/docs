@@ -3,23 +3,20 @@ sidebar_position: 5
 ---
 
 import Image from "@theme/IdealImage";
-import YoutubeEmbed from "@site/src/components/YoutubeEmbed";
 
 # Using Environments, API Keys, and Migrating Assets
 
 > Explanation of Courier environments, API key settings, and how to move templates and assets between the Live and Test environments.
 
-<YoutubeEmbed videoId="WjjHdyVryY8" />
-
 ## Production and Test Environments
 
-Every Courier tenant has two notification development environments: `Live` and `Test`. The two environments are isolated from one another, and all the assets within them (templates, brands, tags, categories integrations, API keys, log data, etc.) belong only to that environment.
+Every Courier tenant has two notification development environments: `Production` and `Test`. The two environments are isolated from one another, and all the assets within them (templates, brands, tags, categories integrations, API keys, log data, etc.) belong only to that environment.
 
 Any changes made to a template and its associated assets are only applied within the current environment until you migrate the template and overwrite any changes to the corresponding `Notification ID` and assets in the other environment.
 
 ## Switching Between Live and Test Environments
 
-Use the **Environments Toggle** in the right-side menu to switch between your Production and Test environments. Look for the **Test Data Indicator** at the top of the application window to confirm that you're in the test environment.
+Use the **Environments Toggle** in the lower-left settings menu to switch between your Production and Test environments. Look for the **Test Environment** indicator at the top of the application window to confirm that you're in the test environment.
 
 <Image
   img={require("../../../assets/guides/environments/environments-switch-toggle.png")}
@@ -28,7 +25,7 @@ Use the **Environments Toggle** in the right-side menu to switch between your Pr
 
 :::info Info
 
-Simply switching from **Live** to **Test** does not impact your notifications in either environment in any way. It just changes the environment you are viewing.
+Simply switching from **Production** to **Test** does not impact your notifications in either environment in any way. It just changes the environment you are viewing.
 
 :::
 
@@ -61,12 +58,6 @@ Courier customers have the ability to create new API keys and have more than 2 k
 
 In addition to the ability to create new API Keys, Business Tier customers can define the routing behavior of their API Keys. A `mock` key will simulate the Courier notification/message lifecycle - but won't invoke the downstream provider. This lets you see how the request flows inside of Courier without incurring any send cost.
 
-:::info Business Tier Feature
-
-End-to-end testing is a Courier Business feature. Please [contact](https://www.courier.com/request-demo/) our Product Experts for more details on our pricing plans.
-
-:::
-
 <Image
   img={require("../../../assets/guides/environments/environments-api-routing.png")}
   alt="Define Routing Behavior for Custom API Keys"
@@ -88,7 +79,7 @@ Courier will copy the current template. All other assets copied will be their mo
 
 1. Open the notification you wish to migration.
 2. Open the dropdown menu in the 'Publish Changes' button.
-3. Select 'Copy Assets'.
+3. Select 'Migrate Assets'.
 
 <Image
   img={require("../../../assets/guides/environments/environments-migrate-assets.png")}
