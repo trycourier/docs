@@ -307,3 +307,21 @@ video {
 .theme-doc-footer-tags-row {
   display: none;
 }
+
+// the below styling allows for divs with .table-wrapper class to not have a horizontal scrollbar
+// which is caused by tr td:last-child {width: 1%; white-space: nowrap;} in table.css
+
+.table-wrapper table th,
+.table-wrapper table td {
+  word-wrap: break-word;
+}
+
+.table-wrapper table tr td:last-child {
+  white-space: normal;
+  width: 100%;
+}
+
+.table-wrapper table th:first-child,
+.table-wrapper table td:first-child {
+  width: 24%;
+}
