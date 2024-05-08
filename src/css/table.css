@@ -32,8 +32,6 @@ tr td:first-child {
 }
 
 tr td:last-child {
-  width: 1%;
-  white-space: nowrap;
   border-right: none;
 }
 
