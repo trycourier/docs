@@ -1,4 +1,5 @@
 table {
+  display: table;
   width: 100%;
   border-radius: 6px;
   border: 1px solid var(--structure-border, #dcdee4);
