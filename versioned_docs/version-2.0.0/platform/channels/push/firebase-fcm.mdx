@@ -1,113 +1,69 @@
 ---
 sidebar_position: 7
 sidebar_label: Firebase Cloud Messaging (FCM)
-title: Setup Push Notifications with Firebase Cloud Messaging
+title: Firebase Cloud Messaging
 description: Looking for a way to send push notifications via Firebase Cloud Messaging? This step-by-step tutorial will show you how to integrate FCM's API the easy way.
 ---
 
 import Image from "@theme/IdealImage";
+import { SiReact, SiAndroid, SiApple, SiFlutter } from "react-icons/si";
+import { IconContext } from "react-icons";
 
 # Firebase Cloud Messaging (FCM)
 
-<div 
-  style={{
-    position: 'relative',
-    width: '100%',
-    height: 0,
-    paddingBottom: '56.25%'
-  }}>
-  <iframe 
-    style={{
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%'
-    }} 
-    src="https://www.youtube.com/embed/mRS4vHwJ4QQ?rel=0" 
-    title="YouTube video player" 
-    frameborder="0" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-    allowfullscreen></iframe>
-</div>
-
-<br/>
-
-:::info Firebase Project Required
-
-Create a Firebase project [here](https://firebase.google.com/) to get started.
-
+:::info
+Before you begin, ensure that you have created a Firebase project. If you haven't done so already, create a new project [here](https://firebase.google.com/).
 :::
 
 ## Setup
 
-[Setup Video](#)
+To set up Courier with Firebase FCM integration, follow these steps:
 
-1. Go to the [FCM Provider Configuration](https://app.courier.com/channels/firebase-fcm)
-2. Go to your [Firebase Project](https://console.firebase.google.com/)
-3. Go to Project Settings
-4. Click "Service Accounts"
-5. Click "Generate new private key"
-6. Copy the private key JSON
-7. Paste the private key JSON into the [FCM Provider Configuration](https://app.courier.com/channels/firebase-fcm)
-8. Click "Install Provider" or "Save"
+### Configure FCM Provider
+1. In your [Firebase Project](https://console.firebase.google.com/), go to "Project Settings" > "Service Accounts" and generate a new private key.
+2. Copy the contents of the downloaded private key JSON file and paste it into the designated field in the [Courier FCM Provider Configuration](https://app.courier.com/channels/firebase-fcm).
+3. Click "Install Provider" or "Save" to complete the configuration.
 
-### iOS Support
-
-[Setup Video](https://youtu.be/mRS4vHwJ4QQ?t=52)
-
-1. Add Firebase to your [iOS project](https://firebase.google.com/docs/ios/setup)
-2. In your Firebase Project Settings
-3. Click "Cloud Messaging"
-4. Under Apple app configuration, select your iOS project
-5. Go to your [Apple Developer Account](https://developer.apple.com/account)
-6. Click "Certificates"
-7. Click "Keys"
-8. Click the "+" button
-9. Name the Key
-10. Click "Enable" on "Apple Push Notifications Service (APNs)"
-11. Click "Continue"
-12. Click "Register"
-13. Click "Download"
-14. Go back to your Firebase Project > Apple apps > Your app > APNs Authentication Key > Click "Upload"
-15. Enter the required information
-16. Click "Upload"
+### Enable iOS Support (if required)
+1. Integrate Firebase into your [iOS project](https://firebase.google.com/docs/ios/setup).
+2. In your Firebase project settings, go to "Cloud Messaging" and select your iOS project under "Apple app configuration".
+3. Create a new key in your [Apple Developer Account](https://developer.apple.com/account) with "Apple Push Notifications Service (APNs)" enabled.
+4. Download the generated `.p8` file and upload it to your Firebase project settings under "Apple apps" > your app > "APNs Authentication Key".
 
 ## Getting FCM Tokens
 
-### With a Courier Mobile SDK
+### Using a Courier Mobile SDK
 
-Using a Courier Mobile SDK is the best way to set this up. All Courier Mobile SDKs sync FCM tokens to Courier and will be automatically managed. This allows you to send pushes directly to a `user_id` rather than FCM tokens.
+The recommended approach to set up Firebase Cloud Messaging (FCM) with Courier is to use a Courier Mobile SDK. All Courier Mobile SDKs automatically sync FCM tokens to Courier and manage them for you. This allows you to send push notifications directly to a `user_id` instead of managing FCM tokens manually.
 
 | Mobile SDK | FCM Token Management | Tracking Analytics |
-| :-- | :--: | :--: |
-| [Android](https://github.com/trycourier/courier-android#readme) | Automatic | Automatic | 
-| [iOS](https://github.com/trycourier/courier-ios#readme) | [Setup](https://github.com/trycourier/courier-ios/blob/master/Docs/PushNotifications.md#fcm---firebase-cloud-messaging-support) | Automatic | 
-| [React Native](https://github.com/trycourier/courier-react-native#readme) | [Setup](https://github.com/trycourier/courier-react-native/blob/master/src/index.ts#L164) | Automatic | 
-| [Flutter](https://github.com/trycourier/courier-flutter#readme) | [Setup](https://github.com/trycourier/courier-flutter#5-managing-user-state) | Automatic | 
+|:-----------|:--------------------:|:------------------:|
+| <IconContext.Provider value={{size: 24}}><SiAndroid /></IconContext.Provider> [Android](https://github.com/trycourier/courier-android#readme) | [Setup](https://github.com/trycourier/courier-android/blob/master/Docs/PushNotifications.md#2-sync-push-notification-tokens) | Automatic |
+| <IconContext.Provider value={{size: 24}}><SiApple /></IconContext.Provider> [iOS](https://github.com/trycourier/courier-ios#readme) | [Setup](https://github.com/trycourier/courier-ios/blob/master/Docs/PushNotifications.md#3-sync-push-notification-tokens) | Automatic |
+| <IconContext.Provider value={{size: 24}}><SiReact /></IconContext.Provider> [React Native](https://github.com/trycourier/courier-react-native#readme) | [Setup](https://github.com/trycourier/courier-react-native/blob/master/Docs/PushNotifications.md#automatic-token-syncing) | Automatic |
+| <IconContext.Provider value={{size: 24}}><SiFlutter /></IconContext.Provider> [Flutter](https://github.com/trycourier/courier-flutter#readme) | [Setup](https://github.com/trycourier/courier-flutter/blob/master/Docs/PushNotifications.md#automatically-sync-tokens-ios) | Automatic |
+
 
 ### Without a Courier Mobile SDK
 
-Follow the [Firebase Cloud Messaging Setup](https://firebase.google.com/docs/cloud-messaging) for the platform you would like to use.
+If you choose not to use a Courier Mobile SDK, follow the [Firebase Cloud Messaging Setup](https://firebase.google.com/docs/cloud-messaging) guide for your desired platform.
 
-What FCM tokens look like:
+Example FCM token:
 ```
 dYeufxa20kwFnykCny-gIN:APA91bEJxheJmH_zDvoHfPsCDZstJcuYfWuQrhztywoejlAK5HmDBEYNm7R8fNzk3bjQ3lPmkVi8uaoIX94SMV4ZXRPxG_IhfT_OkfmVHCAN6GtdAvELOXSjp6z1UHVVmMnAFTOa7YxW
 ```
 
 :::danger Manual Implementation Requirements
-
-You will need to sync, store, and manage your user's FCM tokens. This likely will require you to create entries in your database, deploy separate endpoints, and add extra development time that can be avoided with a [Courier Mobile SDK](#with-a-courier-mobile-sdk).
-
-If you'd like Courier delivery and click tracking, you will also need to manually make a request to the `trackingUrl`.
-
+When implementing FCM without a Courier Mobile SDK, you will need to:
+- Sync, store, and manage your users' FCM tokens. This may require creating entries in your database, deploying separate endpoints, and adding extra development time that can be avoided by using a [Courier Mobile SDK](#using-a-courier-mobile-sdk).
+- Manually make a request to the `trackingUrl` if you want Courier delivery and click tracking.
 :::
 
 ## Sending Messages
 
-This is a common example request you can make to the [`send`](../../../../reference/send/message/) api that shows:
-1. `providers.firebase-fcm.override.body.data.YOUR_CUSTOM_KEY` for adding custom data to your payload. This is usually used for opening a specific screen in your app when the user takes action on a push notification. Firebase requires the `data` key to be flat. More details about FCM custom data [here](https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages#Message.FIELDS.data).
-2. `providers.firebase-fcm.override.body.apns` for applying iOS specific values. You can learn more about these [here](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification).
+Here's a common example request you can make to the [`send`](../../../../reference/send/message/) API, demonstrating:
+1. `providers.firebase-fcm.override.body.data.YOUR_CUSTOM_KEY` for adding custom data to your payload. This is typically used for opening a specific screen in your app when the user interacts with a push notification. Firebase requires the `data` key to be flat. More details about FCM custom data can be found [here](https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages#Message.FIELDS.data).
+2. `providers.firebase-fcm.override.body.apns` for applying iOS-specific values. You can learn more about these [here](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification).
 
 ### Sending to a `user_id` (Recommended)
 
@@ -253,15 +209,16 @@ curl --request POST \
 
 ## Automatic Courier Mobile SDK Formatting
 
-By default, Courier automatically formats the FCM payload to make a better developer experience for you if you are working with a [Courier Mobile SDK](#with-a-courier-mobile-sdk). Here you can manage the [automatic FCM settings](https://app.courier.com/channels/firebase-fcm).
+When working with a working with a [Courier Mobile SDK](#with-a-courier-mobile-sdk), Courier can automatically format the FCM payload to provide a better developer experience. You can toggle this feature in the [Courier FCM Provider Configuration](https://app.courier.com/channels/firebase-fcm).
 
 <Image img={require("../../../assets/platform/channels/fcm-auto-override.png")} alt="" />
+<br />
 
-What this setting does:
-1. Automatically delivers Android push notifications in the background. This allows you to get more accurate push notification delivery tracking and to use your own [custom Android notification style](https://github.com/trycourier/courier-android#2-setup) all the time.
-2. Supports Courier's [iOS Notification Service Extension](https://github.com/trycourier/courier-ios/blob/master/Docs/PushNotifications.md#4-add-the-notification-service-extension-optional-but-recommended) for better push notification delivery tracking.
+When enabled, this feature:
+1. Automatically delivers Android push notifications in the background. This allows for more accurate push notification delivery tracking and the ability to use your own [custom Android notification style](https://github.com/trycourier/courier-android#2-setup) consistently.
+2. Supports Courier's [iOS Notification Service Extension](https://github.com/trycourier/courier-ios/blob/master/Docs/PushNotifications.md#4-add-the-notification-service-extension-optional-but-recommended) for improved push notification delivery tracking.
 
-Here is an example of what the formatted [`send`](../../../../reference/send/message/) request looks like if enabled:
+Here is an example of what the formatted [`send`](../../../../reference/send/message/) request looks like when this setting is enabled:
 
 ```bash title=cURL
 curl --request POST \
