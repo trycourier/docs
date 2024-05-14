@@ -1,32 +1,40 @@
 ---
 sidebar_position: 8
-sidebar_label: Ops Genie
-title: Set Up Push Notifications Using Ops Genie
-description: Looking for a way to send push notifications via Ops Genie? This step-by-step tutorial will show you how to integrate Ops Genie's API the easy way.
+sidebar_label: Opsgenie
+title: Opsgenie
+description: This step-by-step tutorial shows you how to easily integrate Opsgenie's API to send alerts.
 ---
 
-# Ops Genie
+# Opsgenie
 
 ## Profile Requirements
 
-No profile data is required for Ops Genie. If the Channel is included in your notification template, it will be routed.
+Opsgenie does not require any profile data. If you include the Opsgenie channel in your notification template, Courier will route the notification to Opsgenie.
 
-```json title=JSON
-// Recipient Profile
-{}
+```json
+{
+  "message": {
+    // Recipient Profile
+    "to": {},
+    // Template with Opsgenie channel
+    "template": "TEMPLATE_ID",
+  }
+}
 ```
 
 ## Configuration
 
-The OpsGenie provider has a configuration requirement of setting the message in the channel configuration. The message can be static or augmented by using the `data` property in the api call payload.
+:::info
+To configure the Opsgenie provider, **you must set a value in the `Message` field in the channel configuration**. You can use a static message or enhance it by using the data property in the API call payload.
+:::
 
 ![opsgenie-config](../../../assets/platform/channels/opsgenie-channel-configuration.png)
 
-The following API Call with the `data` property will augment the message we configured in the aformentioned step.
-```json title=JSON
+To add dynamic content to your message, include the data property in the API call payload:
+
+```json
 {
   "message": {
-    "brand_id": "some-brand",
     "data": {
       "metadata": {
         "greeting": "Hey... DO NOT PANIC..."
@@ -42,29 +50,29 @@ The following API Call with the `data` property will augment the message we conf
       }
     },
     "template": "TEMPLATE_ID",
-    "to": {
-      "user_id": "some-recipient"
-    }
+    "to": {}
   }
 }
 ```
 
-After processing the request, we can see the notification be correctly augmented with the `data` property value.
+After processing the request, the notification will include the value from the `data` property.
 ![config](../../../assets/platform/channels/opsgenie-resulting-notification.png)
 
 ## Override
 
-Overrides can be used to change the request body that Courier uses to send a push message. Overrides are useful when a field is not yet supported by Courier or you would like to override the value that Courier generates.
+You can use overrides to change the configuration or request body that Courier sends to Opsgenie. For example, you can change the API key or the message body.
 
-**Note:** If you are using it in Europe region, be sure to https://api.eu.opsgenie.com/v2 and the apiKey tied to your EU region.
+:::info
+If you are using Opsgenie in the Europe region, ensure that you use the URL `https://api.eu.opsgenie.com/v2` and the apiKey associated with your EU region.
+:::
 
-```json title=JSON
+```json title=Provider Overrides for Opsgenie
 {
   "providers": {
     "opsgenie": {
       "override": {
         "config": {
-          "accessToken": "YOUR TOKEN",
+          "apiKey": "YOUR API KEY",
           "url": "URL"
         },
         "headers": {},
