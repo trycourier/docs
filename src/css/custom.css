@@ -55,15 +55,15 @@
   --structure-default: #dcdee4;
   --icon-default: #80849d;
   --background-header-default: #fcfcfc;
-  --item-background-color: rgba(0, 133, 255, 0.05);
   /** IFM / Docusuarus */
-  --ifm-color-primary: #0085ff;
-  --ifm-color-primary-dark: #0078e6;
-  --ifm-color-primary-darker: #0071d9;
-  --ifm-color-primary-darkest: #005db3;
-  --ifm-color-primary-light: #1a91ff;
-  --ifm-color-primary-lighter: #2697ff;
-  --ifm-color-primary-lightest: #4daaff;
+  --item-background-color: #97559d22;
+  --ifm-color-primary: #97559d;
+  --ifm-color-primary-dark: #8f5195;
+  --ifm-color-primary-darker: #874c8c;
+  --ifm-color-primary-darkest: #75427a;
+  --ifm-color-primary-light: #a472a9;
+  --ifm-color-primary-lighter: #b189b5;
+  --ifm-color-primary-lightest: #c7aeca;
   --ifm-pre-background: blue;
   --ifm-menu-color: #2c1338;
   --ifm-menu-color-background-active: var(--item-background-color);
@@ -88,6 +88,14 @@
   --ifm-color-emphasis-800: var(--ifm-color-gray-200);
   --ifm-color-emphasis-900: var(--ifm-color-gray-100);
   --ifm-color-emphasis-1000: var(--ifm-color-gray-0);
+  --item-background-color: #97559d22;
+  --ifm-color-primary: #97559d;
+  --ifm-color-primary-dark: #8f5195;
+  --ifm-color-primary-darker: #874c8c;
+  --ifm-color-primary-darkest: #75427a;
+  --ifm-color-primary-light: #a472a9;
+  --ifm-color-primary-lighter: #b189b5;
+  --ifm-color-primary-lightest: #c7aeca;
   --ifm-background-color: #1b1b1d;
   --background-frame: var(--ifm-background-color);
   --ifm-background-surface-color: #242526;

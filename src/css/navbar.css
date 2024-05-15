@@ -15,7 +15,7 @@
 }
 
 .navbar-login {
-  color: var(--text-link);
+  color: var(--ifm-color-primary);
   font-size: var(--navbar-item-font-size);
 }
 
