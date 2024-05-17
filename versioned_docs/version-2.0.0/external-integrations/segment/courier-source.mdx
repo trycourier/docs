@@ -1,5 +1,5 @@
 ---
-pagination_label: "Courier Source"
+pagination_label: "Courier as a Segment Source"
 sidebar_position: 2
 toc_max_heading_level: 2
 ---
@@ -7,62 +7,32 @@ toc_max_heading_level: 2
 import Image from "@theme/IdealImage";
 import GifWrapper from "@site/src/components/GifWrapper";
 
-# Courier as a Source
+# Courier as a Segment Source
 
-> You can configure Courier to send events to your segment integration. This allows you to track Courier events in segment.
+You can configure Courier to send events to your Segment integration, allowing you to track Courier events in Segment.
 
-<GifWrapper width={952} height={500} caption="Add Couier as Segment Sourcep">
+## Setting Up Courier as a Segment Source
 
-![Add Couier as Segment Source](../../assets/tutorials/segment-courier-add-source.gif)
+1. In Segment, navigate to the *Sources* page (under "Connections").
+2. Select your framework of choice (e.g., Node.js).
+3. Obtain a write key. After adding Node.js as a source, you'll see a page with instructions on how to add Segment to your Node.js codebase. 
+Copy the write key from this page.
+4. In Courier's Segment configuration, paste your [Segment Write Key](https://segment.com/docs/connections/find-writekey/) in the *Segment write key* input field.
 
-</GifWrapper>
+After adding your Segment write key, Courier will send updates to Segment. Update events include messages being sent, opened, clicked, delivered, unroutable, and undeliverable.
 
-<GifWrapper width={1920} height={1080} caption="Add Segment Write Key">
+## Courier Events Sent to Segment
 
-![Add Segment Write Key](../../assets/tutorials/segment-courier-source-setup.gif)
+When Courier is set up as a Segment source, the following events can be tracked in Segment:
 
-</GifWrapper>
+### Message Events
+- `Message Clicked`
+- `Message Delivered`
+- `Message Opened`
+- `Message Sent`
+- `Message Undeliverable`
+- `Message Unroutable`
 
-## From Segment
-
-1. In Segment, navigate to the Sources page (under “Connections”).
-2. Select your framework of choice (e.g. Node.js).
-3. Get a write key.
-
-:::tip Write Key
-
-Once you've added Node.js as a source, you'll see a page with instructions on how to add Segment to your Node.js codebase. You'll be given a write key, which you can copy.
-
-:::
-
-4. Insert your [Segment Write Key](https://segment.com/docs/connections/find-writekey/) in the Segment source write key input in Courier Studio.
-5. *Click away from the input field* to save and the value will be masked like below.
-
-<Image
-  img={require("../../assets/tutorials/segment-write-key.png")}
-  alt="Courier - Segment Write Key Saved"
-/>
-
-After adding your Segment write key, Courier will send updates to Segment. 
-Update events include messages being sent, opened, clicked, delivered, unroutable, and undeliverable. 
-
-<Image
-  img={require("../../assets/tutorials/segment-courier-events.png")}
-  alt="Courier - Example Courier Segment Event"
-/>
-
-## Inside Courier
-
-These events will also be forwarded to Courier, if you've set it as a destination
-
-<Image
-  img={require("../../assets/tutorials/segment-events-from-courier.png")}
-  alt="Courier - Courier Events from Segment"
-/>
-
-You can then use these events to map other automations 
-
-<Image
-  img={require("../../assets/tutorials/segment-courier-events-configured.png")}
-  alt="Courier - Courier Events from Segment Configured"
-/>
+### Audience Events
+- `Audience User Matched`
+- `Audience User Unmatched`
