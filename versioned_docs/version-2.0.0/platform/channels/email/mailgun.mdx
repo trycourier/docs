@@ -132,3 +132,31 @@ Repeat the process to create a webhook for event type "Permanent Failure." Use t
 
 Now that the webhook is configured, you will no longer need Courier to poll for status updates. We recommend waiting about an hour before disabling polling in order to make sure there is no gap in status reporting of any messages already in-flight.
 When you are ready, return to the Courier Mailgun configuration screen. Flip the toggle switch labeled "Enable polling for status updates" into the off position. Then, press the Save button at the bottom of the screen.
+
+## Troubleshooting
+
+> Dealing with Mailgun requests can result in some errors. You can find them below to help you troubleshoot. You can also check the [Courier Logs](../../logging/message-logs.mdx) to help debug any provier errors you may encounter. For anything else, you may contact [Courier Support](mailto:support@courier.com).
+
+### 550 Error Mailgun
+
+This error occurs when there is no active MX Record for the subdomain of the sender's hostname.
+
+#### Solution
+
+To resolve the error, visit your DNS and add the MX records for your subdomains. Afterward, wait about an hour or two to let the record changes propagate. Hereafter, you will not encounter this error.
+
+### Mailgun Account Probation
+
+Mailgun will place your account under probation and enforce a sending limit if you:
+
+1. Send emails with high bounce rates.
+2. Send too many bulk emails.
+3. Send emails with high spam rates.
+
+#### Solution
+
+To resolve the error:
+
+1. Mailgun recommends verifying your account through their Business Verification process.
+
+2. Avoid sending bulky emails and remove all the email addresses that create bounces to avoid damaging your sender's reputation. It will automatically terminate your account from probation.
