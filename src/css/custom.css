@@ -5,6 +5,12 @@
  */
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;&display=swap");
+@import url("./navbar.css");
+@import url("./sidebar.css");
+@import url("./pagination.css");
+@import url("./prism.css");
+@import url("./table.css");
+
 
 :root {
   --text-link: #0085ff;
@@ -208,12 +214,6 @@ strong {
 html[data-theme="dark"] .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.3);
 }
-
-@import url("./navbar.css");
-@import url("./sidebar.css");
-@import url("./pagination.css");
-@import url("./prism.css");
-@import url("./table.css");
 
 .footer {
   display: none;

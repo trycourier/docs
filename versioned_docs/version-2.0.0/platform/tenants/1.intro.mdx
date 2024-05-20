@@ -5,6 +5,8 @@ sidebar_position: 0
 slug: ./
 ---
 
+import CodeBlock from '@theme/CodeBlock';
+
 # Tenants
 
 Tenants are a flexible hierarchical database object meant for collecting groups of users and metadata belonging to the user group. Tenants can have three types of metadata: User Profile data, Default Preferences, and Properties. In addition to this metadata, Tenants can have their own default brand and parent tenants. Tenants allow you to map your user relationships to entities like organizations, roles, groups, or projects so that users can have different preferences and messages for tenants.
@@ -31,15 +33,15 @@ While loading tenant profile data, we'll start at the parent and merge in child 
 :::info Four Layers of hierarchy
 Currently, Courier only supports four layers of tenant hierarchy. For example if you have a hierarchy like the following.
 
-```
+```treeview
 tenant0
--tenantQ
---tenantP
----tenantR1
-----tenantR1D1
----tenantR2
-----tenantR2D1
-----tenantR2D2
+└── tenantQ
+    └── tenantP
+        ├── tenantR1
+        │   └── tenantR1D1
+        └── tenantR2
+            ├── tenantR2D1
+            └── tenantR2D2
 ```
 
 Loading a tenant context of tenantR2 will load in tenant0, tenantQ, tenantP, tenantR2.
@@ -55,9 +57,7 @@ When data is loaded through a hierarchy, the topmost parent is loaded first, the
 export const TableCellCode = ({ value }) => {
   return (
     <td style={{ width: "99%" }}>
-      <pre>
-        <code>{JSON.stringify(value, null, 2)}</code>
-      </pre>
+        <CodeBlock language="json">{JSON.stringify(value, null, 2)}</CodeBlock>
     </td>
   );
 };
@@ -132,7 +132,7 @@ All the parent tenant user_metadata will merge, following the rules in [Parent T
 
 This is also a common place to store per tenant Slack and Microsoft Teams Bot Tokens.
 
-```
+```json
 "slack": {
     "access_token": "xoxb-..."
 }

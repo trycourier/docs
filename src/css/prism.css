@@ -37,3 +37,11 @@
   text-transform: lowercase;
   background: #1e0c26;
 }
+
+.treeview-part.entry-line {
+
+}
+
+.treeview-part.entry-name {
+  color: #80CBC4;
+}
