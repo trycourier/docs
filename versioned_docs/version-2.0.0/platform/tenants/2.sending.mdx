@@ -6,13 +6,13 @@ You can notify a list of tenant members by specifying the tenant_id in the to fi
 
 For example, an inline Inbox notification send:
 
-```javascript
+```json
 {
   "to": {
     "tenant_id": "tenantA"
   },
     "content": {
-      "title": `Hello, {first_name}!`,
+      "title": "Hello, {first_name}!",
       "body": "Brought to you by {$.tenant.name}"
   },
   "routing": {
@@ -24,7 +24,7 @@ For example, an inline Inbox notification send:
 
 Will fan out to these list members and send three notifications
 
-```javascript
+```json
 // GET /tenants/tenantA/users
 // Returns:
 {
@@ -59,7 +59,7 @@ Will fan out to these list members and send three notifications
 
 You can be explicit about the tenant context when sending a notification. For example, this inbox send:
 
-```javascript
+```json
 {
   "message": {
     "to": {
@@ -69,7 +69,7 @@ You can be explicit about the tenant context when sending a notification. For ex
       }
     },
     "content": {
-      "title": `Hello, {first_name}!`,
+      "title": "Hello, {first_name}!",
       "body": "Brought to you by {$.tenant.name}"
     },
     "routing": {
@@ -90,7 +90,7 @@ the tenant.
 :::info Tenant Context without Membership
 A user is not required to be a tenant member to use a tenant context. For example, if user1 does not have a tenant membership to tenantA, you still send a call like the following:
 
-```javascript
+```json
 {
   "message": {
     "to": {
