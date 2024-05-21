@@ -62,7 +62,7 @@ When implementing FCM without a Courier Mobile SDK, you will need to:
 
 ## Sending Messages
 
-Here's a common example request you can make to the [`send`](../../../reference/send/message/) API, demonstrating:
+Here's a common example request you can make to the [`send`](../../../../reference/send/message/) API, demonstrating:
 1. `providers.firebase-fcm.override.body.data.YOUR_CUSTOM_KEY` for adding custom data to your payload. This is typically used for opening a specific screen in your app when the user interacts with a push notification. Firebase requires the `data` key to be flat. More details about FCM custom data can be found [here](https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages#Message.FIELDS.data).
 2. `providers.firebase-fcm.override.body.apns` for applying iOS-specific values. You can learn more about these [here](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification).
 
@@ -219,7 +219,7 @@ When enabled, this feature:
 1. Automatically delivers Android push notifications in the background. This allows for more accurate push notification delivery tracking and the ability to use your own [custom Android notification style](https://github.com/trycourier/courier-android#2-setup) consistently.
 2. Supports Courier's [iOS Notification Service Extension](https://github.com/trycourier/courier-ios/blob/master/Docs/PushNotifications.md#4-add-the-notification-service-extension-optional-but-recommended) for improved push notification delivery tracking.
 
-Here is an example of what the formatted [`send`](../../../reference/send/message/) request looks like when this setting is enabled:
+Here is an example of what the formatted [`send`](../../../../reference/send/message/) request looks like when this setting is enabled:
 
 ```bash title=cURL
 curl --request POST \

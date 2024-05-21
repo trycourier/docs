@@ -218,7 +218,7 @@ The `event` value, for this example, is the "Notification ID" that we assigned t
 
 A `recipient` should be a unique identifier that does not change. This prevents duplicate entries in the event that a recipient changes their email or some other identifying value. We do not have any recipients in this tutorial, so we can enter any string value. Something like `“peter_parker”` will work.
 
-The `profile` information is an object that includes any key-value pairs required by our Integrations. In the case of Twilio, we need a `phone_number` key and value. This is the phone number where our message will be delivered. You can find the required keys for any Integration by selecting an Integration on the ["Integrations" page](https://app.courier.com/integrations). See the ["Integration Provider Requirements"](../../channels) for details.
+The `profile` information is an object that includes any key-value pairs required by our Integrations. In the case of Twilio, we need a `phone_number` key and value. This is the phone number where our message will be delivered. You can find the required keys for any Integration by selecting an Integration on the ["Integrations" page](https://app.courier.com/integrations). See the individual integration provider requirements for details.
 
 Lastly, we define message variables inside the `data` object. Remember the variables we set in the
 visual template editor? This is where we provide the values. Our example message had `name`,

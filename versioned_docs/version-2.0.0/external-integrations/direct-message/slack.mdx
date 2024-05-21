@@ -26,7 +26,7 @@ You will need both Courier and Slack accounts to complete this tutorial. If you 
 
 :::info Related Resources
 
-- [Courier API Reference](../../../reference)
+- [Courier API Reference](../../../../reference)
 - ["An Introduction to Slack Apps"](https://api.slack.com/start/overview)
 - ["Managing Slack Apps"](https://api.slack.com/slack-apps)
 - [Slack API Documentation](https://api.slack.com/)
@@ -180,7 +180,7 @@ The `event` value, for this example, is the "Notification ID" that we assigned t
 
 A `recipient` should be a unique identifier that does not change. This prevents duplicate entries in the event that a recipient changes their email or some other identifying value. We do not have any recipients in this tutorial, so we can enter any string value. Something like `“spike_spiegel”` will work.
 
-The `profile` information is an object that includes any key-value pairs required by our Integrations. In the case of Slack, we need the "Bot User OAuth Access Token" and "Email associated with the recipient's Slack Account." These are sent as `access_token` and `email` respectively in a `slack` object. You can find the required keys for any Integration by selecting an Integration on the ["Integrations" page](../../channels).
+The `profile` information is an object that includes any key-value pairs required by our Integrations. In the case of Slack, we need the "Bot User OAuth Access Token" and "Email associated with the recipient's Slack Account." These are sent as `access_token` and `email` respectively in a `slack` object. You can find the required keys for any Integration by selecting an Integration on the ["Integrations" page](../../../external-integrations).
 
 Lastly, we define message variables inside the `data` object. Remember the variables we set in the visual template editor? This is where we provide the values. Our example message had `name`, `apt_date`, `apt_time`, `support_phone`, and `support_url` variables. For this tutorial, we can assign example strings to each.
 
