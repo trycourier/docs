@@ -40,6 +40,22 @@ These traits can be used to update Courier recipient profiles over time.
 
 [Learn more about Courier Profiles >](../../reference/profiles/intro.mdx)
 
+Example Payload
+
+```jsx
+{
+  "messageId": "segment-test-message-iskh4123",
+  "timestamp": "2024-05-21T18:00:18.913Z",
+  "type": "identify",
+  "email": "test@example.org",
+  "traits": {
+    "trait1": 2,
+    "email": "test@example.org"
+  },
+  "userId": "rod-test"
+}
+```
+
 ### Track Calls
 
 Segment Track calls allow you to record actions performed by your users, including any properties associated with their actions. The actions can be associated with properties that help you analyze these actions.
@@ -100,5 +116,5 @@ The above JSON object is mapped into the Courier data object as follows:
 If you continue to see the "No Segment events received yet." message in Courier, it could mean that Segment was unable to successfully set up your Courier workspace as a destination. To ensure that the test event sent by Segment is successfully received by Courier:
 
 1. Double-check that your API Key was copied accurately into Segment.
-2. Check where the `email` property is placed within the test JSON object in Segment. If it is at the top level, move it within the `properties` object and resend the test event.
+2. Check where the `email` property is placed within the test JSON object in Segment. If it is at the top level of an identify call, move it within the `traits` object and resend the test event.
 3. If you are still experiencing issues, please reach out to Courier Support.
