@@ -430,3 +430,94 @@ Hit the Save button.
 
 Now that the webhook is configured, you will no longer need Courier to poll for status updates. We recommend waiting about an hour before disabling polling in order to make sure there is no gap in status reporting of any messages already in-flight.
 When you are ready, return to the Courier Sendgrid configuration screen. Flip the toggle switch labeled "Enable polling for status updates" into the off position. Then, press the Save button at the bottom of the screen.
+
+## Troubleshooting
+
+> Dealing with SendGrid requests can result in some errors. You can find them below to help you troubleshoot. You can also check the [Courier Logs](../../logging/message-logs.mdx) to help debug any provier errors you may encounter. For anything else, you may contact [Courier Support](mailto:support@courier.com).
+
+### SendGrid API Key Access Forbidden
+
+This error occurs when the request you are trying to perform is not listed under [the allowed actions](https://docs.sendgrid.com/api-reference/api-key-permissions/api-key-permissions) of the SendGrid API key that you are using.
+
+#### Solution
+
+You can do one of the following.
+
+1. You can perform actions allowed by the API key you generated.
+2. Create a new SendGrid API key that allows the actions you wish to execute.
+
+**Creating the new SendGrid API key with desired permissions**
+
+When creating the SendGrid API key, you can [select the permissions](https://docs.sendgrid.com/ui/account-and-settings/api-keys) that you need in the setup guide. To do so, visit the SendGrid API keys console and select "Create API Key." It displays the figure shown below.
+
+<Image img={require("../../../assets/guides/sendgrid/sendgrid-create-api-key.png")} alt="Creating a new SendGrid API key" />
+
+As illustrated above, SendGrid allows you to select three permission scopes:
+
+- Full Access
+- Restricted Access
+- Billing Access. 
+
+In addition, you can select the access levels that you require for your API Key based on your requirements.
+
+### Error: sendgrid invalid email
+
+Whenever you try to send an email to an address that does not comply with internet email formatting standards, or if the email does not present on the recipient's mail server, you will get an invalid email error. This response might originate from either your server or the receiver's mail server.
+
+SendGrid checks the email address format before sending it to ensure that it is legitimate. If the receiver server cannot locate the address, it will return a 550 bounce, indicating that the email address is invalid.
+
+Inactive recipients who don't connect with your content have invalid email addresses. In addition, for a variety of reasons, unengaged email addresses may be invalid:
+
+- Invalid emails may contain typos or misformatting, preventing them from reaching a legitimate inbox.
+
+- An email can become invalid if the user's email address changes, leaving the prior email address empty. The biggest cause of emails being invalid is inactivity or lack of engagement.
+
+- When an inbox provider, such as Earthlink, goes out of business or a server goes down for good, all email domains under that provider become "dead." The emails linked to this defunct domain are similarly invalid.
+
+#### Solution
+
+- Email verification for cleaning or "scrubbing" email lists to increase email deliverability and engagement rates using a variety of digital email verification tools.
+
+- Sort your email list by why each address signed up for your newsletter. You can use this method to see if your emails are relevant to your readers. If your email communications are irrelevant or out-of-date, it can affect your total engagement rate by lowering open and click-through rates.
+
+- Contacts can be divided into groups based on their level of interaction. Double-check that it is still legitimate if you come across an email that appears to be graymail. If not, add the address to the unsubscribe or opt-out list.
+
+- Create a sunset policy. A sunset policy's purpose is to discover disengaged contacts regularly and remove or re-engage them from your email lists.
+
+### Maximum Credits Exceeded SendGrid
+
+SendGrid credits denote the number of emails that you can send. SendGrid uses one credit per email, and these credits get renewed at the start of every month. Therefore, [you will run into this error](https://docs.sendgrid.com/for-developers/sending-email/smtp-errors-and-troubleshooting) if you exceed the maximum number of emails your SendGrid account can send.
+
+#### Solution
+
+You will have to wait until your quota gets renewed to resolve this error. If this is not an option for you, you can upgrade your SendGrid plan and get more credits based on your requirements.
+
+### SendGrid 535 Authentication Failed Bad Username Password
+
+This error can happen due to the below reasons:
+
+- Username and password are incorrect. Error 535 occurs when the username and password entered in the Email client are incorrect. Using the incorrect mail server can potentially result in authentication difficulties.
+
+- The account has been disabled. Accounts might be disabled for a variety of reasons, including past-due payments or spamming difficulties.
+
+- SMTP Authentication error can occur if your email client does not have SMTP authentication enabled.
+
+#### Solution
+
+- Check your username and password, billing plans, and account status.
+
+- Check whether you have confirmed your email address.
+
+- Configure SMTP Authentication.
+
+- Your API Keys should be saved as environment variables. This is a far safer technique, with the additional benefit of only having to change them once rather than searching for them every time they're used.
+
+- Set up sender authentication for domains so that SPF and DKIM can be set up. This functionality enables you to use industry-standard email authentication protocols to authenticate your domains with the Twilio SendGrid account.
+
+### Sendgrid From Field Not Working
+
+This indicates that the `from` address does not correspond to a verified Sender Identity. This error prevents an email from being sent until it is fixed.
+
+#### Solution
+
+Customers are asked to [authenticate their sender identities](https://docs.sendgrid.com/glossary/sender-authentication) in order to sustain the highest attainable sender reputations and to maintain legal sending behavior. The address your receivers will view as the sender of your emails is represented by a sender identity. You can use Domain Authentication or Single Sender Verification to authenticate one or more Sender Identities.
