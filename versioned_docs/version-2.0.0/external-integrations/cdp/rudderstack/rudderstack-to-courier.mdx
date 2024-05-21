@@ -1,0 +1,91 @@
+---
+sidebar_position: 1
+slug: /external-integrations/rudderstack/rudderstack-to-courier
+toc_max_heading_level: 2
+---
+
+import Image from "@theme/IdealImage";
+
+# RudderStack to Courier
+
+## Configuration
+
+Go to RudderStack destination and search for Courier.
+
+<Image
+  img={require("../../../assets/external-integrations/rudderstack/search-courier-destination.png")}
+  alt=""
+/>
+
+Connect one or more sources
+
+<Image
+  img={require("../../../assets/external-integrations/rudderstack/connect-sources-to-courier-destination.png")}
+  alt=""
+/>
+
+Add Courier API Key
+
+<Image img={require("../../../assets/external-integrations/rudderstack/courier-api-key.png")} alt="" />
+
+# Event trigger
+
+You can trigger events either via the sources you connected or by directly calling rudderstack endpoints.
+
+Courier destination supports `group`, `identify` and `track` events, which appear on Courier Rudderstack integration page inside Courier Studio UI.
+
+Check <a href="https://www.rudderstack.com/docs/sources/event-streams/sdks/rudderstack-node-sdk/#sending-events">this</a> to learn more on sending events to your RudderStack instance.
+
+Once events start flowing in from RudderStack into Courier, those appear on RudderStack integration page on Courier Studio.
+
+<Image
+  img={require("../../../assets/external-integrations/rudderstack/courier-inbound-rudderstack.png")}
+  alt=""
+/>
+
+## Supported events
+
+### Identify
+
+RudderStack identify event when sent to Courier creates or updates the user profile. It uses userId as the user identifier and the `traits` get mapped to user profile attributes.
+
+### Track
+
+RudderStack track event when sent to Courier can trigger an automation or supply inline automations payload. The `properties` used inside the payload will be used for mapping it to Courier.
+
+### Group
+
+RudderStack group event when sent to Courier can create an account or trigger an automation. The `groupId` will be used as Account ID and `userId` (if not exists, `anonymousId`) will be used as User Identifier.
+
+## Event mapping
+
+Received RudderStack Events can be mapped to an existing automation, or a new automation can be initialized where the event is set as a trigger.
+
+Click on the plus (+) icon under link automations and map the event to an existing automation template, or create a new automation template.
+
+Properties should be scoped by courier.automation object, so for instance if you want to map userId to refs, your request to rudderstack would look like below (note courier.automation object):
+
+```json title="Rudderstack Courier Automation Property Example"
+{
+  "event": "user-checkout",
+  "type": "track",
+  "properties": {
+    "courier": {
+      "automation": {
+        "data": {
+          "userId": "my-user"
+        }
+      }
+    }
+  }
+}
+```
+
+Mapped automation would look like below:
+
+<Image
+  img={require("../../../assets/external-integrations/rudderstack/rudderstack-mapped-automation-v2.png")}
+  alt=""
+/>
+
+[Learn more about Courier Automations >](../../../tutorials/how-to-automate-message-sequences.mdx)

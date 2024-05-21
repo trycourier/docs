@@ -1,52 +1,68 @@
 ---
-sidebar_position: 1
-slug: ./
+sidebar_position: 9
+sidebar_label: Resend
+title: Set Up Email Using Resend
+description: Looking for a way to send email notifications via Resend? This step-by-step tutorial will show you how to integrate Resend's API the easy way.
+slug: /platform/channels/email/resend
 ---
 
 import Image from "@theme/IdealImage";
+import TOCInline from "@theme/TOCInline";
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import GifWrapper from "@site/src/components/GifWrapper";
 
-# Create and Send an Email Notification
+# Resend
 
-This step-by-step guide will walk you through creating and sending an email notification using Courier.
+## Introduction
+
+This step-by-step guide will walk you through sending an email notification using Courier and Resend.
+
+<TOCInline toc={toc.slice(1, -1)} maxHeadingLevel={2} />
 
 ### Prerequisites
 
-You will need both Courier and a channel provider account integrated with Courier to complete this tutorial. If you don't have accounts already, sign up before proceeding.
+You will need both Courier and Resend accounts to complete this tutorial. If you don't have accounts already, sign up before proceeding.
 
-- [Sign up for Courier](https://app.courier.com/)
-- Sign up for one of [Courier's supported integrations](https://help.courier.com/en/articles/4169750-what-notification-providers-can-i-integrate-with-courier)
+- [Sign up for Courier](https://app.courier.com/signup)
+- [Sign up for Resend](https://resend.com/signup)
 
 :::info Related Resources
 
-- [Courier API Reference](../../reference/intro.mdx)
-- [Courier Integrations Settings page](https://app.courier.com/integrations)
+- [Courier API Reference](../../../../reference)
+- [Resend API Keys](https://resend.com/api-keys)
 - [Bash Environment Variables](https://www.gnu.org/software/bash/manual/html_node/Environment.html)
 - [cURL](https://curl.haxx.se/)
 
 :::
 
-## Add an Integration to Courier
+## Add the Resend Integration
 
-Create an account with one of Courier's [supported channel providers](https://help.courier.com/en/articles/4169750-what-notification-providers-can-i-integrate-with-courier) and integrate it on your [Courier Integrations Settings page](https://app.courier.com/integrations).
+Once logged in to Courier, navigate to the ["Integrations" page](https://app.courier.com/integrations). Click on the Resend Integration to configure it.
+
+Courier Integrations each require different pieces of information based on the needs of the Integration provider (see the requirements for each in the "Provider Documentation" section of the sidebar to the left). In the case of Resend, we need a Resend "API Key" and a "From Address."
+
+### Resend API Key
+
+Once logged in to Resend, navigate to ["API Keys"](https://resend.com/api-keys). On this page, you can create an API key, name it, and give it appropriate permissions.
+
+Copy your API key from Resend, and paste it into the "API Key" field on the Courier Integration page.
+
+### Resend From Address
+
+Next, add an email address to the "From Address" field. This will usually be an address such as noreply@mydomain.com, news@mydomain.com, or mail@mydomain.com, but any address you control is fine. Once both fields are complete, click the “Add Integration” button, then click "Save.”
 
 ## Create a Notification
 
-Navigate to the Courier [Notifications page](https://app.courier.com/designer/notifications) and click “Create Notification.” Click on “Untitled Notification” to rename your notification — for this tutorial, call it “Test Appointment Reminder.” Choose an integration from your list of configured Integrations. Then, click the channel box for that integration that is added to the sidebar to open the template designer.
+Navigate to the Courier [Notifications page](https://app.courier.com/designer/notifications) and click “Create Notification.” Click on “Untitled Notification” to rename your notification — for this tutorial, call it “Test Appointment Reminder.” From your list of configured Integrations, click on the Resend button. Then, click the “Resend” box that has been added to the sidebar in order to bring up an email template.
 
-You can add message blocks to the template by clicking one of the content block icons on the mock-up email.
-
-<Image
-  img={require("../../assets/guides/send-message/courier-notification-template.png")}
-  alt="Courier Notification Template"
-/>
+You can add message blocks to the template by clicking one of the three icons on the mock-up email. The paper icon adds a text block. The hand icon adds a link. The list icon adds a repeatable list.
 
 These text blocks can include variables using a mustache-like template syntax. Surround text with a single set of curly braces and that text will be interpreted as a variable (it will also be highlighted in green). For example, you may want to include a `{name}` variable (we'll cover the source of this variable data later in this tutorial).
 
-If you are creating an email notification, be sure to set the subject line for your email (click “New Subject” to edit it).
+Be sure to set the subject line for your email as well (click “New Subject” to edit it). You can also choose a different From Address — this will override the From Address in your Resend Integration settings.
 
-Finish populating the notification template with whatever text you want to send. You can also copy the example below, which contains a few variables for demonstration.
+Finish populating the email template with whatever text you want to send. You can also copy the example below, which contains a few variables for demonstration.
 
 ```text title=Text
 Hello {name},
@@ -60,27 +76,17 @@ Best regards,
 Courier
 ```
 
-<Image
-  img={require("../../assets/guides/send-message/courier-notification-template-sample.png")}
-  alt="Courier Notification Template with Sample Message"
-/>
-
-When you are finished, click Publish in the upper right corner.
+When you are finished, click Publish in the upper right corner and give it a Publish Message of "Initial notification."
 
 ## Send a Message
 
-Courier passes messages to Integrations via the [Send endpoint](../../reference/send/message.mdx) . For this tutorial, we will send our messages with cURL, but you can use your preferred language and HTTP library. You can also use an API testing tool such as [Postman](https://www.getpostman.com/) or [Insomnia](https://insomnia.rest/). For additional code samples, see the ["Courier API Reference."](../../reference/intro.mdx)
+Courier passes messages to Integrations via the [Send endpoint](../../../../reference/send/message). For this tutorial, we will send our messages with cURL, but you can use your preferred language and HTTP library. You can also use an API testing tool such as [Postman](https://www.getpostman.com/) or [Insomnia](https://insomnia.rest/). For additional code samples, see the ["Courier API Reference"](../../../../reference).
 
 ### Authorization
 
-Courier supports both basic and token authorization. For this tutorial, we will use token authorization. You can read more about authorization in Courier's ["Authorization Overview"](../../reference/authorization.mdx).
+Courier supports both basic and token authorization. For this tutorial, we will use token authorization. You can read more about authorization in Courier's ["Authorization Overview"](../../../../reference/authorization).
 
 We must send an `Authorization` header with each request. The Courier Send API also requires an `event`. The authorization token and event values are the "Auth Token" and "Notification ID" we see in the detail view of our “Test Appointment Reminder” event. Click the gear icon next to the Notification's name to reveal them.
-
-<Image
-  img={require("../../assets/guides/send-message/courier-auth-credentials.png")}
-  alt="Courier Authorization Credentials"
-/>
 
 As a best practice, let's assign these values to environment variables. In a Bash terminal, you can add the variables by typing `VARIABLE_NAME="<value>"`. Some examples are provided below. Note that the values are just examples. Do not copy them — be sure to use the tokens associated with your account instead.
 
@@ -127,7 +133,7 @@ The `event` value, for this example, is the "Notification ID" that we assigned t
 
 A `recipient` should be a unique identifier that does not change. This prevents duplicate entries in the event that a recipient changes their email or some other identifying value. We do not have any recipients in this tutorial, so we can enter any string value. Something like “katherine_pryde” will work.
 
-The `profile` information is an object that includes any key-value pairs required by our Integrations. You can find the required keys for any Integration by selecting an Integration on the ["Integrations" page](https://app.courier.com/integrations). See the individual integration provider requirements for details.
+The `profile` information is an object that includes any key-value pairs required by our Integrations. In the case of Resend, we need an `email` key and value. This is the address where our message will be delivered. You can find the required keys for any Integration by selecting an Integration on the ["Integrations" page](https://app.courier.com/integrations). See the ["Integration Provider Requirements"](../../../../external-integrations) for details.
 
 Lastly, we define message variables inside the `data` object. Remember the variables we set in the
 visual template editor? This is where we provide the values. Our example message had `name`,
@@ -142,7 +148,7 @@ Our `--data` option should look like this:
 ```json
 {
   "message": {
-    "template": "'"$COURIER_NOTIFICATION_ID"'",
+    "template": "$COURIER_NOTIFICATION_ID",
     "to": {
       "email": "kpryde@xavierinstitute.edu"
     },
@@ -161,13 +167,13 @@ Our `--data` option should look like this:
 <TabItem value="bash" label="cURL urlencoded">
 
 ```bash
---data "message[template]=$COURIER_NOTIFICATION_ID" \
---data "message[to][email]=kpryde@xavierinstitute.edu" \
---data "message[data][name]=Katherine Pryde" \
---data "message[data][apt_date]=July 31" \
---data "message[data][apt_time]=11:00 AM" \
---data "message[data][support_phone]=555-555-5555" \
---data "message[data][support_url]=https://www.courier.com/docs/" \
+--data "template=$COURIER_NOTIFICATION_ID" \
+--data "to[email]=kpryde@xavierinstitute.edu" \
+--data "data[name]=Katherine Pryde" \
+--data "data[apt_date]=July 31" \
+--data "data[apt_time]=11:00 AM" \
+--data "data[support_phone]=555-555-5555" \
+--data "data[support_url]=https://www.courier.com/docs/" \
 ```
 
 </TabItem>
@@ -226,47 +232,72 @@ Before sending this request, be sure to replace the `kpryde@xavierinstitute.edu`
 
 Paste your complete cURL request in either format in your terminal and hit "Return." You should receive a response like `{"messageId":"<message id string>"}`. You will also receive an email at the address you specified in the request body. Be sure to check your spam folder if the message doesn’t arrive in your inbox.
 
-<Image
-  img={require("../../assets/guides/send-message/send-curl-request.png")}
-  alt="Send the cURL Request"
-/>
-
-<Image
-  img={require("../../assets/guides/send-message/delivered-email.png")}
-  alt="Delivered Email"
-/>
-
 Congratulations, you’re on your way to crafting a better notification strategy that your audience is sure to appreciate.
 
-## Overrides (Advanced)
+## Profile Requirements
 
-Overrides can be used to change the request body that Courier uses to send an email. Overrides are useful when a field is not yet supported by Courier or you would like to override the value that Courier generates.
-
-For a list of fields you can override for any Courier integration provider, see the "Overrides" section of that individual provider's integration doc.
-
-Below is an example of overriding the subject and adding an attachment to a SendGrid email.
+To deliver a message to a recipient over Resend, Courier must be provided the recipient's email address. This value should be included in the recipient profile as `email`.
 
 ```json title=JSON
 {
   "message": {
-    "template": "<COURIER_NOTIFICATION_ID>",
+    // Recipient Profile
     "to": {
-      "email": "kpryde@xavierinstitute.edu"
+      "email": "example@example.com"
+    }
+
+    // ... rest of message definition
+  }
+}
+```
+
+## Sending Attachments
+
+To include an attachment in the email, you can use the following override:
+
+```json
+{
+  "message": {
+    "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "to": {
+      "email": "example@example.com"
     },
     "data": {
-      "name": "Katherine Pryde"
+      "hello": "world"
     },
     "providers": {
-      "sendgrid": {
+      "resend": {
+        "override": {
+          "attachments": [
+            {
+              "filename": "billing.pdf",
+              "contentType": "application/pdf",
+              "data": "Q29uZ3JhdHVsYXRpb25zLCB5b3UgY2FuIGJhc2U2NCBkZWNvZGUh"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+```
+
+## Overrides (Advanced)
+
+You can use a provider override to replace what we send to Resend's API. Overrides are useful when a field is not yet supported by Courier or you would like to override the value that Courier generates. You can override any of the fields supported by Resend's `/emails` endpoint. For example, you can use [Resend's Tagging](https://resend.com/docs/api-reference/emails/send-email) with your request:
+
+```json title=JSON
+{
+  "message": {
+    "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "to": {
+      "email": "example@example.com"
+    },
+    "providers": {
+      "resend": {
         "override": {
           "body": {
-            "attachments": [
-              {
-                "content": "eyJmb28iOiJiYXIifQ==",
-                "type": "application/json",
-                "filename": "SENDGRID_ATTACH.json"
-              }
-            ]
+            "tags": [{ "name": "environment", "value": "development" }]
           }
         }
       }

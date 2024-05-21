@@ -1,0 +1,338 @@
+---
+sidebar_position: 1
+slug: /platform/channels/email/aws-ses
+---
+
+import Image from "@theme/IdealImage";
+import { FiExternalLink } from "react-icons/fi";
+
+# AWS SES
+
+## Setting Up Email with AWS SES
+
+:::info Prerequisites
+
+Before beginning this tutorial, ensure you have an AWS SES account. If you do not have an AWS SES account yet, please sign up:
+
+- [Sign up for AWS SES <FiExternalLink />](https://portal.aws.amazon.com/billing/signup#/start) 
+- [AWS SES Access Keys <FiExternalLink />](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/get-aws-keys.html)
+
+:::
+
+### Step 1: Add the AWS SES Integration to Courier
+
+1. Log in to Courier
+2. Navigate to the [Integrations](https://app.courier.com/integrations) page. 
+3. Select the [AWS SES Integration](https://app.courier.com/integrations/aws-ses) to configure it.
+
+### Step 2: Create an AWS SES API Key
+
+1. Log in to AWS SES.
+2. Navigate to "Settings" → "My Security Credentials."
+3. Go to ”Access management” → “Users.”
+4. On the "Users" page, select “Add user” and follow the steps to create a new IAM user with `AmazonSESFullAccess` permissions.
+
+:::info Important
+
+Be sure to download and save the Access Key ID and Secret Access Key upon user creation.
+
+:::
+
+:::note Creating and Configuring a Custom IAM Policy
+
+If your use case requires specific permissions beyond the `AmazonSESFullAccess` policy, you may need to create a custom IAM policy:
+
+1. In the AWS IAM console, navigate to "Policies" and select “Create policy.”
+2. Use the JSON editor to define the policy. Here's an example of a custom policy allowing specific SES actions:
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "VisualEditor0",
+      "Effect": "Allow",
+      "Action": ["ses:SendRawEmail", "ses:GetSendStatistics"],
+      "Resource": "*"
+    }
+  ]
+}
+```
+
+3. After defining the policy, attach it to the IAM user created for AWS SES.
+
+:::
+
+### Step 3: Integrate AWS SES API Key with Courier
+
+After creating the IAM user and obtaining the API keys, add them to the Courier AWS SES integration page.
+
+### Step 4: Add a Verified "From" Address in Courier
+
+1. Add a verified email address (e.g., support@example.com) to the "From Address" field in Courier.
+    - The "From" email address you set will be used for all emails sent via the AWS SES integration. You can [override this default "From" address](https://www.courier.com/docs/platform/content/notification-settings/email-fields/#setting-the-reply-to-cc-and-bcc-addresses) on a per channel basis within your templates.
+2. Ensure the "From" address is a verified identity in your AWS-SES account.
+3. For more information on verifying identities, see [Verifying an Identity for Amazon SES Sending Authorization <FiExternalLink />](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-identity-owner-tasks-verification.html).
+
+:::danger AWS SES Sandbox Limitations
+New AWS SES accounts start in a limited state called the "SES sandbox." In this mode, you can only send emails to verified addresses and domains. To enable email sending to non-verified addresses, you must request AWS to lift these restrictions. For guidance on this process, see [Moving out of the Amazon SES sandbox <FiExternalLink />](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/request-production-access.html).
+:::
+
+### Step 5: Configure AWS SES Region
+
+Select your preferred AWS SES region from the dropdown menu in the Courier AWS SES integration.
+
+### Step 6: Create and Send a Courier Notification using AWS SES
+
+Refer to [Create and Send a Message](../../../../platform/sending) for instructions on building your notification template and sending a message with the Courier API using cURL.
+
+## Profile Requirements for Message Delivery
+
+To deliver a message via AWS SES, include the recipient's email address in the profile as shown below:
+
+```json
+{
+  "message": {
+    // Recipient Profile
+    "to": {
+      "email": "example@example.com"
+    }
+    // ... rest of message definition
+  }
+}
+```
+
+## Overrides
+
+Overrides in Courier offer the flexibility to customize settings specifically for AWS SES, adapting to more advanced email sending requirements. This is useful when you need to pass custom configurations, such as a MIME 1.0 string, instead of using the standard Courier template. While using Courier's override feature, you can modify various fields that are specific to AWS SES's `SendRawEmail` method.
+
+For a comprehensive list of fields that can be overridden in the context of AWS SES, refer to the AWS documentation on the [SendRawEmail API <FiExternalLink />](https://docs.aws.amazon.com/ses/latest/APIReference/API_SendRawEmail.html).
+
+### Using Overrides to Modify Email Settings
+
+Here’s an example of how to implement an override in Courier to modify the RawMessage data:
+
+```json
+{
+  "message": {
+    "template": "<COURIER_NOTIFICATION_ID>",
+    "to": {
+      "email": "kpryde@xavierinstitute.edu"
+    },
+    "data": {
+      "name": "Katherine Pryde"
+    },
+    "providers": {
+      "aws-ses": {
+        "override": {
+          "body": {
+            "RawMessage": {
+              "Data": "<Mime 1.0 compatible message>"
+            }
+          },
+          "config": {
+            "accessKeyId": "<Access Key ID>",
+            "secretAccessKey": "<Secret Access Key>"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+### Sending Attachments with Overrides
+
+To include an attachment in your email, use the `attachments` override as follows:
+
+```json
+{
+  "message": {
+    "to": {
+      "email": "kpryde@xavierinstitute.edu"
+    },
+    "template": "<COURIER_NOTIFICATION_ID>",
+    "data": {
+      "name": "Katherine Pryde"
+    },
+    "providers": {
+      "aws-ses": {
+        "override": {
+          "attachments": [
+            {
+              "filename": "hello.txt",
+              "contentType": "text/plain",
+              "data": "SGk="
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+```
+
+## Troubleshooting
+
+> Dealing with Amazon SES requests can result in some errors. You can find them below to help you troubleshoot. You can also check the [Courier Logs](/platform/logging/message-logs) to help debug any provier errors you may encounter. For anything else, you may contact [Courier Support](mailto:support@courier.com).
+
+### Amazon SES 554 Error
+
+This error occurs due to numerous reasons.
+
+1. It occurs when you have not verified the sender email (sender identity) on Amazon SES.
+2. If you're using the Amazon SES in the sandbox environment and have not verified the recipient's email address, you may encounter this error.
+3. You may encounter this error when you've provided an invalid recipient email address.
+
+#### Solution
+
+You can try the [following](https://docs.aws.amazon.com/ses/latest/dg/troubleshoot-smtp.html) steps mentioned below.
+
+- Open the Amazon SES console and verify that the sender email identity you are using has a verification status of `verified`.
+- If you're using the sandbox environment, ensure that you have added the recipient email address as a verified identity on the SES console. It is mandatory to add the recipient emails on Amazon SES when running in the Sandbox environment.
+- If both the sender and recipient email addresses are verified, ensure that you have provided the correct recipient email address for the "To" parameter.
+- If none of the above works for you, verify that the region specified in your AWS SDK is the same region that contains the verified identities. For example, if the verified identities are located in the Virginia region (us-east-1), you should initialize the Amazon SES instance in the same region.
+
+### Amazon SES Email Address is Not Verified
+
+This error occurs if you try to send emails using an unverified identity in the region specified.
+
+Additionally, this error occurs when sending emails in the sandbox environment using unverified sender and recipient email identities.
+
+#### Solution
+
+You may try the following to [resolve](https://docs.aws.amazon.com/ses/latest/dg/troubleshoot-error-messages.html) the error.
+
+1. **Verify the region**
+
+Verify that you are connected to SES in the region where all your verified identities are located.
+
+2. **Confirm identity verification**
+
+Confirm that the sender's identity has been verified. If you are using the sandbox environment, confirm the verification status of the recipient identities as well.
+
+To do so, visit the SES Console and navigate to your verified identities. The status of the identities should be marked as "Verified" as shown below.
+
+<Image img={require("../../assets/guides/aws-ses/amazon-ses-verified-identities.png")} alt="Viewing the verified identities on SES" />
+
+If the status for your identity is `Unverified` you will have to verify the identity before sending the email.
+
+3. **Verify email addresses**
+
+If the identities have been verified, ensure that the email addresses you have provided are correctly spelled.
+
+### AWS SES Timeout
+
+This error occurs when the client (such as an EC2) cannot establish a TCP connection to the public endpoint of Amazon SES. 
+
+Generally, this is caused when the client (EC2) has a firewall to block outgoing connections on the SMTP ports (25, 587, or 465) or if the client does not have access to an internet connection.
+
+#### Solution
+
+To resolve the error, ensure that the client has an active/stable internet connection.
+
+Hereafter, update the firewall rules on the client to allow outgoing connections on ports 25, 587, and 465 (depending on the port you use).
+
+### AWS SES BCC Not Working
+
+This error occurs when the recipient email in the "TO" field is present in the "BCC" field. Certain email providers do not allow the email to contain duplicate recipients.
+
+Additionally, this error may occur if the email address in the "BCC" field does not exist.
+
+#### Solution
+
+To resolve the error, ensure that the recipient's email address is not the same as the `BCC` email address.
+
+If the email addresses in the `BCC` are unique, verify the validity of the email addresses specified in the "BCC" list.
+
+### Error: is not authorized to perform ses sendemail
+
+This error occurs when an AWS service such as a Lambda function is not authorized to send an email using Amazon SES.
+
+#### Solution
+
+To resolve the error, you will need to attach a policy to the IAM role to allow the AWS resource to execute the `ses:SendEmail` action.
+
+For example, if you wish to provide a Lambda function the permission to send an email using SES, you would have to create and attach an inline policy for the function's IAM role that allows the `ses:SendEmail` action. The inline policy is shown below.
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement" : [
+     {
+       "Sid": "Inline Policy for SES Send Email",
+       "Effect": "Allow",
+       "Resource" : "*",
+       "Actions":[
+         "ses:SendEmail"
+       ]
+     }
+  ] 
+}
+```
+
+The inline policy shown above will ensure that the AWS service is allowed to execute the `SendEmail` action on an Amazon SES resource and will resolve the permission error.
+
+### Amazon SES Authentication Credentials Invalid
+
+This error occurs when the SMTP username and password provided to connect to the SMTP endpoint of Amazon SES are incorrect.
+
+#### Solution
+
+1. **Verify credentials:** Ensure that the username and password you enter are correct and the same one SES provided.
+
+2. **Verify the region:** SMTP credentials in Amazon SES differ per region. Therefore, ensure that the credentials used are associated with your region.
+
+3. **Use SMTP credentials and not console credentials:** 
+  - It is important to note that the credentials used in the SMTP endpoint are not the same as those you use for AWS. It would help if you had the Amazon SES SMTP credentials to access the Amazon SES SMTP interface.
+
+  - You will have to create an IAM user that can invoke the SES services and generate SMTP credentials for the newly created IAM user. It can be done using the SES console.
+
+  - First, navigate to your SES account dashboard. You will see a section titled - "SMTP Settings." Under this, you should see the output shown below.
+
+<Image img={require("../../assets/guides/aws-ses/aws-ses-authentication.png")} alt="Viewing SES Settings in AWS Console" />
+
+Click "Create SMTP Credentials." This will direct you to the IAM Console, where you will be prompted to create an IAM User with the policies required to invoke SES.
+
+<Image img={require("../../assets/guides/aws-ses/aws-ses-settings.png")} alt="Creating the IAM user" />
+
+Afterward, click "Create." This will create the IAM User, generate the credentials, and display the output below.
+
+<Image img={require("../../assets/guides/aws-ses/aws-ses-create-iam-user.png")} alt="Viewing the SMTP credentials for IAM user" />
+
+To resolve the error, you can download the generated credentials and provide these values for the SMTP username/password.
+
+### Amazon SES 530 Authentication Required
+
+This error occurs when the SMTP credentials provided to Amazon SES are invalid. This can be the username, password, port, and endpoint. Additionally, this error may occur if you have not used TLS.
+
+#### Solution
+
+You can try the following to see which one fixes the error.
+
+1. **Verify credentials:** Ensure that the SMTP username and password you provide are the same credentials you created for the IAM User with permissions to invoke SES.
+
+2. **Verify the region:** Verify that you connect to SES in the region where all your verified identities are located.
+
+3. **Verify SMTP configurations:** Visit the SES console and navigate to your account dashboard. In the account dashboard, you should see the SMTP configurations for SES.
+
+<Image img={require("../../assets/guides/aws-ses/amazon-ses-smtp-settings.png")} alt="SMTP configurations for SES" />
+
+Cross-check the SMTP configurations shown in the SES console with the endpoint and the port you've provided to ensure that SES has been configured correctly.
+
+4. **Use the correct port:** Ensure that the port used is port - 587. Some users have experienced issues using the TLS Wrapper port and found that using port 587 (TLS port) fixes the error.
+
+### AWS SES Rate Limit
+
+Amazon SES has a limit of **one email per second** in the sandbox environment. However, you can exceed this rate for a short period, not for long periods.
+
+#### Solution
+
+To [resolve this error](https://docs.aws.amazon.com/ses/latest/dg/manage-sending-quotas.html), contact AWS and request production access for SES. Your request will be reviewed, and based on your use case, AWS will grant a reasonable email rate for your SES account. Later on, you can increase this rate by contacting AWS.
+
+### AWS SES Email Not Received
+
+This error occurs if the templated email is missing a handlebar parameter. For example, if the email template requires five handlebar parameters and you've specified only four, Amazon SES will send the email and will not display any error. However, the email will not get delivered to the recipient, causing this. It may be possible to debug by viewing the [Courier logs](/platform/logging/message-logs.mdx) for any rendering errors.
+
+#### Solution
+
+To resolve the error, verify that all the required handlebar parameters have been added to the templated email parameters when sending the email.

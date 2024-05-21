@@ -1,0 +1,118 @@
+---
+slug: platform/logging/observability/datadog
+---
+
+import Image from "@theme/IdealImage";
+
+# Datadog
+
+Courier supports Datadog as an observability integration. You can follow the steps below to setup the Datadog integration.
+
+### Setup
+
+1. Create a Datadog account if you don't have one.
+2. Generate a Datadog [API key](https://app.datadoghq.com/organization-settings/api-keys).
+3. Navigate to the [Datadog integration page](https://app.courier.com/integrations/catalog/datadog) in Courier and enter the API key you generated in step 2.
+4. Verify that the [Datadog site parameter](https://docs.datadoghq.com/getting_started/site/#access-the-datadog-site) corresponds to the URL of your Datadog instance.
+
+### Dashboard
+
+Download the Courier Datadog Dashboard using the link below to easily monitor Courier within Datadog.
+
+<a
+  class="button button--primary button--md"
+  target="_blank"
+  href="/data/courier-datadog-dashboard.json"
+  download="courier-datadog-dashboard.json"
+>
+  Download Dashboard JSON
+</a>
+<br />&nbsp;
+
+<Image
+  img={require("../../assets/guides/observability/datadog-dashboard.png")}
+  alt="Datadog Dashboard"
+/>
+
+### Available Datadog Metrics
+
+Courier sends various metrics to Datadog to help you monitor and track the performance of your notifications. Here are the available metrics:
+
+#### Account Metrics
+- `courier.account.created`
+- `courier.account.deleted`
+- `courier.account.updated`
+
+#### Account User Relationship Metrics
+- `courier.account.user.added`
+- `courier.account.user.removed`
+- `courier.account.user.updated`
+
+#### Audience Metrics
+- `courier.audience.matched`
+- `courier.audience.unmatched`
+
+#### Automation Metrics
+- `courier.automation.invoked`
+- `courier.automation.throttled`
+- `courier.automation.digest.triggered`
+- `courier.automation.batch.triggered`
+- `courier.automation.fetch-data-step.errored`
+
+#### Channel Metrics
+- `courier.email.delivered`
+- `courier.email.error`
+- `courier.email.sent`
+- `courier.email.undeliverable`
+- `courier.sms.delivered`
+- `courier.sms.error`
+- `courier.sms.sent`
+- `courier.sms.undeliverable`
+- `courier.push.delivered`
+- `courier.push.error`
+- `courier.push.sent`
+- `courier.push.undeliverable`
+- `courier.direct_message.delivered`
+- `courier.direct_message.error`
+- `courier.direct_message.sent`
+- `courier.direct_message.undeliverable`
+
+#### Debug Metric
+- `courier.debug`
+
+#### Inbox Metrics
+- `courier.inbox.connection_attempt`
+- `courier.inbox.connection_error`
+- `courier.inbox.reconnection_attempt`
+- `courier.inbox.notification_attempt`
+
+#### List Metrics
+- `courier.list.subscribed`
+- `courier.list.unsubscribed`
+- `courier.list.subscribe.failed`
+
+#### Message Metrics
+- `courier.message.canceled`
+- `courier.message.delivered`
+- `courier.message.filtered`
+- `courier.message.received`
+- `courier.message.sent`
+- `courier.message.throttled`
+- `courier.message.total.clicked`
+- `courier.message.total.opened`
+- `courier.message.undeliverable`
+- `courier.message.unique.clicked`
+- `courier.message.unique.opened`
+- `courier.message.unique.sent`
+- `courier.message.unmapped`
+- `courier.message.unroutable`
+
+#### User Metrics
+- `courier.user.created`
+- `courier.user.deleted`
+- `courier.user.unsubscribed`
+- `courier.user.updated`
+- `courier.user.update.failed`
+
+You can use these metrics to create custom dashboards and alerts in Datadog to monitor the health and performance of your Courier notifications.
+

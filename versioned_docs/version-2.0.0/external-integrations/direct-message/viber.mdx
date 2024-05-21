@@ -1,0 +1,46 @@
+---
+sidebar_position: 7
+sidebar_label: Viber
+title: Send Notifications Using Viber
+description: Looking for a way to send notifications via Viber? This step-by-step tutorial will show you how to integrate Viber's API the easy way.
+slug: /platform/channels/direct-message/viber
+---
+
+# Viber
+
+## Viber Requirements
+
+1. A Viber [bot account](https://partners.viber.com/account/create-bot-account). Make a note of the auth token.
+2. An active webhooks server that can receive POST requests from Viber. Viber provides a [nodejs utility](https://www.npmjs.com/package/viber-bot)
+ for handling these requests.
+3. The recipient must have an active [Viber](https://www.viber.com/en/) account logged into either the iOS or Android app.
+
+## Webhooks Server
+
+Before sending notifications Viber requires a webhooks server to be registered. This can be done using the following cURL command:
+
+```bash
+ curl -X POST 'https://chatapi.viber.com/pa/set_webhook'\
+      -H 'Content-Type: application/json'\
+      -H 'X-Viber-Auth-Token: <VIBER_AUTH_TOKEN>'\
+      -d '{ "url": "<YOUR_WEBHOOK_SERVER_URL>", "event_types": ["delivered"] }'
+```
+
+This webhooks server will receive [events](https://www.npmjs.com/package/viber-bot) from Viber such as UserID's of users who wish to subscribe, as well as notification delivery status events.
+
+## Sending a Direct Message
+
+To send a direct message to a user, supply the Viber `UserID` to the `viber.receiver` property of the recipient profile. This `UserID` is sent to the webhooks server after they send a message to the Viber bot.
+
+```json
+{
+  "message": {
+    // Recipient Profile
+    "to": {
+      "viber": {
+        "receiver": "12943673=="
+      }
+    }
+  }
+}
+```
