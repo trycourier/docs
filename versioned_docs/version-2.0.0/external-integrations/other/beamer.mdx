@@ -1,0 +1,45 @@
+---
+sidebar_position: 1
+sidebar_label: Beamer
+title: Send Push Notifications Using Beamer
+description: Looking for a way to send push notifications via Beamer? This step-by-step tutorial will show you how to integrate Beamer's API the easy way.
+slug: /platform/channels/other/beamer
+---
+
+# Beamer
+
+## Profile Requirements
+
+No profile data is required for Beamer.
+
+## Override
+
+Overrides can be used to change the request body that Courier uses to send a push message. Overrides are useful when a field is not yet supported by Courier or you would like to override the value that Courier generates. You can override the following fields from Beamer’s `postcreation` object ([documented here in Beamer's API docs](https://www.getbeamer.com/api#definition-PostCreation)).
+
+```json
+{
+  "filter": "",
+  "filterUserId": "",
+  "filterUrl": "",
+  "sendPushNotification": "",
+  "publish": ""
+}
+```
+
+Below is an example of using the override to deliver a post to a specific known user id.
+
+```json title=JSON
+{
+  "providers": {
+    "beamer": {
+      "override": {
+        "body": {
+          "filterUserId": "YOUR USER ID",
+          "sendPushNotification": "false",
+          "publish": "true"
+        }
+      }
+    }
+  }
+}
+```

@@ -1,0 +1,32 @@
+---
+sidebar_position: 2
+slug: /external-integrations/rudderstack/courier-to-rudderstack
+toc_max_heading_level: 2
+---
+
+import Image from "@theme/IdealImage";
+
+# Courier to RudderStack
+
+## Configuration
+
+Add a source that would essentially be the origin for events sent from Courier could just be a Node.js source). Once a source is added, copy over write key and data plane URL to Courier RudderStack integration page.
+
+<Image
+  img={require("../../../assets/external-integrations/rudderstack/rudderstack-source-config.png")}
+  alt=""
+/>
+
+<Image
+  img={require("../../../assets/external-integrations/rudderstack/courier-rudderstack-source-config.png")}
+  alt=""
+/>
+
+## Event sourcing
+
+Courier would start sending the events generated (like Message Sent for instance) to your RudderStack instance. This should show up on your RudderStack source page.
+
+<Image
+  img={require("../../../assets/external-integrations/rudderstack/courier-to-rudderstack-events.png")}
+  alt=""
+/>
