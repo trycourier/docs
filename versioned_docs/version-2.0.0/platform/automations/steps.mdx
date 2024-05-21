@@ -354,6 +354,12 @@ The `merge` property can be any of the following values:
 - `none`
   - do not make any changes to the recipient profile if the recipient profile already exists and has data. Otherwise initialize the recipient profile
 
+:::warning Profile Merging
+
+When using update-profile steps, be mindful with the aforementioned merge strategies that can update an existing profile that was [created with a Segment Identify event](../../external-integrations/segment/segment-integration.mdx/#identify-calls).
+
+:::
+
 ### Schema
 
 ```json
