@@ -11,12 +11,38 @@ The send API lets you send a message to one or more recipients with a single cal
 the response will contain a request ID that you can use to check the status of your message later.
 
 Recipients come in several forms:
-- User - A single user
-- List (by ID) - A pre-defined list of users stored with Courier
-- List pattern - A pattern that can target multiple lists of users at once
-- Audience - A Courier audience containing users.
+- [User](../profiles/by-id.mdx) - A single user
+- [List](../lists/by-id.mdx) - A pre-defined list of users stored with Courier
+- [List pattern](../../tutorials/how-to-send-to-a-list-or-list-pattern-using-wildcarding.mdx) - A pattern that can target multiple lists of users at once
+- [Audience](../audiences/intro.mdx) - A Courier audience containing users.
 
-You may also pass an array containing any combination of the above.
+**You may also pass an array containing any combination of the above.**
+
+**For ad-hoc users:**
+
+```json
+{
+    "message": {
+        "to": {
+            "email": "darth@vader.com",
+            "phone_number": "+123456789"
+        }
+    }
+}
+```
+
+**For ad-hoc lists:**
+
+```json
+{
+    "message": {
+        "to": [
+            {"email": "example1@courier.com"},
+            {"email": "example2@courier.com"}
+        ]
+    }
+}
+```
 
 There are two styles of notification sending:
 - by template
