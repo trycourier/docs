@@ -1,9 +1,4 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "rewrites": [
-    {
-      "source": "/docs/rest2/:path*",
-      "destination": "https://courier.docs.buildwithfern.com/docs/rest2/:path*"
-    }
-  ]
+  "rewrites": []
 }
