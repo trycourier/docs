@@ -10,7 +10,7 @@ const navbarItems = [
     activeBasePath: "reference",
   },
   {
-    to: "/rest/",
+    to: "https://www.courier.com/docs/rest/",
     label: "API Playground",
     activeBasePath: "rest",
   },
