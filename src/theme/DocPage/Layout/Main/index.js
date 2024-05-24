@@ -2,7 +2,6 @@ import React from "react";
 import clsx from "clsx";
 import { useDocsSidebar } from "@docusaurus/theme-common/internal";
 import styles from "./styles.module.css";
-import DocslyFooter from "./DocslyFooter";
 export default function DocPageLayoutMain({ hiddenSidebarContainer, children }) {
   const sidebar = useDocsSidebar();
   return (
@@ -21,7 +20,6 @@ export default function DocPageLayoutMain({ hiddenSidebarContainer, children }) 
       >
         {children}
       </div>
-      <DocslyFooter />
     </main>
   );
 }

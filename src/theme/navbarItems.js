@@ -2,12 +2,17 @@ const navbarItems = [
   {
     to: "/",
     label: "Home",
-    activeBaseRegex: "^((?!reference).)*$",
+    activeBaseRegex: "^((?!reference|rest).)*$",
   },
   {
     to: "/reference/",
     label: "REST API",
     activeBasePath: "reference",
+  },
+  {
+    to: "/rest/",
+    label: "API Playground",
+    activeBasePath: "rest",
   },
   {
     to: "/sdk-libraries/",
@@ -21,10 +26,6 @@ const navbarItems = [
   {
     href: "https://status.courier.com",
     label: "Service Status",
-  },
-  {
-    type: "docsVersionDropdown",
-    position: "right",
   },
 ];
 
