@@ -45,3 +45,51 @@ Other types of categories will likely be rejected, including:
 - Shipping Update
 - Ticket Update
 - Transportation Update
+
+## WhatsApp Template Verification
+
+When using WhatsApp templates with Twilio, it's essential to understand the verification process, as WhatsApp has stringent guidelines to ensure the quality and appropriateness of messages sent through their platform.
+
+### Create the Template
+
+**Template Structure:** WhatsApp [message templates](https://www.twilio.com/docs/whatsapp/tutorial/send-whatsapp-notification-messages-templates) are predefined messages that can include placeholders for dynamic content. Templates can be of various types such as text, media (images, documents), or interactive messages (buttons, list messages).
+
+**Template Categories:** These are typically [categorized](#notification-categories) into use cases like transactional updates, customer service, or alerts.
+
+### Submit the Template for Approval
+
+**Access Twilio Console:** Navigate to the Twilio Console and go to the Messaging section.
+
+**Create Template:** In the WhatsApp Templates section, create a new template. You'll need to provide details like the template name, category, language, and the message content. This content should be free of any promotional material as WhatsApp strictly disallows promotional content in templates.
+
+**Submit for Review:** Once you've filled in the necessary details, [submit](https://www.twilio.com/docs/whatsapp/tutorial/message-template-approvals-statuses) the template for WhatsApp's review.
+
+### WhatsApp Approval Process
+
+**Review by WhatsApp:** After submission, the template goes through WhatsApp's review process. This usually takes a few minutes to up to 24 hours. WhatsApp reviews the template to ensure it complies with their policies.
+
+Possible Outcomes:
+
+- **Approved:** If the template meets WhatsApp's guidelines, it will be approved. You can now use this template to send messages via the Twilio API.
+
+- **Rejected:** If the template does not meet the guidelines, it will be [rejected](https://www.twilio.com/docs/whatsapp/tutorial/message-template-approvals-statuses#common-rejection-reasons). Reasons for rejection could include promotional content, inappropriate language, or violating other WhatsApp policies. You will need to modify the template and resubmit it for approval.
+
+### Using the Approved Template
+
+**Integration with Courier:** Once your template is approved, you can use the [Send API](../../reference/send/message.mdx) to send messages using this template. You'll need to specify the template name and provide the necessary parameters for the placeholders in your API requests.
+
+**Sending Messages:** When sending a message using an approved template, you make an API call with the required details. Twilio handles the rest, ensuring the message is delivered to the recipient via WhatsApp.
+
+:::tip Templates Definition
+
+While Twilio defines the content of your notification as a `template`, the format of your notification is what's important for the verificaion process. Once it's approved, you can use [Courier Templates](../../platform/content/notification-designer/design-a-notification.mdx) as long as they follow the approved format design.
+
+:::
+
+### Key Considerations
+
+**Template Content:** Ensure that the content of your templates is clear, concise, and non-promotional. Include all necessary placeholders and provide sample values to give context during the review process.
+
+**Localization:** If you need to send messages in multiple languages, you'll need to create and get approval for each language version of the template.
+
+**Monitoring and Updates:** Keep an eye on the [performance](https://help.twilio.com/articles/360039737753-Recommendations-and-best-practices-for-creating-WhatsApp-Message-Templates) of your templates. If users frequently report your messages as spam, it might affect your ability to send messages. You may need to periodically update your templates to remain compliant with any new WhatsApp guidelines.
