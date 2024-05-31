@@ -5,6 +5,8 @@ slug: ./control-flow
 toc_max_heading_level: 2
 ---
 
+# Control Flow
+
 import Image from "@theme/IdealImage";
 import videoThumbnail from "./assets/video-thumbnail.png";
 import controlFlowThumb from "./assets/control-flow.png";
@@ -12,8 +14,13 @@ import connectingNodesURL from "./assets/connecting-nodes.mp4";
 import draggingNodesURL from "./assets/dragging-nodes.mp4";
 import ifNodeURL from "./assets/if-node.mp4";
 import controlFlow from "./assets/control-flow.mp4";
+import CodeBlock from "@theme/CodeBlock";
 
-# Control Flow
+export const TableCellCode = ({ value }) => {
+  return <CodeBlock language="json">{JSON.stringify(value, null, 2)}</CodeBlock>;
+};
+
+## Overview
 
 Automations can conditionally execute a branch of the workflow. This can be useful in any case where you may want to change the actions of an automation based on certain data sent with the template.
 
@@ -23,16 +30,58 @@ For example, you may want to send one template if one data field represents a ce
   <source src={ifNodeURL} />
 </video>
 
-## Message Events
+## Sources
 
-The Control Flow step will accept the following events that are returned in the logs/messages functionality. These events can be used to initiate a workflow based on the value returned.
+The Control Flow IF statement has four different source options, data, profile, step ref and JS condition. These sources control whether to follow the True path or the False path by evaluating the sources.
+
+### Data
+
+Compare a field within the `data` key within the automation context with a value. For example:
+
+| Condition                                                       | Automation Payload                                                              | Evaluation |
+| --------------------------------------------------------------- | ------------------------------------------------------------------------------- | ---------- |
+| ![data flow condition - not equals](data-flow-condition.png)    | <TableCellCode value={{recipient: "user123", "data": {"foo": "bar"}}} />        | True       |
+| ![data flow condition - one Of](data-flow-condition-one-of.png) | <TableCellCode value={{recipient: "user123", "data": {"throw": "scissors"}}} /> | False      |
+
+### Profile
+
+Compare a field within the `data` key within the automation context with a value. For example:
+
+| Condition                                                               | Automation Payload                                                                                                                 | Evaluation |
+| ----------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| ![profile flow condition - equals](profile-flow-condition-equals.png)   | <TableCellCode value={{recipient: "user123", "profile": {"user_id": "user123", first_name: "bryan" }}} />                          | True       |
+| ![profile flow condition - one of](profile-flow-condition-contains.png) | <TableCellCode value={{recipient: "user123", "profile": {"user_id": "user123", properties: { roles: ["admin", "developer"] }}}} /> | True       |
+
+### Step Ref
+
+Step Ref is designed for you to check the current value of a Send node, mainly it's status. See the screenshot below or view the [tutorial](#tutorial). In order to use Step Ref, you must have a Send node and have the alias of the Send node defined in its configuration.
 
 `CLICKED` | `DELIVERED` | `ENQUEUED` | `FILTERED` | `OPENED` | `SENT` | `SIMULATED` | `UNDELIVERABLE` | `UNMAPPED` | `UNROUTABLE`
 
-<Image
-  img={require("./assets/control-flow.png")}
-  alt="Automation Control Flow"
-/>
+<Image img={require("./assets/control-flow.png")} alt="Automation Control Flow" />
+
+### JS Condition
+
+Sometimes the value checking is not open ended enough to evaluate a condition. Using the JS Condition you can:
+
+- manipulate the field value before comparing
+- check for key existence
+- Comparing date diffs as ISO strings
+- manipulate nested arrays and objects
+
+We will evaluate the manipulation into a Javascript Boolean after the equation
+
+| Condition                                                                | Automation Payload                                                                                                       | Evaluation |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ---------- |
+| ![js condition value - map includes](js-condition-value-map-include.png) | <TableCellCode value={{recipient: "user123", data: {names: [{name: "Alvin"}, {"name": "Simon"}, {"name": "Theo"}] }}} /> | False      |
+
+#### JS Condition Values
+
+Within the Data, Profile and Step Ref Sources, you may also use JS String evalution in the value field
+
+| Condition                                                 | Automation Payload                                                           | Evaluation |
+| --------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------- |
+| ![js condition value - date](js-condition-value-date.png) | <TableCellCode value={{recipient: "user123", data: {ts: 1095869760000 }}} /> | True       |
 
 ## Tutorial
 
@@ -41,3 +90,4 @@ Below you can find a walkthrough of a sample control flow using step references.
 <video width="783" loop autoPlay muted controls poster={controlFlowThumb}>
   <source src={controlFlow} />
 </video>
+```
