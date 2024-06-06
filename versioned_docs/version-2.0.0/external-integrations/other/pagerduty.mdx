@@ -2,7 +2,7 @@
 sidebar_position: 9
 sidebar_label: PagerDuty
 title: Set Up Push Notifications Using PagerDuty
-description: Looking for a way to send push notifications via PagerDuty? This step-by-step tutorial will show you how to integrate PagerDuty's API the easy way.
+description: Learn how to send push notifications via PagerDuty by integrating PagerDuty's API with Courier in this step-by-step tutorial.
 slug: /platform/channels/other/pagerduty
 ---
 
@@ -10,36 +10,47 @@ import Image from "@theme/IdealImage";
 
 # PagerDuty
 
-## How to configure PagerDuty:
+## How to Configure PagerDuty:
 
 ### Prerequisites
 
 - Pagerduty [account](https://www.pagerduty.com/sign-up/) with elevated privileges
-- Pagerduty Service created and configured with Events-v2 integration
+- Pagerduty Service created and configured with Events API v2 integration
 
-#### Add Event-v2 integration to your Pagerduty Service
+### Configure PagerDuty Integration
 
-<Image img={require("../../assets/platform/channels/pd-event-v2-integration.png")} alt="" />
+1. In your PagerDuty account, navigate to the desired Service and access its "Integrations" settings.
+2. Add a new "Events API v2" integration and configure it according to your requirements.
+3. Copy the Integration Key provided by PagerDuty for the newly created integration.
+4. Navigate to the [PagerDuty integration setup page](https://app.courier.com/channels/pagerduty) in your Courier account and provide the necessary information, including the Integration Key.
 
-#### Once the integration is configured, you will see something like this:
+|               |                                                                                                         |
+|---------------|---------------------------------------------------------------------------------------------------------|
+| **Routing Key**   | Paste the Integration Key obtained from PagerDuty.                                                  |
+| **Event Action**  | Specify the event action (e.g., trigger) for the notifications.                                     |
+| **Source**        | Enter the host name or fully qualified domain name (FQDN) of the source sending the notifications.  |
+| **Severity**      | Choose the appropriate severity level (e.g., info, warning, error, critical) for the notifications. |
 
-<Image img={require("../../assets/platform/channels/pd-after-installation.png")} alt="" />
+## Overrides 
 
-#### Click on the setting toggle on the top right corner, and copy Integration Key:
+### Routing Key
 
-<Image img={require("../../assets/platform/channels/pd-routing-key.png")} alt="" />
+You can override the routing key by specifying a `routing_key` in the user profile using `profile.pagerduty.routing_key`. 
 
-#### Navigate to PagerDuty channel installation page in your [Courier account](https://app.courier.com/channels/pagerduty) and fill up the form fields, Paste your Integration key in the Routing Key field:
+```json
+{
+  "profile": {
+    "pagerduty": {
+      "routing_key": "YOUR_PROFILE_SPECIFIC_ROUTING_KEY"
+    }
+  }
+}
+```
+If a `routing_key` is specified in `profile.pagerduty`, it will take precedence over the routing key from the main configuration.
 
-<Image img={require("../../assets/platform/channels/pd-provider-page.png")} alt="" />
+### Payload
 
-#### Create notification Template in Courier like following, hit publish and start using this template to send push notifications to your PagerDuty service:
-
-<Image img={require("../../assets/platform/channels/pd-notification-template.png")} alt="" />
-
-## Override
-
-You can use the provider override to replace what we send to PagerDuty's Events API. Supported overrides include the Severity and Source. Here's an example where we override both:
+You can use the provider override the payload sent to PagerDuty's Events API. Supported overrides include the Severity and Source.
 
 ```json title=JSON
 {
@@ -64,4 +75,4 @@ You can use the provider override to replace what we send to PagerDuty's Events 
 }
 ```
 
-Other supported payload overrides are [here](https://v2.developer.pagerduty.com/docs/send-an-event-events-api-v2).
+For more information on supported payload overrides, refer to the [PagerDuty Events API v2 documentation](https://v2.developer.pagerduty.com/docs/send-an-event-events-api-v2).
