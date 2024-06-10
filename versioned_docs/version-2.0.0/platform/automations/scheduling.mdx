@@ -22,7 +22,12 @@ Because scheduling is a part of Automations, it can be used across channels (eg.
 
 To setup a scheduled automation, drag over the Schedule trigger from the triggers section onto the canvas. Publishing an automation template is sufficient to allow the trigger to invoke the automation on the provided schedule. You do not need to make a separate API call to invoke.
 
-Please note that the schedule trigger is set to the [UTC-0 timezone](https://dayspedia.com/time/zones/utc+0/).
+
+:::info Schedule Trigger Delay
+
+Please note that the schedule trigger should be set to the [UTC-0 timezone](https://dayspedia.com/time/zones/utc+0/) and is delayed by 12 minutes. This means that your scedule should be set in **UTC-0 + 12'**.
+
+:::
 
 <video width="783" loop autoPlay muted controls poster={videoThumbnail}>
   <source src={scheduleURL} />
