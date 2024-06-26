@@ -85,6 +85,34 @@ This is a common example request you can make to the [`send`](../../../../refere
 1. `providers.apn.override.body.aps.YOUR_CUSTOM_KEY` for adding custom data to your payload. This is usually used for opening a specific screen in your app when the user takes action on a push notification.
 2. `providers.apn.override.body.aps` for applying iOS specific values. You can learn more about these [here](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification).
 
+### ClickAction and Data Mapping
+
+In order to pass a click action link into your push notification, you will need to enable the data mapping toggle in the Push [channel settings](../../platform/content/notification-designer/notification-designer-overview.mdx).
+
+<Image img={require("../../assets/platform/channels/data-mapping.png")} alt="Data mapping enabled" />
+
+You can then perform a send request that looks similar to this, passing the clickAction in the data payload.
+
+``` json
+{
+    "message": {
+        "to": {
+            "user_id": "mike_mill_made_it"
+        },
+        "template": "HY59FFJQTR4JGEGT25HQD2D201GK",
+        "data": {
+            "click_action": "https://courier.com"
+        }
+    }
+}
+```
+
+:::warning Push Sound & Badging
+
+Sounds and badges can only be configured in the override schema of a send request at this time, and are not compatible with a `template` field attached. If your push notifications require sounds and badges, then we recommend shaping your push request with `sound` and `badge` in the override as shown below.
+
+:::
+
 ### Sending to a `user_id` (Recommended)
 
 ```bash title=cURL
