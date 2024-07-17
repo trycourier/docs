@@ -35,3 +35,7 @@ The screenshot above is a conditional on the visible text block. If profile.firs
 ## Multiple channels
 
 If you are sending to multiple channels and each provider has different variables, only the channel that fails the check will fail to send. For example, if using `{profile.first_name}` in an email template but not in a Courier Inbox template, then Email will fail to render and send if I do not have a profile.first_name, but the Inbox will render and send it successfully.
+
+## Observability
+
+Like other provider errors, these render errors will appear in [Outbound Webhooks](../../workspaces/outbound-webhooks.mdx) and our [Observability](../../../external-integrations/observability/intro.mdx) integrations under any channel updates.
