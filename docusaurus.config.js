@@ -55,14 +55,15 @@ module.exports = {
       colorMode: {
         disableSwitch: false,
         defaultMode: "light",
-        respectPrefersColorScheme: false,
+        respectPrefersColorScheme: true,
       },
       navbar: {
         hideOnScroll: true,
         style: "primary",
         logo: {
           alt: "Courier Logo",
-          src: "img/logo.svg",
+          src: "img/courier-light.png",
+          srcDark: "img/courier-dark.png",
           href: "https://www.courier.com",
           target: "_self",
         },
@@ -71,7 +72,7 @@ module.exports = {
       footer: {},
       prism: {
         theme: codeTheme,
-        additionalLanguages: ["ruby", "php", "java"],
+        additionalLanguages: ["ruby", "php", "java", "uri"],
       },
     }),
 

@@ -1,0 +1,249 @@
+---
+sidebar_position: -1
+---
+
+import Image from "@theme/IdealImage";
+import GifWrapper from "@site/src/components/GifWrapper";
+
+# Inserting Data with Variables
+
+> Personalize your Courier notifications using **variables** from different data sources and insert them into various parts of a notification.
+
+**Read More:** [JSONPath Expressions](json-paths-variables.mdx)
+
+## Data Sources for Substitution Variables
+
+Courier enables you to use **variables** to insert dynamic values into your notifications from five sources:
+
+### The Data Object
+
+The **Data** object is an optional property of the [send](../../../reference/send/intro.mdx) command that allows you to pass arbitrary key-value pairs into your message template.
+
+```json title="Example Data Object"
+{
+  "customer": {
+    "id": "cust_abc123",
+    "name": "Acme Corporation",
+    "email": "contact@acme.com",
+    "plan": {
+      "id": "plan_enterprise",
+      "name": "Enterprise",
+      "price": {
+        "currency": "USD",
+        "amount": 99.99,
+        "interval": "month"
+      },
+      "features": [
+        "Unlimited users",
+        "Priority support",
+        "Custom branding"
+      ]
+    }
+  },
+  "usage": {
+    "period": {
+      "start": "2024-05-01",
+      "end": "2024-05-31"
+    },
+    "activeUsers": 250,
+    "storage": {
+      "used": 2048,
+      "limit": 5120,
+      "unit": "GB"
+    },
+    "apiCalls": 125000,
+    "customDomains": 3
+  },
+  "billing": {
+    "nextInvoiceDate": "2024-06-01",
+    "balance": {
+      "currency": "USD",
+      "amount": 0
+    },
+    "paymentMethod": {
+      "type": "CreditCard",
+      "lastFour": "1234"
+    }
+  }
+}
+```
+
+:::tip Referencing Data Object Variables
+Courier automatically references the `data` path by default. You do not need to include `data` in your variable path if the key-value pair is at the top level of the **Data** object. Nested values need to begin the path where the data value originates, e.g. `{first_layer.second_layer}`
+:::
+
+:::caution Variable Naming Conventions
+When using variables in your notification content, ensure that the variable names are in either *camelCase* or *snake_case* format. Using dashes or other unsupported characters in variable names will result in a rendering error.
+
+- Valid variable name: `{firstName}` or `{first_name}`
+- Invalid variable name: `{first-name}`
+
+:::
+
+### The User Profile
+
+**User Profile** data can be sourced from two places:
+
+- The `profile` object in the [Send API](../../../reference/send/intro.mdx) request.
+- The **User Profile** associated with the recipient ID, created via the [Profiles API](../../../reference/profiles/intro.mdx).
+
+```json title="Example Profile Object"
+{
+  "userId": "user456",
+  "name": {
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "middleName": "Elizabeth"
+  },
+  "email": "jane.doe@example.com",
+  "phone": "+1 555 9876543",
+  "dateOfBirth": "1992-11-23",
+  "gender": "Female",
+  "address": {
+    "street": "123 Main St",
+    "city": "Anytown",
+    "state": "CA",
+    "zipCode": "12345",
+    "country": "USA"
+  },
+  "locale": "en-US",
+  "timezone": "America/Los_Angeles",
+  "preferences": {
+    "language": "en",
+    "currency": "USD",
+    "theme": "dark"
+  },
+  "account": {
+    "createdAt": "2021-08-15T09:30:12Z",
+    "plan": "basic",
+    "status": "active"
+  },
+  "subscription": {
+    "id": "sub_xyz789",
+    "startDate": "2023-06-01",
+    "endDate": "2024-05-31",
+    "paymentMethod": {
+      "type": "CreditCard",
+      "lastFour": "5678"
+    }
+  },
+  "socialProfiles": {
+    "twitter": "https://twitter.com/janedoe",
+    "linkedin": "https://linkedin.com/in/janedoe"
+  },
+  "permissions": [
+    "view_reports",
+    "manage_users",
+    "create_projects"
+  ],
+  "integrations": [
+    {
+      "name": "GitHub",
+      "enabled": true,
+      "credentials": {
+        "accessToken": "abc123def456"
+      }
+    },
+    {
+      "name": "Slack",
+      "enabled": false
+    }
+  ],
+  "teams": [
+    {
+      "id": "team_abc123",
+      "name": "Marketing Team",
+      "role": "member"
+    },
+    {
+      "id": "team_def456",
+      "name": "Engineering Team",
+      "role": "admin"
+    }
+  ]
+}
+```
+
+:::info Precedence of Profile Data
+If a conflict arises between the `profile` object in the Send API request and the User Profile, the `profile` object in the Send API request takes precedence.
+:::
+
+**Read More:** [JSON Paths and Variables Basics](json-paths-variables.mdx)
+
+### Built-in Variables
+
+Courier provides a set of predefined variables that are automatically populated with relevant data during the send process. These built-in variables can be used in your notification content and settings.
+
+The available built-in variables include:
+
+- `{courier.environment}`: *The environment, e.g., "production" or "test".*
+- `{courier.scope}`: *The notification scope, e.g., "published" or "draft".*
+- `{event}`: *The event associated with the notification.*
+- `{messageId}`: *The unique identifier for the message.*
+- `{openTrackingId}`: *The tracking ID for email open events.*
+- `{recipient}`: *The recipient ID.*
+- `{subscriptionTopicId}`: *The ID of the subscription topic, if applicable.*
+- `{template}`: *The name of the template used for the notification.*
+- `{unsubscribeTrackingId}`: *The tracking ID for unsubscribe events.*
+- `{urls.opened}`: *The URL for tracking email opens.*
+- `{urls.unsubscribe}`: *The unsubscribe URL.*
+- `{urls.preferences}`: *The URL for managing the user's notification preferences.*
+
+### Tenant Object
+The **Tenant** object can be referenced to insert values specific to the tenant or organization, such as the tenant name.
+
+### Brand Object
+The **Brand** object can be referenced to insert variables based on the active brand used in the notification. These variables can include brand names, colors, logos, or other branding elements.
+
+## Using Variables in Notifications
+
+Variables can be used to insert data into:
+
+- Notification content across all types 
+- [Content Blocks](../content-blocks/content-block-basics.mdx) (Text, Action, Markdown, Quote, Template, List)
+- [Handlebars code](../notification-designer/handlebars-designer.mdx) (Template blocks, Email templates, Brands)  
+- [Email subject line and addresses](../../sending/channel-settings.mdx) (From, To, CC, BCC)
+- [Notification Conditions](../notification-settings/send-conditions.mdx) to control notification sending
+- [Channel Conditions](../notification-settings/send-conditions.mdx/#for-notifications-and-channels) to enable or disable specific channels
+- [Filters](../notification-designer/notification-designer-overview.mdx/#reusable-drag-and-drop-content) to conditionally show or hide content blocks
+
+<Image
+  img={require("../../../assets/guides/notification-data/data-variables-before-after.png")}
+  alt="Example of Variable Replacement in Rendered Preview"
+/>
+
+The Notification Designer supports using external data in various places, such as:
+
+
+
+### Inserting Variables Into Content Blocks
+
+To insert variables into Content Blocks, enclose the variable name within single curly brackets: `{variable_name}`. Properly formatted variables inside Text, Markdown, Quote, and List Blocks will be highlighted in green.
+
+<Image
+  img={require("../../../assets/guides/notification-data/data-content-block.png")}
+  alt="Text Block With Variables"
+/>
+
+### Inserting Variables into Handlebars
+
+To insert data into Handlebars, use double curly brackets `{{ }}` around the variable, following the same paths as in Content Blocks. However, you must include the Handlebars [`var`](https://www.courier.com/docs/platform/content/notification-designer/handlebars-helpers/#var) or [`path`](https://www.courier.com/docs/platform/content/notification-designer/handlebars-helpers/#path) helper to insert a variable from your JSON event:
+
+- Data object: `{{var "variable_name"}}`
+- Profile data: `{{var "profile.variable_name"}}`
+
+Handlebars code is used in the Template Content Block type, Brand Templates, and the Handlebars override within Email Notifications.
+
+### Inserting Variables into Email Fields
+
+In addition to the Handlebars Template override, variables are supported in the `Subject` line, `From` address, `Reply-To`, `CC`, and `BCC` fields in the email [channel settings](../notification-settings/email-fields.mdx).
+
+<Image
+  img={require("../../../assets/guides/notification-data/data-email.png")}
+  alt="Email Subject With Variables"
+/>
+
+<Image
+  img={require("../../../assets/guides/notification-data/data-notification-settings.png")}
+  alt="Email Channel Settings"
+/>

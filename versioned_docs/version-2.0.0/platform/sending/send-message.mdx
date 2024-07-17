@@ -21,7 +21,6 @@ You will need both Courier and a channel provider account integrated with Courie
 :::info Related Resources
 
 - [Courier API Reference](../../reference/intro.mdx)
-- [Courier Integration Docs](../channels/intro.mdx)
 - [Courier Integrations Settings page](https://app.courier.com/integrations)
 - [Bash Environment Variables](https://www.gnu.org/software/bash/manual/html_node/Environment.html)
 - [cURL](https://curl.haxx.se/)
@@ -128,7 +127,7 @@ The `event` value, for this example, is the "Notification ID" that we assigned t
 
 A `recipient` should be a unique identifier that does not change. This prevents duplicate entries in the event that a recipient changes their email or some other identifying value. We do not have any recipients in this tutorial, so we can enter any string value. Something like “katherine_pryde” will work.
 
-The `profile` information is an object that includes any key-value pairs required by our Integrations. You can find the required keys for any Integration by selecting an Integration on the ["Integrations" page](https://app.courier.com/integrations). See the ["Integration Provider Requirements"](../channels/intro.mdx) for details.
+The `profile` information is an object that includes any key-value pairs required by our Integrations. You can find the required keys for any Integration by selecting an Integration on the ["Integrations" page](https://app.courier.com/integrations). See the individual integration provider requirements for details.
 
 Lastly, we define message variables inside the `data` object. Remember the variables we set in the
 visual template editor? This is where we provide the values. Our example message had `name`,
@@ -243,7 +242,7 @@ Congratulations, you’re on your way to crafting a better notification strategy
 
 Overrides can be used to change the request body that Courier uses to send an email. Overrides are useful when a field is not yet supported by Courier or you would like to override the value that Courier generates.
 
-For a list of fields you can override for any Courier integration provider, see the "Overrides" section of that provider's [integration doc](../channels/intro.mdx).
+For a list of fields you can override for any Courier integration provider, see the "Overrides" section of that individual provider's integration doc.
 
 Below is an example of overriding the subject and adding an attachment to a SendGrid email.
 

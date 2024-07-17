@@ -1,0 +1,90 @@
+---
+sidebar_position: 11
+sidebar_label: SMTP
+title: Set Up Email Using SMTP
+description: Looking for a way to send email notifications via SMTP? This step-by-step tutorial will show you how to integrate SMTP's API the easy way.
+slug: /platform/channels/email/smtp
+---
+
+# SMTP
+
+## Profile Requirements
+
+To deliver a message to a recipient over SMTP, Courier must be provided the recipient's email address. This value should be included in the recipient profile as `email`.
+
+```json title=JSON
+{
+  "message": {
+    // Recipient Profile
+    "to": {
+      "email": "example@example.com"
+    }
+
+    // ... rest of message definition
+  }
+}
+```
+
+## Override
+
+### Message Override
+
+You can use a provider override to replace what we send to SMTP using NodeMailer. For example, you can add an attachment to your request:
+
+```json title=JSON
+{
+  "message": {
+    "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "to": {
+      "email": "example@example.com"
+    },
+    "providers": {
+      "smtp": {
+        "override": {
+          "body": {
+            "attachments": [
+              {
+                "filename": "text1.txt",
+                "content": "aGVsbG8gd29ybGQh",
+                "encoding": "base64"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+Everything inside of `message.providers.smtp.override.body` will replace what we send using NodeMailer. You can see all the available options by visiting the [NodeMailer docs](https://nodemailer.com/message/).
+
+### Transport Override
+
+You may also override the [SMTP transport configuration](https://nodemailer.com/smtp/) using values passed to `message.providers.smtp.override`, like so:
+
+```json title=JSON
+{
+  "message": {
+    "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "to": {
+      "email": "example@example.com"
+    },
+    "providers": {
+      "smtp": {
+        "override": {
+          "config": {
+            "auth": {
+              "user": "username",
+              "pass": "hunter2"
+            },
+            "host": "smtp.example.com",
+            "secure": true,
+            "port": 465
+          }
+        }
+      }
+    }
+  }
+}
+```

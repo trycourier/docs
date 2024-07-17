@@ -8,3 +8,9 @@ slug: ./
 # Profiles API
 
 The Profiles API allows you to manage profile information associated with a [user](/platform/users). The profile object conforms with [OIDC standard claims](https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims).
+
+:::warning user_id Special Characters
+
+Courier handles special characters automatically for user_ids that are created with these characters (`@`, `#`, `%`, etc). These characters will be automatically encoded, so we suggest creating user_ids without special characters.
+
+:::

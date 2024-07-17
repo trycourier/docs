@@ -1,0 +1,27 @@
+---
+sidebar_position: -1
+sidebar_label: Introduction
+pagination_label: SMS Providers
+slug: /platform/channels/sms
+---
+
+# SMS Providers
+
+Courier supports a number of SMS Providers. In order to send a notification using an SMS Channel, the recipient profile must include an SMS capable phone number in the `phone_number` property.
+
+```json
+// Recipient Profile
+{
+  "message": {
+    "to": {
+      "phone_number": "+12025550156"
+    }
+  }
+}
+```
+
+:::tip  
+
+Can't find a provider? Send us a chat ↘️ or email support@courier.com
+
+:::

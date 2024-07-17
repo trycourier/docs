@@ -2,34 +2,45 @@
 sidebar_position: 7
 sidebar_label: Outbound Webhooks
 title: Webhooks for Email, SMS & Push Notifications
-description: Learn how to use Courier's outbound webhook for browser, email, mobile push, and other product notifications.
+description: Learn how to use Courier's outbound webhooks for browser, email, mobile push, and other product notifications.
 ---
 
 # Outbound Webhooks
 
-Courier can use webhooks to notify your application when an event happens in your account.
+Courier can use webhooks to notify your application when an event occurs in your account.
 
-## Add a new Webhook Destination
+## Adding a New Webhook Destination
 
-- Visit [https://app.courier.com/settings/webhooks](https://app.courier.com/settings/webhooks)
-- Click "Add Webhook"
-- Enter new Webhook destination information (this should accept a `POST` request)
+1. Visit [https://app.courier.com/settings/general](https://app.courier.com/settings/general)
+2. Click the "+ Outbound Webhook" button
+3. Enter the new webhook destination information (this should accept a `POST` request)
 
 ## Handling Requests from Courier
 
-**Read the event data**
+### Read the Event Data
 
-Courier sends the event data in the request body. Each event is structured as an object with a **`type`** and related resource nested under **`data`**.
+Courier sends the event data in the request body. Each event is structured as an object with a `type` property and related resource data nested under the `data` property.
 
-**Handle the event**
+### Handle the Event
 
-Currently, only `message:updated` events are supported. In the future, other event types will become available (eg: `profile:updated`).
+Courier currently supports the following event types:
 
-**Return a 200 response**
+- `message:updated`
+- `notification:submitted`
+- `notification:submission_canceled`
+- `notification:published`
+- `audiences:updated`
+- `audiences:user:matched`
+- `audiences:user:unmatched`
+- `audiences:calculated`
+
+Your webhook should be prepared to handle any of these events based on the `type` property in the received payload. Additional event types may be added in the future.
+
+### Return a 200 Response
 
 Send a successful 200 response to Courier as quickly as possible. Write any long-running processes as code that can run asynchronously outside the webhook endpoint.
 
-## Verifying signature
+## Verifying Signatures
 
 Verify the events that Courier sends to your webhook endpoints. Courier can optionally sign the webhook events it sends to your endpoints by including a signature in each event's `courier-signature` header. This allows you to verify that the events were sent by Courier, not by a third party.
 
@@ -39,24 +50,24 @@ t=1631816343012,signature=33777cdae0468ff0939b3609d02d14e6e80ca093c2ea233455f076
 
 Courier generates signatures using a hash-based message authentication code (HMAC) with SHA-256.
 
-### Step 1: Extract the timestamp and signatures from the header
+### Step 1: Extract the Timestamp and Signature from the Header
 
-Split the header, using the `,` character as the separator, to get a list of elements. Then split each element, using the = character as the separator, to get a prefix and value pair.
+Split the header using the `,` character as the separator to get a list of elements. Then split each element using the `=` character as the separator to get a prefix and value pair.
 
-The value for the prefix t corresponds to the timestamp, and the signature corresponds to the signature
+The value for the prefix `t` corresponds to the timestamp, and `signature` corresponds to the signature.
 
-Before you can verify signatures, you need to retrieve your endpoint’s secret from your [Webhooks settings](https://app.courier.com/settings/webhooks), by clicking on a webhook configuration.
+Before you can verify signatures, you need to retrieve your endpoint's secret from your [Webhooks settings](https://app.courier.com/settings/webhooks) by clicking on a webhook configuration.
 
-### Step 2: Prepare the signed_payload string
+### Step 2: Prepare the `signed_payload` String
 
-The signed_payload string is created by concatenating:
+The `signed_payload` string is created by concatenating:
 
-The timestamp (as a string)
-The actual JSON payload (i.e., the request body)
+- The timestamp (as a string)
+- The actual JSON payload (i.e., the request body)
 
-### Step 3: Determine the expected signature
+### Step 3: Determine the Expected Signature
 
-Compute an HMAC with the SHA256 hash function. Use the Courier webhook secret as the key, and use the payload string as the message.
+Compute an HMAC with the SHA256 hash function. Use the Courier webhook secret as the key and the payload string as the message.
 
 ```js title=TypeScript
 const examplePayload = {
@@ -72,61 +83,53 @@ const examplePayload = {
   type: 'message:updated',
 };
 
-function parseHeader(header) {
+function parseHeader(header: string) {
   if (typeof header !== 'string') {
     return null;
   }
 
-  return header.split(',')
-    .reduce(
-      (accum, item) => {
-        const kv = item.split('=');
+  return header.split(',').reduce((accum, item) => {
+    const kv = item.split('=');
 
-        if (kv[0] === 't') {
-          accum.timestamp = kv[1];
-        }
-        if (kv[0] === 'signature') {
-          accum.signature = kv[1];
-        }
+    if (kv[0] === 't') {
+      accum.timestamp = kv[1];
+    }
+    if (kv[0] === 'signature') {
+      accum.signature = kv[1];
+    }
 
-        return accum;
-      },
-      {
-        timestamp: -1,
-        signature: '',
-      }
-    );
+    return accum;
+  }, { timestamp: -1, signature: '' });
 }
-// headers refers to the request headers from incoming webhook event from Courier
+
+// headers refers to the request headers from the incoming webhook event from Courier
 const headerDetails = parseHeader(headers['courier-signature']);
 
 const unfoldedSignature = crypto
-    .createHmac('sha256', secret)
-    .update(`${headerDetails.timestamp}.${JSON.stringify(examplePayload)}`, 'utf8')
-    .digest('hex');
-}
-
+  .createHmac('sha256', secret)
+  .update(`${headerDetails.timestamp}.${JSON.stringify(examplePayload)}`, 'utf8')
+  .digest('hex');
 
 const isValid = unfoldedSignature === headerDetails.signature;
 ```
 
-### Step 4: Compare the signatures
+### Step 4: Compare the Signatures
 
 Compare the signature (or signatures) in the header to the expected signature. For an equality match, compute the difference between the current timestamp and the received timestamp, then decide if the difference is within your tolerance.
 
 To protect against timing attacks, use constant-time string comparison to compare the expected signature to each of the received signatures.
 
-## Data
+## Event Data
 
 ### message:updated
 
-The `data` property in the webhook response payload for the `message:updated` event is identical to the information that is returned from the [GET /message/{message_id}](../../reference/logs/by-id.mdx) endpoint
+The `data` property in the webhook response payload for the `message:updated` event is identical to the information returned from the [GET /message/{message_id}](../../reference/logs/by-id.mdx) endpoint.
 
-For instance, when we send an email - it goes from ENQUEUED → SENT → DELIVERED → OPENED.
+For example, when an email is sent, it goes from `ENQUEUED` → `SENT` → `DELIVERED` → `OPENED`.
 
-Here's a rundown for how the payloads would look like -
+Here's a rundown of how the payloads would look for each event:
 
-**Example payload for an ENQUEUED event**
+**Example Payload for an ENQUEUED Event**
 
 ```json title=JSON
 {
@@ -257,11 +260,11 @@ Here's a rundown for how the payloads would look like -
 
 ---
 
-For the notification template submission workflow, we emit **published,** **submitted** and **submission_canceled** events
+For the notification template submission workflow, Courier emits `notification:submitted`, `notification:submission_canceled`, and `notification:published` events.
 
 ### notification:submitted
 
-Example
+Example:
 
 ```json title=JSON
 {
@@ -275,7 +278,7 @@ Example
 
 ### notification:submission_canceled
 
-Example
+Example:
 
 ```json title=JSON
 {
@@ -306,7 +309,7 @@ Example
 
 This event is fired when your [audience](https://www.courier.com/docs/reference/audiences/put/) is created or updated.
 
-Example
+Example:
 
 ```json title=JSON
 {
@@ -327,7 +330,7 @@ Example
 
 This event is fired when a user is matched to an audience. This usually happens when a user is created or updated. If user's [profile](https://www.courier.com/docs/reference/profiles/replace/) matches any of the audience's filters, the user is matched to the audience.
 
-Example
+Example:
 
 ```json title=JSON
 {

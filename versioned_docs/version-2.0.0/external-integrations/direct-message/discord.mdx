@@ -1,0 +1,101 @@
+---
+sidebar_position: 1
+sidebar_label: Discord
+title: Set Up Notifications Using Discord
+description: Looking for a way to send notifications via Discord? This step-by-step tutorial will show you how to integrate Discord's API the easy way.
+slug: /platform/channels/direct-message/discord
+---
+
+# Discord
+
+## Discord Bot Requirements
+
+To send notifications via Discord, a Discord Bot is required. You may use an existing or [create a new basic bot](https://discord.com/developers/docs/intro).
+
+### Scopes
+
+Update the `bot` scope with the following permissions:
+- `View Channels`
+- `Send Messages`
+- Optional: `Read Message History` to send a message as a reply to another message
+
+[Learn more about Adding Scopes and Permissions.](https://discord.com/developers/docs/getting-started#adding-scopes-and-permissions)
+
+Once the permissions are finalized, go to the generated URL below. This URL will invite the bot to the server and authorize it with the permissions chosen.
+
+## Profiles Requirements
+
+The information required in the recipient profile is different based on the type of message you are sending.
+
+### Sending a Direct Message
+
+To send a message to a user, you'll need to supply the Discord profile object with a `user_id`:
+1. Go to User Settings on Discord (next to profile on the bottom left),
+2. Access the Advanced settings page and enable Developer Mode ✅,
+3. Right click on the user and copy the user ID.
+
+This is not the user tag. The user you are trying to message must be a member of a server the bot is installed in.
+
+```json title=JSON
+{
+  "message": {
+    // Recipient Profile
+    "to": {
+      "discord": {
+        "user_id": "617099137532932107"
+      }
+    }
+  }
+}
+```
+
+### Sending a Message to a Channel
+
+To send a message to a channel, you'll need to supply the discord profile object with a `channel_id`:
+1. Go to User Settings on Discord (next to profile on the bottom left),
+2. Access the Advanced settings page and enable Developer Mode ✅,
+3. Right click on the channel and copy the channel ID.
+
+The bot must be installed in the server to send to the channel.
+
+```json title=JSON
+{
+  "message": {
+    // Recipient Profile
+    "to": {
+      "discord": {
+        "channel_id": "768866348853383208"
+      }
+    }
+  }
+}
+```
+
+## Override
+
+You can use a provider override to replace what we send to Discord's [Create Message](https://discord.com/developers/docs/resources/channel#create-message) endpoint. For example, you can choose to an an embed.
+
+```json title=JSON
+{
+  "message": {
+    "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "to": {
+      "discord": {
+        "channel_id": "768866348853383208"
+      }
+    },
+    "providers": {
+      "discord": {
+        "override": {
+          "body": {
+            "embed": {
+              "title": "Hello, Embed!",
+              "description": "This is an embedded message."
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```

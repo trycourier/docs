@@ -1,0 +1,69 @@
+---
+sidebar_position: 6
+sidebar_label: MagicBell
+title: Set Up Push Notifications Using MagicBell
+description: Looking for a way to send push notifications via MagicBell? This step-by-step tutorial will show you how to integrate MagicBell's API the easy way.
+slug: /platform/channels/push/magicbell
+---
+
+# MagicBell
+
+## Profile Requirements
+
+To deliver a message to in-app using MagicBell, Courier must be provided with either the email address of the recipient or an external ID.
+
+### Email example:
+
+```json title=JSON
+{
+  "message": {
+    // Recipient Profile
+    "to": {
+      "email": "user@example.com"
+    }
+  }
+}
+```
+
+### External ID:
+
+```json title=JSON
+{
+  "message": {
+    // Recipient Profile
+    "to": {
+      "magicbell": {
+        "external_id": "user123"
+      }
+    }
+  }
+}
+```
+
+## Override
+
+Overrides can be used to change the request body that Courier uses to send a message to MagicBell. Overrides are useful when a field is not yet supported by Courier or you would like to override the value that Courier generates.
+
+Below is an example of overriding the Category & Action URL parameters in MagicBell:
+
+```json title=JSON
+{
+  "message": {
+    "template": "example_template",
+    "to": {
+      "email": "user@example.com"
+    },
+    "data": {},
+    "providers": {
+      "magicbell": {
+        "override": {
+          "body": {
+            "category": "new_message",
+            "action_url": "https://example.com/example_link"
+          }
+        }
+      }
+    }
+  }
+}
+```

@@ -20,7 +20,7 @@ const CustomSearchBar = () => {
 
   return (
     <>
-      <BrowserOnly>
+      {/* <BrowserOnly>
         {() => (
           <a
             href={`https://app.courier.com/sso/documentation${qs.stringify(
@@ -35,7 +35,7 @@ const CustomSearchBar = () => {
             {loggedIn ? <span>Log Out</span> : <span>Login</span>}
           </a>
         )}
-      </BrowserOnly>
+      </BrowserOnly> */}
 
       <SearchBar />
     </>

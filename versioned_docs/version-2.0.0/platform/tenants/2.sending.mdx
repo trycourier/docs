@@ -1,20 +1,18 @@
 # Sending With Tenants
 
-There are two ma
-
 ## Send to tenant members
 
 You can notify a list of tenant members by specifying the tenant_id in the to field. Courier will fan out the message to each user with a tenant membership, look up each user's profile data, and send the notification.
 
 For example, an inline Inbox notification send:
 
-```javascript
+```json
 {
   "to": {
     "tenant_id": "tenantA"
   },
     "content": {
-      "title": `Hello, {first_name}!`,
+      "title": "Hello, {first_name}!",
       "body": "Brought to you by {$.tenant.name}"
   },
   "routing": {
@@ -26,7 +24,7 @@ For example, an inline Inbox notification send:
 
 Will fan out to these list members and send three notifications
 
-```javascript
+```json
 // GET /tenants/tenantA/users
 // Returns:
 {
@@ -57,11 +55,11 @@ Will fan out to these list members and send three notifications
 }
 ```
 
-## Send to a tenant with context override
+## Send to a user with a tenant context
 
-You can be explicit about the tenant context when sending a notification. For example, this inbox send
+You can be explicit about the tenant context when sending a notification. For example, this inbox send:
 
-```javascript
+```json
 {
   "message": {
     "to": {
@@ -71,7 +69,7 @@ You can be explicit about the tenant context when sending a notification. For ex
       }
     },
     "content": {
-      "title": `Hello, {first_name}!`,
+      "title": "Hello, {first_name}!",
       "body": "Brought to you by {$.tenant.name}"
     },
     "routing": {
@@ -82,10 +80,17 @@ You can be explicit about the tenant context when sending a notification. For ex
 }
 ```
 
+Will send a notification to `user1` with the context information of `tenantA`.
+This includes default preferences, profile values, the brand of tenantA
+and any other data attached to `tenantA` that may be referenced by the template.
+
+Note that user preferences and data take precedent over the context loaded from
+the tenant.
+
 :::info Tenant Context without Membership
 A user is not required to be a tenant member to use a tenant context. For example, if user1 does not have a tenant membership to tenantA, you still send a call like the following:
 
-```javascript
+```json
 {
   "message": {
     "to": {
@@ -99,5 +104,6 @@ A user is not required to be a tenant member to use a tenant context. For exampl
 }
 ```
 
-This pattern is useful when your tenants have metadata or credentials for a provider, but you don't anticipate needing to nofify each user in the tenant.
+This pattern is useful when your tenants have metadata or credentials for a provider, but you don't anticipate needing to notify each user in the tenant.
 :::
+import { preferences } from "../../api-specs/configs/schemas/Send"
