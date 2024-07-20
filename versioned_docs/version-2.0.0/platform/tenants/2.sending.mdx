@@ -11,9 +11,9 @@ For example, an inline Inbox notification send:
   "to": {
     "tenant_id": "tenantA"
   },
-    "content": {
-      "title": "Hello, {first_name}!",
-      "body": "Brought to you by {$.tenant.name}"
+  "content": {
+    "title": "Hello, {first_name}!",
+    "body": "Brought to you by {$.tenant.name}"
   },
   "routing": {
     "method": "single",
@@ -107,3 +107,45 @@ A user is not required to be a tenant member to use a tenant context. For exampl
 This pattern is useful when your tenants have metadata or credentials for a provider, but you don't anticipate needing to notify each user in the tenant.
 :::
 import { preferences } from "../../api-specs/configs/schemas/Send"
+
+## Send to users of children tenants
+
+If you have linked parent and child tenants and want to send to all users that would be part of the children tenants, you can send to all children users by using `with_children` key.
+
+```json
+{
+  "to": {
+    "tenant_id": "ParentTenantA",
+    "with_children": true
+  },
+  "content": {
+    "title": "Hello, {first_name}!",
+    "body": "Brought to you by {$.tenant.name}"
+  },
+  "routing": {
+    "method": "single",
+    "channels": ["inbox"]
+  }
+}
+```
+
+In the following hierarchy and using `with_children`, Courier would fan out the above request to all five users (User1, User2, User3, User4, User5).
+
+```yaml
+- ParentTenantA
+  child tenants:
+    - ChildTenantA1
+      user members:
+        - User1
+        - User2
+    - ChildTenantA2
+      child tenants:
+        - ChildTenantA2-admin
+          user_members:
+            - User5
+      user members:
+        - User2
+        - User3
+  user members:
+    - User4
+```
