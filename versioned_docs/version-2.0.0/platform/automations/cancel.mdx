@@ -16,6 +16,8 @@ Often times you may want to cancel an automation run. For example, one automatio
 a reminder notification to complete a task. However, this reminder may no longer be necessary
 if the task is already completed.
 
+## Automation Settings
+
 To allow an automation to be cancelled:
 
 1. Navigate to the settings tab of the automation
@@ -38,11 +40,27 @@ To allow an automation to be cancelled:
   <source src={segmentCancelNodeURL} />
 </video>
 
-An automation can also be canceled from automation logs. 
+An automation can also be canceled from automation logs.
 
-1. Navigate to the [automation logs page](https://app.courier.com/logs/automations) in Courier.  
+1. Navigate to the [automation logs page](https://app.courier.com/logs/automations) in Courier.
 2. Find your automation in the logs, you can search with a run Id or source.
 3. If your automation has not finished processing, a cancel button will be shown in the run summary.
 4. Clicking this button will cancel your automation.
 
 <Image img={require("./assets/cancel-button-logs.png")} alt="Canceling an automation from logs" />
+
+## Templated Cancelation Token
+
+It may be advantageous to create a compound key for your cancellation token. For example, if you want to have a cancelation token that combines two different fields, or a data field and a static string. In automations, most fields support Javascript string interpolation and the cancelation token is an example of one. The documentation above says you can use `refs`, for example `refs.data.userId` and the following would be identical in the cancelation token field, `${data.userId}`. For more advanced interpolation you can perform nested interpolations as well.
+
+**Static Fields**
+
+```javascript
+${`onboarding-flow-${data.userId}`}
+```
+
+**Combining Fields**
+
+```javascript
+${`${data.userId}-${data.tenantId}`}
+```
