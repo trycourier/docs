@@ -8,6 +8,8 @@ toc_max_heading_level: 2
 import Image from "@theme/IdealImage";
 import digestsThumb from "./assets/digests-thumb.png";
 import digests from "./assets/digests-end-to-end demo.mp4";
+import videoThumbnail from "./assets/video-thumbnail.png";
+import addToDigestUrl from "./assets/digests-batching-throttling/add-to-digest.mp4";
 
 # Digests
 
@@ -62,14 +64,16 @@ Now that we have a digest configured in preferences, lets talk about adding even
 
 ### Add to digest
 
-First step is to configure an automation to add events to the digest. Open an automation template and drag in the `Add to Digest` node under the `Actions` section in the lefthand pane. Select the subscription topic with the digest configured. This will add any event that comes in to that digest **by user**.
+First step is to configure an automation to add events to the digest. Open an automation template, right click on the canvas, and select the `Add to Digest`. From the configuration panel, select the subscription topic with the digest configured. This will add any event that comes in to that digest **by user**.
 Note: currently `user_id` and `userId` are accepted in the event data
 
-<Image img={require("./assets/add-to-digest.png")} alt="Automation add to digest" />
+<video width="783" loop autoPlay muted controls poster={videoThumbnail}>
+  <source src={addToDigestUrl} />
+</video>
 
 ### Digest trigger
 
-Second step is to configure an automation to release and interact with the digested events data. Open an automation template and drag in the `Digest` node under the `Trigger` section in the lefthand pane. Select the subscription topic with the digest configured. This automation template will now be invoked on any scheduled intervals configured for that digest. Reminder: digests are done at the user level so each invocation will be for a particular user based on the default schedule or the schedule they selected in preferences
+Second step is to configure an automation to release and interact with the digested events data. Open an automation template, select the rounded trigger node,and select in the `Digest` type under the `Trigger` section. Select the subscription topic with the digest configured. This automation template will now be invoked on any scheduled intervals configured for that digest. Reminder: digests are done at the user level so each invocation will be for a particular user based on the default schedule or the schedule they selected in preferences
 
 <Image img={require("./assets/digest-trigger.png")} alt="Automation digest trigger" />
 
