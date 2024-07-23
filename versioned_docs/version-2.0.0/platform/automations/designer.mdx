@@ -44,17 +44,14 @@ The bottom one acts as a placeholder for action and control flow nodes.
 To add nodes, expand from the list on the left and then click and drag a node onto the right. The
 first trigger and action node will snap into their respective placeholders:
 
-<video width="783" loop autoPlay muted controls poster={videoThumbnail}>
-  <source src={draggingNodesURL} />
-</video>
+<Image img={require("./assets/dragging-nodes.gif")} alt="Dragging nodes" />
 
 Nodes are executed sequentially through their connections, from top to bottom. To connect two
 nodes, click and drag from the white dot at the bottom of the source node to the top of the
 target node:
 
-<video width="783" loop autoPlay muted controls poster={videoThumbnail}>
-  <source src={connectingNodesURL} />
-</video>
+<Image img={require("./assets/connecting-nodes.gif")} alt="Connecting nodes" />
+
 
 ## Invoking an Automation Template
 
