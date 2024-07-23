@@ -1,0 +1,35 @@
+---
+sidebar_position: 6
+sidebar_label: Scheduling
+slug: ./scheduling
+toc_max_heading_level: 2
+---
+
+import videoThumbnail from "./assets/video-thumbnail.png";
+import scheduleURL from "./assets/schedule.mp4";
+
+# Scheduling
+
+Scheduling is a feature of Automations that enables scheduling of a notification automation via three methods:
+
+* **One-time:** Set the specific time and date to invoke the automation.
+* **Recurrence:** Identify a repeat schedule for the automation to be invoked. This is similar to scheduling a repeat event in a calendar application.
+* **Cron:** Similar to Recurrence but with more specificity using [crontab expressions](https://crontab.guru/).
+
+Because scheduling is a part of Automations, it can be used across channels (eg. email, SMS, chat, in-app inbox, push) and providers (eg. Twilio, Sendgrid, email SMTP, Slack, MS Teams, WeChat).
+
+## Setup Scheduling
+
+To setup a scheduled automation, drag over the Schedule trigger from the triggers section onto the canvas. Publishing an automation template is sufficient to allow the trigger to invoke the automation on the provided schedule. You do not need to make a separate API call to invoke.
+
+
+:::info Schedule Trigger Delay
+
+Please note that the schedule trigger should be set to the [UTC-0 timezone](https://dayspedia.com/time/zones/utc+0/) and is delayed by 12 minutes. This means that your scedule should be set in **UTC-0 + 12'**.
+
+:::
+
+<video width="783" loop autoPlay muted controls poster={videoThumbnail}>
+  <source src={scheduleURL} />
+</video>
+

@@ -12,9 +12,9 @@ import scheduleURL from "./assets/schedule.mp4";
 
 Scheduling is a feature of Automations that enables scheduling of a notification automation via three methods:
 
-* **One-time:** Set the specific time and date to invoke the automation.
-* **Recurrence:** Identify a repeat schedule for the automation to be invoked. This is similar to scheduling a repeat event in a calendar application.
-* **Cron:** Similar to Recurrence but with more specificity using [crontab expressions](https://crontab.guru/).
+- **One-time:** Set the specific time and date to invoke the automation.
+- **Recurrence:** Identify a repeat schedule for the automation to be invoked. This is similar to scheduling a repeat event in a calendar application.
+- **Cron:** Similar to Recurrence but with more specificity using [crontab expressions](https://crontab.guru/).
 
 Because scheduling is a part of Automations, it can be used across channels (eg. email, SMS, chat, in-app inbox, push) and providers (eg. Twilio, Sendgrid, email SMTP, Slack, MS Teams, WeChat).
 
@@ -22,14 +22,14 @@ Because scheduling is a part of Automations, it can be used across channels (eg.
 
 To setup a scheduled automation, drag over the Schedule trigger from the triggers section onto the canvas. Publishing an automation template is sufficient to allow the trigger to invoke the automation on the provided schedule. You do not need to make a separate API call to invoke.
 
+:::warning Timezone Configuration Change (2024)
+By default, the date time input is now relative to the timezone of your browser. You can change the timezone by clicking on the timezone dropdown and selecting the desired timezone. The date shown by the input after configuration will still be relative to the timezone of your browser.
+:::
 
 :::info Schedule Trigger Delay
-
-Please note that the schedule trigger should be set to the [UTC-0 timezone](https://dayspedia.com/time/zones/utc+0/) and is delayed by 12 minutes. This means that your scedule should be set in **UTC-0 + 12'**.
-
+Please note that the schedule trigger is accurate to within ~12 minutes of selected time.
 :::
 
 <video width="783" loop autoPlay muted controls poster={videoThumbnail}>
   <source src={scheduleURL} />
 </video>
-
