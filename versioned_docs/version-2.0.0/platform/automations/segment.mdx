@@ -5,6 +5,7 @@ slug: ./segment
 toc_max_heading_level: 2
 ---
 
+import Image from "@theme/IdealImage";
 import videoThumbnail from "./assets/video-thumbnail.png";
 import segmentTrackVisitedURL from "./assets/segment-track-1.mp4";
 import settingUpDelayAndSendURL from "./assets/setting-up-delay-and-send.mp4";
@@ -27,22 +28,18 @@ For this, we'll need two automations. One for the reminder condition, the other 
 success condition. We'll start with the reminder condition.
 
 1. Create a new automation
-2. Drag over the segment trigger and attach it to the correct track event. In our case, that is
+2. Select the Segment trigger and choose correct `track` event. In our case, that is
    "Checkout Page Visited". Note: The track event dropdown is populated with events Courier has
    already received from Segment.
 
-<video width="783" loop autoPlay muted controls poster={videoThumbnail}>
-  <source src={segmentTrackVisitedURL} />
-</video>
+<Image img={require("./assets/segment-checkout.gif")} alt="Segment Trigger" />
 
 3. The reminder should be sent out a couple of hours after the checkout page was visited, so
    add a delay node with the desired delay time
 4. Connect the delay node to a new send node and select the desired template. We set the userId to
    `refs.data.userId`, which is the userId sent to us by segment.
 
-<video width="783" loop autoPlay muted controls poster={videoThumbnail}>
-  <source src={settingUpDelayAndSendURL} />
-</video>
+<Image img={require("./assets/checkout-visited.png")} alt="UserId Referenced" />
 
 5. If the user successfully checks out, we won't want to send this notification. We'll add a
    cancellation token so we can cancel this run in from our next automation. Navigate to the
@@ -50,9 +47,7 @@ success condition. We'll start with the reminder condition.
    of this automation associated with the same user the notification would otherwise be sent to.
 6. Click publish to finalize the template
 
-<video width="783" loop autoPlay muted controls poster={videoThumbnail}>
-  <source src={settingUpCancellationURL} />
-</video>
+<Image img={require("./assets/cancelation.gif")} alt="Cancel Automation" />
 
 The next automation will cancel the reminder automation from above, and send an invoice on
 successful checkout.
@@ -60,19 +55,10 @@ successful checkout.
 1. Create a new automation.
 2. Add a Segment trigger node with a track event set to "Checkout Complete"
 
-<video width="783" loop autoPlay muted controls poster={videoThumbnail}>
-  <source src={segmentCheckoutCompleteURL} />
-</video>
+<Image img={require("./assets/segment-checkout-complete.gif")} alt="New Automation" />
 
 3. Add a cancel automation node and set the token to the user id. This will prevent the reminder
    to finish checking out from sending.
-
-<video width="783" loop autoPlay muted controls poster={videoThumbnail}>
-  <source src={segmentCancelNodeURL} />
-</video>
-
 4. Send the Checkout Complete notification
 
-<video width="783" loop autoPlay muted controls poster={videoThumbnail}>
-  <source src={segmentSendCheckoutCompleteURL} />
-</video>
+<Image img={require("./assets/checkout-complete.gif")} alt="Checkout Complete Automation" />
