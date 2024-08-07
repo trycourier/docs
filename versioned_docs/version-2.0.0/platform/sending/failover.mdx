@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 7
 ---
 
 # Automated Failover
@@ -14,16 +14,18 @@ Failover may be triggered by:
 - Provider throttling / payment issues.
 
 ## Provider Failover
-  Have a backup provider for your most important channels. Backup providers are used automatically
-  in the event of a provider outage or billing issue. No configuration beyond installing the provider
-  from the channels page is required. For example, if SendGrid is your preferred email channel,
-  you could install SES as a backup. If SendGrid fails, SES will be used automatically.
+
+Have a backup provider for your most important channels. Backup providers are used automatically
+in the event of a provider outage or billing issue. No configuration beyond installing the provider
+from the channels page is required. For example, if SendGrid is your preferred email channel,
+you could install SES as a backup. If SendGrid fails, SES will be used automatically.
 
 ## Channel Failover
-  Have multiple `best of` channels in your template configuration or `single` channels in routing.
-  Courier will attempt to use each configured channel until the message is successfully sent. For example,
-  if a template uses **_Best&nbsp;of:&nbsp;Email,&nbsp;Push,&nbsp;SMS_**, Courier will start with Email. If that fails, Push
-  will be tried and so on.
+
+Have multiple `best of` channels in your template configuration or `single` channels in routing.
+Courier will attempt to use each configured channel until the message is successfully sent. For example,
+if a template uses **_Best&nbsp;of:&nbsp;Email,&nbsp;Push,&nbsp;SMS_**, Courier will start with Email. If that fails, Push
+will be tried and so on.
 
 ## Message Timeouts
 

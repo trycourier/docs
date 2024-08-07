@@ -11,7 +11,6 @@
 @import url("./prism.css");
 @import url("./table.css");
 
-
 :root {
   --text-link: #0085ff;
   --default-font-size: 14px;
@@ -314,4 +313,8 @@ video {
 
 .theme-doc-footer-tags-row {
   display: none;
+}
+
+.whiteText span {
+  color: white !important;
 }
