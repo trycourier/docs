@@ -12,10 +12,11 @@ Using the `Conditions` functionality in the Notification and Channel settings al
 
 If you want to disable the *entire* notification, set your conditions in the [Notification Settings](general-settings.mdx). To disable specific Channels within the Notification, set your condition in the [Channel settings](../../../platform/sending/channel-settings.mdx).
 
-:::info Note
+:::warning Note
 
 - Channel conditions only apply to the channel where you set them.
-- You cannot disable specific integrations within the channel. If you want to be able to disable specific integrations based on Conditions, add set the integration(s) as a stand-alone channel(s) in the notification. 
+- [User preferences](../../../reference/user-preferences/update-subscription-topic-preferences.mdx) will take precedence over channel conditions. If a user has `custom_routing` channels configured, channel conditions will **not** be applied.
+- A channel can be disabled by using [missing variable guardrails](../variables/variable-not-found.mdx).
 
 :::
 

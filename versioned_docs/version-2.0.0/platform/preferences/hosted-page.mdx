@@ -98,6 +98,31 @@ Delivery Channel customization is a Courier Business feature. Please [contact](h
 
 :::
 
+Delivery channel customization allows recipients to choose their preferred delivery channel from the hosted preferences page. Recipient's custom delivery channels can be reflected as a `custom_routing` array in the response when calling the [Preferences API](../../reference/user-preferences/get-subscription-topic-preferences.mdx).
+
+```json
+{
+	"topic": {
+		"custom_routing": [
+			"email"
+		],
+		"has_custom_routing": true,
+		"default_status": "OPTED_IN",
+		"section_id": "_ysuowndfnousd",
+		"section_name": "Notifications",
+		"status": "OPTED_IN",
+		"topic_id": "TOPIC_ID",
+		"topic_name": "Tips and Tricks"
+	}
+}
+```
+
+:::warning Channel Conditions
+
+Channel [disable/enable conditions](../content/notification-settings/send-conditions.mdx) in a notification template **will not** take precedence when a user has `custom_routing` channels in their preferences topic. A channel can be disabled by using [missing variable guardrails](../content/variables/variable-not-found.mdx).
+
+:::
+
 ## Remove 'Powered by Courier' Watermark
 
 [Developer and Business tier](https://www.courier.com/pricing/) customers have the option to remove the 'Powered by Courier' watermark from the Preference Center.
