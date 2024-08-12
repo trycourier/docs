@@ -13,6 +13,7 @@ import controlFlowThumb from "./assets/control-flow.png";
 import connectingNodesURL from "./assets/connecting-nodes.mp4";
 import draggingNodesURL from "./assets/dragging-nodes.mp4";
 import ifNodeURL from "./assets/if-node.mp4";
+import switchNodeURL from "./assets/switch-node.mp4";
 import controlFlow from "./assets/control-flow.mp4";
 import CodeBlock from "@theme/CodeBlock";
 
@@ -28,6 +29,17 @@ For example, you may want to send one template if one data field represents a ce
 
 <video width="783" loop autoPlay muted controls poster={videoThumbnail}>
   <source src={ifNodeURL} />
+</video>
+
+## Switch Node
+
+For situations where a simple if true / false branch is insufficient, a
+switch node is available. The switch node accepts an arbitrary number of
+conditions and routes to the branch of the first condition to evaluate to true.
+If no conditions evaluate to true, the default branch is used.
+
+<video width="783" loop autoPlay muted controls poster={videoThumbnail}>
+  <source src={switchNodeURL} />
 </video>
 
 ## Sources
