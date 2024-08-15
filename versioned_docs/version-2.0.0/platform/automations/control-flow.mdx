@@ -14,7 +14,7 @@ import connectingNodesURL from "./assets/connecting-nodes.mp4";
 import draggingNodesURL from "./assets/dragging-nodes.mp4";
 import ifNodeURL from "./assets/if-node.mp4";
 import switchNodeURL from "./assets/switch-node.mp4";
-import controlFlow from "./assets/control-flow.mp4";
+import controlFlow from "./assets/new-control-flow.mp4";
 import CodeBlock from "@theme/CodeBlock";
 
 export const TableCellCode = ({ value }) => {
@@ -97,7 +97,7 @@ Within the Data, Profile and Step Ref Sources, you may also use JS String evalut
 
 ## Tutorial
 
-Below you can find a walkthrough of a sample control flow using step references.
+Below you can find a walkthrough of a sample control flow using step references to check the status of a previously sent notification. The control flow node will check against the status of a previous node with the value of the `step ref`.
 
 <video width="783" loop autoPlay muted controls poster={controlFlowThumb}>
   <source src={controlFlow} />

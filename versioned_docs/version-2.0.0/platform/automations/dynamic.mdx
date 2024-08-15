@@ -35,7 +35,7 @@ such as Segment, or modified by actions such as `Fetch Data`.
 For example, you can access the `userId` supplied by segment in a send node using `refs.data.userId`
 
 <Image
-  img={require("./assets/refs-example.png")}
+  img={require("./assets/new-refs-example.png")}
   alt="Accessing userId dynamically using refs.data.userId within the send node"
 />
 
@@ -45,7 +45,7 @@ By default, all `data` passed into an automation is passed through to the notifi
 
 1. Open a send node, click on the advanced section, and then click edit next to the `Data` field
 
-<Image img={require("./assets/send_data.png")} />
+<Image img={require("./assets/new-send_data.png")} />
 
 2. You can either the user the interactive JSON editor, or just modify the JSON in the text editor directly. The syntax to map the attribute is as follows:
 
@@ -69,7 +69,7 @@ We would use the following syntax:
   }
 ```
 
-<Image img={require("./assets/send_dynamic_data_map.png")} />
+<Image img={require("./assets/new-send_dynamic_data_map.png")} />
 
 In the notification template, you are now able to access the `vendor` property directly in a template variable `{vendor}` rather than destructing the data object `{data.properties.vendor_name}`
 
