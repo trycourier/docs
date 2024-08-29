@@ -1,0 +1,301 @@
+---
+sidebar_label: Views
+sidebar_position: 5
+---
+
+import styles from './styles.css';
+
+export const TableCellCode = ({ value, language }) => {
+  return (
+    <td style={{ width: "99%" }}>
+      <CodeBlock className={`language-${language}`} style={{ whiteSpace: "pre" }} language={language ?? "jsx"}>
+        {value.trim()}
+      </CodeBlock>
+    </td>
+  );
+};
+
+# Inbox Views
+
+Courier Inbox supports the retrieval and display of different messages, filtered by parameters. Read, Unread, and tagged messages are all examples of
+
+## Notifications (Default)
+
+By default, the Courier inbox provides all messages via its API's sorted by time received. Both read and unread statuses are retrieved, but archived messages are filled out. Pinned messages are returned and displayed at the top and in the APIs will be a seperate object (messages key vs pinned key).
+
+## Unread / Read
+
+Having an unread view may be the experience you'd like to present to your end users. You can configure the Inbox with these views when implementing it in your front-end.
+
+<table>
+  <tbody>
+    <tr>
+      <th>React Inbox</th>
+      <TableCellCode
+        language={"jsx"}
+        value={`
+<Inbox
+    views={[
+        {id: "unread", label: "Unread", params: {status: "unread"}},
+        {id: "read", label: "Read", params: {status: "read"}}
+    ]}
+/>`}
+      />
+    </tr>
+    <tr>
+      <th>Components Inbox</th>
+      <TableCellCode
+        language={"javascript"}
+        value={`
+window.courierConfig = {
+    components: {
+        inbox: {
+            views: [
+                {id: "unread", label: "Unread", params: {status: "unread"}},
+                {id: "read", label: "Read", params: {status: "read"}}
+            ]
+        }
+    }
+}        
+        `}
+      />
+    </tr>
+  </tbody>
+</table>
+
+## Archived
+
+You retrieve and display messages that a user as archived by exposing the Archive view.
+
+<table>
+  <tbody>
+    <tr>
+      <th>React Inbox</th>
+      <TableCellCode
+        language={"jsx"}
+        value={`
+<Inbox
+    views={[
+        {id: "notifications", label: "Messages"}},
+        {id: "archived", label: "Archived", params: {archived: true}}
+    ]}
+/>`}
+      />
+    </tr>
+    <tr>
+      <th>Components Inbox</th>
+      <TableCellCode
+        language={"js"}
+        value={`
+window.courierConfig = {
+    components: {
+        inbox: {
+            views: [
+                {id: "notifications", label: "Messages"}},
+                {id: "archived", label: "Archived", params: {archived: true}}
+            ]
+        }
+    }
+}        
+        `}
+      />
+    </tr>
+  </tbody>
+</table>
+
+## Preferences
+
+You can allow a user to see and change their user preferences by adding the preference view.
+
+<table>
+  <tbody>
+    <tr>
+      <th>React Inbox</th>
+      <TableCellCode
+        language={"jsx"}
+        value={`
+<Inbox
+    views={[
+        {id: "notifications", label: "Messages"}},
+        {id: "preferences", label: "Preferences"}
+    ]}
+/>`}
+      />
+    </tr>
+    <tr>
+      <th>Components Inbox</th>
+      <TableCellCode
+        language={"js"}
+        value={`
+window.courierConfig = {
+    components: {
+        inbox: {
+            views: [
+                {id: "notifications", label: "Messages"}},
+                {id: "preferences", label: "Preferences"}
+            ]
+        }
+    }
+}        
+        `}
+      />
+    </tr>
+  </tbody>
+</table>
+
+## Custom Filtered Views
+
+You can create filtered views for the inbox by specifying which tags you would like to filter on. By using `metadata.tags` in the [Send API](../../reference/send/message/#the-metadata-property), inbox messages will be tagged with the same information and can be retrieved and displayed as a view. Tags accepts and array and a view can be filtered by a multiple types.
+
+```json title=View + Tags Send Example
+{
+  "message": {
+    "template": "JFGC0K5X554AWXM38JPFFXBNFRDW",
+    "profile": {
+      "user_id": "claude"
+    },
+    "data": {
+      "refund_amount": "$12.34"
+    },
+    "metadata": {
+      "tags": ["refund"]
+    }
+  }
+}
+```
+
+<table>
+  <tbody>
+    <tr>
+      <th>React Inbox</th>
+      <TableCellCode
+        language={"jsx"}
+        value={`
+<Inbox
+    views={[
+        {id: "notifications", label: "Messages"}},
+        {id: "refunds", label: "Refund", params: {tags: ['refund']}},
+        {id: "orders", label: "Orders", params: {tags: ['order']}},
+        {id: "transactions", label: "All Transactions", params: {tags: ['refund', 'order']}},
+        {id: "sales", label: "Sales", params: {tags: ['sales']}}
+    ]}
+/>`}
+      />
+    </tr>
+    <tr>
+      <th>Components Inbox</th>
+      <TableCellCode
+        language={"js"}
+        value={`
+window.courierConfig = {
+    components: {
+        inbox: {
+                {id: "notifications", label: "Messages"}},
+                {id: "refunds", label: "Refund", params: {tags: ['refund']}},
+                {id: "orders", label: "Orders", params: {tags: ['order']}},
+                {id: "transactions", label: "All Transactions", params: {tags: ['refund', 'order']}},
+                {id: "sales", label: "Sales", params: {tags: ['sales']}}
+            ]
+        }
+    }
+}        
+        `}
+      />
+    </tr>
+  </tbody>
+</table>
+
+### Hooks, window.fetchMessages() and GraphQL for custom filtered views
+
+If you are building your own user interface with our APIs, we support custom views in there as well. Here are a few examples.
+
+
+
+<table>
+  <tbody>
+    <tr>
+      <th>@trycourier/client-graphql</th>
+      <TableCellCode
+        language={"jsx"}
+        value={`
+import { Inbox } from "@trycourier/client-graphql"
+inboxApi = Inbox({
+    clientKey: "abc123",
+    userId: "me123"
+});
+const messageCount = await inboxApi.getInboxMessages({
+    tags?: ['order', 'refund'],
+});
+`}
+        />
+    </tr>
+    <tr>
+      <th>Components APIs</th>
+      <TableCellCode
+        language={"js"}
+        value={`
+window.courier.inbox.fetchMessages({ params:{tags: ['order','refund']}})  
+console.log(window.courier.inbox.messages)
+`}
+/>
+    </tr> 
+  </tbody>
+</table>
+
+**Hooks example**
+
+```mdx
+const MessageList = () => {    
+    let {fetchMessages, messages} = useInbox()
+
+    let handleClick = ()  => {
+        fetchMessages({ params:{tags: ['order','refund']}})
+    }
+
+return <div >
+    <button onClick={handleClick}>get transaction messages</button>
+        <ul>
+            {messages.map(m=><li key={m.id}>{m.title}</li>)}
+        </ul>
+    </div>
+}
+```
+
+### Custom Tags, Bookmarks, Saved Messages
+The inbox allows you to add then remove tags that weren't part of the `metadata.tags` which is useful for building a custom "Save Message" or " Bookmark"feature. You can add and remove tags then use the same filtering logic as above to filter the inbox by a tag.
+
+**Hooks Example**
+
+```tsx
+const {addTag, removeTag, fetchMessages} = useInbox()
+
+const saveTag = (message_id: string, tag: string) => {
+    addTag(message_i, 'save')
+}
+
+const unsaveTag = (message_id: string, tag: string) => {
+    removeTag(message_i, 'save')
+}
+
+const toggleSave = (message: IInboxMessagePreview) => {
+    const save_tag = 'save'
+    if (message.tags?.includes(save_tag))
+        removeTag(message.id, save_tag)
+    } else {
+        addTag(message.id, save_tag)
+    }
+}
+
+fetchMessages({ params:{tags: ['save'}})
+```
+
+### Adding View to the template designer
+
+:::note 
+This is under a feature flag currently, please reach out to Courier support or your account team to turn on.
+:::
+
+While designing a template, you may want to select which view you would like this appear in an inbox. You can enter a comma seperated list of tags and those will automatically be put into the `metadata.tags` field when sending to the user. This allows them to be filtered in a view on the inbox using one of those tags.
+
+![Template Designer Settings to Add Tags](designer-settings-message-tags.png)
+
