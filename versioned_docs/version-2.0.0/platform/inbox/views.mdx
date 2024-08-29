@@ -1,5 +1,7 @@
 ---
+
 sidebar_label: Views
+title: Inbox Views
 sidebar_position: 5
 ---
 
@@ -17,11 +19,11 @@ export const TableCellCode = ({ value, language }) => {
 
 # Inbox Views
 
-Courier Inbox supports the retrieval and display of different messages, filtered by parameters. Read, Unread, and tagged messages are all examples of
+Courier Inbox supports the retrieval and display of different messages, filtered by parameters. Read, Unread, and tagged messages are all examples of different views you can use in the inbox. There is support for the inbox views in Courier's GraphQL Client, React-hooks and Components. Views are not yet supported in our Mobile SDKs natively in our mobile SDKs, but are available through CourierClient. If you need help implementing them, do not hesitate to reach out and we can help guide you through the APIs and interacting with the Client to create your own views.
 
 ## Notifications (Default)
 
-By default, the Courier inbox provides all messages via its API's sorted by time received. Both read and unread statuses are retrieved, but archived messages are filled out. Pinned messages are returned and displayed at the top and in the APIs will be a seperate object (messages key vs pinned key).
+By default, the Courier inbox provides all messages via its API's sorted by time received. Both read and unread statuses are retrieved, but archived messages are filtered out. Pinned messages are returned and displayed at the top and in the APIs will be a seperate object (messages key vs pinned key).
 
 ## Unread / Read
 
@@ -262,7 +264,7 @@ return <div >
 ```
 
 ### Custom Tags, Bookmarks, Saved Messages
-The inbox allows you to add then remove tags that weren't part of the `metadata.tags` which is useful for building a custom "Save Message" or " Bookmark"feature. You can add and remove tags then use the same filtering logic as above to filter the inbox by a tag.
+Courier Inbox allows you to add then remove tags that weren't part of the `metadata.tags` which is useful for building a custom "Save Message" or "Bookmark" feature. You can add and remove tags then use the same filtering logic as above to filter the inbox by a tag.
 
 **Hooks Example**
 
@@ -286,7 +288,7 @@ const toggleSave = (message: IInboxMessagePreview) => {
     }
 }
 
-fetchMessages({ params:{tags: ['save'}})
+fetchMessages({ params:{tags: ['save']}})
 ```
 
 ### Adding View to the template designer
