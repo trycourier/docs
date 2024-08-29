@@ -14,11 +14,9 @@ import YoutubeEmbed from "@site/src/components/YoutubeEmbed";
   alt="Courier Message Logs"
 />
 
-<YoutubeEmbed videoId="eWc2QJLZCfE" />
-
 ## Using the Message Logs
 
-The Courier Message Logs provide a timeline and insights into the status of your notifications, recipients, lists and automations.
+The Courier Message Logs provide a timeline and insights into the status of your notifications, recipients, lists and automations. Each step in the Send status has a visual representation.
 
 <Image
   img={require("../../assets/guides/data-logs/logs-overview.png")}
@@ -40,22 +38,22 @@ The message logs convey a great deal of information in the summary view:
 
 ### Send Status Key and Definitions
 
-Each step in the Send status has a visual representation.
+| Status        | Email                                                                                                                                                                               | Push (iOS, Android, Courier Inbox)                                                                                                                                                                                                   | SMS                                                                                                                                                         | Chat                                                                                                                                                        |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Queued**    | Courier has received a properly formatted and valid Send API request and is attempting to Send the Notification.                                                                    | Courier has received a properly formatted and valid Send API request and is attempting to Send the Notification.                                                                                                                     | Courier has received a properly formatted and valid Send API request and is attempting to Send the Notification.                                            | Courier has received a properly formatted and valid Send API request and is attempting to Send the Notification.                                            |
+| **Sent**      | Courier sent the request to the downstream provider. A `200` response will be given by Courier but could return `undeliverable` if the provider rejects it.                         | Courier sent the request to the downstream provider. A `200` response will be given by Courier but could return `undeliverable` if the provider rejects it.                                                                          | Courier sent the request to the downstream provider. A `200` response will be given by Courier but could return `undeliverable` if the provider rejects it. | Courier sent the request to the downstream provider. A `200` response will be given by Courier but could return `undeliverable` if the provider rejects it. |
+| **Delivered** | Channel providers allow Courier to confirm that the message was accepted (in the case of Email, this means it hit their inbox). Webhooks are available for status delivery updates. | The Push provider has confirmed delivery.                                                                                                                                                                                            | n/a                                                                                                                                                         | The Chat provider has confirmed delivery.                                                                                                                   |
+| **Opened**    | If open tracking is enabled, the request was delivered and opened by the recipient.                                                                                                 | Push notifications are marked as `delivered` when the push message reaches the device.                                                                                                                                               | n/a                                                                                                                                                         | n/a                                                                                                                                                         |
+| **Clicked**   | If link tracking is enabled for your workspace, Courier will change the status to `clicked` when a recipient clicks on links sent in the notification.                              | If link tracking is enabled for your workspace, Courier will change the status to `clicked` when a recipient clicks on links sent in the notification. For Inbox, the notification is marked `clicked` if a user clicks the message. | n/a                                                                                                                                                         | If link tracking is enabled for your workspace, Courier will change the status to `clicked` when a recipient clicks on links sent in the notification.      |
 
-<Image
-  img={require("../../assets/guides/data-logs/logs-status-keys.png")}
-  alt="Status Keys"
-/>
+### Other Message Statuses
 
-- **Queued:** Courier has received a properly formatted and valid Send API request and is attempting to Send the Notification.
-- **Sent:** means that the channel provider sent the message to the recipient
-- **Delivered:** certain channel providers allow us to confirm that the message was accepted (in the case of Email this means it hit their inbox).
-- **Opened:** the message was delivered and opened by the recipient (only available for certain channel providers).
 - **Canceled:** The message delivery was canceled.
-- **Clicked:** user clicked a link in the notification. (This is only available for certain channel providers and only after you enable [click tracking in Courier settings](../workspaces/track-email-opens.mdx)).
 - **Undeliverable:** The channel provider did not accept the send request from Courier.
 - **Unmapped:** the Notification ID does not exist or the Event ID included in the send command is not mapped to a Notification.
-- **Has Errors:** indicates that the timeline in theSend detail view includes an error response.
+- **Has Errors:** indicates that the timeline in the Send detail view includes an error response.
+- **Throttled:** Notifications are being throttled either because there are [send limits](../sending/guardrails.mdx) in effect, or your workspace has reached its free quota.
+- **Simulated:** Notifications are being sent with a [mock key](../content/notification-designer/environments-api-keys.mdx) and are simulating the message lifecycle without sending to the downstream provider.
 
 ### Notification Log Detail View
 
@@ -111,11 +109,6 @@ You can filter your Notification Logs by selecting one or more Status types: Que
 Unmapped means that an Event was posted to our Send API with an `eventId` that does not [map to a notification](https://help.courier.com/en/articles/4189555-send-basics-how-notifications-are-triggered-and-sent-with-courier) or an invalid notification ID.
 
 :::
-
-<Image
-  img={require("../../assets/guides/data-logs/logs-status.png")}
-  alt="Status Filter"
-/>
 
 ### Error Status Filter
 
