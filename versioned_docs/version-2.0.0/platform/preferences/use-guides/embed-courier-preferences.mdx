@@ -13,6 +13,12 @@ Courier Preferences components are ready to plug into your React app to immediat
 In this Guide, we will add the `PreferencesList` component into a simple Typescript React App that will allow a user to configure which notifications they wish to receive.
 You can see the final code here [Newsletter Preferences](https://github.com/trycourier/courier-guides/tree/main/preferences-center)
 
+## Using Hooks to Create Custom Preferences
+
+These [hooks](https://github.com/trycourier/courier-react/blob/main/packages/react-preferences/src/components/PreferencesV4.tsx) exist as a separate package so that you can build your own interface using our api and state management without having to install all the dependencies that `@trycourier/react-inbox` or other react-dom based packages include. This is Courier's out-of-the-box preference page for reference which uses the same hook.
+
+You can use [this sample tester](https://bwebs.github.io/courier-test/window-preferences.html) to explore and understand Courier's `preference` component.
+
 ## Context
 Let's imagine we have created a newsletter for bird lovers using Courier. When a user first signs up for our newsletter, they are automatically subscribed to receive bird facts. 
 Our newsletter also allows a user to receive bird pictures and bird jokes, but they must choose to sign up for extra communications.
