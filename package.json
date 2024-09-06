@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "NODE_OPTIONS=\"--openssl-legacy-provider\" vercel dev",
-    "dev": "NODE_OPTIONS=\"--openssl-legacy-provider\" docusaurus start",
-    "build": "NODE_OPTIONS=\"--openssl-legacy-provider\" docusaurus build",
+    "start": "vercel dev",
+    "dev": "docusaurus start",
+    "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
