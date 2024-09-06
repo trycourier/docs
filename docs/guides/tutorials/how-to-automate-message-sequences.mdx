@@ -472,7 +472,7 @@ It is possible to define an Automation Schema in two ways:
 :::info Automation Template Visual Designer
 An automation template is a re-usable, pre-defined list of automation steps created in the [automation design studio](https://help.courier.com/en/articles/5437032-using-the-automation-visual-designer).
 
-Published templates are run or "invoked" using the Courier Automation API automations/{templateId}/invoke endpoint.
+Published templates are run or "invoked" using the Courier Automation API automations/:templateId/invoke endpoint.
 :::
 
 By default, an Automation Template is a JSON schema definition of the following format:
@@ -548,7 +548,7 @@ local list=data('users', []);
 To trigger an automation run, there are two apis that can be called with your Courier API token.
 
 - `automations/invoke`
-- `automations/{templateId}/invoke`
+- `automations/:templateId/invoke`
 
 ### Invoke an ad hoc automation via API
 
@@ -605,7 +605,7 @@ Invoke an ad hoc automation run, by providing a valid automation definition in t
 
 ### Invoke an automation template via API
 
-`POST - /automations/{templateId}/invoke`
+`POST - /automations/:templateId/invoke`
 
 #### Structure
 
