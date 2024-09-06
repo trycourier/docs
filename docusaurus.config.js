@@ -1,8 +1,16 @@
+const path = require('path');
+
+// Manually resolve paths
+const sidebarPath = path.resolve(__dirname, './src/theme/sidebars.js');
+const customCssPath = path.resolve(__dirname, './src/css/custom.css');
+
+// Import other modules
 const codeTheme = require("./src/theme/codeTheme");
 const navbarItems = require("./src/theme/navbarItems");
 const metadata = require("./src/theme/metadata");
+const rehypeExternalLinks = require("./src/theme/plugins/rehypeExternalLinks");
+const tutorialFilters = require("./plugins/tutorial-filters");
 
-// With JSDoc @type annotations, IDEs can provide config autocompletion
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
   title: "Courier Docs",
@@ -21,8 +29,8 @@ module.exports = {
       ({
         docs: {
           routeBasePath: "/",
-          sidebarPath: require.resolve("./src/theme/sidebars"),
-          remarkPlugins: [require("./src/theme/plugins/rehypeExternalLinks")],
+          sidebarPath: sidebarPath,
+          remarkPlugins: [rehypeExternalLinks],
           lastVersion: "2.0.0",
           versions: {
             current: {
@@ -39,9 +47,8 @@ module.exports = {
         blog: false,
         pages: false,
         theme: {
-          customCss: require.resolve("./src/css/custom.css"),
+          customCss: customCssPath,
         },
-        // Using a custom plugin to filter out paths
         sitemap: false,
       }),
     ],
@@ -77,19 +84,11 @@ module.exports = {
     }),
 
   plugins: [
-    ["docusaurus2-dotenv", { systemvars: true, safe: true }],
-    ...(process.env.SEGMENT_KEY
-      ? [["docusaurus-plugin-segment", { apiKey: process.env.SEGMENT_KEY }]]
-      : []),
     [
       "@docusaurus/plugin-ideal-image",
       {
         disableInDev: false,
       },
-    ],
-    [
-      "@easyops-cn/docusaurus-search-local",
-      { docsRouteBasePath: "/", indexBlog: false, hashed: true },
     ],
     [
       "@docusaurus/plugin-sitemap",
@@ -100,8 +99,7 @@ module.exports = {
         filename: "sitemap.xml",
       },
     ],
-
-    "./plugins/tutorial-filters",
+    tutorialFilters,
   ],
   scripts: [
     {
