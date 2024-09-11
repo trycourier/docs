@@ -1,101 +1,91 @@
 const theme = {
   plain: {
-    color: "#97559D",
-    backgroundColor: "#2D1339",
+    color: "#cad3f5",
+    backgroundColor: "#1e2030",
   },
   styles: [
     {
-      types: ["changed"],
+      types: ["keyword", "important", "atrule", "prolog", "doctype"],
       style: {
-        color: "rgb(162, 191, 252)",
-        fontStyle: "italic",
+        color: "#c6a0f6",
       },
     },
     {
-      types: ["deleted"],
+      types: ["builtin", "entity"],
       style: {
-        color: "rgba(239, 83, 80, 0.56)",
-        fontStyle: "italic",
+        color: "#ed8796",
       },
     },
     {
-      types: ["inserted", "attr-name"],
+      types: ["class-name", "symbol", "attr-name", "namespace"],
       style: {
-        color: "#beffad",
-        fontStyle: "italic",
+        color: "#eed49f",
       },
     },
     {
-      types: ["comment"],
+      types: ["function", "tag", "selector", "property"],
       style: {
-        color: "rgba(255, 255, 255, 0.5)",
+        color: "#8aadf4",
       },
     },
     {
-      types: ["string", "url"],
+      types: ["boolean", "number", "constant"],
       style: {
-        color: "#beffad",
+        color: "#f5a97f",
+      },
+    },
+    {
+      types: ["string", "char", "url", "attr-value", "inserted"],
+      style: {
+        color: "#a6da95",
+      },
+    },
+    {
+      types: ["regex"],
+      style: {
+        color: "#f5bde6",
+      },
+    },
+    {
+      types: ["operator"],
+      style: {
+        color: "#91d7e3",
       },
     },
     {
       types: ["variable"],
       style: {
-        color: "rgb(214, 222, 235)",
+        color: "#cad3f5",
       },
     },
     {
-      types: ["number"],
+      types: ["punctuation", "comment"],
       style: {
-        color: "rgb(247, 140, 108)",
+        color: "#939ab7",
       },
     },
     {
-      types: ["builtin", "char", "constant", "function"],
+      types: ["cdata"],
       style: {
-        color: "#ff5e5e",
+        color: "#8bd5ca",
       },
     },
     {
-      types: ["punctuation"],
+      types: ["deleted"],
       style: {
-        color: "#fff",
+        color: "#ed8796",
       },
     },
     {
-      types: ["selector", "doctype"],
+      types: ["important", "bold"],
       style: {
-        color: "rgb(199, 146, 234)",
+        fontWeight: "bold",
+      },
+    },
+    {
+      types: ["italic"],
+      style: {
         fontStyle: "italic",
-      },
-    },
-    {
-      types: ["class-name", "delimiter"],
-      style: {
-        color: "#ffcb6b",
-      },
-    },
-    {
-      types: ["tag", "operator", "keyword"],
-      style: {
-        color: "#ca79ee",
-      },
-    },
-    {
-      types: ["boolean"],
-      style: {
-        color: "rgb(255, 88, 116)",
-      },
-    },
-    {
-      types: ["property"],
-      style: {
-        color: "rgb(128, 203, 196)",
-      },
-    },
-    {
-      types: ["namespace"],
-      style: {
-        color: "rgb(178, 204, 214)",
       },
     },
   ],

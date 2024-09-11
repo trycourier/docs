@@ -79,7 +79,18 @@ module.exports = {
       footer: {},
       prism: {
         theme: codeTheme,
-        additionalLanguages: ["ruby", "java", "uri"],
+        darkTheme: codeTheme,
+        additionalLanguages: [
+          "markup-templating",
+          "ruby", 
+          "java", 
+          "uri", 
+          "bash", 
+          "json", 
+          "handlebars",
+          "php",
+          "python",
+        ],
       },
     }),
 
