@@ -10,6 +10,7 @@ const navbarItems = require("./src/theme/navbarItems");
 const metadata = require("./src/theme/metadata");
 const rehypeExternalLinks = require("./src/theme/plugins/rehypeExternalLinks");
 const tutorialFilters = require("./plugins/tutorial-filters");
+const webpack = require('webpack');
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
@@ -111,6 +112,20 @@ module.exports = {
       },
     ],
     tutorialFilters,
+    function (context, options) {
+      return {
+        name: 'docusaurus-plugin-env',
+        configureWebpack(config, isServer, utils) {
+          return {
+            plugins: [
+              new webpack.DefinePlugin({
+                'process.env': JSON.stringify(context.siteConfig.customFields.env),
+              }),
+            ],
+          };
+        },
+      };
+    }
   ],
   scripts: [
     {
@@ -119,7 +134,6 @@ module.exports = {
     },
   ],
   themes: [
-    // ... Your other themes.
     [
       require.resolve("@easyops-cn/docusaurus-search-local"),
       /** @type {import("@easyops-cn/docusaurus-search-local").PluginOptions} */
@@ -128,4 +142,9 @@ module.exports = {
         hashed: "filename" }),
     ],
   ],
+  customFields: {
+    env: {
+      API_HOST: process.env.API_HOST || 'https://api.courier.com',
+    },
+  },
 };
