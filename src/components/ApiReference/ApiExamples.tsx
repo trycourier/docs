@@ -7,8 +7,8 @@ import isPlainObject from "lodash/isPlainObject";
 import qs from "qs";
 import { Path } from "path-parser";
 import CodeBlock from "@theme/CodeBlock";
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 import { ApiReferenceProps, FormValues } from ".";
 import { ApiReferenceTokenContext } from "./ApiReferenceToken";
@@ -225,7 +225,7 @@ const ApiExamples = ({ method, path }: Pick<ApiReferenceProps, "method" | "path"
   );
 
   return (
-    <Tabs groupId={STORAGE_EXAMPLE_TAB_KEY}>
+    <Tabs groupId={STORAGE_EXAMPLE_TAB_KEY} defaultValue="bash">
       {tabs.map((tab, index) => (
         <TabItem key={index} value={tab.lang} label={tab.title}>
           <CodeBlock className={`language-${tab.lang}`}>
