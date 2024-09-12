@@ -1,27 +1,17 @@
 ---
-
 sidebar_label: Views
 title: Inbox Views
 sidebar_position: 5
 ---
 
 import styles from './styles.css';
-
-export const TableCellCode = ({ value, language }) => {
-  return (
-    <td style={{ width: "99%" }}>
-      <CodeBlock className={`language-${language}`} style={{ whiteSpace: "pre" }} language={language ?? "jsx"}>
-        {value.trim()}
-      </CodeBlock>
-    </td>
-  );
-};
+import { TableCellCode } from './TableCellCode';
 
 Courier Inbox supports the retrieval and display of different messages, filtered by parameters. Read, Unread, and tagged messages are all examples of different views you can use in the inbox. There is support for the inbox views in Courier's GraphQL Client, React-hooks and Components. Views are not yet supported in our Mobile SDKs natively in our mobile SDKs, but are available through CourierClient. If you need help implementing them, do not hesitate to reach out and we can help guide you through the APIs and interacting with the Client to create your own views.
 
 ## Notifications (Default)
 
-By default, the Courier inbox provides all messages via its API's sorted by time received. Both read and unread statuses are retrieved, but archived messages are filtered out. Pinned messages are returned and displayed at the top and in the APIs will be a seperate object (messages key vs pinned key).
+By default, the Courier inbox provides all messages via its API's sorted by time received. Both read and unread statuses are retrieved, but archived messages are filtered out. Pinned messages are returned and displayed at the top and in the APIs will be a separate object (messages key vs pinned key).
 
 ## Unread / Read
 
@@ -295,7 +285,7 @@ fetchMessages({ params:{tags: ['save']}})
 This is under a feature flag currently, please reach out to Courier support or your account team to turn on.
 :::
 
-While designing a template, you may want to select which view you would like this appear in an inbox. You can enter a comma seperated list of tags and those will automatically be put into the `metadata.tags` field when sending to the user. This allows them to be filtered in a view on the inbox using one of those tags.
+While designing a template, you may want to select which view you would like this appear in an inbox. You can enter a comma separated list of tags and those will automatically be put into the `metadata.tags` field when sending to the user. This allows them to be filtered in a view on the inbox using one of those tags.
 
 ![Template Designer Settings to Add Tags](designer-settings-message-tags.png)
 

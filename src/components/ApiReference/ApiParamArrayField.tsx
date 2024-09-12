@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { FieldComponentProps, apiParamInitialValue } from "./ApiParamField";
 import ApiParamField from "./ApiParamField";
 
-import { Param } from "../Params";
+import { Param } from '../Params';
 import Markdown from "markdown-to-jsx";
 
 const ApiParamArrayField = ({ param, field, form }: FieldComponentProps<"array">) => {

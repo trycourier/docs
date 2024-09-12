@@ -23,6 +23,14 @@
   color: var(--text-link);
 }
 
+.breadcrumbs__item--active .breadcrumbs__link {
+  color: var(--text-link);
+}
+
+.table-of-contents__link:hover, .table-of-contents__link:hover code, .table-of-contents__link--active, .table-of-contents__link--active code {
+  color: var(--text-link);
+}
+
 .pagination-nav__link:hover {
   background: rgba(44, 19, 56, 0.02);
   border-color: rgba(44, 19, 56, 0.24);

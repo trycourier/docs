@@ -38,7 +38,7 @@ Sending a template for review emits a webhook event with type "notification:subm
 
 ## Webhooks
 
-Configure a webhook in Settings → Webhooks. This webhook will be called when a notification is submitted for a review, when it was canceled and also when a notification is published. Please note: At this point we do not have a granular way to allocate webhooks so you will receiveother events (message sent events) for the webhooks you add to the Settings, so filter on the event type.
+Configure a webhook in Settings → Webhooks. This webhook will be called when a notification is submitted for a review, when it was canceled and also when a notification is published. Please note: At this point we do not have a granular way to allocate webhooks so you will receive other events (message sent events) for the webhooks you add to the Settings, so filter on the event type.
 
 <Image
   img={require("../../assets/guides/internationalization-specification/webhook-settings.png")}
@@ -62,7 +62,7 @@ Configure a webhook in Settings → Webhooks. This webhook will be called when a
 }
 ```
 
-To see examples of other notification submission event typs, review the [webhook documentation](../../platform/workspaces/outbound-webhooks.mdx/#notificationsubmitted).
+To see examples of other notification submission event types, review the [webhook documentation](../workspaces/outbound-webhooks.mdx).
 
 Once you have received a notification:submitted event, you can trigger an approval workflow that runs outside of Courier. Once the workflow is complete and the template is approved to be published, see [Publishing the template](#publishing-the-template).
 

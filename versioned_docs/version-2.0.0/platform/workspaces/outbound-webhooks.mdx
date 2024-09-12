@@ -123,7 +123,7 @@ To protect against timing attacks, use constant-time string comparison to compar
 
 ### message:updated
 
-The `data` property in the webhook response payload for the `message:updated` event is identical to the information returned from the [GET /message/{message_id}](../../reference/logs/by-id.mdx) endpoint.
+The `data` property in the webhook response payload for the `message:updated` event is identical to the information returned from the [GET /message/:message_id](../../reference/logs/by-id.mdx) endpoint.
 
 For example, when an email is sent, it goes from `ENQUEUED` → `SENT` → `DELIVERED` → `OPENED`.
 

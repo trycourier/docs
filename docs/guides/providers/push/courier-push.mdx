@@ -376,7 +376,8 @@ Now that we have the **Frontend** setup and the **Studio** setup, we should 
 
 ## **Troubleshooting**
 
-<details><summary>My Toast Message doesn't appear?!</summary>
+<details>
+<summary>My Toast Message doesn't appear?!</summary>
 
 If your message doesn't show up after making a Send request, the first thing we want to do is make sure we are connected via WebSockets.
 
@@ -561,7 +562,8 @@ const theme = {
 
 If you do not want to use Courier Push to trigger a Toast notification then you can always invoke the Toast locally with the useToast hook. Below is an example creating a notification from the client rather than creating it from a transport. Do not forget to wrap this component with a CourierProvider somewhere up the component hierarchy chain.
 
-<details><summary>Example Hook</summary>
+<details>
+<summary>Example Hook</summary>
 
 ```js
 import { CourierProvider } from "@trycourier/react-provider";
@@ -716,7 +718,8 @@ const theme = {
 
 To overwrite the rendering of each of these you can supply your own react component.
 
-<details><summary>View an Example</summary>
+<details>
+<summary>View an Example</summary>
 
 ```js
 import React from "react";
@@ -765,7 +768,8 @@ const props = {
 
 `useInbox` is a hook that you can import and use to interact with Inbox without having to use any of the react components. Think of it as a `headless` Inbox.
 
-<details><summary>Example Hook</summary>
+<details>
+<summary>Example Hook</summary>
 
 ```js
 import React, { useEffect } from "react";

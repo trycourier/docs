@@ -6,6 +6,7 @@ export const Param: FC<{
   type: ReactNode;
   required?: boolean;
   collapsed?: boolean;
+  children?: ReactNode;
 }> = ({ name, type, required, collapsed, children }) => {
   return (
     <div className={styles.param}>
