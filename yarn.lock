@@ -1840,6 +1840,11 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@fontsource/jetbrains-mono@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@fontsource/jetbrains-mono/-/jetbrains-mono-5.1.0.tgz#810f33dcaadaaa2f31ca2b89f9d041a83715c56e"
+  integrity sha512-YzWpGYY3PoqvmvwW2Hb4NwkN5C7LO0FmZugEGcFe6cNNE/cMgH9JhW5LI6hjG+1+nwgSHyJtKmblHNrUqlyhWg==
+
 "@hapi/hoek@^9.0.0", "@hapi/hoek@^9.3.0":
   version "9.3.0"
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.3.0.tgz#8368869dcb735be2e7f5cb7647de78e167a251fb"

@@ -31,7 +31,7 @@
   --ifm-heading-font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
     Noto Sans, sans-serif, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  --ifm-font-family-monospace: 'JetBrains Mono', Sans-serif;
+  --ifm-font-family-monospace: 'JetBrains Mono', monospace;
   --ifm-badge-padding-vertical: 0.4rem;
   --ifm-badge-padding-horizontal: 0.8rem;
   --ifm-heading-font-weight: 500;
