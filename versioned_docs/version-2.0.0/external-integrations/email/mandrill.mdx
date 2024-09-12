@@ -29,15 +29,16 @@ To deliver a message to a recipient over Mandrill, Courier must be provided the 
 
 ## Override
 
-:::info Overrides Support
+:::info Overrides
 
-The Mandrill integration does not currently support passing overrides at this time. 
+Overrides occur **after** the render step in the notification lifecycle. This means the the rendered tab in the logs page **will not show** the end result for a notification that was rendered with overrides.
 
 :::
 
-<!--- You can use a provider override to replace what we send to Mandrill's Messages API. For example, you can add an attachment to your request: -->
 
-<!--- ```json title=JSON
+You can use a provider override to replace what we send to Mandrill's Messages API. For example, you can add an attachment to your request:
+
+```json title=JSON
 {
   "message": {
     "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
@@ -49,6 +50,9 @@ The Mandrill integration does not currently support passing overrides at this ti
         "override": {
           "body": {
             "message": {
+              "from_email": "me@courier.com",
+              "subject": "Hi there",
+              "from_name": "Rod",
               "attachments": [
                 {
                   "type": "text/plain",
@@ -63,9 +67,9 @@ The Mandrill integration does not currently support passing overrides at this ti
     }
   }
 }
-``` -->
+```
 
-<!--- Everything inside of `messageproviders.mandrill.override` will replace what we send to Mandrill's Messages API. You can see all the available options by visiting [Mandrill API docs](https://mandrillapp.com/api/docs/messages.JSON.html). -->
+Everything inside of `messageproviders.mandrill.override` will replace what we send to Mandrill's Messages API. You can see all the available options by visiting [Mandrill API docs](https://mandrillapp.com/api/docs/messages.JSON.html).
 
 ## Template Import
 
