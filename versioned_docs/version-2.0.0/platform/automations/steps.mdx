@@ -162,9 +162,20 @@ The `webhook` can be configured with any of the following properties:
 }
 ```
 
+## GET Profile
+
+Bring a profile stored with Courier into scope
+
 ## Invoke
 
 Invoke another Automation Template
+
+| Field          | Type   | Required | Description                                                                                                                        |
+| -------------- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| user_id        | string | required | The user id of the profile to load                                                                                                 |
+| path           | string |          | Where the profile should be attached. Can be profile or `data.<field-name>` defaults to profile                                    |
+| merge_strategy | string |          | How to merge the profile with any existing profile already attached at the same path. "replace", "none", "overwrite", "soft-merge" |
+| tenant_id      | string |          | Load profile with tenant specific data                                                                                             |
 
 ### Fields
 
@@ -237,9 +248,9 @@ Send a Notification Template
 
 ### Fields
 
-| Field   | Type   | Required | Description                                                                                                                   |
-| ------- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| action  | string | required | The type of element. For the Send Automation Step, this value should be `"send"`.                                             |
+| Field   | Type   | Required | Description                                                                                                                      |
+| ------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| action  | string | required | The type of element. For the Send Automation Step, this value should be `"send"`.                                                |
 | message | object | required | The Courier Message. For more information see [The Courier Message](../../../reference/send/message) in the /send api reference. |
 
 ### Schema
