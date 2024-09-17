@@ -1,54 +1,105 @@
----
-sidebar_position: 5
----
-
 # Audit Trail
 
 All Courier business tier customers gain access to a workspace audit trail which allows you to track a wide range of user activity for all members in a workspace. The audit trail will display supported events related to workspace authentication, security, and core functionality when triggered.
 
 ## Supported Events
 
-API Key
+### API Key
 
 - API Key Created
 - API Key Deleted
 - API Key Rotated
 
-User
+### Automation Template
+
+- Automation Template Published
+- Automation Template Deleted
+
+### Brand
+
+- Brand Created
+- Brand Updated
+- Brand Default Brand Updated
+- Brand Published
+- Brand Deleted
+
+### Notification
+
+- Notification Draft Created
+- Notification Duplicated
+- Notification Rolled Back
+- Notification Subscription Topic Changed
+- Notification Published
+- Notification Deleted
+
+### Preferences
+
+- Preferences Page Published
+- Preferences Notification Linked
+- Preferences Notification Unlinked
+- Preferences Section Created
+- Preferences Section Deleted
+- Preferences Section Channel Added
+- Preferences Section Channel Removed
+- Preferences Topic Created
+- Preferences Topic Deleted
+- Preferences Topic Default Status Changed
+
+### User
 
 - User Invited
 - User Role Changed
 - User Deleted
 - User Logout
 
-Workspace
+### Workspace
 
 - Workspace Name Changed
-- Workspace Discoverability Updated
-- Workspace Accessibility Updated
-- SSO Required Enabled/Disabled
-- Click-Through Tracking Enabled/Disabled
+- Workspace Discoverability Enabled
+- Workspace Discoverability Disabled
+- Workspace Accessibility Changed
+- SSO Required Enabled
+- SSO Required Disabled
+- Click-Through Tracking Enabled
+- Click-Through Tracking Disabled
+- Email Open Tracking Enabled
+- Email Open Tracking Disabled
+- Send Limits Settings Updated
 
-Design Assets
+### Segment Source
 
-- Notification Published
-- Notification Deleted
-- Brand Published
-- Brand Deleted
-- Automation Template Published
-- Automation Template Deleted
-- Preferences Page Published
-- Preferences Notification Linked/Unlinked
-- Preferences Section Created/Deleted
-- Preferences Section Channel Added/Removed
-- Preferences Topic Created/Deleted
-- Preferences Topic Default Status Changed
+- Segment Source Created
+- Segment Source Updated
+- Segment Source Archived
+- Segment Source Restored
 
-Outbound Integrations
+### RudderStack Source
 
-- Segment Source Created/Archived/Updated/Restored
-- Rudderstack Source Created/Archived/Updated/Restored
+- RudderStack Source Created
+- RudderStack Source Updated
+- RudderStack Source Archived
+- RudderStack Source Restored
+- RudderStack Source Enabled
+- RudderStack Source Disabled
 
-## External API support
+### Datadog Source
+
+- Datadog Source Created
+- Datadog Source Updated
+- Datadog Source Archived
+- Datadog Source Restored
+- Datadog Source Enabled
+- Datadog Source Disabled
+
+### New Relic Source
+
+- New Relic Source Created
+- New Relic Source Updated
+- New Relic Source Archived
+- New Relic Source Restored
+- New Relic Source Enabled
+- New Relic Source Disabled
+
+## External API Support
 
 Audit trail functionality is accessible via our public facing APIs including all the SDKs. [Check this out for more details](https://www.courier.com/docs/reference/audit-events/).
