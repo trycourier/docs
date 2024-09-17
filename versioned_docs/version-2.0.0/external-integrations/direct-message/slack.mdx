@@ -610,6 +610,35 @@ We typically use `ts` as the value. Courier will then look for this key in the d
 
 ![Slack settings](../../assets/guides/slack/slack-ts.gif)
 
+### Replying to a thread
+
+To reply to a thread in a Slack channel, you need to set the `thread_ts` value in the `override.slack.body` object. This tells Slack to reply to the message at the specified timestamp.
+
+You can retrieve the `thread_ts` value by using [`conversation.history`](https://api.slack.com/methods/conversations.history#examples) method of the Slack Web API using the `access_token`. Be sure to request the `channels:read` scope.
+
+```json title=JSON
+{
+  "message": {
+    "template": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "to": {
+      "slack": {
+        "access_token": "xoxb-xxxxx",
+        "channel": "C025MTFJ1EV"
+      }
+    },
+    "providers": {
+      "slack": {
+        "override": {
+          "body": {
+            "thread_ts": "1234567890.123456"
+          }
+        }
+      }
+    }
+  }
+}
+```   
+
 </GifWrapper>
 
 ### Replacement Key Path
