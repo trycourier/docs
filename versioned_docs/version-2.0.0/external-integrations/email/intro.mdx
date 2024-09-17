@@ -16,25 +16,19 @@ Courier integrates with many different email providers, as well as SMTP. In orde
   "email": "support@courier.com"
 }
 ```
-:::tip  
 
-Can't find a provider? Send us a chat ↘️ or email support@courier.com
-
-:::
-
-## Email channel override
+## Email Channel Overrides
 
 
 Use the email channel override property to override channel settings such as subject, reply to, from, cc, and bcc email addresses, along with HTML and text content. These overrides will apply to all your email channels within a template.
 
-:::note
+:::info Overrides
 
-Attachment overrides at the channel level are currently supported for Mailgun, Postmark, AWS SES, and Amply. For adding attachment overrides through other email providers, refer to the override section in the respective provider documentation.
+Overrides occur **after** the render step in the notification lifecycle. This means the the rendered tab in the logs page **will not show** the end result for a notification that was rendered with overrides.
 
 :::
 
-**Data structure for the email channel override:
-**
+**Data structure for the email channel override:**
 
 ```json
 {
