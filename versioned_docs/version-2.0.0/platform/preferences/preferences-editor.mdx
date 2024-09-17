@@ -45,14 +45,52 @@ The **Default State** defines whether a topic can be opted in or out, and whethe
 
 **Preference Sections** group subscription topics together and determine which topic delivery channels users can opt in/out of.
 
-###  Delivery Channel Customization
+###  Delivery Channel Selection
 
-** Delivery Channel Customization** gives recipients the ability to select and set the preference for their preferred delivery channel.
+:::info Business Tier
+
+Channel Selection is a Courier Business feature. [Contact sales](https://courier.na.chilipiper.com/book/me/sahil-cochinwala) for more details.
+
+:::
+
+**Delivery Channel Selection** gives recipients the ability to select and set the preference for their preferred delivery channel from the Preferences Hosted page.
+
+Channel selection must be enabled for the subscription topic in order for users to customize their delivery channel preferences.
 
 <Image
   img={require("../../assets/guides/preferences-ui/preferences-channel-settings.png")}
   alt="Preference Section Settings"
 />
+
+<Image
+  img={require("../../assets/guides/preferences-ui/channel-selection.png")}
+  alt="Hosted Page Channel Selection"
+/>
+
+### Channel Delivery Customization & Preferences API
+
+:::warning custom_routing
+The `custom_routing` array in the [user preferences API](../../reference/user-preferences/get-subscription-topic-preferences.mdx) response indicates the user's custom channel delivery. Channel Delivery Customization **must be enabled** to use `custom_routing`.
+:::
+
+```json
+{
+	"topic": {
+		"custom_routing": [
+			"email",
+			"push",
+			"webhook"
+		],
+		"has_custom_routing": true,
+		"default_status": "OPTED_IN",
+		"section_id": "5p8ROfompcN6Sg_2WR92A",
+		"section_name": "Notifications",
+		"status": "OPTED_IN",
+		"topic_id": "FPPGTQRQTRM8TSPZGZAY9296WB37",
+		"topic_name": "SMS"
+	}
+}
+```
 
 ## How to Map a Notification Template to a Subscription Topic
 
