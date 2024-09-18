@@ -596,20 +596,6 @@ You can mention users in a Slack message using the syntax `<@USER_ID>` in a Noti
 
 Learn more about [Advanced formatting with special parsing](https://api.slack.com/reference/surfaces/formatting#advanced).
 
-## Updating Slack Notifications
-
-> How to set the replacement key path in the Slack channel integration settings.
-
-### Via Replacement Key
-
-To update the content of a Slack notification previously sent via Courier, you need to set the "replacement key" path in the Slack [channel settings](../../platform/sending/channel-settings.mdx) within your notification template.
-
-We typically use `ts` as the value. Courier will then look for this key in the data block you pass to our API and use that to update an existing message instead of posting a new one.
-
-<GifWrapper width={915} height={437} caption="Slack Channel Settings">
-
-![Slack settings](../../assets/guides/slack/slack-ts.gif)
-
 ### Replying to a thread
 
 To reply to a thread in a Slack channel, you need to set the `thread_ts` value in the `override.slack.body` object. This tells Slack to reply to the message at the specified timestamp.
@@ -637,7 +623,21 @@ You can retrieve the `thread_ts` value by using [`conversation.history`](https:/
     }
   }
 }
-```   
+```
+
+## Updating Slack Notifications
+
+> How to set the replacement key path in the Slack channel integration settings.
+
+### Via Replacement Key
+
+To update the content of a Slack notification previously sent via Courier, you need to set the "replacement key" path in the Slack [channel settings](../../platform/sending/channel-settings.mdx) within your notification template.
+
+We typically use `ts` as the value. Courier will then look for this key in the data block you pass to our API and use that to update an existing message instead of posting a new one.
+
+<GifWrapper width={915} height={437} caption="Slack Channel Settings">
+
+![Slack settings](../../assets/guides/slack/slack-ts.gif)
 
 </GifWrapper>
 
