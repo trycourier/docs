@@ -72,7 +72,7 @@
     },
     {
       "source": "/docs/push-integrations",
-      "destination": "https://www.courier.com/platform/channels/push/",
+      "destination": "https://www.courier.com/docs/platform/channels/push/",
       "permanent": true
     },
     {
