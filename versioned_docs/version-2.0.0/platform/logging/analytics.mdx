@@ -18,7 +18,7 @@ This feature gives granular statistical data points on a particular template. Yo
 
 **Diagram**
 
-<Image img={require("../../assets/guides/analytics/template-analytics.png")} alt="" />
+<Image img={require("../../assets/guides/analytics/template-analytics.png")} alt="Template Analytics Page" />
 
 ### Send volume
 
@@ -27,3 +27,13 @@ A chart visualization on how the notification send volume has evolved over time.
 ### Channel performance
 
 A tabular representation of sends, delivered, opened, clicked and errors - for each channel and provider. This can help determine the ideal channel and/or provider for your notification template!
+
+### Delivered Events
+
+Some email providers like [SendGrid](../../external-integrations/email/sendgrid.mdx) offer granularity for their API keys, and will need [further customization](https://sendgrid.com/en-us/blog/introducing-api-key-permissions) so that `delivered` events can be sent to Courier.
+
+:::info API Key Permissions
+
+In order for Courier to receive `delivered` events from SendGrid, your [API key permissions](https://sendgrid.com/en-us/blog/introducing-api-key-permissions) need to include `email activity` and `inbound parse` so that `delivered` events can be counted in your message metrics.
+
+:::

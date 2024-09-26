@@ -55,6 +55,12 @@ To send a message, your API key needs only "Mail Send" permissions. You can sele
 
 </GifWrapper>
 
+:::info API Key Permissions
+
+In order for Courier to receive `delivered` events from SendGrid, your [API key permissions](https://sendgrid.com/en-us/blog/introducing-api-key-permissions) need to include `email activity` and `inbound parse` so that `delivered` events can be counted in your message metrics.
+
+:::
+
 Copy your API key from SendGrid, and paste it into the "API Key" field on the Courier Integration page.
 
 <Image
@@ -393,7 +399,7 @@ Templates ready for import will appear as selectable checkboxes that you can cho
   alt="Template Import Page"
 />
 
-### SendGrid API Key Permissions
+## SendGrid API Key Permissions
 
 Before you can successfully import SendGrid Dynamic Templates, you will need to make sure of the following:
 
@@ -407,7 +413,7 @@ Before you can successfully import SendGrid Dynamic Templates, you will need to 
 
 Once your SendGrid API key has the appropriate permissions, you will be able to see your templates ready for import from the template import tool.
 
-## Setup mailhooks for delivery status updates
+## Setup Mailhooks for Delivery Status Updates
 
 By default, after we send a message, Courier will poll Sendgrid periodically to find out if the message was delivered successfully or not.
 To get faster status updates, you can setup a webhook so Sendgrid can report delivery status directly to Courier.
