@@ -61,7 +61,7 @@ Settings have a toggle to invoke the digest when empty for users within an audie
 
 <Image img={require("../automations/assets/digest-settings.png")} alt="Digest Settings" />
 
-# Testing the Digest Send
+## Testing the Digest Send
 
 In this example, there are two template aliases `like` and `comment`, a third template `social_digest`, and a "Social" Subscription Topic.
 
@@ -101,7 +101,7 @@ Comment /send body
 - Send a message to Like; you should see a `DIGESTED` message in the logs
 - Wait until the scheduled time and see the Social Digest template being sent.
 
-# When to use automations
+## When to use automations
 
 Digesting can be implemented through the Send API and the Automation Invoke API. Generally, most use cases can be solved using this feature without Automations; however, the following list of items may move you into the automations invocation instead.
 
@@ -110,6 +110,6 @@ Digesting can be implemented through the Send API and the Automation Invoke API.
 - Changing the routing mechanism based on the data payload
   Gathering up-to-date data with a fetch data step
 
-# Logging
+## Logging
 
 A new status `DIGESTED` will appear in the log when a user has a Subscription Topic schedule set that's not `Instant` and the Digest settings have the Linked Digest Template selected. Upon triggering a digest via the schedule, a new message log will show the Linked Digest Template and all the collected items associated with the digest.

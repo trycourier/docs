@@ -383,137 +383,143 @@ Overrides can be used to change the request body that Courier uses to send an SM
 
 Congratulations, you're on your way to crafting a better notification strategy that your audience is sure to appreciate.
 
-## Troubleshooting
+## Troubleshooting: Twilio Error Codes and Solutions
 
-# Twilio Error Codes and Solutions
+{/* Using <h3> instead of markdown ### so that these don't create TOC items. */}
+<h3>Error Code 30003: Destination Unavailable</h3>
 
-### Error Code 30003: Destination Unavailable
-
-Message failed to deliver due to unreachable destination.
+*Message failed to deliver due to unreachable destination.*
 
 - Send another message via REST API or API Explorer
 - Check device status, signal strength, and carrier network
 - Use "Fallback to Long Code" feature if needed
 - Open support request if issue persists
 
-### Error Code 30007: Message Filtered
+<h3>Error Code 30007: Message Filtered</h3>
 
-Messages filtered by Twilio or carrier due to policy violations.
+*Messages filtered by Twilio or carrier due to policy violations.*
 
 - Ensure compliance with Twilio's Messaging and Acceptable Use Policies
 - Secure account credentials
 - Open support request if you suspect a mistake
 
-### Error Code 30005: Unknown or Inactive Destination
+<h3>Error Code 30005: Unknown or Inactive Destination</h3>
 
-Issues with carrier, signal, or inactive number.
+*Issues with carrier, signal, or inactive number.*
 
 - Verify number is active and formatted correctly (E.164)
 - Check device status and signal
 - Test with other devices on same carrier
 
-### Error Code 30006: Landline or Unreachable Carrier
+<h3>Error Code 30006: Landline or Unreachable Carrier</h3>
 
-Message sent to landline or unreachable carrier.
+*Message sent to landline or unreachable carrier.*
 
 - Use Lookup API to check if number is landline
 - Try alternative phone number type
 
-### Error Code 30008: Unknown Delivery Failure
+<h3>Error Code 30008: Unknown Delivery Failure</h3>
 
-Message failed for unknown reasons.
+*Message failed for unknown reasons.*
 
 - Test with simpler message and different sender ID
 - Check device roaming status
 - Contact support with recent message SIDs if issue persists
 
-### Error 11200: HTTP Retrieval Failure
+<h3>Error 11200: HTTP Retrieval Failure</h3>
 
-Failed to retrieve content from given URL.
+*Failed to retrieve content from given URL.*
 
 - Verify web server status and accessibility
 - Check for network issues
 - Ensure proper server configuration for static resources
 
-### Error 12300: Invalid Content-Type
+<h3>Error 12300: Invalid Content-Type</h3>
 
-Twilio unable to process URL's Content-Types.
+*Twilio unable to process URL's Content-Types.*
 
 - Verify correct Content-Type returned by server
 - Ensure URL refers to valid, acceptable resource
 
-### Error 20003: Permission Denied
+<h3>Error 20003: Permission Denied</h3>
 
-Lack of permission to access requested resource.
+*Lack of permission to access requested resource.*
 
 - Verify correct Auth Token and account SID combination
 - Check account type (sub-account vs master, test vs live)
 - Confirm API Key and Auth Token are valid
 
-### Error 20404: Resource Not Found
+<h3>Error 20404: Resource Not Found</h3>
 
-Requested resource doesn't exist or is unavailable.
+*Requested resource doesn't exist or is unavailable.*
 
 - Check resource exists and API case-sensitivity
 - Verify account SID and base URL
 
-### Error 21211: Invalid "To" Phone Number
+<h3>Error 21211: Invalid "To" Phone Number</h3>
 
-Incorrectly formatted or invalid recipient number.
+*Incorrectly formatted or invalid recipient number.*
 
 - Ensure E.164 format with correct country code
 - Avoid calling/messaging a Twilio number from itself
 
-### Error 21408: Permission Not Enabled for Region
+<h3>Error 21408: Permission Not Enabled for Region</h3>
 
-Permission not enabled for recipient's region.
+*Permission not enabled for recipient's region.*
 
 - Enable permission in Geo-Permissions settings
 
-### Error 21610: SMS STOP Filter
+<h3>Error 21610: SMS STOP Filter</h3>
 
-Recipient previously unsubscribed using "STOP" keyword.
+*Recipient previously unsubscribed using "STOP" keyword.*
 
 - Request recipient to text "START" to resubscribe
 - Ensure consent for messaging
 
-### Error 53000: Signaling Connection Error
+<h3>Error 53000: Signaling Connection Error</h3>
 
-Lost or failed signaling communication.
+*Lost or failed signaling communication.*
 
 - Attempt multiple reconnections
 - Try connecting to a different region
 
-### Test Credentials Not Working
+<h3>Test Credentials Not Working</h3>
 
-Test credentials don't send actual messages or make calls.
+*Test credentials don't send actual messages or make calls.*
 
 - For end-to-end testing, use trial credits in a separate project
 - In production, use magic number +15005550006 as "From" number
 
-### Webhook Not Working
+<h3>Webhook Not Working</h3>
+
+*Issues with webhook functionality.*
 
 - Check error logs for detailed information
 - Test webhook in browser, check for HTTP redirects
 - Contact Twilio support if unresolved
 
-### Video/Audio Not Working
+<h3>Video/Audio Not Working</h3>
+
+*Problems with video or audio transmission.*
 
 - Check Twilio Status Pages for incidents
 - Identify affected parties and regions
 - Contact support with detailed information if persistent
 
-### Send Message Not Working
+<h3>Send Message Not Working</h3>
+
+*Unable to send messages successfully.*
 
 - If opted out, text "START" or "YES" to opt-in
 - Verify recipient number status, reception, and roaming
 - Check "do not contact" list
 - Contact support with failed message SIDs
 
-### Import Twilio Not Working
+<h3>Import Twilio Not Working</h3>
+
+*Issues importing the Twilio library.*
 
 - Install library correctly: `pip3 install twilio`
 - Check for conflicting `twilio.py` files
 - Verify pip configuration
 - Test with sample code snippet
-
