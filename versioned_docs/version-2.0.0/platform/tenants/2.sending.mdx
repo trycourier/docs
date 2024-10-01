@@ -111,13 +111,13 @@ This pattern is useful when your tenants have metadata or credentials for a prov
 
 ## Send to users of children tenants
 
-If you have linked parent and child tenants and want to send to all users that would be part of the children tenants, you can send to all children users by using `with_children` key.
+If you have linked parent and child tenants and want to send to all users that would be part of the children tenants, you can send to all children users by using `include_children` key.
 
 ```json
 {
   "to": {
     "tenant_id": "ParentTenantA",
-    "with_children": true
+    "include_children": true
   },
   "content": {
     "title": "Hello, {first_name}!",
@@ -130,7 +130,7 @@ If you have linked parent and child tenants and want to send to all users that w
 }
 ```
 
-In the following hierarchy and using `with_children`, Courier would fan out the above request to all five users (User1, User2, User3, User4, User5).
+In the following hierarchy and using `include_children`, Courier would fan out the above request to all five users (User1, User2, User3, User4, User5).
 
 ```yaml
 - ParentTenantA
