@@ -19,6 +19,12 @@ import Image from "@theme/IdealImage";
 
 The repeatable list block allows you to easily display more complex layered data. This data is passed in the data object as an array during a send. There are 4 types of repeatable list blocks. They differ based on their ability to display images and whether or not children need to be displayed on each item. The option to display an image differs by channel.
 
+:::tip Rendered Output
+
+The rendered output of the list block is a table element. The list block does not currently support an output of bulleted lists. For more list customization, you can use a [template block](template-blocks.mdx) with [helpers](../notification-designer/handlebars-helpers.mdx).
+
+:::
+
 The four types of repeatable lists are:
 
 - Simple list
@@ -31,7 +37,7 @@ The four types of repeatable lists are:
   alt="Simple List Block"
 />
 
-To switch from bulleted lists to numbered lists, add a list then open the list details:
+To switch from a simple list to numbered lists, add a list then open the list details:
 
 <Image
   img={require("../../../assets/guides/list-blocks/list-block-details.png")}
