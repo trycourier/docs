@@ -3,28 +3,20 @@ sidebar_position: 0
 sidebar_label: Operators
 pagination_label: Audiences API
 slug: ./operators
-toc_max_heading_level: 2
+toc_max_heading_level: 3
 ---
 
 import TOCInline from "@theme/TOCInline";
 
 # Audience Operators
 
-<TOCInline maxHeadingLevel={2} toc={toc} />
-
 Audience operators are used to match a user's profile against a set of criteria. Courier supports the following operators:
 
-- `ENDS_WITH` (ends with)
+## Equality & Inequality
 
-```ts
-{
-  "operator": "ENDS_WITH",
-  "value": "sonicpigeons.com",
-  "path": "email"
-}
-```
+### `EQ`
 
-- `EQ` (equal to)
+Checks if a specified attribute is equal to a given value.
 
 ```ts
 {
@@ -34,87 +26,9 @@ Audience operators are used to match a user's profile against a set of criteria.
 }
 ```
 
-- `EXISTS` (check any specific attributes (e.g. email, phone number, etc.) exists in the user's profile)
+### `NEQ`
 
-```ts
-{
-  "operator": "EXISTS",
-  "value": "true", // false if you want to check for the absence of the attribute
-  "path": "email"
-}
-```
-
-- `GT` (checks any specific numeric attribute in user's profile is greater than specified value)
-
-```ts
-{
-  "operator": "GT",
-  "value": "100",
-  "path": "foss_ball_victories"
-}
-```
-
-- `GTE` (checks any specific numeric attribute in user's profile is greater than or equal to specified value)
-
-```ts
-{
-  "operator": "GTE",
-  "value": "99",
-  "path": "foss_ball_victories"
-}
-```
-
-- `INCLUDES` (checks if user's profile specific attribute includes any of the specified values, e.g. favorite_notification channel includes push)
-
-```ts
-{
-  "operator": "INCLUDES",
-  "value": ["push", "email"],
-  "path": "favorite_notification_channel"
-}
-```
-
-- `IS_AFTER` (checks if specified date attribute is after given date, e.g. date of birth is after 1990-01-01) the date should be in ISO 8601 format)
-
-```ts
-{
-  "operator": "IS_AFTER",
-  "value": "1990-01-01",
-  "path": "date_of_birth"
-}
-```
-
-- `IS_BEFORE` (checks if specified date attribute is before given date, e.g. date of birth is before 1990-01-01) the date should be in ISO 8601 format)
-
-```ts
-{
-  "operator": "IS_BEFORE",
-  "value": "1990-01-01",
-  "path": "date_of_birth"
-}
-```
-
-- `LT` (checks any specific numeric attribute in user's profile is less than specified value)
-
-```ts
-{
-  "operator": "LT",
-  "value": "100",
-  "path": "foss_ball_victories"
-}
-```
-
-- `LTE` (checks any specific numeric attribute in user's profile is less than equal to than specified value)
-
-```ts
-{
-  "operator": "LTE",
-  "value": "99",
-  "path": "foss_ball_victories"
-}
-```
-
-- `NEQ` (checks if specified attribute is not equal to given value. e.g. company is not equal to "sonicpigeons.com")
+Checks if a specified attribute is not equal to a given value.
 
 ```ts
 {
@@ -123,28 +37,11 @@ Audience operators are used to match a user's profile against a set of criteria.
   "path": "company"
 }
 ```
+## String Comparison
 
-- `MEMBER_OF` (Check's to see if the user is a member of the supplied path. Currently only supported in send. For now, the only supported path is account_id. Example, check to see if the user is a member of the account "acme" )
+### `STARTS_WITH` 
 
-```ts
-{
-  "operator": "MEMBER_OF",
-  "value": "acme",
-  "path": "account_id"
-}
-```
-
-- `OMIT` (checks if specified attribute is not included in user's profile, e.g. if user's favorite_notification_channel does not include email)
-
-```ts
-{
-  "operator": "OMIT",
-  "value": "email",
-  "path": "favorite_notification_channel"
-}
-```
-
-- `STARTS_WITH` (checks if specified attribute starts with given value, e.g. email starts with "pigeons")
+Checks if a specified attribute starts with a given value.
 
 ```ts
 {
@@ -154,37 +51,158 @@ Audience operators are used to match a user's profile against a set of criteria.
 }
 ```
 
-These operators are case-sensitive. If a user is created with Courier's [profile](../../reference/profiles/intro.mdx) the user's profile looks like this:
+### `ENDS_WITH`
 
-```json
+Checks if a specified attribute ends with a given value.
+
+```ts
 {
-  "profile": {
-    "title": "Software Engineer",
-    "email": "suhas@courier.com",
-    "phone_number": "1234567890",
-    "location": {
-      "city": "San Francisco",
-      "state": "CA",
-      "country": "US"
-    },
-    "favorite_programming_languages": ["Go", "Typescript"]
-  }
+  "operator": "ENDS_WITH",
+  "value": "sonicpigeons.com",
+  "path": "email"
 }
 ```
 
-Now let's consider following use cases and see how we can use them:
+### `INCLUDES` 
 
-### 1. You want to notify a subset of users who are from San Francisco.​
+Checks if a specific attribute in the user's profile includes any of the specified values.
 
-```json
+```ts
 {
-  "operator": "EQ",
-  "path": "location.city",
-  "value": "San Francisco"
+  "operator": "INCLUDES",
+  "value": ["push", "email"],
+  "path": "favorite_notification_channel"
 }
 ```
 
-### 2. You want to notify a subset of users who are Software Engineer and they either live in San Francisco or Oakland.
+### `OMIT` 
+
+Checks if a specified attribute is not included in the user's profile.
+
+```ts
+{
+  "operator": "OMIT",
+  "value": "email",
+  "path": "favorite_notification_channel"
+}
+```
+
+## Numeric Comparison
+
+### `GT`
+
+Checks if a specific numeric attribute in the user's profile is greater than a specified value.
+
+
+```ts
+{
+  "operator": "GT",
+  "value": "100",
+  "path": "foss_ball_victories"
+}
+```
+
+### `GTE`
+
+Checks if a specific numeric attribute in the user's profile is greater than or equal to a specified value.
+
+```ts
+{
+  "operator": "GTE",
+  "value": "99",
+  "path": "foss_ball_victories"
+}
+```
+
+### `LT`
+
+Checks if a specific numeric attribute in the user's profile is less than a specified value.
+
+```ts
+{
+  "operator": "LT",
+  "value": "100",
+  "path": "foss_ball_victories"
+}
+```
+
+### `LTE`
+
+Checks if a specific numeric attribute in the user's profile is less than or equal to a specified value.
+
+```ts
+{
+  "operator": "LTE",
+  "value": "99",
+  "path": "foss_ball_victories"
+}
+```
+
+## Date Comparison
+
+### `IS_BEFORE`
+
+Checks if a specified date attribute is before a given date. The date should be in ISO 8601 format.
+
+```ts
+{
+  "operator": "IS_BEFORE",
+  "value": "1990-01-01",
+  "path": "date_of_birth"
+}
+```
+
+### `IS_AFTER` 
+
+Checks if a specified date attribute is after a given date. The date should be in ISO 8601 format.
+
+```ts
+{
+  "operator": "IS_AFTER",
+  "value": "1990-01-01",
+  "path": "date_of_birth"
+}
+```
+
+## Existence
+
+### `EXISTS`
+
+Checks if a specific attribute exists in the user's profile.
+
+```ts
+{
+  "operator": "EXISTS",
+  "value": "true", // false if you want to check for the absence of the attribute
+  "path": "email"
+}
+```
+
+## Special Operators
+
+### `MEMBER_OF`
+
+Checks if the user is a member of the tenant specified in the path. 
+
+```ts
+{
+  "operator": "MEMBER_OF",
+  "value": "acme",
+  "path": "account_id"
+}
+```
+
+:::caution
+All operators are case-sensitive.
+:::
+
+## Nested Operator Examples
+
+Here are some examples demonstrating how to use nested operators for more complex audience targeting:
+
+### Combining AND and OR Operators
+
+#### Scenario: Notify Software Engineers in San Francisco or Oakland
 
 ```json
 {
@@ -213,8 +231,9 @@ Now let's consider following use cases and see how we can use them:
   ]
 }
 ```
+### Combining Equality and Inclusion Checks
 
-### 3. You want to notify a set of users who with title Software Engineer and they have listed Typescript as one of their favorite programming languages.
+#### Scenario: Notify Software Engineers who like TypeScript
 
 ```json
 {

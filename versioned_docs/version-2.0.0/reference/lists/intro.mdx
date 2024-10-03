@@ -8,23 +8,3 @@ slug: ./
 # Lists
 
 The Lists API helps you build lists of [users](/platform/users), which is useful for when you want to easily [send messages to a group](/platform/users#lists). List are defined by subscribing or unsubscribing users to them. This is different from [audiences](/reference/audiences) in which the members of the audience are defined dynamically based on user attributes.
-
-### API Endpoint
-
-Make a request to get the first page of results:
-
-`https://api.courier.com/users/USER_ID/preferences&cursor=CURSOR_STRING`
-
-## Cursor Pagination
-
-Courier APIs that return a list of results in the response can be paginated with a `cursor` query parameter. Pagination using a `cursor` query parameter is a method to retrieve a large set of results in smaller, more manageable chunks.
-
-### Points to Consider
-
-- Endpoint Design: Ensure your API endpoint is designed to support cursor-based pagination.
-
-- Cursor Generation: The cursor should be a unique identifier that efficiently references the position in the dataset (e.g., an encoded ID of the last retrieved item).
-
-- Handling End of Data: The response should indicate when there are no more results (e.g., next_cursor being null or absent).
-
-- Error Handling: Implement appropriate error handling for network issues and API rate limits.

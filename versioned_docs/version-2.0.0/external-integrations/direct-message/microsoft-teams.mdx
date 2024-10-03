@@ -20,7 +20,7 @@ To send notifications via Microsoft Teams, a Microsoft Teams Bot is required. Yo
 This step-by-step guide will walk you through sending a notification to a channel or user on Microsoft Teams using Courier.
 You will:
 
-#### Prerequisites
+### Prerequisites
 
 You will need both Courier and Microsoft Teams accounts to complete this tutorial. If you don't have accounts already, sign up before proceeding. You will also need permission to install apps to Teams. Either an administrator can grant you this permission or you can sign up for a free Microsoft 365 developer program tenant.
 
@@ -182,7 +182,7 @@ Click the `Send` tab at the top of the page.
 
 #### Send a Direct Message
 
-To send a direct message to a Microsoft Teams user, we'll need a [Courier Recipient Profile](../../reference/profiles/create.mdx) configured with a [Microsoft Teams object](#send-a-message-to-a-microsoft-teams-user) that includes a `user_id`, `tenant_id`, `conversation_id`, and `service_url`.
+To send a direct message to a Microsoft Teams user, we'll need a [Courier Recipient Profile](../../reference/profiles/create.mdx) configured with a [Microsoft Teams object](#send-a-message-to-a-microsoft-teams-user) that includes a `user_id`, `tenant_id`, and `service_url`.
 
 <Image
   img={require("../../assets/guides/microsoft-teams/teams-sample-dm.png")}
@@ -416,7 +416,7 @@ The `user_id` for this example has an `ms_teams` object with a `conversation_id`
 
 Congratulations, You can now send Adaptive Cards to MS Teams!
 
-## MS Teams @ Mentions in Adaptive Cards
+### MS Teams @ Mentions in Adaptive Cards
 
 To include a mention in an Adaptive Card you need to include the following elements:
 

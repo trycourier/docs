@@ -8,35 +8,32 @@ import Image from "@theme/IdealImage";
 
 Courier supports New Relic as an observability integration. You can follow the steps below to setup the New Relic integration.
 
-### Setup
+## Setup
 
 - Create a New Relic account if you don't have one.
 - Retrieve your [License key](https://one.newrelic.com/api-keys) for your account.
 - Login to Courier and navigate to the Channels page.
 - Click on New Relic channel and enter the License key from step 2 in the API Key field.
 
-### New Relic Metrics Endpoint
+## New Relic Metrics Endpoint
 
 Customers have the option to include a [Metrics Endpoint](https://docs.newrelic.com/docs/data-apis/ingest-apis/metric-api/report-metrics-metric-api/#api-endpoint) to your New Relic integration. If no endpoint is provided, the United States (US) endpoint will be used.
 
-### New Relic Logs Endpoint
+## New Relic Logs Endpoint
 
 Customers have the option to include a [Logs Endpoint](https://docs.newrelic.com/docs/logs/log-api/introduction-log-api/#endpoint) to your New Relic integration. If no endpoint is provided, the United States (US) endpoint will be used.
 
-### Dashboard
+## Dashboard
 
 Download the Courier New Relic Dashboard using the link below to easily monitor Courier within New Relic.
 
-<a
-  class="button button--primary button--md"
-  target="_blank"
-  href="/data/courier-new-relic-dashboard.json"
-  download="courier-new-relic-dashboard.json"
->
-  Download Dashboard JSON
-</a>
+<Button
+  label="Download Dashboard JSON"
+  link="/data/courier-new-relic-dashboard.json"
+  size="md"
+/>
 
-### Diagram
+## Diagram
 
 <Image
   img={require("../../assets/guides/observability/new-relic-dashboard.png")}
