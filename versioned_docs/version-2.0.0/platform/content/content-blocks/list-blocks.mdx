@@ -21,7 +21,7 @@ The repeatable list block allows you to easily display more complex layered data
 
 :::tip Rendered Output
 
-The rendered output of the list block is a table element. The list block does not currently support an output of bulleted lists. For more list customization, you can use a [template block](template-blocks.mdx) with [helpers](../notification-designer/handlebars-helpers.mdx).
+The rendered output of the list block is a table element. For more list customization options, you can use a [template block](template-blocks.mdx) with [helpers](../notification-designer/handlebars-helpers.mdx).
 
 :::
 
@@ -47,6 +47,18 @@ To switch from a simple list to numbered lists, add a list then open the list de
 ### Simple List
 
 A simple list block will display a row for each item in the array specified by the path. This block works similar to a [text block](text-blocks.mdx) with variables scoped to the array.
+
+To render a bulleted simple list, the background color for the list block must be set to `transaparent`.
+
+<Image
+  img={require("../../../assets/guides/list-blocks/list-bg-color.png")}
+  alt="List Block Background Color"
+/>
+
+<Image
+  img={require("../../../assets/guides/list-blocks/list-bullet.png")}
+  alt="Rendered Bulleted List"
+/>
 
 ### List With Children
 
