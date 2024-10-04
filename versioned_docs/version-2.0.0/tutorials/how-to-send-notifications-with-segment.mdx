@@ -38,7 +38,7 @@ Linking an automation to a Segment event allows you to create a flow of actions 
 
 Locate the event you want to link, click the + sign on the second column, and select the automation(s) of your choice.
 
-The easiest way to successfully link an automation to a segment event is to click “create new automation”. This new automation will use the linked Segment event as a trigger, and have an autopopulated recipient ID in the send step. All you’ll need to do is select the notification template that should be sent.
+The easiest way to successfully link an automation to a segment event is to click “create new automation”. This new automation will use the linked Segment event as a trigger, and have an auto-populated recipient ID in the send step. All you’ll need to do is select the notification template that should be sent.
 
 Additionally, `refs.data` points to the data object from Segment. `refs.data.userid` references this data from Segment directly and auto populates the recipient ID in the automation send step (see Automation Send Step figure below). Below the recipient ID, add the "Profile" optional field with the following JSON to get the user's email from the Segment data object:
 

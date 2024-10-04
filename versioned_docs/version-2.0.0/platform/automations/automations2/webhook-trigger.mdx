@@ -4,7 +4,7 @@ sidebar_position: 8
 
 # Webhook Trigger
 
-Courier's business tier customers have access to Webhook Triggers in Automations. Webhook Triggers enable you to connect other products and systems to Courier and trigger Automations based on events that happen in those systems. You have the full context of the webhook event payload and can use this data within the automation to send notifications, update profiles, or run workflows using Automation steps. This guide will walk you through how to set registed an inbound webhook and set up a Webhook Trigger.
+Courier's business tier customers have access to Webhook Triggers in Automations. Webhook Triggers enable you to connect other products and systems to Courier and trigger Automations based on events that happen in those systems. You have the full context of the webhook event payload and can use this data within the automation to send notifications, update profiles, or run workflows using Automation steps. This guide will walk you through how to register an inbound webhook and set up a Webhook Trigger.
 
 
 :::info Beta
@@ -35,7 +35,7 @@ For JSON objects, Courier will extract the following fields if they are present.
 * `event` - The name of the event that triggered the webhook. You can filter by the name when you set up the webhook trigger in Automations. If no string field named event is present, Courier will use "Custom" as the default name.
 * `userId` - A user identifier attached to the event. Courier will use this value to identify the user in the Automation, and automatically load associated profile data into the automation context.
 * `properties.courier.automation` - A JSON object containing one of the following fields:
-  * `template` - The Id of an exsting automation template to invoke, instead of using a configured webhook trigger.
+  * `template` - The id of an existing automation template to invoke, instead of using a configured webhook trigger.
   * `steps` - A JSON object containing the steps for an ad-hoc automation to execute.
 
 If you have an event name or user Id keyed by a different field name in the webhook payload, please reach out to Courier Support to have that field mapped.

@@ -15,7 +15,7 @@ const CancelStep: ApiParam = {
     },
     {
       type: "oneOf",
-      name: "cancelation_token",
+      name: "cancellation_token",
       required: true,
       options: [
         {

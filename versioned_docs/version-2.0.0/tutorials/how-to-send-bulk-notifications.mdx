@@ -72,7 +72,7 @@ The ingestion does **not** have to happen in a single call, you could have multi
       "recipient": "john-001", // optional, auto-generated if not present
       "profile": {}, // optional, similar to /send profile object
       "data": {
-        // optional, takes precendence over message data bag
+        // optional, takes precedence over message data bag
         "recipientName": "John Doe" // optional
         // additional [key-values] similar to /send data object
       },
@@ -188,4 +188,4 @@ The jobId can be used to track the status of the individual messages in the bulk
 
 ## Message Information
 
-The messageId from each item is the same as you get from looking up an invidual message from `/send`. Messages are visible on the Courier UI or can be fetched via Messages API as expected. If you have [Outbound Webhooks](../platform/workspaces/outbound-webhooks.mdx) configured, Courier will invoke it with the message data throughout the lifecycle of the message.
+The messageId from each item is the same as you get from looking up an individual message from `/send`. Messages are visible on the Courier UI or can be fetched via Messages API as expected. If you have [Outbound Webhooks](../platform/workspaces/outbound-webhooks.mdx) configured, Courier will invoke it with the message data throughout the lifecycle of the message.
