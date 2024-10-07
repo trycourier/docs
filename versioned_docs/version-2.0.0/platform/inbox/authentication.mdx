@@ -3,20 +3,24 @@ sidebar_label: Installing the Provider
 sidebar_position: 3
 slug: ./authentication
 toc_max_heading_level: 2
+title: Courier Inbox Authentication
+description: Courier Inbox Authentication | Implement JWT for Secure Notifications
+image: https://www.courier.com/docs/assets/ideal-img/inbox-all-sdks.977e39a.1200.png
+keywords: [in-app notifications, push notifications, mobile notifications, authentication]
 ---
-# Installing the Provider
+# Installing the Inbox Provider
 
 In order to send notifications to Inbox, you need to [log-in](https://app.courier.com/login) to your Courier account and install the [Courier Provider](https://app.courier.com/channels/courier). Once you've done that, make note of the Client Key. You'll need that value to initialize the Inbox SDK.
 
 Once you've installed the Provider, you'll notice some authentication options that allow you to secure the notification data that is delivered to the client SDKs.
 
-## Default (No Auth)
+## Default Authentication (No Auth)
 
 By default, you can use the Web Inbox SDK components without authentication beyond your `clientKey` and `userId`. Before going to production, you should implement stricter authentication using JWT tokens.
 
 When initializing the mobile SDKs (iOS and Android) you must supply an `accessToken` in addition to the `clientKey` and `userId`. Please review the authentication docs for [iOS](https://github.com/trycourier/courier-ios/blob/master/Docs/Authentication.md) and [Android](https://github.com/trycourier/courier-android/blob/master/Docs/Authentication.md) for more information about how set the accessToken both for development and production.
 
-## JSON Web Tokens
+## JSON Web Tokens Authentication
 
 When getting ready for production, we recommend implementing authentication in the form of a [JWT](https://jwt.io/).  You can use our [Issue Token API](https://www.courier.com/docs/reference/auth/issue-token/) to make things easier.  A JWT should be generated on a per-user basis in your backend and be supplied to your frontend.
 
@@ -50,7 +54,7 @@ The result of this API will look like:
 
 This token will then be passed into the client components and serve as your per-user authentication.
 
-## HMAC (Deprecated)
+## HMAC Authentication (Deprecated)
 
 We recommend JWT over HMAC as JWT allows developers to set more specific scopes.  
 
