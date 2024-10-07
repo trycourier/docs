@@ -25,7 +25,7 @@ Batching operates based on the following criteria:
 
 Batching is supported across various channels (email, SMS, chat, in-app inbox, push) and providers (Twilio, Sendgrid, email SMTP, Slack, MS Teams, WeChat).
 
-## Use Cases
+## Batching Example Use Cases
 
 ### Article Performance Summary
 When an article is published on a news website, events are generated for each view, comment, and share. 
@@ -160,7 +160,7 @@ This data can be accessed from a notification template using variable syntax.
   alt="Accessing batch data from a notification template"
 />
 
-## Working With Categories
+## Batching with Categories
 
 When the `Category Key` is set to a dynamic value such as `refs.data.category_key`, events can be grouped by category in a batch run. 
 In this case, the batch is aggregated by category:

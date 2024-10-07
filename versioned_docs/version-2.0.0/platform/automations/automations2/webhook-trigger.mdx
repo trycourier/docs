@@ -11,18 +11,18 @@ Courier's business tier customers have access to Webhook Triggers in Automations
 This feature is currently in Beta, please reach out to Courier Support to have it enabled for your account.
 :::
 
-## Registering an inbound webhook
+## Register an Inbound Webhook
 
 1. Go to Settings > Inbound Webhooks and click the "Add Inbound Webhook" button. 
 2. You will be prompted to enter a name and description for the webhook. 
 
 After you save the webhook, you will be presented with a unique URL that you can use to send events to Courier. When you set up the webhook trigger in Automations, you will see a list of all of your registered inbound webhooks by the name. The events are tied to the name you select, and you cannot change the name after you save the webhook.
 
-### Configure the webhook
+## Configure the Webhook
 
 Use the webhook URL that was generated in the previous step to configure the webhook in your system. Exercise a normal workflow to trigger various events to Courier, which will enable them as configuration options in the Automation trigger.
 
-### Webhook payload
+### Inbound Webhook Payload
 
 Courier accepts any payload up to 6Mb in size.
 
@@ -40,7 +40,7 @@ For JSON objects, Courier will extract the following fields if they are present.
 
 If you have an event name or user Id keyed by a different field name in the webhook payload, please reach out to Courier Support to have that field mapped.
 
-## Create a new Automation
+## Using the Webhook trigger in an Automation
 
 1. Go to Automations and create a new automation
 2. Drag and drop "Webhook" from the list of triggers. 

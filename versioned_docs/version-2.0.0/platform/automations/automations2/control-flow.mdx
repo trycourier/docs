@@ -5,7 +5,7 @@ slug: ./control-flow
 toc_max_heading_level: 2
 ---
 
-# Control Flow
+# Conditional Control Flow with the `If` Node
 
 import Image from "@theme/IdealImage";
 import videoThumbnail from "./assets/video-thumbnail.png";
@@ -20,7 +20,7 @@ export const TableCellCode = ({ value }) => {
   return <CodeBlock language="json">{JSON.stringify(value, null, 2)}</CodeBlock>;
 };
 
-## Overview
+## Introduction
 
 Automations can conditionally execute a branch of the workflow. This can be useful in any case where you may want to change the actions of an automation based on certain data sent with the template.
 
@@ -30,9 +30,9 @@ For example, you may want to send one template if one data field represents a ce
   <source src={ifNodeURL} />
 </video>
 
-## Sources
+## Condition Sources
 
-The Control Flow IF statement has four different source options, data, profile, step ref and JS condition. These sources control whether to follow the True path or the False path by evaluating the sources.
+The Control Flow `If` node has four different source options, data, profile, step ref and JS condition. These sources control whether to follow the True path or the False path by evaluating the sources.
 
 ### Data
 
@@ -54,7 +54,7 @@ Compare a field within the `data` key within the automation context with a value
 
 ### Step Ref
 
-Step Ref is designed for you to check the current value of a Send node, mainly it's status. See the screenshot below or view the [tutorial](#tutorial). In order to use Step Ref, you must have a Send node and have the alias of the Send node defined in its configuration.
+Step Ref is designed for you to check the status of a Send node. In order to use Step Ref, you must have a Send node and have the alias of the Send node defined in its configuration.
 
 `CLICKED` | `DELIVERED` | `ENQUEUED` | `FILTERED` | `OPENED` | `SENT` | `SIMULATED` | `UNDELIVERABLE` | `UNMAPPED` | `UNROUTABLE`
 

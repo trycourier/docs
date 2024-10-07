@@ -1,6 +1,6 @@
 ---
 sidebar_position: 6
-sidebar_label: Cancelling
+sidebar_label: Cancel Automation
 slug: ./cancel
 toc_max_heading_level: 2
 ---
@@ -10,22 +10,22 @@ import settingUpCancellationURL from "./assets/setting-up-cancellation-token.mp4
 import segmentCancelNodeURL from "./assets/segment-cancel-node.mp4";
 import Image from "@theme/IdealImage";
 
-# Cancelling An Automation
+# Cancelling an Automation
 
 Often times you may want to cancel an automation run. For example, one automation may send out
 a reminder notification to complete a task. However, this reminder may no longer be necessary
 if the task is already completed.
 
-## Automation Settings
+## Add a Cancellation Token
 
-To allow an automation to be cancelled:
+To allow an automation to be cancelled, add a cancellation token to the automation.
 
-1. Navigate to the settings tab of the automation
+1. Navigate to the settings tab of the automation you want to cancel.
 2. Add a cancellation token. This can be any value desired. Its best to use a dynamic value so
    a specific automation invocation may be cancelled, rather than all running instances. For
    example, you may use `refs.data.userId`, which would allow the automation run to be associated
    with the user the automation would send to.
-3. Publish
+3. Publish the automation.
 
 <video width="783" loop autoPlay muted controls a poster={videoThumbnail}>
   <source src={settingUpCancellationURL} />
@@ -49,9 +49,9 @@ An automation can also be canceled from automation logs.
 
 <Image img={require("./assets/cancel-button-logs.png")} alt="Canceling an automation from logs" />
 
-## Templated Cancelation Token
+## Templated Cancellation Token
 
-It may be advantageous to create a compound key for your cancellation token. For example, if you want to have a cancelation token that combines two different fields, or a data field and a static string. In automations, most fields support Javascript string interpolation and the cancelation token is an example of one. The documentation above says you can use `refs`, for example `refs.data.userId` and the following would be identical in the cancelation token field, `${data.userId}`. For more advanced interpolation you can perform nested interpolations as well.
+It may be advantageous to create a compound key for your cancellation token. For example, if you want to have a cancellation token that combines two different fields, or a data field and a static string. In automations, most fields support Javascript string interpolation and the cancellation token is an example of one. The documentation above says you can use `refs`, for example `refs.data.userId` and the following would be identical in the cancellation token field, `${data.userId}`. For more advanced interpolation you can perform nested interpolations as well.
 
 **Static Fields**
 
