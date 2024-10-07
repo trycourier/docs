@@ -1,10 +1,14 @@
 ---
 sidebar_position: 1
-sidebar_label: "React.js SDK"
+sidebar_label: "React SDK"
 slug: ./react-sdk
 toc_max_heading_level: 2
+title: Courier Inbox React SDK | Integrate In-App Notifications in React Apps
+description: Learn how to integrate the Courier Inbox React SDK to deliver in-app notifications seamlessly in your React applications. Explore setup, customization, and best practices for notification delivery.
+image: https://www.courier.com/docs/assets/ideal-img/inbox-all-sdks.977e39a.1200.png
+keywords: [Courier React SDK, in-app notifications, React notifications, Courier Inbox, notification integration, React SDK setup, custom notifications, React apps]
 ---
-# Using the React.js Web SDK
+# Inbox for React.js Web SDK
 
 ## Installation
 
@@ -105,7 +109,7 @@ function App() {
 }
 ```
 
-## `<Inbox>`
+## Inbox Component
 
 The `<Inbox>` React component displays list of recent notifications that the user has received. 
 
@@ -146,7 +150,7 @@ Each message in the inbox supports the following events:
 Github Docs: [@trycourier/react-inbox](https://github.com/trycourier/courier-react/tree/main/packages/react-inbox)
 
 
-## `<Toast>`
+## Toast Component
 
 The `<Toast>` component displays a toast message when a new message has been received.
 
@@ -181,7 +185,7 @@ React Hooks (`useInbox`, `useToast`, `useCourier`) exist as a separate package s
 
 This also enables using this package with react-native in a much simpler way.
 
-### `useInbox`
+### useInbox
 
 ```jsx
 import { CourierProvider } from "@trycourier/react-provider";
@@ -247,7 +251,7 @@ const MyApp = () => {
 
 Github Docs: [@trycourier/react-hooks](https://github.com/trycourier/courier-react/tree/main/packages/react-hooks)
 
-### `useToast`
+### useToast
 
 If you do not want to use Courier to trigger a toast notification then you can always invoke the toast locally with the useToast hook. Below is an example creating a notification from the client rather than creating it from a transport. Do not forget to wrap this component with a CourierProvider somewhere up the component hierarchy chain.
 
@@ -275,4 +279,3 @@ const App = () => {
 ```
 
 Github Docs: [@trycourier/react-toast](https://github.com/trycourier/courier-react/tree/main/packages/react-toast)
-

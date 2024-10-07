@@ -1,11 +1,16 @@
 ---
-sidebar_label: Views
-title: Inbox Views
+sidebar_label: Inbox Views
 sidebar_position: 5
+title: Courier Inbox Views | Create and Manage Custom Filtered Notification Views
+description: Learn how to create and manage custom filtered views for in-app notifications using Courier Inbox.
+image: https://www.courier.com/docs/assets/ideal-img/inbox-all-sdks.977e39a.1200.png
+keywords: [Courier Inbox Views, custom filtered views, in-app notifications, notification management, notification filtering]
 ---
 
 import styles from './styles.css';
 import { TableCellCode } from './TableCellCode';
+
+# Inbox Views
 
 Courier Inbox supports the retrieval and display of different messages, filtered by parameters. Read, Unread, and tagged messages are all examples of different views you can use in the inbox. There is support for the inbox views in Courier's GraphQL Client, React-hooks and Components. Views are not yet supported in our Mobile SDKs natively in our mobile SDKs, but are available through CourierClient. If you need help implementing them, do not hesitate to reach out and we can help guide you through the APIs and interacting with the Client to create your own views.
 
@@ -13,7 +18,7 @@ Courier Inbox supports the retrieval and display of different messages, filtered
 
 By default, the Courier inbox provides all messages via its API's sorted by time received. Both read and unread statuses are retrieved, but archived messages are filtered out. Pinned messages are returned and displayed at the top and in the APIs will be a separate object (messages key vs pinned key).
 
-## Unread / Read
+## Unread / Read Views
 
 Having an unread view may be the experience you'd like to present to your end users. You can configure the Inbox with these views when implementing it in your front-end.
 
@@ -53,7 +58,7 @@ window.courierConfig = {
   </tbody>
 </table>
 
-## Archived
+## Archived Messages
 
 You retrieve and display messages that a user as archived by exposing the Archive view.
 
@@ -93,7 +98,7 @@ window.courierConfig = {
   </tbody>
 </table>
 
-## Preferences
+## Inbox Preferences
 
 You can allow a user to see and change their user preferences by adding the preference view.
 
@@ -195,7 +200,7 @@ window.courierConfig = {
   </tbody>
 </table>
 
-### Hooks, window.fetchMessages() and GraphQL for custom filtered views
+### Inbox Hooks, window.fetchMessages() and GraphQL for custom filtered views
 
 If you are building your own user interface with our APIs, we support custom views in there as well. Here are a few examples.
 
