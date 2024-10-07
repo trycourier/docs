@@ -1,58 +1,57 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
+title: Divider Blocks
+description: A detailed look at Courier Divider Block functionality, use cases and best practices.
 ---
 
 import Image from "@theme/IdealImage";
 
 # Quote Blocks
 
-> A detailed look at Courier Quote Block functionality, use cases and best practices.
+Quote Blocks allow you to highlight important text or citations across different notification channels. 
+Quote Blocks are designed to make specific text stand out from the rest of your notification content. They're particularly useful for emphasizing key points, displaying testimonials, or citing sources.
 
-**Availability:** All channels
 
-## Working With Quote Blocks
+## Working with Quote Blocks
 
-<Image
-  img={require("../../../assets/guides/quote-blocks/quote-block-new.png")}
-  alt="New Quote Block"
-/>
+### Adding a Quote Block
 
-## Cross-Channel Behaviors
+1. In the Courier designer, click the "+" icon to add a new block
+2. Select "Quote" from the block options
+3. Enter the text you want to appear in the quote
 
-### Email
+### Cross-Channel Behaviors
 
-Creates an indented quote block.
+Quote Blocks adapt their appearance based on the delivery channel:
 
-<Image
-  img={require("../../../assets/guides/quote-blocks/quote-block-email.png")}
-  alt="Email Quote Block"
-/>
+#### Email
 
-### Slack
-
-The text is indented, and italicized in accordance with Slack formatting. 
+Creates an indented quote block with distinctive styling.
 
 <Image
-  img={require("../../../assets/guides/quote-blocks/quote-block-slack.png")}
-  alt="Slack Quote Block"
+img={require("../../../assets/guides/quote-blocks/quote-block-email.png")}
+alt="Quote Block appearance in email"
 />
 
-### SMS / Direct Message
+#### Slack
 
-The quote block text is automatically inside quotation marks which can't be deleted.
+Text is indented and italicized to match Slack's quote formatting.
 
 <Image
-  img={require("../../../assets/guides/quote-blocks/quote-block-sms.png")}
-  alt="DM Quote Block"
+img={require("../../../assets/guides/quote-blocks/quote-block-slack.png")}
+alt="Quote Block appearance in Slack"
 />
 
-:::info
+#### SMS / Direct Message
 
-**Facebook Messenger:** Text from quote blocks in other channel types is available, but when moved from the Library into a Messenger notification, it is unformatted (editable like a text block).
+Automatically wraps the text in quotation marks.
 
-:::
+<Image
+img={require("../../../assets/guides/quote-blocks/quote-block-sms.png")}
+alt="Quote Block appearance in SMS/DM"
+/>
 
-## Filter Out a Quote Block 
+## Conditional Rendering
 
 Like with any content block, Quote Blocks can be hidden using a [conditions filter](../notification-settings/send-conditions.mdx#for-content-blocks).
 

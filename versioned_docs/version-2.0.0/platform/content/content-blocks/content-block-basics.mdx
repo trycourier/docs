@@ -1,36 +1,54 @@
 ---
 sidebar_position: -1
+title: Content Block Overview
+description: Content Blocks are the building blocks of your notifications in Courier. Learn how to use them to build notification content across multiple channels.
 ---
 
 import Image from "@theme/IdealImage";
 import GifWrapper from "@site/src/components/GifWrapper";
 
-# Content Block Basics
+# Content Block Overview
 
-> Understanding how Content Blocks work, the different Content Block types available in Courier, and their core functionality.
+Content Blocks are the building blocks of your notifications in Courier. - Content Blocks are reusable, drag-and-drop components that allow you to build notification content across multiple channels. Key features include:
 
-## What is a Content Block?
+- Responsive and cross-channel by default
+- Reusable across different notification channels
+- Support for [variables](../variables/inserting-variables.mdx) and [conditional filtering](../notification-settings/send-conditions.mdx#for-content-blocks)
 
-Content Blocks are drag and drop components that allow you to build notification content which can be reused across your notification channels.
+## Type of Content Blocks
 
-Courier Content Blocks are responsive and cross-channel by default. Content that you create in one channel is available in the Content Library for use in the other channels you add to a notification. 
+- Text Blocks
+- Image Blocks
+- Action Blocks
+- Divider Blocks
+- Markdown Blocks
+- Quote Blocks
+- Template Blocks
+- List Blocks
+- Jsonnet Blocks
 
-A few block types, such as `Text` and `Action Blocks`, have channel or integration specific options or formatting. In these cases, Courier automatically makes adjustments when you drag the content in from the shared content Library.
+Some blocks, like Text and Action Blocks, have channel-specific options or formatting. For example, you can set the color of a text block differently for email and SMS.
 
-All blocks support [variables](../variables/inserting-variables.mdx) and [filters](../notification-settings/send-conditions.mdx#for-content-blocks).
+## Working with Content Blocks
 
-## Adding Content Blocks to a Notification
+### Adding Content Blocks
 
-When you create a new notification and add delivery channels, you will see the content toolbar. To create a new Content Block, click the block type you wish to add.
+1. Create a new notification and add delivery channels
+2. Use the content toolbar to add desired block types
+3. Drag and drop blocks to reorder them
 
 <Image
   img={require("../../../assets/guides/block-basics/block-basics-blocks.png")}
   alt="Content Toolbar"
 />
 
-## Content Block Library
+### Using the Content Block Library
 
-The Block Library holds shared channel content. It will display blocks not in use by the selected channel. If a block is not being used by any channel, it will be marked as Unused. Unused blocks can be deleted by hovering over the block and clicking `Remove Block`.
+The Block Library stores shared channel content:
+
+- Displays blocks not in use by the selected channel
+- Marks unused blocks for easy identification
+- Allows deletion of unused blocks
 
 <GifWrapper width={920} height={614} caption="Block Library">
 
@@ -38,25 +56,28 @@ The Block Library holds shared channel content. It will display blocks not in us
 
 </GifWrapper>
 
-## Filtering Blocks Using Conditions
+### Applying Conditional Filters
 
-Blocks can be conditionally hidden using a [filter](../notification-settings/send-conditions.mdx#for-content-blocks). You can add a filter by selecting a block and clicking on the `filter` button.
+You can hide or show blocks based on specific conditions:
+
+1. Select a block and click the filter button
 
 <Image
   img={require("../../../assets/guides/block-basics/block-basics-conditions.png")}
   alt="Filter Settings"
 />
 
-This will present you with a modal where you can specify the conditions in which the block will be hidden or shown.
+2. Set conditions in the modal that appears. You can use values passed in the data object or from the merged recipient profile for the property and values.
 
 <Image
   img={require("../../../assets/guides/block-basics/block-basics-condition-modal.png")}
   alt="Conditional Modal"
 />
 
-You can use values passed in the data object or from the merged recipient profile for the property and values.
+You can use values passed in the data object or from the merged recipient profile for the property and values. 
+See [Content Block Conditions](../notification-settings/send-conditions.mdx#for-content-blocks) for more information.
 
-## Block Settings
+### Customizing Block Settings
 
 Each content block has block-specific settings. The available settings are block-dependent but include things like alignment, color, and text formatting.
 
@@ -65,7 +86,7 @@ Each content block has block-specific settings. The available settings are block
   alt="Block Settings"
 />
 
-## Removing a Block
+### Removing a Block
 
 Blocks can be removed from a channel by selecting the block and clicking the Remove Block button. This action will send it to the Block Library.
 

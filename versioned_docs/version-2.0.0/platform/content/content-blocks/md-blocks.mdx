@@ -1,42 +1,48 @@
 ---
-sidebar_position: 7
+sidebar_position: 4
+title: Markdown Blocks
+description: A detailed look at Markdown Block functionality, use cases and best practices.
 ---
 
 import Image from "@theme/IdealImage";
 
 # Markdown Blocks
 
-> A detailed look at Markdown Block functionality, use cases and best practices.
-
-## Working With Markdown Blocks
-
-**Availability:** All channels
+Markdown Blocks allow you to create richly formatted content that can be rendered across multiple channels. 
+Markdown is a lightweight markup language that allows you to write formatted content using plain text syntax. Courier uses Markdown Blocks to enable flexible content creation that can adapt to different delivery channels.
 
 <Image
   img={require("../../../assets/guides/md-blocks/md-block-new.png")}
   alt="New Markdown Block"
 />
 
-Markdown is a text-to-HTML conversion tool for web writers. Markdown allows you to write using an easy-to-read, easy-to-write plain text format, then convert it to structurally valid HTML. Here's a complete list of [markdown syntax](https://daringfireball.net/projects/markdown/syntax) we use in our Markdown Blocks.
+## Key Features
 
-## Markdown Use Cases
+- Cross-channel compatibility: Create content once and deliver it consistently across email, push, SMS and other channels.
+- Rich formatting: Use Markdown syntax to add headings, lists, links, emphasis and more.
+- Variable support: Insert dynamic user data and personalize content.
+- Conditional rendering: Show or hide Markdown Blocks based on conditions.
 
-**Pass user data into a Notification:** As an example, let's say your product allows users to add comments to an article and user comments can have formatting. 
+## Working with Markdown Blocks
 
-- The Markdown block lets you pass that data to Courier (as a variable) and insert it into the markdown.
-- This allows Courier to render that comment across any channel.
-- If that comment was sent as HTML instead of Markdown, it could only be rendered in Email.
+### Adding a Markdown Block
 
-## Hide a Markdown Block Using Conditions
+1. In the Courier designer, click the "+" icon to add a new block
+2. Select "Markdown" from the block options
+3. Enter your Markdown content in the editor
 
-It is possible to hide a Markdown Block - or any other type of block - using [conditional filters](../notification-settings/send-conditions.mdx#for-content-blocks).
+### Markdown Syntax
 
-<Image
-  img={require("../../../assets/guides/md-blocks/md-block-filter.png")}
-  alt="Markdown Condition"
-/>
+Courier supports standard Markdown syntax, including:
 
-<Image
-  img={require("../../../assets/guides/md-blocks/md-block-condition.png")}
-  alt="Conditional Rendering"
-/>
+- Headings (# H1, ## H2, etc)
+- Lists (bulleted and numbered)
+- Links Link text
+- Emphasis (italic, bold)
+- And more
+
+For a complete reference, see the [Markdown syntax guide](https://daringfireball.net/projects/markdown/syntax).
+
+### Inserting Variables
+
+To insert a variable into your Markdown, use double curly braces: `{{variable_name}}`. The variable will be replaced with actual data when the notification is sent

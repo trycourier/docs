@@ -1,5 +1,7 @@
 ---
-sidebar_position: 9
+sidebar_position: 2
+title: Action Blocks
+description: A detailed look at Courier Action Block functionality, use cases and best practices.
 ---
 
 import Image from "@theme/IdealImage";
@@ -7,20 +9,15 @@ import GifWrapper from "@site/src/components/GifWrapper";
 
 # Action Blocks
 
-> A detailed look at Courier Action Block functionality, use cases and best practices.
-
-## Working With Action Blocks
-
-**Availability:** All channels
-
-The action block presents the recipient with an action to perform. Depending on the channel, this could appear as a button or a link.
+Action Blocks in Courier allow you to add interactive elements to your notifications, enabling recipients to take immediate action directly from the message.
+They typically appear as buttons or links, depending on the channel's capabilities.
 
 <Image
   img={require("../../../assets/guides/action-blocks/action-block-new.png")}
   alt="New Action Block"
 />
 
-## Block Level Options
+## Configuring Action Blocks
 
 When you select an action block, you are presented with a toolbar with the following formatting options depending on the notification channel.
 
@@ -30,13 +27,13 @@ When you select an action block, you are presented with a toolbar with the follo
 
 </GifWrapper>
 
-### Edit
+### Text and Link
 
-- Presents you with a modal to set the `Friendly Text` and `Action`. For most channels, the action is a URL. For Slack, you can opt to use a webhook.
+- Click the Edit icon to set the `Friendly Text` and `Action`. For most channels, the action is a URL. For Slack, you can opt to use a webhook.
 
-### Button
+### Button Type
 
-- Displays the action as a button. If you drag a button from the reusable content library into a channel where the button is not an option, Courier automatically reformats it into a link.
+- Select between different button styles, as well as a text-only link option
 
 :::info Note
 
@@ -44,28 +41,10 @@ Action buttons are not available across all channels. For SMS and Chat options, 
 
 :::
 
-### Text
+### Alignment
 
-- Displays the action as a URL link.
+- Align the content of the block left, center or right.
 
-### Align
+### Color (Action Buttons Only)
 
-- Allows you to align the content of the block left, center or right.
-
-### Color
-
-- Presents the users with a color picker to select the button color. You can use a color from the palette or enter the hex value for a custom color - or select from pre-defined brand template colors. This option is only available for action buttons.
-
-## Hide an Action Block Using Conditions
-
-It is possible to hide an action block - or any other type of block - using [conditional filters](../notification-settings/send-conditions.mdx#for-content-blocks).
-
-<Image
-  img={require("../../../assets/guides/action-blocks/action-block-filter.png")}
-  alt="Action Block Filter"
-/>
-
-<Image
-  img={require("../../../assets/guides/action-blocks/action-block-condition.png")}
-  alt="Action Block Conditions"
-/>
+- Select the button color. You can use a color from the palette or enter the hex value for a custom color - or select from pre-defined brand template colors. This option is only available for action buttons.

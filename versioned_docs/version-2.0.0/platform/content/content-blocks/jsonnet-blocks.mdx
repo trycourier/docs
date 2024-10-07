@@ -1,5 +1,7 @@
 ---
 sidebar_position: 8
+title: Jsonnet Blocks
+description: A detailed look at Courier Jsonnet Block functionality, use cases and best practices.
 ---
 
 import Image from "@theme/IdealImage";
@@ -10,6 +12,8 @@ import YoutubeEmbed from "@site/src/components/YoutubeEmbed";
 
 **Availability:** [Slack](/platform/channels/direct-message/slack), [Microsoft Teams](/platform/channels/direct-message/microsoft-teams)
 
+Jsonnet Blocks enable you to create dynamic, customized content for Slack and Microsoft Teams notifications using the Jsonnet templating language.
+
 [Jsonnet](https://learnxinyminutes.com/docs/jsonnet/) is a JSON to JSON templating language, which means that combining Jsonnet with your user data allows you to build and send dynamic, custom Slack blocks and MS Teams Adaptive Cards in your notifications.
 
 <Image
@@ -18,17 +22,41 @@ import YoutubeEmbed from "@site/src/components/YoutubeEmbed";
   width={500}
 />
 
-## Data Properties
+## Key Features
 
-Reference the data object properties using `data("variable")` syntax, as shown in the screenshot above.
+### Data Integration
 
-## Use Cases
+- Access user data using the `data("variable")` syntax
+- Dynamically populate message content based on user attributes or event data
 
-- To help you build common Block Kit actions with Jsonnet, Courier has several Jsonnet template blocks to choose from such as buttons, drop-downs, images, and more.
-- You can also build your own [Block Kit](https://api.slack.com/block-kit) elements from scratch. The Jsonnet Block expects a single Block Kit element or an array of elements.
+### Templating
 
-**Read more:** [Content block basics](content-block-basics.mdx)
+- Use Jsonnet's templating features to create reusable components
+- Apply conditional logic to show or hide parts of your message
+
+### Platform-Specific Elements
+
+- Create Slack [Block Kit](https://api.slack.com/block-kit) elements
+- Design Microsoft Teams [Adaptive Cards](https://adaptivecards.io/)
+
+## Courier-Provided Templates
+
+Courier offers several pre-built Jsonnet template blocks for common Block Kit actions:
+
+- Buttons
+- Dropdowns
+- Images
+- Text sections
+- And more...
+
+These templates can serve as starting points for your custom designs.
+
+## Custom Block Kit Elements
+
+You can also build your own [Block Kit](https://api.slack.com/block-kit) elements from scratch. The Jsonnet Block expects either a single Block Kit element or an array of elements.
 
 ## Demo: Designing Slack Notifications using Block Kit and Jsonnet
+
+Watch this video tutorial to see Jsonnet Blocks in action:
 
 <YoutubeEmbed videoId="KPM4lx2Yq3U" />

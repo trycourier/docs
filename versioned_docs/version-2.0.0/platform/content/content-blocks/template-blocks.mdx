@@ -1,30 +1,21 @@
 ---
-sidebar_position: 3
+sidebar_position: 6
+title: Template Blocks
+description: Use template blocks to insert HTML and Handlebars into your notification.
 ---
 
 import Image from "@theme/IdealImage";
 
 # Template Blocks
 
-> Use template blocks to insert markup language into your notification.
-
-**Availability:** Email only
-
-## Working With Template Blocks
-
-<Image
-  img={require("../../../assets/guides/template-blocks/template-block-new.png")}
-  alt="New Template Block"
-/>
-
-The Template Block allows you to use [Handlebars](../notification-designer/handlebars-designer.mdx) templates along with HTML and CSS to add customized content to your notifications.
+Template Blocks allow you to leverage HTML, CSS, and Handlebars templating for highly customized email notifications in Courier.
+Template Blocks provide a powerful way to create dynamic, richly formatted content for your email notifications. 
+They combine the flexibility of HTML and CSS with the dynamic capabilities of Handlebars templating.
 
 <Image
   img={require("../../../assets/guides/template-blocks/template-block-standard.png")}
   alt="Template Block Boilerplate"
 />
-
-The template block presents you with an HTML editor containing a `div` and `style` element. Starting with these elements, you can build out the look and feel of the block content. 
 
 :::info Note
 
@@ -38,52 +29,33 @@ The Template Block supports Handlebars. You can learn about the language syntax 
 
 **Read more:** [Custom Courier Handlebars helpers](../notification-designer/handlebars-helpers.mdx).
 
-### Using CSS With Handlebars
+## Styling with CSS and Handlebars
 
-1. In the notification designer, add a template block to an email notification.
-
-<Image
-  img={require("../../../assets/guides/template-blocks/template-block-styling.png")}
-  alt="Template Block With CSS and Handlebars"
-/>
-
-2. Open the `preview` tab and create a test event providing the data values for the template block.
+Combine CSS and Handlebars for dynamic styling:
 
 <Image
-  img={require("../../../assets/guides/template-blocks/template-block-data.png")}
-  alt="Test Event Data"
+img={require("../../../assets/guides/template-blocks/template-block-styling.png")}
+alt="Template Block with CSS and Handlebars"
 />
 
-3. Select the test event in the preview to see the code rendered in the email.
+## Using Markdown in a Template Block 
 
-<Image
-  img={require("../../../assets/guides/template-blocks/template-block-data-preview.png")}
-  alt="Template Preview"
-/>
-
-### Using Markdown in a Template Block 
-
-If you like to compose in markdown, you can do that using the template block. Just add a template block to your notification, add the following syntax:
+Render markdown between `{{#markdown}}` and `{{/markdown}}` within a template block.
 
 ```handlebars
-<div>{{#markdown}} YOUR MARKDOWN GOES HERE {{/markdown}}</div>
+<div>
+{{#markdown}}
+  # Your Markdown Content
+  
+  - List item 1
+  - List item 2
+{{/markdown}}
+</div>
 ```
 
-Then write in your markdown between the `{{#markdown}}` and close with `{{/markdown}}`.
+## Using Replacement Variables in Handlebars
 
-<Image
-  img={require("../../../assets/guides/template-blocks/template-block-md.png")}
-  alt="Template Block and Markdown"
-/>
-
-<Image
-  img={require("../../../assets/guides/template-blocks/template-block-md-preview.png")}
-  alt="Markdown Preview"
-/>
-
-### Using Replacement Variables in Handlebars
-
-To insert a variable from your JSON event, you need the variable handlebars helper 
+Insert variables from your JSON event data:
 
 ```handlebars
 {{var "variable_name"}}
@@ -94,10 +66,10 @@ To insert a variable from your JSON event, you need the variable handlebars help
 - [Using replacement variables in Courier](../variables/inserting-variables.mdx)
 - [Courier Handlebars helpers](../notification-designer/handlebars-helpers.mdx)
 
-### Inserting HTML Into a Handlebars Block
+## Inserting HTML from Variables
 
-To pull in a data object variable containing `HTML`, wrap the variable with triple curly brackets like:
+To render HTML stored in a variable, use triple curly braces:
 
 ```handlebars
-{{{body}}}
+{{{htmlContent}}}
 ```
