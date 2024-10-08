@@ -8,7 +8,7 @@ import TOCInline from "@theme/TOCInline";
 
 # Elements
 
-<TOCInline maxHeadingLevel={2} toc={toc} />
+This page provides a comprehensive reference for all available element types, their properties, and usage patterns.
 
 ## Elemental Sugar
 
@@ -18,10 +18,10 @@ Syntactic Sugar to provide a fast shorthand for Courier Elemental Blocks.
 
 | Field | Type   | Required | Description                                                                   |
 | ----- | ------ | -------- | ----------------------------------------------------------------------------- |
-| title | string |          | The title to be displayed by supported channels i.e. push, email (as subject) |
-| body  | string | required | The text content displayed in the notification.                               |
+| title | `string` |          | The title to be displayed by supported channels i.e. push, email (as subject) |
+| body  | `string` | required | The text content displayed in the notification.                               |
 
-### Examples
+### Example
 
 Elemental Sugar does not require the use of `message.content.version` nor does it require nesting block objects in `message.content.elements`.
 Instead, simply pass Elemental Sugar properties directly under `message.content`:
@@ -39,7 +39,7 @@ Instead, simply pass Elemental Sugar properties directly under `message.content`
 }
 ```
 
-Feel free to use Elemental Sugar alongside Elemental blocks:
+Elemental Sugar can be used alongside Elemental blocks:
 
 ```json
 {
@@ -66,16 +66,16 @@ Allows the user to execute an action. Can be a button or a link.
 
 | Field            | Type   | Required | Description                                                                                                      |
 | ---------------- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------- |
-| type             | string | required | The type of element. For action elements, this value should be `"action"`.                                       |
-| content          | string | required | The text content of the action shown to the user.                                                                |
-| href             | string | required | The target URL of the action.                                                                                    |
-| action_id        | string |          | A unique id used to identify the action when it is executed.                                                     |
-| align            | string |          | The alignment of the action button. One of `"center"`, `"left"`, `"right"`, or `"full"`. Defaults to `"center"`. |
-| background_color | string |          | The background color of the action button.                                                                       |
-| style            | string |          | Can be `"button"` or `"link"`. Defaults to `"button"`.                                                           |
-| locales          | object |          | Region specific content. See [locales docs](../locales) for more details.                                        |
+| type             | `string` | required | The type of element. For action elements, this value should be `action`.                                       |
+| content          | `string` | required | The text content of the action shown to the user.                                                                |
+| href             | `string` | required | The target URL of the action.                                                                                    |
+| action_id        | `string` |          | A unique id used to identify the action when it is executed.                                                     |
+| align            | `string` |          | The alignment of the action button. One of `center`, `left`, `right`, or `full`. Defaults to `center`. |
+| background_color | `string` |          | The background color of the action button.                                                                       |
+| style            | `string` |          | Can be `button` or `link`. Defaults to `button`.                                                           |
+| locales          | `object` |          | Region specific content. See [locales docs](../locales) for more details.                                        |
 
-### Examples
+### Example
 
 Basic usage:
 
@@ -100,12 +100,12 @@ Note: As an alternative, most elements support a `channel` property. Which allow
 
 | Field    | Type             | Required | Description                                                                                                                                  |
 | -------- | ---------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| type     | string           | required | The type of element. For channel elements, this value should be `"channel"`.                                                                 |
-| channel  | string           | required | The channel the contents of this element should be applied to. Can be `email`, `push`, `direct_message`, `sms` or a provider such as `slack` |
-| elements | CourierElement[] |          | An array of elements to apply to the channel. If `raw` has not been specified, `elements` is `required`.                                     |
-| raw      | object           |          | Raw data to apply to the channel. See example. If `elements` has not been specified, `raw` is `required`.                                    |
+| type     | `string`           | required | The type of element. For channel elements, this value should be `channel`.                                                                 |
+| channel  | `string`           | required | The channel the contents of this element should be applied to. Can be `email`, `push`, `direct_message`, `sms` or a provider such as `slack` |
+| elements | `CourierElement[]` |          | An array of elements to apply to the channel. If `raw` has not been specified, `elements` is `required`.                                     |
+| raw      | `object`           |          | Raw data to apply to the channel. See example. If `elements` has not been specified, `raw` is `required`.                                    |
 
-### Examples
+### Example
 
 Basic Usage:
 
@@ -178,6 +178,26 @@ With raw:
 }
 ```
 
+## Comment Element
+
+The Comment element allows you to include comments in your Elemental structure that won't be rendered in the final output.
+
+### Fields
+
+| Field   | Type     | Required | Description                                                                 |
+| ------- | -------- | -------- | --------------------------------------------------------------------------- |
+| type    | `string` | required | The type of element. For comment elements, this value should be `comment`.  |
+| comment | `string` |          | The comment text.                                                           |
+| object  | `any`    |          | An optional object that can be included with the comment.                   |
+
+### Example
+
+```json
+{
+  "type": "comment",
+  "comment": "This is a comment that won't be rendered in the output"
+}
+
 ## Divider Element
 
 Renders a dividing line between elements.
@@ -186,10 +206,10 @@ Renders a dividing line between elements.
 
 | Field | Type   | Required | Description                                                                  |
 | ----- | ------ | -------- | ---------------------------------------------------------------------------- |
-| type  | string | required | The type of element. For divider elements, this value should be `"divider"`. |
-| color | string |          | The CSS color to render the line with. I.E. `#fff`.                          |
+| type  | `string` | required | The type of element. For divider elements, this value should be `divider`. |
+| color | `string` |          | The CSS color to render the line with. I.E. `#fff`.                          |
 
-### Examples
+### Example
 
 ```json
 {
@@ -200,17 +220,17 @@ Renders a dividing line between elements.
 
 ## Group Element
 
-Allows you to group elements together. This can be useful when used in combination with `"if"` or
-`"loop"`. See [control flow docs](../control-flow) for more details.
+Allows you to group elements together. This can be useful when used in combination with `if` or
+`loop`. See [control flow docs](../control-flow) for more details.
 
 ### Fields
 
 | Field    | Type             | Required | Description                                                              |
 | -------- | ---------------- | -------- | ------------------------------------------------------------------------ |
-| type     | string           | required | The type of element. For group elements, this value should be `"group"`. |
-| elements | CourierElement[] | required | Sub elements to render.                                                  |
+| type     | `string`           | required | The type of element. For group elements, this value should be `group`. |
+| elements | `CourierElement[]` | required | Sub elements to render.                                                  |
 
-### Examples
+### Example
 
 ```json
 {
@@ -234,6 +254,27 @@ Allows you to group elements together. This can be useful when used in combinati
 }
 ```
 
+## HTML Element
+
+The HTML element allows you to include raw HTML content in your notification.
+
+### Fields
+
+| Field    | Type   | Required | Description                                                                      |
+| -------- | ------ | -------- | -------------------------------------------------------------------------------- |
+| type     | `string` | required | The type of element. For image elements, this value should be `image`.         |
+| content  | `string` | required | The raw HTML content to be included in the notification.                       |
+| locales  | `string` |          | Region specific content. See [locales](locales.mdx) doc for more details.                    |
+
+### Example
+
+```json
+{
+  "type": "html",
+  "content": "<h1>Hello,<strong>World!</strong></h1>"
+}
+```
+
 ## Image Element
 
 Used to embed an image into the notification.
@@ -242,19 +283,64 @@ Used to embed an image into the notification.
 
 | Field    | Type   | Required | Description                                                                      |
 | -------- | ------ | -------- | -------------------------------------------------------------------------------- |
-| type     | string | required | The type of element. For image elements, this value should be `"image"`.         |
-| src      | string | required | The source of the image.                                                         |
-| align    | string |          | The alignment of the image. One of `"center"`, `"left"`, `"right"`, or `"full"`. |
-| alt_text | string |          | Alternate text for the image.                                                    |
-| href     | string |          | A URL to link to when the image is clicked.                                      |
-| width    | string |          | CSS width properties to apply to the image. (I.E. 50px)                          |
+| type     | `string` | required | The type of element. For image elements, this value should be `image`.         |
+| src      | `string` | required | The source of the image.                                                         |
+| align    | `string` |          | The alignment of the image. One of `center`, `left`, `right`, or `full`. |
+| alt_text | `string` |          | Alternate text for the image.                                                    |
+| href     | `string` |          | A URL to link to when the image is clicked.                                      |
+| width    | `string` |          | CSS width properties to apply to the image. (I.E. 50px)                          |
 
-### Examples
+### Example
 
 ```json
 {
   "type": "image",
   "src": "../Images/logo.png"
+}
+```
+
+## List Element
+
+The List element allows you to create ordered or unordered lists in your notification.
+
+### Fields
+
+| Field      | Type                    | Required | Description                                                     |
+| ---------- | ----------------------- | -------- | --------------------------------------------------------------- |
+| type       | `string`                | required | The type of element. For list elements, this value should be `list`. |
+| list_type  | `string`                | required | The type of list. Can be `ordered` or `unordered`.              |
+| elements   | `ListItemElement[]` | required | An array of list item elements.                                 |
+| imgSrc     | `string`                |          | Allows bullets to be rendered using an image (for unordered lists). |
+| imgHref    | `string`                |          | URL for the bullet image, if used.                              |
+
+### List Item Fields
+
+| Field            | Type                                                  | Required | Description                                    |
+| ---------------- | ----------------------------------------------------- | -------- | ---------------------------------------------- |
+| type             | `string`                                              | required | Should be `list-item`.                         |
+| elements         | `TextContentElement[] OR ListItemElement[]`   | required | Content of the list item, can include nested lists. |
+| background_color | `string`                                              |          | Background color for the list item.            |
+
+### Example
+
+```json
+{
+  "type": "list",
+  "list_type": "unordered",
+  "elements": [
+    {
+      "type": "list-item",
+      "elements": [
+        { "type": "string", "content": "First item" }
+      ]
+    },
+    {
+      "type": "list-item",
+      "elements": [
+        { "type": "string", "content": "Second item" }
+      ]
+    }
+  ]
 }
 ```
 
@@ -266,10 +352,10 @@ The meta element contains information describing the notification that may be us
 
 | Field | Type   | Required | Description                                                                   |
 | ----- | ------ | -------- | ----------------------------------------------------------------------------- |
-| type  | string | required | The type of element. For image elements, this value should be `"meta"`.       |
-| title | string |          | The title to be displayed by supported channels i.e. push, email (as subject) |
+| type  | `string` | required | The type of element. For meta elements, this value should be `meta`.       |
+| title | `string` |          | The title to be displayed by supported channels i.e. push, email (as subject) |
 
-### Examples
+### Example
 
 Set the title
 
@@ -312,14 +398,14 @@ Renders a quote block.
 
 | Field        | Type   | Required | Description                                                                  |
 | ------------ | ------ | -------- | ---------------------------------------------------------------------------- |
-| type         | string | required | The type of element. For quote elements, this value should be `"quote"`.     |
-| content      | string | required | The text value of the quote.                                                 |
-| align        | string |          | Alignment of the quote. One of `"center"`, `"left"`, `"right"`, or `"full"`. |
-| border_color | string |          | CSS border color property (i.e. `#fff`).                                     |
-| text_style   | string |          | One of `"text"`, `"h1"`, `"h2"`, or `"subtext"`                              |
-| locales      | object |          | Region specific content. See [locales docs](../locales) for more details.    |
+| type         | `string` | required | The type of element. For quote elements, this value should be `quote`.     |
+| content      | `string` | required | The text value of the quote.                                                 |
+| align        | `string` |          | Alignment of the quote. One of `center`, `left`, `right`, or `full`. |
+| border_color | `string` |          | CSS border color property (i.e. `#fff`).                                     |
+| text_style   | `string` |          | One of `text`, `h1`, `h2`, or `subtext`                              |
+| locales      | `object` |          | Region specific content. See [locales docs](../locales) for more details.    |
 
-### Examples
+### Example
 
 ```json
 {
@@ -336,19 +422,19 @@ Represents a body of text to be rendered inside of the notification.
 
 | Field         | Type                 | Required   | Description                                                                                                |
 | ------------- | -------------------- | ---------- | ---------------------------------------------------------------------------------------------------------- |
-| type          | string               | required   | The type of element. For action elements, this value should be `"text"`.                                   |
-| content       | string               | required\* | The text content displayed in the notification. Either this field must be specified, or the elements field |
-| elements      | TextContentElement[] | required\* | An array of Text Content Elements. Either this field must be specified, or the content element field       |
-| align         | string               |            | Text alignment. One of "left", "center", or "right"                                                        |
-| text_style    | string               |            | Allows the text to be rendered as a heading level. Can be "text", "h1", "h2", or "subtext"                 |
-| color         | string               |            | Specifies the color of text. Can be any valid css color value                                              |
-| bold          | boolean              |            | Apply bold to the text                                                                                     |
-| italic        | boolean              |            | Apply italics to the text                                                                                  |
-| strikethrough | boolean              |            | Apply a strike through the text                                                                            |
-| underline     | boolean              |            | Apply an underline to the text                                                                             |
-| locales       | object               |            | Region specific content. See [locales docs](../locales) for more details.                                  |
+| type          | `string`               | required   | The type of element. For text elements, this value should be `text`.                                   |
+| content       | `string`               | required | The text content displayed in the notification. Either this field must be specified, or the elements field |
+| elements      | `TextContentElement[]` | required | An array of Text Content Elements. Either this field must be specified, or the content element field       |
+| align         | `string`               |            | Text alignment. One of `left`, `center`, or `right`                                                        |
+| text_style    | `string`               |            | Allows the text to be rendered as a heading level. Can be `text`, `h1`, `h2`, or `subtext`                 |
+| color         | `string`               |            | Specifies the color of text. Can be any valid css color value                                              |
+| bold          | `boolean`              |            | Apply bold to the text                                                                                     |
+| italic        | `boolean`              |            | Apply italics to the text                                                                                  |
+| strikethrough | `boolean`             |            | Apply a strike through the text                                                                            |
+| underline     | `boolean`              |            | Apply an underline to the text                                                                             |
+| locales       | `object`               |            | Region specific content. See [locales docs](../locales) for more details.                                  |
 
-### Examples
+### Example
 
 Basic usage:
 
@@ -393,16 +479,16 @@ Renders a simple string. Similar to default behavior of text without a newline a
 
 | Field         | Type     | Required | Description                                                                                |
 | ------------- | -------- | -------- | ------------------------------------------------------------------------------------------ |
-| type          | "string" | required | The type of element. For action elements, this value should be `"string"`.                 |
-| content       | string   | required | The text content displayed in the notification.                                            |
-| align         | string   |          | Text alignment. One of "left", "center", or "right"                                        |
-| text_style    | string   |          | Allows the text to be rendered as a heading level. Can be "text", "h1", "h2", or "subtext" |
-| color         | string   |          | Specifies the color of text. Can be any valid css color value                              |
-| bold          | boolean  |          | Apply bold to the text                                                                     |
-| italic        | boolean  |          | Apply italics to the text                                                                  |
-| strikethrough | boolean  |          | Apply a strike through the text                                                            |
-| underline     | boolean  |          | Apply an underline to the text                                                             |
-| locales       | object   |          | Region specific content. See [locales docs](../locales) for more details.                  |
+| type          | `string` | required | The type of element. For string elements, this value should be `string`.                 |
+| content       | `string`   | required | The text content displayed in the notification.                                            |
+| align         | `string`   |          | Text alignment. One of `left`, `center`, or `right`                                        |
+| text_style    | `string`   |          | Allows the text to be rendered as a heading level. Can be `text`, `h1`, `h2`, or `subtext` |
+| color         | `string`   |          | Specifies the color of text. Can be any valid css color value                              |
+| bold          | `boolean`  |          | Apply bold to the text                                                                     |
+| italic        | `boolean`  |          | Apply italics to the text                                                                  |
+| strikethrough | `boolean`  |          | Apply a strike through the text                                                            |
+| underline     | `boolean`  |          | Apply an underline to the text                                                             |
+| locales       | `object`   |          | Region specific content. See [locales docs](../locales) for more details.                  |
 
 ### Link Element
 
@@ -410,18 +496,18 @@ Renders a link within a body of text.
 
 | Field            | Type    | Required | Description                                                                                |
 | ---------------- | ------- | -------- | ------------------------------------------------------------------------------------------ |
-| type             | "link"  | required | The type of element. For action elements, this value should be `"link"`.                   |
-| content          | string  | required | The text content displayed in the notification.                                            |
-| href             | string  |          | The address to link to                                                                     |
-| disable_tracking | boolean |          | Disable tracking for the link                                                              |
-| align            | string  |          | Text alignment. One of "left", "center", or "right"                                        |
-| text_style       | string  |          | Allows the text to be rendered as a heading level. Can be "text", "h1", "h2", or "subtext" |
-| color            | string  |          | Specifies the color of text. Can be any valid css color value                              |
-| bold             | boolean |          | Apply bold to the text                                                                     |
-| italic           | boolean |          | Apply italics to the text                                                                  |
-| strikethrough    | boolean |          | Apply a strike through the text                                                            |
-| underline        | boolean |          | Apply an underline to the text                                                             |
-| locales          | object  |          | Region specific content. See [locales docs](../locales) for more details.                  |
+| type             | `string`  | required | The type of element. For link elements, this value should be `link`.                   |
+| content          | `string`  | required | The text content displayed in the notification.                                            |
+| href             | `string`  |          | The address to link to                                                                     |
+| disable_tracking | `boolean` |          | Disable tracking for the link                                                              |
+| align            | `string`  |          | Text alignment. One of `left`, `center`, or `right`                                        |
+| text_style       | `string`  |          | Allows the text to be rendered as a heading level. Can be `text`, `h1`, `h2`, or `subtext` |
+| color            | `string`  |          | Specifies the color of text. Can be any valid css color value                              |
+| bold             | `boolean` |          | Apply bold to the text                                                                     |
+| italic           | `boolean` |          | Apply italics to the text                                                                  |
+| strikethrough    | `boolean` |          | Apply a strike through the text                                                            |
+| underline        | `boolean` |          | Apply an underline to the text                                                             |
+| locales          | `object`  |          | Region specific content. See [locales docs](../locales) for more details.                  |
 
 ### Img Element
 
@@ -429,22 +515,22 @@ Renders an image inline within a body of text.
 
 | Field            | Type    | Required | Description                                                                                |
 | ---------------- | ------- | -------- | ------------------------------------------------------------------------------------------ |
-| type             | "link"  | required | The type of element. For action elements, this value should be `"link"`.                   |
-| src              | string  | required | The source address of the image                                                            |
-| alt_text         | string  |          | Text to used for screen readers and displayed on mouse hover                               |
-| width            | string  |          | How wide the image should render. Can be any valid css width value                         |
-| href             | string  |          | An address to link to                                                                      |
-| disable_tracking | boolean |          | Disable tracking for the link                                                              |
-| align            | string  |          | Text alignment. One of "left", "center", or "right"                                        |
-| text_style       | string  |          | Allows the text to be rendered as a heading level. Can be "text", "h1", "h2", or "subtext" |
-| color            | string  |          | Specifies the color of text. Can be any valid css color value                              |
-| bold             | boolean |          | Apply bold to the text                                                                     |
-| italic           | boolean |          | Apply italics to the text                                                                  |
-| strikethrough    | boolean |          | Apply a strike through the text                                                            |
-| underline        | boolean |          | Apply an underline to the text                                                             |
-| locales          | object  |          | Region specific content. See [locales docs](../locales) for more details.                  |
+| type             | `string`  | required | The type of element. For inline image elements, this value should be `img`.                   |
+| src              | `string`  | required | The source address of the image                                                            |
+| alt_text         | `string`  |          | Text to used for screen readers and displayed on mouse hover                               |
+| width            | `string`  |          | How wide the image should render. Can be any valid css width value                         |
+| href             | `string`  |          | An address to link to                                                                      |
+| disable_tracking | `boolean` |          | Disable tracking for the link                                                              |
+| align            | `string` |          | Text alignment. One of `left`, `center`, or `right`                                        |
+| text_style       | `string` |          | Allows the text to be rendered as a heading level. Can be `text`, `h1`, `h2`, or `subtext` |
+| color            | `string` |          | Specifies the color of text. Can be any valid css color value                              |
+| bold             | `boolean` |          | Apply bold to the text                                                                     |
+| italic           | `boolean` |          | Apply italics to the text                                                                  |
+| strikethrough    | `boolean` |          | Apply a strike through the text                                                            |
+| underline        | `boolean` |          | Apply an underline to the text                                                             |
+| locales          | `object`  |          | Region specific content. See [locales docs](../locales) for more details.                  |
 
-### Examples
+### Example
 
 Basic example:
 
@@ -458,3 +544,44 @@ Basic example:
   ]
 }
 ```
+
+## Control Flow
+
+All elements support additional properties for control flow:
+
+| Field | Type     | Description                                                           |
+| ----- | -------- | --------------------------------------------------------------------- |
+| if    | `string` | A condition that determines whether the element should be rendered.   |
+| loop  | `string` | An expression that allows the element to be repeated multiple times.  |
+| ref   | `string` | A reference identifier for the element.                               |
+
+These properties enable dynamic content generation and conditional rendering within your Elemental structure.
+
+### Examples
+
+Conditional rendering:
+
+```json
+{
+  "type": "text",
+  "content": "This will only appear for premium users",
+  "if": "{{user.isPremium}}"
+}
+```
+
+Looping:
+
+```json
+{
+  "type": "group",
+  "loop": "{{items}}",
+  "elements": [
+    {
+      "type": "text",
+      "content": "Item: {{item.name}}"
+    }
+  ]
+}
+```
+
+For more details on using these properties, see the [control flow](control-flow.mdx) docs.
