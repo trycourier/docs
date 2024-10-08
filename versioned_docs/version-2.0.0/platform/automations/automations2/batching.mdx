@@ -65,7 +65,7 @@ To configure a batch, click on the batch node to open the editor in the sidebar.
 | **Sort Key**     | Required when Highest or Lowest is selected for Retain Items. Defines the key of the data object to be used to determine item ordering. For example, if `Sort Key` is set to `refs.data.upvotes`, and the automation is invoked with `{ "data": { "upvotes": 5 }}`, `5` will be the value used to determine the order and position of the event in the items array. |
 | **Max Items**    | *(Optional)* Defines the maximum number of events to include in a batch before completion. When a batch has received this number of events, it will immediately finalize and send the batch to the next step.                                                                                                                                          |
 | **Scope**        | Defines the scope of the batch, determining how events are grouped together. Options:&nbsp;**Global** (default), **User**, **Dynamic**. See [Batch Scope](./#batch-scope) for more details.                                                                                                                                                                            |
-| **Category Key** | *(Optional)* Allows events to be grouped by categories. See [Working with Categories](./#working-with-categories) for more details.                                                                                                                                                                                                                    |
+| **Category Key** | *(Optional)* Allows events to be grouped by categories. See [Working with Categories](./#batch-categories) for more details.                                                                                                                                                                                                                    |
 
 </div>
 
@@ -160,7 +160,7 @@ This data can be accessed from a notification template using variable syntax.
   alt="Accessing batch data from a notification template"
 />
 
-## Batching with Categories
+## Batch Categories
 
 When the `Category Key` is set to a dynamic value such as `refs.data.category_key`, events can be grouped by category in a batch run. 
 In this case, the batch is aggregated by category:
