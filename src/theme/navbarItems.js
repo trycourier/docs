@@ -27,6 +27,10 @@ const navbarItems = [
     href: "https://status.courier.com",
     label: "Service Status",
   },
+  {
+    position: 'right',
+    type: 'custom-intercom-link',
+  },
 ];
 
 module.exports = navbarItems;

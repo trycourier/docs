@@ -12,13 +12,15 @@ const rehypeExternalLinks = require("./src/theme/plugins/rehypeExternalLinks");
 const tutorialFilters = require("./plugins/tutorial-filters");
 const webpack = require('webpack');
 
+
+
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
   title: "Courier Docs",
   url: "https://www.courier.com",
   baseUrl: process.env.VERCEL_ENV === "preview" ? "/" : "/docs/",
   onBrokenLinks: "throw",
-  onBrokenMarkdownLinks: "warn",
+  onBrokenMarkdownLinks: "throw",
   favicon: "img/favicon.ico",
   trailingSlash: true,
   organizationName: "trycourier",
@@ -93,6 +95,40 @@ module.exports = {
           "python",
         ],
       },
+      inkeepConfig: {
+        baseSettings: {
+          apiKey: process.env.INKEEP_KEY, // required
+          integrationId: "cm20zebo700mxx0eqok6lwrf9", // required
+          organizationId: "org_mJdpWbLsGPeOwwPd", // required
+          primaryBrandColor: "#3E2A49", // required -- your brand color, the widget color scheme is derived from this
+          organizationDisplayName: "Courier",
+          // ...optional settings
+          theme: {
+            stylesheetUrls: ['/path/to/stylesheets'], // optional
+            syntaxHighlighter: {
+              lightTheme: codeTheme, // optional -- pass in the Prism theme you're using
+              darkTheme: codeTheme, // optional -- pass in the Prism theme you're using
+            },
+          }
+        },
+        modalSettings: {
+          // optional settings
+        },
+        searchSettings: {
+          // optional settings
+        },
+        aiChatSettings: {
+          // optional settings
+          chatSubjectName: "Courier",
+          botAvatarSrcUrl: "https://framerusercontent.com/images/UaLJKrAmvdMARtdLOIVEDfj5vuQ.svg",
+          quickQuestions: [
+            "How to create and send an email notification?",
+            "How to setup a template approval workflow?",
+            "Inserting data with variables?",
+            "Set up a webhook destination?"
+          ],
+        },
+      },
     }),
 
   plugins: [
@@ -141,10 +177,13 @@ module.exports = {
         indexBlog: false, 
         hashed: "filename" }),
     ],
+    "@inkeep/docusaurus/searchBar",
+    "@inkeep/docusaurus/chatButton"
   ],
   customFields: {
     env: {
       API_HOST: process.env.API_HOST || 'https://api.courier.com',
+      INKEEP_KEY: process.env.INKEEP_KEY
     },
   },
 };
