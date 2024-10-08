@@ -1,16 +1,24 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
+title: Brand Snippets
+description: Create and use custom, reusable code with Courier's Brand Snippets feature
 ---
 
 import Image from "@theme/IdealImage";
 
 # Brand Snippets
 
-## Create Custom, Reusable Code With Snippets
+## What are Brand Snippets?
 
 Snippets are pieces of [handlebars](https://handlebarsjs.com/) code that you can copy and paste or pull into a Template Block using the snippet name.
 
 <Image img={require("../../../assets/guides/courier-app/brand-snippet.png")} alt="Brand Snippet" />
+
+## Creating a Brand Snippet
+
+To create a Snippet, navigate to the **Brands** tab in the Courier app and select the brand you want to add the Snippet to. Click the **Snippets** tab and then click the **Add Snippet** button.
+
+## Using Brand Snippets in Templates
 
 To use Snippets add a **Template Block** to an email Notification, and simply call it using a Template Block: `{{>snippet_name}}`
 
@@ -26,7 +34,7 @@ Using the Notification preview allows you to see the Snippet rendered:
   alt="Brand Snippet Preview"
 />
 
-### Customize your Snippet Content Using Variables
+### Customizing Snippets with Variables
 
 You can use variables to pull customized content into the Snippet, supplying the value for the variable inside the user profile sent via the Send API call.
 
@@ -35,7 +43,7 @@ You can use variables to pull customized content into the Snippet, supplying the
   alt="Brand Snippet Variables"
 />
 
-### Snippets and the Default Brand
+### Brand Snippets and the Default Brand
 
 If a snippet exists in the default brand, but not in a custom brand, the default brand snippet _will_ render in the custom brand as long as there isn't a snippet with the same name native to that custom brand.
 

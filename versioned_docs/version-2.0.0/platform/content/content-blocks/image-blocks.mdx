@@ -1,48 +1,66 @@
 ---
-sidebar_position: 6
+sidebar_position: 1
+title: Image Blocks
+description: A detailed look at Courier Image Block functionality, use cases and best practices.
 ---
 
 import Image from "@theme/IdealImage";
 
 # Image Blocks
 
-> A detailed look at Image Block functionality, use cases and best practices.
-
-## Working With Image Blocks
+Image Blocks allow you to enhance your notifications with visual content across various channels. 
+Image Blocks can improve the engagement and effectiveness of your notifications by providing visual context or appeal.
 
 <Image
   img={require("../../../assets/guides/image-blocks/image-block-new.png")}
   alt="New Image Block"
 />
 
-## Cross-Channel Behaviors
+## Channel-Specific Behaviors
+
+### Email
+
+In email notifications, Image Blocks display as embedded images, allowing for rich visual content.
 
 ### SMS, Push
 
-- When you add a new image block or pull one in from the library in SMS, push or DM, you will see the image URL. 
-- How that URL is unfurled will depend on the integrated channel provider.  
+For SMS and push notifications:
+- Image Blocks appear as URLs
+- The rendering of these URLs depends on the integrated channel provider
 
 ### Direct Message
 
-- If you have one of these direct message integrations as a channel, you will see the image block display your image in real-time in the editor, no preview links.
+For supported direct message integrations:
+- Images are displayed in real-time within the Courier editor
+- No preview links are shown
 
 <Image
   img={require("../../../assets/guides/image-blocks/image-block-fb.png")}
   alt="Image Block Rendering"
 />
 
-## Hiding Image Blocks Using Conditions
+## Advanced Usage
 
-It is possible to hide an image block (or any other type of block) using [conditional filters](../notification-settings/send-conditions.mdx#for-content-blocks).
+### Conditional Display
+
+Like other content blocks, you can dynamically show or hide Image Blocks using [conditional filters](../notification-settings/send-conditions.mdx#for-content-blocks).
 
 <Image
   img={require("../../../assets/guides/image-blocks/image-block-filter.png")}
-  alt="Image Block Filter"
+  alt="Setting up an Image Block filter"
 />
 
 <Image
   img={require("../../../assets/guides/image-blocks/image-block-condition.png")}
-  alt="Image Block Conditional"
+  alt="Configuring Image Block conditions"
 />
+
+## Best Practices
+
+1. **Optimize for Mobile**: Ensure images are responsive and look good on various device sizes
+2. **File Size**: Keep image file sizes small to improve loading times, especially for email
+3. **Relevance**: Use images that are relevant to your message content
+4. **Accessibility**: Always include descriptive alt text for screen readers
+5. **Fallback**: Provide text alternatives for channels that may not support images
 
 **Read more:** [Content block basics](content-block-basics.mdx)

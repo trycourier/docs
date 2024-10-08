@@ -5,7 +5,7 @@ slug: ./control-flow
 toc_max_heading_level: 2
 ---
 
-# Control Flow
+# Conditional Control Flow
 
 import Image from "@theme/IdealImage";
 import videoThumbnail from "./assets/video-thumbnail.png";
@@ -21,9 +21,15 @@ export const TableCellCode = ({ value }) => {
   return <CodeBlock language="json">{JSON.stringify(value, null, 2)}</CodeBlock>;
 };
 
-## Overview
+## Introduction
 
 Automations can conditionally execute a branch of the workflow. This can be useful in any case where you may want to change the actions of an automation based on certain data sent with the template.
+
+Two nodes are available to execute control flow: `If` and `Switch`. 
+
+## If Node
+
+The `If` node is a simple conditional node that evaluates a condition and routes to the True or False branch. The `If` node accepts a single condition and routes to the True branch if the condition evaluates to true, otherwise it routes to the False branch.
 
 For example, you may want to send one template if one data field represents a certain value, or another template if it does not:
 
@@ -42,9 +48,9 @@ If no conditions evaluate to true, the default branch is used.
   <source src={switchNodeURL} />
 </video>
 
-## Sources
+## Condition Sources
 
-The Control Flow IF statement has four different source options, data, profile, step ref and JS condition. These sources control whether to follow the True path or the False path by evaluating the sources.
+The `If` and `Switch` nodes have four different source options: data, profile, step ref and JS condition. These sources control whether to follow the True path or the False path by evaluating the sources.
 
 ### Data
 
@@ -66,7 +72,7 @@ Compare a field within the `data` key within the automation context with a value
 
 ### Step Ref
 
-Step Ref is designed for you to check the current value of a Send node, mainly it's status. See the screenshot below or view the [tutorial](#tutorial). In order to use Step Ref, you must have a Send node and have the alias of the Send node defined in its configuration.
+Step Ref is designed for you to check the current value of a Send node, mainly it's status. See the screenshot below or view the [tutorial](#control-flow-tutorial). In order to use Step Ref, you must have a Send node and have the alias of the Send node defined in its configuration.
 
 `CLICKED` | `DELIVERED` | `ENQUEUED` | `FILTERED` | `OPENED` | `SENT` | `SIMULATED` | `UNDELIVERABLE` | `UNMAPPED` | `UNROUTABLE`
 
@@ -89,13 +95,13 @@ We will evaluate the manipulation into a Javascript Boolean after the equation
 
 #### JS Condition Values
 
-Within the Data, Profile and Step Ref Sources, you may also use JS String evalution in the value field
+Within the Data, Profile and Step Ref Sources, you may also use JS String evaluation in the value field
 
 | Condition                                                 | Automation Payload                                                           | Evaluation |
 | --------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------- |
 | ![js condition value - date](js-condition-value-date.png) | <TableCellCode value={{recipient: "user123", data: {ts: 1095869760000 }}} /> | True       |
 
-## Tutorial
+## Control Flow Tutorial
 
 Below you can find a walkthrough of a sample control flow using step references to check the status of a previously sent notification. The control flow node will check against the status of a previous node with the value of the `step ref`.
 

@@ -1,5 +1,7 @@
 ---
 sidebar_position: 0
+title: Text Blocks
+description: A detailed look at Text Block functionality, use cases and best practices.
 ---
 
 import Image from "@theme/IdealImage";
@@ -7,11 +9,7 @@ import GifWrapper from "@site/src/components/GifWrapper";
 
 # Text Blocks
 
-> A detailed look at Text Block functionality, use cases and best practices.
-
-## Working With Text Blocks
-
-**Availability:** All channels
+Text Blocks provide a versatile way to add and format text in your notifications.
 
 <Image
   img={require("../../../assets/guides/text-blocks/text-block-new.png")}
@@ -20,92 +18,57 @@ import GifWrapper from "@site/src/components/GifWrapper";
 
 ### Text Block Options
 
-- **Variables:** In every channel and integration, customized text can be inserted with variables.
-- **Background Color:** Sets the background color behind the text.
-- **Insert Bulleted List:** Use this option for static bulleted lists. See list blocks for dynamic list content. 
-- **Hyperlink:** You have the option to hyperlink text in a Text Block in every channel.
+- **Variables**: Customize text across all channels and integrations using variables.
+- **Background Color**: Adjust the background color to enhance the text block's appearance.
+- **Insert Bulleted List**: For static bulleted lists, use this option. For dynamic content, refer to list blocks.
+- **Hyperlink**: Add hyperlinks to text in any channel to create interactive notifications.
 
 <Image
   img={require("../../../assets/guides/text-blocks/text-block-variable.png")}
   alt="Create a New Variable"
 />
 
-## Hide or Show Text With Inline Conditions
+## Show or Hide Text With Inline Conditions
 
-Conditional text lets you show or hide text within any Text Block in any channel. Using filters that show or hide the text in-line based on data from the data or profile objects sent with the [Send API](../../../reference/send/intro.mdx) call.
+Conditional text allows you to control the visibility of text within a Text Block across different channels. You can use filters to dynamically show or hide text based on data from the profile or data objects sent with the Send API.
 
-<Image
-  img={require("../../../assets/guides/text-blocks/text-block-conditional.png")}
-  alt="Conditionally Render Text"
-/>
+<Image img={require("../../../assets/guides/text-blocks/text-block-conditional.png")} alt="Conditionally Render Text" />
 
-<Image
-  img={require("../../../assets/guides/text-blocks/text-block-conditional-modal.png")}
-  alt="Choose Your Rendering Conditions"
-/>
+<Image img={require("../../../assets/guides/text-blocks/text-block-conditional-modal.png")} alt="Choose Your Rendering Conditions" />
 
-**A typical use case** for inline text conditions is creating a fallback greeting when you don't have a user's name.
-
-1. Highlight the `profile.name` variable in your template and create a condition to hide it when the name property is empty.
-2. Highlight your fallback text, `there` for example, and set a condition to show when `profile.name` property is empty so your sentences renders as `Hi there,` instead of `Hi {profile.name},`
+**Common Use Case**: Use inline conditions to provide fallback text when user-specific data is unavailable. For example, highlight the `profile.name` variable in your template and set a condition to hide it when the name property is empty. Then, add fallback text (e.g., "there") with a condition to display when `profile.name` is not present, resulting in a message like "Hi there," instead of "Hi `{profile.name}`,".
 
 ## Cross-Channel Formatting Behaviors
 
-Courier automatically adjusts any text formating to align with the channel and integration limitations when you drag text blocks in from the shared content library.
+Courier automatically adjusts text formatting to suit the limitations of each channel and integration when using text blocks from the shared content library.
 
 ### Email
 
-<Image
-  img={require("../../../assets/guides/text-blocks/text-block-format.png")}
-  alt="Email Text Formating"
-/>
+<Image img={require("../../../assets/guides/text-blocks/text-block-format.png")} alt="Email Text Formatting" />
 
-- Text blocks in email offer options such as inline images, bulleted lists, header text (H1, H2), subtext, text color, and text alignment that are not available in other channels such as SMS, push, or Slack.
-- You can also insert images inline:
+- Text blocks in emails offer advanced formatting options, such as inline images, bulleted lists, headers (H1, H2), subtext, text color, and alignment. These features are not available in SMS, push notifications, or Slack.
+- You can also embed images inline:
 
-<Image
-  img={require("../../../assets/guides/text-blocks/text-block-image.png")}
-  alt="Inline Image"
-/>
+<Image img={require("../../../assets/guides/text-blocks/text-block-image.png")} alt="Inline Image" />
 
-- Highlight Text:
+- Highlight important text:
+<Image img={require("../../../assets/guides/text-blocks/text-block-highlight.png")} alt="Highlight Text" />
 
-<Image
-  img={require("../../../assets/guides/text-blocks/text-block-highlight.png")}
-  alt="Highlight Text"
-/>
-
-- Add a static bulleted list (for dynamic lists that pull from an array, see list blocks):
-
-<Image
-  img={require("../../../assets/guides/text-blocks/text-block-bullet.png")}
-  alt="Unordered List"
-/>
+- Add static bulleted lists (use list blocks for dynamic content):
+<Image img={require("../../../assets/guides/text-blocks/text-block-bullet.png")} alt="Unordered List" />
 
 ### Direct Message
 
-- Bold and Italic formatting is available in certain direct message text blocks.
-
-<Image
-  img={require("../../../assets/guides/text-blocks/text-block-bold.png")}
-  alt="Bold Formating"
-/>
+- Formatting options such as bold and italic are available in certain direct message text blocks.
+<Image img={require("../../../assets/guides/text-blocks/text-block-bold.png")} alt="Bold Formatting" />
 
 ### SMS
 
-- SMS does not allow text formatting, so any formatted text using bold, italics, headers, subtext, background-colors or alignment will revert to plain text.
-- Formatted anchor links become URL hyperlinks when pulled into an SMS from the shared library.
+- SMS does not support text formatting. Bold, italic, headers, subtext, background colors, and alignment will revert to plain text.
+- Hyperlinks formatted as anchor links will appear as URL hyperlinks in SMS.
 
-## Hide Text Blocks With Conditions
+## Conditional Rendering
 
-It is possible to hide a Text Block or any other type of block using conditional filters. When the [User Profile](../../../reference/profiles/intro.mdx) data matches the filter rules, the block will be hidden.
+Like with any content block, Text Blocks can be hidden using a [conditions filter](../notification-settings/send-conditions.mdx#for-content-blocks).
 
-<Image
-  img={require("../../../assets/guides/text-blocks/text-block-hide.png")}
-  alt="Show or Hide the Text Block"
-/>
-
-<Image
-  img={require("../../../assets/guides/text-blocks/text-block-hide-modal.png")}
-  alt="Set Your Filtering Conditions"
-/>
+**Read more:** [Content block basics](content-block-basics.mdx)

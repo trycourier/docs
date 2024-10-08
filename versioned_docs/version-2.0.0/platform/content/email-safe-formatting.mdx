@@ -6,9 +6,9 @@ sidebar_position: 8
 
 When formatting emails in HTML, it's important to consider the compatibility across different email clients, as some may not support certain CSS styles or HTML tags. Here are some HTML-safe formatting techniques commonly used in emails:
 
-### Inline CSS
+## Inline CSS
 
-Use inline CSS styles rather than external or internal stylesheets. This ensures that your styling is more likely to be rendered consistently across various email clients. Additionally, you can leverage the [brands designer](../brands/how-to-use-brands-to-customize) to apply CSS styles to your email templates.
+Use inline CSS styles rather than external or internal stylesheets. This ensures that your styling is more likely to be rendered consistently across various email clients. Additionally, you can leverage the [brands designer](../brands/brands-in-email-notifications) to apply CSS styles to your email templates.
 
 :::warning Styles in head
 
@@ -16,11 +16,11 @@ Some email clients like [Gmail will only support](https://www.emailonacid.com/bl
 
 :::
 
-### Basic HTML tags 
+## Basic HTML tags 
 
 Stick to basic HTML tags like `<p>`, `<div>`, `<span>`, `<a>`, `<strong>`, `<em>`, `<ul>`, `<ol>`, `<li>`, `<h1>` to `<h6>`, etc. These are widely supported across email clients.
 
-### Tables
+## Tables
 
 Tables are often used for layout in HTML emails because they are well-supported across different email clients. However, keep your table structures simple and avoid complex nesting. 
 
@@ -29,7 +29,7 @@ Email clients like gmail will impose certain limitations on HTML tables like:
 - Handling of nested tables can be inconsistent, leading to layout distortions or unexpected behavior in the email layout.
 - Lack of support conditional formatting for table cells, which limits dynamic content presentation within tables.
 
-### Inline Images
+## Inline Images
 
 Embed images using the `<img>` tag and provide appropriate alt attributes for accessibility. Make sure to host your images on a reliable server.
 
@@ -40,15 +40,15 @@ Courier does not host images at this time for `src` paths. The exception is usin
 
 :::
 
-### Links
+## Links
 
 Use the `<a>` tag for hyperlinks. Ensure that all links are clickable and provide descriptive anchor text.
 
-### Font Styles
+## Font Styles
 
 Use CSS for basic font styles like color, size, family, and weight. Avoid using web fonts that may not be supported by all email clients.
 
-#### Web Fonts
+### Web Fonts
 
 While desktop fonts are loaded onto an individual computer so they can be used in word processors and other applications, web fonts are stored online and downloaded by browsers. When someone accesses a page on a website, web fonts are specified through CSS ⸺ often using the `@font-face` declaration.
 
@@ -60,7 +60,7 @@ While desktop fonts are loaded onto an individual computer so they can be used i
 - Thunderbird
 - Outlook for macOS
 
-#### Web Safe Fonts
+### Web Safe Fonts
 
 Fonts that are deemed web safe are more likely to be supported across email clients. However, it's important to note that even though a font is classified as web safe, it doesn't guarantee complete safety for use in email marketing.
 
@@ -75,7 +75,7 @@ Fonts that are deemed web safe are more likely to be supported across email clie
 - Courier New (monospace)
 - Brush Script MT (cursive)
 
-#### Email Safe Fonts
+### Email Safe Fonts
 
 While the font choices may not be particularly thrilling, opting for these options guarantees a uniform experience across various email platforms. Additionally, you might [discover an email-safe font](https://www.emailonacid.com/blog/article/email-development/best-font-for-email-everything-you-need-to-know-about-email-safe-fonts/) that mirrors your brand's preferred typeface.
 
@@ -86,15 +86,15 @@ While the font choices may not be particularly thrilling, opting for these optio
 - Trebuchet
 - Verdana
 
-### Background Colors
+## Background Colors
 
 You can set background colors for elements using CSS. Keep in mind that some email clients may not fully support background colors.
 
-### Responsive Design
+## Responsive Design
 
 Consider using responsive design techniques to ensure that your email renders well on different devices and screen sizes. [Media queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries) can be used to adjust the layout based on the viewport size.
 
-### Testing
+## Testing
 
 Always [test your HTML emails](../content/notification-designer/how-to-preview-notification.mdx) across different email clients and devices to ensure consistent rendering. There are tools available that can help with email testing, such as [Litmus](https://www.litmus.com/) or [Email on Acid](https://www.emailonacid.com/).
 

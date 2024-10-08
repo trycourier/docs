@@ -5,56 +5,50 @@ toc_max_heading_level: 2
 ---
 
 import Image from "@theme/IdealImage";
-import TOCInline from "@theme/TOCInline";
 
 # Export to Elemental
 
-> [Courier Elemental](intro.mdx) offers a powerful JSON based syntax to send notifications in lieu of using notification templates.
-
-Courier's Designer Studio offers DnD functionalities to build notification templates where users can invoke a notification by just referencing the template ID.
-
-Courier now offers interoperability between notification templates and Elemental, so users can now get the best of both worlds.
-
-With the `Export to Elemental` feature, users can use the designer to build notification templates and export them as Elemental syntax whether it's for sending raw code templates, or for establishing a template review process.
+The "Export to Elemental" feature allows users to export templates made with Courier's Notification Designer as Elemental syntax.
 
 ## Exporting Elemental Assets
 
-Select the dropdown option on top-right of notification `Publish` button, and click `Export to Elemental`.
+1. In the Notification Designer, click the dropdown arrow next to "Publish"
+2. Select "Export to Elemental"
+3. Copy the JSON output containing the Elemental syntax
 
 <Image
   img={require("../../../assets/guides/elemental/export-to-elemental.png")}
   alt="Export to Elemental Dropdown"
 />
 
-Copy the JSON output to use the Elemental syntax inside your `/send` request's payload.
-
 <Image
   img={require("../../../assets/guides/elemental/export-to-elemental-output.png")}
   alt="Export to Elemental Output JSON"
 />
 
-Once copied, the Elemental syntax can be passed inside a `content` object of your send request.
+## Using Exported Elemental Syntax
 
-## Block Types and Node Type Mappings
+The copied Elemental JSON can be used in your `/send` API requests by including it in the content object of the payload.
 
-Below are the following supported block types that can be exported as Elemental syntax.
+## Supported Block Types 
 
-| Block type | Elemental Node Type(s)       |
-| ---------- | ---------------------------- |
-| text       | combination of text and list |
-| image      | image                        |
-| action     | action                       |
-| divider    | divider                      |
-| markdown   | text (format markdown)       |
-| quote      | quote                        |
-| template   | html                         |
+The following Designer Studio block types can be exported to Elemental:
 
+| Designer Block | Elemental Node Type(s)       |
+|----------------|------------------------------|
+| Text           | `text`, `list`                   |
+| Image          | `image`                        |
+| Action         | `action`                       |
+| Divider        | `divider`                      |
+| Markdown       | `text` (format: markdown)      |
+| Quote          | `quote`                        |
+| Template       | `HTML`                         |
 
-:::caution Note
-
-**List** and **jsonnet** blocks, **locales** at the block level are not supported.
-
+:::caution Limitations
+- List blocks are not directly supported
+- Jsonnet blocks are not supported  
+- Block-level locales are not supported
 :::
 
 
-Please reach out to [support](mailto:support@courier.com) if you have any questions or feedback.
+

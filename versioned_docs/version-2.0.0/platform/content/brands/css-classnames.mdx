@@ -1,12 +1,14 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
+title: Email Template CSS Classes
+description: Courier's standardized CSS classes allow you to manually set styles in your Brand email templates.
 ---
 
 import Image from "@theme/IdealImage";
 
-# CSS Classnames for Brand Email Templates
+# Email Template CSS Classes"
 
-> Courier's standardized CSS classnames allow you to manually set styles in your Brand email templates.
+> Courier's standardized CSS classes allow you to customize element styles in your Brand email templates.
 
 ## Adding CSS to your Brand Email Notification Templates
 
@@ -14,7 +16,7 @@ Courier email template [CSS](https://www.w3schools.com/html/html_css.asp) is set
 
 You can customize the  `<style>` element in the `<head>` section of your Brands using custom templates as well as brands built using the Designer UI.
 
-:::tip Overwritting
+:::tip Overwriting
 
 To overwrite existing styles, you have to use `!important`.
 
@@ -36,19 +38,25 @@ To overwrite existing styles, you have to use `!important`.
 
 ## MJML Rendering
 
-Your email template CSS is rendered using [MJML](https://mjml.io/). This creates child components out of each component. This means that any style changes you make could apply to multiple children and multiple elements. There is also the potential that changes will not affect the element with the class itself.
+Your email template CSS is rendered using [MJML](https://mjml.io/). This creates child components out of each component. Content is usually nested within a child element of one of the below CSS classes. To select all child elements recursively, use the universal selector(*), for example:
+
+```css
+
+.c--block-text * {
+    color: red;
+}
+
+```
 
 :::info Testing your changes
 
-_We recommend that you carefully test the resulting changes to your CSS classnames._
+_We recommend that you carefully test the resulting changes to your CSS classes._
 
 :::
 
 You can do this by creating an email notification with the relevant block types, then using the preview tab to observe the effect of your CSS changes.
 
-## CSS Classnames
-
-### Content Block Type Classnames
+## Content Block CSS Classes
 
 - Action block: `.c--block-action`
 
@@ -66,7 +74,7 @@ You can do this by creating an email notification with the relevant block types,
 
 - Text block `.c--block-text`
 
-### Text Classnames
+### Text CSS Classes
 
 - `.c--text-text`
 
@@ -78,7 +86,7 @@ You can do this by creating an email notification with the relevant block types,
 
 - `.c--text-quote`
 
-### Other Classnames
+### Other CSS Classes
 
 - `.c--email-footer`
 

@@ -21,17 +21,17 @@ It is available for our business and enterprise customers and requires reaching 
 
 Courier Automations can be leveraged to create recurring user digests on configured intervals. This can be useful for things like weekly reports or user digests, while also offering user schedule preferences if desired.
 
-## Configure a digest in preferences
+## Prerequisite: Configure a Digest in the Preferences Editor
 
 The first step is to configure a digest with at least one schedule in the [Preferences Editor](https://app.courier.com/settings/preferences). In the Preferences Editor, either create a new subscription topic or open the settings of an existing one.
 
-### Schedules
+### Schedule a Digest
 
 In the digest section click on schedules. This is where you define the schedule(s) at which the digest will be released. One schedule is required here however multiple schedules can be configured to give your users preference. If you have multiple schedules configured, these will show in the hosted preferences page as options for the user to select. Note: the date-time picker is currently configured in local timezone. Users viewing our hosted preference page, or using our front-end preference components will also see as their local timezone.
 
 <Image img={require("./assets/digest-schedules.png")} alt="Digest Schedules" />
 
-### Categories
+### Configure Digest Categories
 
 Categories provides the ability to separate disparate data within the same digest. For example, you may want to sort by likes and comments for a weekly digest of the blog posts with the most engagement. Each category has a `retain` setting. This describes the specific events that will be retained when the digest is released. 10 highest/10 lowest require a sort_key which is a data attribute in the event we will use to sort the events by.
 
@@ -51,28 +51,28 @@ Categories provides the ability to separate disparate data within the same diges
 }
 ```
 
-### Settings
+### Configure Other Digest Settings
 
 Settings has a toggle to invoke the digest when empty for users within an audience. Typically the digest will only send to users that had events come in during the schedule window. This option means that users in the audience will have a digest sent to them even if there were no events matching their user_id. This can be useful for fetching your own data in the automation and sending the digest to your users with that custom data
 
 <Image img={require("./assets/digest-settings.png")} alt="Digest Settings" />
 
-## Automations
+## Working with Digests in Automations
 
 Now that we have a digest configured in preferences, lets talk about adding events to the digest. There are two automation nodes that will be used to add/release digest events.
 
-### Add to digest
+### Digest Event Collection
 
-First step is to configure an automation to add events to the digest. Open an automation template, right click on the canvas, and select the `Add to Digest`. From the configuration panel, select the subscription topic with the digest configured. This will add any event that comes in to that digest **by user**.
+Configure an automation to gather events for the digest. In your automation template, add an "Add to Digest" node by right-clicking on the canvas and selecting it from the menu. In the configuration panel, choose the subscription topic where you've set up the digest. This node will accumulate events for each user, identified by their user_id or userId in the event data.
 Note: currently `user_id` and `userId` are accepted in the event data
 
 <video width="783" loop autoPlay muted controls poster={videoThumbnail}>
   <source src={addToDigestUrl} />
 </video>
 
-### Digest trigger
+### Digest Release
 
-Second step is to configure an automation to release and interact with the digested events data. Open an automation template, select the rounded trigger node,and select in the `Digest` type under the `Trigger` section. Select the subscription topic with the digest configured. This automation template will now be invoked on any scheduled intervals configured for that digest. Reminder: digests are done at the user level so each invocation will be for a particular user based on the default schedule or the schedule they selected in preferences
+Create an automation to process and send the compiled digest. In a new automation template, select the rounded trigger node and choose the "Digest" type from the "Trigger" section. Select the same subscription topic you used for event collection. This automation will activate according to the scheduled intervals you've configured for the digest, processing data for each user based on their default or selected schedule in preferences.
 
 <Image img={require("./assets/digest-trigger.png")} alt="Automation digest trigger" />
 
@@ -85,7 +85,7 @@ The digest data payload will come into the automation in the structure
 }
 ```
 
-## Tutorial
+## Digest Tutorial
 
 Below you can find a walkthrough of a sample digest flow using automations and preferences.
 

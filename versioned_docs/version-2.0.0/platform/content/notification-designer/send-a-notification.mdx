@@ -71,7 +71,7 @@ After you configure the Code Snippet, setting these values will allow you to sen
   alt="Select an Event"
 />
 
-- The [Notification Event](https://help.courier.com/en/articles/4189555-send-basics-how-notifications-are-triggered-and-sent-with-courier) included in the code snippet is used to identify and trigger the correct Notification. <!-- Link follow-up doc -->
+- The [Notification Event](https://help.courier.com/en/articles/4189555-send-basics-how-notifications-are-triggered-and-sent-with-courier) included in the code snippet is used to identify and trigger the correct Notification.
 - This `event` can be either the Notification ID or the Event ID mapped to it in the Event Settings.
 
 ### 3. The Recipient Id
@@ -79,7 +79,7 @@ After you configure the Code Snippet, setting these values will allow you to sen
 - A unique identifier associated with the recipient of the delivered message.
 - The string in the code snippet is randomly generated to enable the test send.
 - You can click into the field and customize it.
-- When integrating into your codebase, your app will need to insert the correct Receipient ID into the `send` command.
+- When integrating into your codebase, your app will need to insert the correct Recipient ID into the `send` command.
 
 ## Sending a Test Notification Prerequisites
 
@@ -87,7 +87,7 @@ Once you have completed steps 1-3 to generate the correct code snippet, complete
 
 To send a test notification, you'll need:
 
-- A valid [Integration](https://help.courier.com/en/articles/4382644-how-to-add-an-integration-to-a-channel) added to at least one Notification Channel. <!-- Link follow-up doc -->
+- A valid [Integration](https://help.courier.com/en/articles/4382644-how-to-add-an-integration-to-a-channel) added to at least one Notification Channel. 
 - A [Test Event](how-to-preview-notification.mdx) in the Preview tab with valid recipient data in the profile 
 
 ### 4. Select a Test Event
@@ -103,7 +103,7 @@ Select the Test Event with the profile data of the recipient for your test Notif
 
 ### 5. Specify the Brand
 
-If you are testing an Email Notification, you can specify which of your [Brand Email Templates](../../brands/how-to-use-brands-to-customize/#customize-your-brands) you want to have applied to the test. If you don't specify a brand, Courier will apply your [Default Brand](../../brands/how-to-use-brands-to-customize/#the-default-brand).
+If you are testing an Email Notification, you can specify which of your [Brand Email Templates](../../brands/brands-in-email-notifications/#customizing-brands) you want to have applied to the test. If you don't specify a brand, Courier will apply your [Default Brand](../../brands/brands-in-email-notifications/#the-default-brand).
 
 <Image
   img={require("../../../assets/guides/send-notification/send-notification-select-brand.png")}
@@ -113,7 +113,7 @@ If you are testing an Email Notification, you can specify which of your [Brand E
 ### 6. Send a Test Notification
 
 Once you've completed steps 1-5, click `Send Notification`. Check the [Data Logs](https://help.courier.com/en/articles/4364860-using-the-notification-data-logs) to review the results.
-<!-- Link follow-up doc -->
+{/* Link follow-up doc */}
 <Image
   img={require("../../../assets/guides/send-notification/send-notification-test-send.png")}
   alt="Send a Test Notification"

@@ -5,13 +5,13 @@ sidebar_position: 1
 slug: ./users
 ---
 
-# Users
+# Courier Users
 
-Courier uses the term `user` to describe the recipient of a notification. You'll sometimes see the term `recipient` used, but these mean the same thing. There are several different ways to define which users will recieve a notification.
+Courier uses the term `user` to describe the recipient of a notification. You'll sometimes see the term `recipient` used, but these mean the same thing. There are several different ways to define which users will receive a notification.
 
 The code samples below illustrate a subset of the `message` object used to make a call to the [send API](../../reference/send).
 
-## Inline
+## Inline Recipient Addresses
 
 The simplest way to send a notification is to specify either an `email` or a `phone_number`.
 
@@ -21,9 +21,9 @@ The simplest way to send a notification is to specify either an `email` or a `ph
 }
 ```
 
-## Profiles
+## User Profiles
 
-Courier supports storing user contact information in a [Profile](../../reference/profiles) record, and then referencing a `user_id` when calling `send`. One of the benefits of this approach is that the specific channel that is used to deliver the notification can be deferred to a later step where routing rules are applied.
+Courier supports storing recipient information in a [User Profile](../../reference/profiles) record, and then referencing a `user_id` when calling `send`. One of the benefits of this approach is that the specific channel that is used to deliver the notification can be deferred to a later step where routing rules are applied.
 
 ```json
 "to": {
@@ -31,7 +31,7 @@ Courier supports storing user contact information in a [Profile](../../reference
 }
 ```
 
-## Lists
+## Lists and Audiences
 
 If you want to send a notification to more than one user, you can add as many users as you like to a [List](../../reference/lists) and then pass the `list_id`.
 
@@ -41,9 +41,7 @@ If you want to send a notification to more than one user, you can add as many us
 }
 ```
 
-## Audiences
-
-Instead of using a static list of users, you can create an [Audience](/reference/audiences) that will dynamically include users based on their attributes and a set of custom filtering rules that you define.
+Instead of using a static list of users, you can alternatively create an [Audience](/reference/audiences) that will dynamically include users based on their attributes and a set of custom filtering rules that you define.
 
 ```json
 "to": {
@@ -57,7 +55,7 @@ Courier has a hierarchical database object called Tenants that maps to use cases
 
 See the Tenants [Documentation](/platform/tenants) or [API](/reference/tenants) for usage. A single user can be associated with multiple tenants, and you can specify a `tenant_id` when sending a message to ensure the correct preferences and configuration values are applied.
 
-## Tokens
+## User Authentication Tokens
 
 When sending push notifications to mobile devices, developers need to [create tokens](/reference/token-management) that are mapped to the users they are sending notifications to.
 

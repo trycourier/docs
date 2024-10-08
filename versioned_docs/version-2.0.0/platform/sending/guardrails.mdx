@@ -47,7 +47,7 @@ This limits the total number of messages you can send during each time period. A
 
 This limits the number of messages you can send to an individual user. To work, users must have a profile with Courier. Any message with an excluded subscription topic will still count toward the limit, but will not itself be throttled, even if you go over the limit.
 
-### Per-user Subcription Topic limit
+### Subscription
 
 This limits the number of messages you can send to an individual user, for a given subscription topic. You can set a different limit for each topic, or no limit at all.
 
@@ -57,7 +57,7 @@ This limits the number of messages you can send to an individual account. To wor
 
 ### Limit exclusions
 
-Some messages should always be sent, even if they would normally go over a limit. For example, important system updates, password-reset emails, etc.. Simply add the subscription topic(s) of messages you want excluded from limits here. Messages with these topics will still cound toward the limits, but will never themselves be throttled.
+Some messages should always be sent, even if they would normally go over a limit. For example, important system updates, password-reset emails, etc.. Simply add the subscription topic(s) of messages you want excluded from limits here. Messages with these topics will still count toward the limits, but will never themselves be throttled.
 
 <Image
   img={require("../../assets/guides/guardrails/settings.png")}

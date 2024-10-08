@@ -1,5 +1,7 @@
 ---
 sidebar_position: 0
+title: Branding Emails
+description: Create and manage multiple brands for email notifications with Courier's Brands feature
 ---
 
 import Image from "@theme/IdealImage";
@@ -14,12 +16,9 @@ import GifWrapper from "@site/src/components/GifWrapper";
   alt="Brand Designer"
 />
 
-#### White-Label Your Email Notifications
+## White-Labeling Email Notifications
 
 You can manage multiple brands, create reusable styling, and **white-label** email notifications sent on behalf of your customers to their end-user recipients, or if you have multiple brands internally.
-
-#### Brands API
-Courier Brands are fully **API enabled**. Developers can get, create, update and delete brands programmatically using the [Brands API](../../../reference/brands/intro.mdx).
 
 ## The Default Brand
 
@@ -31,7 +30,7 @@ Courier Brands are fully **API enabled**. Developers can get, create, update and
 - Every email notification you create uses the Default Brand unless you manually disable Brands in the Notification settings.
 - If you enable brands on a notification, your Default Brand will be the fallback for any Send API call that does not specify a brand in the user profile.
 
-## Create a New Brand
+## Creating New Brands
 
 - To create a new brand open the notification Designer, select **Brands** in the top menu and click **New Brand**.
 - Giving your Brand an optional `brand_id` will allow your developers to manage your brand programmatically using the Brands API.
@@ -42,7 +41,7 @@ Courier Brands are fully **API enabled**. Developers can get, create, update and
   style={{width: 400}} 
 />
 
-### Set a Custom Brand as your Default
+### Setting a Custom Brand as your Default
 
 To set a custom brand as your default, open the brand settings and click Set As Default.
 
@@ -51,7 +50,7 @@ To set a custom brand as your default, open the brand settings and click Set As 
   alt="Brand Settings Modal"
 />
 
-## Customize Your Brands
+## Customizing Brands
 
 ### Standard Template
 
@@ -85,14 +84,14 @@ Use a Custom MJML/Handlebars Template to customize the header, footer and backgr
 
 You can customize the `<style>` element in the `Head` section of your Brands. In addition to the normal CSS class names, you can define the CSS for Courier blocks using Courier's [CSS Classnames](css-classnames.mdx).
 
-## Re-use Custom Styling in Multiple Brands
+## Re-Using Custom Styling in Multiple Brands
 
 You can re-use custom styling across multiple brands in two different ways.
 
 - **Inherit from Default Brand** if both the default brand and the custom brand use the standard brand type.
 - **Re-use CSS using Brand Snippets** if you want to share styling between standard and custom brand types.
 
-### Inherit From Default Brand
+### Inheriting from the Default Brand
 
 Use the **Inherit from Default Brand** toggle to inherit the `Head`, `Header`, or `Footer` from the Default brand.
 
@@ -102,7 +101,7 @@ Use the **Inherit from Default Brand** toggle to inherit the `Head`, `Header`, o
   style={{width: 500}}
 />
 
-### Re-use CSS using Brand Snippets
+### Re-using CSS using Brand Snippets
 
 Use Brand Snippets to share custom styles between standard and custom brand templates (Handlebars & MJML).
 
@@ -124,7 +123,7 @@ Brand snippets in your Default brand can be referenced in custom brands **as lon
 </style> 
 ```
 
-## Preview your Brand-Enabled Email Notifications
+## Previewing Brands in Email Notification Templates
 
 To preview what your email notification will look like with different brands applied, open the **Preview** and then select the **Brand** from the **Preview Details > Brand** menu.
 
@@ -134,7 +133,7 @@ To preview what your email notification will look like with different brands app
   style={{width: 250}} 
 />
 
-## Reference Brand Attributes With Variables
+## Referencing Brand Attributes With Variables
 
 You can reference brand attributes using variables e.g. `{{var "brand.social.facebook"}}`. Here is the schema for the brand information accessible via variables:
 
@@ -169,7 +168,7 @@ export const getBrandVariables = (
 }
 ```
 
-## Send a Branded Email Notification
+## Sending a Branded Email
 
 1. The Notification must have Brand Enabled switched on in the Notification Settings.
 2. _(optional)_ Include a Brand ID in the Send API call. If no Brand ID is provided, Courier will send using the Default Brand. See the [Send API documentation](../../../reference/send/intro.mdx) for details.
@@ -178,3 +177,6 @@ export const getBrandVariables = (
   img={require("../../../assets/guides/courier-app/brand-notification-settings.png")}
   alt="Brand Notification Settings"
 />
+
+## Brands API
+Courier Brands are fully **API enabled**. Developers can get, create, update and delete brands programmatically using the [Brands API](../../../reference/brands/intro.mdx).

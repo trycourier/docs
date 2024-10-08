@@ -11,7 +11,7 @@ status: string, // the message status
 recipient: string, // the recipient email or id
 
 // optional
-  canceledAt: number, // the milli second timestamp of the successful cancelation request
+  canceledAt: number, // the milli second timestamp of the successful cancellation request
 	clicked: number, // the milli-second timestamp of the clicked event
   delivered: number // the milli-second timestamp of the deleivered event
   enqueued: number, // the milli-second timestamp of the enqueued event

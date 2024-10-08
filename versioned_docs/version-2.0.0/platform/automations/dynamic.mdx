@@ -39,7 +39,7 @@ For example, you can access the `userId` supplied by segment in a send node usin
   alt="Accessing userId dynamically using refs.data.userId within the send node"
 />
 
-## Mapping dynamic data to notification templates
+## Mapping Dynamic Data to Variables
 
 By default, all `data` passed into an automation is passed through to the notification template in a send call. However, there are cases where you want to map specific data attributes to different variables.
 
@@ -55,7 +55,7 @@ By default, all `data` passed into an automation is passed through to the notifi
   }
 ```
 
-### Example
+### Example: Mapping Dynamic Data to a Variable
 
 Let's say we have a segment event as a trigger for our automation. The event has a `vendor_name` attribute in the segment `properties` object and we want to map that to a `vendor` attribute in our send call.
 
