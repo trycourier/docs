@@ -16,12 +16,29 @@ List Blocks allow you to dynamically render arrays of data in your notifications
 3. List with images (email only)
 4. List with children and images (email only)
 
+## Working With List Blocks
+
+**Availability:** All channels
+
+<Image
+  img={require("../../../assets/guides/list-blocks/list-block-new.png")}
+  alt="New List Block"
+/>
+
+The repeatable list block allows you to easily display more complex layered data. This data is passed in the data object as an array during a send. The option to display an image differs by channel.
+
+:::tip Rendered Output
+
+The rendered output of the list block is a table element. For more list customization options, you can use a [template block](template-blocks.mdx) with [helpers](../notification-designer/handlebars-helpers.mdx).
+
+:::
+
 <Image
   img={require("../../../assets/guides/list-blocks/list-block-simple.png")}
   alt="Simple List Block"
 />
 
-To switch from bulleted lists to numbered lists, add a list then open the list details:
+To switch from a simple list to numbered lists, add a list then open the list details:
 
 <Image
   img={require("../../../assets/guides/list-blocks/list-block-details.png")}
@@ -33,6 +50,18 @@ To switch from bulleted lists to numbered lists, add a list then open the list d
 ### Simple List
 
 Displays a row for each item in the specified array, similar to a [text block](text-blocks.mdx) with variables scoped to the array.
+
+To render a bulleted simple list, the background color for the list block must be set to `transaparent`.
+
+<Image
+  img={require("../../../assets/guides/list-blocks/list-bg-color.png")}
+  alt="List Block Background Color"
+/>
+
+<Image
+  img={require("../../../assets/guides/list-blocks/list-bullet.png")}
+  alt="Rendered Bulleted List"
+/>
 
 ### List With Children
 

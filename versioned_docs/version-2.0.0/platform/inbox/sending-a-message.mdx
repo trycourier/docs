@@ -1,14 +1,19 @@
 ---
 pagination_label: "Sending a Message"
 sidebar_position: 4
+sidebar_label: Making an Inbox Send
 slug: ./making-a-send
 toc_max_heading_level: 2
+title: Step-by-Step Guide How to Send In-App Notifications with Courier
+description: Master sending notifications with Courier. Explore API setup, message formatting, and efficient notification delivery for any app.
+image: https://www.courier.com/docs/assets/ideal-img/inbox-all-sdks.977e39a.1200.png
+keywords: [in-app notifications, push notifications, mobile notifications, authentication]
 ---
 
 import Image from "@theme/IdealImage";
 
 
-# Sending a Message
+# Sending a Courier Inbox Message
 
 When you're ready to [send a message](https://www.courier.com/docs/reference/send/message/), it's exactly like sending any other Courier notification, with the difference being that you are sending it to the `inbox` channel.
 
@@ -33,17 +38,21 @@ When you're ready to [send a message](https://www.courier.com/docs/reference/sen
 }
 ```
 
-## Passing Data
+## Passing Data for an Inbox Request
 
-If you provide information in the `data` field, it will be passed automatically through to SDK.
+If you provide information in the `data` field, it will be passed automatically through to the SDK.
 
-Note: If you pass information in `data` that isn't referenced in your `content` payload or in a `template` that you specify, it will still be passed through to your app. For example, this is useful when trying to launch a specific screen in your app on mobile with a deep link:
+:::tip
+
+If you pass information in `data` that isn't referenced in your `content` payload or in a `template` that you specify, it will still be passed through to your app. For example, this is useful when trying to launch a specific screen in your app on mobile with a deep link:
+
+:::
 
 `data.deeplinkUrl = https://starwars.com/villains/darth_maul`
 
-## Using Elemental Syntax
+## Using Courier Elemental Syntax
 
-Inbox SDKs support a subset of Elemental syntax for composing messages. 
+Inbox SDKs support a subset of [Elemental](../content/elemental/intro.mdx) syntax for composing inline messages. 
 
 | Element  	| Web	 | iOS	| Android 	|                                                                                          
 | :---------| :------| :-----|:---------|
