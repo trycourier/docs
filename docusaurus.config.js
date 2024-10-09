@@ -126,7 +126,8 @@ module.exports = {
             "How to create and send an email notification?",
             "How to setup a template approval workflow?",
             "Inserting data with variables?",
-            "Set up a webhook destination?"
+            "Set up a webhook destination?",
+            "How to change 'from' email fields?"
           ],
         },
       },

@@ -20,13 +20,10 @@ const navbarItems = [
     activeBasePath: "sdk-reference",
   },
   {
-    href: "https://courier.com/changelog",
-    label: "Changelog",
-  },
-  {
-    href: "https://status.courier.com",
-    label: "Service Status",
-  },
+    to: "/help/",
+    label: "Help",
+    activeBasePath: "help",
+  }
 ];
 
 module.exports = navbarItems;
