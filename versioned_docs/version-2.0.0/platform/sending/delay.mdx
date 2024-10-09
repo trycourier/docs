@@ -1,0 +1,140 @@
+---
+sidebar_position: 8
+---
+
+# Delay
+
+As part of a Send in Courier, you can define the time to wait before delivering the message and Courier will handle. Courier supports one of three ways to delay
+
+1. delay by X milliseconds (`delay.duration`)
+2. specify the ISO 8601 timestamp string (`delay.until`)
+3. specify a Deliver Window using a partial implementation of [opening_hours](https://wiki.openstreetmap.org/wiki/Key:opening_hours) (`delay.until`). This also supports timezone offsets from within a user profile `timezone` key or `message.to.timezone`.
+
+
+## Logging
+When a delay is accepted via the API, you can verify it by viewing the Message Log for the request. You should see a `Request Delayed` event that specifies the time in GMT that the send take place.
+
+**Example:**
+
+```json
+{
+  "delay": {
+    "duration": 120000
+  },
+  "details": {
+    "duration": "Message delivery has been delayed by 2 minutes.",
+    "date": "The message will be delivered on October 09, 2024 at 8:36 GMT+00:00"
+  }
+}
+```
+
+
+
+## Duration
+Specifying a `delay.duration` will delay the send by this number of milliseconds. For example, this payload will send to the inbox only have 2 minutes.
+
+```json
+{
+  "message": {
+      "to": {"user_id": "test"},
+      "delay": {"duration": 120000},
+      "content": {"title": "Wait!", "body": "for 2 minutes"},
+      "routing": {"method": "single", "channels": ["inbox"]
+    }
+}
+```
+
+:::info Duration is rounded up to next minute
+When using `delay.duration`, we will round up to the next minute
+:::
+
+
+
+
+## Timestamp
+You can specify an [ISO8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp string in `delay.until`. Courier will calculate the delay and send the message at this time for you.
+
+```json
+{
+  "message": {
+    "to": {"user_id": "test-date-midnight"},
+    "delay": {"until": "2025-01-01"},
+    "template": "az09"
+  }
+}
+
+{
+  "message": {
+    "to": {"user_id": "test-withtimezone"},
+    "delay": {"until": "2024-10-11T06:37:25+7:00"},
+    "template": "az09"
+  }
+}
+
+{
+  "message": {
+    "to": {"user_id": "test-atutc"},
+    "delay": {"until": "2024-10-11T06:37:25Z"},
+    "template": "az09"
+  }
+}
+```
+
+
+## Delivery Window
+You can specify a Deliver Window using a partial implementation of [opening_hours](https://wiki.openstreetmap.org/wiki/Key:opening_hours) (`delay.until`). This also supports timezone offsets from within a user profile `timezone` key or `message.to.timezone`. Based on the current time and the opening_hours string, Courier will calculate if it can send right now (is open) or delay until the next window.
+
+- By default, Delivery Window will calculate the timezone in UTC, however it can be overridden by the `timezone` key stored in the user profile or provided in the request `message.to.timezone`. Timezone can follow either [IANA timezones](https://www.iana.org/time-zones) or UTC+- syntax (UTC+4, UTC-5).
+- Opening hours calcuation is inclusive at the start of the range, and exclusive at the end of the range. For example, sending at Mo 08:00 exactly with Delivery Window `Mo-Fr 08:00-12:00` will **not** delay. Sending at Mo 12:00 exactly with Delivery Window `Mo-Fr 08:00-12:00` will delay until Tu 08:00
+
+**Examples:**
+- Business Hours **(Mo-Fr 09:00-17:00)**
+- Weekend **(Fr-Mo 17:00-09:00)**
+- Only Mornings **(Su-Sa 08:00-12:00)**
+- Single Day **(Mo 09:00-12:00, 14:00-18:00)**
+- Same Day Different Entries **(Mo 09:00-12:00; Mo 14:00-18:00)**
+- Non-Consecutive Entries **(Mo 09:00-12:00; We 14:00-18:00)**
+- Only at 11am **(Su-Mo 11:00-11:00)**
+
+
+### Examples
+```json
+// /send Thursday at noon, will send 
+// /send Saturday at noon, will delay until 8am the following Monday
+{
+  "message": {
+    "to": {
+      "user_id":  "test123",
+      "timezone": "Americas/Los_Angeles"
+    },
+    "delay": { 
+      "until": "Mo-Fr 08:00-16:30"
+    }
+  }
+}
+
+// If different profiles have different timezones, the calculation will also happen independantly. 
+// /send at Friday at 23:00 UTC, America/Los_Angeles is open and will send now, 
+// Americas/New_York is closed and will delay until Monday
+{
+  "message": {
+    "to": [
+      {
+        "user_id":  "test123",
+        "timezone": "Americas/Los_Angeles"
+      },
+      {
+        "user_id":  "test456",
+        "timezone": "Americas/New_York"
+      }
+    ],
+    "delay": { 
+      "until": "Mo-Fr 08:00-16:30"
+    }
+  }
+}
+```
+
+:::note Partial Opening Hours Support
+We currently don't support the full opening_hours specifications like exceptions and public holidays. Please submit feedback to support@courier.com or your account team if Delivery Window is covering your use case for business hours or dynamic delays, please let us know.
+:::
