@@ -1,11 +1,14 @@
 import React from "react";
 import NavbarNavLink from "@theme-original/NavbarItem/NavbarNavLink";
-import { ServiceStatus } from "./ServiceStatus";
 
 const SERVICE_STATUS_LABEL = "Service Status";
+const SDK = "SDK Libraries";
+
 
 export default function NavbarNavLinkWrapper(props) {
-  if (props.label === SERVICE_STATUS_LABEL) return <ServiceStatus />;
+  // removing the status and sdk tabs
+  if (props.label === SERVICE_STATUS_LABEL) return null;
+  if (props.label === SDK) return null;
   return (
     <>
       <NavbarNavLink {...props} />
