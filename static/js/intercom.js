@@ -1,7 +1,8 @@
 window.intercomSettings = {
   api_base: "https://api-iam.intercom.io",
   app_id: "swa6u9ey",
-  vertical_padding: 80
+  vertical_padding: 75,
+  horizontal_padding: 22
 };
 
 (function () {
