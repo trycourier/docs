@@ -1,7 +1,8 @@
 window.intercomSettings = {
   api_base: "https://api-iam.intercom.io",
   app_id: "swa6u9ey",
-  hide_default_launcher: true
+  vertical_padding: 75,
+  horizontal_padding: 22
 };
 
 (function () {
