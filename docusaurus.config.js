@@ -12,13 +12,14 @@ const rehypeExternalLinks = require("./src/theme/plugins/rehypeExternalLinks");
 const tutorialFilters = require("./plugins/tutorial-filters");
 const webpack = require('webpack');
 
+const isVercelPreview = process.env.VERCEL_ENV === "preview";
 
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
   title: "Courier Docs",
   url: "https://www.courier.com",
-  baseUrl: process.env.VERCEL_ENV === "preview" ? "/" : "/docs/",
+  baseUrl: isVercelPreview ? "/" : "/docs/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
   favicon: "img/favicon.ico",
@@ -104,7 +105,7 @@ module.exports = {
           organizationDisplayName: "Courier",
           // ...optional settings
           theme: {
-            stylesheetUrls: ['/path/to/stylesheets'], // optional
+            // stylesheetUrls: ['/path/to/stylesheets'], // optional
             syntaxHighlighter: {
               lightTheme: codeTheme, // optional -- pass in the Prism theme you're using
               darkTheme: codeTheme, // optional -- pass in the Prism theme you're using
@@ -165,7 +166,7 @@ module.exports = {
   ],
   scripts: [
     {
-      src: "/docs/js/intercom.js",
+      src: isVercelPreview ? "/js/intercom.js" : "/docs/js/intercom.js",
       async: true,
     },
   ],
