@@ -5,7 +5,7 @@
  */
 
 @import "inter-ui/inter.css";
-@import url('https://fonts.cdnfonts.com/css/jetbrains-mono');
+@import "@fontsource/jetbrains-mono"; 
 @import "monaspace-font/neon.css";
 @import url("./navbar.css");
 @import url("./sidebar.css");
