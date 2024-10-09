@@ -75,7 +75,7 @@ module.exports = {
           alt: "Courier Logo",
           src: "img/courier-light.png",
           srcDark: "img/courier-dark.png",
-          href: "https://www.courier.com/docs",
+          href: "https://www.courier.com",
           target: "_self",
         },
         items: navbarItems,

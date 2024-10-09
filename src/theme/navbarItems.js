@@ -28,11 +28,6 @@ const navbarItems = [
     label: "Service Status",
   },
   {
-    type: 'search',
-    position: 'right',
-
-  },
-  {
     position: 'right',
     type: 'custom-intercom-link',
   },
