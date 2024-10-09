@@ -16,18 +16,6 @@ const navbarItems = [
     label: "API Playground",
     activeBasePath: "rest",
   },
-  {
-    href: "https://courier.com/changelog",
-    label: "Changelog",
-  },
-  {
-    href: "https://status.courier.com",
-    label: "Service Status",
-  },
-  {
-    type: "search",
-    position: "right",
-  }
 ];
 
 module.exports = navbarItems;
