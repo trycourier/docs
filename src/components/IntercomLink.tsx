@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import styles from './intercomLink.module.css';
+import { MessageCircleQuestion } from 'lucide-react';
 
 declare global {
   interface Window {
@@ -31,9 +33,12 @@ const IntercomLink: React.FC = () => {
   if (!intercomLoaded) return null;
 
   return (
-    <a href="#" onClick={(e: React.MouseEvent<HTMLAnchorElement>) => { e.preventDefault(); openIntercom(); }}>
+    <button 
+    className={styles.intercomLink} 
+    onClick={() => {/* Open chat function */}}>
+      <MessageCircleQuestion className={styles.intercomIcon} size={18} />
       Chat with Support
-    </a>
+    </button>
   );
 };
 
