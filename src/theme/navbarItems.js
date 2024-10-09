@@ -19,6 +19,11 @@ const navbarItems = [
     href: "https://courier.com/changelog",
     label: "Changelog",
   },
+  {
+    to: "/help/",
+    label: "Help",
+    activeBasePath: "help",
+  }
 ];
 
 module.exports = navbarItems;
