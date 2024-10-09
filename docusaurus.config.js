@@ -162,12 +162,16 @@ module.exports = {
           };
         },
       };
-    }
+    },
   ],
   scripts: [
     {
       src: isVercelPreview ? "/js/intercom.js" : "/docs/js/intercom.js",
       async: true,
+    },
+    {
+      src: '/docs/js/inkeep-path-fix.js',
+      async: false,
     },
   ],
   themes: [
