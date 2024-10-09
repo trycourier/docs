@@ -163,26 +163,15 @@ module.exports = {
         },
       };
     },
-    function (context, options) {
-      return {
-        name: 'docusaurus-fix-inkeep-paths',
-        injectHtmlTags({ content }) {
-          return {
-            postBodyTags: content.postBodyTags.map(tag => {
-              if (typeof tag === 'string' && tag.includes('inkeep')) {
-                return tag.replace('src="/', `src="${context.baseUrl}`);
-              }
-              return tag;
-            }),
-          };
-        },
-      };
-    },
   ],
   scripts: [
     {
       src: isVercelPreview ? "/js/intercom.js" : "/docs/js/intercom.js",
       async: true,
+    },
+    {
+      src: '/docs/js/inkeep-path-fix.js',
+      async: false,
     },
   ],
   themes: [
