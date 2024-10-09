@@ -162,7 +162,22 @@ module.exports = {
           };
         },
       };
-    }
+    },
+    function (context, options) {
+      return {
+        name: 'docusaurus-fix-inkeep-paths',
+        injectHtmlTags({ content }) {
+          return {
+            postBodyTags: content.postBodyTags.map(tag => {
+              if (typeof tag === 'string' && tag.includes('inkeep')) {
+                return tag.replace('src="/', `src="${context.baseUrl}`);
+              }
+              return tag;
+            }),
+          };
+        },
+      };
+    },
   ],
   scripts: [
     {
