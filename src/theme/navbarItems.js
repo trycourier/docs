@@ -1,3 +1,5 @@
+const { type } = require("@generated/site-storage");
+
 const navbarItems = [
   {
     to: "/",
@@ -22,6 +24,10 @@ const navbarItems = [
     href: "https://status.courier.com",
     label: "Service Status",
   },
+  {
+    type: "search",
+    position: "right",
+  }
 ];
 
 module.exports = navbarItems;
