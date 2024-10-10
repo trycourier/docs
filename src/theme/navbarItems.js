@@ -1,4 +1,3 @@
-
 const navbarItems = [
   {
     to: "/",
@@ -16,8 +15,9 @@ const navbarItems = [
     activeBasePath: "rest",
   },
   {
-    href: "https://courier.com/changelog",
-    label: "Changelog",
+    to: "/sdk-libraries/",
+    label: "SDK Libraries",
+    activeBasePath: "sdk-reference",
   },
   {
     to: "/help/",
