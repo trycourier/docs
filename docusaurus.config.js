@@ -11,15 +11,14 @@ const metadata = require("./src/theme/metadata");
 const rehypeExternalLinks = require("./src/theme/plugins/rehypeExternalLinks");
 const tutorialFilters = require("./plugins/tutorial-filters");
 const webpack = require('webpack');
-const isVercelPreview = process.env.VERCEL_ENV === "preview";
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
   title: "Courier Docs",
   url: "https://www.courier.com",
-  baseUrl: isVercelPreview ? "/" : "/docs/",
+  baseUrl: process.env.VERCEL_ENV === "preview" ? "/" : "/docs/",
   onBrokenLinks: "throw",
-  onBrokenMarkdownLinks: "throw",
+  onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
   trailingSlash: true,
   organizationName: "trycourier",
@@ -94,55 +93,6 @@ module.exports = {
           "python",
         ],
       },
-      inkeepConfig: {
-        baseSettings: {
-          apiKey: process.env.INKEEP_KEY, // required
-          integrationId: process.env.INKEEP_INTEGRATION_ID, // required
-          organizationId: process.env.INKEEP_ORGANIZATION_ID, // required
-          primaryBrandColor: "#3E2A49", // required -- your brand color, the widget color scheme is derived from this
-          organizationDisplayName: "Courier",
-          // ...optional settings
-          theme: {
-            // stylesheetUrls: ['/path/to/stylesheets'], // optional
-            syntaxHighlighter: {
-              lightTheme: codeTheme, // optional -- pass in the Prism theme you're using
-              darkTheme: codeTheme, // optional -- pass in the Prism theme you're using
-            },
-          }
-        },
-        modalSettings: {
-          // optional settings
-        },
-        searchSettings: {
-          // optional settings
-        },
-        aiChatSettings: {
-          chatSubjectName: "Courier",
-        botAvatarSrcUrl: "https://framerusercontent.com/images/UaLJKrAmvdMARtdLOIVEDfj5vuQ.svg",
-        getHelpCallToActions: [
-            {
-                name: "GitHub",
-                url: "https://github.com/trycourier",
-                icon: {
-                    builtIn: "FaGithub"
-                }
-            },
-            {
-                name: "Discord",
-                url: "https://discord.gg/wWGecZgs4k",
-                icon: {
-                    builtIn: "FaDiscord"
-                }
-            }
-        ],
-        quickQuestions: [
-            "How to create and send an email notification?",
-            "How to setup a template approval workflow?",
-            "Inserting data with variables?",
-            "Set up a webhook destination?"
-        ]
-        },
-      },
     }),
 
   plugins: [
@@ -179,7 +129,7 @@ module.exports = {
   ],
   scripts: [
     {
-      src: isVercelPreview ? "/js/intercom.js" : "/docs/js/intercom.js",
+      src: "/docs/js/intercom.js",
       async: true,
     },
   ],
@@ -191,15 +141,10 @@ module.exports = {
         indexBlog: false, 
         hashed: "filename" }),
     ],
-    "@inkeep/docusaurus/chatButton", 
-    "@inkeep/docusaurus/searchBar"
   ],
   customFields: {
     env: {
       API_HOST: process.env.API_HOST || 'https://api.courier.com',
-      INKEEP_KEY: process.env.INKEEP_KEY,
-      INKEEP_INTEGRATION_ID: process.env.INKEEP_INTEGRATION_ID,
-      INKEEP_ORGANIZATION_ID: process.env.INKEEP_ORGANIZATION_ID,
     },
   },
 };
