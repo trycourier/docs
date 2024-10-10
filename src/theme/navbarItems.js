@@ -15,11 +15,6 @@ const navbarItems = [
     activeBasePath: "rest",
   },
   {
-    to: "/sdk-libraries/",
-    label: "SDK Libraries",
-    activeBasePath: "sdk-reference",
-  },
-  {
     to: "/help/",
     label: "Help",
     activeBasePath: "help",
