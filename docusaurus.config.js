@@ -145,6 +145,9 @@ module.exports = {
   customFields: {
     env: {
       API_HOST: process.env.API_HOST || 'https://api.courier.com',
+      INKEEP_API_KEY: process.env.INKEEP_API_KEY,
+      INKEEP_INTEGRATION_ID: process.env.INKEEP_INTEGRATION_ID,
+      INKEEP_ORGANIZATION_ID: process.env.INKEEP_ORGANIZATION_ID,
     },
   },
 };
