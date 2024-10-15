@@ -1,7 +1,7 @@
 import React, { useContext, useCallback } from "react";
-import SearchBar from "@theme-original/SearchBar";
 import BrowserOnly from "@docusaurus/BrowserOnly";
 import qs from "qs";
+import { SearchBar } from "@site/src/components/SearchBar";
 
 import { ApiReferenceTokenContext } from "@site/src/components/ApiReference/ApiReferenceToken";
 

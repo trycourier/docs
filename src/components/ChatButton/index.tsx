@@ -4,7 +4,7 @@ import {
   type InkeepBaseSettings,
 } from "@inkeep/uikit";
 
-const baseSettings: InkeepBaseSettings = {
+export const baseSettings: InkeepBaseSettings = {
   apiKey: process.env.INKEEP_API_KEY!,
   integrationId: process.env.INKEEP_INTEGRATION_ID!,
   organizationId: process.env.INKEEP_ORGANIZATION_ID!,
