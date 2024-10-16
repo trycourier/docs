@@ -1,10 +1,18 @@
 // inkeepConfig.ts
 import type { InkeepBaseSettings } from "@inkeep/uikit";
 
+declare const customFields: {
+  env: {
+    INKEEP_API_KEY: string;
+    INKEEP_INTEGRATION_ID: string;
+    INKEEP_ORGANIZATION_ID: string;
+  };
+};
+
 export const baseSettings: InkeepBaseSettings = {
-  apiKey: process.env.INKEEP_API_KEY!,
-  integrationId: process.env.INKEEP_INTEGRATION_ID!,
-  organizationId: process.env.INKEEP_ORGANIZATION_ID!,
+  apiKey: customFields.env.INKEEP_API_KEY!,
+  integrationId: customFields.env.INKEEP_INTEGRATION_ID!,
+  organizationId: customFields.env.INKEEP_ORGANIZATION_ID!,
   organizationDisplayName: "Inkeep",
   primaryBrandColor: "#3E2A49",
 };
