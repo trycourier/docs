@@ -96,11 +96,18 @@ aside > div > div > a,
   margin-bottom: var(--sidebar-item-spacing);
 }
 
+.theme-doc-sidebar-item-category-level-1 > .menu__link--active {
+  background: var(--sidebar-hover-bg) !important;
+}
+
+.theme-doc-sidebar-item-category-level-1 .menu__link--active:hover {
+  background: var(--sidebar-hover-bg) !important;
+}
+
 .theme-doc-sidebar-item-link-level-1 .menu__link,
 .theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible .menu__link {
   min-height: 38px;
   font-size: var(--font-size-base);
-  font-weight: var(--font-weight-normal);
   font-family: var(--ifm-heading-font-family);
   padding-right: 6px;
   padding-left: 10px;
@@ -118,6 +125,10 @@ aside > div > div > a,
 .theme-doc-sidebar-item-category-level-1
   > .menu__list-item-collapsible
   .menu__link:not(.menu__link--active):hover {
+
+}
+
+.theme-doc-sidebar-item-category-level-1.menu__link--active  {
   background: var(--sidebar-hover-bg) !important;
 }
 
