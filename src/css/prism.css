@@ -8,7 +8,7 @@
 
 .prism-code {
   counter-reset: line-number;
-  font-size: 13px;
+  font-size: inherit;
   background: var(--code-block-bg);
 }
 

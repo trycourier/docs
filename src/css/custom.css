@@ -1,9 +1,4 @@
-/**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
- */
-
+/* Import statements */
 @import "inter-ui/inter.css";
 @import url('https://fonts.cdnfonts.com/css/jetbrains-mono');
 @import "monaspace-font/neon.css";
@@ -13,43 +8,66 @@
 @import url("./prism.css");
 @import url("./table.css");
 
+/* Root variables */
 :root {
-  --ifm-link-color: rgb(53, 120, 229);
-  --ifm-menu-color-active: rgb(53, 120, 229);
-  --text-link: #0085ff;
-  --default-font-size: 14px;
-  --default-font-weight: 400;
-  --navbar-item-font-size: 12px;
-  --ifm-code-font-size: 12px;
-  --ifm-navbar-height: 4.5rem;
+  /* Colors */
+  --color-primary: #97559d;
+  --color-link: #3449c6;
+  --color-danger: #de5063;
+
+  /* Typography */
+  --font-size-base: 15px;
+  --font-size-small: 13px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 450;
+  --font-weight-bold: 600;
+
+  /* Font families */
+  --font-family-base: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
+    Noto Sans, sans-serif, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-family-monospace: monospace;
+
+  /* Layout */
+  --spacing-unit: 0.25rem;
+  --navbar-height: 3.5rem;
+  --navbar-padding-horizontal: 2rem;
+
+  /* Components */
+  --border-radius: 0.25rem;
+
+  /* Docusaurus specific */
+  --ifm-color-primary: var(--color-primary);
+  --ifm-link-color: var(--color-link);
+  --ifm-menu-color-active: var(--color-link);
+  --ifm-color-danger: var(--color-danger);
+  --ifm-font-family-base: var(--font-family-base);
+  --ifm-font-family-monospace: var(--font-family-monospace);
+  --ifm-heading-font-family: var(--font-family-base);
+  --ifm-font-size-base: var(--font-size-base);
+  --ifm-code-font-size: inherit;
+  --ifm-navbar-item-padding-horizontal: calc(2 * var(--spacing-unit));
+  --ifm-navbar-height: var(--navbar-height);
+  --ifm-navbar-padding-horizontal: var(--navbar-padding-horizontal);
+  --ifm-navbar-shadow: none;
+  --ifm-spacing-horizontal: 2.25rem;
+  --ifm-spacing-vertical: 2.25rem;
   --ifm-h1-font-size: 20px;
   --ifm-h2-font-size: 18px;
   --ifm-h3-font-size: 16px;
-  --ifm-font-family-base: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
-    Noto Sans, sans-serif, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  --ifm-heading-font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
-    Noto Sans, sans-serif, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  --ifm-font-family-monospace: 'JetBrains Mono', monospace;
-  --ifm-badge-padding-vertical: 0.4rem;
-  --ifm-badge-padding-horizontal: 0.8rem;
-  --ifm-heading-font-weight: 500;
+  --ifm-heading-font-weight: var(--font-weight-medium);
+
+  /* Components */
+  --ifm-badge-padding-vertical: calc(1.6 * var(--spacing-unit));
+  --ifm-badge-padding-horizontal: calc(2 * var(--spacing-unit));
   --ifm-alert-padding-vertical: 1.25rem;
   --ifm-alert-padding-horizontal: 1.5rem;
   --ifm-blockquote-padding-horizontal: 1rem;
   --ifm-blockquote-border-left-width: 3px;
-  --ifm-badge-padding-horizontal: 0.5rem;
-  --ifm-navbar-item-padding-horizontal: 0.5rem;
-  --ifm-navbar-height: 3.5rem;
-  --ifm-navbar-shadow: none;
-  --text-red: #ff3363;
-  --ifm-navbar-link-color: var(--ifm-font-color-base-inverse);
-  --ifm-color-danger: #de5063;
 }
 
+/* Light theme */
 [data-theme="light"] {
-  /** Figma */
   --background-frame: #f7f8fa;
   --text-content: #292929;
   --structure-border: #dcdee4;
@@ -65,9 +83,12 @@
   --structure-default: #dcdee4;
   --icon-default: #80849d;
   --background-header-default: #fcfcfc;
-  /** IFM / Docusuarus */
-  --item-background-color: #97559d22;
-  --ifm-color-primary: #97559d;
+  --item-background-color: #d789a11a;
+  --minor-description-color: #7d5014;
+
+  /* Docusaurus colors */
+  --ifm-background-color: rgba(36, 37, 38, 0.95);
+  --ifm-color-primary: var(--color-primary);
   --ifm-color-primary-dark: #8f5195;
   --ifm-color-primary-darker: #874c8c;
   --ifm-color-primary-darkest: #75427a;
@@ -76,37 +97,25 @@
   --ifm-color-primary-lightest: #c7aeca;
   --ifm-pre-background: blue;
   --ifm-menu-color: #2c1338;
+  --ifm-menu-color-active: #0056b3;
   --ifm-menu-color-background-active: var(--item-background-color);
   --ifm-menu-color-background-hover: var(--item-background-color);
   --ifm-toc-border-color: rgba(0, 0, 0, 0.05);
-  --ifm-heading-color: #141414;
-  --ifm-font-color-base: #292929;
+  --ifm-heading-color: var(--text-header);
+  --ifm-font-color-base: var(--text-content);
   --code-block-bg: linear-gradient(to right, #1e0c26 2.5rem, #2d1339 2.5rem);
   --search-local-modal-background: #fdfbfe;
-  --minor-description-color: #7d5014;
 }
 
+/* Dark theme */
 [data-theme="dark"] {
   --ifm-color-scheme: dark;
-  --ifm-color-emphasis-0: var(--ifm-color-gray-1000);
-  --ifm-color-emphasis-100: var(--ifm-color-gray-900);
-  --ifm-color-emphasis-200: var(--ifm-color-gray-800);
-  --ifm-color-emphasis-300: var(--ifm-color-gray-700);
-  --ifm-color-emphasis-400: var(--ifm-color-gray-600);
-  --ifm-color-emphasis-600: var(--ifm-color-gray-400);
-  --ifm-color-emphasis-700: var(--ifm-color-gray-300);
-  --ifm-color-emphasis-800: var(--ifm-color-gray-200);
-  --ifm-color-emphasis-900: var(--ifm-color-gray-100);
-  --ifm-color-emphasis-1000: var(--ifm-color-gray-0);
-  --item-background-color: #97559d22;
-  --ifm-color-primary: #97559d;
-  --ifm-color-primary-dark: #8f5195;
-  --ifm-color-primary-darker: #874c8c;
-  --ifm-color-primary-darkest: #75427a;
-  --ifm-color-primary-light: #a472a9;
-  --ifm-color-primary-lighter: #b189b5;
-  --ifm-color-primary-lightest: #c7aeca;
-  --ifm-background-color: #1b1b1d;
+  --color-link: #a5a6ff;
+  /* --ifm-background-color: #1b1b1d; */
+  --ifm-background-color: #242526;  /* Slightly lighter than pure black */
+  --ifm-background-surface-color: #2d2d2f;  /* For elevated surfaces */
+  --ifm-font-color-base: #e3e3e3;  /* Slightly darker than pure white */
+  --ifm-color-content-secondary: #b8b8b8;  /* For secondary text */
   --background-frame: var(--ifm-background-color);
   --ifm-background-surface-color: #242526;
   --ifm-hover-overlay: hsla(0, 0%, 100%, 0.05);
@@ -114,6 +123,14 @@
   --ifm-color-content-secondary: #fff;
   --ifm-font-color-base: var(--ifm-color-content);
   --text-content: var(--ifm-font-color-base);
+  --item-background-color: #97559d22;
+  --ifm-color-primary: var(--color-primary);
+  --ifm-color-primary-dark: #8f5195;
+  --ifm-color-primary-darker: #874c8c;
+  --ifm-color-primary-darkest: #75427a;
+  --ifm-color-primary-light: #a472a9;
+  --ifm-color-primary-lighter: #b189b5;
+  --ifm-color-primary-lightest: #c7aeca;
   --ifm-breadcrumb-separator-filter: invert(64%) sepia(11%) saturate(0%) hue-rotate(149deg)
     brightness(99%) contrast(95%);
   --ifm-code-background: hsla(0, 0%, 100%, 0.1);
@@ -122,22 +139,17 @@
   --ifm-scrollbar-thumb-hover-background-color: #7a7a7a;
   --ifm-table-stripe-background: hsla(0, 0%, 100%, 0.07);
   --ifm-toc-border-color: var(--ifm-color-emphasis-200);
-  --ifm-color-primary-contrast-background: #102445;
-  --ifm-color-primary-contrast-foreground: #ebf2fc;
-  --ifm-color-secondary-contrast-background: #474748;
-  --ifm-color-secondary-contrast-foreground: #fdfdfe;
-  --ifm-color-success-contrast-background: #003100;
-  --ifm-color-success-contrast-foreground: #e6f6e6;
-  --ifm-color-info-contrast-background: #193c47;
-  --ifm-color-info-contrast-foreground: #eef9fd;
-  --ifm-color-warning-contrast-background: #4d3800;
-  --ifm-color-warning-contrast-foreground: #fff8e6;
-  --ifm-color-danger-contrast-background: #4b1113;
-  --ifm-color-danger-contrast-foreground: #ffebec;
-  --site-color-feedback-background: #2a2929;
-  --site-color-favorite-background: #1d1e1e;
-  --site-color-checkbox-checked-bg: rgba(148, 225, 208, 0.1);
-  --docusaurus-highlighted-code-line-bg: rgba(66, 66, 66, 0.35);
+  --background-panels: var(--ifm-background-surface-color);
+  --ifm-menu-color: var(--ifm-menu-color-emphasis-700);
+  --ifm-menu-color-background-active: var(--ifm-hover-overlay);
+  --ifm-heading-color: inherit;
+  --text-header: var(--ifm-color-content-secondary);
+  --background-field-input: var(--docsearch-searchbox-background);
+  --text-subtext: var(--ifm-color-content);
+  --search-local-modal-background: var(--ifm-background-color);
+  --minor-description-color: #ddae6e;
+
+  /* DocSearch specific colors */
   --docsearch-text-color: #f5f6f7;
   --docsearch-container-background: rgba(9, 10, 17, 0.8);
   --docsearch-modal-background: #15172a;
@@ -154,48 +166,59 @@
   --docsearch-footer-shadow: inset 0 1px 0 0 rgba(73, 76, 106, 0.5), 0 -4px 8px 0 rgba(0, 0, 0, 0.2);
   --docsearch-logo-color: #fff;
   --docsearch-muted-color: #7f8497;
-  --background-panels: var(--ifm-background-surface-color);
-  --ifm-menu-color: var(--ifm-menu-color-emphasis-700);
-  --ifm-menu-color-background-active: var(--ifm-hover-overlay);
-  --ifm-heading-color: inherit;
-  --text-header: var(--ifm-color-content-secondary);
-  --background-field-input: var(--docsearch-searchbox-background);
-  --text-subtext: var(--ifm-color-content);
-  --search-local-modal-background: var(--ifm-background-color);
-  --minor-description-color: #ddae6e;
+
+  /* Emphasis colors */
+  --ifm-color-emphasis-0: var(--ifm-color-gray-1000);
+  --ifm-color-emphasis-100: var(--ifm-color-gray-900);
+  --ifm-color-emphasis-200: var(--ifm-color-gray-800);
+  --ifm-color-emphasis-300: var(--ifm-color-gray-700);
+  --ifm-color-emphasis-400: var(--ifm-color-gray-600);
+  --ifm-color-emphasis-600: var(--ifm-color-gray-400);
+  --ifm-color-emphasis-700: var(--ifm-color-gray-300);
+  --ifm-color-emphasis-800: var(--ifm-color-gray-200);
+  --ifm-color-emphasis-900: var(--ifm-color-gray-100);
+  --ifm-color-emphasis-1000: var(--ifm-color-gray-0);
+
+  /* Contrast colors */
+  --ifm-color-primary-contrast-background: #102445;
+  --ifm-color-primary-contrast-foreground: #ebf2fc;
+  --ifm-color-secondary-contrast-background: #474748;
+  --ifm-color-secondary-contrast-foreground: #fdfdfe;
+  --ifm-color-success-contrast-background: #003100;
+  --ifm-color-success-contrast-foreground: #e6f6e6;
+  --ifm-color-info-contrast-background: #193c47;
+  --ifm-color-info-contrast-foreground: #eef9fd;
+  --ifm-color-warning-contrast-background: #4d3800;
+  --ifm-color-warning-contrast-foreground: #fff8e6;
+  --ifm-color-danger-contrast-background: #4b1113;
+  --ifm-color-danger-contrast-foreground: #ffebec;
+
+  /* Site-specific colors */
+  --site-color-feedback-background: #2a2929;
+  --site-color-favorite-background: #1d1e1e;
+  --site-color-checkbox-checked-bg: rgba(148, 225, 208, 0.1);
+  --docusaurus-highlighted-code-line-bg: rgba(66, 66, 66, 0.35);
 }
 
-@media (min-width: 997px) {
-  :root {
-    --ifm-spacing-horizontal: 2.25rem;
-    --ifm-spacing-vertical: 2.25rem;
-    --ifm-navbar-padding-horizontal: 2rem;
-  }
-
-  main {
-    padding-top: 1rem;
-  }
-}
-
+/* Global styles */
 html {
-  font-size: var(--default-font-size);
-  font-weight: var(--default-font-weight);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
 }
 
-h1,
-h2,
-h3 {
-  font-weight: 600;
+h1, h2, h3 {
+  font-weight: var(--font-weight-bold);
 }
 
 strong {
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
 }
 
 .docs-wrapper {
-  background: var(--background-frame, #f7f8fa);
+  background: var(--background-frame);
 }
 
+/* Typography styles */
 .markdown h1:first-child {
   --ifm-h1-font-size: 20px;
 }
@@ -208,6 +231,7 @@ strong {
   --ifm-h3-font-size: 16px;
 }
 
+/* Code highlight styles */
 .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.1);
   display: block;
@@ -215,32 +239,34 @@ strong {
   padding: 0 var(--ifm-pre-padding);
 }
 
-html[data-theme="dark"] .docusaurus-highlight-code-line {
+[data-theme="dark"] .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
+/* Footer styles */
 .footer {
   display: none;
 }
 
+/* Tabs styles */
 .tabs-container {
   border-radius: var(--ifm-code-border-radius);
   background: var(--code-block-bg);
 }
 
 .tabs {
-  padding-top: 0.5rem;
+  padding-top: calc(2 * var(--spacing-unit));
   padding-left: 3.3rem;
 }
 
 .tabs__item {
-  margin-right: 0.5rem;
-  padding: 0.4rem 0.6rem;
+  margin-right: calc(2 * var(--spacing-unit));
+  padding: calc(1.6 * var(--spacing-unit)) calc(2.4 * var(--spacing-unit));
   border-radius: var(--ifm-code-border-radius);
   border: 0;
   background: #392144;
-  font-size: 12px;
-  font-weight: 500;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
   font-family: inherit;
   color: rgba(255, 255, 255, 0.72);
   cursor: pointer;
@@ -261,6 +287,8 @@ html[data-theme="dark"] .docusaurus-highlight-code-line {
   margin: 0 !important;
 }
 
+/* Table of Contents styles */
+/* Table of Contents styles */
 .theme-doc-toc-mobile {
   background: transparent !important;
 }
@@ -271,12 +299,9 @@ html[data-theme="dark"] .docusaurus-highlight-code-line {
 
 .theme-doc-toc-mobile button {
   padding-left: 0;
-}
-
-.theme-doc-toc-mobile button {
-  font-size: 12px;
+  font-size: var(--font-size-small);
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   color: var(--ifm-font-color-secondary);
 }
 
@@ -287,19 +312,17 @@ html[data-theme="dark"] .docusaurus-highlight-code-line {
   background-size: 1.5rem;
 }
 
+/* Miscellaneous styles */
 .theme-doc-version-badge {
-  margin: 1rem 0 !important;
-}
-
-code {
-  font-size: inherit;
-}
-
-.theme-doc-version-badge {
-  font-size: 11px;
-  font-weight: 500;
+  margin: var(--spacing-unit) 0 !important;
+  font-size: calc(0.73 * var(--font-size-small));
+  font-weight: var(--font-weight-medium);
   text-transform: uppercase;
 }
+
+/* code {
+  font-size: inherit;
+} */
 
 video {
   max-width: 100%;
@@ -307,7 +330,7 @@ video {
 
 .clean-btn {
   color: var(--text-content);
-  margin-left: 4px;
+  margin-left: calc(var(--spacing-unit));
 }
 
 .navbar--primary {
@@ -322,4 +345,14 @@ video {
 
 .whiteText span {
   color: white !important;
+}
+
+/* Fade-in effect for main content */
+.theme-doc-markdown {
+  animation: fadeIn 0.1s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
