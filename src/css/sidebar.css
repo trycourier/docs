@@ -96,12 +96,24 @@ aside > div > div > a,
   margin-bottom: var(--sidebar-item-spacing);
 }
 
-.theme-doc-sidebar-item-category-level-1 > .menu__link--active {
-  background: var(--sidebar-hover-bg) !important;
+.theme-doc-sidebar-item-category-level-1.menu__list-item--current > .menu__list-item-collapsible {
+  background-color: var(--sidebar-hover-bg) !important;
 }
 
-.theme-doc-sidebar-item-category-level-1 .menu__link--active:hover {
-  background: var(--sidebar-hover-bg) !important;
+.theme-doc-sidebar-item-link-level-1 .menu__link:hover,
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible:hover,
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible .menu__link:hover {
+  background-color: var(--sidebar-hover-bg) !important;
+}
+
+.theme-doc-sidebar-item-link-level-1.menu__link--active,
+.theme-doc-sidebar-item-link-level-1 .menu__link--active {
+  background-color: var(--sidebar-hover-bg) !important;
+}
+
+.theme-doc-sidebar-item-link-level-1 .menu__link--active,
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible .menu__link--active {
+  background-color: var(--sidebar-hover-bg) !important;
 }
 
 .theme-doc-sidebar-item-link-level-1 .menu__link,
@@ -126,10 +138,6 @@ aside > div > div > a,
   > .menu__list-item-collapsible
   .menu__link:not(.menu__link--active):hover {
 
-}
-
-.theme-doc-sidebar-item-category-level-1.menu__link--active  {
-  background: var(--sidebar-hover-bg) !important;
 }
 
 /* Collapse icon styles */
