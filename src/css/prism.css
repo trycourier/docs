@@ -8,8 +8,9 @@
 
 .prism-code {
   counter-reset: line-number;
-  font-size: inherit;
+  font-size: 14px;
   background: var(--code-block-bg);
+  font-family: var(--ifm-font-family-monospace);
 }
 
 .prism-code .token-line {

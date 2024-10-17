@@ -1,7 +1,6 @@
 /* Import statements */
 @import "inter-ui/inter.css";
-@import url('https://fonts.cdnfonts.com/css/jetbrains-mono');
-@import "monaspace-font/neon.css";
+@import '~firacode/distr/fira_code.css';
 @import url("./navbar.css");
 @import url("./sidebar.css");
 @import url("./pagination.css");
@@ -26,7 +25,7 @@
   --font-family-base: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
     Noto Sans, sans-serif, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  --font-family-monospace: monospace;
+  --font-family-monospace: 'Fira Code', monospace;
 
   /* Layout */
   --spacing-unit: 0.25rem;
@@ -42,7 +41,7 @@
   --ifm-menu-color-active: var(--color-link);
   --ifm-color-danger: var(--color-danger);
   --ifm-font-family-base: var(--font-family-base);
-  --ifm-font-family-monospace: var(--font-family-monospace);
+  --ifm-font-family-monospace: 'Fira Code';
   --ifm-heading-font-family: var(--font-family-base);
   --ifm-font-size-base: var(--font-size-base);
   --ifm-code-font-size: inherit;
