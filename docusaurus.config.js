@@ -50,7 +50,18 @@ module.exports = {
         theme: {
           customCss: customCssPath,
         },
-        sitemap: false,
+        sitemap: {
+          lastmod: 'date',
+          changefreq: null,
+          priority: null,
+          ignorePatterns: ['**/tags/**',"**/1.0.0/**"],
+          filename: 'sitemap.xml',
+          createSitemapItems: async (params) => {
+            const {defaultCreateSitemapItems, ...rest} = params;
+            const items = await defaultCreateSitemapItems(rest);
+            return items.filter((item) => !item.url.includes('/page/'));
+          },
+        },
       }),
     ],
   ],
@@ -100,15 +111,6 @@ module.exports = {
       "@docusaurus/plugin-ideal-image",
       {
         disableInDev: false,
-      },
-    ],
-    [
-      "@docusaurus/plugin-sitemap",
-      {
-        changefreq: "weekly",
-        priority: 0.5,
-        ignorePatterns: ["**/1.0.0/**"],
-        filename: "sitemap.xml",
       },
     ],
     tutorialFilters,
