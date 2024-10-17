@@ -7570,6 +7570,11 @@ find-yarn-workspace-root2@1.2.16:
     micromatch "^4.0.2"
     pkg-dir "^4.2.0"
 
+firacode@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/firacode/-/firacode-6.2.0.tgz#d9fcbf7cb8589b6df56b59edddcde640c7f68ab9"
+  integrity sha512-t5R3aO2BmhRXnYtKXbImLVNsILuCIbJ/XlDzBufjpi3il8P/CVdpWco83Ud3r2Tl0gitAmyP4o1fbJ52ozV1jw==
+
 flat-cache@^3.0.4:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/flat-cache/-/flat-cache-3.2.0.tgz#2c0c2d5040c99b1632771a9d105725c0115363ee"

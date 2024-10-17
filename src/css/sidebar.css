@@ -1,39 +1,71 @@
+/* Root variables */
+:root {
+  /* Sidebar-specific variables */
+  --sidebar-item-spacing: 10px;
+  --sidebar-border-radius: 8px;
+  --sidebar-link-min-height: 30px;
+  --sidebar-link-padding: 0.5rem 1rem;
+  --sidebar-icon-size: 1rem;
+  --sidebar-active-bg: var(--ifm-menu-color-background-active);
+  --sidebar-hover-bg: var(--ifm-menu-color-background-hover);
+  --sidebar-border-color: var(--structure-border, #dcdee4);
+  --sidebar-icon-color: #747b95;
+  --sidebar-icon-active-color: #2c1338;
+}
+
+/* Menu styles */
 .menu {
   scrollbar-gutter: stable;
   margin-bottom: 20px;
+  padding: 1.3rem 1rem !important;
+  transition: background-color 0.1s ease;
+  font-size: var(--ifm-font-size-base);
+  line-height: 1.5;
+  font-weight: 450;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ifm-color-primary-lighter) var(--ifm-background-color);
 }
 
 .menu__link {
-  min-height: 30px;
-  font-size: 12px;
-  font-weight: 400;
+  min-height: var(--sidebar-link-min-height);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-normal);
   align-items: center;
   justify-content: flex-start;
-  border-radius: 8px;
+  border-radius: var(--sidebar-border-radius);
   overflow-wrap: anywhere;
+  position: relative;
+  transition: all 0.1s step-start;
+  padding: var(--sidebar-link-padding);
+}
+
+.menu__link:hover {
+  background-color: var(--item-background-color);
 }
 
 .menu__link--active {
-  background: rgba(145, 33, 194, 0.05);
+  background-color: var(--item-background-color);
+  font-weight: var(--font-weight-medium);
 }
 
 .menu__link:after {
   opacity: 0.6;
-  margin-left: 0.6rem;
-  height: 1rem;
-  min-width: 1rem;
-  background-size: 1.2rem 1.2rem;
+  height: var(--sidebar-icon-size);
+  min-width: var(--sidebar-icon-size);
+  background-size: calc(1.2 * var(--sidebar-icon-size));
+  margin-left: var(--sidebar-item-spacing);
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.menu__link svg {
-  margin-left: 10px;
-  opacity: 0.4;
-  transform: scale(0.75);
+.menu__link:hover::after {
+  transform: scale(1.15) rotate(90deg);
+  opacity: 0.6;
 }
 
+/* Sidebar structure */
 aside,
 .navbar-sidebar {
-  border-right: 1px solid var(--structure-border, #dcdee4);
+  border-right: 1px solid var(--sidebar-border-color);
   color: var(--ifm-menu-color);
 }
 
@@ -41,7 +73,6 @@ aside,
   margin-left: auto;
 }
 
-/* the html changed in version 2.4.1 */
 aside > div > div > a,
 .navbar-sidebar__brand .navbar__brand {
   width: fit-content;
@@ -54,80 +85,166 @@ aside > div > div > a,
   padding-left: 1rem;
 }
 
-@media (min-width: 997px) {
-  .menu {
-    padding: 1.3rem 1rem !important;
-  }
-}
-
+/* Level 1 items */
 .theme-doc-sidebar-item-link-level-1,
 .theme-doc-sidebar-item-category-level-1 {
   position: relative;
 }
 
-.menu__list-item.theme-doc-sidebar-item-category-level-1 {
-  margin-top: 10px;
+.menu__list-item.theme-doc-sidebar-item-category-level-1, 
+.menu__list-item.theme-doc-sidebar-item-link-level-1  {
+  margin-bottom: var(--sidebar-item-spacing);
+}
+
+.theme-doc-sidebar-item-category-level-1.menu__list-item--current > .menu__list-item-collapsible {
+  background-color: var(--sidebar-hover-bg) !important;
+}
+
+.theme-doc-sidebar-item-link-level-1 .menu__link:hover,
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible:hover,
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible .menu__link:hover {
+  background-color: var(--sidebar-hover-bg) !important;
+}
+
+.theme-doc-sidebar-item-link-level-1.menu__link--active,
+.theme-doc-sidebar-item-link-level-1 .menu__link--active {
+  background-color: var(--sidebar-hover-bg) !important;
+}
+
+.theme-doc-sidebar-item-link-level-1 .menu__link--active,
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible .menu__link--active {
+  background-color: var(--sidebar-hover-bg) !important;
 }
 
 .theme-doc-sidebar-item-link-level-1 .menu__link,
 .theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible .menu__link {
   min-height: 38px;
-  font-size: 14px;
-  font-weight: 400;
+  font-size: var(--font-size-base);
   font-family: var(--ifm-heading-font-family);
   padding-right: 6px;
   padding-left: 10px;
 }
 
 .theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible {
-  border-radius: 8px;
+  border-radius: var(--sidebar-border-radius);
 }
 
-.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible .menu__link--active {
-  background: var(--ifm-menu-color-background-active) !important;
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible .menu__link--active, {
+  background: var(--sidebar-active-bg) !important;
+  font-weight: var(--font-weight-medium);
 }
 
 .theme-doc-sidebar-item-category-level-1
   > .menu__list-item-collapsible
   .menu__link:not(.menu__link--active):hover {
-  background: var(--ifm-menu-color-background-hover) !important;
+
 }
 
-.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible .menu__link:after {
-  margin-left: auto;
-  background: none;
-  width: 10px;
-  height: 2px;
-  opacity: 1;
-  background: #2c1338;
-  min-width: unset;
-  margin-right: 8px;
-  border-radius: 2px;
-  transition-property: all;
+/* Collapse icon styles */
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible {
+  position: relative;
+  cursor: pointer; 
 }
 
-.menu__list-item--collapsed.theme-doc-sidebar-item-category-level-1
-  > .menu__list-item-collapsible
-  .menu__link:after {
-  background: #747b95;
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible .menu__link {
+  padding-right: 30px; /* Make room for the collapse icon */
 }
 
-.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible:before {
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible .menu__link-content {
+  pointer-events: auto;
+}
+
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible::after,
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible::before {
   content: "";
   position: absolute;
+  background: var(--sidebar-icon-color);
+  transition: all 0.3s ease;
+  pointer-events: none; 
+}
+
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible::after {
   top: 50%;
-  right: 14px;
+  right: 12px;
   width: 10px;
   height: 2px;
   transform: translateY(-50%);
-  background: #747b95;
-  border-radius: 2px;
 }
 
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible::before {
+  top: 50%;
+  right: 16px;
+  width: 2px;
+  height: 10px;
+  transform: translateY(-50%);
+}
+
+/* Smooth height transition for collapsible items */
+.menu__list-item--collapsed .menu__list {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.1s ease;
+}
+
+/* Show plus sign when collapsed */
+.theme-doc-sidebar-item-category-level-1.menu__list-item--collapsed > .menu__list-item-collapsible::before {
+  transform: translateY(-50%) rotate(0);
+}
+
+/* Show minus sign when expanded */
+.theme-doc-sidebar-item-category-level-1:not(.menu__list-item--collapsed) > .menu__list-item-collapsible::before {
+  transform: translateY(-50%) rotate(90deg);
+}
+
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible:hover::before,
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible:hover::after,
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible .menu__link--active::before,
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible .menu__link--active::after {
+  background: var(--sidebar-icon-active-color);
+}
+
+/* Hide default caret for top-level items */
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > .menu__link--sublist-caret:after {
+  display: none !important;
+}
+
+/* Preserve default carets for sublist items */
+.theme-doc-sidebar-item-category-level-2 .menu__link--sublist-caret:after,
+.theme-doc-sidebar-item-category-level-3 .menu__link--sublist-caret:after {
+  display: block !important;
+  right: var(--ifm-menu-link-padding-horizontal);
+  top: 50%;
+}
+
+/* Nested menu items */
 .theme-doc-sidebar-item-category-level-1 > .menu__list {
   padding-left: 22px;
 }
 
 .theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible:hover {
   background: transparent;
+}
+
+/* Hide sidebar home */
+.sidebar-home {
+  display: none;
+}
+
+/* Improved scrollbar appearance */
+.menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.menu::-webkit-scrollbar-thumb {
+  background-color: var(--ifm-color-primary-lighter);
+  border-radius: 3px;
+}
+
+.menu::-webkit-scrollbar-track {
+  background-color: var(--ifm-background-color);
+}
+
+/* Add a subtle shadow to the entire sidebar */
+.theme-doc-sidebar-container {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 }
