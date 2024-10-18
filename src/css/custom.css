@@ -63,6 +63,9 @@
   --ifm-alert-padding-horizontal: 1.5rem;
   --ifm-blockquote-padding-horizontal: 1rem;
   --ifm-blockquote-border-left-width: 3px;
+
+    /* API Reference */
+    --text-red: #c01940;
 }
 
 /* Light theme */
