@@ -63,6 +63,9 @@
   --ifm-alert-padding-horizontal: 1.5rem;
   --ifm-blockquote-padding-horizontal: 1rem;
   --ifm-blockquote-border-left-width: 3px;
+
+    /* API Reference */
+    --text-red: #c01940;
 }
 
 /* Light theme */
@@ -354,4 +357,8 @@ video {
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+a {
+  font-weight: var(--font-weight-medium);
 }

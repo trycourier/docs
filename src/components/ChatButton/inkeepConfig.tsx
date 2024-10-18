@@ -7,6 +7,13 @@ export const baseSettings: InkeepBaseSettings = {
   organizationId: process.env.INKEEP_ORGANIZATION_ID!,
   organizationDisplayName: "Inkeep",
   primaryBrandColor: "#3E2A49",
+  theme: {
+    tokens:{
+      colors:{
+        'gray.600': '#6b7278',
+      }
+    }
+  }
 };
 
 export const aiChatSettings = {
