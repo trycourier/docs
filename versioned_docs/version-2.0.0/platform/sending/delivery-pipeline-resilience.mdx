@@ -4,46 +4,68 @@ sidebar_position: 6
 
 # Delivery Pipeline Resilience
 
-> When and how Courier will retry a notification send and how it handles delivery status check retries.
+Courier employs a robust retry mechanism to ensure reliable notification/webhook delivery and accurate status tracking, even in the event of temporary downstream failures or network issues.
 
-## Send Retries
+## Notification Send Retries
 
-### Retry Requirements
+### Retry Conditions
 
-> The following reasons will trigger a retry when trying to send a notification through an integration:
+Courier will attempt to resend a notification under the following circumstances:
 
-- The integration did not respond (e.g. network connection lost).
-- The integration responded to our attempt with a reason to allow for a retry (e.g. server overloaded, rate limit exceeded etc.).
-- Uncaught exception in our pipeline.
+- No response from the integration (e.g., network connection lost)
+- Integration response indicates a temporary issue (e.g., server overload, rate limit exceeded)
+- Uncaught exception in Courier's pipeline
 
-### Retry Attempts
+### Retry Strategy
 
-> If we encounter any of the reasons above, we will retry immediately for the first ten attempts. Afterwards:
+Our retry strategy employs an exponential backoff approach:
 
-- We wait **one hour** before the 11th attempt
-- We wait **two hours** before the 12th attempt
-- We wait **three hours** before the 13th attempt up to the 25th attempt
+1. Immediate retry for the first 10 attempts
+2. 1-hour delay before the 11th attempt
+3. 2-hour delay before the 12th attempt
+4. 3-hour delay for attempts 13 through 25
 
-The 25 attempts span over 72 hours giving us a chance to resolve the send within three days.
+This strategy spans 72 hours (3 days), maximizing the chances of successful delivery.
 
 ## Delivery Status Check Retries
 
-### Status Check Requirements
+### Retry Conditions
 
-> The following reasons will trigger a retry when trying to check the delivery status of a notification for some integrations:
+Courier will retry delivery status checks under these conditions:
 
-- The integration did not respond (e.g. network connection lost).
-- The integration responded at our attempted with a reason to allow for a retry (e.g. server overloaded).
-- The integration had a temporary failure attempting to resolve the delivery status.
-- Uncaught exception in our pipeline.
+- No response from the integration (e.g., network connection lost)
+- Integration response indicates a temporary issue (e.g., server overload)
+- Temporary failure in resolving the delivery status
+- Uncaught exception in Courier's pipeline
 
-> If we encounter any of the reasons above, we will retry immediately for the first ten attempts. Afterwards:
+### Retry Strategy
 
-- We wait **an hour** before the 11th attempt.
-- We wait **two hours** before the 12th attempt.
-- We wait **three hours** before the 13th attempt up to the 25th attempt.
+We employ the same exponential backoff strategy for status checks:
 
-The 25 attempts span over 72 hours giving us a chance to resolve the delivery status within three days.
+1. Immediate retry for the first 10 attempts
+2. 1-hour delay before the 11th attempt
+3. 2-hour delay before the 12th attempt
+4. 3-hour delay for attempts 13 through 25
+
+This approach ensures thorough tracking of delivery statuses over a 72-hour period.
+
+## Outbound Webhook Delivery Retries
+
+### Retry Conditions
+
+Courier will attempt to retry outbound webhook delivery under the following circumstances:
+
+- Internal Courier errors occur
+- Network errors are encountered
+- Certain retryable HTTP errors are received
+
+### Retry Strategy
+
+Our outbound webhook retry strategy employs an exponential backoff approach:
+
+1. Initial retries with increasing delays: 5, 10, 20, 40, 60, 120, 240, 480, 720, 900 seconds
+2. After the 10th retry, a consistent 15-minute delay is used for subsequent attempts
+3. Up to 296 retry attempts are made, spanning a maximum of 3 days
 
 ## Courier Status Page
 
