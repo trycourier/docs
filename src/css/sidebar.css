@@ -22,8 +22,6 @@
   font-size: var(--ifm-font-size-base);
   line-height: 1.5;
   font-weight: 450;
-  scrollbar-width: thin;
-  scrollbar-color: var(--ifm-color-primary-lighter) var(--ifm-background-color);
 }
 
 .menu__link {
