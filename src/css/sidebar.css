@@ -71,11 +71,11 @@ aside,
   margin-left: auto;
 }
 
-aside > div > div > a,
+/* aside > div > div > a,
 .navbar-sidebar__brand .navbar__brand {
   width: fit-content;
   background: url(/img/courier-dark.png) center no-repeat;
-}
+} */
 
 .navbar-sidebar__back {
   text-transform: uppercase;
