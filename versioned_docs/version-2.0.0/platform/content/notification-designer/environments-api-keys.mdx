@@ -10,7 +10,7 @@ import Image from "@theme/IdealImage";
 
 ## Production and Test Environments
 
-Every Courier tenant has two notification development environments: `Production` and `Test`. The two environments are isolated from one another, and all the assets within them (templates, brands, tags, categories integrations, API keys, log data, etc.) belong only to that environment.
+Every Courier tenant has two notification development environments: `Production` and `Test`. The two environments are isolated from one another, and all the assets within them (templates, brands, tags, subscription topics, integrations, API keys, log data, etc.) belong only to that environment.
 
 Any changes made to a template and its associated assets are only applied within the current environment until you migrate the template and overwrite any changes to the corresponding `Notification ID` and assets in the other environment.
 
@@ -65,7 +65,7 @@ In addition to the ability to create new API Keys, Business Tier customers can d
 
 ## Notifications, Assets and Environments
 
-The environments feature allows you to move a template and its associated assets (like Brands, Tags and Categories) between environments. You can move them from Test to Production and from Production to Test. You can also select the destination Tenant when migrating assets.
+The environments feature allows you to move a template and its associated assets (like brands, tags and subscription topics) between environments. You can move them from Test to Production and from Production to Test. You can also select the destination Tenant when migrating assets.
 
 **In order to copy a template between environments.** Courier must also copy all dependencies attached to the template to ensure functionality is preserved. After you've copied associated assets once (e.g. Brand, Category), you will have the option to overwrite those in future migrations.
 
@@ -158,8 +158,6 @@ The Test Configuration means Courier will use this configuration when sending a 
 
 Your [Data Logs](https://help.courier.com/en/articles/4364860-using-the-data-logs) and Metrics are environment-specific. Sends of Notifications using the `pk_test_` and `dk_test_` keys will only appear in the Data and Metrics dashboard of the Test environment. While `pk_prod_` and `dk_prod_` sends will only appear in the Data Logs and Metrics for the Production environment.
 
-<!-- Link follow-up doc -->
-
 ### Courier APIs and Environments
 
 The environment and state-specific API key **(pk_prod\_, dk_prod\_, pk_test\_, dk_test\_)** you use when interacting with [Courier's APIs](../../../reference/intro.mdx) will perform the command for that environment and state only.
@@ -177,8 +175,6 @@ One way to implement this could be:
 3. [Map the Track events to your templates](../../../platform/sending/create-map-events.mdx) in the test environment.
 
 **For more details, read:** [Setting up Courier's Segment integration](https://help.courier.com/en/articles/4438651-setting-up-courier-s-segment-integration).
-
-<!-- Link follow-up doc -->
 
 ## Environments and Billing
 
