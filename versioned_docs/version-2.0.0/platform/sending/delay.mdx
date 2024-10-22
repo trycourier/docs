@@ -82,7 +82,7 @@ You can specify an [ISO8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp s
 
 
 ## Delivery Window
-You can specify a Deliver Window using a partial implementation of [opening_hours](https://wiki.openstreetmap.org/wiki/Key:opening_hours) (`delay.until`). This also supports timezone offsets from within a user profile `timezone` key or `message.to.timezone`. Based on the current time and the opening_hours string, Courier will calculate if it can send right now (is open) or delay until the next window.
+You can specify a Delivery Window using a partial implementation of [opening_hours](https://wiki.openstreetmap.org/wiki/Key:opening_hours) (`delay.until`). This also supports timezone offsets from within a user profile `timezone` key or `message.to.timezone`. Based on the current time and the opening_hours string, Courier will calculate if it can send right now (is open) or delay until the next window.
 
 - By default, Delivery Window will calculate the timezone in UTC, however it can be overridden by the `zoneinfo` or `timezone` key stored in the user profile or provided in the request (`message.to.zoneinfo` or `message.to.timezone`). Timezone can follow either [IANA timezones](https://www.iana.org/time-zones) or UTC+- syntax (UTC+4, UTC-5). 
 - Opening hours calcuation is inclusive at the start of the range, and exclusive at the end of the range. For example, sending at Mo 08:00 exactly with Delivery Window `Mo-Fr 08:00-12:00` will **not** delay. Sending at Mo 12:00 exactly with Delivery Window `Mo-Fr 08:00-12:00` will delay until Tu 08:00
