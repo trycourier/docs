@@ -4,8 +4,8 @@ sidebar_label: Okta SSO Integration
 ---
 
 import Image from "@theme/IdealImage";
-import CourierSvg from '/img/logo_2023.svg';
 import { FaDownload } from "react-icons/fa";
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Okta SSO Integration
 
@@ -29,7 +29,7 @@ import { FaDownload } from "react-icons/fa";
 3. Configure basic settings:
    - **Sign-in method**: Select `SAML 2.0` and click **Next**
    - **App name**: Enter `Courier`
-   - **Logo*:* <a class="" href="pathname:///img/logo_2023.png" download="courier_logo"> <FaDownload /> Courier Logo</a>
+   - **Logo**: <a class="" target="_blank" href={useBaseUrl('/img/logo_2023.png')} download="courier_logo"> <FaDownload /> Courier Logo</a>
       
 
 ### Configure SAML Settings
