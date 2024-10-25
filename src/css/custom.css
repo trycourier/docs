@@ -19,7 +19,7 @@
   --font-size-small: 13px;
   --font-weight-normal: 400;
   --font-weight-medium: 450;
-  --font-weight-bold: 600;
+  --font-weight-bold: 700;
 
   /* Font families */
   --font-family-base: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
@@ -361,4 +361,8 @@ video {
 
 a {
   font-weight: var(--font-weight-medium);
+}
+
+strong {
+  font-weight: var(--font-weight-bold);
 }

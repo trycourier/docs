@@ -1,190 +1,158 @@
 ---
 sidebar_position: 6
+sidebar_label: Okta SSO Integration
 ---
 
 import Image from "@theme/IdealImage";
 import CourierSvg from '/img/logo_2023.svg';
+import { FaDownload } from "react-icons/fa";
 
-# Okta Integration 
+# Okta SSO Integration
 
-## Introduction
-
-This guide will walk you through the steps necessary to allow your team to sign in to Courier with Okta.
+> Set up Single Sign-On (SSO) and user provisioning with Okta and Courier.
 
 ## Prerequisites
 
-- An Okta account with Admin privileges.
-- Each user must be invited to courier via email before they can log in with Okta.
-- Some of these steps require information to be received from _and_ sent to courier. Before continuing, contact Courier support and ask for assistance in setting up Okta Sign in.
+- Admin access to your Okta account
+- The following from Courier Support:
+  - Single Sign-On (SSO) URL
+  - Audience URI (SP Entity ID)
+  - SCIM Endpoint URL and Bearer Token (if using provisioning)
+  - (optional) Bookmark URL 
 
-## Create the App Integration in Okta
+## Configure SAML SSO
 
-1. Navigate to the Applications > Applications section of the Okta admin panel
-2. Hit the "Create App Integration Button":
+### Create the Integration
 
-<Image img={require("../../assets/guides/okta/create-app.png")} alt="Create App Integration button."/>
+1. Navigate to **Applications → Applications** in Okta
+2. Click **Create App Integration**
+3. Configure basic settings:
+   - **Sign-in method**: Select `SAML 2.0` and click **Next**
+   - **App name**: Enter `Courier`
+   - **Logo*:* <a class="" href="pathname:///img/logo_2023.png" download="courier_logo"> <FaDownload /> Courier Logo</a>
+      
 
-3. Select SAML 2.0 and hit "Next"
+### Configure SAML Settings
 
-<Image img={require("../../assets/guides/okta/saml.png")} alt="Select Sign-in Method" />
+1. Enter the credentials:
+   - **Single Sign-On (SSO) URL**: _[from Courier Support]_
+   - **Audience URI (SP Entity ID)**: _[from Courier Support]_
+2. Add these *Attribute Statements*:
+    - **Name**: `id`
+      <br/>**Format**: `Unspecified`
+      <br/>**Value**: `user.id`
+    - **Name**: `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress`
+      <br/>**Format**: `Unspecified`
+      <br/>**Value**: `user.email`
+3. Complete setup:
+   - Select **I'm an Okta customer adding an internal app**
+   - Click **Finish**
+   - In the **Sign On** tab, find the **Metadata URL** and click **Copy**
+   - Send the Metadata URL to Courier Support
 
-4. Enter `Courier` as the app name and optionally provide the Courier logo (available after the screenshot) then click "Next"
+After Courier receives the metadata URL, we will configure the SSO integration on our end within 24 hours.
 
-<Image img={require("../../assets/guides/okta/general-settings.png")} alt="App Name & Logo" />
-
-:::note Download Courier Logo
-
-<CourierSvg class="" /><br />
-
-<div class="button-group">
-  <a class="button button--primary" href="pathname:///img/logo_2023.png"  download="courier_logo" >Download PNG </a>
-</div>
-
+:::note
+Remember to assign users to the app in Okta's **Assignments** tab.
 :::
 
-5. Contact Courier support for a `Single sign on URL` and an `Audience URI`. Enter them in their respective fields under SAML settings.
-
-<Image img={require("../../assets/guides/okta/settings-urls.png")} alt="SSO URL and Audience URI fields" />  
-
-6. In the **Attribute Statements** section, enter the following information:
-
-| Name | Name Format | Value |
-| ---- | ---- | ----------- |
-| `id` | Unspecified | user.id |
-| `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress` | Unspecified | user.email |
-
-<Image img={require("../../assets/guides/okta/attributes.png")} alt="Okta attribute statements." />
-
-7. Hit the "Next" button towards the bottom of the page
-8. Under the "Application Feedback" section, select "I'm an Okta customer adding an internal app" and hit "Finish":
-
-<Image img={require("../../assets/guides/okta/feedback-form.png")} alt="Okta feedback form" />
-
-9. From the "Sign On" tab of the new Courier application integration, find the Metadata URL. Copy the link address and send it to the Courier support team member
-
-<Image img={require("../../assets/guides/okta/metadata.png")} alt="Okta Metadata URL"/>
-
-That's all thats needed to allow sign in with Okta. Be sure to assign users using the Assignments tab of Courier App Integration.
-
-## Creating a Courier Bookmark App
-
-Bookmark apps are used to direct users to a specific web page using Okta applications. Below is a step-by-step process to create a Courier bookmark app within the Okta Admin Panel.
+## Configure User Provisioning (SCIM)
 
 :::info
-
-Before you can create a bookmark, you will need a bookmark URL from Courier for IdP initiated SSO to work. Please [contact Support](mailto:support@courier.com) to get set up with the bookmark URL.
-
+_SCIM provisioning_ automates user management between Okta and Courier.
 :::
 
-### Steps
+### Set Up SCIM Connection
 
-1. Make sure you're logged-in to the Okta admin panel as an `Admin`.
-2. Expand the `Applications` drop-down in the left pane, then click `Applications`.
-3. Click `Browse App Catalog`.
-4. Search for `Bookmark App`, select it from the list of results, and click `Add` in the left pane.
-5. Choose an app name, in this example `Courier Login`, which will be the display name.
-6. Copy the URL supplied by Courier Support directly to into the URL box:
+1. From your Courier App in Okta:
+   - Select the **Provisioning** tab
+   - Click **Edit**
+2. Enter SCIM settings:
+   - **SCIM connector base URL**: `[from Courier Support]`
+   - **Unique identifier field**: `userName`
+   - **Authentication Mode**: `HTTP Header`
+   - **Bearer token**: `[from Courier Support]`
+3. Enable provisioning features:
+     - **Push New Users**
+     - **Push Profile Updates**
 
-<Image img={require("../../assets/guides/okta/okta-bookmark-app.png")} alt="Okta Bookmark App Settings" />
+### Enable User Management
 
-7. Click `Save`.
-8. Assign to users to test.
+1. In the **To App** section (refresh if not visible):
+   - Click **Edit**
+   - Enable:
+     - **Create Users**
+     - **Update User Attributes**
+     - **Deactivate Users**
+2. Configure user roles:
+   - Navigate to **Directory → Profile Editor**
+   - Edit the **Courier App** profile
+   - Click **Add Attribute**
+    - Enter the following:
+      - **Data type**: `string`
+      - **Display name**: `Role`
+      - **Variable name**: `role`
+      - **External name**: `role`
+      - **External namespace**: `urn:ietf:params:scim:schemas:core:2.0:User`
+      - **Description**: `Courier Role`
 
-## Migrating Users To Okta
+3. Enable **Define enumerated list of values** and 
+4. Enter the following **Attribute Members**:
 
-1. From the [Settings > Security](https://app.courier.com/settings/security) page, confirm that "Require Google SSO" is not checked
-<Image img={require("../../assets/guides/okta/google-sso.png")} alt="" />
+| Role | System Value |
+|------|--------------|
+| `Admin` | `ADMINISTRATOR` |
+| `Manager` | `MANAGER` |
+| `Developer` | `DEVELOPER` |
+| `Designer` | `DESIGNER` |
+| `Support` | `SUPPORT_SPECIALIST` |
+| `Analyst` | `ANALYST` |
 
-2. From the [Settings > Team](https://app.courier.com/settings/team) page in Courier, remove and then re-invite users who should sign in with Okta
+4. Enable **Attribute required** and click **Save**
 
-## After the invites are sent
+:::warning
+Existing users need manual role updates after enabling provisioning.
+:::
 
-### To accept an Okta invitation users should follow these steps:
+## Create a Courier Bookmark App (Optional)
+
+:::info
+Contact Courier Support for the **Bookmark URL** before proceeding.
+:::
+
+1. In Okta admin panel:
+   - Click **Browse App Catalog**
+   - Search for **Bookmark App**
+   - Click **Add**
+2. Configure:
+   - **App name**: `Courier Login`
+   - **URL**: [From Courier Support]
+3. Click **Done**
+4. Assign the app integration to the necessary users. See [Assign app integrations](https://help.okta.com/en-us/content/topics/apps/apps-assign-applications).
+
+## Migrate Existing Users
+
+1. From [**Settings → Security**](https://app.courier.com/settings/security):
+   - Ensure **Require Google SSO** is unchecked
+2. From [**Settings → Team**](https://app.courier.com/settings/team):
+   - Remove users to be migrated
+   - Re-invite them through Okta
+
+## User Login Process
 
 1. Sign out of Courier
-2. Click the "join" button from the email invite
-3. Enter your work email (the email address your invite was sent to)
-4. Hit continue
+2. Click the **join** button from the email invite
+3. Enter work email address
+4. Click continue
 
-<Image 
-img={require("../../assets/guides/okta/log-in.png")} 
-alt="" 
-/>
-<br />
+:::info
+Users with Okta logins must use the email login process:
 
-:::info 
-
-Users with Okta logins to Courier **MUST** use the email login process.
-<Image 
-img={require("../../assets/guides/okta/log-in-email.png")} 
-alt=""
-style={{width: 500}} 
-/>
-
+<Image img={require("../../assets/guides/okta/log-in-email.png")} alt="" style={{width: 500}}/>
 :::
 
-## User Provisioning with Okta SCIM v2
+## Troubleshooting
 
-1. Contact Courier support for a SCIM endpoint URL and bearer token
-2. Navigate to the Courier App from the Okta admin panel
-3. Navigate to the provisioning tab and click "Edit"
-
-<Image img={require("../../assets/guides/okta/provisioning.png")} alt="" />
-
-4. Enter the URL provided by Courier into the "SCIM connector base URL"
-5. Enter `userName` into the "Unique identifier field for users"
-6. Check "Push New Users" and "Push Profile Updates" for the "Supported provisioning actions"
-7. For "Authentication Mode" select `HTTP Header`
-8. Enter the Bearer token provided by Courier
-
-<Image img={require("../../assets/guides/okta/scim-auth.png")} alt="" />
-
-9. Hit "Save"
-10. After 30 seconds the provisioning tab should have a "To App" section on the left. If it doesn't, try refreshing the page. Once it appears select it and hit the "Edit" button
-11. Check the "Create Users", "Update User Attributes", and "Deactivate Users" features and hit save
-
-<Image img={require("../../assets/guides/okta/to-app-settings.png")} alt="" />
-
-12. Using the side menu navigate to Directory > Profile Editor and hit the edit profile button of the Courier App
-
-<Image img={require("../../assets/guides/okta/profile-editor.png")} alt="" />
-
-13. Hit the "Add Attribute" button
-
-<Image img={require("../../assets/guides/okta/profile-editor-attributes.png")} alt="" />
-
-14. Enter the following values:
-    - Data type: `string`
-    - Display name: `Role`
-    - Variable name: `role`
-    - External name: `role`
-    - External namespace: `urn:ietf:params:scim:schemas:core:2.0:User`
-    - Description: `Courier Role`
- 
-    <Image img={require("../../assets/guides/okta/add-attribute-form.png")} alt="" />
-
-15. Check the "Define enumerated list of values" checkbox and enter the following values:
-
-  - Display Name: `Admin`, Value: `ADMINISTRATOR`
-  - Display Name: `Manager`, Value: `MANAGER`
-  - Display Name: `Developer`, Value: `DEVELOPER`
-  - Display Name: `Designer`, Value: `DESIGNER`
-  - Display Name: `Support`, Value: `SUPPORT_SPECIALIST`
-  - Display Name: `Analyst`, Value: `ANALYST`
-
-16. Check the "Attribute required" checkbox and hit "save"
-
-<Image img={require("../../assets/guides/okta/add-attribute-form-extra.png")} alt="" />
-<br />
-
-:::info 
-
-If users were already assigned to the Courier app before provisioning was setup, you will need to edit their assignment and update their role.
-
-:::
-
-### Finalizing User Provisioning
-
-- Changes to user assignments in the Courier Okta app will automatically be reflected in the Courier Workspace. 
-- Users will receive an invite via email to Courier when added. 
-- Users are automatically removed from the Courier Workspace when no longer assigned in Okta.
+- If SCIM provisioning features aren't visible, wait 30 seconds and refresh
+- For SSO issues, ensure email addresses match between Okta and Courier
+- Contact [Courier Support](mailto:support@courier.com) for configuration assistance.
