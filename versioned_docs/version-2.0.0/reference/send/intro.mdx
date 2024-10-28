@@ -50,3 +50,31 @@ There are two styles of notification sending:
 
 To send by template, first create a notification using Courier Studio, then pass the template ID in your send call.
 To send ad-hoc, include the content of the notification directly in the send call using Elemental.
+
+## Sending Attachments
+
+To add an attachment, you'll need to first retrieve it from an encoder and convert it to a base64 string. Then you'll be able to add it to the send call using a provider override.
+
+```json
+{
+   "providers":{
+      "sendgrid":{
+         "override":{
+            "body":{
+               "subject":"Requested file - lockheed.json",
+               "attachments":[
+                  {
+                     "content":"eyJmb28iOiJiYXIifQ==", //base64 encoded attachment
+                     "type":"application/json",
+                     "filename":"lockheed.json"
+                  }
+               ]
+            },
+            "config":{
+               "apiKey":"<your API Key>"
+            }
+         }
+      }
+   }
+}
+```
