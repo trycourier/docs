@@ -16,9 +16,13 @@ Once you've installed the Provider, you'll notice some authentication options th
 
 ## Default Authentication (No Auth)
 
-By default, you can use the Web Inbox SDK components without authentication beyond your `clientKey` and `userId`. Before going to production, you should implement stricter authentication using JWT tokens.
+For testing and development, you can use the Web Inbox SDK components without authentication beyond your `clientKey` and `userId`.
 
 When initializing the mobile SDKs (iOS and Android) you must supply an `accessToken` in addition to the `clientKey` and `userId`. Please review the authentication docs for [iOS](https://github.com/trycourier/courier-ios/blob/master/Docs/Authentication.md) and [Android](https://github.com/trycourier/courier-android/blob/master/Docs/Authentication.md) for more information about how set the accessToken both for development and production.
+
+:::caution
+Before going to production, you should implement stricter authentication using JWT tokens.
+:::
 
 ## JSON Web Tokens Authentication
 
